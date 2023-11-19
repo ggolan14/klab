@@ -14,7 +14,7 @@ const path = require('path');
 const fileupload = require("express-fileupload");
 const cors = require('cors');
 // const {Seeder, PuzzleSeeder, addNewExperiment} = require('./models/models');
-const {UsersSeeder} = require('./models/models');
+const {Seeder} = require('./models/models');
 const bodyParser = require('body-parser');
 // const zip = require('express-easy-zip');
 const socketHandle = require('./routes/socket/socket_handle');
@@ -74,7 +74,7 @@ connectDB().then(
       try {
           // addNewExperiment('SignatureTimingEffect').then(res => console.log('addNewExperiment', res));
 
-          // UsersSeeder().then(res => console.log('Seeder', res));
+          //Seeder().then(res => console.log('Seeder', res));
           // fixExp().then(()=>{});
 
           init_app();
