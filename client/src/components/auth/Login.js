@@ -1,9 +1,9 @@
+//test11
 import React, {Fragment, useReducer} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {login, resetPassword} from '../../actions/auth';
 import './Auth.css';
-
 const initialState = {
     email: '',
     password: '',
