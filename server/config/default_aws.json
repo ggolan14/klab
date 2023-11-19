@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb://elirand5:ed21011985ed@127.0.0.1:27017/klab_db",
+  "jwtSecret": "salvadorgct",
+  "githubClientId": "a07777dff9f7f77358a3",
+  "githubSecret": "8bee12a0e98362e19c77c2f0b24463545be200dc"
+}

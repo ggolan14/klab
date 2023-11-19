@@ -1,0 +1,69 @@
+.settings-ade_dec {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-column-gap: 0.5rem;
+    margin-left: 0.5rem;
+    align-items: center;
+}
+.settings-ade_dec input {
+    border-radius: 0;
+}
+
+.settings-ade_story_r {
+    display: grid;
+    row-gap: 1rem;
+    /*align-items: baseline;*/
+}
+
+.settings-ade_story_r>label {
+    font-size: x-large;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.settings-ade_story_r>textarea{
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.settings-ade_story_r>textarea.a{
+    min-height: 8rem;
+}
+
+.settings-ade_story_r>textarea.b{
+    min-height: 15rem;
+}
+
+.settings-ade_ques_co {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.5rem;
+    margin: 1rem;
+    width: max-content;
+}
+
+.settings-ade_add_answer_co *{
+    background-color: #ffd463;
+}
+
+.settings-ade_add_answer {
+    display: grid;
+    margin-left: 5rem;
+    align-items: center;
+    column-gap: 0.5rem;
+    grid-template-columns: max-content 40% max-content;
+}
+
+.settings-ade_add_answer input {
+    width: 100%;
+    border-radius: 0;
+}
+.settings-ade_add_answer label {
+    font-size: x-large;
+    height: max-content;
+}
+
+.settings-ade_story-p>.settings-ste_story_l{
+    background-color: #eccd67;
+    padding: 1rem;
+}

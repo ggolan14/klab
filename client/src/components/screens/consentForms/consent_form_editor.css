@@ -1,0 +1,246 @@
+.admin-consent_form-panel .admin-consent_form-drop-down{
+    margin: auto;
+}
+.admin-consent_form-panel {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    grid-row-gap: 1rem;
+    padding: 1rem 0.5rem;
+    background-color: #a7a7a7;
+    position: relative;
+}
+
+.admin-consent_form-panel button {
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    padding: 0.5rem 1.5rem;
+}
+
+.admin-consent_form-panel-header {
+    font-size: 3rem;
+    width: max-content;
+    margin: auto;
+    text-shadow: 0px 0px 3px #0048ff;
+    color: #291d95;
+}
+
+.admin-consent_form-panel_modified {
+    background: rgba(255, 255, 255, 0.5);
+    width: max-content;
+    padding: 1rem;
+    border-radius: 2rem;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    top: 10%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.admin-consent_form-panel_modified label:nth-child(2n){
+   color: darkmagenta;
+}
+
+/*exp_options*/
+.admin-consent_form-exp_options {
+    display: grid;
+    grid-row-gap: 1.7rem;
+    /*margin: auto;*/
+    text-align: center;
+    justify-content: center;
+}
+
+.admin-consent_form-exp_options-ver {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    margin: auto;
+    display: grid;
+    grid-auto-flow: column;
+    background-color: #fff4f4;
+}
+
+.admin-consent_form-exp_options-ver>label{
+    font-size: larger;
+}
+
+.admin-consent_form-exp_options-ver>select{
+
+}
+
+.isActiveConsentVersion {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    font-size: large;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    background-color: #767676;
+}
+.isActiveConsentVersion label{
+    color: #eaeaea;
+}
+.isActiveConsentVersion span{
+    color: #054093;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.admin-consent_form-exp_options-copy {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.3rem;
+    align-items: center;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 0.7rem;
+    padding: 0.2rem 0.3rem;
+}
+
+.admin-consent_form-exp_options-copy label{
+    color: #d94600;
+}
+
+.admin-consent_form-exp_options-copy select{
+    background-color: white;
+}
+
+.admin-consent_form-exp_options-copy button{
+    background-color: #01deff;
+}
+
+.admin-consent_form-exp_options-btn {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 3rem;
+    margin: auto;
+}
+/*exp_options*/
+
+.admin-consent_form-panel-editor {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+
+/*consent_form_view*/
+.admin-consent_form-consent_form_view_part1 {
+}
+
+.admin-consent_form-consent_form_view_part2 {
+    display: grid;
+    grid-row-gap: 0.5rem;
+    height: max-content;
+}
+
+.admin-consent_form-consent_form_view_part2>div {
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+}
+
+.admin-consent_form-consent_form_view_part2>label {
+   text-align: center;
+    font-size: larger;
+}
+
+.ck.ck-reset.ck-editor.ck-rounded-corners {
+    /*border: none;*/
+    /*height: 100%;*/
+}
+.ck.ck-editor__main {
+    border: 1px solid #333;
+    /*height: 100%;*/
+}
+
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    /*border: none;*/
+}
+/*consent_form_view*/
+
+
+
+
+
+
+/*dropdown*/
+.admin-consent_form-drop-down {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.5rem;
+    width: max-content;
+    align-items: center;
+    background-color: #f6f1ec;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 7px blue;
+}
+
+.admin-consent_form-drop-down>label{
+    text-decoration: underline;
+    font-size: larger;
+}
+
+.admin-consent_form-drop-down>div{
+    position: relative;
+}
+
+.admin-consent_form-drop-down>div>label{
+    border: 1px solid;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #b7b2b2;
+    border-radius: 1rem;
+}
+
+.admin-consent_form-drop-down>div>label:hover{
+    border-color: #8f7706;
+    color: blue;
+}
+
+.admin-consent_form-drop-down>div>div {
+    position: absolute;
+    border: 1px solid black;
+    padding: 0.4rem 0.8rem;
+    background-color: antiquewhite;
+    z-index: 9999;
+    border-radius: 0.9rem;
+}
+.admin-consent_form-drop-down>div>div>label {
+    cursor: pointer;
+}
+
+.admin-consent_form-drop-down>div>div>label:hover {
+    color: darkmagenta;
+}
+
+.admin-consent_form-drop-down-selected_exp {
+    pointer-events: none;
+    color: blue;
+}
+/*dropdown*/
+
+
+
+/*.admin-consent_form-exp_options input::placeholder { !* Chrome, Firefox, Opera, Safari 10.1+ *!*/
+/*    color: black;*/
+/*    opacity: 1;*/
+/*}*/
+
+/*.admin-consent_form-exp_options input:-ms-input-placeholder { !* Internet Explorer 10-11 *!*/
+/*    color: black;*/
+/*    opacity: 1;*/
+/*}*/
+
+/*.admin-consent_form-exp_options input::-ms-input-placeholder { !* Microsoft Edge *!*/
+/*    color: black;*/
+/*    opacity: 1;*/
+/*}*/
+

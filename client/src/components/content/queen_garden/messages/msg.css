@@ -1,0 +1,89 @@
+.qg_msg {
+    position: fixed;
+    z-index: 999999;
+    background-color: #dedede;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 3px solid black;
+    font-size: 20px;
+    width: max-content;
+    display: grid;
+    row-gap: 0.5rem;
+}
+
+.qg_msg::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+.qg_msg::-webkit-scrollbar-track {
+    background: #000000;
+    border-radius: 0px 5px 5px 0px;
+}
+
+/* Handle */
+.qg_msg::-webkit-scrollbar-thumb {
+    background: #067688;
+    border-radius: 0px 5px 5px 0px;
+}
+
+/* Handle on hover */
+.qg_msg::-webkit-scrollbar-thumb:hover {
+    background: #214593;
+}
+
+.msg_pos_right{
+    top: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+    max-width: 15%;
+    overflow-y: auto;
+    max-height: 85%;
+}
+
+.msg_pos_left{
+    top: 50%;
+    left: 9%;
+    transform: translate(-50%, -50%);
+    max-width: 17%;
+    overflow-y: auto;
+    max-height: 85%;
+}
+
+.msg_pos_center{
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80vw;
+}
+
+.qg_msg_delay {
+    animation: taadaa 2s linear;
+}
+
+@keyframes taadaa {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+.qg_msg>button {
+    margin: auto;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 22px;
+}
+
+.qg_cht_img {
+    width: 100px;
+    margin: auto;
+}

@@ -1,0 +1,30 @@
+.fullscreen {
+    background-color: black;
+    display: none;
+}
+
+.fullscreen-enabled {
+    background-color: white;
+    display: block;
+}
+
+.full-screen-alert {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    row-gap: 5rem;
+    width: max-content;
+    justify-items: center;
+}
+
+.full-screen-alert button {
+    width: max-content;
+    padding: 2rem 4rem;
+}
+
+.full-screen-alert button:hover {
+    background-color: blue;
+    color: white;
+}

@@ -1,0 +1,78 @@
+.klab-dashboard {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 5rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  font-size: larger;
+  width: max-content;
+}
+
+.klab-dashboard label {
+  font-size: x-large;
+  width: max-content;
+  height: max-content;
+}
+
+.klab-dashboard ul {
+  list-style: inside;
+}
+
+.klab-dashboard li {
+  margin-top: 0.5rem;
+}
+
+.klab-dashboard button {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background-color: #768d87;
+  color: white;
+}
+
+.klab-dashboard button:hover{
+  background-color: blue;
+}
+
+.klab-dashboard-apps,
+.klab-dashboard-users{
+  display: grid;
+  width: max-content;
+  /*padding: 1rem 1.5rem 1rem 1.5rem;*/
+  grid-template-rows: max-content auto;
+}
+
+
+.klab-user-permissions-error {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+}
+
+.klab-user-permissions-error label {
+  font-size: xx-large;
+  color: darkred;
+}
+
+.klab-dashboard-panel-misname {
+  color: red;
+  font-weight: bold;
+}
+
+.klab-dashboard-panel-name {
+  font-weight: bold;
+}
+
+.klab-dashboard-panel {
+  display: grid;
+  font-size: larger;
+  grid-template-rows: max-content;
+}
+
+.klab-dashboard-panel>label {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  font-size: xx-large;
+  width: max-content;
+  height: max-content;
+}

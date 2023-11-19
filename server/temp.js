@@ -1,0 +1,1 @@
+db.createUser({user: "deliran",pwd: "HlqKagm5ruCxQ70kk3U6",db: "klab",roles: [{ role:'readWriteAnyDatabase', db: 'klab' }, { role: 'clusterMonitor', db: 'klab' },{ role:'userAdminAnyDatabase', db: 'klab' }], mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]})

@@ -1,0 +1,22 @@
+.roads {
+    height: 100%;
+    width: 100%;
+    grid-area: altRoads;
+    display: grid;
+    grid-template-columns: auto 40% 30%;
+    z-index: 6;
+    position: relative;
+}
+
+.roads>div{
+    height: 100%;
+    width: 100%;
+}
+
+.forest_roads {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    position: relative;
+    width: 100%;
+}
+

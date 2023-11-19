@@ -1,0 +1,411 @@
+.klab-manage-users {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  grid-row-gap: 2rem;
+  grid-template-rows: max-content auto;
+}
+
+.klab-mu-err-id {
+  color: purple;
+  font-weight: bold;
+}
+
+.klab-manage-users-add-user-list-item:hover,
+.klab-manage-users-edit-user-list-item:hover,
+/*.klab-manage-btn-update:hover,*/
+/*.klab-manage-btn-remove:hover,*/
+/*.klab-manage-btn-add:hover,*/
+.klab-manage-users-msg button:hover,
+/*.klab-manage-btn-create:hover,*/
+.klab-manage-users button:hover{
+  background-color: blue !important;
+  color: white !important;
+}
+
+.klab-manage-users-edit-user-list {
+  position: relative;
+}
+
+.klab-manage-users-edit-user-list>label {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+  color: yellowgreen;
+}
+
+.klab-manage-users-edit-user-list-loading {
+  background-color: slategray;
+}
+
+
+.klab-manage-edit-btns {
+  width: max-content;
+  margin: auto;
+  display: grid;
+  column-gap: 0.5rem;
+  grid-template-columns: auto auto;
+}
+
+.klab-manage-users button,
+.klab-manage-users-msg button{
+  height: max-content;
+  padding: 0.3rem 0.9rem 0.3rem 0.9rem;
+}
+
+.klab-manage-btn-update {
+  background-color: limegreen;
+  color: white;
+  border-color: darkgreen;
+}
+
+.klab-manage-btn-remove,
+.klab-manage-users-edit-confirm-d2 button:not(:first-child){
+  background-color: red;
+  color: white;
+  border-color: darkred;
+}
+
+.klab-manage-btn-add {
+  background-color: #b3d7ff;
+}
+
+.klab-manage-btn-create {
+  background-color: lightblue;
+}
+
+.klab-manage-users-msg {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 999;
+  padding: 3rem 3rem 3rem 3rem;
+  display: grid;
+  background-color: lightslategray;
+  max-width: 50%;
+  min-width: 30%;
+  text-align: center;
+  border: 4px solid dimgray;
+  color: whitesmoke;
+}
+
+.klab-manage-users-msg label{
+  font-size: larger;
+}
+
+.klab-manage-users-msg button{
+  font-size: large;
+  width: max-content;
+  margin: auto;
+}
+
+
+.klab-manage-users-updating {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 999;
+
+  width: max-content;
+  height: max-content;
+}
+
+.klab-manage-users-updating label{
+  color: blue;
+
+  font-size: xx-large;
+}
+
+.klab-manage-users-selected {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.klab-manage-users-add-user,
+.klab-manage-users-edit-user{
+  display: grid;
+  grid-template-rows: max-content auto;
+}
+
+.klab-manage-users-add-user-insert {
+  grid-area: kmuInsrert;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.klab-manage-users-add-user-insert input{
+  min-width: 20rem;
+  padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+}
+
+.klab-manage-users-add-user-insert *:not(:first-child) {
+  margin-left: 1rem;
+}
+
+.klab-manage-users-add-user-list {
+  grid-area: kmuList;
+}
+
+.klab-manage-users-add-user-det {
+  grid-area: kmuDet;
+}
+
+.klab-manage-users-add-user-list,
+.klab-manage-users-add-user-det,
+.klab-manage-users-edit-user-det,
+.klab-manage-users-edit-user-list{
+  border: 1px solid;
+  min-width: 22rem;
+  width: auto;
+  overflow-y: auto;
+  height: auto;
+}
+
+.klab-manage-users-add-user-list,
+.klab-manage-users-add-user-det {
+  min-height: 13rem;
+  max-height: 20rem;
+}
+
+.klab-manage-users-edit-user-det,
+.klab-manage-users-edit-user-list {
+  min-height: 20rem;
+}
+
+.klab-manage-users-add-user-list-item {
+  display: grid;
+  grid-template-columns: auto max-content;
+  padding: 0.3rem 0.2rem 0.1rem 0.2rem;
+  align-items: center;
+}
+
+.klab-manage-users-add-user-list-item>label:first-child{
+  /*margin-left: 5px;*/
+  width: max-content;
+}
+
+.klab-manage-users-add-user-list-item>label:not(:first-child){
+  /*margin-right: 5px;*/
+  width: max-content;
+  color: red;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 0.3rem 0.2rem 0.1rem 0.2rem;
+  background-color: lightgrey;
+}
+
+.klab-manage-users-add-user-list-item:hover.klab-manage-users-add-user-list-item>label:not(:first-child){
+  border-color: darkgray;
+}
+
+
+.klab-manage-users-add-user-det,
+.klab-manage-users-edit-user-det{
+  display: grid;
+  padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+  grid-row-gap: 1rem;
+}
+
+.klab-manage-users-add-user-det {
+  grid-template-rows: max-content auto;
+
+}
+.klab-manage-users-edit-user-det{
+  grid-template-rows: max-content auto max-content;
+
+}
+
+.klab-manage-users-add-user-det>div:first-child,
+.klab-manage-users-edit-user-det>div:first-child{
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 1rem;
+}
+
+.klab-manage-users-add-user-det>div:not(:first-child),
+.klab-manage-users-edit-user-det>div:not(:first-child){
+  display: grid;
+  grid-template-rows: max-content max-content;
+}
+
+.klab-manage-all-exp-list {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 1rem;
+}
+
+.klab-manage-all-exp-item input{
+  margin-right: 0.3rem;
+}
+
+.klab-manage-all-exp-item:hover {
+  color: orangered;
+}
+
+.klab-manage-users-edit-user-panel {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+  grid-gap: 1rem;
+  max-height: 45%;
+  height: auto;
+}
+
+
+.klab-manage-users-add-user-panel {
+  display: grid;
+  grid-template-areas: 'kmuInsrert kmuInsrert'
+  'kmuList kmuDet';
+  grid-template-columns: max-content max-content;
+  grid-template-rows: max-content auto;
+  padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+  grid-gap: 1rem;
+  max-height: 90%;
+  height: auto;
+}
+
+.klab-manage-users-edit-user-list-item {
+  display: grid;
+  grid-template-columns: auto;
+  padding: 0.3rem 0.2rem 0.1rem 0.2rem;
+  align-items: center;
+}
+
+
+.klab-manage-users-add-user>label,
+.klab-manage-users-edit-user>label {
+  font-size: x-large;
+}
+
+
+.export-is-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  z-index: 1000;
+
+}
+
+.export-is-loading-back {
+  opacity: 0.9;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+
+}
+
+.export-is-loading-msg {
+  font-size: xx-large;
+  width: max-content;
+  height: max-content;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1002;
+  opacity: 1;
+  color: white;
+  display: grid;
+  grid-template-rows: max-content max-content;
+  justify-items: center;
+  grid-row-gap: 3rem;
+}
+
+.sk-chase {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  animation: sk-chase 2.5s infinite linear both;
+}
+
+.sk-chase-dot {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: sk-chase-dot 2.0s infinite ease-in-out both;
+}
+
+.sk-chase-dot:before {
+  content: '';
+  display: block;
+  width: 25%;
+  height: 25%;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sk-chase-dot-before 2.0s infinite ease-in-out both;
+}
+
+.sk-chase-dot:nth-child(1) { animation-delay: -1.1s; }
+.sk-chase-dot:nth-child(2) { animation-delay: -1.0s; }
+.sk-chase-dot:nth-child(3) { animation-delay: -0.9s; }
+.sk-chase-dot:nth-child(4) { animation-delay: -0.8s; }
+.sk-chase-dot:nth-child(5) { animation-delay: -0.7s; }
+.sk-chase-dot:nth-child(6) { animation-delay: -0.6s; }
+.sk-chase-dot:nth-child(1):before { animation-delay: -1.1s; }
+.sk-chase-dot:nth-child(2):before { animation-delay: -1.0s; }
+.sk-chase-dot:nth-child(3):before { animation-delay: -0.9s; }
+.sk-chase-dot:nth-child(4):before { animation-delay: -0.8s; }
+.sk-chase-dot:nth-child(5):before { animation-delay: -0.7s; }
+.sk-chase-dot:nth-child(6):before { animation-delay: -0.6s; }
+
+@keyframes sk-chase {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes sk-chase-dot {
+  80%, 100% { transform: rotate(360deg); }
+}
+
+@keyframes sk-chase-dot-before {
+  50% {
+    transform: scale(0.4);
+  } 100%, 0% {
+      transform: scale(1.0);
+    }
+}
+
+
+.klab-manage-users-edit-confirm-d1 {
+  width: max-content;
+  height: max-content;
+  display: grid;
+  grid-template-rows: max-content max-content !important;
+  grid-template-columns: max-content !important;
+  text-align: center;
+  margin: auto;
+}
+.klab-manage-users-edit-confirm-d1 label:not(:first-child){
+  font-weight: bold;
+  font-size: larger;
+}
+.klab-manage-users-edit-confirm-d2 {
+
+}
+
+.klab-manage-users-edit-confirm-d2{
+  width: max-content;
+  height: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  column-gap: 0.5rem;
+  grid-template-columns: auto auto;
+}
+
+.klab-manage-users-edit-confirm-d2 button:first-child{
+  background-color: forestgreen;
+  color: white;
+}

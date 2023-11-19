@@ -1,0 +1,453 @@
+.pg-sh-game-board {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    text-align: center;
+    padding: 2rem 0 0 0;
+
+}
+
+.pg-sh-game-points {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content ;
+    padding: 0 3rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.pg-sh-game-header {
+    display: grid;
+    grid-row-gap: 1.5rem;
+}
+
+.pg-sh-game-header label:first-child {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.pg-sh-game-header label:not(:first-child) {
+    font-size: large;
+}
+
+.pg-sh-game-header label:not(:first-child) span {
+    font-weight: bold;
+    color: darkmagenta;
+}
+
+.pg-sh-game-points-d {
+    border: 1px solid black;
+    /*width: max-content;*/
+    /*height: max-content;*/
+    min-width: 20cm;
+    min-height: 15cm;
+    text-align: center;
+    background-image: linear-gradient(#000, #000);
+    background-size: 2px 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.pg-sh-game-points-btn {
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+.pg-sh-game-points-btn>label{
+    font-size: x-large;
+    color: red;
+}
+
+.pg-sh-points-canvas-wrapper{
+    /*position: center !important;*/
+    width: 100%;
+    height: 100%;
+
+}
+
+.pg-sh-points-canvas {
+    /*position: center !important;*/
+}
+
+.pg-sh-game-points button {
+    display: grid;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pg-sh-game-points button label {
+    pointer-events: none;
+}
+
+.pg-sh-game-points button:hover {
+    background-color: dodgerblue !important;
+    color: white !important;
+    border-color: blue !important;
+}
+
+.pg-sh-message-mode {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+
+    background-color: ghostwhite;
+    padding: 1rem 2rem;
+    border: 3px solid black;
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    max-height: 90%;
+    height: max-content;
+    width: 95%;
+    max-width: 95%;
+
+    font-size: larger;
+    grid-row-gap: 1rem;
+    overflow: auto;
+}
+
+.pg-sh-g-w {
+    display: grid;
+    grid-template-rows: max-content auto;
+    grid-row-gap: 2rem;
+}
+
+.pg-sh-g-w>label {
+    font-weight: bolder;
+    font-size: xx-large;
+    height: max-content;
+}
+
+.pg-sh-g-w>div {
+    display: grid;
+    height: max-content;
+}
+
+.pg-sh-g-w>div *{
+    height: max-content;
+    width: max-content;
+    max-width: 90%;
+}
+
+.pg-sh-cond {
+    /*position: absolute;*/
+    /*top: 50%; left: 50%;*/
+    /*transform: translate(-50%,-50%);*/
+    height: max-content;
+    width: max-content;
+    max-width: 90%;
+    display: grid;
+    margin: auto;
+    font-size: larger;
+}
+
+.pg-sh-f-s {
+    display: grid;
+    margin: auto;
+    height: max-content;
+    width: max-content;
+    font-size: larger;
+}
+
+.pg-sh-g1 {
+
+}
+
+.pg-sh-g2 {
+    display: grid;
+    margin: auto;
+    height: max-content;
+    width: max-content;
+    font-size: larger;
+}
+
+.pg-sh-g3 {
+    display: grid;
+    margin: auto;
+    height: max-content;
+    width: max-content;
+    font-size: larger;
+    text-align: center;
+}
+
+.pg-sh-f-g {
+    display: grid;
+    height: max-content;
+    width: max-content;
+    font-size: larger;
+    grid-row-gap: 2rem;
+}
+
+.pg-sh-f-g>label {
+    font-weight: bolder;
+}
+
+.pg-sh-f-g>div {
+    display: grid;
+}
+
+.pg-sh-bet {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.pg-sh-bet {
+    display: grid;
+    height: 100%;
+    place-items: center;
+    font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+}
+
+.hourglass,
+.hourglass:before,
+.hourglass:after{
+    /*animation-duration: 7s;*/
+    /*animation-duration: 7s;*/
+    animation-duration: var(--pgshhtimer);
+    /*animation-iteration-count: ;*/
+}
+.hourglass {
+    --polygonH: polygon(
+            0% 0%,
+            100% 0%,
+            100% 5.55%,
+            95% 5.55%,
+            95% 28%,
+            60% 46%,
+            60% 54%,
+            95% 72%,
+            95% 94.45%,
+            100% 94.45%,
+            100% 100%,
+            0% 100%,
+            0% 94.45%,
+            5% 94.45%,
+            5% 72%,
+            40% 54%,
+            40% 46%,
+            5% 28%,
+            5% 5.55%,
+            0% 5.55%
+    );
+    animation-name: flip;
+    animation-timing-function: ease-in-out;
+    background-image: linear-gradient(
+            #255ff4 0.5em,
+            #737a8c55 0.5em 8.5em,
+            #255ff4 8.5em
+    );
+    clip-path: var(--polygonH);
+    -webkit-clip-path: var(--polygonH);
+    overflow: hidden;
+    position: relative;
+    width: 5em;
+    height: 9em;
+    z-index: 0;
+}
+.hourglass:before,
+.hourglass:after {
+    animation-timing-function: linear;
+    content: "";
+    display: block;
+    position: absolute;
+}
+.hourglass:before {
+    --polygonB1: polygon(
+            0% 0%,
+            100% 0%,
+            100% 24%,
+            50% 47%,
+            50% 47%,
+            50% 47%,
+            50% 47%,
+            50% 47%,
+            50% 47%,
+            50% 47%,
+            50% 47%,
+            0% 24%
+    );
+    --polygonB2: polygon(
+            0% 4%,
+            100% 4%,
+            100% 24%,
+            55% 45%,
+            55% 100%,
+            55% 100%,
+            55% 100%,
+            45% 100%,
+            45% 100%,
+            45% 100%,
+            45% 45%,
+            0% 24%
+    );
+    --polygonB3: polygon(
+            0% 24%,
+            100% 24%,
+            100% 24%,
+            55% 45%,
+            55% 80%,
+            100% 100%,
+            100% 100%,
+            0% 100%,
+            0% 100%,
+            45% 80%,
+            45% 45%,
+            0% 24%
+    );
+    --polygonB4: polygon(
+            45% 45%,
+            55% 45%,
+            55% 45%,
+            55% 45%,
+            55% 58%,
+            100% 76%,
+            100% 100%,
+            0% 100%,
+            0% 76%,
+            45% 58%,
+            45% 45%,
+            45% 45%
+    );
+    --polygonB5: polygon(
+            50% 53%,
+            50% 53%,
+            50% 53%,
+            50% 53%,
+            50% 53%,
+            100% 76%,
+            100% 100%,
+            0% 100%,
+            0% 76%,
+            50% 53%,
+            50% 53%,
+            50% 53%
+    );
+    animation-name: fill;
+    background-color: #2e3138;
+    background-size: 100% 3.6em;
+    clip-path: var(--polygonB1);
+    -webkit-clip-path: var(--polygonB1);
+    top: 0.5em;
+    left: 0.5em;
+    width: 4em;
+    height: 8em;
+    z-index: 1;
+}
+.hourglass:after {
+    animation-name: glare;
+    background: linear-gradient(
+            90deg,
+            #0000 0.5em,
+            #0003 0.5em 1.5em,
+            #0000 1.5em 3.5em,
+            #fff3 3.5em 4.5em,
+            #fff0 4.5em 6.5em,
+            #0003 6.5em 7.5em,
+            #0000 7.5em
+    )
+    0 0 / 100% 0.5em,
+    linear-gradient(
+            90deg,
+            #0000 0.75em,
+            #0003 0.75em 1.25em,
+            #0000 1.25em 3.75em,
+            #fff3 3.75em 4.25em,
+            #fff0 4.25em 6.75em,
+            #0003 6.75em 7.25em,
+            #0000 7.25em
+    )
+    0 0.5em / 100% 8em,
+    linear-gradient(
+            90deg,
+            #0000 0.5em,
+            #0003 0.5em 1.5em,
+            #0000 1.5em 3.5em,
+            #fff3 3.5em 4.5em,
+            #fff0 4.5em 6.5em,
+            #0003 6.5em 7.5em,
+            #0000 7.5em
+    )
+    0 100% / 100% 0.5em;
+    background-repeat: repeat-x;
+    top: 0;
+    left: -3em;
+    width: 200%;
+    height: 100%;
+    z-index: 2;
+}
+/* Animations */
+@keyframes fill {
+    from {
+        clip-path: var(--polygonB1);
+        -webkit-clip-path: var(--polygonB1);
+    }
+    10% {
+        clip-path: var(--polygonB2);
+        -webkit-clip-path: var(--polygonB2);
+    }
+    45% {
+        clip-path: var(--polygonB3);
+        -webkit-clip-path: var(--polygonB3);
+    }
+    80% {
+        clip-path: var(--polygonB4);
+        -webkit-clip-path: var(--polygonB4);
+    }
+    85%,
+    to {
+        clip-path: var(--polygonB5);
+        -webkit-clip-path: var(--polygonB5);
+    }
+}
+@keyframes glare {
+    from,
+    90% {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(3em);
+    }
+}
+@keyframes flip {
+    from,
+    90% {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+.pg-sh-cond {
+    /*background-color: yellow;*/
+}
+
+.pg-sh-cond-head {
+    margin-bottom: 2rem;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+}
+
+
+.pie-d {
+    margin-top: 2rem;
+    width: 65vw;
+    /*width: calc(100vw - 500px);*/
+    /*width: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));*/
+}
+
+.pie-d img {
+    width: 100%;
+}
+
+
+.pg-sh-cond-1,
+.pg-sh-cond-3 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.pg-sh-cond-span {
+    font-weight: bold;
+}

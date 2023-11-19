@@ -1,0 +1,30 @@
+.land {
+    height: 100%;
+    background: #eb4;
+    background-image: linear-gradient(to bottom, #eb4 0%, #962 100%);
+    overflow: hidden;
+    z-index: 5;
+    margin: auto;
+    position: relative;
+}
+
+.land-top {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    grid-area: header;
+    width: 50%;
+}
+
+.land-bottom {
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    grid-area: footer;
+    width: 70%;
+
+}
+
+.land-flowers {
+    position: absolute;
+    bottom: 100px;
+    left: 2%;
+}

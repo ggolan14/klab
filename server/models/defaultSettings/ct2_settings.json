@@ -1,0 +1,871 @@
+{
+  "math_problems_bank": [
+    {
+      "math_problem": "(8*9)-8=",
+      "presented_number": "64",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 0
+    },
+    {
+      "math_problem": "(5*9)-1=",
+      "presented_number": "44",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 1
+    },
+    {
+      "math_problem": "(8*2)-8=",
+      "presented_number": "2",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 2
+    },
+    {
+      "math_problem": "(9*1)+3=",
+      "presented_number": "12",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 3
+    },
+    {
+      "math_problem": "(5*9)-5=",
+      "presented_number": "45",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 4
+    },
+    {
+      "math_problem": "(2/1)-2=",
+      "presented_number": "6",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 5
+    },
+    {
+      "math_problem": "(1/1)+9=",
+      "presented_number": "10",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 6
+    },
+    {
+      "math_problem": "(2*6)-4=",
+      "presented_number": "6",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 7
+    },
+    {
+      "math_problem": "(4*4)-4=",
+      "presented_number": "8",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 8
+    },
+    {
+      "math_problem": "(4*5)-5=",
+      "presented_number": "11",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 9
+    },
+    {
+      "math_problem": "(5*8)-9=",
+      "presented_number": "40",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 10
+    },
+    {
+      "math_problem": "(6/3)+1=",
+      "presented_number": "3",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 11
+    },
+    {
+      "math_problem": "(6/6)-0=",
+      "presented_number": "1",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 12
+    },
+    {
+      "math_problem": "(3*7)-4=",
+      "presented_number": "17",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 13
+    },
+    {
+      "math_problem": "(5*6)+1=",
+      "presented_number": "31",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 14
+    },
+    {
+      "math_problem": "(4/2)+9=",
+      "presented_number": "12",
+      "correct_choice": "false",
+      "of_stock": "Practice",
+      "index": 15
+    },
+    {
+      "math_problem": "(7/1)+6=",
+      "presented_number": "13",
+      "correct_choice": "true",
+      "of_stock": "Practice",
+      "index": 16
+    },
+    {
+      "math_problem": "(1/1)+5=",
+      "presented_number": "5",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 17
+    },
+    {
+      "math_problem": "(2*9)-9=",
+      "presented_number": "9",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 18
+    },
+    {
+      "math_problem": "(8/2)+9=",
+      "presented_number": "7",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 19
+    },
+    {
+      "math_problem": "(5*5)+7=",
+      "presented_number": "32",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 20
+    },
+    {
+      "math_problem": "(9/1)+2=",
+      "presented_number": "10",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 21
+    },
+    {
+      "math_problem": "(8/2)-2=",
+      "presented_number": "2",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 22
+    },
+    {
+      "math_problem": "(2/2)+7=",
+      "presented_number": "9",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 23
+    },
+    {
+      "math_problem": "(9*1)-8=",
+      "presented_number": "1",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 24
+    },
+    {
+      "math_problem": "(4/2)-1=",
+      "presented_number": "1",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 25
+    },
+    {
+      "math_problem": "(4*5)-4=",
+      "presented_number": "15",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 26
+    },
+    {
+      "math_problem": "(3*4)/6=",
+      "presented_number": "6",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 27
+    },
+    {
+      "math_problem": "(3*3)-1=",
+      "presented_number": "8",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 28
+    },
+    {
+      "math_problem": "(5/5)+3=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 29
+    },
+    {
+      "math_problem": "(5*5)-6=",
+      "presented_number": "18",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 30
+    },
+    {
+      "math_problem": "(3*6)/2=",
+      "presented_number": "8",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 31
+    },
+    {
+      "math_problem": "(3*2)-4=",
+      "presented_number": "2",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 32
+    },
+    {
+      "math_problem": "(4/4)+4=",
+      "presented_number": "8",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 33
+    },
+    {
+      "math_problem": "(3*8)-1=",
+      "presented_number": "23",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 34
+    },
+    {
+      "math_problem": "(9*1)-5=",
+      "presented_number": "4",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 35
+    },
+    {
+      "math_problem": "(6/1)+2=",
+      "presented_number": "8",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 36
+    },
+    {
+      "math_problem": "(5*6)-9=",
+      "presented_number": "31",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 37
+    },
+    {
+      "math_problem": "(5*6)-5=",
+      "presented_number": "30",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 38
+    },
+    {
+      "math_problem": "(1*9)+7=",
+      "presented_number": "19",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 39
+    },
+    {
+      "math_problem": "(8*2)+2=",
+      "presented_number": "16",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 40
+    },
+    {
+      "math_problem": "(5*6)-4=",
+      "presented_number": "26",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 41
+    },
+    {
+      "math_problem": "(4/4)-1=",
+      "presented_number": "0",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 42
+    },
+    {
+      "math_problem": "(4*6)-5=",
+      "presented_number": "19",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 43
+    },
+    {
+      "math_problem": "(6*3)+5=",
+      "presented_number": "21",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 44
+    },
+    {
+      "math_problem": "(5/5)+5=",
+      "presented_number": "6",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 45
+    },
+    {
+      "math_problem": "(5*2)/2=",
+      "presented_number": "5",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 46
+    },
+    {
+      "math_problem": "(9/1)+4=",
+      "presented_number": "12",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 47
+    },
+    {
+      "math_problem": "(4*3)+4=",
+      "presented_number": "16",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 48
+    },
+    {
+      "math_problem": "(1*8)-6=",
+      "presented_number": "0",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 49
+    },
+    {
+      "math_problem": "(5/5)-1=",
+      "presented_number": "0",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 50
+    },
+    {
+      "math_problem": "(3*4)/2=",
+      "presented_number": "5",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 51
+    },
+    {
+      "math_problem": "(4/1)-2=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 52
+    },
+    {
+      "math_problem": "(4*5)+8=",
+      "presented_number": "28",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 53
+    },
+    {
+      "math_problem": "(8/2)+2=",
+      "presented_number": "2",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 54
+    },
+    {
+      "math_problem": "(4*2)+6=",
+      "presented_number": "14",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 55
+    },
+    {
+      "math_problem": "(3/3)+2=",
+      "presented_number": "3",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 56
+    },
+    {
+      "math_problem": "(8/8)+3=",
+      "presented_number": "4",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 57
+    },
+    {
+      "math_problem": "(5*7)+4=",
+      "presented_number": "30",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 58
+    },
+    {
+      "math_problem": "(3*8)-4=",
+      "presented_number": "18",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 59
+    },
+    {
+      "math_problem": "(5*7)-5=",
+      "presented_number": "30",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 60
+    },
+    {
+      "math_problem": "(1*2)+1=",
+      "presented_number": "3",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 61
+    },
+    {
+      "math_problem": "(2*4)+8=",
+      "presented_number": "16",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 62
+    },
+    {
+      "math_problem": "(2/2)-1=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 63
+    },
+    {
+      "math_problem": "(8*2)-2=",
+      "presented_number": "14",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 64
+    },
+    {
+      "math_problem": "(5*5)-5=",
+      "presented_number": "20",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 65
+    },
+    {
+      "math_problem": "(5*8)-9=",
+      "presented_number": "31",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 66
+    },
+    {
+      "math_problem": "(5/5)-1=",
+      "presented_number": "4",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 67
+    },
+    {
+      "math_problem": "(2*7)-5=",
+      "presented_number": "6",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 68
+    },
+    {
+      "math_problem": "(3/3)+6=",
+      "presented_number": "9",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 69
+    },
+    {
+      "math_problem": "(1*1)+9=",
+      "presented_number": "9",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 70
+    },
+    {
+      "math_problem": "(1/1)-1=",
+      "presented_number": "2",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 71
+    },
+    {
+      "math_problem": "(1*3)+1=",
+      "presented_number": "3",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 72
+    },
+    {
+      "math_problem": "(8*2)+5=",
+      "presented_number": "22",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 73
+    },
+    {
+      "math_problem": "(7*3)-3=",
+      "presented_number": "18",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 74
+    },
+    {
+      "math_problem": "(7*2)-4=",
+      "presented_number": "10",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 75
+    },
+    {
+      "math_problem": "(9/1)+5=",
+      "presented_number": "18",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 76
+    },
+    {
+      "math_problem": "(8*8)-8=",
+      "presented_number": "56",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 77
+    },
+    {
+      "math_problem": "(5*8)-4=",
+      "presented_number": "36",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 78
+    },
+    {
+      "math_problem": "(4/4)+8=",
+      "presented_number": "12",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 79
+    },
+    {
+      "math_problem": "(4/4)-1=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 80
+    },
+    {
+      "math_problem": "(5*5)-4=",
+      "presented_number": "21",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 81
+    },
+    {
+      "math_problem": "(2*2)-1=",
+      "presented_number": "3",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 82
+    },
+    {
+      "math_problem": "(8/2)-1=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 83
+    },
+    {
+      "math_problem": "(4*2)-6=",
+      "presented_number": "2",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 84
+    },
+    {
+      "math_problem": "(5*5)+5=",
+      "presented_number": "20",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 85
+    },
+    {
+      "math_problem": "(3/3)+2=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 86
+    },
+    {
+      "math_problem": "(5*5)-9=",
+      "presented_number": "11",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 87
+    },
+    {
+      "math_problem": "(9*1)-9=",
+      "presented_number": "1",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 88
+    },
+    {
+      "math_problem": "(1*4)+4=",
+      "presented_number": "0",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 89
+    },
+    {
+      "math_problem": "(9*1)+1=",
+      "presented_number": "10",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 90
+    },
+    {
+      "math_problem": "(8/4)+3=",
+      "presented_number": "5",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 91
+    },
+    {
+      "math_problem": "(10*2)-5=",
+      "presented_number": "15",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 92
+    },
+    {
+      "math_problem": "(2*3)+8=",
+      "presented_number": "14",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 93
+    },
+    {
+      "math_problem": "(4/4)+7=",
+      "presented_number": "12",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 94
+    },
+    {
+      "math_problem": "(5*8)-5=",
+      "presented_number": "45",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 95
+    },
+    {
+      "math_problem": "(4/4)+1=",
+      "presented_number": "2",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 96
+    },
+    {
+      "math_problem": "(2*5)-5=",
+      "presented_number": "2",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 97
+    },
+    {
+      "math_problem": "(5/5)+1=",
+      "presented_number": "6",
+      "correct_choice": "false",
+      "of_stock": "Real",
+      "index": 98
+    },
+    {
+      "math_problem": "(3*5)-6=",
+      "presented_number": "9",
+      "correct_choice": "true",
+      "of_stock": "Real",
+      "index": 99
+    }
+  ],
+  "raven_source": {
+    "1": {
+      "correct": "5",
+      "of": "Real"
+    },
+    "2": {
+      "correct": "1",
+      "of": "Practice"
+    },
+    "3": {
+      "correct": "7",
+      "of": "Practice"
+    },
+    "4": {
+      "correct": "4",
+      "of": "Real"
+    },
+    "5": {
+      "correct": "3",
+      "of": "None"
+    },
+    "6": {
+      "correct": "1",
+      "of": "None"
+    },
+    "7": {
+      "correct": "6",
+      "of": "None"
+    },
+    "8": {
+      "correct": "1",
+      "of": "Real"
+    },
+    "9": {
+      "correct": "8",
+      "of": "None"
+    },
+    "10": {
+      "correct": "4",
+      "of": "None"
+    },
+    "11": {
+      "correct": "5",
+      "of": "Real"
+    },
+    "12": {
+      "correct": "6"
+    },
+    "13": {
+      "correct": "2"
+    },
+    "15": {
+      "of": "Real",
+      "correct": "2"
+    },
+    "16": {
+      "correct": "4"
+    },
+    "17": {
+      "correct": "6"
+    },
+    "18": {
+      "of": "Real",
+      "correct": "7"
+    },
+    "19": {
+      "correct": "3"
+    },
+    "20": {
+      "correct": "8"
+    },
+    "21": {
+      "of": "Real",
+      "correct": "8"
+    },
+    "22": {
+      "correct": "7"
+    },
+    "23": {
+      "of": "Real",
+      "correct": "6"
+    },
+    "24": {
+      "correct": "3"
+    },
+    "25": {
+      "of": "Real",
+      "correct": "7"
+    },
+    "26": {
+      "correct": "2"
+    },
+    "27": {
+      "correct": "7"
+    },
+    "28": {
+      "correct": "5"
+    },
+    "29": {
+      "correct": "6"
+    },
+    "30": {
+      "of": "Real",
+      "correct": "5"
+    },
+    "31": {
+      "of": "Real",
+      "correct": "4"
+    },
+    "32": {
+      "correct": "8"
+    },
+    "33": {
+      "correct": "5"
+    },
+    "35": {
+      "of": "Real",
+      "correct": "3"
+    },
+    "36": {
+      "correct": "2"
+    }
+  },
+  "aospan_math_practice_trials": "15",
+  "aospan_practice_random_order": "False",
+  "aospan_real_random_order": "True",
+  "aospan_real_repeat_each_set": "3",
+  "aospan_real_trials_sets1": "3",
+  "aospan_real_trials_sets2": "4",
+  "aospan_real_trials_sets3": "5",
+  "aospan_real_trials_sets4": "6",
+  "aospan_real_trials_sets5": "7",
+  "aospan_display_letter_time": "1",
+  "raven_random_order": "False",
+  "raven_real_trials": "12",
+  "raven_practice_trials": "2",
+  "raven_display_selection_time": 5000,
+  "raven1_Duration": 600000,
+  "exchange_rate_pattern_l1": "100",
+  "exchange_rate_rd_l1": "100",
+  "exchange_rate_rt_l1": "100",
+  "exchange_rate_pl_l1": "100",
+  "pay_sign_l1": "£",
+  "show_up2_l1": "3.5",
+  "show_up1_l1": "2.5",
+  "exchange_rate_pattern_l2": "1",
+  "exchange_rate_rd_l2": "1",
+  "exchange_rate_rt_l2": "1",
+  "exchange_rate_pl_l2": "1",
+  "pay_sign_l2": "$",
+  "show_up2_l2": "1",
+  "show_up1_l2": "1",
+  "location_1_name": "loc1",
+  "location_2_name": "loc2",
+  "language_hebrew": false,
+  "language_english": true,
+  "language_german": false,
+  "raven_task": true,
+  "aospan_task": true,
+  "bonus_endowment1": "1.1",
+  "wms_task": true,
+  "wms_digit_display_time": "1",
+  "wms_delay_between_numbers": "200",
+  "Prolific_code": "70A2369B",
+  "Running_label": "Real",
+  "raven_higher_smaller_then": "5",
+  "aospan_higher_smaller_then": "65"
+}

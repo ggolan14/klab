@@ -1,0 +1,157 @@
+.admin-todo_new_todo {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+
+.admin-todo_new_todo>div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    display: grid;
+    overflow: hidden;
+}
+
+.admin-todo_new_todo_w{
+    background-color: #d0d0d0;
+    grid-template-rows: max-content 1fr max-content;
+    /*width: max-content;*/
+
+    min-width: 80%;
+    max-width: 95%;
+    height: max-content;
+    min-height: 80%;
+    max-height: 95%;
+}
+
+.admin-todo_new_todo_w>label{
+    font-size: x-large;
+    text-align: center;
+    width: 100%;
+    background-color: #0024ff;
+    color: whitesmoke;
+}
+
+.admin-todo_new_todo_body {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-auto-rows: max-content;
+    grid-row-gap: 1rem;
+    column-gap: 0.5rem;
+    padding: 0.5rem;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.admin-todo_new_todo_body textarea{
+    resize: vertical;
+    min-height: 30vh;
+    padding: 0.2rem 0.4rem;
+}
+
+.admin-todo_new_todo_body select{
+    width: max-content;
+    height: max-content;
+}
+
+.admin-todo_new_todo_body input{
+    border-radius: 0 !important;
+}
+
+.admin-todo_new_todo_btn {
+    padding: 0.5rem 0;
+    margin: auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 1rem;
+    width: max-content;
+}
+
+.admin-todo_new_todo_btn>button {
+    border-radius: 10px;
+    padding: 8px 15px;
+    width: auto;
+}
+
+.admin-todo_new_todo_btn>button:hover{
+    background-color: #000ffd;
+    color: white;
+}
+
+.admin-todo_new_todo_btn .save{
+    background-color: #c5f86f;
+}
+
+.admin-todo_new_todo_choose-file>label{
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 8px;
+    cursor: pointer;
+    background-color: #011b8a;
+    color: white;
+}
+
+.admin-todo_new_todo_choose-file>label:hover{
+    background-color: #0028d2;
+}
+
+.admin-todo_new_todo_choose-file>label:active{
+    padding: 7px;
+    background-color: #1e49ff;
+}
+
+.admin-todo_new_todo_files {
+    /*border: 1px solid black;*/
+    /*grid-auto-flow: column;*/
+    display: flex;
+    /*flex-wrap: wrap;*/
+    row-gap: 0.5rem;
+    column-gap: 0.3rem;
+    align-items: center;
+    /*grid-column-gap: 1rem;*/
+    /*grid-template-columns: max-content;*/
+    padding: 0.2rem 0.3rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+}
+
+.admin-todo_new_todo_file {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    /*grid-column-gap: 0.3rem;*/
+    grid-template-columns: repeat(2, max-content);
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    width: max-content;
+}
+.admin-todo_new_todo_file label:first-child{
+    color: red;
+}
+
+.admin-todo_new_todo_file:hover{
+    color: darkmagenta !important;
+}
+
+.admin-todo_new_todo_file label{
+    width: 100%;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.admin-todo_new_todo_file label:first-child:hover{
+    color: darkred;
+}

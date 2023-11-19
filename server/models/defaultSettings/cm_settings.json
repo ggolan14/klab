@@ -1,0 +1,19 @@
+{
+  "prolific_code": "",
+  "show_up_fee": "0.8",
+  "sign_of_reward": "£",
+  "number_of_blocks": "1",
+  "amount_of_reward": "0.5",
+  "reward_display": "0.8",
+  "delay_last_choice": "0.8",
+  "probability_of_reward": "0.5",
+  "number_of_choices_per_matrix": "1",
+  "color_1": "#f65142",
+  "color_2": "#5366f7",
+  "dark_color_1": "#ca3a33",
+  "dark_color_2": "#404fb2",
+  "running_name": "",
+  "game_of": "Both",
+  "action_time": "60",
+  "second_warning": "10"
+}

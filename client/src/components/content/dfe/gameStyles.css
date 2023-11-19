@@ -1,0 +1,112 @@
+.dfe-game-mode {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+/*.dfe-game-board {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+
+/*    display: grid;*/
+/*    !*grid-template-rows: 70% 30%;*!*/
+/*    justify-content: center;*/
+/*    text-align: center;*/
+/*    justify-items: center;*/
+/*}*/
+
+.dfe-game-board {
+    width: 100%;
+    height: max-content;
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-areas:
+            'dfeBtns'
+            'dfeMsg'
+            'dfeSpacebar';
+    grid-template-rows: repeat(3, max-content);
+    grid-row-gap: 5rem;
+    /*grid-template-columns: 21rem 21rem;*/
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.dfe-game-board-btns {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-column-gap: 15rem;
+    grid-area: dfeBtns;
+}
+
+.dfe-game-board-message {
+    display: grid;
+    grid-area: dfeMsg;
+}
+
+.dfe-game-board-space {
+    grid-area: dfeSpacebar;
+}
+
+.dfe-game-board-btns>button {
+    border-top-color: #B7B7B7;
+    border-left-color: #C9C9C9;
+    border-right-color: #B7B7B7;
+    border-bottom-color: #C9C9C9;
+    background-color: #A5A5A5;
+    font-size: xx-large;
+    width: 15rem;
+    height: 10rem;
+    padding: 2rem;
+    border-width: 0.5rem;
+    outline: none;
+}
+
+.dfe-game-board>div>button:active {
+
+}
+
+.dfe-game-board>label {
+    color: white;
+    font-size: x-large;
+    width: max-content;
+    height: max-content;
+    padding: 1rem 3rem;
+}
+
+
+.dfe-debugger-mode-body-d1 {
+    display: grid;
+    padding: 0.5rem 1.2rem;
+    text-align: left;
+    background-color: black;
+
+    color: cornflowerblue;
+}
+
+.dfe-debugger-mode-body-d1 span {
+    color: orangered;
+}
+
+
+.selected-pattern {
+    font-weight: bolder;
+    color: greenyellow !important;
+}
+
+.dfe-unselected-btn {
+    /*font-weight: lighter;*/
+    opacity: 0.6;
+    color: white;
+}
+.dfe-selected-btn {
+    font-weight: bolder;
+}
+
+
+.dfe-pl-panel {
+    background: none #919090 !important;
+}

@@ -1,0 +1,112 @@
+.admin-todo-panel {
+    min-height: 100%;
+    height: max-content;
+    grid-auto-rows: max-content;
+    display: grid;
+    padding: 0.5rem;
+    grid-row-gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.admin-todo-su-qt {
+    border-bottom: 1px solid;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: larger;
+}
+
+.admin-todo-su-qt>label{
+    padding: 5px;
+    cursor: pointer;
+    background-color: rgba(219, 252, 200, 0.5);
+}
+
+.admin-todo-su-qt>label>span{
+
+}
+
+.admin-todo-su-qt>ol{
+    width: max-content;
+    margin: auto;
+}
+
+.admin-todo-su-qt>ol>li{
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-bottom: 1px solid;
+    width: auto;
+    background-color: rgba(255, 254, 220, 0.6);
+}
+
+.dragging-helper-class{
+    background-color: rgba(169, 246, 250, 0.6);
+    padding: 0.2rem 0.5rem;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.admin-todo-exp_turn {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+}
+
+.admin-todo-exp_turn>span{
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(197, 172, 255, 0.4);
+    padding: 0.5rem;
+}
+
+
+.admin-todo-panel-add_new_todo {
+    border-radius: 25px;
+    padding: 10px;
+    border: 1px solid;
+    width: max-content;
+    cursor: pointer;
+    background-color: rgb(118, 65, 243);
+    color: white;
+}
+
+.admin-todo-panel-add_new_todo:hover{
+    background-color: rgb(32, 12, 77);
+    color: white;
+}
+
+.admin-todo-panel-add_new_todo:active{
+    background-color: rgb(68, 8, 199);
+    padding: 9px;
+}
+
+
+
+
+
+
+.todo_error {
+    width: max-content !important;
+    height: max-content !important;
+    padding: 1.5rem 4rem;
+    z-index: 999;
+    font-size: larger !important;
+
+    border: 2px solid #28282f;
+    background-color: whitesmoke;
+    /**/
+    /*border-radius: 10px;*/
+    /*border: 3px solid #626039;*/
+    /*overflow: hidden;*/
+}
+
+.todo_error>label:first-child {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.todo_error>button {
+    margin: auto;
+    font-size: larger !important;
+    border-radius: 12px;
+}
+

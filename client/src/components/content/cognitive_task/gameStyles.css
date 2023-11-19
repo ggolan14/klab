@@ -1,0 +1,415 @@
+.ct-only {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.ct-nfc-only {
+    width: 100% !important;
+    text-align: center;
+    text-align: -moz-center;
+    text-align: -webkit-center;
+}
+
+.ct-start-buttons-template {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.ct-start-buttons-horizontal {
+    display: grid;
+    grid-template-areas:
+            'ctBtn1 ctBtn2'
+            'ctMsg2 ctMsg2'
+            'ctMsg3 ctMsg3';
+    grid-template-rows: 12rem 12rem 6rem;
+    grid-template-columns: 21rem 21rem;
+    text-align: center;
+    align-items: center;
+}
+
+.ct-start-buttons-vertical{
+    display: grid;
+    grid-template-areas:
+            'ctBtn1'
+            'ctMsg2'
+            'ctBtn2'
+            'ctMsg3';
+    grid-template-rows: 12rem 6rem 12rem 6rem;
+    grid-template-columns: max-content;
+    grid-row-gap: 1rem;
+    text-align: center;
+    align-items: center;
+}
+
+.ct-start-buttons-vertical div {
+    margin: auto;
+}
+
+.ct-start-buttons-msg{
+    background-color: #FFD790;
+    width: max-content;
+    height: max-content;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid #ffaa22;
+    border-radius: 11px;
+}
+
+.ct-start-buttons-msg span{
+    color: red;
+}
+
+.ct-start-buttons-msg1{
+    font-weight: bold;
+    text-align: center;
+    grid-area: ctMsg1;
+    position: absolute;
+    top: 12%; right: 0;
+    transform: translate(-50%,-50%);
+    font-size: x-large;
+}
+
+.ct-start-buttons-msg2 {
+    font-style: italic;
+    grid-area: ctMsg2;
+    font-size: x-large;
+    margin: auto;
+}
+
+.ct-task-btn-container {
+    /*tabIndex: 0;*/
+    width: 100vw;
+    height: 100vh;
+}
+.ct-start-buttons-msg3 {
+    grid-area: ctMsg3;
+    font-size: xx-large;
+    margin: auto;
+    animation: blinker 3s infinite;
+    background-color: #1B8BFF;
+    width: max-content;
+    height: max-content;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid #005cbf;
+    border-radius: 11px;
+    color: white;
+}
+
+@keyframes blinker {
+    /*0%{     opacity: 0;    }*/
+    /*49%{    opacity: 0.3; }*/
+    /*60%{    opacity: 0.5; }*/
+    /*99%{    opacity: 0.7;  }*/
+    /*100%{   opacity: 1;    }*/
+    /*0%{opacity: 0;}*/
+    /*10%{opacity: 0.1;}*/
+    20%{opacity: 1;}
+    /*25%{opacity: 0.25;}*/
+    /*30%{opacity: 0.3;}*/
+    /*40%{opacity: 0.4;}*/
+    50%{opacity: 0;}
+    /*50%{opacity: 0.5;}*/
+    /*60%{opacity: 0.6;}*/
+    /*70%{opacity: 0.7;}*/
+    /*75%{opacity: 0.75;}*/
+    80%{opacity: 1;}
+    /*90%{opacity: 0.9;}*/
+    /*100%{opacity: 1;}*/
+}
+
+.ct-start-buttons-btn1{
+    grid-area: ctBtn1;
+}
+
+.ct-start-buttons-btn2 {
+    grid-area: ctBtn2;
+}
+
+.ct-start-buttons-template button {
+    width: 10rem;
+    height: 10rem;
+
+    /*border: 1rem outset #A3C2E5;*/
+
+    margin: auto;
+    border-style: outset;
+    border-width: 10px;
+    color: white;
+
+}
+
+.ct-start-buttons-reg {
+    border-top-color: #B7B7B7;
+    border-left-color: #C9C9C9;
+    border-right-color: #B7B7B7;
+    border-bottom-color: #C9C9C9;
+    background-color: #A5A5A5;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.ct-disabled-item {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.ct-start-buttons-template button:active{
+    /*width: 9rem;*/
+    /*height: 9rem;*/
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.ct-start-game-messages-box {
+    width: 90%;
+    height: 90%;
+    display: grid;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    grid-template-rows: auto max-content;
+    grid-template-columns: auto;
+    padding: 1rem;
+    border: 1px solid black;
+    overflow: visible;
+}
+
+
+.ct-end-task-msg {
+    font-size: xx-large;
+    display: grid;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.ct-end-task-msg  button {
+    width: max-content;
+    height: max-content;
+}
+
+.ct2-game-swc-panel-input label {
+    font-size: xx-large;
+}
+
+.ct2-game-swc-panel-input label:nth-child(1){
+    letter-spacing: 1rem;
+}
+
+.ct2-game-swc-panel-input label:nth-child(2){
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color: transparent;  }
+    100%{   color: #000;    }
+}
+
+.ct2-game-swc-panel-buttons button {
+    font-size: x-large;
+    padding: 0.2rem 2.2rem 0.2rem 2.2rem;
+}
+
+.ct2-game-swc-panel-buttons button:nth-child(1) {
+    float: left;
+    margin-left: 1.5rem;
+}
+
+
+.ct2-game-swc-panel-buttons button:nth-child(2) {
+    float: right;
+    margin-right: 1.5rem;
+}
+
+.ct2-game-swc{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    display: grid;
+}
+
+.ct2-game-swc-labels {
+    display: grid;
+    font-size: x-large;
+}
+
+.ct2-game-swc-panel {
+    border: 1px solid;
+    padding: 2rem 4rem 2rem 4rem;
+    text-align: center;
+    grid-row-gap: 1.5rem;
+    display: grid;
+    width: max-content;
+}
+
+.ct2-game-swc-panel-words {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: repeat(3, max-content);
+    column-gap: 10rem;
+    grid-row-gap: 2.3rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+    font-size: 2.5rem;
+}
+
+.ct2-game-swc-panel {
+    margin-top: 1rem;
+}
+
+.ct2-game-swc-panel-words div{
+    width: max-content;
+    height: max-content;
+}
+
+.ct2-game-swc-panel-words div label:nth-child(1){
+    border: 1px solid black;
+    padding: 0.01rem 1rem 0.01rem 1rem;
+    background-color: white;
+}
+
+.ct2-game-swc-panel-blank button {
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    font-size: x-large;
+    border: 1px solid;
+}
+
+.text-transparency{
+    color: white;
+}
+
+.ct-start-ques-bar th {
+    width: 12%;
+}
+
+.ct-start-ques-bar tbody {
+    font-size: large;
+}
+
+.ct-start-ques-bar td {
+    text-align: center !important;
+}
+
+.ct-start-ques-bar td input[type="radio"]{
+    height: 1.5rem;
+    width: 100%
+}
+
+
+
+
+
+
+.ct-start-check-task {
+    display: grid;
+    width: max-content;
+    height: max-content;
+
+    max-width: 90%;
+    grid-template-rows: max-content max-content;
+    row-gap: 2rem;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    justify-items: center;
+    place-items: center;
+}
+
+.ct-start-check-buttons-msg {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.ct-start-check-task-btns {
+
+}
+
+.ct-start-check-task-btn-left,
+.ct-start-check-task-btn-right {
+    width: 10rem;
+    height: 10rem;
+
+    margin: auto;
+    border-style: outset;
+    border-width: 10px;
+    color: white;
+}
+
+.ct-start-check-task-btn-left:active,
+.ct-start-check-task-btn-right:active {
+    /*width: 9rem;*/
+    /*height: 9rem;*/
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.ct-check-buttons-horizontal {
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*        'ctBtn1 ctBtn2'*/
+    /*        'ctMsg2 ctMsg2'*/
+    /*        'ctMsg3 ctMsg3';*/
+    /*grid-template-rows: 12rem 12rem 6rem;*/
+    /*grid-template-columns: 21rem 21rem;*/
+    /*text-align: center;*/
+    /*align-items: center;*/
+}
+
+.ct-check-buttons-vertical{
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*        'ctBtn1'*/
+    /*        'ctMsg2'*/
+    /*        'ctBtn2'*/
+    /*        'ctMsg3';*/
+    /*grid-template-rows: 12rem 6rem 12rem 6rem;*/
+    /*grid-template-columns: max-content;*/
+    /*grid-row-gap: 1rem;*/
+    /*text-align: center;*/
+    /*align-items: center;*/
+}
+
+.ct-check-buttons-vertical div {
+    margin: auto;
+}
+
+
+.ct2-introductions {
+    text-align: left !important;
+    display: grid;
+}
+
+.ct2-introductions ul{
+    list-style: inside !important;
+}
+
+
+.align-center {
+    text-align: center;
+}
+
+
+
+.ct1-support-tools {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    grid-template-rows: repeat(3,max-content) !important;
+    width: max-content !important;
+    height: max-content !important;
+    grid-row-gap: 6rem;
+}

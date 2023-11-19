@@ -1,0 +1,333 @@
+16-04-2023 | 14:15:34 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 14:15:34 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 14:15:34 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 14:15:34 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test
+16-04-2023 | 14:15:34 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=643bd8d6fdb1427c33a55096 Ver=test
+16-04-2023 | 14:16:39 | addNewRecord IP=0.0.0.0 ExpID=643bd8d6fdb1427c33a55096 Length=6
+16-04-2023 | 14:16:43 | finishRecord IP=0.0.0.0 ExpID=643bd8d6fdb1427c33a55096
+16-04-2023 | 14:55:59 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 14:55:59 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 14:55:59 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 14:55:59 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+16-04-2023 | 14:55:59 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=643be24ffdb1427c33a5510b Ver=test_1
+16-04-2023 | 14:56:47 | addNewRecord IP=0.0.0.0 ExpID=643be24ffdb1427c33a5510b Length=5
+16-04-2023 | 14:56:48 | finishRecord IP=0.0.0.0 ExpID=643be24ffdb1427c33a5510b
+16-04-2023 | 16:48:31 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 16:48:31 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 16:48:31 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 16:48:31 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+16-04-2023 | 16:48:31 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=643bfcaf4373260f99fbee87 Ver=test_1
+16-04-2023 | 16:48:48 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 16:48:48 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 16:48:48 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 16:49:45 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 16:49:45 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 16:49:45 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 16:49:45 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+16-04-2023 | 16:49:45 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=643bfcf94373260f99fbeea1 Ver=test_1
+16-04-2023 | 16:51:20 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 16:51:20 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 16:51:20 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 20:37:28 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 20:37:28 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 20:37:37 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 20:37:57 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 20:37:57 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 20:38:03 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+16-04-2023 | 20:38:03 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+16-04-2023 | 20:38:03 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=643c327b4373260f99fbef13 Ver=test_1
+16-04-2023 | 20:40:18 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 20:40:18 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 20:40:29 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 20:40:29 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 20:41:00 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2023 | 20:41:00 | getGameConsentForm IP=0.0.0.0
+16-04-2023 | 20:41:16 | getGameVersion IP=0.0.0.0 UserId=user_test
+16-04-2023 | 20:41:16 | addNewUserRecords IP=0.0.0.0 UserId=user_test Ver=test_1
+16-04-2023 | 20:41:16 | addNewUserRecords2 IP=0.0.0.0 UserId=user_test ExpId=643c333c4373260f99fbef36 Ver=test_1
+16-04-2023 | 20:42:11 | addNewRecord IP=0.0.0.0 ExpID=643c333c4373260f99fbef36 Length=5
+16-04-2023 | 20:42:13 | finishRecord IP=0.0.0.0 ExpID=643c333c4373260f99fbef36
+16-04-2023 | 20:42:13 | getRedirectTo IP=0.0.0.0 UserId=user_test ExpID=643c333c4373260f99fbef36 Ver=test_1
+18-04-2023 | 15:18:46 | getIsExpReady IP=0.0.0.0 status=Y
+18-04-2023 | 15:18:46 | getGameConsentForm IP=0.0.0.0
+18-04-2023 | 15:19:51 | getIsExpReady IP=0.0.0.0 status=Y
+18-04-2023 | 15:19:51 | getGameConsentForm IP=0.0.0.0
+23-04-2023 | 21:48:43 | getIsExpReady IP=0.0.0.0 status=Y
+23-04-2023 | 21:48:43 | getGameConsentForm IP=0.0.0.0
+25-04-2023 | 15:27:57 | getIsExpReady IP=0.0.0.0 status=Y
+25-04-2023 | 15:27:57 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 12:18:54 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 12:18:54 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 12:19:04 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+01-05-2023 | 12:19:04 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+01-05-2023 | 12:19:04 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=644f84085609c153d33458ae Ver=test_1
+01-05-2023 | 14:25:53 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 14:25:53 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 14:26:05 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 14:26:05 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 14:26:06 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+01-05-2023 | 14:26:06 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+01-05-2023 | 14:26:06 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=644fa1cea5d5e559be0c9fad Ver=test_1
+01-05-2023 | 14:47:33 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 14:47:33 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 14:47:34 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+01-05-2023 | 14:47:34 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+01-05-2023 | 14:47:34 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=644fa6d6a5d5e559be0c9fd2 Ver=test_1
+01-05-2023 | 19:58:39 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 19:58:39 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 19:58:42 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 19:58:42 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 19:58:43 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+01-05-2023 | 19:58:43 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+01-05-2023 | 19:58:43 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=644fefc3a5d5e559be0ca02d Ver=test_1
+01-05-2023 | 20:00:04 | getIsExpReady IP=0.0.0.0 status=Y
+01-05-2023 | 20:00:04 | getGameConsentForm IP=0.0.0.0
+01-05-2023 | 20:00:05 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+01-05-2023 | 20:00:05 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+01-05-2023 | 20:00:05 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=644ff015a5d5e559be0ca06c Ver=test_1
+02-05-2023 | 07:29:07 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 07:29:07 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 07:29:09 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 07:29:09 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 07:29:09 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450919511ea2864fe0a94ce Ver=test_1
+02-05-2023 | 07:30:27 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 07:30:27 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 09:50:48 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 09:50:48 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 09:50:48 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450b2c811ea2864fe0a9507 Ver=test_1
+02-05-2023 | 09:54:19 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 09:54:19 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 09:55:03 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 09:55:03 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 09:55:03 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450b3c711ea2864fe0a9545 Ver=test_1
+02-05-2023 | 10:10:56 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 10:10:56 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 10:11:41 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 10:11:41 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 10:11:41 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450b7ad11ea2864fe0a958f Ver=test_1
+02-05-2023 | 10:29:48 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 10:29:48 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 10:30:00 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 10:30:00 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 10:30:00 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450bbf811ea2864fe0a95d1 Ver=test_1
+02-05-2023 | 10:42:37 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 10:42:37 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 10:42:37 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 10:42:37 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 10:42:37 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450beed11ea2864fe0a963b Ver=test_1
+02-05-2023 | 10:44:40 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 10:44:40 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 10:44:41 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 10:44:41 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 10:44:41 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450bf6911ea2864fe0a967b Ver=test_1
+02-05-2023 | 10:47:49 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 10:47:49 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 10:54:59 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 10:54:59 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 10:55:00 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 10:55:00 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 10:55:00 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450c1d411ea2864fe0a970d Ver=test_1
+02-05-2023 | 11:25:17 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 11:25:17 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 11:26:12 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 11:26:12 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 11:26:13 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 11:26:13 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 11:26:13 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450c92511ea2864fe0a9780 Ver=test_1
+02-05-2023 | 11:32:29 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 11:32:29 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 11:32:29 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 11:32:29 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 11:32:29 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450ca9d11ea2864fe0a97a1 Ver=test_1
+02-05-2023 | 11:35:43 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 11:35:43 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 11:35:44 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 11:35:44 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 11:35:45 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450cb6111ea2864fe0a97dd Ver=test_1
+02-05-2023 | 11:36:11 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 11:36:11 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 11:36:13 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 11:36:13 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 11:36:13 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450cb7d11ea2864fe0a980f Ver=test_1
+02-05-2023 | 11:58:36 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 11:58:36 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 11:58:38 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 11:58:38 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 11:58:38 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d0be11ea2864fe0a9859 Ver=test_1
+02-05-2023 | 12:00:38 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:00:38 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:00:46 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:00:47 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:00:47 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d13f11ea2864fe0a9891 Ver=test_1
+02-05-2023 | 12:09:41 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:09:41 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:09:42 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:09:42 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:09:42 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d35611ea2864fe0a9909 Ver=test_1
+02-05-2023 | 12:11:54 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:11:54 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:11:55 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:11:55 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:11:55 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d3db11ea2864fe0a9945 Ver=test_1
+02-05-2023 | 12:14:13 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:14:13 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:14:15 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:14:15 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:14:15 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d46711ea2864fe0a9979 Ver=test_1
+02-05-2023 | 12:37:01 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:37:01 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:37:03 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:37:03 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:37:03 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d9bf11ea2864fe0a9ab3 Ver=test_1
+02-05-2023 | 12:37:38 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:37:38 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:37:38 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:37:38 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:37:38 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450d9e211ea2864fe0a9af5 Ver=test_1
+02-05-2023 | 12:55:11 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:55:11 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:55:12 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:55:12 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:55:12 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450de0011ea2864fe0a9b6f Ver=test_1
+02-05-2023 | 12:59:34 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:59:34 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:59:36 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:59:36 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:59:36 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450df0811ea2864fe0a9bb3 Ver=test_1
+02-05-2023 | 12:59:56 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 12:59:56 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 12:59:57 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 12:59:57 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 12:59:57 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450df1d11ea2864fe0a9bed Ver=test_1
+02-05-2023 | 13:00:26 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:00:26 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:00:27 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:00:27 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:00:27 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450df3b11ea2864fe0a9bfe Ver=test_1
+02-05-2023 | 13:01:05 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:01:05 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:01:07 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:01:07 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:01:07 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450df6311ea2864fe0a9c48 Ver=test_1
+02-05-2023 | 13:06:45 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:06:45 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:06:46 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:06:46 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:06:46 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450e0b611ea2864fe0a9cc0 Ver=test_1
+02-05-2023 | 13:32:23 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:32:23 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:32:26 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:32:26 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:32:26 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450e6ba11ea2864fe0a9d36 Ver=test_1
+02-05-2023 | 13:35:12 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:35:12 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:35:14 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:35:14 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:35:14 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450e76211ea2864fe0a9d7a Ver=test_1
+02-05-2023 | 13:39:45 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:39:45 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:39:46 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:39:46 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:39:46 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450e87211ea2864fe0a9dbe Ver=test_1
+02-05-2023 | 13:40:05 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:40:05 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:40:06 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:40:06 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:40:06 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450e88611ea2864fe0a9df4 Ver=test_1
+02-05-2023 | 13:42:58 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 13:42:58 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 13:42:59 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 13:42:59 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 13:42:59 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450e93311ea2864fe0a9e38 Ver=test_1
+02-05-2023 | 14:00:27 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 14:00:27 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 14:00:28 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 14:00:28 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 14:00:28 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450ed4c11ea2864fe0a9e7e Ver=test_1
+02-05-2023 | 14:50:09 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 14:50:09 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 14:50:10 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 14:50:10 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 14:50:10 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450f8f211ea2864fe0aa161 Ver=test_1
+02-05-2023 | 14:51:52 | getIsExpReady IP=0.0.0.0 status=Y
+02-05-2023 | 14:51:52 | getGameConsentForm IP=0.0.0.0
+02-05-2023 | 14:51:53 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+02-05-2023 | 14:51:53 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+02-05-2023 | 14:51:53 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6450f95911ea2864fe0aa197 Ver=test_1
+03-05-2023 | 12:31:43 | getIsExpReady IP=0.0.0.0 status=Y
+03-05-2023 | 12:31:43 | getGameConsentForm IP=0.0.0.0
+03-05-2023 | 12:31:48 | getGameVersion IP=0.0.0.0 UserId=dd
+03-05-2023 | 12:31:48 | addNewUserRecords IP=0.0.0.0 UserId=dd Ver=test_1
+03-05-2023 | 12:31:48 | addNewUserRecords2 IP=0.0.0.0 UserId=dd ExpId=64522a0411ea2864fe0aa1ce Ver=test_1
+07-05-2023 | 15:08:39 | getIsExpReady IP=0.0.0.0 status=Y
+07-05-2023 | 15:08:39 | getGameConsentForm IP=0.0.0.0
+07-05-2023 | 15:08:40 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+07-05-2023 | 15:08:40 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+07-05-2023 | 15:08:40 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=645794c856650ca2ce9fa283 Ver=test_1
+21-05-2023 | 10:16:50 | getIsExpReady IP=0.0.0.0 status=Y
+21-05-2023 | 10:16:50 | getGameConsentForm IP=0.0.0.0
+21-05-2023 | 10:16:50 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+21-05-2023 | 10:16:50 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+21-05-2023 | 10:16:51 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6469c562f16a8505edb6f18e Ver=test_1
+21-05-2023 | 10:18:51 | getIsExpReady IP=0.0.0.0 status=Y
+21-05-2023 | 10:18:51 | getGameConsentForm IP=0.0.0.0
+21-05-2023 | 10:18:52 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+21-05-2023 | 10:18:52 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+21-05-2023 | 10:18:52 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6469c5dcf16a8505edb6f1ac Ver=test_1
+21-05-2023 | 10:31:21 | getIsExpReady IP=0.0.0.0 status=Y
+21-05-2023 | 10:31:21 | getGameConsentForm IP=0.0.0.0
+21-05-2023 | 10:31:22 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+21-05-2023 | 10:31:22 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+21-05-2023 | 10:31:22 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6469c8caf16a8505edb6f23f Ver=test_1
+21-05-2023 | 11:35:00 | getIsExpReady IP=0.0.0.0 status=Y
+21-05-2023 | 11:35:00 | getGameConsentForm IP=0.0.0.0
+21-05-2023 | 11:35:01 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+21-05-2023 | 11:35:01 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+21-05-2023 | 11:35:01 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6469d7b5f16a8505edb6f343 Ver=test_1
+21-05-2023 | 11:35:18 | getIsExpReady IP=0.0.0.0 status=Y
+21-05-2023 | 11:35:18 | getGameConsentForm IP=0.0.0.0
+21-05-2023 | 11:35:19 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+21-05-2023 | 11:35:19 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+21-05-2023 | 11:35:19 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6469d7c7f16a8505edb6f361 Ver=test_1
+30-05-2023 | 15:14:03 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 15:14:03 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 15:14:04 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 15:14:04 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 15:14:04 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6475e88c80dc22085b25d4cb Ver=test_1
+30-05-2023 | 15:20:19 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 15:20:19 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 15:20:20 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 15:20:20 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 15:20:20 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6475ea0480dc22085b25d50c Ver=test_1
+30-05-2023 | 15:22:43 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 15:22:43 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 15:22:44 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 15:22:44 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 15:22:44 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6475ea9480dc22085b25d527 Ver=test_1
+30-05-2023 | 15:34:13 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 15:34:13 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 15:34:14 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 15:34:14 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 15:34:14 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6475ed4646f4ae63fd00c58c Ver=test_1
+30-05-2023 | 17:53:15 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 17:53:15 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 17:53:15 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 17:53:15 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 17:53:15 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=64760ddb46f4ae63fd00c5f0 Ver=test_1
+30-05-2023 | 17:59:36 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 17:59:36 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 18:00:55 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 18:00:55 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 18:00:59 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 18:00:59 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 18:00:59 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=64760fab46f4ae63fd00c637 Ver=test_1
+30-05-2023 | 18:02:46 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 18:02:46 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 18:02:48 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 18:02:48 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 18:02:48 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6476101846f4ae63fd00c648 Ver=test_1
+30-05-2023 | 18:03:44 | getIsExpReady IP=0.0.0.0 status=Y
+30-05-2023 | 18:03:44 | getGameConsentForm IP=0.0.0.0
+30-05-2023 | 18:03:46 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
+30-05-2023 | 18:03:46 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test_1
+30-05-2023 | 18:03:47 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=6476105346f4ae63fd00c655 Ver=test_1

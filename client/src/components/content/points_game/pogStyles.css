@@ -1,0 +1,146 @@
+.pg_settings-block_g-b {
+    margin-left: 0.5rem;
+    display: grid;
+    row-gap: 1rem;
+    grid-auto-rows: max-content;
+}
+
+.pg_settings-block_g-b input {
+    width: 100px;
+}
+
+.pg_settings-block_g-b>.btn-add {
+    margin-left: 0;
+}
+.pg_settings-block_c{ /*container*/
+    background-color: rgba(51, 51, 51, 0.2);
+    border-radius: 0.5rem;
+    border: 1px solid black;
+}
+
+.pg_settings-block_c select {
+    background-color: #d7d7f3;
+}
+
+.pg_settings-block_t { /*title*/
+    background-color: rgba(51, 51, 51, 1);
+    padding: 0.5rem;
+    font-size: larger;
+    color: whitesmoke;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pg_settings-block_t * {
+    cursor: pointer;
+}
+.pg_settings-block_t .btn-delete {
+    font-size: large;
+}
+
+.pg_settings-block_t .plus,
+.pg_settings-block_t .minus {
+    font-size: 15px;
+    padding: 3px 5px;
+    border-radius: 30px;
+    border: 1px solid #e0e0e0;
+    background-color: #031059;
+}
+
+.pg_settings-block_t .plus {
+
+}
+
+.pg_settings-block_t .minus {
+
+}
+
+
+.pg_settings-block_t {
+
+}
+
+.pg_settings-block_t .plus {
+
+}
+
+.pg_settings-block_t .block-title {
+
+}
+
+.pg_settings-block_body {
+    padding: 1rem 2rem;
+    display: grid;
+    row-gap: 1rem;
+}
+
+.pg_settings-block_elements {
+
+}
+
+.BlockDotsPays {
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+.BlockDotsPays-c {
+    border: 1px solid black;
+    padding: 0.5rem;
+    display: grid;
+    grid-row-gap: 0.5rem;
+    overflow-y: scroll;
+    height: max-content;
+    max-height: 300px;
+    background-color: rgb(175, 175, 175);
+
+}
+
+.BlockDotsPays-c::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+.BlockDotsPays-c::-webkit-scrollbar-track {
+    background: #adacac;
+}
+
+/* Handle */
+.BlockDotsPays-c::-webkit-scrollbar-thumb {
+    background: #0056ab;
+}
+
+/* Handle on hover */
+.BlockDotsPays-c::-webkit-scrollbar-thumb:hover {
+    background: #214593;
+}
+
+
+.BlockDotsPays_item {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.3rem;
+    align-items: center;
+}
+
+.BlockDotsPays_item-prop {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.3rem;
+    align-items: center;
+}
+
+.pg_settings-game_label{
+    width: 20em !important;
+}
+
+.pg_settings-game_bank-h{
+    font-weight: bold;
+}
+
+.pg_set-ge-rft>label:first-child:hover {
+    color: orangered;
+}

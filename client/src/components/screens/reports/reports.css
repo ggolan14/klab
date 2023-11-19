@@ -1,0 +1,139 @@
+.admin-reports-page {
+    display: grid;
+    row-gap: 1rem;
+    padding: 1rem 1rem 10rem 1rem;
+    width: 100%;
+}
+
+.admin-reports-page>label{
+    font-size: xx-large;
+    width: max-content;
+    margin: 8rem auto;
+}
+
+.admin-reports-page .c_box {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    row-gap: 1rem;
+    width: 100%;
+    overflow-x: hidden;
+    height: max-content;
+}
+
+.admin-reports-page .b_box {
+    width: max-content;
+    display: flex;
+    gap: 1rem;
+    margin: auto;
+}
+
+
+
+
+/*FILTERS*/
+
+.admin-reports-page .c_box .filters {
+    display: grid;
+    grid-row-gap: 1.5rem;
+    width: 100%;
+}
+
+.admin-reports-page .c_box .filters .filter_item{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 1rem;
+    width: 100%;
+    height: auto;
+    background-color: #e7e7e7;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list>label{
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list{
+    display: grid;
+    grid-template-rows: max-content;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list ol{
+    overflow-y: auto;
+    border: 1px solid black;
+    margin: 0;
+    min-height: 4rem;
+    height: max-content;
+    max-height: 12rem;
+    background-color: whitesmoke;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list ol li{
+    padding: 0.2rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list ol .all_opt{
+    color: whitesmoke;
+    background-color: #888991;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list ol li:hover{
+    color: orangered;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list .list_item_y{
+    background-color: #bec1ff;
+    border-bottom: 1px solid black;
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list .list_item_n{
+}
+
+.admin-reports-page .c_box .filters .filter_item .filter_list input{
+    height: max-content;
+    width: 25rem;
+    border-radius: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.admin-reports-page .c_box .filters .filter_item .f_list_select{
+    display: block;
+    /*min-height: 6rem;*/
+    height: max-content;
+    max-height: 12rem;
+    /*border: 1px solid rgba(0,0,0, 0.3);*/
+    overflow: auto;
+    /*border-radius: 0.25rem;*/
+    padding: 1rem;
+}
+
+
+
+.admin-reports-page .c_box .filters .selected_item{
+    margin-right: 15px;
+    border: 1px solid black;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.admin-reports-page .c_box .filters .selected_item span:first-child{
+    color: red;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: large;
+}
+
+.admin-reports-page .c_box .filters .selected_item span:first-child:hover{
+    color: darkblue;
+}
+
+.admin-reports-page .c_box .filters .selected_item span:not(:first-child){
+    font-size: medium;
+}
+
+/*FILTERS*/

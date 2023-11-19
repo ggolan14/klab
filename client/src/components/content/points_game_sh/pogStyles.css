@@ -1,0 +1,7 @@
+.p-g-sh-cond {
+    display: grid;
+}
+
+label>input {
+    margin-left: 10px;
+}

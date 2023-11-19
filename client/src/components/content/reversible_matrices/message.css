@@ -1,0 +1,18 @@
+.messages-content-header {
+    width: max-content;
+    margin: auto;
+    font-weight: bold;
+}
+
+.MsgMode {
+    top: 50%;
+}
+.MsgMode button{
+    border-radius: 1rem;
+    margin: auto;
+}
+
+.MsgMode .sp-m-com {
+    width: 100% !important;
+}
+

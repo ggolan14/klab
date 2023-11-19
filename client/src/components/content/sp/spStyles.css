@@ -1,0 +1,14 @@
+ /*     Settings    */
+
+ .setting_sp {
+     display: grid;
+     grid-auto-flow: column;
+     width: max-content;
+     column-gap: 2rem;
+     margin-left: 0.5rem;
+ }
+
+ .setting_sp input {
+     margin-left: 5px;
+ }
+ /*     Settings    */

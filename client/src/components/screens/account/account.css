@@ -1,0 +1,61 @@
+.admin-user_account {
+    display: grid;
+    height: max-content;
+    padding: 0.5rem 1rem;
+    grid-row-gap: 1rem;
+}
+
+.admin-user_account_opt{
+    display: grid;
+    grid-row-gap: 4rem;
+}
+
+.admin-user_account_pass,
+.admin-user_account_det {
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+.admin-user_account_pass>label,
+.admin-user_account_det>label {
+    font-size: x-large;
+}
+
+.admin-user_account_pass>div,
+.admin-user_account_det>div {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-row-gap: 0.4rem;
+    column-gap: 0.4rem;
+    font-size: larger;
+}
+
+.admin-user_account_pass>div>label,
+.admin-user_account_det>div>label {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.admin-user_account select {
+    width: max-content;
+}
+
+.admin-user_account_pass input {
+    width: 20rem;
+}
+
+.admin-user_account_det input{
+    width: 20rem;
+}
+.admin-user_account_det input:last-child{
+    width: 5rem;
+}
+
+.admin-user_account_det>div .admin-user_account_det_name {
+    text-decoration: none;
+    font-weight: normal;
+    font-style: italic;
+    font-size: x-large;
+    color: #8103a0;
+
+}

@@ -1,0 +1,17 @@
+{
+  "prolific_code": "",
+  "running_name": "",
+  "condition": "MeanDis1_MeanDis2",
+  "action_time": "16",
+  "second_warning": 10,
+  "show_up_fee": 0,
+  "sign_of_reward": "£",
+  "Nrounds": "2",
+  "Ncards": "10",
+  "NumberOfPointsY": "3000",
+  "cards_beforeX": "2",
+  "MeanDis1": 400,
+  "StdDis1": 200,
+  "MeanDis2": 4000,
+  "StdDis2": 200
+}

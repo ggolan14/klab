@@ -1,0 +1,61 @@
+.consent_form-panel {
+    width: 100%;
+    min-height: 100%;
+    overflow: visible;
+    display: grid;
+    grid-template-rows: 1fr auto max-content;
+    grid-row-gap: 1rem;
+    padding: 1rem 0.5rem 2rem 0.5rem;
+}
+
+.consent_form-panel button {
+    margin: auto;
+    border-radius: 1rem;
+    font-size: x-large;
+}
+
+/*consent_form_view*/
+.consent_form_view_part1 .ck.ck-editor__main{
+    border: none;
+}
+
+.consent_form_view_part1 .ck.ck-editor__top .ck-sticky-panel .ck-toolbar{
+    border-color: white !important;
+}
+
+.consent_form_view_part1 .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused){
+    border-color: white !important;
+}
+
+.consent_form_view_part2 .ck.ck-editor__main{
+    border: none;
+}
+
+.consent_form_view_part2 .ck.ck-editor__top .ck-sticky-panel .ck-toolbar{
+    border-color: white !important;
+}
+
+.consent_form_view_part2 .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused){
+    border-color: white !important;
+}
+
+.consent_form_view_part2 {
+    display: grid;
+    grid-row-gap: 0.5rem;
+    height: max-content;
+}
+
+.consent_form_view_part2>div {
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+    box-shadow: none !important;
+    border: none !important;
+}
+/*consent_form_view*/
+
+
+

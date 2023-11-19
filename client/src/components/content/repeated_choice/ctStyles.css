@@ -1,0 +1,189 @@
+/*new*/
+
+.settings_rc-pattern-template{
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.2rem;
+    width: max-content;
+}
+
+.settings_rc-pattern-template * {
+    width: max-content;
+}
+
+
+.rc-settings-tasks {
+    /*width: max-content;*/
+    display: grid;
+    grid-row-gap: 2rem;
+    max-width: 100%;
+    overflow: hidden;
+    grid-template-rows: max-content max-content 1fr;
+    margin-left: 0.5rem;
+
+}
+
+.rc-settings-tasks button,
+.rc-settings-tasks label{
+    width: max-content;
+    margin: 0 !important;
+}
+
+.rc-settings-tasks-check {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1.5rem;
+    align-items: center;
+    width: max-content;
+}
+
+.rc-settings-tasks-check>div{
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1rem;
+    align-items: center;
+    width: max-content;
+}
+
+.rc-settings-tasks-list {
+    display: grid;
+    grid-auto-flow: column;
+    /*grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); !* see notes below *!*/
+    /*grid-gap: 1em;*/
+    align-items: center;
+    grid-column-gap: 1rem;
+    width: max-content;
+}
+
+.rc-settings-tasks-list>label{
+    place-self: self-start;
+}
+
+.rc-settings-tasks-list-items{
+    display: grid;
+    /*grid-auto-flow: column;*/
+    align-items: center;
+    grid-column-gap: 1rem;
+    grid-row-gap: 0.5rem;
+    /*max-width: 100%;*/
+    overflow: auto;
+    grid-template-columns: repeat(6, max-content);
+}
+
+.rc-settings-tasks-list-item {
+    display: grid;
+    width: max-content;
+    padding: 0.3rem 0.4rem 0.5rem 0.4rem;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+.rc-settings-tasks-list-item>label {
+    justify-self: center;
+    font-size: larger;
+    color: darkmagenta;
+}
+
+.rc-settings-tasks-list-item>div{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    align-items: center;
+    grid-column-gap: 0.1rem;
+    /*padding: 0.2rem;*/
+    /*border: 1px solid rgba(0,0,0,0.3);*/
+    width: max-content;
+}
+.rc-settings-tasks-list-item>div>*{
+    cursor: pointer;
+    width: max-content !important;
+}
+.rc-settings-tasks-list-item>div>label{
+    color: red;
+}
+
+
+/*new*/
+
+
+
+
+
+
+
+
+
+.ct3-general-settings {
+    padding: 1rem 1rem 7rem 1rem;
+    display: grid;
+    margin-bottom: 3rem;
+    grid-row-gap: 1.5rem;
+}
+
+.ct3-general-settings>label {
+    font-size: x-large;
+}
+.ct3-general-settings>div {
+    padding: 0 1rem;
+    display: grid;
+    grid-row-gap: 3rem;
+}
+
+.ct3-option-head {
+    font-size: x-large;
+}
+
+
+.ct3-general-settings td input {
+    width: 5rem;
+}
+
+.ct3-set-ot {
+    border: 1px solid;
+    padding: 1rem;
+}
+
+.ct3-set-ot>div{
+    display: grid;
+    grid-template-columns: auto max-content;
+    grid-column-gap: 0.5rem;
+}
+
+.ct3-general-settings-g {
+    display: grid !important;
+    width: max-content;
+}
+
+.ct3-general-settings-g1 {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 1rem;
+    align-items: center;
+}
+
+.ct3-btn-settings {
+    width: min-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+}
+
+.ct3-rx-1 {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 1rem;
+}
+.ct3-rx-1 input{
+    width: 5rem;
+}
+
+.ct3-rx {
+    display: grid;
+    grid-row-gap: 1rem;
+}
+
+.ct3-col {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 4rem;
+}

@@ -1,0 +1,70 @@
+.ncg_main {
+    width: 100%;
+    height: 100%;
+    padding: 0 5px 5px 5px;
+    overflow: hidden;
+}
+
+.ncg-game_board {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: max-content 1fr 1fr 1fr;
+    padding: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+.ncg-game_board_t {
+    margin-left: auto;
+    font-size: x-large;
+    border: 1px solid blue;
+    padding: 5px 10px;
+}
+
+.ncg-game_board_l {
+    font-size: 2em;
+    border: 1px solid limegreen;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.ncg-game_board_b {
+    background-color: #0e9b09;
+    color: white;
+    font-size: 2em;
+    padding: 0.1em 2em;
+    border-radius: 5px;
+}
+
+.ncg-game_board_buttons {
+    display: flex;
+    width: 100%;
+    /*margin: auto;*/
+    /*column-gap: 4px;*/
+    overflow: hidden;
+    justify-content: space-between;
+    grid-template-columns: repeat(11, 8.5%);
+}
+
+.ncg-game_board_buttons button {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 5px !important;
+    border: 1px solid black;
+    background-color: #9f9f9f;
+    color: #000000;
+}
+
+
+
+.ncg-game_board_buttons button:active {
+    background-color: #1B8BFF !important;
+}
+
+.ncg-game_board_buttons button.index_on {
+    background-color: #1B8BFF !important;
+    color: white;
+}
+
+

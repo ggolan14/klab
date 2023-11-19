@@ -1,0 +1,400 @@
+@media screen and (max-width: 500px) {
+
+}
+/*@media screen and (max-width: 900px) and (min-width: 600px), (min-width: 1100px) {*/
+
+/*}*/
+/*@media screen and (max-width: 900px) and (min-width: 600px), (min-width: 1100px) {*/
+
+/*}*/
+@media screen and (min-width: 600px) and (max-width: 900px){
+
+}
+
+
+@media screen and (min-width: 900px){
+
+}
+
+
+/*   Settings   */
+
+
+table th{
+    /*border: 1px solid black;*/
+    /*text-align: left;*/
+    /*padding-left: 1rem;*/
+    /*padding-right: 1rem;*/
+    /*padding-top: 0.5rem;*/
+    /*padding-bottom: 0.5rem;*/
+    /*background-color: dodgerblue;*/
+    /*cursor: pointer;*/
+}
+
+table td{
+    /*border: 1px solid black;*/
+    /*text-align: left;*/
+    /*background-color: lightskyblue;*/
+    /*padding: 0.3rem;*/
+}
+
+
+.ct2-math-list,
+.ct2-raven-src-settings>div>div:nth-child(1){
+    overflow-y: auto;
+    max-height: 40rem;
+    height: max-content;
+    width: max-content;
+}
+
+.ct2-raven-src-settings>div {
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: 5rem;
+
+}
+
+.ct2-raven-src-settings>div>div:nth-child(2){
+    width: auto;
+    overflow-x: auto;
+}
+
+.ct2-math-list th,
+.ct2-raven-src-settings th{
+    position: sticky;
+    top: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+.ct2-raven-src-settings-plist,
+.ct2-raven-src-settings-rlist {
+    display: grid;
+}
+
+.ct2-raven-src-settings-rlist {
+    margin-top: 3rem;
+}
+
+.ct2-raven-comp {
+    display: grid;
+    width: 90%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    grid-template-columns: auto;
+}
+
+.ct2-raven-comp>div>label{
+    width: max-content;
+    font-size: x-large;
+    align-self: end;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.ct2-raven-comp>div>div>label{
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    border: 1px solid forestgreen;
+    width: 10rem;
+    font-size: x-large;
+    text-align: center;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.ct2-raven-comp>div>div{
+    display: grid;
+
+}
+
+.ct2-raven-comp>div:first-child>div{
+    margin-right: 0;
+}
+
+.ct2-raven-comp>label:nth-child(5){
+    color: red;
+    margin: 1rem auto auto auto;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.ct2-raven-comp>button{
+    width: max-content;
+    font-size: larger;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    margin: 1rem auto auto auto;
+    background-color: lightgrey;
+    border: 1px solid;
+}
+
+.ct2-raven-comp>img{
+    margin: auto;
+}
+.ct2-raven-comp>div:first-child {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+}
+
+.ct2-raven-comp>div:not(:first-child) {
+    display: grid;
+    grid-template-columns: max-content max-content max-content max-content;
+    grid-template-rows: max-content max-content;
+    /*column-gap: 1.5rem;*/
+    /*grid-row-gap: 0.5rem;*/
+    margin: 1rem auto 1rem auto;
+    width: max-content;
+}
+
+.raven-selected-img {
+    border: 0.3rem solid brown;
+}
+
+.ct2-raven-comp-options p,
+.ct2-raven-comp-options img{
+    pointer-events: none;
+}
+
+.ct2-raven-comp-options>div{
+    padding: 0.5rem;
+}
+
+.ct2-raven-src-settings-plist>label,
+.ct2-raven-src-settings-rlist>label {
+    font-size: 3rem;
+
+}
+
+.ct2-raven-src-settings-plist>div label,
+.ct2-raven-src-settings-rlist>div label {
+    font-size: 2rem;
+
+}
+
+.ct2-raven-src-settings-plist>div label:not(:first-child)::before,
+.ct2-raven-src-settings-rlist>div label:not(:first-child)::before{
+    content: ",";
+}
+
+.ct2-raven-src-settings-plist div,
+.ct2-raven-src-settings-rlist div{
+    width: 100%;
+}
+
+.ct2-math-list th button{
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    border: 1px solid;
+}
+
+.ct2-math-list th button:nth-child(1){
+    background-color: lightsalmon;
+}
+
+
+.ct2-math-list td {
+    text-align: center;
+}
+
+.ct2-math-list td button{
+    padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+    border: 1px solid;
+    margin-left: 0.3rem;
+}
+
+.ct2-math-list td button:nth-child(1){
+    background-color: red;
+}
+
+.ct2-math-list-save-btn{
+    background-color: lawngreen;
+    margin-left: 0.5rem;
+}
+
+.ct2-math-list-save-btn:before {
+    content: "Save";
+}
+
+.ct2-math-list-edit-btn{
+    background-color: fuchsia;
+    margin-left: 0.5rem;
+}
+
+.ct2-math-list-edit-btn:before {
+    content: "Edit";
+}
+
+.ct2-error-input {
+    border: 3px solid red;
+}
+
+.ct-general-settings:last-child {
+    margin-bottom: 15rem;
+}
+
+.ct-general-settings td input {
+    width: 4rem;
+}
+
+.ct2-raven-src-settings {
+    margin-left: 2rem;
+    margin-right: 5rem;
+    width: 100%;
+}
+
+.ct2-raven-src-settings img {
+    width: 10rem;
+}
+
+.ct2-raven-src-settings-table {
+    width: max-content;
+}
+
+.ct2-raven-src-settings td{
+    text-align: center;
+    font-size: xx-large;
+    padding: 2rem;
+}
+
+.ct2-raven-src-settings select{
+    font-size: 1.5rem !important;
+}
+
+.ct2-settings-raven-img-table {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ct2-settings-raven-img-table:hover {
+    opacity: 0.7;
+}
+
+.ct2-raven-settings-full-img {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    overflow: hidden;
+    display: grid;
+}
+
+.ct2-raven-settings-full-img-img {
+    width: 25rem;
+    max-width: 25rem;
+    margin: 0 auto auto auto;
+}
+
+/* The Close Button */
+.ct2-raven-settings-full-img-close {
+    text-align: right;
+    color: lightgrey;
+    font-size: 5rem;
+    font-weight: bold;
+    transition: 0.3s;
+    width: max-content;
+    margin-left: auto;
+    margin-right: 5rem;
+}
+
+.ct2-raven-settings-full-img-close:hover,
+.ct2-raven-settings-full-img-close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*   Settings   */
+
+
+
+/* Reports */
+.ct2-reports-tables {
+    margin-top: 3rem;
+    padding: 1rem;
+}
+
+.ct2-reports-tables label {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.ct2-reports-tables div {
+    height: max-content;
+    overflow-y: auto;
+    overflow-x: visible;
+    width: max-content;
+}
+
+/* Reports */
+
+/* ct2 landing */
+
+.ct-welcome-page {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    width: max-content;
+    height: max-content;
+    grid-row-gap: 5rem;
+
+    position: fixed;
+    zIndex: 999;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ct-welcome-page label{
+    width: max-content;
+    height: max-content;
+    font-size: x-large;
+}
+
+.ct-welcome-page button{
+    width: max-content;
+    height: max-content;
+    padding: 0.3rem 0.9rem 0.3rem 0.9rem;
+    margin: auto;
+}
+
+.ct2-consent-light-form {
+    display: grid;
+    font-size: larger;
+    text-align: left;
+    width: max-content;
+    height: max-content;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    grid-template-rows: repeat(5, max-content);
+    grid-row-gap: 0.5rem;
+}
+
+.ct2-consent-light-form * {
+    width: max-content;
+    height: max-content;
+}
+
+.ct2-full-consent-link {
+    margin-left: 0.7rem;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ct2-score {
+    color: darkblue;
+    margin-left: 0.3rem;
+    font-weight: bold;
+}
+
+.ct2-score-admin {
+
+}
+
+/* ct2 landing */
+
+

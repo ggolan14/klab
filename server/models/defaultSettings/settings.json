@@ -1,0 +1,273 @@
+{
+  "game1": {
+    "number_of_rounds": "2",
+    "number_of_trails": "8",
+    "matrix_cols": "3",
+    "matrix_rows": "4",
+    "exploration_cost": "-2",
+    "display_pay_for": "1.5",
+    "first_matrix_color": {
+      "r": 95,
+      "g": 139,
+      "b": 229,
+      "a": 1
+    },
+    "second_matrix_color": {
+      "r": 190,
+      "g": 186,
+      "b": 180,
+      "a": 1
+    },
+    "background_color": {
+      "r": 10,
+      "g": 0,
+      "b": 0,
+      "a": 1
+    },
+    "try_matrix": {
+      "H": "12",
+      "PH": 0.09999999999999998,
+      "L": "1",
+      "PL": 0.9,
+      "L_KEY": null,
+      "punish_cost": null,
+      "reward_cost": null
+    },
+    "giveup_matrix": {
+      "MH": "2",
+      "PMH": 0.5,
+      "ML": "1",
+      "PML": 0.5,
+      "punish_cost": null
+    }
+  },
+  "game2": {
+    "exploration_cost": "-2",
+    "number_of_rounds": "2",
+    "number_of_trails": "8",
+    "matrix_cols": "3",
+    "matrix_rows": "4",
+    "display_pay_for": "1.5",
+    "first_matrix_color": {
+      "r": 95,
+      "g": 139,
+      "b": 229,
+      "a": 1
+    },
+    "second_matrix_color": {
+      "r": 190,
+      "g": 186,
+      "b": 180,
+      "a": 1
+    },
+    "background_color": {
+      "r": 10,
+      "g": 0,
+      "b": 0,
+      "a": 1
+    },
+    "try_matrix": {
+      "H": "12",
+      "PH": 0.09999999999999998,
+      "L": "1",
+      "PL": 0.9,
+      "L_KEY": null,
+      "punish_cost": null,
+      "reward_cost": null
+    },
+    "giveup_matrix": {
+      "MH": "2",
+      "PMH": 0.5,
+      "ML": "1",
+      "PML": 0.5,
+      "punish_cost": "3"
+    }
+  },
+  "game3": {
+    "exploration_cost": "-2",
+    "number_of_rounds": "2",
+    "number_of_trails": "8",
+    "matrix_cols": "3",
+    "matrix_rows": "4",
+    "display_pay_for": "1.5",
+    "first_matrix_color": {
+      "r": 95,
+      "g": 139,
+      "b": 229,
+      "a": 1
+    },
+    "second_matrix_color": {
+      "r": 190,
+      "g": 186,
+      "b": 180,
+      "a": 1
+    },
+    "background_color": {
+      "r": 10,
+      "g": 0,
+      "b": 0,
+      "a": 1
+    },
+    "try_matrix": {
+      "H": "12",
+      "PH": 0.09999999999999998,
+      "L": "1",
+      "PL": 0.9,
+      "L_KEY": "3",
+      "punish_cost": "3",
+      "reward_cost": null
+    },
+    "giveup_matrix": {
+      "MH": "2",
+      "PMH": 0.5,
+      "ML": "1",
+      "PML": 0.5,
+      "punish_cost": null
+    }
+  },
+  "game4": {
+    "exploration_cost": "-2",
+    "number_of_rounds": "2",
+    "number_of_trails": "8",
+    "matrix_cols": "3",
+    "matrix_rows": "4",
+    "display_pay_for": "1.5",
+    "first_matrix_color": {
+      "r": 95,
+      "g": 139,
+      "b": 229,
+      "a": 1
+    },
+    "second_matrix_color": {
+      "r": 190,
+      "g": 186,
+      "b": 180,
+      "a": 1
+    },
+    "background_color": {
+      "r": 10,
+      "g": 0,
+      "b": 0,
+      "a": 1
+    },
+    "try_matrix": {
+      "H": "12",
+      "PH": 0.09999999999999998,
+      "L": "1",
+      "PL": 0.9,
+      "L_KEY": "3",
+      "punish_cost": "3",
+      "reward_cost": null
+    },
+    "giveup_matrix": {
+      "MH": "2",
+      "PMH": 0.5,
+      "ML": "1",
+      "PML": 0.5,
+      "punish_cost": "3"
+    }
+  },
+  "game5": {
+    "exploration_cost": "-2",
+    "number_of_rounds": "2",
+    "number_of_trails": "8",
+    "matrix_cols": "3",
+    "matrix_rows": "4",
+    "display_pay_for": "1.5",
+    "first_matrix_color": {
+      "r": 95,
+      "g": 139,
+      "b": 229,
+      "a": 1
+    },
+    "second_matrix_color": {
+      "r": 190,
+      "g": 186,
+      "b": 180,
+      "a": 1
+    },
+    "background_color": {
+      "r": 10,
+      "g": 0,
+      "b": 0,
+      "a": 1
+    },
+    "try_matrix": {
+      "H": "12",
+      "PH": 0.09999999999999998,
+      "L": "1",
+      "PL": 0.9,
+      "L_KEY": null,
+      "punish_cost": null,
+      "reward_cost": "3"
+    },
+    "giveup_matrix": {
+      "MH": "2",
+      "PMH": 0.5,
+      "ML": "1",
+      "PML": 0.5,
+      "punish_cost": null
+    }
+  },
+  "game6": {
+    "exploration_cost": "-2",
+    "number_of_rounds": "2",
+    "number_of_trails": "8",
+    "matrix_cols": "3",
+    "matrix_rows": "4",
+    "display_pay_for": "1.5",
+    "first_matrix_color": {
+      "r": 95,
+      "g": 139,
+      "b": 229,
+      "a": 1
+    },
+    "second_matrix_color": {
+      "r": 190,
+      "g": 186,
+      "b": 180,
+      "a": 1
+    },
+    "background_color": {
+      "r": 10,
+      "g": 0,
+      "b": 0,
+      "a": 1
+    },
+    "try_matrix": {
+      "H": "12",
+      "PH": 0.09999999999999998,
+      "L": "1",
+      "PL": 0.9,
+      "L_KEY": null,
+      "punish_cost": null,
+      "reward_cost": "3"
+    },
+    "giveup_matrix": {
+      "MH": "2",
+      "PMH": 0.5,
+      "ML": "1",
+      "PML": 0.5,
+      "punish_cost": null
+    }
+  },
+  "TIMEOUT": "00:00",
+  "COINSIGN": "pound",
+  "SHOWUP": "2",
+  "EXCHANGERATIO": "100",
+  "INITIALBONUS": "0.4",
+  "PROLIFICCODE": "41AC38C0",
+  "EXPNAME": "doron1_test",
+  "mh_exploration_feedback": false,
+  "ml_exploitation_feedback": false,
+  "h_exploration_feedback": true,
+  "l_exploration_feedback": true,
+  "ml_exploration_feedback": false,
+  "mh_exploitation_feedback": false,
+  "h_exploitation_feedback": true,
+  "l_exploitation_feedback": true,
+  "try_exploitation": false,
+  "giveup_exploitation": true,
+  "try_exploration": false,
+  "giveup_exploration": false
+}

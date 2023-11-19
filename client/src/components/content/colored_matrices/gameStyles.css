@@ -1,0 +1,510 @@
+/*.cm-start-panel {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+
+/*    background:*/
+/*            radial-gradient(rgba(40, 40, 47, 1) 50%, transparent 100%) 10px 10px;*/
+/*    !*background-color:#282828;*!*/
+/*    background-color: lightslategrey;*/
+/*    !*background-size:9px 9px;*!*/
+/*    background-size: 10px 10px;*/
+/*}*/
+
+/*.cm-start-panel button {*/
+/*    padding: 0.3rem 3rem;*/
+/*    width: max-content;*/
+/*    height: max-content;*/
+/*    margin: auto;*/
+/*}*/
+
+/*.cm-start-panel button:hover{*/
+/*    background-color: dodgerblue;*/
+/*    color: white;*/
+/*}*/
+
+
+
+
+.cm-message-mode{
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+
+    background-color: ghostwhite;
+    padding: 2rem 4rem;
+    border: 3px solid black;
+    display: grid;
+
+    width: max-content;
+    max-width: 98%;
+
+    font-size: large;
+    grid-row-gap: 1rem;
+
+}
+
+.cm-message-mode input {
+    width: 10rem;
+}
+
+.cm-message-mode>div{
+    display: grid;
+}
+
+.cm-messages-content-header {
+    font-weight: bold;
+    font-size: larger;
+    margin-bottom: 2rem;
+}
+
+.cm-messages-content-1 {
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.cm-messages-content-color {
+    padding: 0.2rem 0.6rem;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+    border: 1px solid;
+}
+
+
+.cm-game-mode {
+    background-color: ghostwhite;
+    padding: 2rem 4rem;
+    border: 3px solid black;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.cm-game-mode-message,
+.cm-game-mode-message>div{
+    display: grid;
+    font-size: larger;
+}
+
+.cm-game-mode-message {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    border: 2px solid;
+    padding: 1rem 1.5rem;
+}
+
+
+.cm-game-mode-game {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    /*width: 85vw;*/
+    /*height: 90vh;*/
+}
+
+.cm-game-header {
+    display: grid;
+}
+
+.cm-game-header-h {
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.cm-game-header-div {
+    display: grid;
+    font-size: larger;
+}
+
+.cm-game-header-step-1,
+.cm-game-header-step-2{
+    color: orangered;
+}
+
+.cm-game-header-matrix-1,
+.cm-game-header-matrix-2{
+    color: darkred;
+}
+
+.cm-game-header-block-1,
+.cm-game-header-block-2{
+    color: blueviolet;
+}
+
+.cm-game-body {
+    display: inline-block;
+    align-self: center;
+    width: 80%;
+    margin: auto;
+}
+
+.cm-matrix-elem {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+}
+
+.cm-matrix-elem-left {
+    float: left;
+    vertical-align: middle;
+}
+.cm-matrix-elem-right {
+    float: right;
+    vertical-align: middle;
+}
+
+
+.cm-matrix-elem-item {
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid black;
+
+}
+
+.cm-matrix-elem-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+.cm-matrix-elem-item-img {
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+
+    width: 1.5rem;
+}
+
+.cm-matrix-elem-item-hover:hover {
+    box-shadow: 0 0 5px 5px black;
+}
+
+.cm-matrix-elem-item-selected {
+    font-size: 3rem;
+}
+
+.cm-game-footer {
+    display: grid;
+    text-align: center;
+}
+
+.cm-game-footer>label {
+    font-size: large;
+}
+
+.cm-game-footer>label:not(:first-child) {
+    font-size: 2rem;
+}
+
+.cm-game-footer-input {
+    font-size: 2rem;
+    width: 6rem;
+}
+
+
+.cm-debugger-mode-start {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    /*transform: translate(-50%,-50%);*/
+    background-color: gray;
+    color: white;
+    border: 2px solid black;
+}
+
+.cm-debugger-mode-start-header {
+    background-color: blue;
+    width: 100%;
+    min-width: 5rem;
+    text-align: center;
+    font-size: larger;
+}
+
+.cm-debugger-mode-start-body{
+    display: grid;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.cm-debugger-mode-start-body-bold {
+    color: lime;
+    font-weight: bold;
+}
+
+.cm-dis-none {
+    display: none;
+}
+
+.cm-debugger-mode-game {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: gray;
+    color: white;
+    border: 2px solid black;
+}
+.cm-debugger-mode-start-matrices {
+}
+
+.cm-debugger-mode-start-matrices label{
+    padding: 0.2rem 0.3rem;
+    border: 1px solid black;
+    color: black;
+}
+
+.cm-debugger-mode-start-right-mat,
+.cm-debugger-mode-start-left-mat,
+.cm-debugger-mode-start-one-mat {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    justify-content: center;
+}
+
+.cm-debugger-mode-start-body-summary,
+.cm-debugger-mode-start-body-summary-part{
+    display: grid;
+}
+
+.cm-debugger-mode-start-body-summary {
+    grid-row-gap: 2rem;
+    max-height: 85vh;
+}
+
+
+.cm-debugger-mode-start-body-summary-part .cm-debugger-mode-start-body-bold{
+    margin-left: 0.3rem;
+    margin-right: 1rem;
+}
+
+.cm-debugger-mode-start-body-summary-header {
+    color: darkorange;
+}
+
+
+.cm-debugger-mode-start-body-summary-all {
+    display: grid;
+    grid-template-rows: auto auto;
+    overflow: scroll;
+    grid-row-gap: 2rem;
+    max-height: 100%;
+}
+
+.cm-debugger-mode-start-body-summary-all-part {
+    display: grid;
+    grid-template-rows: max-content auto;
+}
+
+.cm-debugger-mode-start-body-summary-all-part>label {
+    color: darkred;
+    font-weight: bold;
+}
+
+.cm-debugger-mode-start-body-summary-all-part>div{
+    display: grid;
+}
+
+.cm-debugger-mode-start-body-summary-all-part>div>label>span {
+    margin-right: 1rem;
+}
+
+
+.cm-part2-welcome {
+}
+
+.Part1_Block_Practice_Finish {
+
+}
+.Part1_Block_Practice_Finish .bold-it1,
+.Part1_Block_Practice_Finish .bold-it2
+{
+    font-size: xx-large !important;
+    font-style: italic;
+    background-color: blanchedalmond;
+    padding: 0.2rem 0.5rem;
+    font-weight: bold;
+}
+.Part1_Block_Practice_Finish .bold-it1 {
+    color: blue;
+}
+
+.Part1_Block_Practice_Finish .bold-it2 {
+    color: red;
+}
+
+.cm-ques-mode {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+
+    background-color: ghostwhite;
+    padding: 2rem 4rem;
+    border: 3px solid black;
+    display: grid;
+    grid-row-gap: 1rem;
+
+}
+
+.cm-ques-mode>label:first-child {
+    font-size: x-large;
+}
+.cm-ques-mode>div {
+    display: grid;
+    grid-row-gap: 0.3rem;
+}
+.cm-ques-mode>div>div {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+}
+.cm-ques-mode>div>div>label{
+    font-size: larger;
+}
+
+.cm-ques-mode input {
+    margin-right: 0.5rem;
+}
+
+.cm-messages-content-part1-last {
+    display: grid;
+    grid-template-rows: repeat(4, max-content) auto;
+    font-size: large !important;
+    grid-row-gap: 1rem;
+}
+
+.cm-messages-content-part1-last-head {
+    font-weight: bold;
+    font-size: larger !important;
+}
+
+.cm-messages-content-part1-last-content-1 {
+    margin: auto;
+    font-size: larger !important;
+}
+
+.cm-messages-content-matrices-view {
+    display: grid;
+    grid-template-rows: repeat(2, max-content) auto;
+    grid-row-gap: 0.2rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+    position: relative;
+    width: 60%;
+    margin: auto;
+}
+
+.cm-messages-content-matrices-view-example{
+    position: absolute;
+    padding: 0.7rem 6rem;
+    background-color: #eab106;
+    font-size: x-large;
+    border: 1px solid black;
+    top: 0;
+    right: -7%;
+
+    transform: rotate(30deg);
+
+    /* Safari */
+    -webkit-transform: rotate(30deg);
+
+    /* Firefox */
+    -moz-transform: rotate(30deg);
+
+    /* IE */
+    -ms-transform: rotate(30deg);
+
+    /* Opera */
+    -o-transform: rotate(30deg);
+
+    /* Internet Explorer */
+    /*filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);*/
+
+}
+
+
+.cm-messages-content-matrices-view>label {
+    margin: auto;
+    font-weight: bold;
+}
+
+.cm-messages-content-matrices-labels {
+    display: grid;
+}
+
+.cm-messages-content-matrices-matrix {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 1rem;
+}
+
+.cm-messages-content-matrix-item {
+    width: 2rem;
+    height: 2rem;
+    background: dodgerblue;
+}
+
+.cm-messages-content-matrix {
+    margin: auto;
+    /*width: max-content;*/
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    grid-template-rows: repeat(4, max-content);
+}
+
+
+.cm-action-timer-message {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 99999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cm-action-timer-message>div {
+    position: fixed;
+    width: max-content;
+    height: max-content;
+    background-color: white;
+    border: 5px solid mediumseagreen;
+    z-index: 999999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3rem 5rem;
+    display: grid;
+    grid-template-rows: max-content max-content;
+    grid-template-columns: max-content;
+    grid-row-gap: 2rem;
+}
+
+.cm-action-timer-message>div>label {
+    font-size: x-large;
+}
+
+.cm-action-timer-message-second-timer {
+    font-size: xx-large;
+    color: red;
+}
+
+.cm-action-timer-message>div>button {
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    font-size: large;
+    padding: 0.3rem 2rem;
+}
+
+.cm-action-timer-message>div>button:hover {
+    background-color: dodgerblue;
+    color: white;
+}

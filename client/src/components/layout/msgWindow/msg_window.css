@@ -1,0 +1,39 @@
+.msg_win {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #333333;
+}
+
+.msg_win_body {
+    display: grid;
+    width: max-content;
+    height: max-content;
+    max-width: 90vw;
+    max-height: 80vh;
+    padding: 1rem 2rem;
+    grid-template-rows: 1fr max-content;
+    overflow: hidden;
+}
+
+.msg_win_body>p {
+    /*max-height: 90%;*/
+}
+
+.msg_win_body>p::-webkit-scrollbar {
+    display: none;
+}
+
+.msg_win_body>p {
+    overflow: auto;
+    /*height: 100%;*/
+    /*max-height: 50vh;*/
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.tog_wel>p{
+    /*max-height: 90%;*/
+}

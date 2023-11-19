@@ -1,0 +1,47 @@
+/* Debugger */
+.Q_G-Debugger {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+    pointer-events: none;
+    row-gap: 1.5rem;
+}
+
+.Q_G-Debugger label {
+    color: black;
+    width: max-content;
+}
+
+.Q_G-Debugger span {
+    color: #8103a0;
+    margin-left: 5px;
+}
+
+.Q_G-Debugger>div {
+    display: grid;
+    grid-template-rows: max-content max-content;
+}
+
+.Q_G-Debugger>div>label:first-child{
+    font-weight: bold;
+}
+
+.Q_G-Debugger>div>div {
+    display: grid;
+    row-gap: 10px;
+}
+.Q_G-Debugger>div>div>div{
+    width: max-content;
+    display: grid;
+    row-gap: 5px;
+    margin-left: 10px;
+    background-color: #797979;
+    padding: 5px 10px;
+}
+
+.Q_G-Debugger1 {
+
+}
+
+.Q_G-Debugger2 {
+
+}

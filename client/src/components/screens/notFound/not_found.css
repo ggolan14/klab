@@ -1,0 +1,13 @@
+.klab-nf {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    width: max-content;
+    margin: auto;
+    text-align: center;
+    height: max-content;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    grid-row-gap: 2rem;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,48 @@
+.P_MSG_B {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 99999;
+}
+
+.prompt-message {
+    position: fixed;
+    width: max-content;
+    height: max-content;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    border: 3px double black;
+    border-radius: 2rem;
+    padding: 0.1rem 0.2rem;
+}
+
+.prompt-message>div {
+    padding: 3rem 5rem;
+    display: grid;
+    grid-template-rows: max-content max-content;
+    grid-row-gap: 3rem;
+    border: 3px double black;
+    border-radius: 2rem;
+    background-color: white;
+}
+
+.prompt-message-buttons {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 1rem;
+    width: max-content;
+    margin: auto;
+}
+
+.prompt-message-danger {
+    background-color: #dd0000;
+}
+
+.prompt-message-success {
+    background-color: #369322;
+}

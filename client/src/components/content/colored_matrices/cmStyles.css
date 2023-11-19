@@ -1,0 +1,30 @@
+ /*     Settings    */
+ .cm-settings-page {
+     display: grid;
+     grid-template-columns: max-content max-content;
+     height: max-content;
+     width: max-content;
+     margin: auto;
+     column-gap: 2rem;
+ }
+
+ .cm-settings-page>div>label {
+     font-size: x-large;
+ }
+
+ .cm-general-settings {
+     display: grid;
+     height: max-content;
+     width: max-content;
+     padding: 1rem 1.5rem 1rem 1.5rem;
+     margin-left: 3rem;
+     margin-top: 3rem;
+
+ }
+
+ .cm-settings-button {
+     align-self: center;
+     display: grid;
+     grid-template-rows: max-content max-content;
+ }
+ /*     Settings    */

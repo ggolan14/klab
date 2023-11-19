@@ -1,0 +1,183 @@
+.admin-manage-users {
+  width: 100%;
+  display: grid;
+  grid-template-rows: max-content auto auto auto;
+  grid-row-gap: 3.5rem;
+  padding: 0.5rem 1rem 7rem 1rem;
+  overflow-x: hidden;
+  height: max-content;
+}
+
+.input_error {
+  color: red;
+}
+
+.admin-manage-users_reset>label,
+.admin-manage-users_remove>label,
+.admin-manage-users_add>label,
+.admin-manage-users_edit>label {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.admin-manage-users_add {
+  display: grid;
+  height: max-content;
+  grid-row-gap: 0.5rem;
+}
+
+.admin-manage-users_add_input {
+  display: grid;
+  grid-auto-flow: column;
+  width: max-content;
+  column-gap: 0.25rem;
+}
+
+.admin-manage-users_add_input>input {
+  width: 24rem;
+}
+
+.admin-manage-users_add_list {
+  border: black 1px solid;
+  width: max-content;
+  max-width: 30rem;
+  min-width: 15rem;
+  height: 20rem;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-auto-rows: max-content;
+  padding: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+.admin-manage-users_add_list>label:nth-child(1){
+
+}
+
+.admin-manage-users_add_list>label:nth-child(2n+2){
+  color: red;
+  cursor: pointer;
+}
+
+.admin-manage-users_add_list>label:nth-child(2n+2):hover{
+  color: darkred;
+}
+
+.admin-manage-users_edit {
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-row-gap: 0.5rem;
+}
+
+.admin-manage-users_edit>div{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  grid-column-gap: 0.5rem;
+}
+
+.admin-manage-users_edit>div>button{
+  width: max-content;
+  height: max-content;
+}
+
+.admin-manage-users_edit_usr_list{
+  display: grid;
+  grid-auto-rows: max-content;
+  width: max-content;
+  border: 1px solid black;
+  height: 20rem;
+  overflow: auto;
+  min-width: 20rem;
+}
+
+.admin-manage-users_edit_exp_list {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-auto-rows: max-content;
+  width: max-content;
+  border: 1px solid black;
+  height: 20rem;
+  overflow: auto;
+  padding: 0.4rem;
+  column-gap: 0.3rem;
+  row-gap: 0.5rem;
+  min-width: 20rem;
+}
+
+.admin-manage-users_edit_usr_list label{
+  padding: 0.4rem;
+}
+
+.admin-manage-users_edit_usr_list label,
+.admin-manage-users_edit_exp_list label{
+  cursor: pointer;
+  width: 100%;
+}
+
+.admin-manage-users_edit_usr_list label:hover,
+.admin-manage-users_edit_exp_list label:hover{
+  color: orangered;
+}
+
+.admin-mu_edit_usr_select {
+  background-color: #000ffd;
+  color: whitesmoke !important;
+  pointer-events: none;
+}
+
+.admin-manage-users_edit_exp_list>label>input{
+  margin-right: 0.1rem;
+}
+
+.admin-manage-users_reset,
+.admin-manage-users_remove {
+  display: grid;
+  grid-template-rows: repeat(2, max-content);
+}
+
+.admin-manage-new_exp {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.admin-manage-new_exp>div{
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-column-gap: 1.5rem;
+  width: max-content;
+}
+
+.admin-manage-new_exp input {
+  width: 20rem;
+}
+
+.admin-manage-new_exp .exist {
+  color: red;
+}
+
+.admin-manage-users_remove_usr_list,
+.admin-manage-users_reset_usr_list {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-auto-rows: max-content;
+  width: max-content;
+  border: 1px solid black;
+  height: 20rem;
+  overflow: auto;
+  padding: 0.4rem;
+  column-gap: 0.3rem;
+  row-gap: 0.5rem;
+  min-width: 20rem;
+}
+
+.admin-manage-users_reset_usr_list button {
+  color: whitesmoke;
+  background-color: #8103a0;
+}
+.admin-manage-users_remove_usr_list button {
+  color: whitesmoke;
+  background-color: red;
+}

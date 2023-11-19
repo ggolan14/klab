@@ -1,0 +1,536 @@
+.STE_main {
+    height: 100%;
+    width: 100%;
+    /*cursor: url(''), auto;*/
+    /* The second value here is a fallback. */
+    /*cursor: url('magnifying.png'), auto;*/
+    /* You may need coordinates to adjust the pointer
+       for example, the custom cursor is circular and you want
+       the middle to be where you click */
+    /*cursor: url('magnifying.png') 15 15, move;*/
+    /*cursor:url(http://www.javascriptkit.com/dhtmltutors/cursor-hand.gif), auto;*/
+}
+
+.STE_main button{
+    z-index: 999;
+}
+
+.STE_next_btn {
+    margin: auto;
+    border-radius: 1rem;
+    font-size: x-large;
+    padding: 1rem 4rem;
+    background-color: #7fbcfc;
+}
+
+
+/* Story2 */
+
+/*.STE_board {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    display: grid;*/
+/*    row-gap: 1.5rem;*/
+/*    width: max-content;*/
+/*}*/
+
+/*.STE_storyCont {*/
+/*    position: relative;*/
+/*    !*width: 100%;*!*/
+/*    !*height: 100%;*!*/
+/*    padding: 60px;*/
+/*    !*cursor: url('./magnifying.png'), auto;;*!*/
+/*    !*cursor: none;*!*/
+/*    !*padding: 10px 20px;*!*/
+/*    background-color: white;*/
+/*    box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);*/
+/*}*/
+
+/*.STE_storyTxt {*/
+/*    !*width: 100%;*!*/
+/*    !*height: 100%;*!*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    color: black;*/
+/*    background-color: transparent;*/
+
+/*    padding: 10px;*/
+/*    !*box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);*!*/
+
+/*    !*background-color: #8103a0;*!*/
+
+/*}*/
+
+/*#ste_box {*/
+/*    margin: auto;*/
+/*    !*top: 0;*!*/
+/*    !*left: 0;*!*/
+/*    position: absolute;*/
+/*    pointer-events: none;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+
+/*    padding: 10px;*/
+
+/*}*/
+
+/*.STE_storyCover {*/
+/*    !*width: 100%;*!*/
+/*    !*height: 99%;*!*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+
+/*    z-index: 995;*/
+/*    pointer-events: none;*/
+/*    color: transparent;*/
+/*    text-shadow: 0 0 7px #000;*/
+/*    background-color: transparent;*/
+/*    opacity: 0.9;*/
+/*    !*padding: 10px 20px;*!*/
+/*    !*box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);*!*/
+
+
+/*    padding: 10px;*/
+
+/*}*/
+
+.STE_story {
+    width: max-content;
+    height: max-content;
+    position: relative;
+    /*border: 1px solid black;*/
+}
+
+/* Story2 */
+
+
+
+
+/* Story */
+.STE_board {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    row-gap: 1.5rem;
+    width: 100vw;
+    padding: 1rem;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.STE_board>label {
+    height: max-content;
+    display: grid;
+    row-gap: 15px;
+}
+.STE_board>label>span:first-child {
+    font-size: x-large;
+    color: #00659f;
+    height: max-content;
+}
+.STE_board>label>span:not(:first-child) {
+    font-size: larger;
+    color: #000000;
+    height: max-content;
+}
+
+.STE_storyCont {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);
+}
+.STE_WithImg {
+    cursor:url(magnifying2.png) 60 60, auto;
+}
+
+
+.STE_storyTxt {
+    width: 100%;
+    max-height: 100%;
+    height: max-content;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    color: black;
+    /*background-color: blue;*/
+    background-color: white;
+    /*padding: 10px;*/
+    /*font-size: 50px;*/
+    /*box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);*/
+    padding: 10px;
+}
+
+.STE_storyTxt2 {
+    width: 100%;
+    height: 100%;
+    color: white;
+    /*background-color: blue;*/
+    background-color: blueviolet;
+    /*padding: 10px;*/
+    /*font-size: 50px;*/
+    /*box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);*/
+    padding: 10px;
+}
+
+#ste_box {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    padding: 10px;
+
+
+}
+
+.STE_storyCover {
+    width: 100%;
+    max-height: 100%;
+    height: max-content;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+
+    z-index: 995;
+    pointer-events: none;
+    color: transparent;
+    text-shadow: 0 0 12px #000;
+    /*background-color: blueviolet;*/
+    /*background-color: transparent;*/
+    opacity: 0.9;
+    padding: 10px;
+    font-size: 50px;
+}
+
+.STE_polygon {
+    z-index: 9999;
+    background-color: #ff6600;
+}
+/* Story */
+
+
+
+/* GameWelcome */
+.STE_GW {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    height: max-content;
+    max-width: 90%;
+    max-height: 90%;
+    font-size: x-large;
+    display: grid;
+    row-gap: 2rem;
+
+    z-index:1;
+    padding: 2rem 2.5rem;
+    box-shadow:-4px 8px 8px rgba(0,0,0,0.1), -8px 16px 16px rgba(0,0,0,0.1), -16px 32px 32px rgba(0,0,0,0.15), -32px 64px 64px rgba(0,0,0,0.25);
+
+    border-radius:0 100px;
+    background:linear-gradient(0.01000000000001deg, rgba(179, 179, 179, 1) 8.92%,
+    rgba(213, 213, 213, 1) 31.91%,
+    rgb(210, 204, 204) 54.33%,
+    rgba(250, 250, 250, 1) 67.52%);
+}
+
+/*.STE_GW {*/
+/*    z-index:1;*/
+/*    padding: 2rem 2.5rem;*/
+/*    box-shadow:-4px 8px 8px rgba(0,0,0,0.1), -8px 16px 16px rgba(0,0,0,0.1), -16px 32px 32px rgba(0,0,0,0.15), -32px 64px 64px rgba(0,0,0,0.25);*/
+
+/*    border-radius:0 100px;*/
+/*    background:linear-gradient(0.01000000000001deg, rgba(179, 179, 179, 1) 8.92%,*/
+/*    rgba(213, 213, 213, 1) 31.91%,*/
+/*    rgb(210, 204, 204) 54.33%,*/
+/*    rgba(250, 250, 250, 1) 67.52%);*/
+
+/*}*/
+.STE_GW:before {
+    content:'';
+    position:absolute;
+    z-index:-1;
+    top:0; left:0; right:0; bottom:0; margin:0;
+    margin:8px;
+    border-radius:0 96px;
+    background:linear-gradient(0.06deg, rgba(250, 250, 250, 1) 0%,
+    rgba(246, 246, 246, 1) 29.62%,
+    rgba(234, 234, 234, 1) 58.47%,
+    rgba(215, 215, 215, 1) 86.92%,
+    rgba(204, 204, 204, 1) 99.22%);
+}
+
+.STE_GW label {
+    text-align: center;
+}
+
+.STE_GW label:first-child {
+    font-size: xx-large;
+}
+
+.STE_GW label:not(:first-child) {
+    font-size: x-large;
+}
+/* GameWelcome */
+
+
+/* Declaration */
+.STE_Prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem 5rem;
+    border: 5px solid #0000a8;
+    max-width: 85%;
+    border-radius: 10px;
+    width: max-content;
+}
+
+.STE_Dec {
+    display: grid;
+    row-gap: 0.5rem;
+    background-color: white;
+    width: max-content;
+}
+
+.STE_Dec>label {
+    font-size: x-large;
+}
+
+.STE_Dec>label:first-child {
+    text-decoration: underline;
+}
+
+.STE_Dec>label>input {
+    margin-right: 10px;
+}
+
+.STE_Dec>label:first-child {
+    font-size: xx-large;
+    text-align: center;
+}
+/* Declaration */
+
+ /* FinishGame */
+.STE_FM {
+    display: grid;
+    background-color: white;
+    grid-row-gap: 1rem;
+    width: max-content;
+    max-width: 85%;
+    top: 45%;
+}
+
+.STE_FM>div{
+    margin: auto;
+    width: 100%;
+}
+
+.STE_FM>label{
+    font-size: x-large;
+    text-align: center;
+}
+
+.STE_FM_m {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+    align-items: baseline;
+    column-gap: 2rem;
+}
+
+.STE_FM_m>div {
+    display: grid;
+    row-gap: 0.5rem;
+    width: 100%;
+}
+
+.STE_FM_m>div>label {
+    font-size: larger;
+    height: max-content;
+}
+
+.STE_FM_ngm,
+.STE_FM_dm {
+    z-index: 999;
+    background-color: rgba(0,0,0,0.9);
+    position: absolute;
+    /*top: 0;*/
+    /*left: 0;*/
+    width: 100%;
+    height: 100%;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+.STE_FM_ngm>div,
+.STE_FM_dm>div{
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    display: grid;
+    row-gap: 2rem;
+}
+
+.STE_FM_ngm>div>label,
+.STE_FM_dm>div>label{
+    font-size: x-large;
+    width: max-content;
+}
+
+.STE_FM_ngm>div>div {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    column-gap: 1.5rem;
+}
+
+
+ /* FinishGame */
+
+ /* AfterPractice */
+.STE_AP {
+    display: grid;
+    row-gap: 1.5rem;
+}
+
+.STE_AP label {
+    font-size: x-large;
+    display: grid;
+}
+
+.STE_AP div {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+}
+ /* AfterPractice */
+
+
+ /* BeforeLastQues */
+.STE_BLQ {
+    display: grid;
+    font-size: x-large;
+    grid-row-gap: 1rem;
+}
+
+.STE_BLQ button {
+    margin: auto;
+}
+
+ /* BeforeLastQues */
+
+/* Questions */
+.STE_Ques {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: white;
+    padding: 2rem 1rem;
+    display: grid;
+    row-gap: 1.5rem;
+    grid-template-rows: max-content 1fr max-content;
+}
+
+.STE_Ques-h {
+    font-size: x-large;
+    display: grid;
+    height: max-content;
+}
+
+.STE_Ques-h>label:first-child {
+    font-size: xx-large;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.STE_QuesList{
+    height: max-content;
+    display: grid;
+    row-gap: 5rem;
+}
+
+.STE_Que {
+    display: grid;
+    row-gap: 0.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.STE_Que>label {
+    font-size: x-large;
+}
+
+.STE_Que>div {
+    width: max-content;
+    display: grid;
+    font-size: larger;
+    row-gap: 1rem;
+    margin-left: 1rem;
+
+}
+
+.STE_Que input {
+    transform: scale(1.5);
+    margin-right: 0.5rem;
+}
+/* Questions */
+
+/* FinishMsg */
+.STE_FM {
+    display: grid;
+    grid-row-gap: 5rem;
+}
+
+.STE_FM>label{
+    font-size: x-large;
+}
+
+.STE_FM>div{
+    display: grid;
+    grid-row-gap: 0.5rem;
+}
+
+.STE_FM>div>label{
+    font-size: larger;
+}
+/* FinishMsg */
+
+
+.STE-DebugGroup {
+    display: grid;
+    height: max-content;
+    gap: 0.5rem;
+}
+
+.STE-DebugGroupItem {
+    border: 1px solid;
+    width: auto;
+    margin: 0.5rem;
+    background-color: #9ba0a6;
+}

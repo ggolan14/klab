@@ -1,0 +1,209 @@
+.center-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.msg_container {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: max-content;
+    height: max-content;
+    background-color: #d3d3d3;
+}
+
+.PG_main {
+    height: 100%;
+    width: 100%;
+}
+
+.PG_main button{
+    border-radius: 10px;
+    margin: auto;
+    font-size: larger;
+}
+
+/* Game Welcome */
+.pg_-gw {
+    display: grid;
+    grid-row-gap: 1rem;
+    padding: 1rem 3rem;
+    font-size: large;
+}
+
+.pg_-gw>label:first-child{
+    font-size: x-large;
+}
+
+.pg_-gw>p {
+    text-align: left;
+}
+
+.pg_-gw>label:not(:first-child){
+    font-size: larger;
+}
+
+/* Game Welcome Comment*/
+.pg_-gw-com {
+    display: grid;
+    height: max-content;
+    width: 100%;
+}
+
+.pg_-gw-com label {
+    text-align: left !important;
+    width: 100%;
+}
+
+.pg_-gw-com textarea {
+    width: 100%;
+    height: 4rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 1.2rem;
+    resize: none;
+    text-align: left;
+}
+
+
+/*Plus Page*/
+.pg_pp {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+    font-size: 180px;
+}
+
+/*Points Page*/
+.pg_point-p {
+    width: 100%;
+    height: 100%;
+}
+
+.pg-points-canvas {
+    border: 1px solid #000000;
+}
+
+/*Button Page*/
+.pg_bp {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    grid-template-rows: max-content max-content max-content;
+    grid-row-gap: 6rem;
+}
+
+.pg_bp-inspection {
+    font-size: xx-large;
+    margin: auto;
+    width: max-content;
+    color: white;
+    font-weight: bold;
+}
+
+.pg_bp-space_bar {
+    font-size: xx-large;
+    background-color: #1b8bff;
+    margin: auto;
+    width: max-content;
+    padding: 0.5rem 1rem;
+    border: 1px solid #005cbf;
+    border-radius: 11px;
+    color: white;
+    animation: space_bar_blink 3s infinite;
+}
+
+@keyframes space_bar_blink {
+    20%{opacity: 1;}
+    50%{opacity: 0;}
+    80%{opacity: 1;}
+    100%{opacity: 0;}
+}
+
+
+.pg_bp>div {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-auto-columns: 1fr;
+}
+
+.pg_bp>div>button{
+    font-weight: 100;
+    height: 200px;
+    width: 300px;
+    font-size: 30px;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin: auto;
+    color: white;
+    border: 1px solid black;
+    background-color: #858585;
+}
+
+.side_selected {
+    font-size: 60px !important;
+    background-color: rgb(255, 192, 0) !important;
+    color: white !important;
+    border: 3px dotted blue !important;
+}
+
+.side_not_selected {
+    font-size: 60px !important;
+    color: rgb(201, 201, 201) !important;
+}
+
+/* Finish Block Page */
+.pg_fbp {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: max-content;
+    height: max-content;
+    display: grid;
+    grid-row-gap: 1rem;
+    padding: 1rem 3rem;
+    background-color: #d3d3d3;
+    font-size: large;
+}
+
+
+/* Debugger */
+.P_G-Debugger {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+    pointer-events: none;
+    grid-row-gap: 0.1rem;
+    row-gap: 0.5rem;
+}
+
+.P_G-Debugger label {
+    color: black;
+    width: max-content;
+}
+
+.P_G-Debugger span {
+    color: #8103a0;
+    margin-left: 2px;
+}
+
+.P_G-Debugger>div {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    margin: 1rem 0;
+}
+
+.P_G-Debugger>div>label:first-child{
+    font-weight: bold;
+}
+
+.P_G-Debugger>div>div{
+    width: max-content;
+    display: grid;
+    row-gap: 5px;
+    margin-left: 10px;
+    background-color: #797979;
+    padding: 5px 10px;
+}

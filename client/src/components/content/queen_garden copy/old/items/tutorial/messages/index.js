@@ -1,0 +1,194 @@
+import React from "react";
+import KNIGHT_IMG from '../../images/knight.png';
+
+const RiskWelcome = ({GameSettings, GameSet}) => {
+  return (
+    <p>
+      You have been tasked with delivering plants for the Queen of the realm. The plants are grown in a greenhouse on the outskirts of the forest. Your job is to pick up the plants from the greenhouse, and deliver them to her castle. You will be paid {GameSettings.RewardValue} coins upon successful delivery.
+      <br/><br/>
+      She reminds you of the recent attacks on merchants by bears in the Shadewood and so emphasizes using the highway that goes around the forest. As an experienced merchant, you know that the cost of travel along the {GameSet.CrownHighway_txt} is {GameSettings.MileageTravelCost} coins.
+    </p>
+  )
+}
+
+const DishonestWelcome = ({GameSettings, GameSet}) => {
+  return (
+    <p>
+      You have been tasked with delivering plants for the Queen of the realm. The plants are grown in a greenhouse on the outskirts of the forest. Your job is to pick up the plants from the greenhouse, and deliver them to her castle.
+      <br/><br/>
+      She emphasizes the importance of sunlight for the health of the plants, and so as part of the contract tells you that all travel through the Shadewood is banned.
+      Instead, you are required to travel the {GameSet.CrownHighway_txt}. You will be paid {GameSettings.RewardValue} coins upon successful delivery.
+      <br/><br/>
+      As an experienced merchant, you know that the cost of travel along the {GameSet.CrownHighway_txt} is {GameSettings.MileageTravelCost} coins.
+    </p>
+  )
+}
+
+const tutorial0step1 = ({GameSettings, Condition, GameSet}) => {
+  return (
+    Condition === 'Risk'? <RiskWelcome GameSettings={GameSettings} GameSet={GameSet}/> : <DishonestWelcome GameSettings={GameSettings} GameSet={GameSet}/>
+  )
+}
+
+const tutorial1step1 = () => {
+  return (
+    <p>
+      Before you can begin your contract with the queen, first you’ll need to  make it to the castle and speak with her about the terms. <br/>
+      To make it there, you should take the Crown Highway.
+      <br/><br/>
+      Click on the road sign indicating the Crown Highway
+    </p>
+  )
+}
+
+const tutorial1step2 = () => {
+  return (
+    <div
+      style={{display: 'grid'}}
+    >
+      <p>
+        As you approach the Castle Gates, you are stopped by guardsmen and asked to pay the toll before entering:
+        You have paid [Toll]
+        <br/><br/>
+        The guards inform you that the toll serves to pay for the guards in the area, you will have to pay the toll each time you pass through
+      </p>
+      <img
+        alt='knight'
+        src={KNIGHT_IMG}
+        width={90}
+        height={160}
+        style={{margin: 'auto'}}
+      />
+    </div>
+  )
+}
+
+// const tutorial2step1 = (condition, TutorialForestPathRoadTxt, TutorialRepeatTravelRoadTxt) => {
+const tutorial2step1 = ({TutorialForestPathRoadTxt}) => {
+  return (
+    <p>
+      You’ve taken on the contract with the Queen to run Deliveries, and returned to the outskirts of the Shadewood where you live.<br/>
+      Before you can begin making deliveries in earnest, you need to travel to the city of Zorea once more to hire additional hands.
+      <br/><br/>
+      The Crown Highway is shut down today,  you will have to travel through the Shadewood.<br/>
+      There are 4 paths to choose from, for today, you decide to take the Red Oak Road.
+      <br/><br/>
+      Click on the sign that says "{TutorialForestPathRoadTxt}"
+    </p>
+  )
+}
+
+const tutorial2step2_Dishonesty = () => {
+  return (
+    <p>
+      Travelling through the Shadewood you are stopped by guards.
+      <br/><br/>
+      "Halt! State your business!"
+      <br/><br/>
+      You inform the guardsman that you are travelling to Zorea to hire additional hands.
+      <br/><br/>
+      The guard tells you that he and his fellow guards are patrolling the forest paths for smugglers.<br/>
+      He tells you that increased foot traffic means he’ll have to bring more guards tomorrow
+    </p>
+  )
+}
+
+const tutorial2step2_Risk = () => {
+  return (
+    <p>
+      Travelling through the Shadewood you are stopped by guards.
+      <br/><br/>
+      "Halt! State your business!"
+      <br/><br/>
+      You inform the guardsman that you are travelling to Zorea to hire additional hands.
+      <br/><br/>
+      The guard tells you that he and his fellow guards are patrolling the forest paths for bandits and thieves.<br/>
+      He warns you to be careful travelling through the Shadewood, that criminal activity has been reported in the area.
+    </p>
+  )
+}
+
+const tutorial2step2 = ({Condition}) => {
+  return (
+    <
+      // style={{display: 'grid'}}
+    >
+      {Condition === 'Risk'? tutorial2step2_Risk() : tutorial2step2_Dishonesty()}
+      {/*<img*/}
+      {/*  alt='knight'*/}
+      {/*  src={KNIGHT_IMG}*/}
+      {/*  width={90}*/}
+      {/*  height={160}*/}
+      {/*  style={{margin: 'auto'}}*/}
+      {/*/>*/}
+    </>
+  )
+}
+
+// const tutorial3step1 = (condition, TutorialForestPathRoadTxt, TutorialRepeatTravelRoadTxt) => {
+const tutorial3step1 = ({TutorialRepeatTravelRoadTxt}) => {
+  return (
+    <p>
+      The Crown Highway is shut down for one more day.<br/>
+      Your last objective is to register with the Merchant’s guild in Zorea before you can begin working for the Queen.
+      <br/><br/>
+      You will have to travel through the Shadewood again.<br/>
+      Since you took the Red Oak Road yesterday, you decide to do so again.
+      <br/><br/>
+      Click the {TutorialRepeatTravelRoadTxt} sign
+    </p>
+  )
+}
+
+const tutorial3step2 = ({Condition}) => {
+  return (
+    <p>
+      You note that there is some sign of your previous activity travelling this route.
+      <br/><br/>
+      You also notice that travelling through it again, there is less obstruction as you cleared some obstacles the previous day.
+      <br/><br/>
+      NOTE: Repeat travel along a forest route generates signs of activity, which means {Condition === 'Risk'?'Bandits':'Guards'} are more likely to be watching that path.
+      <br/><br/>
+      However repeated travel also reduces the time needed to travel the path.
+    </p>
+  )
+}
+
+
+// export const getTutorialMessage = (tutorial_number, tutorial_step, condition, onClick, TutorialForestPathRoadTxt, TutorialRepeatTravelRoadTxt) => {
+export const getTutorialMessage = ({
+                                     tutorialNumber,
+                                     tutorialStep,
+                                     Condition,
+                                     onClick,
+                                     TutorialForestPathRoadTxt,
+                                     TutorialRepeatTravelRoadTxt,
+                                     GameSet,
+                                     GameSettings
+                                   }) => {
+  let msg = [
+    [tutorial0step1],
+    [tutorial1step1, tutorial1step2],
+    [tutorial2step1, tutorial2step2],
+    [tutorial3step1, tutorial3step2]
+  ];
+
+  return (
+    <>
+      {msg[tutorialNumber-1][tutorialStep-1]({
+        Condition, TutorialForestPathRoadTxt,
+        TutorialRepeatTravelRoadTxt, GameSet,
+        GameSettings
+      })}
+      {
+        tutorialStep === 2 && (
+          <button
+            onClick={onClick}
+          >
+            Continue
+          </button>
+        )
+      }
+    </>
+  )
+}

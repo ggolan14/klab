@@ -1,0 +1,780 @@
+.RM_main {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.RM_Game {
+    width: 99.5%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    margin: auto;
+    column-gap: 20px;
+    /*grid-template-columns: 1fr 12%;*/
+    /*grid-template-columns: 83% 17%;*/
+}
+
+.RM_SideBtn {
+    display: grid;
+    row-gap: 1rem;
+    grid-template-columns: auto;
+    height: max-content;
+    margin-top: 5rem;
+    justify-self: right;
+    width: 100%;
+}
+
+.RM_main button {
+    color: black;
+    border: 1px solid black !important;
+}
+
+.RM_main button:hover {
+    background-color: #000ffd !important;
+}
+
+/*RM_SideBtnNM*/
+.RM_button,
+.RM_MatViewUp button,
+.RM_SideBtn button {
+    color: black;
+    padding: 15px 20px !important;
+    font-size: large;
+    width: auto;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+}
+
+.RM_MatViewUp2 button {
+    margin: auto;
+}
+
+.RM_button,
+.RM_MatViewUp button,
+.RM_SideBtn button:active {
+    transform: translateY(4px);
+}
+
+.RM_button {
+    width: 210px !important;
+    font-size: 20px !important;
+}
+
+.RM_SideBtnFD {
+    background-color: rgba(10, 161, 108, 0.8);
+}
+
+.RM_SideBtnNM {
+    background-color: #99ccff;
+}
+.RM_SideBtnBF {
+    background-color: rgba(10, 117, 150, 0.8);
+}
+
+.RM_BoardP {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    grid-row-gap: 1rem;
+    padding: 1rem 0;
+}
+
+.RM_BoardP_b {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-row-gap: 0.5rem;
+    overflow: hidden;
+}
+
+.RM_BoardP_head {
+    display: grid;
+    width: 100%;
+    height: max-content;
+    padding-left: 2rem;
+    align-self: center;
+    font-size: x-large;
+}
+.RM_BoardP_head .l1>span{
+    position: relative;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.RM_BoardP_head .l1 .l1B{
+    background-color: yellow;
+    border: none;
+    box-shadow: 0 0 15px yellow;
+}
+
+.RM_BoardP_l_r {
+    position: absolute;
+    bottom: -260px;
+    left: -18px;
+
+    animation: blink-animation 3s steps(5, start) infinite;
+    -webkit-animation: blink-animation 3s steps(5, start) infinite;
+}
+
+.RM_BoardP_l_r-ar {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 25px solid #f15a09;
+}
+
+.RM_BoardP_l_r-l {
+    border: 10px solid #f15a09;
+    width: 10px;
+    height: 225px;
+    margin: auto;
+}
+
+
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+.RM_BoardP_head .l1{
+    text-align: left;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.RM_BoardP_head .l2{
+    color: blue;
+    font-size: xx-large !important;
+}
+
+.RM_BoardP label {
+    text-align: center;
+}
+.RM_BoardP>label:first-child{
+    color: #000ffd;
+    font-weight: bold;
+    font-size: x-large;
+    align-self: center;
+}
+.RM_BoardP label:last-child{
+    align-self: baseline;
+    font-size: larger;
+}
+
+.RM_BoardR {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 30% 1fr;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.RM_BoardRL {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    grid-row-gap: 1rem;
+    height: 100%;
+    font-size: larger;
+    overflow: hidden;
+}
+
+.RM_BoardRL label {
+    width: 100%;
+    text-align: left;
+    font-size: xx-large;
+}
+
+.RM_BoardRL p::-webkit-scrollbar,
+.RM_BoardP_b p::-webkit-scrollbar {
+    display: none;
+}
+
+.RM_BoardP_b p,
+.RM_BoardRL p {
+    /*width: max-content;*/
+    height: 95%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    text-align: left;
+    /*font-size: 30px;*/
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+
+.RM_Matrix {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    font-size: 5px;
+    grid-row-gap: 1px;
+    grid-column-gap: 1px;
+    overflow: auto;
+}
+
+.RM_Matrix label {
+    border: 1px solid black;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    margin: 0;
+    position: relative;
+    max-height: 6rem;
+    max-width: 6rem;
+    cursor: pointer;
+}
+
+.RM_Matrix label span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.RM_MatItemSelect{
+    border: 2px solid red !important;
+}
+
+.RM_MatItemFinal{
+    background-color: whitesmoke !important;
+    border: 2px solid #0c0fcc !important;
+}
+
+.RM_PMatH .active,
+.RM_final_err.active {
+    animation-name: example;
+    animation-duration: 5s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.RM_disable_cell {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.RM_Matrix_FinalErrMsg {
+    position: absolute;
+    background-color: black;
+    color: whitesmoke;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    pointer-events: none;
+
+}
+
+@keyframes example {
+    0%   {
+        font-size: 1.6rem;
+        text-shadow: 0 0 3px #a11723;
+    }
+    25%  {
+        font-size: 1.7rem;
+        text-shadow: 0 0 5px #a11723;
+    }
+    50%  {
+        font-size: 1.6rem;
+        text-shadow: none;
+    }
+    100% {
+        font-size: 1.6rem;
+        text-shadow: none;
+    }
+}
+
+
+.RM_MatView {
+    display: grid;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    grid-row-gap: 0.7rem;
+    grid-template-rows: 30% 70%;
+}
+
+.RM_MatViewFN {
+    background-color: rgba(10, 13, 161, 0.8);
+}
+.RM_MatViewE {
+    background-color: rgba(34, 199, 43, 0.8);
+}
+.RM_MatViewGT {
+    background-color: rgba(76, 39, 189, 0.8);
+}
+
+.RM_MatViewUp1 {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr max-content;
+    grid-column-gap: 0.5rem;
+    height: max-content;
+    font-size: larger;
+}
+.RM_MatViewUp2 {
+    display: grid;
+    height: max-content;
+    font-size: larger;
+    row-gap: 1rem;
+}
+
+.RM_MatViewUpBtn {
+    display: grid;
+    grid-row-gap: 0.7rem;
+    height: max-content;
+}
+
+.RM_MatViewUpTxt {
+    display: grid;
+    height: max-content;
+    text-align: center;
+    font-size: large;
+    max-width: 90%;
+    margin: auto;
+}
+
+.RM_MatViewUpTxt .head {
+    width: 100%;
+    height: max-content;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.RM_MatViewUpBtn button {
+    width: auto;
+    height: max-content;
+}
+
+.RM_MatViewDown {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.5rem;
+    padding: 0 0.5rem 15px 0.5rem;
+    height: 100%;
+    align-content: center;
+    overflow-x: scroll;
+}
+
+.RM_MatViewDown div {
+    height: max-content;
+    width: max-content;
+    border: 1px solid black;
+    z-index: 999;
+}
+
+.RM_MatViewDown .RM_MatViewDownSelMath {
+    border: 5px solid #025d12;
+}
+
+.RM_MatViewDown .RM_MatViewDownSelMathChanged {
+    border: 5px solid #0b0aea;
+}
+
+.RM_MatViewP {
+    display: grid;
+    padding: 0.5rem;
+    width: 100%;
+    height: max-content;
+    max-height: 100%;
+    grid-row-gap: 1rem;
+    grid-template-rows: max-content 1fr auto;
+}
+
+.RM_MatViewP>button{
+    margin: 1.5rem auto auto auto;
+    font-size: larger;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+
+}
+
+.RM_PMatH {
+    display: grid;
+    height: max-content;
+    grid-row-gap: 0.2rem;
+    text-align: center;
+    font-size: larger;
+    max-width: 96%;
+    margin: auto;
+}
+.RM_PMatH>label:first-child{
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.RM_MatViewM {
+    display: grid;
+    grid-auto-flow: column;
+    width: max-content;
+    margin: auto;
+    height: max-content;
+    column-gap: 1rem;
+}
+.RM_MatViewM * {
+    overflow: hidden;
+}
+.RM_MatViewM .RM_Matrix label,
+.RM_PMatS0 .RM_Matrix label{
+    /*font-size: 20px !important;*/
+    /*width: 35px !important;*/
+    /*height: 35px !important;*/
+}
+
+.RM_PMatS0 {
+    display: grid;
+    height: max-content;
+    text-align: center;
+    grid-row-gap: 0.3rem;
+    font-size: larger;
+}
+
+.RM_PMatS0>button{
+    margin: auto;
+    padding: 0.5rem 3rem;
+}
+
+
+.RM_RF {
+    display: grid;
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    height: max-content;
+    overflow: hidden;
+    grid-row-gap: 0.5rem;
+    grid-template-rows: max-content 1fr max-content;
+    text-align: center;
+}
+
+.RM_RF label {
+    height: max-content;
+}
+
+.RM_RF_h {
+    display: grid;
+    font-size: large;
+}
+
+.RM_RF_h>label:first-child {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.RM_RF button {
+    margin: auto;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: larger;
+    padding: 0.8rem 2.5rem;
+}
+
+.RM_RF button:hover {
+    color: #290a57;
+}
+
+.RM_RF button:active {
+    border-color: black;
+    opacity: 0.7;
+}
+
+.RM_RF_b {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    justify-self: center;
+}
+
+.RM_RF_b>div {
+    display: grid;
+    width: 50%;
+    height: max-content;
+    margin: 0 auto;
+    row-gap: 0.5rem;
+    font-size: larger;
+}
+
+.RM_RF_b>div>label{
+    text-decoration: underline;
+    font-size: larger;
+}
+
+.RM_RF_b>div>div {
+    display: grid;
+    width: 100%;
+    row-gap: 0.5rem;
+}
+
+.RM_RF_b>div>div>label:first-child {
+    font-weight: bold;
+}
+
+.RM_RF_f {
+    display: grid;
+    font-size: larger;
+    height: max-content;
+    grid-row-gap: 0.5rem;
+}
+
+/* Designing for scroll-bar */
+.RM_Game ::-webkit-scrollbar {
+    width: 15px;
+    height: 30px;
+}
+
+/* Track */
+.RM_Game ::-webkit-scrollbar-track {
+    background: #cbcbcb;
+    border-radius: 1rem;
+}
+
+/* Handle */
+.RM_Game ::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 1rem;
+}
+
+/* Handle on hover */
+.RM_Game ::-webkit-scrollbar-thumb:hover {
+    background: #214593;
+}
+
+/*RM_MatViewUp*/
+/*RM_MatViewDown*/
+/*RM_MatViewBtn*/
+
+.MsgMode_PE, .MsgMode_SE {
+    text-align: center;
+    padding: 0.5rem 12rem;
+    height: max-content;
+    display: grid;
+    grid-row-gap: 0.3rem;
+}
+
+.MsgMode_PE>label:first-child {
+    font-weight: bold;
+    font-size: x-large;
+    color: #8103a0;
+}
+
+.MsgMode_PE>label:not(:first-child) {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.MsgMode_SE>label:first-child {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.MsgMode_SE>label:not(:first-child) {
+    font-size: larger;
+}
+
+.rm_debug {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+    pointer-events: none;
+    grid-row-gap: 0.3rem;
+}
+
+.rm_debug label {
+    color: black;
+}
+
+.rm_debug span {
+    color: #8103a0;
+}
+
+.rm_debug>div {
+    border: 1px solid black;
+    padding: 0.25rem;
+    display: grid;
+    background-color: #8d8d8d;
+}
+
+.rm_debug_nv {
+
+}
+.rm_debug_cm {
+
+}
+.rm_debug_rec {
+
+}
+
+
+/* MemoryTask */
+.RM_MT_sl.full {
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+}
+.mid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.RM_MT_l_box {
+    font-size: 100px;
+    border: 1px solid black;
+    padding: 0.5rem 1.5rem;
+    width: max-content;
+    height: max-content;
+}
+.RM_MT_t {
+    background-color: #0f60b4;
+    color: white;
+}
+
+.RM_MT_sl {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1rem;
+}
+
+.RM_MT_sl>label {
+    background-color: #6904ab;
+    color: white;
+}
+
+.RM_MT_il {
+    display: grid;
+    grid-template-rows: repeat(3, max-content);
+    justify-items: center;
+    row-gap: 3rem;
+    height: max-content;
+    width: max-content;
+}
+
+.RM_MT_il_1 {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1rem;
+}
+
+.RM_MT_il_1>input{
+    font-size: 3rem;
+    width: 8rem;
+    height: max-content;
+    text-align: center;
+
+    background-color: #6904ab;
+    color: white;
+}
+
+.RM_MT_il_1>input:focus{
+    border-color: #913d05;
+    border-width: 1px;
+}
+
+.RM_MT_il_2 {
+    display: grid;
+    grid-row-gap: 1rem;
+    font-size: x-large;
+    text-align: center;
+}
+
+.RM_MT_il>button {
+    font-size: x-large;
+    border-radius: 1rem;
+    padding: 1rem 4rem;
+}
+
+.finish_demo {
+    display: grid;
+    text-align: center;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    grid-row-gap: 1rem;
+}
+
+.finish_demo>label:first-child{
+    text-decoration: underline;
+    font-size: 27px;
+}
+
+.finish_demo .a,
+.finish_demo .b{
+    display: flex;
+}
+
+.finish_demo .b>span,
+.finish_demo .a>span{
+    margin-left: 1rem;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.5rem;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.finish_demo .b>span>span,
+.finish_demo .a>span>span{
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+
+.finish_demo .a>span>span{
+    color: blue;
+}
+
+.finish_demo button{
+    margin: auto;
+}
+
+.rm_text_input_error_c {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.7);
+    z-index: 9999;
+}
+
+.rm_text_input_error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    display: grid;
+    font-size: x-large;
+    padding: 2rem 3rem;
+    row-gap: 2rem;
+    border: 5px solid red;
+    border-radius: 10px;
+}
+
+.rm_text_input_error button {
+    margin: auto;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor:pointer ;
+}
+
+.rm_text_input_error button:hover{
+    background-color: #000ffd;
+    color: white;
+}

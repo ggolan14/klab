@@ -1,0 +1,29 @@
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const USER_LOADED = 'USER_LOADED';
+
+export const CHATS_LOADED = 'CHATS_LOADED';
+export const NEW_CHAT_MSG = 'NEW_CHAT_MSG';
+export const TODO_LOADED = 'TODO_LOADED';
+export const NEW_TODO = 'NEW_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const REMOVE_TODO = 'REMOVE_TODO';
+export const UPDATE_TODO_QUEUE = 'UPDATE_TODO_QUEUE';
+
+export const USER_UPDATE = 'USER_UPDATE';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
+export const SET_SOCKET_STATUS = 'SET_SOCKET_STATUS';
+
+export const LOAD_SETTINGS = 'LOAD_SETTINGS';
+
+export const SET_GAME_MODE = 'SET_GAME_MODE';
+export const SET_WAIT_FOR_ACTION = 'SET_WAIT_FOR_ACTION';
+export const SET_ALL_EXPERIMENTS = 'SET_ALL_EXPERIMENTS';
+export const SET_ALL_EXPERIMENTS_ERROR = 'SET_ALL_EXPERIMENTS_ERROR';
+

@@ -1,0 +1,3425 @@
+[{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde21"
+  },
+  "puzzle_data": {
+    "juice": {
+      "start_index": 210,
+      "length": 5,
+      "steps": 30
+    },
+    "scone": {
+      "start_index": 122,
+      "length": 5,
+      "steps": 1
+    },
+    "oil": {
+      "start_index": 124,
+      "length": 3,
+      "steps": 30
+    },
+    "kale": {
+      "start_index": 272,
+      "length": 4,
+      "steps": 31
+    },
+    "salt": {
+      "start_index": 451,
+      "length": 4,
+      "steps": 1
+    },
+    "cracker": {
+      "start_index": 541,
+      "length": 7,
+      "steps": 31
+    },
+    "crab": {
+      "start_index": 630,
+      "length": 4,
+      "steps": 30
+    },
+    "jelly": {
+      "start_index": 781,
+      "length": 5,
+      "steps": 1
+    },
+    "spaghetti": {
+      "start_index": 872,
+      "length": 9,
+      "steps": 1
+    },
+    "cinnamon": {
+      "start_index": 889,
+      "length": 8,
+      "steps": 1
+    },
+    "tahini": {
+      "start_index": 852,
+      "length": 6,
+      "steps": 1
+    },
+    "pizza": {
+      "start_index": 700,
+      "length": 5,
+      "steps": 31
+    },
+    "raisin": {
+      "start_index": 729,
+      "length": 6,
+      "steps": 1
+    },
+    "paprika": {
+      "start_index": 638,
+      "length": 7,
+      "steps": 1
+    },
+    "croissant": {
+      "start_index": 579,
+      "length": 9,
+      "steps": 1
+    },
+    "falafel": {
+      "start_index": 427,
+      "length": 7,
+      "steps": 30
+    },
+    "nachos": {
+      "start_index": 246,
+      "length": 6,
+      "steps": 30
+    },
+    "corn": {
+      "start_index": 188,
+      "length": 4,
+      "steps": 30
+    },
+    "cucumber": {
+      "start_index": 188,
+      "length": 8,
+      "steps": 31
+    },
+    "zucchini": {
+      "start_index": 251,
+      "length": 8,
+      "steps": 30
+    },
+    "banana": {
+      "start_index": 343,
+      "length": 6,
+      "steps": 30
+    },
+    "sugar": {
+      "start_index": 466,
+      "length": 5,
+      "steps": 1
+    },
+    "almond": {
+      "start_index": 469,
+      "length": 6,
+      "steps": 30
+    },
+    "truffle": {
+      "start_index": 676,
+      "length": 7,
+      "steps": 1
+    },
+    "butter": {
+      "start_index": 648,
+      "length": 6,
+      "steps": 30
+    },
+    "steak": {
+      "start_index": 339,
+      "length": 5,
+      "steps": 30
+    },
+    "mandarin": {
+      "start_index": 131,
+      "length": 8,
+      "steps": 1
+    },
+    "muesli": {
+      "start_index": 225,
+      "length": 6,
+      "steps": 31
+    },
+    "lime": {
+      "start_index": 113,
+      "length": 4,
+      "steps": 30
+    },
+    "date": {
+      "start_index": 232,
+      "length": 4,
+      "steps": 30
+    },
+    "blackberry": {
+      "start_index": 26,
+      "length": 10,
+      "steps": 30
+    },
+    "ham": {
+      "start_index": 85,
+      "length": 3,
+      "steps": 1
+    },
+    "strudel": {
+      "start_index": 358,
+      "length": 7,
+      "steps": 30
+    },
+    "flour": {
+      "start_index": 414,
+      "length": 5,
+      "steps": 1
+    },
+    "eggplant": {
+      "start_index": 622,
+      "length": 8,
+      "steps": 1
+    },
+    "peach": {
+      "start_index": 625,
+      "length": 5,
+      "steps": 30
+    },
+    "cheese": {
+      "start_index": 744,
+      "length": 6,
+      "steps": 1
+    },
+    "pudding": {
+      "start_index": 647,
+      "length": 7,
+      "steps": 31
+    },
+    "lamb": {
+      "start_index": 499,
+      "length": 4,
+      "steps": 1
+    },
+    "clementine": {
+      "start_index": 37,
+      "length": 10,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S4",
+  "puzzle_length": 40,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde22"
+  },
+  "puzzle_data": {
+    "guava": {
+      "start_index": 92,
+      "length": 5,
+      "steps": 31
+    },
+    "papaya": {
+      "start_index": 69,
+      "length": 6,
+      "steps": 30
+    },
+    "parsley": {
+      "start_index": 251,
+      "length": 7,
+      "steps": 31
+    },
+    "curry": {
+      "start_index": 181,
+      "length": 5,
+      "steps": 31
+    },
+    "chili": {
+      "start_index": 141,
+      "length": 5,
+      "steps": 1
+    },
+    "honey": {
+      "start_index": 142,
+      "length": 5,
+      "steps": 30
+    },
+    "wafer": {
+      "start_index": 294,
+      "length": 5,
+      "steps": 31
+    },
+    "apricot": {
+      "start_index": 321,
+      "length": 7,
+      "steps": 30
+    },
+    "pie": {
+      "start_index": 351,
+      "length": 3,
+      "steps": 1
+    },
+    "coffee": {
+      "start_index": 441,
+      "length": 6,
+      "steps": 1
+    },
+    "ginger": {
+      "start_index": 391,
+      "length": 6,
+      "steps": 1
+    },
+    "pumpkin": {
+      "start_index": 480,
+      "length": 7,
+      "steps": 1
+    },
+    "cherry": {
+      "start_index": 544,
+      "length": 6,
+      "steps": 1
+    },
+    "meat": {
+      "start_index": 819,
+      "length": 4,
+      "steps": 1
+    },
+    "marshmallow": {
+      "start_index": 751,
+      "length": 11,
+      "steps": 1
+    },
+    "orange": {
+      "start_index": 660,
+      "length": 6,
+      "steps": 1
+    },
+    "donut": {
+      "start_index": 578,
+      "length": 5,
+      "steps": 31
+    },
+    "pomegranate": {
+      "start_index": 582,
+      "length": 11,
+      "steps": 1
+    },
+    "pineapple": {
+      "start_index": 582,
+      "length": 9,
+      "steps": 31
+    },
+    "carrot": {
+      "start_index": 656,
+      "length": 6,
+      "steps": 30
+    },
+    "kiwi": {
+      "start_index": 539,
+      "length": 4,
+      "steps": 30
+    },
+    "mushroom": {
+      "start_index": 886,
+      "length": 8,
+      "steps": 1
+    },
+    "tuna": {
+      "start_index": 338,
+      "length": 4,
+      "steps": 30
+    },
+    "cake": {
+      "start_index": 400,
+      "length": 4,
+      "steps": 1
+    },
+    "oregano": {
+      "start_index": 47,
+      "length": 7,
+      "steps": 1
+    },
+    "bread": {
+      "start_index": 194,
+      "length": 5,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S2 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde23"
+  },
+  "puzzle_data": {
+    "celery": {
+      "start_index": 90,
+      "length": 6,
+      "steps": 30
+    },
+    "grape": {
+      "start_index": 242,
+      "length": 5,
+      "steps": 31
+    },
+    "oatmeal": {
+      "start_index": 62,
+      "length": 7,
+      "steps": 1
+    },
+    "bacon": {
+      "start_index": 247,
+      "length": 5,
+      "steps": 1
+    },
+    "mango": {
+      "start_index": 132,
+      "length": 5,
+      "steps": 1
+    },
+    "biscuit": {
+      "start_index": 111,
+      "length": 7,
+      "steps": 1
+    },
+    "yogurt": {
+      "start_index": 25,
+      "length": 6,
+      "steps": 30
+    },
+    "coconut": {
+      "start_index": 298,
+      "length": 7,
+      "steps": 30
+    },
+    "watermelon": {
+      "start_index": 889,
+      "length": 10,
+      "steps": 1
+    },
+    "noodles": {
+      "start_index": 833,
+      "length": 7,
+      "steps": 1
+    },
+    "cookie": {
+      "start_index": 740,
+      "length": 6,
+      "steps": 1
+    },
+    "avocado": {
+      "start_index": 615,
+      "length": 7,
+      "steps": 1
+    },
+    "broccoli": {
+      "start_index": 529,
+      "length": 8,
+      "steps": 1
+    },
+    "tofu": {
+      "start_index": 625,
+      "length": 4,
+      "steps": 1
+    },
+    "sushi": {
+      "start_index": 313,
+      "length": 5,
+      "steps": 31
+    },
+    "guacamole": {
+      "start_index": 135,
+      "length": 9,
+      "steps": 31
+    },
+    "bolognese": {
+      "start_index": 204,
+      "length": 9,
+      "steps": 30
+    },
+    "radish": {
+      "start_index": 420,
+      "length": 6,
+      "steps": 1
+    },
+    "hummus": {
+      "start_index": 483,
+      "length": 6,
+      "steps": 30
+    },
+    "mustard": {
+      "start_index": 573,
+      "length": 7,
+      "steps": 1
+    },
+    "spinach": {
+      "start_index": 457,
+      "length": 7,
+      "steps": 1
+    },
+    "salmon": {
+      "start_index": 666,
+      "length": 6,
+      "steps": 30
+    },
+    "chocolate": {
+      "start_index": 784,
+      "length": 9,
+      "steps": 1
+    },
+    "egg": {
+      "start_index": 668,
+      "length": 3,
+      "steps": 1
+    },
+    "potato": {
+      "start_index": 520,
+      "length": 6,
+      "steps": 31
+    },
+    "pasta": {
+      "start_index": 750,
+      "length": 5,
+      "steps": 31
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S3 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde24"
+  },
+  "puzzle_data": {
+    "scone": {
+      "start_index": 122,
+      "length": 5,
+      "steps": 1
+    },
+    "oil": {
+      "start_index": 124,
+      "length": 3,
+      "steps": 30
+    },
+    "salt": {
+      "start_index": 451,
+      "length": 4,
+      "steps": 1
+    },
+    "cracker": {
+      "start_index": 541,
+      "length": 7,
+      "steps": 31
+    },
+    "crab": {
+      "start_index": 630,
+      "length": 4,
+      "steps": 30
+    },
+    "jelly": {
+      "start_index": 781,
+      "length": 5,
+      "steps": 1
+    },
+    "spaghetti": {
+      "start_index": 872,
+      "length": 9,
+      "steps": 1
+    },
+    "cinnamon": {
+      "start_index": 889,
+      "length": 8,
+      "steps": 1
+    },
+    "pizza": {
+      "start_index": 700,
+      "length": 5,
+      "steps": 31
+    },
+    "croissant": {
+      "start_index": 579,
+      "length": 9,
+      "steps": 1
+    },
+    "falafel": {
+      "start_index": 427,
+      "length": 7,
+      "steps": 30
+    },
+    "cucumber": {
+      "start_index": 188,
+      "length": 8,
+      "steps": 31
+    },
+    "sugar": {
+      "start_index": 466,
+      "length": 5,
+      "steps": 1
+    },
+    "almond": {
+      "start_index": 469,
+      "length": 6,
+      "steps": 30
+    },
+    "butter": {
+      "start_index": 648,
+      "length": 6,
+      "steps": 30
+    },
+    "mandarin": {
+      "start_index": 131,
+      "length": 8,
+      "steps": 1
+    },
+    "blackberry": {
+      "start_index": 26,
+      "length": 10,
+      "steps": 30
+    },
+    "ham": {
+      "start_index": 85,
+      "length": 3,
+      "steps": 1
+    },
+    "peach": {
+      "start_index": 625,
+      "length": 5,
+      "steps": 30
+    },
+    "cheese": {
+      "start_index": 744,
+      "length": 6,
+      "steps": 1
+    },
+    "pudding": {
+      "start_index": 647,
+      "length": 7,
+      "steps": 31
+    },
+    "clementine": {
+      "start_index": 37,
+      "length": 10,
+      "steps": 1
+    },
+    "banana": {
+      "start_index": 211,
+      "length": 6,
+      "steps": 31
+    },
+    "corn": {
+      "start_index": 444,
+      "length": 4,
+      "steps": 31
+    },
+    "zucchini": {
+      "start_index": 198,
+      "length": 8,
+      "steps": 30
+    },
+    "date": {
+      "start_index": 353,
+      "length": 4,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S4 - new ",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde25"
+  },
+  "puzzle_data": {
+    "schnitzel": {
+      "start_index": 34,
+      "length": 9,
+      "steps": 30
+    },
+    "asparagus": {
+      "start_index": 3,
+      "length": 9,
+      "steps": 31
+    },
+    "pepper": {
+      "start_index": 65,
+      "length": 6,
+      "steps": 1
+    },
+    "cauliflower": {
+      "start_index": 242,
+      "length": 11,
+      "steps": 30
+    },
+    "lettuce": {
+      "start_index": 702,
+      "length": 7,
+      "steps": 30
+    },
+    "garlic": {
+      "start_index": 364,
+      "length": 6,
+      "steps": 1
+    },
+    "artichoke": {
+      "start_index": 365,
+      "length": 9,
+      "steps": 31
+    },
+    "salad": {
+      "start_index": 719,
+      "length": 5,
+      "steps": 30
+    },
+    "hamburger": {
+      "start_index": 283,
+      "length": 9,
+      "steps": 30
+    },
+    "crepe": {
+      "start_index": 374,
+      "length": 5,
+      "steps": 31
+    },
+    "muffin": {
+      "start_index": 409,
+      "length": 6,
+      "steps": 1
+    },
+    "milk": {
+      "start_index": 409,
+      "length": 4,
+      "steps": 30
+    },
+    "ketchup": {
+      "start_index": 148,
+      "length": 7,
+      "steps": 30
+    },
+    "peanut": {
+      "start_index": 354,
+      "length": 6,
+      "steps": 1
+    },
+    "baloney": {
+      "start_index": 326,
+      "length": 7,
+      "steps": 30
+    },
+    "chips": {
+      "start_index": 593,
+      "length": 5,
+      "steps": 1
+    },
+    "bagel": {
+      "start_index": 631,
+      "length": 5,
+      "steps": 31
+    },
+    "tortilla": {
+      "start_index": 742,
+      "length": 8,
+      "steps": 1
+    },
+    "walnut": {
+      "start_index": 587,
+      "length": 6,
+      "steps": 31
+    },
+    "apple": {
+      "start_index": 203,
+      "length": 5,
+      "steps": 1
+    },
+    "pancake": {
+      "start_index": 76,
+      "length": 7,
+      "steps": 31
+    },
+    "fig": {
+      "start_index": 143,
+      "length": 3,
+      "steps": 1
+    },
+    "onion": {
+      "start_index": 196,
+      "length": 5,
+      "steps": 30
+    },
+    "beer": {
+      "start_index": 228,
+      "length": 4,
+      "steps": 30
+    },
+    "nectarine": {
+      "start_index": 857,
+      "length": 9,
+      "steps": 1
+    },
+    "parmesan": {
+      "start_index": 76,
+      "length": 8,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S1 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde26"
+  },
+  "puzzle_data": {
+    "oil": {
+      "start_index": 124,
+      "length": 3,
+      "steps": 30
+    },
+    "kale": {
+      "start_index": 272,
+      "length": 4,
+      "steps": 31
+    },
+    "salt": {
+      "start_index": 451,
+      "length": 4,
+      "steps": 1
+    },
+    "cracker": {
+      "start_index": 541,
+      "length": 7,
+      "steps": 31
+    },
+    "crab": {
+      "start_index": 630,
+      "length": 4,
+      "steps": 30
+    },
+    "jelly": {
+      "start_index": 781,
+      "length": 5,
+      "steps": 1
+    },
+    "spaghetti": {
+      "start_index": 872,
+      "length": 9,
+      "steps": 1
+    },
+    "cinnamon": {
+      "start_index": 889,
+      "length": 8,
+      "steps": 1
+    },
+    "tahini": {
+      "start_index": 852,
+      "length": 6,
+      "steps": 1
+    },
+    "pizza": {
+      "start_index": 700,
+      "length": 5,
+      "steps": 31
+    },
+    "raisin": {
+      "start_index": 729,
+      "length": 6,
+      "steps": 1
+    },
+    "paprika": {
+      "start_index": 638,
+      "length": 7,
+      "steps": 1
+    },
+    "croissant": {
+      "start_index": 579,
+      "length": 9,
+      "steps": 1
+    },
+    "falafel": {
+      "start_index": 427,
+      "length": 7,
+      "steps": 30
+    },
+    "nachos": {
+      "start_index": 246,
+      "length": 6,
+      "steps": 30
+    },
+    "corn": {
+      "start_index": 188,
+      "length": 4,
+      "steps": 30
+    },
+    "cucumber": {
+      "start_index": 188,
+      "length": 8,
+      "steps": 31
+    },
+    "zucchini": {
+      "start_index": 251,
+      "length": 8,
+      "steps": 30
+    },
+    "banana": {
+      "start_index": 343,
+      "length": 6,
+      "steps": 30
+    },
+    "sugar": {
+      "start_index": 466,
+      "length": 5,
+      "steps": 1
+    },
+    "almond": {
+      "start_index": 469,
+      "length": 6,
+      "steps": 30
+    },
+    "truffle": {
+      "start_index": 676,
+      "length": 7,
+      "steps": 1
+    },
+    "butter": {
+      "start_index": 648,
+      "length": 6,
+      "steps": 30
+    },
+    "steak": {
+      "start_index": 339,
+      "length": 5,
+      "steps": 30
+    },
+    "mandarin": {
+      "start_index": 131,
+      "length": 8,
+      "steps": 1
+    },
+    "muesli": {
+      "start_index": 225,
+      "length": 6,
+      "steps": 31
+    },
+    "lime": {
+      "start_index": 113,
+      "length": 4,
+      "steps": 30
+    },
+    "date": {
+      "start_index": 232,
+      "length": 4,
+      "steps": 30
+    },
+    "blackberry": {
+      "start_index": 26,
+      "length": 10,
+      "steps": 30
+    },
+    "ham": {
+      "start_index": 85,
+      "length": 3,
+      "steps": 1
+    },
+    "strudel": {
+      "start_index": 358,
+      "length": 7,
+      "steps": 30
+    },
+    "flour": {
+      "start_index": 414,
+      "length": 5,
+      "steps": 1
+    },
+    "eggplant": {
+      "start_index": 622,
+      "length": 8,
+      "steps": 1
+    },
+    "peach": {
+      "start_index": 625,
+      "length": 5,
+      "steps": 30
+    },
+    "cheese": {
+      "start_index": 744,
+      "length": 6,
+      "steps": 1
+    },
+    "pudding": {
+      "start_index": 647,
+      "length": 7,
+      "steps": 31
+    },
+    "lamb": {
+      "start_index": 499,
+      "length": 4,
+      "steps": 1
+    },
+    "clementine": {
+      "start_index": 37,
+      "length": 10,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S4-2",
+  "puzzle_length": 38,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde27"
+  },
+  "puzzle_data": {
+    "parsley": {
+      "start_index": 0,
+      "length": 7,
+      "steps": 31
+    },
+    "orange": {
+      "start_index": 30,
+      "length": 6,
+      "steps": 30
+    },
+    "carrot": {
+      "start_index": 2,
+      "length": 6,
+      "steps": 30
+    },
+    "marshmallow": {
+      "start_index": 4,
+      "length": 11,
+      "steps": 1
+    },
+    "kiwi": {
+      "start_index": 34,
+      "length": 4,
+      "steps": 31
+    },
+    "pineapple": {
+      "start_index": 64,
+      "length": 9,
+      "steps": 1
+    },
+    "meat": {
+      "start_index": 154,
+      "length": 4,
+      "steps": 1
+    },
+    "chili": {
+      "start_index": 158,
+      "length": 5,
+      "steps": 1
+    },
+    "pomegranate": {
+      "start_index": 210,
+      "length": 11,
+      "steps": 1
+    },
+    "guava": {
+      "start_index": 214,
+      "length": 5,
+      "steps": 31
+    },
+    "mushroom": {
+      "start_index": 472,
+      "length": 8,
+      "steps": 30
+    },
+    "curry": {
+      "start_index": 556,
+      "length": 5,
+      "steps": 1
+    },
+    "tuna": {
+      "start_index": 527,
+      "length": 4,
+      "steps": 30
+    },
+    "wafer": {
+      "start_index": 588,
+      "length": 5,
+      "steps": 30
+    },
+    "bread": {
+      "start_index": 707,
+      "length": 5,
+      "steps": 1
+    },
+    "coffee": {
+      "start_index": 621,
+      "length": 6,
+      "steps": 1
+    },
+    "oregano": {
+      "start_index": 566,
+      "length": 7,
+      "steps": 30
+    },
+    "pumpkin": {
+      "start_index": 244,
+      "length": 7,
+      "steps": 1
+    },
+    "cherry": {
+      "start_index": 44,
+      "length": 6,
+      "steps": 30
+    },
+    "honey": {
+      "start_index": 74,
+      "length": 5,
+      "steps": 1
+    },
+    "cake": {
+      "start_index": 685,
+      "length": 4,
+      "steps": 1
+    },
+    "ginger": {
+      "start_index": 568,
+      "length": 6,
+      "steps": 30
+    },
+    "apricot": {
+      "start_index": 741,
+      "length": 7,
+      "steps": 1
+    },
+    "papaya": {
+      "start_index": 620,
+      "length": 6,
+      "steps": 30
+    },
+    "pie": {
+      "start_index": 533,
+      "length": 3,
+      "steps": 31
+    },
+    "donut": {
+      "start_index": 443,
+      "length": 5,
+      "steps": 31
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G2 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde28"
+  },
+  "puzzle_data": {
+    "watermelon": {
+      "start_index": 34,
+      "length": 10,
+      "steps": 30
+    },
+    "mustard": {
+      "start_index": 35,
+      "length": 7,
+      "steps": 30
+    },
+    "avocado": {
+      "start_index": 9,
+      "length": 7,
+      "steps": 1
+    },
+    "celery": {
+      "start_index": 12,
+      "length": 6,
+      "steps": 31
+    },
+    "egg": {
+      "start_index": 105,
+      "length": 3,
+      "steps": 30
+    },
+    "biscuit": {
+      "start_index": 66,
+      "length": 7,
+      "steps": 1
+    },
+    "broccoli": {
+      "start_index": 127,
+      "length": 8,
+      "steps": 1
+    },
+    "yogurt": {
+      "start_index": 161,
+      "length": 6,
+      "steps": 30
+    },
+    "sushi": {
+      "start_index": 250,
+      "length": 5,
+      "steps": 1
+    },
+    "pasta": {
+      "start_index": 192,
+      "length": 5,
+      "steps": 30
+    },
+    "coockie": {
+      "start_index": 69,
+      "length": 7,
+      "steps": 30
+    },
+    "coconut": {
+      "start_index": 659,
+      "length": 7,
+      "steps": 30
+    },
+    "noodles": {
+      "start_index": 769,
+      "length": 7,
+      "steps": 1
+    },
+    "mango": {
+      "start_index": 628,
+      "length": 5,
+      "steps": 30
+    },
+    "spinach": {
+      "start_index": 860,
+      "length": 7,
+      "steps": 1
+    },
+    "guacamole": {
+      "start_index": 890,
+      "length": 9,
+      "steps": 1
+    },
+    "grape": {
+      "start_index": 834,
+      "length": 5,
+      "steps": 1
+    },
+    "hummus": {
+      "start_index": 620,
+      "length": 6,
+      "steps": 31
+    },
+    "bacon": {
+      "start_index": 655,
+      "length": 5,
+      "steps": 31
+    },
+    "oatmeal": {
+      "start_index": 15,
+      "length": 7,
+      "steps": 31
+    },
+    "bolognese": {
+      "start_index": 799,
+      "length": 9,
+      "steps": 1
+    },
+    "radish": {
+      "start_index": 678,
+      "length": 6,
+      "steps": 30
+    },
+    "potato": {
+      "start_index": 596,
+      "length": 6,
+      "steps": 30
+    },
+    "chocolate": {
+      "start_index": 617,
+      "length": 9,
+      "steps": 30
+    },
+    "salmon": {
+      "start_index": 592,
+      "length": 6,
+      "steps": 30
+    },
+    "tofu": {
+      "start_index": 101,
+      "length": 4,
+      "steps": 31
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G3 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde29"
+  },
+  "puzzle_data": {
+    "zucchini": {
+      "start_index": 571,
+      "length": 8,
+      "steps": 30
+    },
+    "ham": {
+      "start_index": 574,
+      "length": 3,
+      "steps": 31
+    },
+    "cinnamon": {
+      "start_index": 720,
+      "length": 8,
+      "steps": 1
+    },
+    "mandarin": {
+      "start_index": 582,
+      "length": 8,
+      "steps": 30
+    },
+    "croissant": {
+      "start_index": 696,
+      "length": 9,
+      "steps": 1
+    },
+    "cheese": {
+      "start_index": 21,
+      "length": 6,
+      "steps": 1
+    },
+    "blackberry": {
+      "start_index": 28,
+      "length": 10,
+      "steps": 30
+    },
+    "cracker": {
+      "start_index": 21,
+      "length": 7,
+      "steps": 30
+    },
+    "cucumber": {
+      "start_index": 21,
+      "length": 8,
+      "steps": 31
+    },
+    "butter": {
+      "start_index": 87,
+      "length": 6,
+      "steps": 30
+    },
+    "jelly": {
+      "start_index": 170,
+      "length": 5,
+      "steps": 1
+    },
+    "oil": {
+      "start_index": 203,
+      "length": 3,
+      "steps": 1
+    },
+    "peach": {
+      "start_index": 262,
+      "length": 5,
+      "steps": 1
+    },
+    "salt": {
+      "start_index": 291,
+      "length": 4,
+      "steps": 1
+    },
+    "date": {
+      "start_index": 234,
+      "length": 4,
+      "steps": 30
+    },
+    "falafel": {
+      "start_index": 233,
+      "length": 7,
+      "steps": 31
+    },
+    "corn": {
+      "start_index": 83,
+      "length": 4,
+      "steps": 1
+    },
+    "pizza": {
+      "start_index": 59,
+      "length": 5,
+      "steps": 30
+    },
+    "spaghetti": {
+      "start_index": 291,
+      "length": 9,
+      "steps": 31
+    },
+    "crab": {
+      "start_index": 572,
+      "length": 4,
+      "steps": 31
+    },
+    "banana": {
+      "start_index": 665,
+      "length": 6,
+      "steps": 1
+    },
+    "pudding": {
+      "start_index": 787,
+      "length": 7,
+      "steps": 1
+    },
+    "sugar": {
+      "start_index": 570,
+      "length": 5,
+      "steps": 31
+    },
+    "almond": {
+      "start_index": 755,
+      "length": 6,
+      "steps": 1
+    },
+    "clementine": {
+      "start_index": 840,
+      "length": 10,
+      "steps": 1
+    },
+    "scone": {
+      "start_index": 752,
+      "length": 5,
+      "steps": 31
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G4 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde2a"
+  },
+  "puzzle_data": {
+    "hamburger": {
+      "start_index": 270,
+      "length": 9,
+      "steps": 31
+    },
+    "walnut": {
+      "start_index": 300,
+      "length": 6,
+      "steps": 1
+    },
+    "garlic": {
+      "start_index": 330,
+      "length": 6,
+      "steps": 30
+    },
+    "bagel": {
+      "start_index": 363,
+      "length": 5,
+      "steps": 1
+    },
+    "onion": {
+      "start_index": 368,
+      "length": 5,
+      "steps": 30
+    },
+    "muffin": {
+      "start_index": 393,
+      "length": 6,
+      "steps": 1
+    },
+    "beer": {
+      "start_index": 422,
+      "length": 4,
+      "steps": 1
+    },
+    "chips": {
+      "start_index": 480,
+      "length": 5,
+      "steps": 1
+    },
+    "pepper": {
+      "start_index": 483,
+      "length": 6,
+      "steps": 30
+    },
+    "salad": {
+      "start_index": 484,
+      "length": 5,
+      "steps": 30
+    },
+    "peanut": {
+      "start_index": 545,
+      "length": 6,
+      "steps": 1
+    },
+    "artichoke": {
+      "start_index": 632,
+      "length": 9,
+      "steps": 1
+    },
+    "cauliflower": {
+      "start_index": 19,
+      "length": 11,
+      "steps": 31
+    },
+    "asparagus": {
+      "start_index": 50,
+      "length": 9,
+      "steps": 30
+    },
+    "lettuce": {
+      "start_index": 112,
+      "length": 7,
+      "steps": 1
+    },
+    "baloney": {
+      "start_index": 139,
+      "length": 7,
+      "steps": 30
+    },
+    "pancake": {
+      "start_index": 110,
+      "length": 7,
+      "steps": 31
+    },
+    "milk": {
+      "start_index": 262,
+      "length": 4,
+      "steps": 1
+    },
+    "crepe": {
+      "start_index": 294,
+      "length": 5,
+      "steps": 1
+    },
+    "tortilla": {
+      "start_index": 516,
+      "length": 8,
+      "steps": 1
+    },
+    "fig": {
+      "start_index": 540,
+      "length": 3,
+      "steps": 31
+    },
+    "nectarine": {
+      "start_index": 17,
+      "length": 9,
+      "steps": 1
+    },
+    "schnitzel": {
+      "start_index": 29,
+      "length": 9,
+      "steps": 30
+    },
+    "apple": {
+      "start_index": 14,
+      "length": 5,
+      "steps": 31
+    },
+    "ketchup": {
+      "start_index": 27,
+      "length": 7,
+      "steps": 30
+    },
+    "parmesan": {
+      "start_index": 573,
+      "length": 8,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G1 - new",
+  "puzzle_length": 26,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde2b"
+  },
+  "puzzle_data": {
+    "juice": {
+      "start_index": 396,
+      "length": 5,
+      "steps": 1
+    },
+    "crab": {
+      "start_index": 399,
+      "length": 4,
+      "steps": 31
+    },
+    "pudding": {
+      "start_index": 452,
+      "length": 7,
+      "steps": 1
+    },
+    "eggplant": {
+      "start_index": 428,
+      "length": 8,
+      "steps": 30
+    },
+    "sugar": {
+      "start_index": 486,
+      "length": 5,
+      "steps": 1
+    },
+    "banana": {
+      "start_index": 519,
+      "length": 6,
+      "steps": 1
+    },
+    "steak": {
+      "start_index": 483,
+      "length": 5,
+      "steps": 30
+    },
+    "zucchini": {
+      "start_index": 571,
+      "length": 8,
+      "steps": 30
+    },
+    "tahini": {
+      "start_index": 572,
+      "length": 6,
+      "steps": 1
+    },
+    "ham": {
+      "start_index": 574,
+      "length": 3,
+      "steps": 31
+    },
+    "scone": {
+      "start_index": 486,
+      "length": 5,
+      "steps": 30
+    },
+    "cinnamon": {
+      "start_index": 720,
+      "length": 8,
+      "steps": 1
+    },
+    "raisin": {
+      "start_index": 490,
+      "length": 6,
+      "steps": 30
+    },
+    "almond": {
+      "start_index": 520,
+      "length": 6,
+      "steps": 31
+    },
+    "mandarin": {
+      "start_index": 582,
+      "length": 8,
+      "steps": 30
+    },
+    "muesli": {
+      "start_index": 611,
+      "length": 6,
+      "steps": 30
+    },
+    "croissant": {
+      "start_index": 696,
+      "length": 9,
+      "steps": 1
+    },
+    "lime": {
+      "start_index": 669,
+      "length": 4,
+      "steps": 30
+    },
+    "strudel": {
+      "start_index": 783,
+      "length": 7,
+      "steps": 1
+    },
+    "clementine": {
+      "start_index": 814,
+      "length": 10,
+      "steps": 1
+    },
+    "cheese": {
+      "start_index": 21,
+      "length": 6,
+      "steps": 1
+    },
+    "blackberry": {
+      "start_index": 28,
+      "length": 10,
+      "steps": 30
+    },
+    "cracker": {
+      "start_index": 21,
+      "length": 7,
+      "steps": 30
+    },
+    "cucumber": {
+      "start_index": 21,
+      "length": 8,
+      "steps": 31
+    },
+    "lamb": {
+      "start_index": 85,
+      "length": 4,
+      "steps": 30
+    },
+    "butter": {
+      "start_index": 87,
+      "length": 6,
+      "steps": 30
+    },
+    "paprika": {
+      "start_index": 89,
+      "length": 7,
+      "steps": 30
+    },
+    "kale": {
+      "start_index": 141,
+      "length": 4,
+      "steps": 1
+    },
+    "jelly": {
+      "start_index": 170,
+      "length": 5,
+      "steps": 1
+    },
+    "oil": {
+      "start_index": 203,
+      "length": 3,
+      "steps": 1
+    },
+    "peach": {
+      "start_index": 262,
+      "length": 5,
+      "steps": 1
+    },
+    "salt": {
+      "start_index": 291,
+      "length": 4,
+      "steps": 1
+    },
+    "date": {
+      "start_index": 234,
+      "length": 4,
+      "steps": 30
+    },
+    "falafel": {
+      "start_index": 233,
+      "length": 7,
+      "steps": 31
+    },
+    "truffle": {
+      "start_index": 353,
+      "length": 7,
+      "steps": 1
+    },
+    "flour": {
+      "start_index": 357,
+      "length": 5,
+      "steps": 30
+    },
+    "corn": {
+      "start_index": 475,
+      "length": 4,
+      "steps": 1
+    },
+    "nachos": {
+      "start_index": 415,
+      "length": 6,
+      "steps": 30
+    },
+    "pizza": {
+      "start_index": 508,
+      "length": 5,
+      "steps": 30
+    },
+    "spaghetti": {
+      "start_index": 509,
+      "length": 9,
+      "steps": 30
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G4",
+  "puzzle_length": 40,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde2c"
+  },
+  "puzzle_data": {
+    "asd": {
+      "start_index": 37,
+      "length": 3,
+      "steps": 1
+    },
+    "poi": {
+      "start_index": 43,
+      "length": 3,
+      "steps": 30
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "Test2",
+  "puzzle_length": 2,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde2d"
+  },
+  "puzzle_data": {
+    "tre": {
+      "start_index": 67,
+      "length": 3,
+      "steps": 30
+    },
+    "sdf": {
+      "start_index": 103,
+      "length": 3,
+      "steps": 31
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "Test3",
+  "puzzle_length": 2,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde2e"
+  },
+  "puzzle_data": {
+    "fgdf": {
+      "start_index": 38,
+      "length": 4,
+      "steps": 1
+    },
+    "fgfdg": {
+      "start_index": 92,
+      "length": 5,
+      "steps": 31
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "Test4",
+  "puzzle_length": 2,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde2f"
+  },
+  "puzzle_data": {
+    "ggd": {
+      "start_index": 68,
+      "length": 3,
+      "steps": 30
+    },
+    "fdfdghfg": {
+      "start_index": 71,
+      "length": 8,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "Test5",
+  "puzzle_length": 2,
+  "puzzle_size": "30X30",
+  "puzzle_rows": 30,
+  "puzzle_cols": 30
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde30"
+  },
+  "puzzle_data": {
+    "hjghjgjhg": {
+      "start_index": 44,
+      "length": 9,
+      "steps": 1
+    },
+    "hxdfxfdfgb": {
+      "start_index": 44,
+      "length": 10,
+      "steps": 21
+    },
+    "hcghcgdfgdg": {
+      "start_index": 44,
+      "length": 11,
+      "steps": 20
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "Test2015",
+  "puzzle_length": 3,
+  "puzzle_size": "20X15",
+  "puzzle_rows": 15,
+  "puzzle_cols": 20
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde31"
+  },
+  "puzzle_data": {
+    "asd": {
+      "start_index": 49,
+      "length": 3,
+      "steps": 16
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "Test1512",
+  "puzzle_length": 1,
+  "puzzle_size": "15X12",
+  "puzzle_rows": 12,
+  "puzzle_cols": 15
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde32"
+  },
+  "puzzle_data": {
+    "uuu": {
+      "start_index": 50,
+      "length": 3,
+      "steps": 15
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "Test1512-2",
+  "puzzle_length": 1,
+  "puzzle_size": "15X12",
+  "puzzle_rows": 12,
+  "puzzle_cols": 15
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde33"
+  },
+  "puzzle_data": {
+    "guava": {
+      "start_index": 426,
+      "length": 5,
+      "steps": 26
+    },
+    "papaya": {
+      "start_index": 475,
+      "length": 6,
+      "steps": 1
+    },
+    "honey": {
+      "start_index": 500,
+      "length": 5,
+      "steps": 26
+    },
+    "pie": {
+      "start_index": 405,
+      "length": 3,
+      "steps": 25
+    },
+    "ginger": {
+      "start_index": 550,
+      "length": 6,
+      "steps": 1
+    },
+    "pumpkin": {
+      "start_index": 406,
+      "length": 7,
+      "steps": 25
+    },
+    "cherry": {
+      "start_index": 354,
+      "length": 6,
+      "steps": 25
+    },
+    "meat": {
+      "start_index": 456,
+      "length": 4,
+      "steps": 26
+    },
+    "orange": {
+      "start_index": 579,
+      "length": 6,
+      "steps": 1
+    },
+    "donut": {
+      "start_index": 525,
+      "length": 5,
+      "steps": 1
+    },
+    "carrot": {
+      "start_index": 409,
+      "length": 6,
+      "steps": 25
+    },
+    "kiwi": {
+      "start_index": 350,
+      "length": 4,
+      "steps": 26
+    },
+    "oregano": {
+      "start_index": 408,
+      "length": 7,
+      "steps": 25
+    },
+    "bread": {
+      "start_index": 278,
+      "length": 5,
+      "steps": 26
+    },
+    "mushroom": {
+      "start_index": 300,
+      "length": 8,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G2  - new new",
+  "puzzle_length": 15,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde34"
+  },
+  "puzzle_data": {
+    "schnitzel": {
+      "start_index": 62,
+      "length": 9,
+      "steps": 26
+    },
+    "lettuce": {
+      "start_index": 16,
+      "length": 7,
+      "steps": 26
+    },
+    "garlic": {
+      "start_index": 194,
+      "length": 6,
+      "steps": 26
+    },
+    "salad": {
+      "start_index": 141,
+      "length": 5,
+      "steps": 1
+    },
+    "hamburger": {
+      "start_index": 35,
+      "length": 9,
+      "steps": 1
+    },
+    "muffin": {
+      "start_index": 18,
+      "length": 6,
+      "steps": 26
+    },
+    "fig": {
+      "start_index": 65,
+      "length": 3,
+      "steps": 26
+    },
+    "cauliflower": {
+      "start_index": 24,
+      "length": 11,
+      "steps": 25
+    },
+    "artichoke": {
+      "start_index": 163,
+      "length": 9,
+      "steps": 1
+    },
+    "onion": {
+      "start_index": 48,
+      "length": 5,
+      "steps": 25
+    },
+    "bagel": {
+      "start_index": 173,
+      "length": 5,
+      "steps": 25
+    },
+    "asparagus": {
+      "start_index": 36,
+      "length": 9,
+      "steps": 25
+    },
+    "pepper": {
+      "start_index": 87,
+      "length": 6,
+      "steps": 25
+    },
+    "apple": {
+      "start_index": 240,
+      "length": 5,
+      "steps": 1
+    },
+    "milk": {
+      "start_index": 90,
+      "length": 4,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G1 - new new",
+  "puzzle_length": 15,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde35"
+  },
+  "puzzle_data": {
+    "schnitzel": {
+      "start_index": 0,
+      "length": 9,
+      "steps": 26
+    },
+    "bagel": {
+      "start_index": 72,
+      "length": 5,
+      "steps": 25
+    },
+    "pepper": {
+      "start_index": 303,
+      "length": 6,
+      "steps": 25
+    },
+    "lettuce": {
+      "start_index": 363,
+      "length": 7,
+      "steps": 26
+    },
+    "muffin": {
+      "start_index": 89,
+      "length": 6,
+      "steps": 26
+    },
+    "hamburger": {
+      "start_index": 32,
+      "length": 9,
+      "steps": 1
+    },
+    "garlic": {
+      "start_index": 477,
+      "length": 6,
+      "steps": 26
+    },
+    "cauliflower": {
+      "start_index": 223,
+      "length": 11,
+      "steps": 25
+    },
+    "artichoke": {
+      "start_index": 587,
+      "length": 9,
+      "steps": 1
+    },
+    "apple": {
+      "start_index": 291,
+      "length": 5,
+      "steps": 1
+    },
+    "onion": {
+      "start_index": 126,
+      "length": 5,
+      "steps": 25
+    },
+    "fig": {
+      "start_index": 136,
+      "length": 3,
+      "steps": 26
+    },
+    "asparagus": {
+      "start_index": 282,
+      "length": 9,
+      "steps": 25
+    },
+    "milk": {
+      "start_index": 435,
+      "length": 4,
+      "steps": 1
+    },
+    "salad": {
+      "start_index": 236,
+      "length": 5,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S1 - new new",
+  "puzzle_length": 15,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde36"
+  },
+  "puzzle_data": {
+    "guava": {
+      "start_index": 57,
+      "length": 5,
+      "steps": 26
+    },
+    "papaya": {
+      "start_index": 454,
+      "length": 6,
+      "steps": 1
+    },
+    "honey": {
+      "start_index": 419,
+      "length": 5,
+      "steps": 26
+    },
+    "pie": {
+      "start_index": 96,
+      "length": 3,
+      "steps": 25
+    },
+    "ginger": {
+      "start_index": 585,
+      "length": 6,
+      "steps": 1
+    },
+    "pumpkin": {
+      "start_index": 201,
+      "length": 7,
+      "steps": 25
+    },
+    "cherry": {
+      "start_index": 313,
+      "length": 6,
+      "steps": 25
+    },
+    "meat": {
+      "start_index": 501,
+      "length": 4,
+      "steps": 26
+    },
+    "orange": {
+      "start_index": 231,
+      "length": 6,
+      "steps": 1
+    },
+    "carrot": {
+      "start_index": 192,
+      "length": 6,
+      "steps": 25
+    },
+    "kiwi": {
+      "start_index": 26,
+      "length": 4,
+      "steps": 26
+    },
+    "oregano": {
+      "start_index": 123,
+      "length": 7,
+      "steps": 25
+    },
+    "bread": {
+      "start_index": 279,
+      "length": 5,
+      "steps": 26
+    },
+    "mushroom": {
+      "start_index": 36,
+      "length": 8,
+      "steps": 1
+    },
+    "donut": {
+      "start_index": 515,
+      "length": 5,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S2 - new new",
+  "puzzle_length": 15,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde37"
+  },
+  "puzzle_data": {
+    "watermelon": {
+      "start_index": 1,
+      "length": 10,
+      "steps": 1
+    },
+    "avocado": {
+      "start_index": 2,
+      "length": 7,
+      "steps": 25
+    },
+    "broccoli": {
+      "start_index": 0,
+      "length": 8,
+      "steps": 26
+    },
+    "biscuit": {
+      "start_index": 0,
+      "length": 7,
+      "steps": 25
+    },
+    "yogurt": {
+      "start_index": 51,
+      "length": 6,
+      "steps": 1
+    },
+    "sushi": {
+      "start_index": 28,
+      "length": 5,
+      "steps": 26
+    },
+    "coconut": {
+      "start_index": 78,
+      "length": 7,
+      "steps": 25
+    },
+    "egg": {
+      "start_index": 7,
+      "length": 3,
+      "steps": 26
+    },
+    "mango": {
+      "start_index": 30,
+      "length": 5,
+      "steps": 1
+    },
+    "chocolate": {
+      "start_index": 104,
+      "length": 9,
+      "steps": 25
+    },
+    "pasta": {
+      "start_index": 250,
+      "length": 5,
+      "steps": 1
+    },
+    "grape": {
+      "start_index": 76,
+      "length": 5,
+      "steps": 25
+    },
+    "cookie": {
+      "start_index": 57,
+      "length": 6,
+      "steps": 26
+    },
+    "potato": {
+      "start_index": 108,
+      "length": 6,
+      "steps": 1
+    },
+    "celery": {
+      "start_index": 79,
+      "length": 6,
+      "steps": 26
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G3 - new new",
+  "puzzle_length": 15,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde38"
+  },
+  "puzzle_data": {
+    "sushi": {
+      "start_index": 26,
+      "length": 5,
+      "steps": 26
+    },
+    "broccoli": {
+      "start_index": 264,
+      "length": 8,
+      "steps": 26
+    },
+    "egg": {
+      "start_index": 44,
+      "length": 3,
+      "steps": 26
+    },
+    "cookie": {
+      "start_index": 377,
+      "length": 6,
+      "steps": 26
+    },
+    "celery": {
+      "start_index": 437,
+      "length": 6,
+      "steps": 26
+    },
+    "watermelon": {
+      "start_index": 84,
+      "length": 10,
+      "steps": 25
+    },
+    "yogurt": {
+      "start_index": 198,
+      "length": 6,
+      "steps": 25
+    },
+    "mango": {
+      "start_index": 151,
+      "length": 5,
+      "steps": 25
+    },
+    "pasta": {
+      "start_index": 41,
+      "length": 5,
+      "steps": 25
+    },
+    "potato": {
+      "start_index": 452,
+      "length": 6,
+      "steps": 25
+    },
+    "avocado": {
+      "start_index": 188,
+      "length": 7,
+      "steps": 1
+    },
+    "biscuit": {
+      "start_index": 355,
+      "length": 7,
+      "steps": 1
+    },
+    "coconut": {
+      "start_index": 581,
+      "length": 7,
+      "steps": 1
+    },
+    "chocolate": {
+      "start_index": 30,
+      "length": 9,
+      "steps": 1
+    },
+    "grape": {
+      "start_index": 519,
+      "length": 5,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S3 - new new",
+  "puzzle_length": 15,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde39"
+  },
+  "puzzle_data": {
+    "schnitzel": {
+      "start_index": 11,
+      "length": 9,
+      "steps": 24
+    },
+    "hamburger": {
+      "start_index": 59,
+      "length": 9,
+      "steps": 1
+    },
+    "lettuce": {
+      "start_index": 84,
+      "length": 7,
+      "steps": 24
+    },
+    "salad": {
+      "start_index": 11,
+      "length": 5,
+      "steps": 1
+    },
+    "muffin": {
+      "start_index": 39,
+      "length": 6,
+      "steps": 24
+    },
+    "cauliflower": {
+      "start_index": 22,
+      "length": 11,
+      "steps": 23
+    },
+    "artichoke": {
+      "start_index": 220,
+      "length": 9,
+      "steps": 1
+    },
+    "onion": {
+      "start_index": 82,
+      "length": 5,
+      "steps": 23
+    },
+    "bagel": {
+      "start_index": 106,
+      "length": 5,
+      "steps": 23
+    },
+    "asparagus": {
+      "start_index": 34,
+      "length": 9,
+      "steps": 23
+    },
+    "pepper": {
+      "start_index": 58,
+      "length": 6,
+      "steps": 23
+    },
+    "apple": {
+      "start_index": 40,
+      "length": 5,
+      "steps": 1
+    },
+    "milk": {
+      "start_index": 61,
+      "length": 4,
+      "steps": 24
+    },
+    "garlic": {
+      "start_index": 17,
+      "length": 6,
+      "steps": 1
+    },
+    "fig": {
+      "start_index": 153,
+      "length": 3,
+      "steps": 24
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G1",
+  "puzzle_length": 15,
+  "puzzle_size": "23X23",
+  "puzzle_rows": 23,
+  "puzzle_cols": 23
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde3a"
+  },
+  "puzzle_data": {
+    "guava": {
+      "start_index": 368,
+      "length": 5,
+      "steps": 24
+    },
+    "papaya": {
+      "start_index": 461,
+      "length": 6,
+      "steps": 1
+    },
+    "honey": {
+      "start_index": 369,
+      "length": 5,
+      "steps": 24
+    },
+    "pie": {
+      "start_index": 395,
+      "length": 3,
+      "steps": 23
+    },
+    "ginger": {
+      "start_index": 368,
+      "length": 6,
+      "steps": 23
+    },
+    "pumpkin": {
+      "start_index": 506,
+      "length": 7,
+      "steps": 1
+    },
+    "cherry": {
+      "start_index": 350,
+      "length": 6,
+      "steps": 23
+    },
+    "meat": {
+      "start_index": 322,
+      "length": 4,
+      "steps": 24
+    },
+    "orange": {
+      "start_index": 484,
+      "length": 6,
+      "steps": 1
+    },
+    "donut": {
+      "start_index": 323,
+      "length": 5,
+      "steps": 1
+    },
+    "carrot": {
+      "start_index": 328,
+      "length": 6,
+      "steps": 23
+    },
+    "oregano": {
+      "start_index": 375,
+      "length": 7,
+      "steps": 23
+    },
+    "mushroom": {
+      "start_index": 253,
+      "length": 8,
+      "steps": 1
+    },
+    "bread": {
+      "start_index": 233,
+      "length": 5,
+      "steps": 24
+    },
+    "soy": {
+      "start_index": 300,
+      "length": 3,
+      "steps": 24
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G2",
+  "puzzle_length": 15,
+  "puzzle_size": "23X23",
+  "puzzle_rows": 23,
+  "puzzle_cols": 23
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde3b"
+  },
+  "puzzle_data": {
+    "watermelon": {
+      "start_index": 1,
+      "length": 10,
+      "steps": 1
+    },
+    "avocado": {
+      "start_index": 2,
+      "length": 7,
+      "steps": 23
+    },
+    "biscuit": {
+      "start_index": 0,
+      "length": 7,
+      "steps": 23
+    },
+    "yogurt": {
+      "start_index": 47,
+      "length": 6,
+      "steps": 1
+    },
+    "sushi": {
+      "start_index": 26,
+      "length": 5,
+      "steps": 24
+    },
+    "broccoli": {
+      "start_index": 0,
+      "length": 8,
+      "steps": 24
+    },
+    "coconut": {
+      "start_index": 72,
+      "length": 7,
+      "steps": 23
+    },
+    "egg": {
+      "start_index": 7,
+      "length": 3,
+      "steps": 24
+    },
+    "mango": {
+      "start_index": 28,
+      "length": 5,
+      "steps": 1
+    },
+    "chocolate": {
+      "start_index": 96,
+      "length": 9,
+      "steps": 23
+    },
+    "pasta": {
+      "start_index": 230,
+      "length": 5,
+      "steps": 1
+    },
+    "grape": {
+      "start_index": 31,
+      "length": 5,
+      "steps": 23
+    },
+    "potato": {
+      "start_index": 73,
+      "length": 6,
+      "steps": 24
+    },
+    "cake": {
+      "start_index": 165,
+      "length": 4,
+      "steps": 24
+    },
+    "celery": {
+      "start_index": 236,
+      "length": 6,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_id": "G3",
+  "puzzle_length": 15,
+  "puzzle_size": "23X23",
+  "puzzle_rows": 23,
+  "puzzle_cols": 23
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde3c"
+  },
+  "puzzle_data": {
+    "schnitzel": {
+      "start_index": 0,
+      "length": 9,
+      "steps": 24
+    },
+    "hamburger": {
+      "start_index": 32,
+      "length": 9,
+      "steps": 1
+    },
+    "lettuce": {
+      "start_index": 361,
+      "length": 7,
+      "steps": 24
+    },
+    "garlic": {
+      "start_index": 461,
+      "length": 6,
+      "steps": 1
+    },
+    "salad": {
+      "start_index": 267,
+      "length": 5,
+      "steps": 1
+    },
+    "muffin": {
+      "start_index": 109,
+      "length": 6,
+      "steps": 24
+    },
+    "fig": {
+      "start_index": 79,
+      "length": 3,
+      "steps": 24
+    },
+    "cauliflower": {
+      "start_index": 116,
+      "length": 11,
+      "steps": 23
+    },
+    "artichoke": {
+      "start_index": 492,
+      "length": 9,
+      "steps": 1
+    },
+    "onion": {
+      "start_index": 297,
+      "length": 5,
+      "steps": 23
+    },
+    "bagel": {
+      "start_index": 44,
+      "length": 5,
+      "steps": 23
+    },
+    "asparagus": {
+      "start_index": 218,
+      "length": 9,
+      "steps": 23
+    },
+    "apple": {
+      "start_index": 174,
+      "length": 5,
+      "steps": 1
+    },
+    "pepper": {
+      "start_index": 237,
+      "length": 6,
+      "steps": 23
+    },
+    "milk": {
+      "start_index": 348,
+      "length": 4,
+      "steps": 24
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S1",
+  "puzzle_length": 15,
+  "puzzle_size": "23X23",
+  "puzzle_rows": 23,
+  "puzzle_cols": 23
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde3d"
+  },
+  "puzzle_data": {
+    "watermelon": {
+      "start_index": 24,
+      "length": 10,
+      "steps": 1
+    },
+    "avocado": {
+      "start_index": 66,
+      "length": 7,
+      "steps": 23
+    },
+    "broccoli": {
+      "start_index": 243,
+      "length": 8,
+      "steps": 24
+    },
+    "sushi": {
+      "start_index": 92,
+      "length": 5,
+      "steps": 24
+    },
+    "coconut": {
+      "start_index": 324,
+      "length": 7,
+      "steps": 23
+    },
+    "egg": {
+      "start_index": 419,
+      "length": 3,
+      "steps": 24
+    },
+    "chocolate": {
+      "start_index": 40,
+      "length": 9,
+      "steps": 23
+    },
+    "pasta": {
+      "start_index": 380,
+      "length": 5,
+      "steps": 1
+    },
+    "grape": {
+      "start_index": 390,
+      "length": 5,
+      "steps": 23
+    },
+    "potato": {
+      "start_index": 208,
+      "length": 6,
+      "steps": 24
+    },
+    "celery": {
+      "start_index": 194,
+      "length": 6,
+      "steps": 1
+    },
+    "cake": {
+      "start_index": 81,
+      "length": 4,
+      "steps": 24
+    },
+    "biscuit": {
+      "start_index": 262,
+      "length": 7,
+      "steps": 23
+    },
+    "yogurt": {
+      "start_index": 497,
+      "length": 6,
+      "steps": 1
+    },
+    "mango": {
+      "start_index": 120,
+      "length": 5,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S3",
+  "puzzle_length": 15,
+  "puzzle_size": "23X23",
+  "puzzle_rows": 23,
+  "puzzle_cols": 23
+},{
+  "_id": {
+    "$oid": "5f76c5cf3125847623acde3e"
+  },
+  "puzzle_data": {
+    "honey": {
+      "start_index": 408,
+      "length": 5,
+      "steps": 24
+    },
+    "pie": {
+      "start_index": 66,
+      "length": 3,
+      "steps": 23
+    },
+    "ginger": {
+      "start_index": 24,
+      "length": 6,
+      "steps": 23
+    },
+    "pumpkin": {
+      "start_index": 238,
+      "length": 7,
+      "steps": 1
+    },
+    "cherry": {
+      "start_index": 312,
+      "length": 6,
+      "steps": 23
+    },
+    "meat": {
+      "start_index": 414,
+      "length": 4,
+      "steps": 24
+    },
+    "papaya": {
+      "start_index": 396,
+      "length": 6,
+      "steps": 1
+    },
+    "orange": {
+      "start_index": 152,
+      "length": 6,
+      "steps": 1
+    },
+    "donut": {
+      "start_index": 34,
+      "length": 5,
+      "steps": 1
+    },
+    "carrot": {
+      "start_index": 228,
+      "length": 6,
+      "steps": 23
+    },
+    "soy": {
+      "start_index": 231,
+      "length": 3,
+      "steps": 24
+    },
+    "oregano": {
+      "start_index": 73,
+      "length": 7,
+      "steps": 23
+    },
+    "bread": {
+      "start_index": 259,
+      "length": 5,
+      "steps": 24
+    },
+    "mushroom": {
+      "start_index": 515,
+      "length": 8,
+      "steps": 1
+    },
+    "guava": {
+      "start_index": 52,
+      "length": 5,
+      "steps": 24
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_id": "S2",
+  "puzzle_length": 15,
+  "puzzle_size": "23X23",
+  "puzzle_rows": 23,
+  "puzzle_cols": 23
+},{
+  "_id": {
+    "$oid": "5f90571912f4625644dd26a1"
+  },
+  "puzzle_id": "SSD_pilot",
+  "puzzle_data": {
+    "gravel": {
+      "start_index": 45,
+      "length": 6,
+      "steps": 25
+    },
+    "staple": {
+      "start_index": 93,
+      "length": 6,
+      "steps": 1
+    },
+    "anchor": {
+      "start_index": 92,
+      "length": 6,
+      "steps": 25
+    },
+    "weasel": {
+      "start_index": 40,
+      "length": 6,
+      "steps": 26
+    },
+    "number": {
+      "start_index": 117,
+      "length": 6,
+      "steps": 26
+    },
+    "insect": {
+      "start_index": 218,
+      "length": 6,
+      "steps": 1
+    },
+    "carrot": {
+      "start_index": 244,
+      "length": 6,
+      "steps": 1
+    },
+    "stereo": {
+      "start_index": 578,
+      "length": 6,
+      "steps": 1
+    },
+    "zipper": {
+      "start_index": 551,
+      "length": 6,
+      "steps": 1
+    },
+    "coffee": {
+      "start_index": 455,
+      "length": 6,
+      "steps": 25
+    },
+    "powder": {
+      "start_index": 454,
+      "length": 6,
+      "steps": 26
+    },
+    "canvas": {
+      "start_index": 455,
+      "length": 6,
+      "steps": 26
+    },
+    "mother": {
+      "start_index": 451,
+      "length": 6,
+      "steps": 26
+    },
+    "summer": {
+      "start_index": 376,
+      "length": 6,
+      "steps": 25
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_length": 14,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5f9059a012f4625644dd26a3"
+  },
+  "puzzle_id": "tryyyy",
+  "puzzle_data": {
+    "try": {
+      "start_index": 53,
+      "length": 3,
+      "steps": 1
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_length": 1,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "5fa82bf999b99a1147e968f9"
+  },
+  "puzzle_id": "22Pilot_SSD",
+  "puzzle_data": {
+    "gravel": {
+      "start_index": 39,
+      "length": 6,
+      "steps": 22
+    },
+    "weasel": {
+      "start_index": 37,
+      "length": 6,
+      "steps": 23
+    },
+    "staple": {
+      "start_index": 81,
+      "length": 6,
+      "steps": 1
+    },
+    "anchor": {
+      "start_index": 80,
+      "length": 6,
+      "steps": 22
+    },
+    "number": {
+      "start_index": 102,
+      "length": 6,
+      "steps": 23
+    },
+    "insect": {
+      "start_index": 191,
+      "length": 6,
+      "steps": 1
+    },
+    "carrot": {
+      "start_index": 144,
+      "length": 6,
+      "steps": 23
+    },
+    "stereo": {
+      "start_index": 443,
+      "length": 6,
+      "steps": 1
+    },
+    "zipper": {
+      "start_index": 419,
+      "length": 6,
+      "steps": 1
+    },
+    "coffee": {
+      "start_index": 335,
+      "length": 6,
+      "steps": 22
+    },
+    "powder": {
+      "start_index": 334,
+      "length": 6,
+      "steps": 23
+    },
+    "canvas": {
+      "start_index": 335,
+      "length": 6,
+      "steps": 23
+    },
+    "mother": {
+      "start_index": 331,
+      "length": 6,
+      "steps": 23
+    },
+    "summer": {
+      "start_index": 287,
+      "length": 6,
+      "steps": 22
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_length": 14,
+  "puzzle_size": "22X22",
+  "puzzle_rows": 22,
+  "puzzle_cols": 22
+},{
+  "_id": {
+    "$oid": "6006e287cb0c2c04f7797608"
+  },
+  "puzzle_id": "18x18 try unrelated2",
+  "puzzle_data": {
+    "stereo": {
+      "start_index": 0,
+      "length": 6,
+      "steps": 19,
+      "WordTag": "tag 1"
+    },
+    "summer": {
+      "start_index": 72,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 1"
+    },
+    "mother": {
+      "start_index": 4,
+      "length": 6,
+      "steps": 18,
+      "WordTag": "tag 1"
+    },
+    "powder": {
+      "start_index": 21,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 1"
+    },
+    "coffee": {
+      "start_index": 109,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 1"
+    },
+    "canvas": {
+      "start_index": 109,
+      "length": 6,
+      "steps": 19,
+      "WordTag": "tag 1"
+    },
+    "number": {
+      "start_index": 228,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 1"
+    },
+    "anchor": {
+      "start_index": 210,
+      "length": 6,
+      "steps": 18,
+      "WordTag": "tag 2"
+    },
+    "carrot": {
+      "start_index": 246,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 2"
+    },
+    "gravel": {
+      "start_index": 299,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 2"
+    },
+    "staple": {
+      "start_index": 137,
+      "length": 6,
+      "steps": 19,
+      "WordTag": "tag 2"
+    },
+    "weasel": {
+      "start_index": 208,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "tag 2"
+    },
+    "insect": {
+      "start_index": 155,
+      "length": 6,
+      "steps": 18,
+      "WordTag": "tag 2"
+    },
+    "zipper": {
+      "start_index": 42,
+      "length": 6,
+      "steps": 18,
+      "WordTag": "tag 2"
+    }
+  },
+  "puzzle_type": "Scattered",
+  "puzzle_length": 14,
+  "puzzle_size": "18X18",
+  "puzzle_rows": 18,
+  "puzzle_cols": 18
+},{
+  "_id": {
+    "$oid": "600bf81ac8d8d9247f55abba"
+  },
+  "puzzle_id": "ssd_pilot",
+  "puzzle_data": {
+    "gravel": {
+      "start_index": 45,
+      "length": 6,
+      "steps": 25,
+      "WordTag": "1"
+    },
+    "staple": {
+      "start_index": 93,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "1"
+    },
+    "anchor": {
+      "start_index": 92,
+      "length": 6,
+      "steps": 25,
+      "WordTag": "1"
+    },
+    "weasel": {
+      "start_index": 43,
+      "length": 6,
+      "steps": 26,
+      "WordTag": "1"
+    },
+    "number": {
+      "start_index": 117,
+      "length": 6,
+      "steps": 26,
+      "WordTag": "1"
+    },
+    "insect": {
+      "start_index": 218,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "1"
+    },
+    "zipper": {
+      "start_index": 551,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "2"
+    },
+    "stereo": {
+      "start_index": 578,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "2"
+    },
+    "coffee": {
+      "start_index": 455,
+      "length": 6,
+      "steps": 25,
+      "WordTag": "2"
+    },
+    "powder": {
+      "start_index": 454,
+      "length": 6,
+      "steps": 26,
+      "WordTag": "2"
+    },
+    "canvas": {
+      "start_index": 455,
+      "length": 6,
+      "steps": 26,
+      "WordTag": "2"
+    },
+    "mother": {
+      "start_index": 451,
+      "length": 6,
+      "steps": 26,
+      "WordTag": "2"
+    },
+    "summer": {
+      "start_index": 376,
+      "length": 6,
+      "steps": 25,
+      "WordTag": "2"
+    },
+    "carrot": {
+      "start_index": 165,
+      "length": 6,
+      "steps": 26,
+      "WordTag": "1"
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_length": 14,
+  "puzzle_size": "25X25",
+  "puzzle_rows": 25,
+  "puzzle_cols": 25
+},{
+  "_id": {
+    "$oid": "609a45715e56e4765f8c27f3"
+  },
+  "puzzle_id": "SSD_Pilot3",
+  "puzzle_data": {
+    "stereo": {
+      "start_index": 363,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "2"
+    },
+    "zipper": {
+      "start_index": 341,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "2"
+    },
+    "coffee": {
+      "start_index": 265,
+      "length": 6,
+      "steps": 20,
+      "WordTag": "2"
+    },
+    "mother": {
+      "start_index": 261,
+      "length": 6,
+      "steps": 21,
+      "WordTag": "2"
+    },
+    "summer": {
+      "start_index": 201,
+      "length": 6,
+      "steps": 20,
+      "WordTag": "2"
+    },
+    "powder": {
+      "start_index": 264,
+      "length": 6,
+      "steps": 21,
+      "WordTag": "2"
+    },
+    "canvas": {
+      "start_index": 265,
+      "length": 6,
+      "steps": 21,
+      "WordTag": "2"
+    },
+    "staple": {
+      "start_index": 73,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "1"
+    },
+    "anchor": {
+      "start_index": 72,
+      "length": 6,
+      "steps": 20,
+      "WordTag": "1"
+    },
+    "insect": {
+      "start_index": 173,
+      "length": 6,
+      "steps": 1,
+      "WordTag": "1"
+    },
+    "number": {
+      "start_index": 92,
+      "length": 6,
+      "steps": 21,
+      "WordTag": "1"
+    },
+    "weasel": {
+      "start_index": 33,
+      "length": 6,
+      "steps": 21,
+      "WordTag": "1"
+    },
+    "gravel": {
+      "start_index": 35,
+      "length": 6,
+      "steps": 20,
+      "WordTag": "1"
+    },
+    "carrot": {
+      "start_index": 11,
+      "length": 6,
+      "steps": 20,
+      "WordTag": "1"
+    }
+  },
+  "puzzle_type": "Grouped",
+  "puzzle_length": 14,
+  "puzzle_size": "20X20",
+  "puzzle_rows": 20,
+  "puzzle_cols": 20
+}]

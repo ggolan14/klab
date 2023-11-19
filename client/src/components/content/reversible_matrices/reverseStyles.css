@@ -1,0 +1,299 @@
+.R_M-MatricesBank {
+    margin-bottom: 5rem;
+}
+
+.R_M-MatricesBank .mb_filters{
+    width: max-content;
+    margin: auto;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 2.5rem;
+    border: 1px solid rgba(114, 114, 114, 0.3);
+    border-radius: 1rem;
+    padding: 0.3rem 0.7rem;
+    align-items: center;
+}
+
+.R_M-MatricesBank .mb_filters>div{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 0.3rem;
+    align-items: center;
+}
+
+.R_M-MatricesBank .active {
+    background-color: antiquewhite;
+}
+
+.R_M-MatricesBank .no_active {
+    background-color: rgba(180, 180, 180, 0.1);
+}
+
+.R_M-MatricesBank .add_dist {
+    background-color: lawngreen;
+    color: black;
+}
+
+.R_M-MatricesBank .add_dist:hover{
+    background-color: blue;
+    color: white;
+}
+
+.R_M-MatricesBank td {
+    text-align: left !important;
+    vertical-align: baseline;
+}
+
+.R_M-MatricesBank input {
+    width: 5rem;
+    font-size: 1rem;
+}
+
+.R_M-MatricesBank .dists {
+    display: grid;
+    grid-row-gap: 1.5rem;
+}
+
+.R_M-MatricesBank .dist_item {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.5rem;
+    border: 1px solid rgba(0,0,0, 0.3);
+    padding: 0.3rem;
+}
+
+.R_M-MatricesBank .dist_error{
+    color: red;
+}
+
+.R_M-MatricesBank .dist_error span {
+    font-size: larger;
+}
+.R_M-MatricesBank .dist_error .err{
+    color: #af3636;
+}
+
+.R_M-MatricesBank .dist_ok{
+    color: green;
+}
+
+.R_M-MatricesBank .dist_ok .ok{
+    color: #57c568;
+}
+
+.R_M-MatricesBank .dist_item label{
+    font-weight: bold;
+}
+
+
+.R_M-SummaryDebug {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+    pointer-events: none;
+    grid-row-gap: 0.3rem;
+}
+
+.R_M-SummaryDebug label {
+    color: black;
+}
+
+.R_M-SummaryDebug span {
+    color: #8103a0;
+    margin-left: 5px;
+}
+
+.R_M-SummaryDebugAllVal {
+    width: max-content;
+}
+
+.R_M-SummaryDebugAllVal>label {
+    text-decoration: underline;
+}
+
+.R_M-SummaryDebugAllVal>div {
+    border: 1px solid black;
+    padding: 0.25rem;
+    display: grid;
+    background-color: #8d8d8d;
+    grid-template-columns: repeat(4, 1fr);
+    /*column-gap: 0.5rem;*/
+}
+
+.R_M-SummaryDebugAllVal>div>label {
+    text-align: center;
+    width: 100%;
+}
+
+.R_M-SummaryDebugAllVal>div>label:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+.R_M-SummaryDebugAllVal>div>label:last-child {
+    color: #8103a0;
+}
+
+
+.rm_gw {
+    display: grid;
+    min-width: 90vw;
+    grid-template-rows: 1fr max-content;
+    overflow: hidden;
+}
+
+.rm_gw>p::-webkit-scrollbar {
+    display: none;
+}
+
+.rm_gw>p {
+    overflow: auto;
+    /*height: 100%;*/
+    /*max-height: 50vh;*/
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.RM_main .rm_gw-m {
+    overflow: hidden;
+    min-height: 90vh;
+}
+
+.R_M-MemoryTaskBank {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.R_M-MemoryTaskBank .R_M-mtb-sc {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1rem;
+    width: max-content;
+}
+
+.R_M-MemoryTaskBank .R_M-mtb-sc>input{
+    width: 5rem;
+}
+
+.R_M-MemoryTaskBank .R_M-mtb-h {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1rem;
+    width: max-content;
+    height: max-content;
+}
+
+.R_M-MemoryTaskBank .R_M-mtb-h>label{
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid;
+    height: max-content;
+    width: max-content;
+    padding: 0.2rem 0.5rem;
+    background-color: #c2ffed;
+}
+
+.R_M-MemoryTaskBank .R_M-mtb-h>button{
+    background-color: #ffd7bf;
+}
+
+.R_M-MemoryTaskBank .R_M-mtb-h>button:hover{
+    background-color: #002586;
+    color: white;
+}
+
+.R_M-mtb-list {
+    margin-left: 1rem;
+    display: grid;
+    row-gap: 1.5rem;
+}
+
+.R_M-mtb-m_i {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.5rem;
+    width: max-content;
+    align-items: center;
+}
+
+.R_M-mtb-m_i>label {
+    font-size: x-large;
+}
+
+.R_M-mtb-i_v_list {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1.3rem;
+}
+
+.SET_PM-dist_item,
+.R_M-mtb-i_v {
+    position: relative;
+}
+.SET_PM-dist_item *,
+.R_M-mtb-i_v *{
+    margin: 0;
+}
+
+.SET_PM-dist_item>input,
+.R_M-mtb-i_v>input{
+    width: 80px;
+    padding: 0.1rem;
+    font-size: 20px;
+    border-radius: 0;
+    text-align: center;
+}
+
+.SET_PM-dist_item>label,
+.R_M-mtb-i_v>label{
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    padding: 0.1rem;
+    border: 1px solid;
+    background-color: darkred;
+    color: white;
+
+    display: inline-block;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.SET_PM {
+    display: grid;
+    width: max-content;
+    grid-row-gap: 1rem;
+    margin-top: 1rem;
+}
+
+.SET_PM_list {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: max-content;
+    column-gap: 1rem;
+    row-gap: 1.5rem;
+}
+
+.SET_PM-dist,
+.SET_PM-dist2 {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.6rem;
+    align-items: center;
+    width: max-content;
+}
+
+.SET_PM-dist>label,
+.SET_PM-dist2>label {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.SET_PM-dist2 {
+    margin-left: 3.5rem;
+}
+.SET_PM-dist_item {
+
+}

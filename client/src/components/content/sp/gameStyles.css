@@ -1,0 +1,991 @@
+.sp-att {
+    width: max-content;
+    height: max-content;
+    padding: 2rem 5rem;
+    display: grid;
+    grid-row-gap: 0.5rem;
+    font-size: larger;
+    background-color: #b9c0ff;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    place-items: center;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.sp-att-h{
+    display: grid;
+    grid-row-gap: 0.2rem;
+    font-size: x-large;
+}
+
+.sp-att-h2 {
+    display: grid;
+    grid-row-gap: 0.1rem;
+    font-size: larger;
+}
+
+.sp-bg {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.5rem;
+    width: max-content;
+}
+
+.sp-bg>button {
+    width: max-content;
+    height: max-content;
+    padding: 0.5rem 2rem;
+}
+
+.sp-bf{
+    width: max-content;
+    height: max-content;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin: auto;
+}
+
+
+
+.sp-start-panel {
+    width: 100%;
+    height: 100%;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sp-message-mode{
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+
+    background-color: ghostwhite;
+    padding: 2rem 2rem;
+    border: 3px solid black;
+    display: grid;
+    grid-auto-rows: 1fr max-content;
+    max-height: 95%;
+    height: max-content;
+    width: max-content;
+    max-width: 95%;
+
+    font-size: larger;
+    grid-row-gap: 1rem;
+    overflow: auto;
+
+}
+
+.sp-message-mode input {
+    width: 10rem;
+}
+
+.sp-message-mode>div{
+    display: grid;
+}
+
+.sp-game-mode {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+
+}
+
+.sp-game-mode-game {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    grid-row-gap: 2rem;
+    padding: 2rem 2rem 5rem 2rem;
+    font-size: x-large;
+}
+
+.sp-game-header {
+    display: grid;
+    grid-row-gap: 0.5rem;
+    grid-auto-rows: max-content;
+}
+
+.sp-game-header>label:first-child>span {
+    color: red;
+    font-weight: bold;
+}
+.sp-game-header>label:not(:first-child)>span {
+    color: blueviolet;
+    font-weight: bold;
+}
+
+.sp-game-body {
+    justify-content: center;
+    display: grid;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.sp-game-body * {
+    align-self: end;
+}
+
+.sp-game-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sp-game-footer button {
+    height: 7rem;
+    border-radius: 1rem;
+    background-color: lightsalmon;
+}
+
+.sp-game-footer button:active {
+    opacity: 0.5;
+}
+
+.sp-practice-s2 {
+    width: 95vw;
+    height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    /*grid-row-gap: 2rem;*/
+    /*padding: 2rem 2rem 5rem 2rem;*/
+    /*font-size: x-large;*/
+}
+
+.sp_practice-s2-md {
+    display: grid;
+    grid-template-rows: 1fr max-content 1fr;
+    row-gap: 1.5rem;
+    text-align: center;
+    justify-items: center;
+}
+
+.sp_practice-s2-cards {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    width: max-content;
+    justify-self: center;
+}
+
+
+.sp_practice-s2-cards .sp-game-header {
+    height: max-content;
+    width: max-content;
+}
+
+.sp_practice-s2-cards .sp-game-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    font-size: 20px !important;
+}
+.sp_practice-s2-cards .sp-game-body *{
+    font-size: 20px !important;
+}
+
+.sp_practice-s2-cards .sp-game-body .playingCards.rotateHand {
+    height: 60%;
+}
+
+.playingCards .card {
+    display: inline-block;
+    width: 5em;
+    /*width: 3.3em;*/
+    height: 6.3em;
+    /*height: 4.6em;*/
+    border: 1px solid; /* NEED CHANGE */
+    /*border: 1px solid #666; !* NEED CHANGE *!*/
+    border-radius: .3em;
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    -khtml-border-radius: .3em;
+    padding: .25em;
+    /*margin: 0 .5em .5em 0;*/
+    text-align: center;
+    font-size: 1.6em; /* @change: adjust this value to make bigger or smaller cards */
+    font-weight: normal;
+    font-family: Arial, sans-serif;
+    position: relative;
+    background-color: #fff;
+    -moz-box-shadow: .2em .2em .5em #333;
+    -webkit-box-shadow: .2em .2em .5em #333;
+    box-shadow: .2em .2em .5em #333;
+    z-index: 1;
+    align-self: start;
+}
+
+.playingCards a.card {
+    text-decoration: none;
+    pointer-events: none;
+    /*background-color: #ccc; !* NEED CHANGE *!*/
+    /*text-indent: -4000px;*/
+    background-repeat: repeat;
+    /*background-image: url(data:image/gif;base64,R0lGODlhJAAkAJEAAOjFsezdztOKbL5QKCH5BAAAAAAALAAAAAAkACQAAAL/HC4RAqm/mmLHyHmAbczB11Ea8ombJKSgKo6Z17pXFznmS1JptiX0z3vVhpEKDoUIkoa0olGIUeZUk1RI6Yn2mh/FDAt6frOrRRTqXPpsVLYugzxaVy+YcBdnoWPZOT0E4eckQtZFZBjWoHixQFWl6Nhol6R2p1Okt5TGaEWZA6fjiMdhZgPHeWrTWGVq+jTZg1HYyAEWKLYzmyiGKoUimilz+YYryyTlg5RcDJSAbNx0Q7lMcbIGEyzTK8zVdfVaImzs/QV+prYqWWW2ObkoOApM/Em/rUlIm7fijs8a2EEKEaZ3AsMUgneEU6RcpJbZ27aGHkAO2Ors8xQH1IR0Bn5YnOtVAAA7); !* image is "Pattern 069" from http://www.squidfingers.com/patterns/ *!*/
+    /*background-image: -moz-repeating-linear-gradient(34% 6% 135deg,#0F1E59, #75A1BF, #3E3E63 50%);*/
+    /*background-image: -webkit-gradient(radial, center center, 20, center center, 80, from(#3c3), color-stop(0.4, #363), to(#030));*/
+    /*transform: scale(.5);*/
+    background-size: 30px 20px;
+}
+
+.playingCards a.card.back:after {
+    content: "\1F0A0";
+    /*color: var(--bgcolor); !* NEED CHANGE *!*/
+    /*color: blue; !* NEED CHANGE *!*/
+    /*position: absolute;*/
+    font-size: 5em;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    word-spacing: normal;
+    letter-spacing: normal;
+    line-height: 1.2;
+}
+
+.strong-card-show:after {
+    content: attr(value);
+}
+
+.strong-card-hide {
+    -moz-transform: translate(.3em, .1em) rotate(-6deg);
+    -webkit-transform: translate(.3em, .1em) rotate(-6deg);
+    -o-transform: translate(.3em, .1em) rotate(-6deg);
+    transform: translate(.3em, .1em) rotate(-6deg);
+}
+
+.playingCards .card .rank,
+.playingCards .card .suit {
+    display: block;
+    line-height: 1;
+    text-align: left;
+}
+
+.playingCards .card .rank {
+}
+.playingCards .card .suit {
+    line-height: .7;
+}
+
+/* inner multiple suits */
+.playingCards .card .suit:after {
+    display: block;
+    text-align: center;
+    white-space: pre;
+    line-height: .9;
+    font-size: 1.6em;
+    position: absolute;
+    color: inherit; /* NEED CHANGE */
+    font-family: "Times New Roman", serif;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.playingCards ul.table,
+.playingCards ul.hand,
+.playingCards ul.deck {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 0 0;
+    position: relative;
+    clear: both;
+    align-self: start;
+}
+
+.playingCards ul.table li,
+.playingCards ul.hand li,
+.playingCards ul.deck li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: left;
+}
+
+.playingCards ul.hand,
+.playingCards ul.deck {
+    height: 9em;
+}
+.playingCards ul.hand li,
+.playingCards ul.deck li {
+    position: absolute;
+}
+.playingCards ul.hand li {
+    bottom: 0;
+}
+.playingCards ul.hand li:nth-child(1)  { left: 0; }
+.playingCards ul.hand li:nth-child(2)  { left: 1.1em; }
+.playingCards ul.hand li:nth-child(3)  { left: 2.2em; }
+.playingCards ul.hand li:nth-child(4)  { left: 3.3em; }
+.playingCards ul.hand li:nth-child(5)  { left: 4.4em; }
+.playingCards ul.hand li:nth-child(6)  { left: 5.5em; }
+.playingCards ul.hand li:nth-child(7)  { left: 6.6em; }
+.playingCards ul.hand li:nth-child(8)  { left: 7.7em; }
+.playingCards ul.hand li:nth-child(9)  { left: 8.8em; }
+.playingCards ul.hand li:nth-child(10) { left: 9.9em; }
+.playingCards ul.hand li:nth-child(11) { left: 11em; }
+.playingCards ul.hand li:nth-child(12) { left: 12.1em; }
+.playingCards ul.hand li:nth-child(13) { left: 13.2em; }
+
+.playingCards ul.hand li:nth-child(14) { left: 14.3em; }
+.playingCards ul.hand li:nth-child(15) { left: 15.4em; }
+.playingCards ul.hand li:nth-child(16) { left: 16.5em; }
+.playingCards ul.hand li:nth-child(17) { left: 17.6em; }
+.playingCards ul.hand li:nth-child(18) { left: 18.7em; }
+.playingCards ul.hand li:nth-child(19) { left: 19.8em; }
+.playingCards ul.hand li:nth-child(20) { left: 20.9em; }
+.playingCards ul.hand li:nth-child(21) { left: 22em; }
+.playingCards ul.hand li:nth-child(22) { left: 23.1em; }
+.playingCards ul.hand li:nth-child(23) { left: 24.2em; }
+.playingCards ul.hand li:nth-child(24) { left: 25.3em; }
+.playingCards ul.hand li:nth-child(25) { left: 26.4em; }
+.playingCards ul.hand li:nth-child(26) { left: 27.5em; }
+
+/* rotate cards if rotateHand option is on */
+.playingCards.rotateHand ul.hand li:nth-child(1) {
+    -moz-transform: translate(1.9em, .9em) rotate(-42deg);
+    -webkit-transform: translate(1.9em, .9em) rotate(-42deg);
+    -o-transform: translate(1.9em, .9em) rotate(-42deg);
+    transform: translate(1.9em, .9em) rotate(-42deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(2) {
+    -moz-transform: translate(1.5em, .5em) rotate(-33deg);
+    -webkit-transform: translate(1.5em, .5em) rotate(-33deg);
+    -o-transform: translate(1.5em, .5em) rotate(-33deg);
+    transform: translate(1.5em, .5em) rotate(-33deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(3) {
+    -moz-transform: translate(1.1em, .3em) rotate(-24deg);
+    -webkit-transform: translate(1.1em, .3em) rotate(-24deg);
+    -o-transform: translate(1.1em, .3em) rotate(-24deg);
+    transform: translate(1.1em, .3em) rotate(-24deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(4) {
+    -moz-transform: translate(.7em, .2em) rotate(-15deg);
+    -webkit-transform: translate(.7em, .2em) rotate(-15deg);
+    -o-transform: translate(.7em, .2em) rotate(-15deg);
+    transform: translate(.7em, .2em) rotate(-15deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(6) {
+    -moz-transform: translate(-.1em, .1em) rotate(3deg);
+    -webkit-transform: translate(-.1em, .1em) rotate(3deg);
+    -o-transform: translate(-.1em, .1em) rotate(3deg);
+    transform: translate(-.1em, .1em) rotate(3deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(7) {
+    -moz-transform: translate(-.5em, .2em) rotate(12deg);
+    -webkit-transform: translate(-.5em, .2em) rotate(12deg);
+    -o-transform: translate(-.5em, .2em) rotate(12deg);
+    transform: translate(-.5em, .2em) rotate(12deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(8) {
+    -moz-transform: translate(-.9em, .3em) rotate(21deg);
+    -webkit-transform: translate(-.9em, .3em) rotate(21deg);
+    -o-transform: translate(-.9em, .3em) rotate(21deg);
+    transform: translate(-.9em, .3em) rotate(21deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(9) {
+    -moz-transform: translate(-1.3em, .6em) rotate(30deg);
+    -webkit-transform: translate(-1.3em, .6em) rotate(30deg);
+    -o-transform: translate(-1.3em, .6em) rotate(30deg);
+    transform: translate(-1.3em, .6em) rotate(30deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(10) {
+    -moz-transform: translate(-1.7em, 1em) rotate(39deg);
+    -webkit-transform: translate(-1.7em, 1em) rotate(39deg);
+    -o-transform: translate(-1.7em, 1em) rotate(39deg);
+    transform: translate(-1.7em, 1em) rotate(39deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(11) {
+    -moz-transform: translate(-2.2em, 1.5em) rotate(48deg);
+    -webkit-transform: translate(-2.2em, 1.5em) rotate(48deg);
+    -o-transform: translate(-2.2em, 1.5em) rotate(48deg);
+    transform: translate(-2.2em, 1.5em) rotate(48deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(12) {
+    -moz-transform: translate(-2.8em, 2.1em) rotate(57deg);
+    -webkit-transform: translate(-2.8em, 2.1em) rotate(57deg);
+    -o-transform: translate(-2.8em, 2.1em) rotate(57deg);
+    transform: translate(-2.8em, 2.1em) rotate(57deg);
+}
+.playingCards.rotateHand ul.hand li:nth-child(13) {
+    -moz-transform: translate(-3.5em, 2.8em) rotate(66deg);
+    -webkit-transform: translate(-3.5em, 2.8em) rotate(66deg);
+    -o-transform: translate(-3.5em, 2.8em) rotate(66deg);
+    transform: translate(-3.5em, 2.8em) rotate(66deg);
+}
+
+.sp-debugger-mode {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: max-content;
+    min-width: 10rem;
+    text-align: center;
+    height: max-content;
+    background-color: blue;
+}
+
+.sp-debugger-mode-header {
+    cursor: pointer;
+    height: max-content;
+    align-self: center;
+    width: 100%;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.sp-debugger-mode-header:hover {
+    color: #ff6600;
+}
+.sp-debugger-mode-header:active {
+    opacity: 0.7;
+}
+
+.sp-debugger-mode-body {
+    display: grid;
+    grid-row-gap: 1rem;
+    pointer-events: none;
+}
+
+.sp-debugger-mode-finish-list {
+
+}
+
+.sp-debugger-mode-finish-list {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background-color: black;
+    display: grid;
+    padding: 1rem;
+    row-gap: 1rem;
+    grid-template-rows: max-content max-content;
+    overflow: auto;
+    max-height: 90%;
+}
+
+.sp-debugger-mode-finish-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.sp-debugger-mode-finish-list::-webkit-scrollbar-track {
+    background: darkgreen;
+}
+
+.sp-debugger-mode-finish-list::-webkit-scrollbar-thumb {
+    background: greenyellow;
+}
+
+.sp-debugger-mode-finish-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.sp-debugger-mode-finish-list>label {
+
+}
+
+.sp-debugger-mode-finish-list button{
+    padding: 0.5rem 2rem;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+}
+
+.sp-debugger-mode-finish-list button:hover{
+    background-color: blue;
+    color: white;
+}
+
+.sp-debugger-mode-finish-list>div {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.sp-debugger-mode-finish-list>div>div {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    column-gap: 0.5rem;
+    align-items: center;
+}
+
+.sp-debugger-mode-finish-list>div>div label {
+    color: darkmagenta;
+}
+
+.sp-debugger-mode-finish-list>div>div label>span {
+    color: yellow;
+    font-weight: bolder;
+}
+
+#sp-debugger-mode-finish-all-list>div{
+    padding: 0.1rem 0.3rem;
+}
+
+.sp-show:after {
+    content: 'SHOW ALL PROPER RESULT';
+}
+.sp-hide:after {
+    content: 'HIDE RESULT';
+}
+
+.sp-selected-bonus {
+    background-color: #ff6600;
+}
+
+.sp-selected-bonus label {
+    color: whitesmoke !important;
+}
+.sp-selected-bonus span {
+    color: blue !important;
+}
+
+#SP_DebuggerContent {
+    display: grid;
+    background-color: black;
+    pointer-events: none;
+    padding: 0.5rem;
+    color: yellow;
+    text-align: left;
+}
+
+.sp-debugger-mode-body-d1 {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 1rem;
+    align-items: center;
+}
+
+.sp-debugger-mode-body-d1>label:nth-child(even) {
+    color: darkmagenta;
+}
+
+.sp-debugger-mode-body-d1>label:nth-child(odd) {
+    color: red;
+}
+
+.sp-debugger-mode-body-d2>label:nth-child(even) {
+    color: cornflowerblue;
+}
+
+.sp-debugger-mode-body-d2>label:nth-child(odd) {
+    color: orangered;
+}
+
+.sp-debugger-mode-body-d2 {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 1rem;
+    align-items: center;
+}
+
+.sp-dis-bt {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.sp-game-mode-message{
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+
+    display: grid;
+    padding: 3rem 5rem;
+    border: 3px solid ;
+    font-size: x-large;
+    grid-row-gap: 1rem;
+    background-color: antiquewhite;
+}
+
+.sp-before_x-message {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0; left: 0;
+    /*transform: translate(-50%,-50%);*/
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999999;
+}
+
+.sp-before_x-message button {
+    margin: auto;
+}
+
+.sp-before_x-message div {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    display: grid;
+    padding: 3rem 8rem;
+    grid-row-gap: 2rem;
+    background-color: antiquewhite;
+    font-size: x-large;
+    border: 3px solid black;
+    width: max-content;
+}
+
+.sp-debugger-mode-body-end {
+    background-color: black;
+    padding: 1rem;
+    text-align: left;
+    display: grid;
+    grid-row-gap: 1.5rem;
+}
+
+.sp-debugger-mode-body-end>div {
+    color: blueviolet;
+    display: grid;
+}
+
+.sp-debugger-mode-body-end>div>label {
+    background-color: rgb(31, 30, 30);
+    padding: 0.3rem 0.5rem;
+}
+
+.sp-debugger-mode-body-end>div>div {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-row-gap: 0.5rem;
+}
+
+.sp-debugger-mode-body-end>div>div>label:nth-child(odd) {
+    color: red;
+}
+
+.sp-debugger-mode-body-end>div>div>label:nth-child(even) {
+    color: cornflowerblue;
+}
+
+.sp-m-com {
+    display: grid;
+    height: max-content;
+    width: 100%;
+}
+
+.sp-m-com label {
+    text-align: left !important;
+    width: 100%;
+}
+.sp-m-com textarea {
+    width: 95%;
+    height: 4rem;
+    padding: 0.1rem 0.2rem;
+    font-size: 1.2rem;
+    resize: none;
+    text-align: left;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .playingCards .card {
+        width: 5em;
+        height: 6.3em;
+        font-size: 0.9em; /* @change: adjust this value to make bigger or smaller cards */
+    }
+
+    .playingCards a.card.back:after {
+        font-size: 4em;
+    }
+
+    .playingCards .card .suit:after {
+        font-size: 1.6em;
+    }
+
+    .sp-game-mode-game {
+        grid-row-gap: 2rem;
+        padding: 2rem 2rem 5rem 2rem;
+        font-size: x-large;
+    }
+    .sp-game-body {
+        font-size: larger;
+    }
+
+    .sp-game-footer button {
+        height: 5rem;
+    }
+
+    .playingCards ul.hand,
+    .playingCards ul.deck {
+        height: 5em;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1400px){
+    .playingCards .card {
+        width: 5em;
+        height: 6.3em;
+        font-size: 0.9em; /* @change: adjust this value to make bigger or smaller cards */
+    }
+
+    .playingCards a.card.back:after {
+        font-size: 4em;
+    }
+
+    .playingCards .card .suit:after {
+        font-size: 1.6em;
+    }
+
+    .sp-game-mode-game {
+        grid-row-gap: 2rem;
+        padding: 2rem 2rem 5rem 2rem;
+        font-size: x-large;
+    }
+    .sp-game-body {
+        font-size: larger;
+    }
+
+    .sp-game-footer button {
+        height: 5rem;
+    }
+
+    .playingCards ul.hand,
+    .playingCards ul.deck {
+        height: 5em;
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1800px){
+    .playingCards .card {
+        width: 5em;
+        height: 6.3em;
+        font-size: 1.2em; /* @change: adjust this value to make bigger or smaller cards */
+    }
+
+    .playingCards a.card.back:after {
+        font-size: 4em;
+    }
+
+    .playingCards .card .suit:after {
+        font-size: 1.7em;
+    }
+
+    .sp-game-mode-game {
+        grid-row-gap: 2rem;
+        padding: 2rem 2rem 5rem 2rem;
+        font-size: x-large;
+    }
+    .sp-game-body {
+        font-size: xx-large;
+    }
+
+    .sp-game-footer button {
+        height: 5rem;
+    }
+
+    .playingCards ul.hand,
+    .playingCards ul.deck {
+        height: 4.2em;
+    }
+}
+
+@media screen and (min-width: 1800px){
+    .playingCards .card {
+        width: 5em;
+        height: 6.3em;
+        font-size: 1.4em; /* @change: adjust this value to make bigger or smaller cards */
+    }
+
+    .playingCards a.card.back:after {
+        font-size: 4.5em;
+    }
+
+    .playingCards .card .suit:after {
+        font-size: 1.6em;
+    }
+
+    .sp-game-mode-game {
+        grid-row-gap: 2rem;
+        padding: 2rem 2rem 5rem 2rem;
+        font-size: x-large;
+    }
+    .sp-game-body {
+        font-size: larger;
+    }
+
+    .sp-game-footer button {
+        height: 6rem;
+    }
+
+    .playingCards ul.hand,
+    .playingCards ul.deck {
+        height: 6em;
+    }
+}
+
+
+
+.sp-nfc-inst {
+    background-color: white;
+    width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    height: max-content;
+    text-align: left !important;
+    display: grid;
+    grid-row-gap: 0.5rem;
+    grid-auto-rows: max-content;
+    padding: 1.5rem;
+    align-content: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: larger;
+}
+
+.sp-nfc-msg-ques{
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+    text-align: center;
+    text-align: -moz-center;
+    text-align: -webkit-center;
+}
+
+.sp-nfc-msg-ques-lbl {
+    text-align: center;
+    width: 100%;
+    font-size: x-large;
+}
+
+.sp-nfc-ul {
+    list-style: disc;
+    margin-left: 2rem;
+    list-style: inside !important;
+
+}
+
+
+.sp-ques-bar th {
+    width: 12%;
+    font-size: medium;
+    text-align: center;
+}
+
+.sp-ques-bar tbody {
+    font-size: larger;
+}
+
+.sp-ques-bar td {
+    text-align: center !important;
+}
+
+.sp-ques-bar td input[type="radio"]{
+    height: 1.5rem;
+    width: 100%
+}
+
+
+.sp-nfc-ques {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    display: grid;
+    grid-auto-rows: max-content;
+    background-color: white;
+}
+
+.sp-nfc-ques button {
+    margin: 1.5rem auto;
+    font-size: larger;
+}
+
+.sp-nfc-ques::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+.sp-nfc-ques::-webkit-scrollbar-track {
+    background: #adacac;
+}
+
+/* Handle */
+.sp-nfc-ques::-webkit-scrollbar-thumb {
+    background: rgb(2, 38, 80);
+}
+
+/* Handle on hover */
+.sp-nfc-ques::-webkit-scrollbar-thumb:hover {
+    background: #17b3e7;
+}
+
+.sp-que {
+    display: grid;
+    grid-row-gap: 0.5em;
+    padding: 1rem 1rem 3rem 1rem;
+}
+
+.sp-que:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.sp-que:nth-child(even) {
+    background-color: #ececec;
+}
+
+.sp-que>label {
+    font-size: x-large;
+}
+
+.sp_ques_step {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    background-color: white;
+    display: grid;
+    grid-row-gap: 3rem;
+    grid-template-rows: 40% 1fr max-content;
+}
+.sp_ques_step>div {
+    justify-self: center;
+}
+
+.sp_ques_step_h {
+    align-self: flex-end;
+
+}
+.sp_ques_step_h>label,
+.sp_ques_step_a>label{
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.sp_ques_step_h_b{
+    display: grid;
+    grid-auto-flow: column;
+    margin: auto;
+    width: max-content;
+    column-gap: 0.5rem;
+}
+
+.sp_ques_step_h_b button {
+   padding: 0.5rem 2rem;
+    border-radius: 10px;
+    border: 2px solid;
+}
+
+.sp_ques_step_h,
+.sp_ques_step_a {
+    border: 2px solid black;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 24px;
+    display: grid;
+    row-gap: 1.3rem;
+}
+
+.sp_ques_step_a {
+    align-self: flex-start;
+    text-align: center;
+}
+
+.sp_ques_step_cb button {
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+    border: 2px solid;
+    font-size: x-large;
+}

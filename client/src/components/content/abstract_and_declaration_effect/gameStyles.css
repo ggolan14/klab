@@ -1,0 +1,95 @@
+/* Story */
+.ADE_story {
+    display: grid;
+    grid-auto-rows: max-content 1fr;
+    row-gap: 1.5rem;
+    width: 100vw;
+    padding: 1rem;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.ADE_story>label {
+    height: max-content;
+    display: grid;
+    row-gap: 15px;
+}
+.ADE_story>label>span:first-child {
+    font-size: x-large;
+    color: #00659f;
+    height: max-content;
+}
+.ADE_story>label>span:not(:first-child) {
+    font-size: larger;
+    color: #000000;
+    height: max-content;
+}
+
+
+.ADE_story_b{
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-row-gap: 4rem;
+    grid-auto-rows: max-content 1fr;
+}
+
+.ADE_story_b::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+.ADE_story_b::-webkit-scrollbar-track {
+    background: #adacac;
+}
+
+/* Handle */
+.ADE_story_b::-webkit-scrollbar-thumb {
+    background: #0056ab;
+}
+
+/* Handle on hover */
+.ADE_story_b::-webkit-scrollbar-thumb:hover {
+    background: #214593;
+}
+
+.ADE_storyCont {
+    display: grid;
+    grid-row-gap: 1rem;
+    grid-template-rows: max-content auto;
+    font-size: larger;
+}
+
+.ADE_storyCont>label {
+    font-size: x-large;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.ADE_storyCont>label {
+    width: max-content;
+    height: max-content;
+    color: #ffffff;
+}
+
+.ADE_storyCont>p {
+    resize: none;
+    width: 98%;
+    height: 100%;
+    white-space: break-spaces;
+    margin: auto;
+
+
+    color: black;
+    /*background-color: blue;*/
+    background-color: white;
+    /*padding: 10px;*/
+    /*font-size: 50px;*/
+    box-shadow: inset 0 0px 8px rgba(0,0,0,0.16), 0 0px 8px rgba(0,0,0,0.45);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+/* Story */

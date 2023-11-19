@@ -1,0 +1,198 @@
+{
+  "prolific_code": "",
+  "running_name": "test",
+  "action_time": 60,
+  "second_warning": 10,
+  "show_up_fee": 1,
+  "sign_of_reward": "£",
+  "real_trials": 10,
+  "practice_trials": 4,
+  "sampling_delay": 1,
+  "estimated_time_text": "10 minutes",
+  "show_up_fee_text": "£1",
+  "maximal_bonus_text": "£1",
+  "problems_bank": [
+    {
+      "difficulty_level": "Highest",
+      "EV_gap": 1,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 53,
+        "high": 59
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "High",
+      "EV_gap": 2,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 54,
+        "high": 60
+      },
+      "level": "Practice"
+    },
+    {
+      "difficulty_level": "Med-High",
+      "EV_gap": 3,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 55,
+        "high": 61
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Medium",
+      "EV_gap": 4,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 56,
+        "high": 62
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Med-Low",
+      "EV_gap": 5,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 57,
+        "high": 63
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Low",
+      "EV_gap": 6,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 58,
+        "high": 64
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Lowest",
+      "EV_gap": 7,
+      "values_inferior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "values_superior_option": {
+        "low": 59,
+        "high": 65
+      },
+      "level": "Practice"
+    },
+    {
+      "difficulty_level": "Highest",
+      "EV_gap": 1,
+      "values_inferior_option": {
+        "low": 51,
+        "high": 57
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Practice"
+    },
+    {
+      "difficulty_level": "High",
+      "EV_gap": 2,
+      "values_inferior_option": {
+        "low": 50,
+        "high": 56
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Med-High",
+      "EV_gap": 3,
+      "values_inferior_option": {
+        "low": 49,
+        "high": 55
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Medium",
+      "EV_gap": 4,
+      "values_inferior_option": {
+        "low": 48,
+        "high": 54
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Med-Low",
+      "EV_gap": 6,
+      "values_inferior_option": {
+        "low": 47,
+        "high": 53
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Real"
+    },
+    {
+      "difficulty_level": "Low",
+      "EV_gap": 6,
+      "values_inferior_option": {
+        "low": 46,
+        "high": 52
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Practice"
+    },
+    {
+      "difficulty_level": "Lowest",
+      "EV_gap": 7,
+      "values_inferior_option": {
+        "low": 45,
+        "high": 51
+      },
+      "values_superior_option": {
+        "low": 52,
+        "high": 58
+      },
+      "level": "Real"
+    }
+  ]
+}

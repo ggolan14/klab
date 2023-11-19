@@ -1,0 +1,68 @@
+.signpost {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    z-index: 99999;
+    cursor: pointer;
+
+}
+
+.signpost:hover .signpost_sign{
+    background-color: #1429ad;
+    color: #ff0000;
+}
+
+.signpost:hover .signpost_leg{
+    background-color: #14adad;
+}
+
+
+.signpost_queen {
+    left: 45% !important;
+    top: 70% !important;
+    transform: translate(-50%, -50%);
+}
+
+.signpost_sign {
+    background-color: #005000;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.signpost_sign_right {
+    clip-path: polygon(
+            0% 0%,
+            calc(100% - 1rem) 0,
+            100% 50%,
+            calc(100% - 1rem) 100%,
+            0% 100%
+    );
+    padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+}
+
+.signpost_left {
+    /*left: 60px;*/
+}
+
+.signpost_right {
+    /*left: -8px;*/
+}
+.signpost_sign_left {
+    clip-path: polygon(
+            1rem 0%,
+            100% 0,
+            100% 100%,
+            1rem 100%,
+            0% 1rem
+    );
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+
+    /*clip-path: polygon(0% 0%, calc(100% - 1rem) 0, 100% 50%, calc(100% - 1rem) 100%, 0% 100%);*/
+}
+
+.signpost_leg {
+    margin: auto;
+    background-color: #733f00;
+    height: 50px;
+    width: 20px;
+}

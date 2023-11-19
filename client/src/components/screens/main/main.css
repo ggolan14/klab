@@ -1,0 +1,129 @@
+.admin-main-panel {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: max-content;
+    /*grid-template-rows: max-content max-content max-content max-content;*/
+    justify-items: center;
+    /*align-content: center;*/
+    grid-row-gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+/*TaskLabel*/
+.admin-main-panel-t-l {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 4rem;
+    letter-spacing: 2.4px;
+    word-spacing: 3.6px;
+    color: #1B8BFF;
+    font-weight: 400;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: capitalize;
+    width: max-content;
+}
+
+/*expDetails*/
+.admin-main-panel-e-d {
+    width: max-content;
+    display: grid;
+    grid-row-gap: 0.5rem;
+    font-size: larger;
+    column-gap: 0.5rem;
+    height: max-content;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 1rem 1.5rem;
+    background-color: antiquewhite;
+    grid-template-columns: repeat(2, auto);
+}
+
+.admin-main-panel-e-d>label:nth-child(even) {
+    color: darkmagenta;
+    font-weight: bold;
+    font-style: italic;
+}
+/*expDetails*/
+
+
+
+.admin-main-panel-g1 {
+    display: grid;
+    grid-row-gap: 1rem;
+    justify-items: center;
+    font-size: larger;
+}
+
+
+/*btnOptions*/
+.admin-main-panel-b-o {
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    /*grid-auto-flow: column;*/
+    grid-column-gap: 1rem;
+    grid-row-gap: 0.5rem;
+}
+
+.admin-main-panel-b-o .button-item {
+    width: auto !important;
+    text-align: center;
+}
+/*btnOptions*/
+
+/*debuggerItem*/
+.admin-main-panel-d-i {
+    width: max-content;
+    position: relative;
+}
+
+.admin-main-panel-d-i * {
+    cursor: pointer;
+}
+
+.admin-main-panel-d-i>label{
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.5rem;
+    align-items: center;
+}
+
+.admin-main-panel-d-i:hover{
+    color: #ff6600;
+}
+
+.admin-main-panel-d-i:hover .admin-tooltip-btn {
+    display: grid;
+}
+/*debuggerItem*/
+
+.admin-main-url {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: max-content;
+    grid-column-gap: 0.5rem;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: lightsteelblue;
+}
+
+.admin-main-url button {
+    border-radius: 1rem;
+    background-color: limegreen;
+    color: #01175c;
+}
+
+.admin-main-url-a {
+    font-size: larger;
+    text-decoration: underline;
+    color: darkblue;
+}
+
+.admin-main-url-b {
+    font-size: large;
+    color: #bd2e00;
+}

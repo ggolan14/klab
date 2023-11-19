@@ -1,0 +1,66 @@
+.settings-sar_pages_bar {
+    max-width: 50%;
+    overflow-y: auto;
+    height: 100%;
+    font-size: x-large;
+    margin: auto;
+    display: flex;
+    padding: 1rem;
+}
+
+.settings-sar_pages_bar::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+.settings-sar_pages_bar::-webkit-scrollbar-track {
+    background: #adacac;
+}
+
+/* Handle */
+.settings-sar_pages_bar::-webkit-scrollbar-thumb {
+    background: #0056ab;
+}
+
+/* Handle on hover */
+.settings-sar_pages_bar::-webkit-scrollbar-thumb:hover {
+    background: #214593;
+}
+
+.settings-sar_pages_bar>label{
+    border: 1px solid black;
+    height: max-content;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    cursor: pointer;
+}
+
+.settings-sar_pages_bar-cur_page {
+    background-color: #000000;
+    color: white;
+}
+
+.settings-sar_pages_txt {
+    display: grid;
+    grid-template-rows: repeat(2, max-content);
+
+}
+
+.settings-sar_pages_txt>div{
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    column-gap: 2rem;
+}
+
+.settings-sar_pages_txt>div>label{
+    font-size: x-large;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.settings-sar_pages_txt>textarea{
+    height: 10rem;
+    padding: 0.3rem;
+    font-size: large;
+}

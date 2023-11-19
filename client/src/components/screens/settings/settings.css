@@ -1,0 +1,230 @@
+.admin-settings-panel {
+    display: grid;
+    padding: 1rem;
+    grid-row-gap: 4rem;
+    grid-template-rows: max-content;
+    font-size: medium;
+}
+
+.admin-settings-panel.dimming-page{
+    background-color: #8a8888;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    opacity: 1;
+}
+
+.admin-settings-panel.dimming-page *{
+    opacity: 0.4;
+}
+
+.admin-settings-panel button {
+    border-radius: 1rem;
+    margin: auto;
+}
+
+.admin-settings-input-big {
+    width: 50%;
+}
+
+.admin-settings-panel-h {
+    display: grid;
+    grid-row-gap: 3rem;
+    justify-items: center;
+}
+
+.admin-settings-panel-h>a{
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.admin-settings-panel-h>a:active{
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+}
+
+.admin-settings-panel-h button {
+    padding: 0.5rem 6rem;
+}
+
+.admin-settings-group {
+    /*border: 1px solid black;*/
+    height: max-content;
+    padding: 1rem 0.5rem;
+    font-size: xx-large;
+    display: grid;
+    grid-row-gap: 1rem;
+    text-align: center;
+}
+
+.admin-settings-panel>div .admin-consent_form-drop-down {
+    margin: auto;
+}
+
+.admin-settings-no-set {
+    margin: auto;
+    font-size: xx-large;
+}
+
+.admin-settings-section-col {
+    display: grid;
+    grid-auto-flow: column;
+    width: max-content;
+    grid-column-gap: 1rem;
+}
+
+.admin-settings-section-raw {
+    display: grid;
+    grid-row-gap: 0.5rem;
+}
+
+.admin-settings-section-b {
+    margin-left: 0.5rem;
+}
+
+.admin-settings-section-modified_info {
+    background: rgba(0,0,0,0.2);
+    width: max-content;
+    padding: 1rem;
+    border-radius: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.settings-modified-lbl {
+    color: darkblue;
+}
+.admin-settings-section {
+    position: relative;
+}
+
+.admin-settings-section,
+.admin-settings-section-run,
+.admin-settings-all-counters{
+    background-color: rgba(0,0,0,0.1);
+    padding: 1rem 0.4rem;
+    border-radius: 10px;
+}
+
+.admin-settings-section-h>label,
+.admin-settings-all-counters>label,
+.admin-settings-section>label{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.highlight_error_input {
+    color: red;
+}
+
+.admin-settings-all-counters {
+    display: grid;
+    grid-row-gap: 0.5rem;
+}
+
+.admin-settings-all-counters-add {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.5rem;
+    width: max-content;
+    padding-left: 0.5rem;
+}
+
+.admin-settings-all-counters-add input{
+    width: 16rem;
+}
+
+.admin-settings-all-counters-list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 1rem;
+    width: max-content;
+    padding-left: 0.5rem;
+}
+
+.admin-settings-all-counters-list-name {
+    display: grid;
+    width: 10rem;
+    border: 1px solid black;
+    height: 8rem;
+    overflow: auto;
+}
+
+.admin-settings-all-counters-list-name>label {
+    padding: 0.3rem;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.admin-settings-all-counters-list-data>div{
+    align-self: center;
+    width: max-content;
+    margin: auto;
+}
+
+.admin-settings-all-counters-list-data>div:not(:first-child){
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.5rem;
+}
+
+.admin-settings-all-counters-list-data {
+    width: 15rem;
+    border: 1px solid black;
+    text-align: center;
+    display: grid;
+}
+
+.admin-settings-all-counters-list-data>div:first-child>label:not(:first-child){
+    color: green;
+    font-weight: bold;
+}
+
+.highlight_selected {
+    background-color: blue;
+    color: white;
+}
+
+.admin-settings-options {
+    display: grid;
+    grid-row-gap: 3rem;
+    width: max-content;
+    text-align: center;
+    margin: auto;
+}
+
+.admin-settings-action-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 1.5rem;
+    vertical-align: middle;
+    align-items: center;
+    width: max-content;
+    margin: auto;
+    position: relative;
+}
+
+.admin-settings-action-btn:hover ~ .admin-tooltip-btn {
+    display: grid;
+}
+
+.admin-settings-action-btn{
+    color: black;
+    font-size: 3.5rem;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.admin-settings-action-btn:hover{
+    color: blue;
+}
+
+.admin-settings-action-btn:active{
+    color: greenyellow;
+    background-color: #333333;
+}

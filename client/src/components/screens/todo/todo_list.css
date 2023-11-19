@@ -1,0 +1,177 @@
+.admin-todo-todo_list {
+    display: grid;
+    grid-row-gap: 1.5rem;
+    grid-auto-rows: max-content;
+    width: 100%;
+}
+
+.admin-todo-filter {
+    width: max-content;
+    margin: auto;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0.5rem;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 0.5rem;
+ }
+
+.admin-todo-todo_item {
+    display: grid;
+    row-gap: 0.5rem;
+}
+
+.admin-todo-todo_item_h {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 0.5rem;
+    grid-template-columns: repeat(3, max-content) 1fr;
+    width: 100%;
+    align-items: center;
+    background-color: #eaeaea;
+    padding: 0.1rem 0.5rem;
+    cursor: pointer;
+    /*plus*/
+    /*update_at*/
+    /*status*/
+    /*subject*/
+}
+
+.admin-todo-todo_item_h.expand {
+    background-color: #ffebc8;
+}
+
+.admin-todo-todo_item_h>* {
+    cursor: pointer;
+}
+
+.admin-todo-todo_item_h .plus{
+}
+
+.admin-todo-item_info {
+    border: 1px solid black;
+    padding: 10px;
+    row-gap: 0.5rem;
+    display: grid;
+    width: 100%;
+}
+.admin-todo-item_info_b {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    width: 100%;
+    row-gap: 0.3rem;
+}
+
+.admin-todo-item_info_b select{
+    width: max-content;
+}
+.admin-todo-item_info_b textarea{
+    resize: vertical;
+    padding: 0.2rem 0.4rem;
+    height: 200px;
+    min-height: 100px;
+}
+
+/* Scroll bar */
+.admin-todo-item_info_b textarea::-webkit-scrollbar {
+    width: 15px;
+    cursor: pointer;
+}
+
+/* Track */
+.admin-todo-item_info_b textarea::-webkit-scrollbar-track {
+    background: #2f2f2f;
+    cursor: pointer;
+
+}
+
+/* Handle */
+.admin-todo-item_info_b textarea::-webkit-scrollbar-thumb {
+    background: rgb(0, 136, 204);
+    cursor: pointer;
+
+}
+
+/* Handle on hover */
+.admin-todo-item_info_b textarea::-webkit-scrollbar-thumb:hover {
+    background: #012b8a;
+    cursor: pointer;
+}
+
+.admin-todo-item_info_b textarea::-webkit-scrollbar-thumb:active {
+    background: #0440c0;
+    cursor: pointer;
+}
+
+.admin-todo-item_info_btn {
+    width: max-content;
+    display: grid;
+    grid-auto-flow: column;
+    margin: auto;
+    grid-column-gap: 1rem;
+    padding: 1rem;
+}
+
+.admin-todo-item_info_btn>button{
+    color: white;
+}
+
+.admin-todo-item_info_btn>button:hover{
+    background-color: blue;
+}
+
+.admin-todo-item_info_btn .remove {
+    background-color: #dc040a;
+}
+
+.admin-todo-item_info_btn .update {
+    background-color: #007c3f;
+}
+
+
+.remove_warning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: black;
+}
+
+.remove_warning>div{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: max-content;
+    height: max-content;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem 5rem;
+    border: 3px solid darkred;
+    display: grid;
+    row-gap: 1.5rem;
+    border-radius: 5px;
+}
+
+.remove_warning>div>label{
+    color: black !important;
+
+}
+.remove_warning>div>label>span{
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.remove_warning>div>div {
+    display: grid;
+    width: max-content;
+    margin: auto;
+    grid-auto-flow: column;
+    column-gap: 1.5rem;
+}
+
+.remove_warning button {
+    border-radius: 10px;
+}

@@ -1,0 +1,30 @@
+.qg_game_board {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 15px;
+    overflow: hidden;
+    margin: 0;
+    grid-template-rows: 25% 40% 35%;
+    background-color: #733f00;
+    display: grid;
+    grid-template-areas:
+    'header header header'
+    'altRoads altRoads altRoads'
+    'footer footer footer';
+    padding: 0 0.5rem;
+}
+
+.qg_game_board_t_display {
+    position: fixed;
+    top: 3%;
+    left: 2%;
+    color: black;
+    font-size: 25px;
+    background-color: #d39e5d;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 2px solid blue;
+}

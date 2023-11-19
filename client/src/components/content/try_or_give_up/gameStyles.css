@@ -1,0 +1,147 @@
+.TOG_main {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Game board */
+.tog-g_b {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 20% 80%;
+}
+
+/* Game board head */
+.tog-g_b-h {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    height: 100%;
+    position: relative;
+}
+
+.tog-g_b-h>label{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tog-g_b-h>label>span{
+    color: #ffe373;
+}
+
+/* Game board matrices box */
+.tog-g_b-m {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    height: 100%;
+}
+
+/* Game board matrix item */
+
+.tog-g_b-m_i {
+    display: grid;
+    width: max-content;
+    height: max-content;
+    grid-gap: 4px;
+    margin: auto;
+}
+
+.tog-g_b-m_i label {
+    margin: 0 !important;
+    text-align: center;
+}
+
+.tog_finish {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    text-align: center;
+    row-gap: 20px;
+    background-color: whitesmoke;
+    width: max-content;
+    height: max-content;
+    padding: 1.5rem 3rem;
+    font-size: larger;
+    border: 5px solid;
+}
+
+.tog_finish>button {
+    margin: auto;
+}
+
+.tog_f-r {
+    border-color: #1B8BFF;
+}
+
+.tog_f-r span {
+    color: #1B8BFF;
+}
+
+.tog_f-g {
+    border-color: #4b019a;
+}
+
+.tog_f-g span {
+    color: #4b019a;
+}
+
+.tog_debug {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+}
+
+.tog_debug label {
+    color: black;
+}
+.tog_debug span {
+    color: #8103a0;
+    margin-left: 5px;
+}
+
+.tog_debug>div {
+    border: 1px solid black;
+    padding: 0.25rem;
+    display: grid;
+    background-color: #8d8d8d;
+}
+
+.tog_d-sum {
+    row-gap: 5px;
+    grid-template-rows: max-content 1fr;
+}
+
+.tog_d-sum-l {
+    display: grid;
+    row-gap: 5px;
+}
+
+.tog_d-sum-l>label {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.tog_d-sum-l-rp {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 0.5rem;
+    border: 1px solid;
+    width: max-content;
+    padding: 5px 10px;
+}
+
+.tog_d-sum-l-rpi {
+    margin-left: 5px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 10px;
+    align-items: center;
+}

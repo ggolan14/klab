@@ -1,0 +1,48 @@
+.ncg-settings-btns {
+    width: 100%;
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(11, max-content);
+    column-gap: 10px;
+    overflow-x: scroll;
+    padding: 1rem 0;
+}
+
+.ncg-settings-btns::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+.ncg-settings-btns::-webkit-scrollbar-track {
+    background: #adacac;
+}
+
+/* Handle */
+.ncg-settings-btns::-webkit-scrollbar-thumb {
+    background: #0056ab;
+}
+
+/* Handle on hover */
+.ncg-settings-btns::-webkit-scrollbar-thumb:hover {
+    background: #214593;
+}
+
+.ncg-settings-btn_item {
+    display: grid;
+    border: 1px solid black;
+    padding: 10px;
+    justify-content: center;
+    align-content: center;
+    row-gap: 1rem;
+}
+
+.ncg-settings-btn_item>div {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    column-gap: 0.5rem;
+    align-items: center;
+}
+
+.ncg-settings-btn_item input{
+    max-width: 5em;
+}

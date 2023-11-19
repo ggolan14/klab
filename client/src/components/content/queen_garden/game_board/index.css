@@ -1,0 +1,23 @@
+:root {
+    --TREES_ROADS_HEIGHT: 40vh;
+    --TREES_ROADS_WIDTH: 65vw;
+    --TOP_LAND_WIDTH: 70vw;
+    --BOTTOM_LAND_WIDTH: 85vw;
+    --LAND_HEIGHT: calc((100vh - 40vh) / 2);
+    --WAGON_ANIMATION_TIMING: 1s;
+    --WHEELS_ANIMATION_TIMING: 0.4s;
+    --TREE_WIDTH: calc(0.7 * (var(--TREES_ROADS_HEIGHT)/6));
+    --TREE_HEIGHT: calc(var(--TREES_ROADS_HEIGHT)/6);
+}
+
+.qg_game_board {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    overflow: hidden;
+    margin: 0;
+    background-color: #733f00;
+}
