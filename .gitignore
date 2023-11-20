@@ -30,3 +30,5 @@ server/logs/*.log*
 #tmp files
 *.tmp
 
+~*
+
