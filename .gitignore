@@ -25,7 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #log files
-*.log*
+server/logs/*.log*
 
 #tmp files
 *.tmp

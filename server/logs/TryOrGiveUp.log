@@ -181,3 +181,8 @@
 29-06-2023 | 13:14:31 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
 29-06-2023 | 13:14:31 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test
 29-06-2023 | 13:14:31 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=649d59876c4748aedd8e3b10 Ver=test
+19-11-2023 | 15:46:39 | getIsExpReady IP=0.0.0.0 status=Y
+19-11-2023 | 15:46:39 | getGameConsentForm IP=0.0.0.0
+19-11-2023 | 15:47:42 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+19-11-2023 | 15:47:42 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+19-11-2023 | 15:47:42 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=655a11fe85acf033ec8af03e Ver=test
