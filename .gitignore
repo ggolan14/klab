@@ -29,6 +29,8 @@ server/logs/*.log*
 
 #tmp files
 *.tmp
+*.log
+*.iml
 
 ~*
 
