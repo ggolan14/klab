@@ -150,7 +150,7 @@ const GameWelcome = ({Forward}) => {
                 //     </div>
                 // </div>
             }
-            <button onClick={Forward}>Next</button>
+            <button onClick={Forward}>Start the game</button>
         </div>
     )
 };
@@ -282,7 +282,7 @@ const CupExistMsg = ({onClick, my_index, cups_num}) => {
         return (
             <>
                 <div>
-                    <label>Would you like to keep the cup in this location or throw it?</label>
+                    <label>Would you like to keep the cup in this location or give it away for donation?</label>
                 </div>
                 <div>
                     <div
@@ -294,11 +294,11 @@ const CupExistMsg = ({onClick, my_index, cups_num}) => {
                             rowGap: 3
                         }}
                     >
-                        <label style={{textAlign:'left'}}>If you throw the cup, the cups tax will be {points_msg(Math.pow(cups_num-1, 2), true)}</label>
+                        <label style={{textAlign:'left'}}>If you donate the cup, the cups tax will be {points_msg(Math.pow(cups_num-1, 2), true)}</label>
                         <button
                             onClick={() => onClick('ThrowCup', my_index, true)}
                             style={{borderRadius: 0, width: '100%'}}
-                        >Throw Cup</button>
+                        >Donate Cup</button>
 
                         <label style={{textAlign:'left'}}>If you keep the cup, the cups tax will be {points_msg(Math.pow(cups_num, 2), true)}</label>
                         <button
