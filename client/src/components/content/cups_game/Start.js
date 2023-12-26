@@ -90,24 +90,25 @@ const GameWelcome = ({Forward}) => {
             className='cg_welcome'
         >
             <label>Welcome to the Cups Game!</label>
-            <div className='cg_welcome_container'>
+			<div className='cg_welcome_container'>
                 <div className='cg_welcome_int'>
-                    <label>Please read the following instructions:</label>
-                    <label>During the game, a ball will fall randomly in one of ten locations. The fall, and your decisions, will determine if you earn or lose points:</label>
-                    <label>If the ball falls into a cup, you will be rewarded with {GameSet.reward} point{GameSet.reward !== 1 ? 's' : ''}</label>
-                    <label>If there’s no cup, the ball will continue falling – and you will not get any points.</label>
-                    <label>
-                        In addition, in each trial you will pay a <u>storage fee</u>,
-                        which is the number of cups <i>squared</i>. (For example – if
-                        you have 3 cups, the storage fee will be 3&sup2; = 9).
+                    <label>Please read carefully the following instructions:</label>
+                    <label>The cups game consists of 100 trials. In each trial a ball will fall randomly in one of 10 locations.</label>
+                    <label>The fall, and your decisions, will determine if you earn or lose points:</label>
+                    <label className='indent_label'>
+                               If the ball falls into a cup, you will be rewarded with 100 points.<br></br>
+						       If there is no cup in the falling location, the ball will continue falling – and you will not get any points. 
+						       <br></br>In addition, in each trial you will pay a storage fee (cups tax) – which is the overall number of cups you currently have on your screen, 
+						       squared (for example, if you have 3 cups, the storage fee will be 3^2=9).
                     </label>
                     <label>
-                        At the end of each trial will be asked to make decisions concerning the cups. Notice that the location of the cup that will be thrown or placed will be determined randomly.
+                        At the end of each trial, one location will be selected randomly by the computer and you will be asked to consider either donating one of your cups and giving it away OR placing a new cup. 
+						After your decision, the next trial will begin and a new ball will fall.
                     </label>
                     <label>
                         Your goal is to earn as many points as you can.
                     </label>
-                    <label>Getting more points will increase your chance of getting an <b>extra bonus</b>.</label>
+                    <label><b>The more game points you earn – the higher your chances to get an extra bonus!</b>.</label>
 
                 </div>
 

@@ -225,6 +225,11 @@
     font-size: large;
 }
 
+.indent_label {
+    font-size: large;
+    padding-left: 20px;
+}
+
 .cg_welcome button {
     font-size: larger;
     border-radius: 1rem;
