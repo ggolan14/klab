@@ -29,12 +29,18 @@ const ResetAll = () => {
     GamePoints = {};
 };
 
-const GameHead = ({game_order, trial, round}) => {
-
+const GameHead = ({game_order, trial, round , showMessage}) => {
+    
+    //console.log("---> GameHead   game_order="+game_order +" trial="+trial+" round="+round+ " showMessage="+showMessage);
+    if(!showMessage){
+        return (
+            <label></label>
+        )
+    }
     return (
         <div className='tog-g_b-h'>
             <label>
-                You are on trial <span>{trial}</span> out of <span>{GameSet.trials}</span> trials in this round<br/>
+                You are on trial <span>{trial+1}</span> out of <span>{GameSet.trials}</span> trials in this round<br/>
                 Round <span>{round}</span> out of <span>{GameSet.rounds}</span> rounds<br/>
                 Game <span>{game_order}</span> out of <span>{GameSet.games_play.length}</span> games
             </label>
@@ -211,6 +217,9 @@ const GameBoard = ({state, ContainerRef, handleClick}) => {
                 game_order={state.game_order+1}
                 trial={state.trial}
                 round={state.round}
+                showMessage={!state.disableClicks}
+                
+                
             />
 
             <div
@@ -250,6 +259,7 @@ class Game extends React.Component {
             game_order: 0,
             trial: 0,
             round: 0,
+            showMessage: true,
             isLoading: false,
             disableClicks: false,
             mode: 'Game',
@@ -336,7 +346,6 @@ class Game extends React.Component {
 
     componentDidMount() {
         this.props.SetLimitedTime(true);
-
         this.newRound();
     }
 
@@ -407,6 +416,7 @@ class Game extends React.Component {
         });
 
         sc.disableClicks = true;
+
         this.setState(sc, () => {
             setTimeout(() => {
                 sc.disableClicks = false;
@@ -474,6 +484,7 @@ class Game extends React.Component {
                             state={this.state}
                             ContainerRef={this.ContainerRef}
                             handleClick={this.handleClick}
+                            disableClicks={this.disableClicks}
                         />
                     )
                 }
@@ -869,7 +880,7 @@ const FinishGame = ({Forward, game_order}) => {
 
 const welcome = () => (
     <>
-        <><span style={{fontSize: 'larger'}}><b>Welcome aboard!</b></span></><br/>
+        <><span style={{fontSize: 'larger'}}><b>XXXWelcome aboard!</b></span></><br/>
         {/*<b>Please read carefully the following instructions:</b><br/>*/}
         This study consists {GameSet.games_play.length} games,<br/>
         Each game will be played for many rounds which will consist of several trials.
