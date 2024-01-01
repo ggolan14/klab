@@ -374,7 +374,7 @@ export const GainMessage = ({message_more_info}) => {
         <br/><br/>
 
         {from_queen_road && (
-          `Your total cost was ${TollCost} coins`
+          `Your total cost was ${TollCost} coins. `
         )}
 
         Your net gain is {net_gain} coins
