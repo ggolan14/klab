@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import { Link, Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -236,8 +236,10 @@ class Dashboard extends React.Component {
             return <></>;
         if (this.state.navigate_to_exp)
             return <Navigate state={{exp: this.state.navigate_to_exp}} to={`${this.state.navigate_to_exp}/main`} />;
+            // return <Navigate to={`/${this.state.navigate_to_exp}/main`} />;
+
+        /// need to add isValidExperiments for each index in this.props.auth.user_permissions.experiments
         try {
-            /// need to add isValidExperiments for each index in this.props.auth.user_permissions.experiments
             return (
                 <div
                     className='klab-dashboard-panel'

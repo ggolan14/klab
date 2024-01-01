@@ -6,7 +6,11 @@
     /*font-size: 25px;*/
     font-size: min(3vw, 5vh);
     font-weight: bold;
-    cursor: pointer;
+    pointer-events: none;
+}
+
+.castle_name * {
+    pointer-events: none;
 }
 
 .castle_name_left {

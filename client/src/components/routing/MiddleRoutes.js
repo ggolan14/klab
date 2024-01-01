@@ -29,9 +29,9 @@ import GameHandle from "../screens/gameHandle/game_handle";
 import Reports from "../screens/reports/reports";
 import Todo from "../screens/todo/todo";
 import WaitForAction2 from "../screens/waitForAction/wait_for_action2";
-// import ExpMessages from "../screens/expMessages/exp_messages";
 
 // import VerChanges from "../screens/verChanges/ver_changes";
+// import ExpMessages from "../screens/expMessages/exp_messages";
 
 
 
@@ -51,7 +51,7 @@ const MiddleRoutes = ({isAuthenticated, isGameMode, expsList, authLoading}) => {
             <WaitForAction />
             <Alert />
             <section className={isAuthenticated && !isGameMode ? 'admin-main' : 'main'}>
-                <Router>
+                <Router >
                     {isAuthenticated && !isGameMode && <Navbar/>}
                     <Routes>
                         <Route exact path="/:exp" element={<RouterWrapper Component={GameHandle} />} />
@@ -66,14 +66,15 @@ const MiddleRoutes = ({isAuthenticated, isGameMode, expsList, authLoading}) => {
                                     <Route exact path="/settings/" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={Settings} /> }/>} />
                                     <Route exact path="/consent_form_editor/" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={ConsentFormEditor} /> }/>} />} />
                                     <Route exact path="/exp_details/" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={NewExp} /> } />} />
-                                    {/*<Route exact path="/exp_messages" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={ExpMessages} /> } />} />*/}
                                     <Route exact path="/chat/" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={Chat} /> } />} />
                                     <Route exact path="/reports/" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={Reports} /> } />} />
                                     <Route exact path="/todo/" element={<PrivateAdminRoute Component={() => <RouterWrapper Component={Todo} /> } />} />
+
                                 </>
                             )
                         }
                         <Route exact path='/login' element={<NotAuthRoute Component={Login} />} />
+                        {/*<Route path="/:exp/exp_messages/" element={<PrivateAdminRoute Component={ExpMessages} />} />*/}
                         {/*<Route path="/changes/" element={<PrivateAdminRoute Component={VerChanges} />} />*/}
                         {/*<PrivateRoute exact path='/consent_form/' component={ConsentForm} />*/}
                         <Route exact path='/not_found' element={<NotFound />} />

@@ -19,7 +19,6 @@ export default class GardenWagon extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps !== this.props){
-      console.log('cccccc')
     }
     // if (this.props.wagon_place === 'base' && this.state.current_place.includes('return'))
     //   return;

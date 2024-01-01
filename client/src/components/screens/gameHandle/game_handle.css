@@ -304,7 +304,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 85vh;
-    z-index: 9999;
+    z-index: 9999999;
 }
 
 .debugger-mode::-webkit-scrollbar {

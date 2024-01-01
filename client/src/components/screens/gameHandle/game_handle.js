@@ -464,9 +464,9 @@ const getSummary = ({exp, summary_args}) => {
             element: () => (
                 <QueenGardenSummary
                   summary_args={summary_args}
-                  SignOfReward={DB_RECORDS.Payment.SignOfReward}
-                  ShowUpFee={DB_RECORDS.Payment.ShowUpFee}
-                  GameBonus={DB_RECORDS.Payment.GameBonus}
+                  ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                  SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                  GameBonus={DB_RECORDS.Payment.bonus_payment}
                 />
             )
         },

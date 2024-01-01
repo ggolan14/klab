@@ -334,7 +334,6 @@ const Settings = (props) => {
             })
         },
     ];
-    console.log('game_settings', game_settings);
 
     const g_settings = [
         {
@@ -432,24 +431,6 @@ const Settings = (props) => {
         //         value,
         //     })
         // },
-        {
-            type: 'Input',
-            label: 'Practice trials:',
-            show: true,
-            class_name: '',
-            value: game_settings.game.pt,
-            input_type: 'number',
-            step: 1,
-            min: 1,
-            label_after: '',
-            pattern: '',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'pt',
-                value,
-            })
-        },
         {
             type: 'Input',
             label: 'Crown highway:',

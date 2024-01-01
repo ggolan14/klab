@@ -1651,10 +1651,7 @@ class GameMessages extends React.Component {
             <div
                 className='wp-game-intro'
             >
-                <div
-                  className="wp-gi-message-box"
-                  style={{fontSize: '22px'}}
-                >
+                <div className="wp-gi-message-box">
                     {
                         this[this.forms_arr[this.state.page].pages[this.state.form_index]]()
                         // this.state.forms[this.state.forms_arr[this.state.form_index]]()

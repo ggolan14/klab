@@ -8,14 +8,18 @@ const span_style = {
     color: 'darkmagenta'
 }
 
-const Summary = ({SignOfReward, ShowUpFee, GameBonus, summary_args}) => {
+const Summary = (props) => {
     return (
         <label
         >
-
+            Based on the points you earned, your bonus payment is {props.SignOfReward}{props.GameBonus}.<br/>
+            You will get your bonus after all participants will finish the study
         </label>
     )
 };
+// SignOfReward
+// ShowUpFee
+// GameBonus
 
 
 export default Summary;

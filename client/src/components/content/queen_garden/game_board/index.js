@@ -8,9 +8,7 @@ import GardenWagon from "./wagon/wagon";
 import {QueenGardenGameBoardContext} from "../context/qg_board_context";
 import {Flowers} from "./flowers/flowers";
 
-export const QueenGameBoard = ({
-                                 gameState, changeWagonPlace, nextTrial
-                               }) => {
+export const QueenGameBoard = ({gameState, changeWagonPlace}) => {
 
   return (
     <QueenGardenGameBoardContext.Provider
@@ -30,9 +28,9 @@ export const QueenGameBoard = ({
         <GardenWagon
           wagon_place={gameState.wagon_place}
           move_direction={gameState.move_direction}
-          flower_color={(gameState.hide_flower || !gameState.with_flower)?null:gameState.flowers[0]}
+          flower_color={(!gameState.flower_on_wagon || gameState.hide_flower || !gameState.with_flower)?null:gameState.flowers[0]}
         />
-        <Flowers nextTrial={nextTrial} flowers={gameState.with_flower? gameState.flowers.slice(1) : gameState.flowers}/>
+        <Flowers flowers={gameState.with_flower? gameState.flowers.slice(1) : gameState.flowers}/>
       </div>
     </QueenGardenGameBoardContext.Provider>
   )

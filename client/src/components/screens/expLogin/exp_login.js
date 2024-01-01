@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import './exp_login.css';
 import {GetExperimentLabel} from "../../../data/experiments";
-import {isDevUser} from "../../../utils/app_utils";
 
 class ExpLogin extends React.Component {
 
@@ -103,8 +102,7 @@ class ExpLogin extends React.Component {
     }
 
     componentDidMount() {
-        if (isDevUser())
-            this.goNext('LogInToGame')
+
     }
 
     closeErrorInputs() {

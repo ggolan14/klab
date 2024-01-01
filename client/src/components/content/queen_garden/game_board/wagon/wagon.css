@@ -14,6 +14,23 @@
     position: absolute;
 }
 
+.qg_wagon_place_game_load {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: kf_qg_wagon_place_game_load 2s linear infinite;
+}
+
+@keyframes kf_qg_wagon_place_game_load {
+    0%{
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
 .qg_wagon_place_base {
     top: 87%;
     left: 42%;
@@ -93,6 +110,9 @@
 }
 .qg_wagon_place_castle_toll_1 {
     animation: kf_castle_toll_1 1s linear forwards;
+}
+.qg_wagon_place_castle_toll_finish_to_end_1 {
+    animation: kf_castle_toll_finish_to_end_1 1s linear forwards;
 }
 .qg_wagon_place_castle_toll_finish_1 {
     animation: kf_castle_toll_finish_1 1s linear forwards;
@@ -176,12 +196,12 @@
         rotate: -90deg;
     }
     100% {
-        top: 45%;
+        top: 55%;
         left: 20%;
         rotate: -90deg;
     }
 }
-@keyframes kf_castle_toll_finish_1 {
+@keyframes kf_castle_toll_finish_to_end_1 {
     0% {
         top: 45%;
         left: 20%;
@@ -195,6 +215,17 @@
     100% {
         top: 15%;
         left: 40%;
+    }
+}
+@keyframes kf_castle_toll_finish_1 {
+    0% {
+        top: 45%;
+        left: 20%;
+        rotate: -90deg;
+    }
+    100% {
+        top: 75%;
+        left: 20%;
     }
 }
 @keyframes kf_castle_return_1 {
@@ -236,7 +267,7 @@
         rotate: -90deg;
     }
     100% {
-        top: 45%;
+        top: 55%;
         left: 35%;
         rotate: -90deg;
     }
@@ -248,8 +279,8 @@
         rotate: -90deg;
     }
     100% {
-        top: 15%;
-        left: 40%;
+        top: 75%;
+        left: 35%;
     }
 }
 @keyframes kf_castle_return_2 {
@@ -292,7 +323,7 @@
         rotate: -90deg;
     }
     100% {
-        top: 45%;
+        top: 55%;
         left: 50%;
         rotate: -90deg;
     }
@@ -304,8 +335,8 @@
         rotate: -90deg;
     }
     100% {
-        top: 15%;
-        left: 55%;
+        top: 75%;
+        left: 50%;
     }
 }
 @keyframes kf_castle_return_3 {
@@ -348,7 +379,7 @@
         rotate: 90deg;
     }
     100% {
-        top: 45%;
+        top: 55%;
         left: 65%;
         rotate: 90deg;
     }
@@ -359,14 +390,9 @@
         left: 65%;
         rotate: 90deg;
     }
-    50% {
-        top: 15%;
-        left: 65%;
-        rotate: 90deg;
-    }
     100% {
-        top: 15%;
-        left: 55%;
+        top: 75%;
+        left: 65%;
     }
 }
 @keyframes kf_castle_return_4 {

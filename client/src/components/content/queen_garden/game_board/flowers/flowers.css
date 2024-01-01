@@ -1,3 +1,8 @@
+:root {
+    --BRACH_SAD_TRANSFORM_RIGHT: 130deg;
+    --BRACH_SAD_TRANSFORM_LEFT: -130deg;
+}
+
 .flowers {
     /*display: grid;*/
     /*grid-auto-flow: column;*/
@@ -14,7 +19,8 @@
     height: max-content;
     width: max-content;
     position: relative;
-    z-index: 0;
+    z-index: 5;
+    /*z-index: 0;*/
     scale: 0.7;
 }
 
@@ -45,7 +51,7 @@
     right: 17px;
     animation: eye 4s linear infinite normal 0.5s;
 }
-.flower .head .mouth {
+.flower .head .mouth_smile {
     background: #ecf0f1;
     border-radius: 30px;
     bottom: 2px;
@@ -55,6 +61,20 @@
     position: absolute;
     left: 50%;
     width: 15px;
+}
+.flower .head .mouth_sad {
+    background: #ecf0f1;
+    border-radius: 30px;
+    bottom: 2px;
+    /*t r b l*/
+    /*clip: rect(8px, 15px, 16px, 0);*/
+    clip: rect(0px, 15px, 8px, 0px);
+    height: 20px;
+    margin-left: -7.5px;
+    position: absolute;
+    left: 50%;
+    width: 15px;
+    top: 80%;
 }
 
 .flower .petals {
@@ -92,6 +112,14 @@
     22px -7px #1c4d03;
 }
 
+.flower .petals.flower_purple {
+    box-shadow:15px 17px darkmagenta,
+    -15px 17px darkmagenta,
+    -22px -7px darkmagenta,
+    0px -22px darkmagenta,
+    22px -7px darkmagenta;
+}
+
 .flower .petals.flower_blue {
     box-shadow:15px 17px #0124b6,
     -15px 17px #0124b6,
@@ -101,11 +129,11 @@
 }
 
 .flower .petals.flower_pink {
-    box-shadow:15px 17px #bf00ff,
-    -15px 17px #bf00ff,
-    -22px -7px #bf00ff,
-    0px -22px #bf00ff,
-    22px -7px #bf00ff;
+    box-shadow:15px 17px pink,
+    -15px 17px pink,
+    -22px -7px pink,
+    0px -22px pink,
+    22px -7px pink;
 }
 
 
@@ -117,7 +145,7 @@
     z-index:-2;
     animation:flower_trunk 2s infinite linear;
 }
-.flower .left-branch{
+.flower .left-branch_smile{
     background: #77b039;
     height: 35px; width: 9px;
     position: absolute; left: -12px; top: 24px;
@@ -133,8 +161,24 @@
     -ms-transform: rotate(-50deg);
     -o-transform: rotate(-50deg);
 }
+.flower .left-branch_sad{
+    background: #77b039;
+    height: 35px; width: 9px;
+    position: absolute; left: -12px; top: 24px;
+    border-radius:100% 0% 0% 0%;
+    -webkit-border-radius:100% 0% 0% 0%;
+    -moz-border-radius:100% 0% 0% 0%;
+    -ms-border-radius:100% 0% 0% 0%;
+    -o-border-radius:100% 0% 0% 0%;
 
-.flower .right-branch{
+    transform: rotate(var(--BRACH_SAD_TRANSFORM_LEFT));
+    -webkit-transform: rotate(var(--BRACH_SAD_TRANSFORM_LEFT));
+    -moz-transform: rotate(var(--BRACH_SAD_TRANSFORM_LEFT));
+    -ms-transform: rotate(var(--BRACH_SAD_TRANSFORM_LEFT));
+    -o-transform: rotate(var(--BRACH_SAD_TRANSFORM_LEFT));
+}
+
+.flower .right-branch_smile{
     background: #77b039;
     height: 35px; width: 9px;
     position: absolute; top: 24px; left: 10px;
@@ -143,12 +187,27 @@
     -moz-border-radius:0% 100% 0% 0%;
     -ms-border-radius:0% 100% 0% 0%;
     -o-border-radius:0% 100% 0% 0%;
-
     transform: rotate(50deg);
     -webkit-transform: rotate(50deg);
     -moz-transform: rotate(50deg);
     -ms-transform: rotate(50deg);
     -o-transform: rotate(50deg);
+}
+
+.flower .right-branch_sad{
+    background: #77b039;
+    height: 35px; width: 9px;
+    position: absolute; top: 24px; left: 10px;
+    border-radius:0% 100% 0% 0%;
+    -webkit-border-radius:0% 100% 0% 0%;
+    -moz-border-radius:0% 100% 0% 0%;
+    -ms-border-radius:0% 100% 0% 0%;
+    -o-border-radius:0% 100% 0% 0%;
+    transform: rotate(var(--BRACH_SAD_TRANSFORM_RIGHT));
+    -webkit-transform: rotate(var(--BRACH_SAD_TRANSFORM_RIGHT));
+    -moz-transform: rotate(var(--BRACH_SAD_TRANSFORM_RIGHT));
+    -ms-transform: rotate(var(--BRACH_SAD_TRANSFORM_RIGHT));
+    -o-transform: rotate(var(--BRACH_SAD_TRANSFORM_RIGHT));
 }
 
 @keyframes petals {

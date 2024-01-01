@@ -1,6 +1,6 @@
 .qg_land {
     height: var(--LAND_HEIGHT);
-    background: #eb4 linear-gradient(to bottom, #eb4 0%, #962 100%);
+    background: var(--LAND_COLOR);
     overflow: hidden;
     z-index: 2;
     margin: auto;

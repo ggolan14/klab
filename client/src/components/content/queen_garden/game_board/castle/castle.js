@@ -6,17 +6,8 @@ import {Flower} from "../flowers/flower";
 const ALLOW_PLACES = ['1', '2', '3', '4', 'queen'];
 
 export const Castle = () => {
-  const {gameState, changeWagonPlace} = useContext(QueenGardenGameBoardContext);
+  const {gameState} = useContext(QueenGardenGameBoardContext);
 
-  // const allowClick = !gameState.disable_castle_click && (ALLOW_PLACES.indexOf(gameState.wagon_place) > -1);
-  const allowClick = !gameState.disable_castle_click;
-
-  const onClick = () => {
-    if (!allowClick) return;
-    changeWagonPlace('castle');
-  }
-
-  // const flower_color = gameState.flowers[0];
   const flower_color = gameState.hide_flower? gameState.flowers[0] : null;
   const classes = [
     "shadow", "minar-top minar-top-2", "minar-top","minar ha",
@@ -33,10 +24,6 @@ export const Castle = () => {
   return (
     <div
       className="castle_container"
-      onClick={allowClick?onClick:undefined}
-      style={{
-        cursor: allowClick? 'pointer' : 'not-allowed'
-      }}
     >
       {flower_color && (
         <div className='castle_flower'>

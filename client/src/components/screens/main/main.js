@@ -18,7 +18,7 @@ import {CURRENT_URL} from "../../../utils/current_url";
 
 const LinkItem = ({exp, item}) => {
 
-    let disable_link = ['changes_pathname'].indexOf(item) > -1;
+    let disable_link = ['exp_messages_pathname', 'changes_pathname'].indexOf(item) > -1;
 
     return (
         <Link

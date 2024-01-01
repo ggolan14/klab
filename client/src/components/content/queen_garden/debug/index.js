@@ -9,7 +9,7 @@ export const DebuggerItem = ({debugger_props, TotalPoints, TrialResults}) => {
     <DebuggerModalView>
       <div className='Q_G-Debugger'>
         <div className='Q_G-Debugger1'>
-          <label>Game points: <span>{TotalPoints['GameIndex_'+debugger_props.trial_props.GameIndex]}</span></label>
+          <label>Game points: <span>{TotalPoints['GameOrder_'+debugger_props.trial_props.GameOrder]}</span></label>
         </div>
 
         <div className='Q_G-Debugger1'>

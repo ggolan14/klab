@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
 
-export const Tree = ({fontSize, top, left, treeRef}) => useMemo(() => {
-  let tree_styles = {};
+export const Tree = ({top, left, tree_style = {}, class_name = ''}) => useMemo(() => {
+  let tree_styles = {...tree_style};
   if (top !== undefined)
     tree_styles.top = top;
   if (left !== undefined)
@@ -9,7 +9,7 @@ export const Tree = ({fontSize, top, left, treeRef}) => useMemo(() => {
 
   return (
     <div
-      className='tree_container'
+      className={class_name || 'tree_container'}
       style={tree_styles}
     >
       <div
@@ -22,4 +22,4 @@ export const Tree = ({fontSize, top, left, treeRef}) => useMemo(() => {
       </div>
     </div>
   )
-}, [fontSize, top, left]);
+}, [top, left, tree_style, class_name]);

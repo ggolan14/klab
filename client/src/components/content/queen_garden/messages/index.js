@@ -1,6 +1,7 @@
 import React from "react";
 import './msg.css';
-import {getMessage} from "./msg";
+import {getMessage, QueenGardenGameMessageImg} from "./msg";
+import {Flower} from "../game_board/flowers/flower";
 
 class QueenGardenMessages extends React.Component {
 
@@ -10,47 +11,65 @@ class QueenGardenMessages extends React.Component {
 
     this.state = {
       message_id: this.props.message_id,
+      message_more_info: this.props.message_more_info,
+      button_label: this.props.button_label,
+      button_class_name: this.props.button_class_name,
+      message_position: this.props.message_position,
     };
-
-    this.Forward = this.props.Forward;
-    this.button_label = this.props.button_label;
-    this.message_position = this.props.message_position || 'left';
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.message_id !== prevProps.message_id) {
-      this.Forward = this.props.Forward;
-      this.button_label = this.props.button_label;
-      this.message_position = this.props.message_position || 'left';
+    if (this.props !== prevProps) {
       this.setState({
-        message_id: this.props.message_id
+        message_id: this.props.message_id,
+        message_more_info: this.props.message_more_info,
+        button_label: this.props.button_label,
+        button_class_name: this.props.button_class_name,
+        message_position: this.props.message_position,
       });
 
     }
 
   }
 
-  button = () => {
-    return (
-      <button
-        style={{margin: 'auto'}}
-        onClick={() => this.Forward()}
-      >
-        {this.button_label}
-      </button>
-    )
-  }
-
   render() {
     const MessageComp = getMessage(this.state.message_id);
+    // const MessageImg = getMessageImg(this.state.message_id);
 
     return (
-      <div
-        className={'qg_msg ' + `msg_pos_${this.message_position}`}
-      >
-        <MessageComp/>
-        {this.button_label && this.button()}
-      </div>
+      <>
+        <QueenGardenGameMessageImg
+          message_id={this.state.message_id}
+          message_position={this.state.message_position}
+          from_road={this.state.message_more_info?.from_road}
+        />
+
+        {this.state.message_more_info && this.state.message_more_info.flower_color && (
+          <div
+            className={'qg_msg_sad_flower qg_msg_sad_flower_' + this.state.message_more_info.from_road}
+          >
+            <Flower
+              flower_color={this.state.message_more_info.flower_color}
+              flower_type='sad'
+            />
+          </div>
+        )}
+        <div
+          className={`qg_msg msg_pos_${this.state.message_position}`}
+        >
+
+          <MessageComp message_more_info={this.state.message_more_info}/>
+          {this.state.button_label && (
+            <button
+              className={this.state.button_class_name || ''}
+              style={{margin: 'auto'}}
+              onClick={() => this.props.Forward()}
+            >
+              {this.state.button_label}
+            </button>
+          )}
+        </div>
+      </>
     )
   }
 }

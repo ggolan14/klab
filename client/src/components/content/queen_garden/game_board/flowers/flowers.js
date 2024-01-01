@@ -3,11 +3,10 @@ import './flowers.css';
 import {Flower} from "./flower";
 
 
-export const Flowers = ({flowers, nextTrial}) => {
+export const Flowers = ({flowers}) => {
   return (
     <div
       className='flowers'
-      onClick={nextTrial}
     >
       {flowers.map(
         (flower_color, flower_index) => (
