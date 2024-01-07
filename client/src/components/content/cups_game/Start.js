@@ -99,7 +99,7 @@ const GameWelcome = ({Forward}) => {
                                If the ball falls into a cup, you will be rewarded with 100 points.<br></br>
 						       If there is no cup in the falling location, the ball will continue falling – and you will not get any points. 
 						       <br></br>In addition, in each trial you will pay a storage fee (cups tax) – which is the overall number of cups you currently have on your screen, 
-						       squared (for example, if you have 3 cups, the storage fee will be 3^2=9).
+						       squared (for example, if you have 3 cups, the storage fee will be 3<sup>2</sup>=9).
                     </label>
                     <label>
                         At the end of each trial, one location will be selected randomly by the computer and you will be asked to consider either donating one of your cups and giving it away OR placing a new cup. 
