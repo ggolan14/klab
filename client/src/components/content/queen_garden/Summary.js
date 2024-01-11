@@ -9,7 +9,7 @@ const span_style = {
 }
 
 const Summary = (props) => {
-     let final_bonus=JSON.stringify(props.summary_args.reward_sum);
+     const final_bonus = props.summary_args.reward_sum;
      console.log("---> final_bonus="+final_bonus)
      return (
         <label
