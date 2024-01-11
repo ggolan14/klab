@@ -22,6 +22,7 @@ class Start extends React.Component {
         this.DebugMode = props.dmr;
 
         this.TrialsForBonus = [];
+        this.TotalBonus = [];
 
         this.PaymentsSettings = props.game_settings.payments;
 
@@ -167,6 +168,9 @@ class Start extends React.Component {
     }
 
     Forward(finish_game, game_data){
+        if(finish_game==true){
+            this.addGameBonus(game_data);
+        }
         let sc = this.state;
         if (sc.tasks_index === (this.game_template.length-1)){
             this.props.SetLimitedTime(false);
@@ -233,8 +237,16 @@ class Start extends React.Component {
                               local_t: current_time.time,
                               local_d: current_time.date,
                           },
-                      }).then((res) => {});
-                      this.props.callbackFunction('FinishGame', {need_summary: true, args: {debug_args, bonus_pay: 'ttt'}});
+                      }).then((res) => {}); 
+
+                      
+                       var total_bonus=this.TotalBonus.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+                       var exchange_ratio = this.PaymentsSettings.exchange_ratio;
+                       // Using reduce to calculate the sum of array elements
+                       total_bonus = total_bonus / exchange_ratio ;
+                       total_bonus= (Math.round(total_bonus * 100) / 100).toFixed(2);
+                       debug_args.reward_sum=total_bonus;
+                       this.props.callbackFunction('FinishGame', {need_summary: true, args: debug_args});
                   }
                 );
             });
@@ -296,7 +308,13 @@ class Start extends React.Component {
         // insertGameLine={this.props.insertGameLine}
         // sendGameDataToDB={this.props.sendGameDataToDB}
     }
-
+    addGameBonus(game_data){
+        var selectedTrail= Math.floor(Math.random() * game_data.length);
+        var selectedTrailPoints=game_data[selectedTrail].TrialPoints;
+        this.TotalBonus.push(selectedTrailPoints);
+        //console.log("--->addGameBonus  game_data.length="+game_data.length + " selectedTrail = "+selectedTrail+"   selectedTrailPoints="+selectedTrailPoints+"    this.TotalBonus="+this.TotalBonus);
+        //console.log("---> this.PaymentsSettings.exchange_ratio="+this.PaymentsSettings.exchange_ratio);
+     }
     render() {
         if (!this.state || this.state.isLoading || !this.state.game_settings || !Array.isArray(this.game_template)) {
             return <QG_GameLoading loading={true}/>;

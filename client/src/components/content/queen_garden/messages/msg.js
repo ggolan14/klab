@@ -364,6 +364,10 @@ export const GainMessage = ({message_more_info}) => {
   const {from_queen_road} = message_more_info;
 
   const net_gain = from_queen_road? (RewardValue-TollCost) : RewardValue;
+  let coinsStr= TollCost !== 1 ? 'coins. ' : 'coin. ';
+  
+    
+  
   return (
     <div
       className='qg_delivery_gain'
@@ -372,11 +376,13 @@ export const GainMessage = ({message_more_info}) => {
         You have successfully delivered the plants to the Queen’s castle.<br/>
         You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1?'s':''} upon successful delivery.
         <br/><br/>
+        
+
 
         {from_queen_road && (
-          `Your total cost was ${TollCost} coins. `
+          `Your total cost was ${TollCost} `+coinsStr
         )}
-
+      <br></br>
         Your net gain is {net_gain} coins
       </p>
       {/*<img src={ImgGain}/>*/}
