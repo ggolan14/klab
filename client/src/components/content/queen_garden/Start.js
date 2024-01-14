@@ -6,7 +6,7 @@ import {getTimeDate} from "../../../utils/app_utils";
 import {QueenGardenContext} from "./context/qg_context";
 import QueenGardenTutorial from "./tutorial";
 import QueenGardenGame from "./game";
-import {QG_GameLoading} from "./game/game_loading";
+import {QueenGardenGameLoading} from "./game/game_loading";
 
 const ThisExperiment = 'QueenGarden';
 let firstTime = true;
@@ -169,16 +169,16 @@ class Start extends React.Component {
 
     Forward(finish_game, game_data){
         
-        if(finish_game==true){
+        if(finish_game===true){
             //console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p + "   firstTime ="+ firstTime)
-            if(this.props.game_settings.game.w_p == "No"){
+            if(this.props.game_settings.game.w_p === "No"){
             
                // console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p+"  firstTime="+firstTime)
                 //console.log("-------------> 111 call addGameBonus");
                 this.addGameBonus(game_data);
             }
             else{
-                if(this.props.game_settings.game.w_p == "Yes" &&  firstTime== true ){
+                if(this.props.game_settings.game.w_p === "Yes" &&  firstTime=== true ){
                     //console.log("--- FIRST TIME skipping")
                     firstTime = false;
                 }else{
@@ -362,7 +362,7 @@ class Start extends React.Component {
         }
     render() {
         if (!this.state || this.state.isLoading || !this.state.game_settings || !Array.isArray(this.game_template)) {
-            return <QG_GameLoading loading={true}/>;
+            return <QueenGardenGameLoading loading={true}/>;
         }
 
         return (

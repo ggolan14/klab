@@ -3,8 +3,8 @@ import {QueenGardenContext} from "../context/qg_context";
 import {QueenGameBoard} from "../game_board";
 import QueenGardenMessages from "../messages";
 import {BoardInitialState, WAGON_ANIMATION_TIMING} from "../game_board/constants";
-import {QG_GameLoading} from "./game_loading";
-import {QG_GameDebug} from "./game_debug";
+import {QueenGardenGameLoading} from "./game_loading";
+import {QueenGardenGameDebug} from "./game_debug";
 import {getTimeDate} from "../../../../utils/app_utils";
 
 const GAME_LOAD_TIME = 1.5 * 1000;
@@ -385,7 +385,7 @@ class QueenGardenGame extends React.Component {
 
     return (
       <div>
-        <QG_GameLoading loading={this.state.game_loading}/>
+        <QueenGardenGameLoading loading={this.state.game_loading}/>
         {!this.state.game_loading && message_id && (
           <QueenGardenMessages
             button_label={button_label}
@@ -413,7 +413,7 @@ class QueenGardenGame extends React.Component {
         )}
 
         {!this.state.game_loading && this.context.DebugMode && (
-          <QG_GameDebug
+          <QueenGardenGameDebug
             debugger_props={this.state.debugger_props}
             current_trial={this.state.trial}
             game_mode={true}

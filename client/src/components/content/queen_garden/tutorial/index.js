@@ -3,7 +3,7 @@ import {QueenGardenContext} from "../context/qg_context";
 import {QueenGameBoard} from "../game_board";
 import QueenGardenMessages from "../messages";
 import {BoardInitialState, WAGON_ANIMATION_TIMING} from "../game_board/constants";
-import {QG_GameDebug} from "../game/game_debug";
+import {QueenGardenGameDebug} from "../game/game_debug";
 // componentDidUpdate(prevProps, prevState, snapshot) {
 //   if (prevProps !== this.props){
 //   }
@@ -338,7 +338,7 @@ class QueenGardenTutorial extends React.Component {
         />
 
         {this.context.DebugMode && (
-          <QG_GameDebug
+          <QueenGardenGameDebug
             debugger_props={this.state.debugger_props}
             button={{
               button_label: 'Skip Tutorial',
