@@ -9,7 +9,7 @@ import QueenGardenGame from "./game";
 import {QG_GameLoading} from "./game/game_loading";
 
 const ThisExperiment = 'QueenGarden';
-
+let firstTime = true;
 class Start extends React.Component {
 
     constructor(props) {
@@ -168,8 +168,44 @@ class Start extends React.Component {
     }
 
     Forward(finish_game, game_data){
+        
         if(finish_game==true){
-            this.addGameBonus(game_data);
+            //console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p + "   firstTime ="+ firstTime)
+            if(this.props.game_settings.game.w_p == "No"){
+            
+               // console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p+"  firstTime="+firstTime)
+                //console.log("-------------> 111 call addGameBonus");
+                this.addGameBonus(game_data);
+            }
+            else{
+                if(this.props.game_settings.game.w_p == "Yes" &&  firstTime== true ){
+                    //console.log("--- FIRST TIME skipping")
+                    firstTime = false;
+                }else{
+                    //console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p+"  firstTime="+firstTime)
+                    //console.log("-------------> 222 call addGameBonus");
+                    this.addGameBonus(game_data);
+                }
+            }
+            
+
+            /*
+            if(this.props.game_settings.game.w_p == "Yes"){
+                console.log("---> 111")
+                if(firstTime == true){
+                    console.log("---> 222")
+                    firstTime = false
+                    }
+                else{
+                    console.log("---> 333")
+                    this.addGameBonus(game_data);
+                }
+                
+            }else{
+                console.log("---> 444")
+                this.addGameBonus(game_data);
+            }
+          */
         }
         let sc = this.state;
         if (sc.tasks_index === (this.game_template.length-1)){
@@ -201,13 +237,15 @@ class Start extends React.Component {
             this.props.insertTextInput('RewardSum', trials_bonus);
             this.props.insertTextInput('RewardAvg', reward_avg);
             this.props.insertTextInput('FinalBonus', bonus_payment);
-
+            var total_bonus=this.calculateBonus();
+            this.PaymentsSettings.total_bonus = total_bonus;
+            console.log("---> 111 total_bonus="+this.PaymentsSettings.total_bonus +"    total_bonus="+total_bonus)
             this.props.insertPayment({
                 exchange_ratio: this.PaymentsSettings.exchange_ratio,
                 bonus_endowment: this.PaymentsSettings.bonus_endowment,
                 show_up_fee: this.PaymentsSettings.show_up_fee,
                 sign_of_reward: this.PaymentsSettings.sign_of_reward,
-                bonus_payment,
+                bonus_payment:this.PaymentsSettings.total_bonus,
                 Time: current_time.time,
                 Date: current_time.date
             });
@@ -239,12 +277,12 @@ class Start extends React.Component {
                           },
                       }).then((res) => {}); 
 
-                      
+                      /*
                        var total_bonus=this.TotalBonus.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
                        var exchange_ratio = this.PaymentsSettings.exchange_ratio;
-                       // Using reduce to calculate the sum of array elements
                        total_bonus = total_bonus / exchange_ratio ;
                        total_bonus= (Math.round(total_bonus * 100) / 100).toFixed(2);
+                       */
                        debug_args.reward_sum=total_bonus;
                        this.props.callbackFunction('FinishGame', {need_summary: true, args: debug_args});
                   }
@@ -305,16 +343,23 @@ class Start extends React.Component {
             });
         }
 
-        // insertGameLine={this.props.insertGameLine}
-        // sendGameDataToDB={this.props.sendGameDataToDB}
+      
     }
-    addGameBonus(game_data){
-        var selectedTrail= Math.floor(Math.random() * game_data.length);
-        var selectedTrailPoints=game_data[selectedTrail].TrialPoints;
-        this.TotalBonus.push(selectedTrailPoints);
-        //console.log("--->addGameBonus  game_data.length="+game_data.length + " selectedTrail = "+selectedTrail+"   selectedTrailPoints="+selectedTrailPoints+"    this.TotalBonus="+this.TotalBonus);
-        //console.log("---> this.PaymentsSettings.exchange_ratio="+this.PaymentsSettings.exchange_ratio);
+    calculateBonus(){
+        var total_bonus=this.TotalBonus.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        var exchange_ratio = this.PaymentsSettings.exchange_ratio;
+        total_bonus = total_bonus / exchange_ratio ;
+        total_bonus= (Math.round(total_bonus * 100) / 100).toFixed(2);
+        console.log("---> in calculateBonus()  total_bonus="+total_bonus+"  exchange_ratio="+exchange_ratio)
+        return total_bonus;
      }
+    addGameBonus(game_data){
+        console.log("-------------> in addGameBonus");
+        var selectedTrial= Math.floor(Math.random() * game_data.length);
+        var selectedTrailPoints=game_data[selectedTrial].TrialPoints;
+        console.log("---> game_data.length="+game_data.length + "   selectedTrial="+(selectedTrial+1)+"   selectedTrailPoints="+selectedTrailPoints)
+        this.TotalBonus.push(selectedTrailPoints);
+        }
     render() {
         if (!this.state || this.state.isLoading || !this.state.game_settings || !Array.isArray(this.game_template)) {
             return <QG_GameLoading loading={true}/>;

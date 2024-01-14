@@ -1,12 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-const span_style = {
-    marginLeft: '0.3rem',
-    marginRight: '0.3rem',
-    fontWeight: 'bold',
-    color: 'darkmagenta'
-}
 
 const Summary = (props) => {
      const final_bonus = props.summary_args.reward_sum;
@@ -19,10 +11,6 @@ const Summary = (props) => {
         </label>
     )
 };
-// SignOfReward
-// ShowUpFee
-// GameBonus
-
 
 export default Summary;
 
