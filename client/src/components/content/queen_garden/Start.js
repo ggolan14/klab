@@ -239,7 +239,6 @@ class Start extends React.Component {
             this.props.insertTextInput('FinalBonus', bonus_payment);
             var total_bonus=this.calculateBonus();
             this.PaymentsSettings.total_bonus = total_bonus;
-            console.log("---> 111 total_bonus="+this.PaymentsSettings.total_bonus +"    total_bonus="+total_bonus)
             this.props.insertPayment({
                 exchange_ratio: this.PaymentsSettings.exchange_ratio,
                 bonus_endowment: this.PaymentsSettings.bonus_endowment,
@@ -252,15 +251,11 @@ class Start extends React.Component {
 
             sc.isLoading = true;
 
-            let debug_args = null;
-
-            if (this.DebugMode){
-                debug_args = {
-                    TrialsForBonus: this.TrialsForBonus,
-                    reward_sum,
-                    reward_avg,
-                    bonus_payment
-                }
+            let debug_args = {
+                TrialsForBonus: this.TrialsForBonus,
+                reward_sum,
+                reward_avg,
+                bonus_payment
             }
             this.setState(sc, () => {
                 this.props.sendGameDataToDB().then(
