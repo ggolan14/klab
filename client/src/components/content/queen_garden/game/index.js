@@ -338,6 +338,9 @@ class QueenGardenGame extends React.Component {
 
       Pi = last_prob + Adaptability*(2*Cti - 1);
       Pi = Math.max(Pi, P0);
+      if(Pi>=1){
+        Pi=1;
+      }
 
       // const road_total = Math.round((Pi)*100)/100;
       // roads_prob[road] = road_total>=1? 1 : Math.max(road_total, P0);
@@ -422,7 +425,7 @@ class QueenGardenGame extends React.Component {
       </div>
     )
   }
-}
+} 
 
 QueenGardenGame.contextType = QueenGardenContext;
 
