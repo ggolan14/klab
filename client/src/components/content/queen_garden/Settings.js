@@ -338,6 +338,19 @@ const Settings = (props) => {
     const g_settings = [
         {
             type: 'Select',
+            label: 'Force full screen:',
+            show: true,
+            options: ['true', 'false'],
+            value: game_settings.game.force_full_screen,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'force_full_screen',
+                value,
+            })
+        },
+        {
+            type: 'Select',
             label: 'Condition:',
             show: true,
             options: [
