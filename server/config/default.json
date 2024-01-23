@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb://deliran:HlqKagm5ruCxQ70kk3U6@127.0.0.1:27017/klab?authMechanism=DEFAULT",
+  "jwtSecret": "salvadorgct",
+  "githubClientId": "a07777dff9f7f77358a3",
+  "githubSecret": "8bee12a0e98362e19c77c2f0b24463545be200dc"
+}
