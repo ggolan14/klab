@@ -16,6 +16,7 @@ import setAuthToken from '../utils/setAuthToken';
 
 export const getUserInfo = async user_email => {
     try {
+        console.log("---> in getUserInfo")
         const res = await api.get(`/users/info/${user_email}`);
         return res;
     } catch (err) {
@@ -25,6 +26,7 @@ export const getUserInfo = async user_email => {
 
 // Login User
 export const login = (email, password) => async dispatch => {
+    console.log("---> in authe.js login")
     const body = { email, password };
     try {
         const res = await api.post('/auth', body);
@@ -35,9 +37,12 @@ export const login = (email, password) => async dispatch => {
                 type: LOGIN_SUCCESS,
                 payload: res.data
             });
+            console.log("---> before load user login")
             dispatch(loadUser());
+            console.log("---> after load user login")
         }
     } catch (err) {
+        console.log("---> Error occured during load user")
         const errors = err?.response?.data?.errors;
 
         if (errors) {
@@ -52,16 +57,20 @@ export const login = (email, password) => async dispatch => {
 
 // Load User
 export const loadUser = () => async dispatch => {
-
-    if (localStorage.token)
+console.log("---> in loadUser()")
+    if (localStorage.token){
+        console.log("---> localStorage.token=true "+localStorage.token)
         setAuthToken(localStorage.token);
-    else
+    }
+    else{
+        console.log("---> localStorage.token=false "+localStorage.token)
         // return;
         return dispatch({type: AUTH_ERROR});
+    }
 
     try {
         const res = await api.get('/auth');
-
+console.log("---> 111 in load user")
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -76,7 +85,9 @@ export const loadUser = () => async dispatch => {
             type: TODO_LOADED,
             payload: res.data
         });
+        console.log("---> 222 in load user")
     } catch (err) {
+        console.log("---> ERROR: "+err)
 
         dispatch({
             type: AUTH_ERROR

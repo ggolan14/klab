@@ -62,6 +62,7 @@ function isValidEmail(email) {
 }
 
 const Login = ({login}) => {
+    console.log("---> in Login")
     const [state, dispatch] = useReducer(reducer, initialState, init);
 
     const onChange = e => {
@@ -109,6 +110,7 @@ const Login = ({login}) => {
     };
 
     const onSubmit = async e => {
+        console.log("---> in onSubmit()  state.email="+state.email+"   state.password="+state.password);
         e.preventDefault();
         login(state.email, state.password);
     };
