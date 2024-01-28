@@ -47,7 +47,8 @@ const Toll_Road_Tutorial = ({GameSet}) => {
       <br/><br/>
       The guard tells you that he and his fellow guards are patrolling the forest paths for smugglers. He tells you that increased foot traffic means he’ll have to bring more guards tomorrow.
       <br/><br/>
-      The guards react to repeat activity in the Shadewood, the more a path is used the larger the forces patrolling it, increasing the likelihood of getting stopped in the future. Awareness decays over time, as guards shift towards more frequently used pathways.
+      The guards react to repeated activity in the Shadewood forest. The more a path is used, the more guards patrol it, increasing the likelihood of getting stopped in the future. But their awareness decays over time, so guards will patrol less on pathways that have not been used for a while.
+
 
       <img
         src={KNIGHT_IMG}

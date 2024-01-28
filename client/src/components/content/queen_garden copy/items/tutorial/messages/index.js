@@ -75,7 +75,7 @@ const tutorialStep2 = ({GameSet}) => {
         you need to travel to {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt} once more to hire additional hands.
         <br/><br/>
 
-        The {GameSet.CrownHighway_txt} is shut down today,  you will have to travel through the Shadewood.
+        The {GameSet.CrownHighway_txt} is shut down today, so you will have to travel through the Shadewood forest. 
         There are 4 paths to choose from, for today, you decide to take the [Road #1]
 
         1:Click on the sign that says "{GameSet.Road1_txt}"
@@ -100,7 +100,7 @@ const tutorialStep3 = ({GameSet}) => {
         <br/><br/>
         1: Click on {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt} again
         <br/><br/>
-        Note: Repeat Travel along the same route requires clicking only on {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt} the wagon begins by default at the entrance to the previously used route
+        "Note: Traveling again along the same route requires clicking only on {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt}. The wagon begins by default at the entrance to the previously used route.”
       </p>
 
     </div>
@@ -114,7 +114,7 @@ const tutorial2step1 = ({TutorialForestPathRoadTxt}) => {
       You’ve taken on the contract with the Queen to run Deliveries, and returned to the outskirts of the Shadewood where you live.<br/>
       Before you can begin making deliveries in earnest, you need to travel to the city of Zorea once more to hire additional hands.
       <br/><br/>
-      The Crown Highway is shut down today,  you will have to travel through the Shadewood.<br/>
+      The Crown Highway is shut down today,  you will have to travel through the Shadewood forest.<br/>
       There are 4 paths to choose from, for today, you decide to take the Red Oak Road.
       <br/><br/>
       Click on the sign that says "{TutorialForestPathRoadTxt}"
