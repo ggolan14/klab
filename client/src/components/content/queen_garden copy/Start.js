@@ -1,3 +1,4 @@
+//test
 import React from 'react';
 import './gameStyles.css';
 import {Game} from "./items/board/board";
