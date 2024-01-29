@@ -1913,3 +1913,18 @@
 10-11-2023 | 07:56:33 | getGameVersion IP=0.0.0.0 UserId=elirand574@gmail.com
 10-11-2023 | 07:56:33 | addNewUserRecords IP=0.0.0.0 UserId=elirand574@gmail.com Ver=test
 10-11-2023 | 07:56:33 | addNewUserRecords2 IP=0.0.0.0 UserId=elirand574@gmail.com ExpId=654dc611f484061036a095bb Ver=test
+29-01-2024 | 14:42:28 | getIsExpReady IP=0.0.0.0 status=Y
+29-01-2024 | 14:42:28 | getGameConsentForm IP=0.0.0.0
+29-01-2024 | 14:42:30 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+29-01-2024 | 14:42:30 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=frit2
+29-01-2024 | 14:42:30 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=65b79d367e7a1922f4340bcf Ver=frit2
+29-01-2024 | 14:43:00 | getIsExpReady IP=0.0.0.0 status=Y
+29-01-2024 | 14:43:00 | getGameConsentForm IP=0.0.0.0
+29-01-2024 | 14:43:02 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+29-01-2024 | 14:43:02 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=frit2
+29-01-2024 | 14:43:02 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=65b79d567e7a1922f4340bf3 Ver=frit2
+29-01-2024 | 14:43:50 | getIsExpReady IP=0.0.0.0 status=Y
+29-01-2024 | 14:43:50 | getGameConsentForm IP=0.0.0.0
+29-01-2024 | 14:43:52 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+29-01-2024 | 14:43:52 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=frit2
+29-01-2024 | 14:43:52 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=65b79d887e7a1922f4340c15 Ver=frit2

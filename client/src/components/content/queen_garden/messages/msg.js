@@ -157,7 +157,7 @@ const InstructionsRoad1TollDishonest = () => {
       <br/><br/>
       "Halt! State your business!"
       <br/><br/>
-      You inform the guardsman that you are travelling to {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} to hire additional hands.
+      You inform the guardsman that you are travelling to {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} to hire additional workers.
       <br/><br/>
       The guard tells you that he and his fellow guards are patrolling the forest paths for smugglers. He tells you that increased foot traffic means he’ll have to bring more guards tomorrow.
       <br/><br/>
