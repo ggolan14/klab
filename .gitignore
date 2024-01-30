@@ -31,7 +31,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #log files
-server/logs/*.log*
+/server/logs/*.log*
 
 #tmp files
 *.tmp
