@@ -161,7 +161,7 @@ const InstructionsRoad1TollDishonest = () => {
       <br/><br/>
       The guard tells you that he and his fellow guards are patrolling the forest paths for smugglers. He tells you that increased foot traffic means he’ll have to bring more guards tomorrow.
       <br/><br/>
-      The guards react to repeat activity in the Shadewood, the more a path is used the larger the forces patrolling it, increasing the likelihood of getting stopped in the future. Awareness decays over time, as guards shift towards more frequently used pathways.
+      The guards react to repeat activity in the Shadewood forest, the more a path is used the larger the forces patrolling it, increasing the likelihood of getting stopped in the future. Awareness decays over time, as guards shift towards more frequently used pathways.
     </p>
   )
 }
@@ -314,15 +314,16 @@ const GameMsg = () => {
   )
 };
 
-const DeliveryFailedText = ({GameCondition}) => GameCondition === 'Risk'? (
+const DeliveryFailedText = ({GameCondition}) => GameCondition === 'R'? (
   <p>
     You have been attacked by a bear in the forest, you leave your flowers behind and flee.
     <br/><br/>
     You gain nothing for this run
+    
   </p>
 ) : (
   <p>
-    You have been caught by the Queens Guard Violating the terms of your contract,
+    You have been caught by the Queens Guard. Since you violated the terms of your contract,
     by travelling through the Shadewood, they have confiscated your wares.
     <br/><br/>
     You gain nothing for this run
@@ -332,7 +333,7 @@ const DeliveryFailedText = ({GameCondition}) => GameCondition === 'Risk'? (
 export const DeliveryFailed = () => {
   const {game_settings} = useContext(QueenGardenContext);
   const {GameCondition} = game_settings;
-
+  console.log("---> GameCondition="+GameCondition)
   return (
     <div
       className='qg_delivery_failed'
@@ -399,7 +400,7 @@ const MESSAGES = {
   GainMessage
 };
 
-const MESSAGES_IMAGES = {
+  const MESSAGES_IMAGES = {
   CrownHighwayToll: ImgToll,
   DeliveryToll: ImgToll,
   GainMessage: ImgGain,
@@ -408,6 +409,7 @@ const MESSAGES_IMAGES = {
   InstructionsRoad1TollRisk: ImgCaravan,
   InstructionsRoad1TollDishonest: ImgKnight,
 };
+
 
 export const getMessage = message_id => MESSAGES[message_id];
 
