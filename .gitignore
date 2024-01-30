@@ -6,6 +6,7 @@
 .pnp.js
 
 default.json
+server/config/default.json
 
 # testing
 /coverage
