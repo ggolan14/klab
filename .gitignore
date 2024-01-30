@@ -8,6 +8,9 @@
 default.json
 server/config/default.json
 
+current_url.js
+client/src/utils/current_url.js
+
 # testing
 /coverage
 
