@@ -1299,7 +1299,7 @@ const BonusQuestions = ({Forward}) => {
                 className={'STE_next_btn ' + (err_ans? 'disabledElem' : '')}
                 onClick={err_ans? undefined : Forward}
             >
-                Get completion code
+                Move to exit survey
             </button>
         </div>
     )

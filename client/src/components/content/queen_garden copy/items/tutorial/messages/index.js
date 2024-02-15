@@ -100,7 +100,7 @@ const tutorialStep3 = ({GameSet}) => {
         <br/><br/>
         1: Click on {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt} again
         <br/><br/>
-        Note: Repeat Travel along the same route requires clicking only on {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt} the wagon begins by default at the entrance to the previously used route
+        Note: Traveling again along the same route requires clicking only on {GameSet.KingdomLeft_txt} {GameSet.KingdomRight_txt} the wagon begins by default at the entrance to the previously used route
       </p>
 
     </div>
