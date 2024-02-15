@@ -314,21 +314,24 @@ const GameMsg = () => {
   )
 };
 
-const DeliveryFailedText = ({GameCondition}) => GameCondition === 'R'? (
-  <p>
-    You have been attacked by a bear in the forest, you leave your flowers behind and flee.
-    <br/><br/>
-    You gain nothing for this run
-    
-  </p>
-) : (
-  <p>
-    You have been caught by the Queens Guard. Since you violated the terms of your contract,
-    by travelling through the Shadewood, they have confiscated your wares.
-    <br/><br/>
-    You gain nothing for this run
-  </p>
-)
+const DeliveryFailedText = ({ GameCondition }) => {
+  console.log("---> GameCondition:", GameCondition); // Log the GameCondition to the console
+
+  return (GameCondition === 'R' || GameCondition === 'Risk')? (
+    <p>
+      You have been attacked by a bear in the forest, you leave your flowers behind and flee.
+      <br/><br/>
+      You gain nothing for this run
+    </p>
+  ) : (
+    <p>
+      You have been caught by the Queens Guard. Since you violated the terms of your contract,
+      by travelling through the Shadewood, they have confiscated your wares.
+      <br/><br/>
+      You gain nothing for this run
+    </p>
+  );
+};
 
 export const DeliveryFailed = () => {
   const {game_settings} = useContext(QueenGardenContext);
