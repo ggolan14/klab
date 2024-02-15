@@ -775,7 +775,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                   onClick={disableBtn? undefined : () => finishCallback()}
                 >
                     {
-                        language === 'German' ? 'Beenden' : 'Get completion code!'
+                        language === 'German' ? 'Beenden' : 'Move to exit survey'
                     }
                 </button>
             </div>
