@@ -835,7 +835,7 @@ const DecFirstFinal = ({Forward}) => {
 
 const FinishStory = ({Forward}) => {
 
-    const btn_label = (GameSet.b_q === 'Yes' && GameSet.bonus_ques.length && AllowBonusQuestions)? 'GO TO THE QUESTIONS' : 'Move to exit survey';
+    const btn_label = (GameSet.b_q === 'Yes' && GameSet.bonus_ques.length && AllowBonusQuestions)? 'GO TO THE QUESTIONS' : 'Get completion code';
     return (
         <div className='STE_Dec STE_Prompt'>
             <label>Congratulations,</label>

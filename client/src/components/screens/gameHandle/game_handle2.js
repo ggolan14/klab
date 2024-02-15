@@ -663,7 +663,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                     <textarea onChange={e => insertTextInput('UserFinalComments', e.target.value)}/>
                 </div>
                 <label className='exp-summary-h3'>To get your completion code, please press the button below without closing the window.</label>
-                <button onClick={() => finishCallback()}>Move to exit survey</button>
+                <button onClick={() => finishCallback()}>Get completion code!</button>
             </div>
         </div>
     )
