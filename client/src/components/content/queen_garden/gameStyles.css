@@ -150,4 +150,7 @@
     justify-content: center; /* Center vertically */
     height: 100vh; /* Set height to 100% of the viewport height */
     padding: 60px;
+    h1 {
+        font-size: 50px;
+      }
   }

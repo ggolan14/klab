@@ -741,19 +741,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                     }
                 </label>
                 {expSummary.element()}
-                <label className='exp-summary-h2'>
-                    {
-                        language === 'German' ? (
-                          <>
-                              Vielen Dank für Ihre Teilnahme an der Studie „Wiederholtes Entscheiden“!
-                          </>
-                        ) : (
-                          <>
-                              Thank you for participating in the <span>{expSummary.label}</span> study! 😀
-                          </>
-                        )
-                    }
-                </label>
+                
                 <div>
                     <label className='exp-summary-h2'>
                         {
@@ -767,7 +755,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                 </div>
                 <label className='exp-summary-h3'>
                     {
-                        language === 'German' ? 'Bitte wenden Sie sich an den Versuchsleiter.' : 'To get your completion code, please press the button below without closing the window.'
+                        //language === 'German' ? 'Bitte wenden Sie sich an den Versuchsleiter.' : 'To get your completion code, please press the button below without closing the window.'
                     }
                 </label>
                 <button
