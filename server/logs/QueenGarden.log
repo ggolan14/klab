@@ -1,4 +1,4 @@
-06-08-2023 | 15:08:02 | getIsExpReady IP=0.0.0.0 status=Y
+06-08-2023 | 15:08:02 | getIsExpReady IP=0.0.0.0 status=YYYY
 06-08-2023 | 15:08:02 | getGameConsentForm IP=0.0.0.0
 06-08-2023 | 15:08:34 | getIsExpReady IP=0.0.0.0 status=Y
 06-08-2023 | 15:08:34 | getGameConsentForm IP=0.0.0.0
@@ -1944,3 +1944,9 @@
 18-02-2024 | 11:56:15 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
 18-02-2024 | 11:56:15 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=frit2_do_not_touch
 18-02-2024 | 11:56:15 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=65d1d43f6ccc38352463df89 Ver=frit2_do_not_touch
+18-02-2024 | 12:08:07 | getIsExpReady IP=0.0.0.0 status=Y
+18-02-2024 | 12:08:07 | getGameConsentForm IP=0.0.0.0
+18-02-2024 | 12:08:13 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+18-02-2024 | 12:08:13 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=frit2_do_not_touch
+18-02-2024 | 12:08:13 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=65d1d70d6ccc38352463dfb1 Ver=frit2_do_not_touch
+18-02-2024 | 12:08:36 | addNewRecord IP=0.0.0.0 ExpID=65d1d70d6ccc38352463dfb1 Length=1

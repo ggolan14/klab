@@ -10,6 +10,7 @@ server/config/default.json
 
 current_url.js
 client/src/utils/current_url.js
+serve/logs/QueenGarden.log
 
 # testing
 /coverage
