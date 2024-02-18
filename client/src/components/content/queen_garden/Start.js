@@ -378,7 +378,7 @@ class Start extends React.Component {
                     <label>In order to receive the payment for participation, you are asked to complete the games and the exit survey, after which you will receive the completion code. </label><br></br>
                     </h2>
                   </p>
-                  <button onClick={this.handleOkButtonClick}>Move to the Queen's Garden Game</button>
+                  <button style={{ fontSize: '40px', marginTop: '10px' }} onClick={this.handleOkButtonClick}>Move to the Queen's Garden Game</button>
                 </div>
               );
             }
