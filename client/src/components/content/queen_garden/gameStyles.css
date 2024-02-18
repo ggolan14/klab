@@ -143,3 +143,11 @@
 .Q_G-Debugger_collapseArrayList::-webkit-scrollbar-thumb:hover{
     background: #214593;
 }
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 100vh; /* Set height to 100% of the viewport height */
+    padding: 60px;
+  }

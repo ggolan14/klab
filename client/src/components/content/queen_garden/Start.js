@@ -112,7 +112,9 @@ class Start extends React.Component {
             isa: props.isa,
             isLoading: true,
             game_settings: this.GameSet,
-            current_game_index: this.GameSet.WithPractice === 'Yes'? 0 : 1
+            current_game_index: this.GameSet.WithPractice === 'Yes'? 0 : 1,
+            showWelcomeMessage: true
+
         };
 
         this.game_template = null;
@@ -355,37 +357,55 @@ class Start extends React.Component {
         console.log("---> game_data.length="+game_data.length + "   selectedTrial="+(selectedTrial+1)+"   selectedTrailPoints="+selectedTrailPoints)
         this.TotalBonus.push(selectedTrailPoints);
         }
+    handleOkButtonClick = () => {
+            // Update state to hide the welcome message
+            this.setState({ showWelcomeMessage: false });
+          };
     render() {
-        if (!this.state || this.state.isLoading || !this.state.game_settings || !Array.isArray(this.game_template)) {
-            return <QueenGardenGameLoading loading={true}/>;
-        }
-
-        return (
-          <QueenGardenContext.Provider
-            value={{
-                game_settings: this.state.game_settings,
-                current_game_index: this.state.current_game_index,
-                DebugMode: this.DebugMode
-            }}
-          >
-              <div
-                className='sp-start-panel'
+            const { showWelcomeMessage } = this.state;
+        
+            // If the welcome message is still visible, render it
+            if (showWelcomeMessage) {
+              return (
+                <div className="center-container">
+                  <h1>Welcome to the Queen’s Garden Study</h1>
+                  <p>
+                    <label>Thank you for taking part in this experiment. Today you will be playing the Queen’s Garden Game. You will begin by first completing the games tutorial.</label><br></br>
+                    <label>Following the tutorial, you will  have a couple practice trials of the game before you start playing for real. Once the game begins you will play two separate instances of the game, each game includes many trials.</label><br></br>
+                    <label>At the end of each game, a random trial will be selected, and the payoffs earned from these selected trials will be used to determine your bonus payment. That means, in order to maximize your bonus payment, you should try to earn as many points as possible in every trial, in both games.</label><br></br>
+                    <label>Once you have completed the games you will be redirected to take a brief exit survey.</label><br></br>
+                    <label>In order to receive the payment for participation, you are asked to complete the games and the exit survey, after which you will receive the completion code. </label><br></br>
+                  </p>
+                  <button onClick={this.handleOkButtonClick}>Move to the Queen's Garden Game</button>
+                </div>
+              );
+            }
+        
+            // If the welcome message is hidden, render the game board
+            if (this.state.isLoading || !this.state.game_settings || !Array.isArray(this.game_template)) {
+              return <QueenGardenGameLoading loading={true} />;
+            }
+        
+            return (
+              <QueenGardenContext.Provider
+                value={{
+                  game_settings: this.state.game_settings,
+                  current_game_index: this.state.current_game_index,
+                  DebugMode: this.DebugMode,
+                }}
               >
+                <div className='sp-start-panel'>
                   {this.game_template[this.state.tasks_index].Mode === 'Tutorial' && (
-                    <QueenGardenTutorial Forward={this.Forward}/>
+                    <QueenGardenTutorial Forward={this.Forward} />
                   )}
-
+        
                   {this.game_template[this.state.tasks_index].Mode === 'Game' && (
-                    <QueenGardenGame
-                      Forward={this.Forward}
-                      START_APP_MIL={this.START_APP_MIL}
-                    />
+                    <QueenGardenGame Forward={this.Forward} START_APP_MIL={this.START_APP_MIL} />
                   )}
-              </div>
-          </QueenGardenContext.Provider>
-
-        );
-    }
+                </div>
+              </QueenGardenContext.Provider>
+            );
+          }
 }
 
 export default Start;
