@@ -57,7 +57,6 @@ export const login = (email, password) => async dispatch => {
 
 // Load User
 export const loadUser = () => async dispatch => {
-console.log("---> in loadUser()")
     if (localStorage.token){
         console.log("---> localStorage.token=true "+localStorage.token)
         setAuthToken(localStorage.token);
@@ -70,7 +69,6 @@ console.log("---> in loadUser()")
 
     try {
         const res = await api.get('/auth');
-console.log("---> 111 in load user")
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -85,7 +83,7 @@ console.log("---> 111 in load user")
             type: TODO_LOADED,
             payload: res.data
         });
-        console.log("---> 222 in load user")
+        
     } catch (err) {
         console.log("---> ERROR: "+err)
 
