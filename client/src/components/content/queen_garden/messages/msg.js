@@ -16,7 +16,7 @@ export const RiskInstructions1 = () => {
       <br/><br/>
       She reminds you of the recent attacks on merchants by bears in the Shadewood and so emphasizes using the highway that goes around the forest.
       <br/><br/>
-      As an experienced merchant, you know that the cost of travel along the {game_settings.Labels.CrownHighway} is {game_settings.GamesBank[0].TollCost}.
+      As an experienced merchant, you know that the cost of travel along the {game_settings.Labels.CrownHighway} is {game_settings.GamesBank[0].TollCost} coin{Number(game_settings.GamesBank[0].TollCost) !== 1? 's' : ''}.
       <br/><br/>
     </p>
   )
