@@ -172,43 +172,17 @@ class Start extends React.Component {
     Forward(finish_game, game_data){
         
         if(finish_game===true){
-            //console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p + "   firstTime ="+ firstTime)
             if(this.props.game_settings.game.w_p === "No"){
-            
-               // console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p+"  firstTime="+firstTime)
-                //console.log("-------------> 111 call addGameBonus");
-                this.addGameBonus(game_data);
+                 this.addGameBonus(game_data);
             }
             else{
                 if(this.props.game_settings.game.w_p === "Yes" &&  firstTime=== true ){
-                    //console.log("--- FIRST TIME skipping")
                     firstTime = false;
                 }else{
-                    //console.log("---> props.game_settings.game.w_p = "+this.props.game_settings.game.w_p+"  firstTime="+firstTime)
-                    //console.log("-------------> 222 call addGameBonus");
                     this.addGameBonus(game_data);
                 }
             }
-            
-
-            /*
-            if(this.props.game_settings.game.w_p == "Yes"){
-                console.log("---> 111")
-                if(firstTime == true){
-                    console.log("---> 222")
-                    firstTime = false
-                    }
-                else{
-                    console.log("---> 333")
-                    this.addGameBonus(game_data);
-                }
-                
-            }else{
-                console.log("---> 444")
-                this.addGameBonus(game_data);
-            }
-          */
-        }
+         }
         let sc = this.state;
         if (sc.tasks_index === (this.game_template.length-1)){
             this.props.SetLimitedTime(false);
