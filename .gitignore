@@ -18,7 +18,7 @@ serve/logs/QueenGarden.log
 # production
 client/build
 server/node_modules
-server/logs
+server/logs/
 
 # misc
 .DS_Store
@@ -36,7 +36,7 @@ yarn-error.log*
 
 #tmp files
 *.tmp
-*.log*
+*.log
 *.iml
 *.err
 
