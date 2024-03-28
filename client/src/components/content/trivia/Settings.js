@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {DivContainer} from "../../screens/settings/elements_builder";
 import {convertPointsRatio} from "../../screens/settings/settings";
 import ColorPicker from "../../layout/colorPicker/color_picker";
-import './togStyles.css';
+import './triviaStyles.css';
 
 const Colors = ({settings, changeSettings, label, attr}) => {
     return (
@@ -148,41 +148,9 @@ const GamesPlay = ({changeSettings, settings}) => {
     };
 
     return (
-        <div style={{width: '90%'}} className='t-o-g-u_set_m-s_kv unselectable'>
-            <label>Games play:</label>
-            <div>
-                <div className='t-o-g-u_set_games'>
-                    {
-                        ['1', '2', '3', '4', '5', '6', 'random'].map(
-                            (game, game_i) => (
-                                <GameElement
-                                    key={game_i}
-                                    callback={addGame}
-                                    game_number={game}
-                                    game_index={game_i}
-                                    type='Info'
-                                />
-                            )
-                        )
-                    }
-                </div>
-                <div className='t-o-g-u_set_items'>
-                    {
-                        (settings.g_p || []).map(
-                            (game, game_i) => (
-                                <GameElement
-                                    key={game_i}
-                                    callback={removeGame}
-                                    game_number={game}
-                                    game_index={game_i}
-                                    type='Remove'
-                                />
-                            )
-                        )
-                    }
-                </div>
-            </div>
-        </div>
+        <>
+        <label>Test Setting</label> 
+        </>
     )
 }
 
@@ -506,28 +474,7 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
     ];
 
     const game_elements = [
-        {
-            type: 'Select',
-            label: 'Random condition:',
-            show: true,
-            options: [
-                {
-                    value: 'r',
-                    label: 'Random'
-                },
-                {
-                    value: 'u_d',
-                    label: 'Uniform distribution'
-                },
-            ],
-            value: game_settings.game.r_c,
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'r_c',
-                value,
-            })
-        },
+
         {
             type: 'Input',
             label: 'Rounds:',
@@ -656,59 +603,9 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                 />
             </DivContainer>
 
-            <DivContainer
-                className='admin-settings-section admin-settings-section-raw'
-            >
-                <DivContainer
-                    className='admin-settings-section-col admin-settings-section-h'
-                    elements={[{
-                        type: 'Label',
-                        label: 'Game settings:',
-                        show: true
-                    }]}
-                />
-                <GamesPlay
-                    changeSettings={changeSettings}
-                    settings={game_settings.game}
-                />
+            
 
-                <RandomFrom
-                    changeSettings={changeSettings}
-                    settings={game_settings.game}
-                />
-
-
-                <DivContainer
-                    className='admin-settings-section-raw admin-settings-section-b'
-                    elements={game_elements}
-                />
-
-                <Colors
-                    changeSettings={changeSettings}
-                    settings={game_settings.game}
-                    label='Background'
-                    attr='b_c'
-                />
-            </DivContainer>
-
-            <DivContainer
-                className='admin-settings-section admin-settings-section-raw'
-            >
-                <DivContainer
-                    className='admin-settings-section-col admin-settings-section-h'
-                    elements={[{
-                        type: 'Label',
-                        label: 'Matrices:',
-                        show: true
-                    }]}
-                />
-
-                <MatricesSettings
-                    changeSettings={changeSettings}
-                    settings={game_settings.game}
-                />
-
-            </DivContainer>
+            
         </>
     )
 };

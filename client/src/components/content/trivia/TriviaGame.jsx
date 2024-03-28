@@ -2,7 +2,11 @@
 import React, { useState } from 'react';
 import jsonData from './trivia_questions.json';
 import './TriviaGame.css'; // Import the CSS file
+import {NewLogs} from "../../../actions/logger";
+import {getTimeDate} from "../../../utils/app_utils";
 import CorrectAnswerConfirmation from './CorrectAnswerConfirmation'; // Import your NextConfirmationDialog component
+
+
 
 // Define a functional component
 const Quiz = () => {
@@ -10,6 +14,8 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
   const totalQuestions = jsonData.length;
+  const ThisExperiment = 'QueenGarden';
+
   // Function to handle navigation to the next question
   const goToNextQuestion = () => {
     // Show confirmation dialog
@@ -24,6 +30,21 @@ const Quiz = () => {
 
   // Function to handle confirmation dialog confirmation
   const handleConfirmConfirmation = () => {
+    NewLogs({
+      user_id: 123,
+      exp: ThisExperiment,
+      running_name: "myRunning",
+      action: 'G.L',
+      type: 'LogGameType',
+      more_params: {
+          local_t: getTimeDate().time,
+          local_d: getTimeDate().date,
+      },
+  }).then((res) => {
+      this.START_APP_MIL = Date.now();
+      this.props.SetLimitedTime(true);
+      this.setState({isLoading: false});
+  });
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setShowConfirmationDialog(false);
   };
