@@ -8,6 +8,10 @@ import {setGameMode, setWaitForAction} from "../../../actions/app_actions";
 import TryOrGiveUpStart from "../../content/try_or_give_up/Start";
 import TryOrGiveUpSummary from "../../content/try_or_give_up/Summary";
 
+
+import TriviaStart from "../../content/trivia/Start";
+import TriviaSummary from "../../content/trivia/Summary";
+
 import PointsGameStart from "../../content/points_game/Start";
 import PointsGameSummary from "../../content/points_game/Summary";
 
@@ -422,6 +426,8 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         callbackFunction
     };
     const game_list = {
+        
+        Trivia:<TriviaStart {...game_props}/>,
         TryOrGiveUp: <TryOrGiveUpStart {...game_props}/>,
         PointsGame: <PointsGameStart {...game_props}/>,
         PointsGameSh: <PointsGameShStart/>,
@@ -581,6 +587,14 @@ const getSummary = ({exp, summary_args}) => {
                     SummaryArgs={summary_args}
                 />
             )
+        },
+        Trivia: {
+            label: 'Trivia',
+            element: () => (
+                <TriviaSummary
+                    SummaryArgs={summary_args}
+                />
+            )
         }
     };
 
@@ -705,6 +719,7 @@ const summary_lang = summary_args => {
 }
 
 const Summary = ({exp, finishCallback, summary_args}) => {
+    console.log("--->in summarry  111")
     const language = summary_lang(summary_args);
     const [expSummary, setExpSummary] = useState(null);
     const [disableBtn, setDisableBtn] = useState(true);
@@ -1642,6 +1657,7 @@ class GameHandle extends React.Component {
                     </>
                 )
             case 'Summary':
+                console.log('Summary ---> 222'); // Add your log printout here
                 return (
                     <>
                         <Summary summary_args={this.state.summary_args} exp={this.exp} finishCallback={this.recordsFinishGame}/>
@@ -1658,40 +1674,32 @@ class GameHandle extends React.Component {
     render() {
         if (!this.state || this.state.isLoading)
             return <></>;
-
         if (this.state.redirect_to !== null && this.state.redirect_to) {
             OnBeforeUnload(false);
             return window.location = this.state.redirect_to;
         }
-
         if ((this.state.redirect_to !== null && !this.state.redirect_to) || this.state.play_error || this.state.user_rejected || (this.state.user_finish_game && this.state.active_settings.mode !== 'Real') || (this.state.user_finish_game && this.state.isAuthenticated)) {
             OnBeforeUnload(false);
             return <PlayError state={this.state} exp={this.exp}/>;
         }
-
         if (this.state.no_action_rejected) {
             OnBeforeUnload(false);
             return <NoActionRejected state={this.state} exp={this.exp}/>;
         }
-
         if (this.state.user_finish_game)
             return <RedirectingWait />;
-
         if (this.state.running_error) {
             OnBeforeUnload(false);
             return <RunningError exp={this.exp}/>;
         }
-
         if (this.state.not_found || (this.state.not_ready === 'N' && !this.state.isAuthenticated)) {
             OnBeforeUnload(false);
             return <Navigate to='/not_found'/>;
         }
-
         if (this.state.not_ready === 'N' && this.state.isAuthenticated) {
             OnBeforeUnload(false);
             return <NotReady exp={this.exp}/>;
         }
-
         return (
             <>
                 { this.state.action_time_alert && <UnMoveComponent callback={this.actionTimerOptions}/> }
@@ -1725,7 +1733,9 @@ class GameHandle extends React.Component {
                 </div>
             </>
         );
+        console.log("---> 000")
     };
+
 }
 
 GameHandle.propTypes = {

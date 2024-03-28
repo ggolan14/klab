@@ -1,0 +1,18 @@
+.trivia_d-sum-l-rp {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 0.5rem;
+    border: 1px solid;
+    width: max-content;
+    padding: 5px 10px;
+}
+
+.tog_d-sum-l-rpi {
+    margin-left: 5px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 10px;
+    align-items: center;
+}

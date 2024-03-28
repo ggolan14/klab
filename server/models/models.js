@@ -17,6 +17,7 @@ const {SignatureAsReminderUsersRecords, SignatureAsReminderVersions} = require('
 const {PointsGameShVersions, PointsGameShUsersRecords} = require('./all_models/PointsGameSh');
 const {PointsGameVersions, PointsGameUsersRecords} = require('./all_models/PointsGame');
 const {TryOrGiveUpVersions, TryOrGiveUpUsersRecords} = require('./all_models/TryOrGiveUp');
+const {TriviaVersions, TriviaUsersRecords} = require('./all_models/Trivia');
 const User = require('./all_models/User');
 const ConsentForms = require('./all_models/ConsentForms');
 const ActiveSettings = require('./all_models/ActiveSettings');
@@ -70,6 +71,67 @@ const getModelPack = model => {
 };
 
 const defaultVersions = {
+    
+    Trivia: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            r: 2, // rounds
+            t: 8, // trials per round
+            e_c: 2, // exploration_cost  C
+            f: 1, // punishment \ reward  F
+            d_p: 1.5, // display_pay_for seconds
+            b_c: { // background_color
+                r: 10,
+                g: 0,
+                b: 0,
+                a: 1
+            },
+            mc: 3, // mat cols
+            mr: 4, // mat rows
+            m1c: {
+                r: 95,
+                g: 139,
+                b: 229,
+                a: 1
+            }, // mat 1 color
+            m2c: {
+                r: 190,
+                g: 186,
+                b: 180,
+                a: 1
+            },
+            H: 12,
+            PH: 0.5,
+            L: 1,
+            MH: 2,
+            PMH: 0.5,
+            ML: 1,
+            g_p: ['1'],
+            r_f: ['1', '2', '3', '4', '5', '6'],
+            r_c: 'r',
+        },
+        payments: {
+            // COINSIGN: "pound",
+            // SHOWUP: 2,
+            // EXCHANGERATIO: 100,
+            // INITIALBONUS: 0.4,
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            // TIMEOUT: "00:00",
+            // EXPNAME: "",
+            redirect_to: "",
+            need_summary: true,
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'Yes'
+        },
+    },
     TryOrGiveUp: {
         version: 'test',
         last_modified: '-',
@@ -2213,6 +2275,12 @@ const defaultVersions = {
 }
 
 const AllModels = {
+    Trivia: {
+        versions: TriviaVersions,
+        records: TriviaUsersRecords,
+        extra: {},
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
     TryOrGiveUp: {
         versions: TryOrGiveUpVersions,
         records: TryOrGiveUpUsersRecords,
@@ -2366,7 +2434,7 @@ const addNewExperiment = asyncHandler(async (req, res) => {
         };
         let newModel = new Model(new_model);
         await newModel.save();
-
+        console.log("---> 123")
         Model = getModelPack('ActiveSettings').ActiveSettings;
         new_model = {
             exp: NewExp,
@@ -2438,16 +2506,25 @@ const addNewExperiment = asyncHandler(async (req, res) => {
 
 const UsersData = [
     {
-        name: 'Eliran Dahan',
-        email: 'elirand574@gmail.com',
+        name: 'Oren Gal',
+        email: 'oren@technion.ac.il',
         password: bcrypt.hashSync('12345', 10),
         permission: 'SuperAdmin',
         gender: 'Male',
-        age: 1,
+        age: 54,
         // Experiments: [],
     },
     ];
 const UsersData2 = [
+    {
+        name: 'Guy Golan',
+        email: 'ggolan@technion.ac.il',
+        password: bcrypt.hashSync('12345', 10),
+        permission: 'SuperAdmin',
+        gender: 'Male',
+        age: 54,
+        // Experiments: [],
+    },
     {
         name: 'Eliran Dahan',
         email: 'elirand574@gmail.com',
@@ -2773,8 +2850,9 @@ const Seeder = async () => {
         /*  ############### Directories ################## */
 
         console.log('EMPTY_COLLECTIONS');
-
+console.log("---> EMPTY_COLLECTIONS")
         const EXP_LIST = Object.keys(defaultVersions);
+
         let Model, new_model;
         /* ############### EMPTY COLLECTIONS ################## */
         Model = getModelPack('RejectedUsers').RejectedUsers;
@@ -2795,6 +2873,7 @@ const Seeder = async () => {
             ip: '-',
             date: '-',
             time: '-',
+            type: 'REDIRECT'
         });
         await new_model.save();
         await Model.deleteMany();
@@ -2826,7 +2905,7 @@ const Seeder = async () => {
         /* ############### USER ################## */
         Model = getModelPack('User').User;
         await Model.deleteMany();
-        await Model.insertMany(UsersData);
+        await Model.insertMany(UsersData2);
         /* ############### USER ################## */
 
 
@@ -3004,7 +3083,7 @@ const Seeder = async () => {
 
         /* ############### EXPERIMENTS ################## */
 
-        console.log('FINISH');
+        console.log('FINISH expDev');
 
         return 'Complete';
     }
@@ -3021,9 +3100,9 @@ const UsersSeeder = async () => {
     try {
         let Model = getModelPack('User').User;
         await Model.deleteMany();
-        await Model.insertMany(UsersData);
+        await Model.insertMany(UsersData2);
 
-        console.log('FINISH');
+        console.log('FINISH Users');
 
         return 'Complete';
     }
@@ -3048,7 +3127,7 @@ const DevReset = async () => {
         const isMatch = await bcrypt.compare(password, '12345');
 
         console.log('isMatch', isMatch);
-        console.log('FINISH');
+        console.log('FINISH DevReset');
 
         return 'Complete';
     }

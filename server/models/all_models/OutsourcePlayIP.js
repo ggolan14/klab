@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const OutsourcePlayIPSchema = new mongoose.Schema({
         exp: {
             type: String,
-            required: true,
+            //required: true,
         },
         ip: {
             type: String,
-            required: true,
+            //required: true,
         },
         type: {
             type: String,
-            required: true,
+            //required: true,
             enum: ['REDIRECT', 'LOGIN']
         },
         userId: {
@@ -24,7 +24,7 @@ const OutsourcePlayIPSchema = new mongoose.Schema({
         },
         time: {
             type: String,
-            required: true,
+            //required: true,
         },
 },
     {timestamps: true}

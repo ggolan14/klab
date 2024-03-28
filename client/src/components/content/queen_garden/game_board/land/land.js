@@ -8,12 +8,12 @@ export const Land = ({side}) => {
    
   const {gameState, changeWagonPlace} = useContext(QueenGardenGameBoardContext);
 
-  const allowClick = !gameState.disable_castle_click;
+  const allowClick = !gameState.disable_castle_click && gameState.wagon_place != "castle_toll_finish_queen";
 
   var cursor_type;
-  if(side === 'bottom'){
+  if(side === 'bottom' || !allowClick){
     cursor_type='not-allowed'
-  }else if(side === 'top'&& allowClick){
+  }else if(side === 'top' && allowClick){
     cursor_type = 'pointer';
   }
 
