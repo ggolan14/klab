@@ -9,12 +9,14 @@ import CorrectAnswerConfirmation from './CorrectAnswerConfirmation'; // Import y
 
 
 // Define a functional component
-const Quiz = () => {
+const TriviaGame = (props) => {
   // State to hold the current question index and whether the confirmation dialog should be shown
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
   const totalQuestions = jsonData.length;
-  const ThisExperiment = 'QueenGarden';
+  const ThisExperiment = 'Trivia';
+  
+  
 
   // Function to handle navigation to the next question
   const goToNextQuestion = () => {
@@ -63,6 +65,7 @@ const Quiz = () => {
   }
   else if(currentQuestionIndex===totalQuestions){
     console.log("currentQuestionIndex==totalQuestions")
+    
     content = (<div>
       <label>You successfully finished the trivia experiment</label>
     </div>
@@ -118,4 +121,4 @@ const Quiz = () => {
 };
 
 // Export the component
-export default Quiz;
+export default TriviaGame;
