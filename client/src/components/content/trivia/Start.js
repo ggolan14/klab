@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {KeyTableID} from "../../screens/gameHandle/game_handle";
 import {NewLogs} from "../../../actions/logger";
 import {getTimeDate} from "../../../utils/app_utils";
 import PropTypes from "prop-types";
 import TriviaGame from './TriviaGame';
+import jsonData from './trivia_questions.json';
+import './TriviaGame.css'; // Import the CSS file
+import CorrectAnswerConfirmation from './CorrectAnswerConfirmation'; // Import your NextConfirmationDialog component
+
 
 const ThisExperiment = 'Trivia';
 
@@ -16,65 +20,7 @@ let DebugMode = null;
 let GameSet = {};
 let PaymentsSettings = null;
 let GameCondition = null;
-/*
-const GameWelcome = ({Forward}) => {
-    console.log("---> Forward 222")
-    return (
-        <div
-            //ref={ref}
-            className='cg_welcome'
-        >
-            <label>Welcome to the Trivia experiment!</label>
-			<div className='cg_welcome_container'>
-                <div className='cg_welcome_int'>
-                    <label>Please read carefully the following instructions:</label>
-                    <label class="bold-text">TBD</label>
 
-                </div>
-
-                
-            </div>
-            {
-                // <div
-                //     className='cg_welcome_demo_c'
-                // >
-                //     <div className='cg_welcome_demo'>
-                //         {
-                //             cupsSelected.map(
-                //                 (bc, bc_index) => (
-                //                     <BoardColumn
-                //                         ball_speed={18}
-                //                         numbers={false}
-                //                         key={bc_index}
-                //                         my_index={bc_index}
-                //                         cup_selected={bc}
-                //                         gain_msg={gainMsg}
-                //                         msg_index={null}
-                //                         ball_selected={ballIndex === bc_index}
-                //                         msg_selected={null}
-                //                         callback={callback}
-                //                     />
-                //                 )
-                //             )
-                //         }
-                //
-                //         {
-                //             gainMsg && (
-                //                 <GainMsg
-                //                     gain_msg={gainMsg}
-                //                     btnNext={null}
-                //                 />
-                //             )
-                //         }
-                //
-                //     </div>
-                // </div>
-            }
-            <button onClick={Forward}>Start the game</button>
-        </div>
-    )
-};
-*/
 const ResetAll = () => {
     UserId = 'empty';
     RunningName = '-';
@@ -100,25 +46,7 @@ class Start extends React.Component {
 
         let RunCounter = KeyTableID();
 
-        /*
-            Props:
-            SetLimitedTime,
-            dmr,
-            running_name: DB_RECORDS.KeyTable.RunningName,
-            getTable,
-            insertGameLine,
-            sendGameDataToDB,
-            insertTextInput,
-            insertTaskGameLine,
-            insertPayment,
-            insertLineCustomTable,
-            setWaitForAction: setWaitForAction,
-            game_settings,
-            more,
-            isa,
-            user_id: DB_RECORDS.UserDetails.UserId,
-            callbackFunction
-         */
+        
 
         PaymentsSettings = props.game_settings.payments;
 
@@ -195,6 +123,7 @@ class Start extends React.Component {
 
         game_template.push({
           //  Component: Game
+
         });
 
         this.game_template = game_template;
@@ -367,7 +296,7 @@ class Start extends React.Component {
     render() {
         return (
             <div>
-              <TriviaGame></TriviaGame>
+              <MyTriviaGame></MyTriviaGame>
             </div>
           );
        
@@ -380,3 +309,140 @@ Start.propTypes = {
 
 
 export default Start;
+
+function setGainMsg({cups_tax, base_reward}){
+    let sc = this.state;
+    sc.gain_msg =  {
+        reward: this.current_trial.reward,
+        cups_tax,
+        base_reward
+    };
+    sc.stop_ball = true;
+
+    const cups_num = sc.cups_selected.reduce((total, num) => total + (num?1:0), 0);
+    SUM_OF_CUPS += cups_num;
+    let db_row = {
+        trial: sc.trial,
+        ball_location: this.current_trial.ball_index+1,
+        
+    }
+    if (DebugMode)
+        sc.debug_row = db_row;
+
+    this.setState(sc)
+}
+
+const MyTriviaGame = (props) => {
+    console.log("---> in TriviaGame constructor")
+    // State to hold the current question index and whether the confirmation dialog should be shown
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+    const totalQuestions = jsonData.length;
+    const ThisExperiment = 'Trivia';
+  
+    // Function to handle navigation to the next question
+    const goToNextQuestion = () => {
+      // Show confirmation dialog
+      
+      setShowConfirmationDialog(true);
+    };
+  
+    // Function to handle confirmation dialog cancellation
+    const handleCancelConfirmation = () => {
+      setShowConfirmationDialog(false);
+    };
+  
+    // Function to handle confirmation dialog confirmation
+    const handleConfirmConfirmation = () => {
+      NewLogs({
+        user_id: 123,
+        exp: ThisExperiment,
+        running_name: "myRunning",
+        action: 'G.L',
+        type: 'LogGameType',
+        more_params: {
+            local_t: getTimeDate().time,
+            local_d: getTimeDate().date,
+        },
+    }).then((res) => {
+        this.START_APP_MIL = Date.now();
+        this.props.SetLimitedTime(true);
+        this.setState({isLoading: false});
+    });
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setShowConfirmationDialog(false);
+    };
+    const currentQuestion = jsonData[currentQuestionIndex];
+    
+    let content = null;
+    if(showConfirmationDialog === true){
+      content = (<div>
+        <CorrectAnswerConfirmation
+            onCancel={handleCancelConfirmation}
+            onConfirm={handleConfirmConfirmation}
+            correctAnswer={getCorrectAnswer()}
+           />
+      </div>
+      )
+    }
+    else if(currentQuestionIndex===totalQuestions){
+      console.log("currentQuestionIndex==totalQuestions")
+      
+      
+      content = (<div>
+        <label>You successfully finished the trivia experiment</label>
+      </div>
+      )
+    }
+    else if(currentQuestionIndex < totalQuestions){
+      console.log("---> currentQuestionIndex="+currentQuestionIndex+"  totalQuestions="+totalQuestions)
+      content=(
+      <div>
+      <h3><label style={{ fontWeight: 'bold' }}>Question#{currentQuestionIndex+1}:</label> <label>{jsonData[currentQuestionIndex].question}</label></h3>
+      {/* Render answer options */}
+      <ul>
+      {jsonData[currentQuestionIndex].answers.map((answer, index) => (
+        <li key={answer.option}>
+          <label>
+          <span style={{ color: 'blue' }}>Option#{answer.option}</span> <span style={{ color: 'green' }}>{answer.text}</span>
+          </label>
+        </li>
+      ))}
+      </ul>
+      <button onClick={goToNextQuestion}>I have an answer in my mind.</button>
+      
+    </div>
+      )
+    } 
+    else{
+      content = (<div>
+        content= <CorrectAnswerConfirmation></CorrectAnswerConfirmation>
+      </div>
+      )
+     
+  
+    }
+   
+    function getCorrectAnswer(){
+      const correctAnswer = jsonData[currentQuestionIndex].answers.map((answer, index) => {  
+        console.log("---> Answer: "+answer.text);
+        if (answer.option === currentQuestion.correct_answer) {
+          return answer.text;
+        }
+      }).find(answer => answer !== undefined);
+    
+      return correctAnswer;
+    }
+  
+    // Render the component
+    return (
+      <div className="quiz-container">
+        <h1>Trivia Quiz</h1>
+        {content}
+      </div>
+    );
+  };
+  
+  // Export the component
+  
+  

@@ -3,43 +3,11 @@ import PropTypes from 'prop-types';
 import {DivContainer} from "../../screens/settings/elements_builder";
 import {convertPointsRatio} from "../../screens/settings/settings";
 import ColorPicker from "../../layout/colorPicker/color_picker";
-import './triviaStyles.css';
+import './togStyles.css';
 
-const Colors = ({settings, changeSettings, label, attr}) => {
-    return (
-        <div className='t-o-g-u_set_m-s_kv'>
-            <label>{label}</label>
-            <ColorPicker
-                defaultValue={settings[attr]}
-                setSetting={value => {
-                    changeSettings( {
-                        settings_of: 'game_settings',
-                        key: 'game',
-                        key2: attr,
-                        value,
-                    })
-                }}
-            />
-        </div>
-    )
-};
 
-const MatrixItem = ({value, mat_attr, on_change}) => {
 
-    return (
-        <>
-            <label>{mat_attr}</label>
-            <input
-                type='number'
-                value={value}
-                onChange={e => on_change(mat_attr, e.target.value)}
-                min={(['PH', 'PMH'].indexOf(mat_attr)> -1 ? 0 : '') }
-                max={(['PH', 'PMH'].indexOf(mat_attr)> -1 ? 1 : '') }
-                step={(['PH', 'PMH'].indexOf(mat_attr)> -1 ? 0.01 : '') }
-            />
-        </>
-    )
-};
+
 
 const game_tooltip = {
     game1: (
@@ -82,233 +50,6 @@ const game_tooltip = {
 
 };
 
-const GameElement = ({game_number, type, callback, game_index, chosen, disabled}) => {
-
-    const [showInfo, setShowInfo] = useState(false);
-
-    return (
-        <div
-            className='t-o-g-u_game_btn'
-            style={chosen? {backgroundColor: 'blue', color: 'white'} : {}}
-        >
-            {
-                ['Info', 'Remove'].indexOf(type) > -1 && (
-                    <label
-                        className={'t-o-g-u_game_btn_options ' + (type === 'Info' ? 'info ' : 'remove ') + (type === 'Remove' && game_index === 0 ? 'disabledElem' : '')}
-                        onClick={() => (type === 'Info'? setShowInfo(true) : callback(game_index))}
-                    >
-                        {type === 'Info' ?'i' : 'x'}
-                    </label>
-                )
-            }
-
-            <label
-                className='t-o-g-u_game_btn_g'
-                onClick={disabled? undefined : ['Info', 'AddRandom', 'RemoveRandom'].indexOf(type) > -1 ? () => callback(game_number) : undefined}
-            >
-                {game_number === 'random' ? game_number : `Game ${game_number}`}</label>
-            {
-                showInfo && (
-                    <div
-                        className='t-o-g-u_game_btn_info'
-                    >
-                        {game_tooltip['game'+game_number]}
-                        <button onClick={() => setShowInfo(false)}>Close</button>
-                    </div>
-                )
-            }
-
-        </div>
-    )
-}
-
-const GamesPlay = ({changeSettings, settings}) => {
-
-    const addGame = (game) => {
-        let g_p = settings.g_p || [];
-        g_p.push(game);
-
-        changeSettings({
-            settings_of: 'game_settings',
-            key: 'game',
-            key2: 'g_p',
-            value: g_p,
-        });
-    };
-
-    const removeGame = (game_index) => {
-        let g_p = settings.g_p || [];
-        g_p = g_p.filter((g, g_i) => g_i !== game_index);
-        changeSettings({
-            settings_of: 'game_settings',
-            key: 'game',
-            key2: 'g_p',
-            value: g_p,
-        });
-    };
-
-    return (
-        <>
-        <label>Test Setting</label> 
-        </>
-    )
-}
-
-const RandomFrom = ({changeSettings, settings}) => {
-
-    const addGame = game => {
-        const arr = settings.r_f? [...settings.r_f] : []
-        const rnd_set = new Set([...arr, game.toString()]);
-
-        changeSettings({
-            settings_of: 'game_settings',
-            key: 'game',
-            key2: 'r_f',
-            value: Array.from(rnd_set).sort(),
-        });
-    };
-
-    const removeGame = (game) => {
-        changeSettings({
-            settings_of: 'game_settings',
-            key: 'game',
-            key2: 'r_f',
-            value: settings.r_f.filter((g, g_i) => g !== game),
-        });
-    };
-
-    const random_indexes = settings.r_f || [];
-
-    return (
-        <div
-            style={{width: '90%', marginTop: 20, display: 'block'}}
-            className='t-o-g-u_set_m-s_kv unselectable'
-        >
-            <div>
-                <div
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'auto 1fr',
-                        gridColumnGap: '19px',
-                        alignItems: 'center',
-                        rowGap: '12px'
-                    }}
-                >
-
-                    <label><b>Random from:</b></label>
-                    <div className='t-o-g-u_set_items'>
-                        {
-                            ['1', '2', '3', '4', '5', '6'].map(
-                                (game, game_i) => (
-                                    <GameElement
-                                        key={game_i}
-                                        callback={random_indexes.indexOf(game) === -1 ? addGame : removeGame}
-                                        game_number={game}
-                                        game_index={random_indexes.indexOf(game_i)}
-                                        chosen={random_indexes.indexOf(game) > -1}
-                                        type={random_indexes.indexOf(game) > -1? 'RemoveRandom' : 'AddRandom'}
-                                    />
-                                )
-                            )
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-const MatricesSettings = ({settings, changeSettings}) => {
-    const try_mat = ['H', 'PH', 'L'];
-    const give_up_mat = ['MH', 'PMH', 'ML'];
-
-    const on_change = (attr, value) => {
-        changeSettings({
-            settings_of: 'game_settings',
-            key: 'game',
-            key2: attr,
-            value,
-        });
-    }
-
-    return (
-        <div className='t-o-g-u_set_m-s'>
-            <Colors
-                changeSettings={changeSettings}
-                settings={settings}
-                label='Matrix #1 color'
-                attr='m1c'
-            />
-            <Colors
-                changeSettings={changeSettings}
-                settings={settings}
-                label='Matrix #2 color'
-                attr='m2c'
-            />
-
-            <div className='t-o-g-u_set_m-s_kv'>
-                <label>Matrices cols:</label>
-                <input
-                    value={settings.mc}
-                    onChange={e => on_change('mc', e.target.value)}
-                    type='number'
-                    step={1}
-                    min={1}
-                />
-            </div>
-
-            <div className='t-o-g-u_set_m-s_kv'>
-                <label>Matrices rows:</label>
-                <input
-                    value={settings.mr}
-                    onChange={e => on_change('mr', e.target.value)}
-                    type='number'
-                    step={1}
-                    min={1}
-                />
-            </div>
-
-            <div className='t-o-g-u_set_m-s_m'>
-                <div className='t-o-g-u_set_m-s_mb'>
-                    <label>Try Matrix:</label>
-                    <div>
-                        {
-                            try_mat.map(
-                                tm => (
-                                    <MatrixItem
-                                        on_change={on_change}
-                                        key={tm}
-                                        mat_attr={tm}
-                                        value={settings[tm]}
-                                    />
-                                )
-                            )
-                        }
-                    </div>
-                </div>
-
-                <div className='t-o-g-u_set_m-s_mb'>
-                    <label>GiveUp Matrix:</label>
-                    <div>
-                        {
-                            give_up_mat.map(
-                                g_u_m => (
-                                    <MatrixItem
-                                        on_change={on_change}
-                                        key={g_u_m}
-                                        mat_attr={g_u_m}
-                                        value={settings[g_u_m]}
-                                    />
-                                )
-                            )
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-        );
-};
-
 const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_list, exp_more_settings}) => {
 
     const general = [
@@ -323,6 +64,38 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                 settings_of: 'game_settings',
                 key: 'version',
                 key2: null,
+                value,
+            })
+        },
+        {
+            type: 'Select',
+            label: 'Tutorial:',
+            show: true,
+            options: [
+                {label: 'Yes', value: 'Yes'},
+                {label: 'No', value: 'No'},
+            ],
+            value: game_settings.general.w_t,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'general',
+                key2: 'w_t',
+                value,
+            })
+        },
+        {
+            type: 'Select',
+            label: 'Practice:',
+            show: true,
+            options: [
+                {label: 'Yes', value: 'Yes'},
+                {label: 'No', value: 'No'},
+            ],
+            value: game_settings.general.w_p,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'general',
+                key2: 'w_p',
                 value,
             })
         },
@@ -473,95 +246,6 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
         },
     ];
 
-    const game_elements = [
-
-        {
-            type: 'Input',
-            label: 'Rounds:',
-            show: true,
-            class_name: '',
-            value: game_settings.game.r,
-            input_type: 'number',
-            step: 1,
-            min: 1,
-            label_after: '',
-            pattern: '',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'r',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Trial:',
-            show: true,
-            class_name: '',
-            value: game_settings.game.t,
-            input_type: 'number',
-            step: 1,
-            min: 1,
-            label_after: '',
-            pattern: '',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 't',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Exploration cost:',
-            show: true,
-            class_name: '',
-            value: game_settings.game.e_c,
-            input_type: 'number',
-            min: 0,
-            pattern: '',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'e_c',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Punishment\\Reward:',
-            show: true,
-            class_name: '',
-            value: game_settings.game.f,
-            input_type: 'number',
-            label_after: ' (F)',
-            pattern: '',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'f',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Display pay for:',
-            show: true,
-            class_name: '',
-            value: game_settings.general.d_p,
-            input_type: 'number',
-            step: 0.1,
-            min: 0,
-            label_after: 'second',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'general',
-                key2: 'd_p',
-                value,
-            })
-        },
-    ];
-
     return (
         <>
             <DivContainer
@@ -601,11 +285,19 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                     className='admin-settings-section-raw admin-settings-section-b'
                     elements={payments}
                 />
+                
+            </DivContainer>
+            <DivContainer
+                className='admin-settings-section admin-settings-section-raw'
+            >
+                
+
+                
             </DivContainer>
 
-            
 
-            
+
+
         </>
     )
 };
