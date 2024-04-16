@@ -186,3 +186,13 @@
 19-11-2023 | 15:47:42 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
 19-11-2023 | 15:47:42 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
 19-11-2023 | 15:47:42 | addNewUserRecords2 IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=655a11fe85acf033ec8af03e Ver=test
+14-04-2024 | 15:28:31 | getIsExpReady IP=0.0.0.0 status=Y
+14-04-2024 | 15:28:31 | getGameConsentForm IP=0.0.0.0
+14-04-2024 | 15:28:36 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+14-04-2024 | 15:28:36 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+14-04-2024 | 15:28:36 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661bcbf495c3ef423894c55c Ver=test
+15-04-2024 | 10:03:03 | getIsExpReady IP=0.0.0.0 status=Y
+15-04-2024 | 10:03:03 | getGameConsentForm IP=0.0.0.0
+15-04-2024 | 10:03:11 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+15-04-2024 | 10:03:11 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+15-04-2024 | 10:03:11 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661cd12fca83db264ceaeecb Ver=test

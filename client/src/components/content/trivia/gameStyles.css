@@ -1,3 +1,16 @@
+.trivia-container {
+    display: flex;
+    flex-direction: column; /* Display components vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+    padding: 30px; /* Add padding around the container */
+    font-size: 25px;
+}
+  
+.trivia-container > * {
+    margin-bottom: 30px; /* Add margin between each component */
+}
 .trivia_d-sum-l-rp {
     display: grid;
     grid-auto-flow: column;
@@ -15,4 +28,23 @@
     grid-auto-columns: max-content;
     column-gap: 10px;
     align-items: center;
+}
+.tog_debug {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+}
+
+.tog_debug label {
+    color: black;
+}
+.tog_debug span {
+    color: #8103a0;
+    margin-left: 5px;
+}
+
+.tog_debug>div {
+    border: 1px solid black;
+    padding: 0.25rem;
+    display: grid;
+    background-color: #8d8d8d;
 }

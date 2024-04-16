@@ -272,7 +272,7 @@ function SetLimitedTime(status){
 }
 
 const sendGameDataToDB = async () => {
-
+console.log("---> in game_handle sendGameDataToDB")
     RecordGame({
         Exp: CurrentExperiments,
         ExpID: EXP_ID,
@@ -333,6 +333,7 @@ const constantLineValues = (part) => {
 }
 
 const insertGameLine = (line) => {
+    console.log("---> in game_handle.js insertGameLine line.NumOfYesAnswers="+line.NumOfYesAnswers);
     if (!Array.isArray(DB_RECORDS.Game))
         DB_RECORDS.Game = [];
 
@@ -343,6 +344,7 @@ const insertGameLine = (line) => {
 };
 
 const insertGameArray = (rec_arr) => {
+    console.log("---> in game_handle.js insertGameArray rec_arr.size="+rec_arr.size);
     DB_RECORDS.Game = rec_arr.map(
         rec => ({
             ...constantLineValues('GAME'),
@@ -352,6 +354,7 @@ const insertGameArray = (rec_arr) => {
 };
 
 const insertTextInput = (input_key, value) => {
+    console.log("---> in game_handle.js insertTextInput ");
     DB_RECORDS.Summary[input_key] = value;
 };
 
@@ -360,6 +363,7 @@ const getTextInput = (input_key) => {
 };
 
 const getTable = table => {
+    console.log("---> in game_handle.js getTable ");
     return DB_RECORDS[table];
 };
 
@@ -378,6 +382,7 @@ const insertTaskGameLine = (task, line) => {
 };
 
 const insertLineCustomTable = (table, line, type) => {
+    console.log("---> in game_handle.js insertLineCustomTable ");
     if (DB_RECORDS.MoreRec[table] === undefined){
         if (type === 'array')
             DB_RECORDS.MoreRec[table] = [];
@@ -396,13 +401,19 @@ const insertLineCustomTable = (table, line, type) => {
 };
 
 const insertPayment = (payment) => {
+    console.log("---> in game_handle.js insertPayment ");
     DB_RECORDS.Payment = {
         ...constantLineValues('PAYMENT'),
         ...payment
     };
 };
 
+const myFunc = () => {
+    console.log("-----------> my func")
+};
+
 const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr}) => {
+    console.log("---> in game_handle.js getGame ");
     const game_props = {
         SetLimitedTime,
         dmr,
@@ -414,6 +425,7 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         sendGameDataToDB,
         insertTextInput,
         getTextInput,
+        myFunc,
         insertTaskGameLine,
         insertPayment,
         insertLineCustomTable,
@@ -452,7 +464,7 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
 };
 
 const getSummary = ({exp, summary_args}) => {
-
+    console.log("---> in game_handle.js getSummary ");
     const game_list = {
         RepeatedChoice: {
             label: 'Repeated Choice',
@@ -625,6 +637,7 @@ const getSummary = ({exp, summary_args}) => {
  */
 
 const HandleFullScreen = (props) => {
+    console.log("---> in game_handle.js HandleFullScreen ");
     const handle = useFullScreenHandle();
     useEffect(() => {
         if (props.action_time_alert)
@@ -677,6 +690,7 @@ const HandleFullScreen = (props) => {
 };
 
 const UnMoveComponent = ({callback}) => {
+    console.log("---> in game_handle.js UnMoveComponent ");
     const second_warning = useRef(null);
 
     useEffect(() => {
@@ -710,6 +724,7 @@ const UnMoveComponent = ({callback}) => {
 };
 
 const summary_lang = summary_args => {
+    console.log("---> in game_handle.js summary_lang ");
     let language = 'English';
     try {
         if(summary_args.language) language = summary_args.language;
@@ -719,7 +734,7 @@ const summary_lang = summary_args => {
 }
 
 const Summary = ({exp, finishCallback, summary_args}) => {
-    console.log("--->in summarry  111")
+    console.log("--->in summarry")
     const language = summary_lang(summary_args);
     const [expSummary, setExpSummary] = useState(null);
     const [disableBtn, setDisableBtn] = useState(true);
@@ -787,6 +802,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
 };
 
 const ReturnToMainLink = ({state, exp, className, label}) => {
+   // console.log("--->in ReturnToMainLink exp="+exp+"  className="+className+"   label="+label)
     if (state !== null){
         if (!state || !state.isAuthenticated) return <></>;
     }
@@ -875,6 +891,7 @@ const RunningError = ({exp}) => {
 };
 
 const NotReady = ({exp}) => {
+    console.log("--->in NotReady")
     return (
         <>
             <label>Not ready</label>
@@ -1274,8 +1291,8 @@ class GameHandle extends React.Component {
     }
 
     recordsFinishGame = (params) => {
+        console.log("---> in game_handle.js recordsFinishGame ");
         this.props.setWaitForAction(true);
-
         let game_points;
         try {
             game_points = params.args.game_points;
@@ -1566,7 +1583,9 @@ class GameHandle extends React.Component {
     }
 
     game_stages(){
+
         let stage = this.game_handle[this.state.game_index];
+        
         let user;
         try {
             if (this.state.isAuthenticated)
@@ -1592,6 +1611,7 @@ class GameHandle extends React.Component {
 
 
         switch (stage){
+            
             case 'ConsentForm':
                 return (
                     <>

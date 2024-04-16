@@ -77,40 +77,12 @@ const defaultVersions = {
         last_modified: '-',
         date_modified: '-',
         game: {
-            r: 2, // rounds
-            t: 8, // trials per round
-            e_c: 2, // exploration_cost  C
-            f: 1, // punishment \ reward  F
-            d_p: 1.5, // display_pay_for seconds
-            b_c: { // background_color
-                r: 10,
-                g: 0,
-                b: 0,
-                a: 1
-            },
-            mc: 3, // mat cols
-            mr: 4, // mat rows
-            m1c: {
-                r: 95,
-                g: 139,
-                b: 229,
-                a: 1
-            }, // mat 1 color
-            m2c: {
-                r: 190,
-                g: 186,
-                b: 180,
-                a: 1
-            },
-            H: 12,
-            PH: 0.5,
-            L: 1,
-            MH: 2,
-            PMH: 0.5,
-            ML: 1,
-            g_p: ['1'],
-            r_f: ['1', '2', '3', '4', '5', '6'],
-            r_c: 'r',
+            force_full_screen: "false",
+            cond: 'o',
+            s_c: false,
+            trials: 40,
+            reward: 100,
+            no_ask: 'None'  // ['None', 'Random', 1-10]
         },
         payments: {
             // COINSIGN: "pound",

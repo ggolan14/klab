@@ -1,0 +1,44 @@
+[
+ 
+    {
+      "id":"1",
+      "question": "Practice #1 : What is the tiny piece at the end of a shoelace called?",
+      "answers": [
+        {"option": "A", "text": "Shoe stopper"},
+        {"option": "B", "text": "Lace Knob"},
+        {"option": "C", "text": "Nub"},
+        {"option": "D", "text": "Aglet"},
+        {"option": "E", "text": "Lace Tag"},
+        {"option": "F", "text": "Lacelet"}
+      ],
+      "correct_answer": "D"
+    },
+    {
+      "id":"2",
+      "question": "Practice #2 :Originally, Amazon only sold what kind of product?",
+      "answers": [
+        {"option": "A", "text": "Books"},
+        {"option": "B", "text": "Food"},
+        {"option": "C", "text": "Furniture"},
+        {"option": "D", "text": "Office supplies"},
+        {"option": "E", "text": "Clothing"},
+        {"option": "F", "text": "Electronics"}
+      ],
+      "correct_answer": "A"
+    },
+    {
+      "id":"3",
+      "question": "Practice #3 :Who was the only British Pope ever?",
+      "answers": [
+        {"option": "A", "text": "Alexander VI"},
+        {"option": "B", "text": "Clement VII"},
+        {"option": "C", "text": "Gregory I"},
+        {"option": "D", "text": "Adrian IV"},
+        {"option": "E", "text": "Nicholas V"},
+        {"option": "F", "text": "Julius II"}
+      ],
+      "correct_answer": "D"
+    }
+
+  ]
+  

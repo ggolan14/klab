@@ -403,6 +403,7 @@ class Game extends React.Component {
             sc.debug_args = {
                 MatrixType,
                 RoundPoints: this.round_points,
+                GGG:222,
             ...obj
         };
 

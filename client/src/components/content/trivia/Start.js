@@ -1,448 +1,226 @@
-import React, { useState } from 'react';
-import {KeyTableID} from "../../screens/gameHandle/game_handle";
-import {NewLogs} from "../../../actions/logger";
+import React, { Component } from 'react';
+import './gameStyles.css';
+import trivia_questions from './trivia_questions.json';
+import practice_questions from './practice_questions.json';
 import {getTimeDate} from "../../../utils/app_utils";
-import PropTypes from "prop-types";
-import TriviaGame from './TriviaGame';
-import jsonData from './trivia_questions.json';
-import './TriviaGame.css'; // Import the CSS file
-import CorrectAnswerConfirmation from './CorrectAnswerConfirmation'; // Import your NextConfirmationDialog component
-
-
+import {NewLogs} from "../../../actions/logger";
+import {DebuggerModalView, KeyTableID} from "../../screens/gameHandle/game_handle";
 const ThisExperiment = 'Trivia';
+
+
 
 let UserId = 'empty';
 let RunningName = '-';
 let StartTime = null;
 let GAME_POINTS = 0;
 let SUM_OF_CUPS = 0;
-let DebugMode = null;
 let GameSet = {};
 let PaymentsSettings = null;
 let GameCondition = null;
 
+
+/*
 const ResetAll = () => {
-    UserId = 'empty';
-    RunningName = '-';
-    StartTime = null;
-    DebugMode = null;
-    GameSet = {};
-    PaymentsSettings = null;
-    GAME_POINTS = 0;
-    SUM_OF_CUPS = 0;
-    GameCondition = null;
+  UserId = 'empty';
+  RunningName = '-';
+  StartTime = null;
+  GameSet = {};
+  PaymentsSettings = null;
+  GAME_POINTS = 0;
+  SUM_OF_CUPS = 0;
+  GameCondition = null;
 };
+*/
 
-class Start extends React.Component {
+class Start extends Component {
+  constructor(props) {
+    super(props);
+    let RunCounter = KeyTableID();
+    let cond = props.game_settings.game.cond;
+    console.log("------> cond="+cond)
 
-    constructor(props) {
-        super(props);
-        this.props = props;
-        ResetAll();
-
-        UserId = props.user_id;
-        RunningName = props.running_name;
-        DebugMode = props.dmr;
-
-        let RunCounter = KeyTableID();
-
-        
-
-        PaymentsSettings = props.game_settings.payments;
-
-        GameSet.trials = Number(props.game_settings.game.trials);
-        GameSet.reward = Number(props.game_settings.game.reward);
-        GameSet.cups_start = Number(props.game_settings.game.cups_start);
-        GameSet.storage_cost = props.game_settings.game.s_c;
-        let no_ask = props.game_settings.game.no_ask;
-        let cond = props.game_settings.game.cond;
-
-        if (cond === 's')
-            GameCondition = 'Specific';
-        else if (cond === 'g')
-            GameCondition = 'General';
-        else if (cond === 'r') {
+    if (cond === 'o')
+            GameCondition = 'OneShot';
+        else if (cond === 'r')
+            GameCondition = 'Repeated';
+        else if (cond === 'rand') {
             // GameCondition = 'Random';
             let rnd = Math.floor(Math.random() * 2);
             if (rnd)
-                GameCondition = 'Specific';
+                GameCondition = 'OneShot';
             else
-                GameCondition = 'General';
+                GameCondition = 'Repeated';
         }
         else if (cond === 'u_d') {
             // GameCondition = 'Uniform distribution';
             if (RunCounter % 2)
-                GameCondition = 'Specific';
+                GameCondition = 'OneShot';
             else
-                GameCondition = 'General';
+                GameCondition = 'Repeated';
         }
-        if (isNaN(no_ask)){
-            if (no_ask === 'Random')
-                GameSet.no_ask = Math.floor(Math.random() * 10).toString();
-        }
-        else{
-            GameSet.no_ask = (Number(GameSet.no_ask) - 1).toString();
-        }
+    
+    this.state = {
+      currentQuestionIndex: 0,
+      showConfirmation: false,
+      correctAnswer: null,
+      showResult: false,
+      showQuestion: true,
+      yesClickCount: 0,
+      practiceMode: true,
+      gameCondition:GameCondition,
+      
+    };
+  }
 
-
-        if (GameSet.cups_start > 10)
-            GameSet.cups_start = 10;
-
-        try {
-            GameSet.ball_speed = Number(props.game_settings.game.ball_speed) || 1;
-
-        }catch (e) {
-            GameSet.ball_speed = 1;
-        }
-
-        this.state = {
-            tasks_index: 0,
-            isa: props.isa,
-            isLoading: true,
-        };
-
-        this.props.SetLimitedTime(false);
-
-        this.Forward = this.Forward.bind(this);
-        this.initializeGame = this.initializeGame.bind(this);
-
-        this.game_template = null;
-
-        this.initializeGame();
-
+  handleNext = () => {
+    const { currentQuestionIndex, practiceMode } = this.state;
+    let questions = [];
+    console.log("---> in handleNext  practiceMode="+practiceMode)
+    if (practiceMode) {
+      questions = practice_questions;
+    } else {
+      questions = trivia_questions;
     }
+    console.log("---> questions.length="+questions.length)
+    const lastIndex = questions.length - 1;
+    console.log("---> in handleNext  practiceMode="+practiceMode+"  lastIndex="+lastIndex+ "  currentQuestionIndex="+currentQuestionIndex)
 
-    initializeGame() {
+    // Check if it's the last question in practice mode
+    if (practiceMode && currentQuestionIndex === lastIndex) {
+      console.log("---> in handleNext 11111");
+      this.setState({
+        practiceMode: false,
+        currentQuestionIndex: 0 // Reset to the first question of trivia mode
+      });
+    } else {
+      console.log("---> in handleNext 22222");
+      // Increment the index to show the next question
+      this.setState(prevState => ({
+        currentQuestionIndex: Math.min(prevState.currentQuestionIndex + 1, lastIndex)
+      }));
 
-        let game_template = [];
-/*
-        game_template.push({
-            Component: GameWelcome
+
+      
+
+
+     // if (!practiceMode) {
+        const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.option === questions[currentQuestionIndex].correct_answer).text;
+
+        this.setState({
+          showConfirmation: true,
+          correctAnswer: correctAnswer,
+          showQuestion: false
         });
-        */
-
-        game_template.push({
-          //  Component: Game
-
-        });
-
-        this.game_template = game_template;
+     // }
+      
     }
+  };
 
-    componentDidMount(){
-        NewLogs({
-            user_id: UserId,
-            exp: ThisExperiment,
-            running_name: RunningName,
-            action: 'G.L',
-            type: 'LogGameType',
-            more_params: {
-                local_t: getTimeDate().time,
-                local_d: getTimeDate().date,
-            },
-        }).then((res) => this.setState({isLoading: false}));
-    }
+  handleConfirmation = (confirmed) => {
+    console.log("-------> NUM of clicks=" + this.state.yesClickCount);
+    const { yesClickCount, practiceMode } = this.state;
+    if (!practiceMode) {
+        console.log("Before setState()  yesClickCount=" + yesClickCount + "   confirmed=" + confirmed);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.isa !== this.props.isa){
-            let sc = this.state;
-            sc.isa = this.props.isa;
-            this.setState(sc);
-        }
-    }
+        // Increment yesClickCount
+        const updatedYesClickCount = confirmed ? yesClickCount + 1 : yesClickCount;
 
-    Forward(){
-        console.log("---> Forward 111")
-        let sc = this.state;
-        if (sc.tasks_index === (this.game_template.length-1)){
-            this.props.SetLimitedTime(false);
-            let rec = this.props.getGameRecords();
+        // Update state and call insertGameLine in the setState callback
+        this.setState({
+            showResult: true,
+            showConfirmation: false,
+            yesClickCount: updatedYesClickCount,
+        }, () => {
+            const db_row = {
+                NumOfYesAnswers: updatedYesClickCount, // Use the updated count
+                GameCondition: GameCondition,
+            };
+            // Call insertGameLine with updated db_row
+            this.props.insertGameLine(db_row);
 
-            let q_cup = 0, q_no_cup = 0, keep = 0, throw_ = 0, place = 0, dontPlace = 0;
-            for (let i=0; i<rec.length; i++){
-                if (rec[i].cup_decision === 'KeepCup')
-                    keep++;
-                else if (rec[i].cup_decision === 'ThrowCup')
-                    throw_++;
-
-                if (rec[i].no_cup_decision === 'PlaceCup')
-                    place++;
-                else if (rec[i].no_cup_decision === 'DontPlace')
-                    dontPlace++;
-
-                if (rec[i].cup_decision !== '') {
-                    q_cup++;
-                }
-                if (rec[i].no_cup_decision !== '') {
-                    q_no_cup++;
-                }
-            }
-
-            this.props.insertTextInput('q_cup', q_cup);
-            this.props.insertTextInput('q_no_cup', q_no_cup);
-
-            this.props.insertTextInput('keepT', keep);
-            this.props.insertTextInput('keep', Math.round((keep/q_cup) * 10000) / 10000);
-
-            this.props.insertTextInput('throwT', throw_);
-            this.props.insertTextInput('throw', Math.round((throw_/q_cup) * 10000) / 10000);
-
-            this.props.insertTextInput('placeT', place);
-            this.props.insertTextInput('place', Math.round((place/q_no_cup) * 10000) / 10000);
-
-            this.props.insertTextInput('dontPlaceT', dontPlace);
-            this.props.insertTextInput('dontPlace', Math.round((dontPlace/q_no_cup) * 10000) / 10000);
-
-            let probability = GAME_POINTS / PaymentsSettings.exchange_ratio;
-            if (probability > 1) probability = 1;
-            else if (probability < 0) probability = 0;
-
+            // Call sendGameDataToDB after insertGameLine in the callback
             const current_time = getTimeDate();
-            NewLogs({
-                user_id: UserId,
-                exp: ThisExperiment,
-                running_name: RunningName,
-                action: 'G.E',
-                type: 'LogGameType',
-                more_params: {
-                    game_points: GAME_POINTS,
-                    prob: probability,
-                    local_t: current_time.time,
-                    local_d: current_time.date,
-                },
-            }).then((res) => {});
-
-            let Total_time = Date.now() - StartTime;
-            let full_seconds = Total_time/1000;
-            let minutes = Math.floor(full_seconds/60);
-            let seconds = Math.floor(full_seconds - minutes*60);
-
-            let Total_milli = `${minutes}:${seconds}`;
-            const Avg_cup_num = Math.round((SUM_OF_CUPS / GameSet.trials)*1000)/1000;
-            this.props.insertTextInput('Total_point', GAME_POINTS);
-            this.props.insertTextInput('Avg_cup_num', Avg_cup_num);
-            this.props.insertTextInput('Total_milli', Total_milli);
-            this.props.insertTextInput('Total_time', Total_time);
-            this.props.insertTextInput('Condition', GameCondition);
-
-            this.props.insertPayment({
-                game_points: GAME_POINTS,
-                exchange_ratio: PaymentsSettings.exchange_ratio,
-                prob: probability,
-                bonus_endowment: PaymentsSettings.bonus_endowment,
-                show_up_fee: PaymentsSettings.show_up_fee,
-                sign_of_reward: PaymentsSettings.sign_of_reward,
-                Time: current_time.time,
-                Date: current_time.date
-            });
-
-            sc.isLoading = true;
-
-            let debug_args = null;
-            if (DebugMode) {
-                debug_args = {
-                    game_points: GAME_POINTS,
-                    exchange_ratio: PaymentsSettings.exchange_ratio,
-                    q_cup,
-                    q_no_cup,
-                    keepT: keep,
-                    throwT: throw_,
-                    placeT: place,
-                    dontPlaceT: dontPlace,
-                    keep: Math.round((keep/q_cup) * 10000) / 10000,
-                    throw_: Math.round((throw_/q_cup) * 10000) / 10000,
-                    place: Math.round((place/q_no_cup) * 10000) / 10000,
-                    dontPlace: Math.round((dontPlace/q_no_cup) * 10000) / 10000,
-                    probability,
-                    bonus_endowment: PaymentsSettings.bonus_endowment,
-                    show_up_fee: PaymentsSettings.show_up_fee,
-                    total_cups: SUM_OF_CUPS,
-                    trials: GameSet.trials,
-                    Avg_cup_num,
-                    Total_milli,
-                    Total_time
+            const summary_args = {
+                //game_points: 56,
+            };
+            this.props.sendGameDataToDB().then(
+                res => {
+                    NewLogs({
+                        user_id: UserId,
+                        exp: ThisExperiment,
+                        running_name: RunningName,
+                        action: 'G.E.S',
+                        type: 'LogGameType',
+                        more_params: {
+                            game_points: "TBD",
+                            local_t: current_time.time,
+                            local_d: current_time.date,
+                        },
+                    }).then((res) => {});
+                    this.props.callbackFunction('FinishGame', { need_summary: true, args: summary_args });
                 }
-            }
-
-            this.setState(sc, () => {
-                this.props.sendGameDataToDB().then(
-                    res => {
-                        NewLogs({
-                            user_id: UserId,
-                            exp: ThisExperiment,
-                            running_name: RunningName,
-                            action: 'G.E.S',
-                            type: 'LogGameType',
-                            more_params: {
-                                game_points: GAME_POINTS,
-                                local_t: current_time.time,
-                                local_d: current_time.date,
-                            },
-                        }).then((res) => {});
-                        this.props.callbackFunction('FinishGame', {need_summary: true, args: debug_args});
-                    }
-                );
-            });
-        }
-        else {
-            if (sc.tasks_index === 0)
-                this.props.SetLimitedTime(true);
-
-            sc.tasks_index++;
-        }
-        this.setState(sc);
+            );
+        });
+    } else {
+        console.log("Before setState() 222")
+        this.setState({
+            showConfirmation: false,
+            showQuestion: true
+        });
     }
-
-    render() {
-        return (
-            <div>
-              <MyTriviaGame></MyTriviaGame>
-            </div>
-          );
-       
-    }
-}
-
-Start.propTypes = {
-    game_settings: PropTypes.object,
 };
 
 
-export default Start;
+render() {
+  const { currentQuestionIndex, showConfirmation, correctAnswer, showResult, showQuestion, yesClickCount, practiceMode, gameCondition} = this.state;
+  let questions = practiceMode ? practice_questions : trivia_questions;
+  const question = questions[currentQuestionIndex];
+  const { answers } = question;
 
-function setGainMsg({cups_tax, base_reward}){
-    let sc = this.state;
-    sc.gain_msg =  {
-        reward: this.current_trial.reward,
-        cups_tax,
-        base_reward
-    };
-    sc.stop_ball = true;
-
-    const cups_num = sc.cups_selected.reduce((total, num) => total + (num?1:0), 0);
-    SUM_OF_CUPS += cups_num;
-    let db_row = {
-        trial: sc.trial,
-        ball_location: this.current_trial.ball_index+1,
-        
-    }
-    if (DebugMode)
-        sc.debug_row = db_row;
-
-    this.setState(sc)
+  return (
+    <div className="trivia-container">
+      {showQuestion && (
+        <div>
+          {practiceMode && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+          <p>Please read the following question. Pick your best answer and keep it in mind.</p>
+          <p>{question.question}</p>
+          <ul>
+            {answers.map((answer, index) => (
+              <li key={index}>{answer.option}. {answer.text}</li>
+            ))}
+          </ul>
+          <DebuggerModalView>
+            <p>Current Question Index: {currentQuestionIndex+1}</p>
+            <p>Game mode: {gameCondition}</p>
+            <p>Is in practice: {practiceMode==true?"Yes":"No"}</p>
+          </DebuggerModalView> 
+        </div>
+      )}
+      {showResult ? (
+        <div>
+          <h1><strong>You completed the trivia game</strong></h1>
+          <p>You will now receive a food preference survey. Note that you cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.</p>
+          <p>Total "Yes" clicks: {yesClickCount}</p>
+        </div>
+      ) : (
+        <div>
+          {!showConfirmation && <button onClick={this.handleNext}>I have an answer in my mind</button>}
+          {showConfirmation && (
+            <div>
+              {practiceMode && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+              <p>Correct answer is: {correctAnswer}</p>
+              <p>Is this the answer you had in mind?</p>
+              <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+              <button onClick={() => this.handleConfirmation(false)}>No</button>
+              <p>Note: you will receive a bonus for participating!</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
 
-const MyTriviaGame = (props) => {
-    console.log("---> in TriviaGame constructor")
-    // State to hold the current question index and whether the confirmation dialog should be shown
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-    const totalQuestions = jsonData.length;
-    const ThisExperiment = 'Trivia';
-  
-    // Function to handle navigation to the next question
-    const goToNextQuestion = () => {
-      // Show confirmation dialog
-      
-      setShowConfirmationDialog(true);
-    };
-  
-    // Function to handle confirmation dialog cancellation
-    const handleCancelConfirmation = () => {
-      setShowConfirmationDialog(false);
-    };
-  
-    // Function to handle confirmation dialog confirmation
-    const handleConfirmConfirmation = () => {
-      NewLogs({
-        user_id: 123,
-        exp: ThisExperiment,
-        running_name: "myRunning",
-        action: 'G.L',
-        type: 'LogGameType',
-        more_params: {
-            local_t: getTimeDate().time,
-            local_d: getTimeDate().date,
-        },
-    }).then((res) => {
-        this.START_APP_MIL = Date.now();
-        this.props.SetLimitedTime(true);
-        this.setState({isLoading: false});
-    });
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setShowConfirmationDialog(false);
-    };
-    const currentQuestion = jsonData[currentQuestionIndex];
-    
-    let content = null;
-    if(showConfirmationDialog === true){
-      content = (<div>
-        <CorrectAnswerConfirmation
-            onCancel={handleCancelConfirmation}
-            onConfirm={handleConfirmConfirmation}
-            correctAnswer={getCorrectAnswer()}
-           />
-      </div>
-      )
-    }
-    else if(currentQuestionIndex===totalQuestions){
-      console.log("currentQuestionIndex==totalQuestions")
-      
-      
-      content = (<div>
-        <label>You successfully finished the trivia experiment</label>
-      </div>
-      )
-    }
-    else if(currentQuestionIndex < totalQuestions){
-      console.log("---> currentQuestionIndex="+currentQuestionIndex+"  totalQuestions="+totalQuestions)
-      content=(
-      <div>
-      <h3><label style={{ fontWeight: 'bold' }}>Question#{currentQuestionIndex+1}:</label> <label>{jsonData[currentQuestionIndex].question}</label></h3>
-      {/* Render answer options */}
-      <ul>
-      {jsonData[currentQuestionIndex].answers.map((answer, index) => (
-        <li key={answer.option}>
-          <label>
-          <span style={{ color: 'blue' }}>Option#{answer.option}</span> <span style={{ color: 'green' }}>{answer.text}</span>
-          </label>
-        </li>
-      ))}
-      </ul>
-      <button onClick={goToNextQuestion}>I have an answer in my mind.</button>
-      
-    </div>
-      )
-    } 
-    else{
-      content = (<div>
-        content= <CorrectAnswerConfirmation></CorrectAnswerConfirmation>
-      </div>
-      )
-     
-  
-    }
-   
-    function getCorrectAnswer(){
-      const correctAnswer = jsonData[currentQuestionIndex].answers.map((answer, index) => {  
-        console.log("---> Answer: "+answer.text);
-        if (answer.option === currentQuestion.correct_answer) {
-          return answer.text;
-        }
-      }).find(answer => answer !== undefined);
-    
-      return correctAnswer;
-    }
-  
-    // Render the component
-    return (
-      <div className="quiz-container">
-        <h1>Trivia Quiz</h1>
-        {content}
-      </div>
-    );
-  };
-  
-  // Export the component
-  
-  
+}
+
+export default Start;

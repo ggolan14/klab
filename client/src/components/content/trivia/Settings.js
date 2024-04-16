@@ -246,6 +246,38 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
         },
     ];
 
+    const game_elements = [
+        {
+            type: 'Select',
+            label: 'Condition:',
+            show: true,
+            options: [
+                {
+                    value: 'o',
+                    label: 'One Shot'
+                },
+                {
+                    value: 'r',
+                    label: 'Repeated'
+                },
+                {
+                    value: 'u_d',
+                    label: 'Uniform distribution'
+                },
+                {
+                    value: 'rand',
+                    label: 'Random'
+                },
+            ],
+            value: game_settings.game.cond,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'cond',
+                value,
+            })
+        }
+    ]
     return (
         <>
             <DivContainer
@@ -290,10 +322,20 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
             <DivContainer
                 className='admin-settings-section admin-settings-section-raw'
             >
-                
+            <DivContainer
+                    className='admin-settings-section-col admin-settings-section-h'
+                    elements={[{
+                        type: 'Label',
+                        label: 'Game settings:',
+                        show: true
+                    }]}
+                />
+                <DivContainer
+                    className='admin-settings-section-raw admin-settings-section-b'
+                    elements={game_elements}
+                />
+                </DivContainer>
 
-                
-            </DivContainer>
 
 
 

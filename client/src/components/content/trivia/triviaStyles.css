@@ -1,3 +1,16 @@
+.trivia-container {
+    display: flex;
+    flex-direction: column; /* Display components vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+    padding: 30px; /* Add padding around the container */
+    font-size: 25px;
+  }
+  
+  .trivia-container > * {
+    margin-bottom: 30px; /* Add margin between each component */
+  }
 .t-o-g-u_set_m-s {
 
 }

@@ -1,124 +1,88 @@
-// Import React and the JSON data
-import React, { useState } from 'react';
-import jsonData from './trivia_questions.json';
-import './TriviaGame.css'; // Import the CSS file
-import {NewLogs} from "../../../actions/logger";
-import {getTimeDate} from "../../../utils/app_utils";
-import CorrectAnswerConfirmation from './CorrectAnswerConfirmation'; // Import your NextConfirmationDialog component
+import React, { Component } from 'react';
 
+class TriviaGame extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentQuestionIndex: 0,
+      score: 0,
+      showConfirmation: false,
+      selectedAnswer: null
+    };
+  }
 
+  handleNextQuestion = () => {
+    const { currentQuestionIndex } = this.state;
+    const { questions } = this.props;
 
-// Define a functional component
-const TriviaGame = (props) => {
-  // State to hold the current question index and whether the confirmation dialog should be shown
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-  const totalQuestions = jsonData.length;
-  const ThisExperiment = 'Trivia';
-  
-  
-
-  // Function to handle navigation to the next question
-  const goToNextQuestion = () => {
-    // Show confirmation dialog
-    
-    setShowConfirmationDialog(true);
+    if (currentQuestionIndex < questions.length - 1) {
+      this.setState({ showConfirmation: true });
+    } else {
+      // User has answered all questions, handle end of game
+      this.handleEndOfGame();
+    }
   };
 
-  // Function to handle confirmation dialog cancellation
-  const handleCancelConfirmation = () => {
-    setShowConfirmationDialog(false);
+  handleAnswer = (answer) => {
+    this.setState({ selectedAnswer: answer });
   };
 
-  // Function to handle confirmation dialog confirmation
-  const handleConfirmConfirmation = () => {
-    NewLogs({
-      user_id: 123,
-      exp: ThisExperiment,
-      running_name: "myRunning",
-      action: 'G.L',
-      type: 'LogGameType',
-      more_params: {
-          local_t: getTimeDate().time,
-          local_d: getTimeDate().date,
-      },
-  }).then((res) => {
-      this.START_APP_MIL = Date.now();
-      this.props.SetLimitedTime(true);
-      this.setState({isLoading: false});
-  });
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-    setShowConfirmationDialog(false);
+  handleConfirmAnswer = (isConfirmed) => {
+    const { currentQuestionIndex, selectedAnswer } = this.state;
+    const { questions } = this.props;
+
+    if (isConfirmed && selectedAnswer === questions[currentQuestionIndex].correct_answer) {
+      this.setState((prevState) => ({
+        score: prevState.score + 1,
+        showConfirmation: false,
+        currentQuestionIndex: prevState.currentQuestionIndex + 1,
+        selectedAnswer: null
+      }));
+    } else {
+      // Handle incorrect answer or cancellation of confirmation
+      this.setState({
+        showConfirmation: false,
+        selectedAnswer: null
+      });
+    }
   };
-  const currentQuestion = jsonData[currentQuestionIndex];
-  
-  let content = null;
-  if(showConfirmationDialog === true){
-    content = (<div>
-      <CorrectAnswerConfirmation
-          onCancel={handleCancelConfirmation}
-          onConfirm={handleConfirmConfirmation}
-          correctAnswer={getCorrectAnswer()}
-         />
-    </div>
-    )
-  }
-  else if(currentQuestionIndex===totalQuestions){
-    console.log("currentQuestionIndex==totalQuestions")
-    
-    content = (<div>
-      <label>You successfully finished the trivia experiment</label>
-    </div>
-    )
-  }
-  else if(currentQuestionIndex < totalQuestions){
-    console.log("---> currentQuestionIndex="+currentQuestionIndex+"  totalQuestions="+totalQuestions)
-    content=(
-    <div>
-    <h3><label style={{ fontWeight: 'bold' }}>Question#{currentQuestionIndex+1}:</label> <label>{jsonData[currentQuestionIndex].question}</label></h3>
-    {/* Render answer options */}
-    <ul>
-    {jsonData[currentQuestionIndex].answers.map((answer, index) => (
-      <li key={answer.option}>
-        <label>
-        <span style={{ color: 'blue' }}>Option#{answer.option}</span> <span style={{ color: 'green' }}>{answer.text}</span>
-        </label>
-      </li>
-    ))}
-    </ul>
-    <button onClick={goToNextQuestion}>I have an answer in my mind.</button>
-    
-  </div>
-    )
-  } 
-  else{
-    content = (<div>
-      content= <CorrectAnswerConfirmation></CorrectAnswerConfirmation>
-    </div>
-    )
-   
 
-  }
- 
-  function getCorrectAnswer(){
-    const correctAnswer = jsonData[currentQuestionIndex].answers.map((answer, index) => {  
-      console.log("---> Answer: "+answer.text);
-      if (answer.option === currentQuestion.correct_answer) {
-        return answer.text;
-      }
-    }).find(answer => answer !== undefined);
-  
-    return correctAnswer;
-  }
+  handleEndOfGame = () => {
+    // Logic to handle end of game, such as displaying final score
+  };
 
-  // Render the component
-  return (
-    <div className="quiz-container">
-      <h1>Trivia Quiz</h1>
-      {content}
-    </div>
-  );
-};
+  render() {
+    const { currentQuestionIndex, score, showConfirmation, selectedAnswer } = this.state;
+    const { questions, isPracticeMode } = this.props;
+    const currentQuestion = questions[currentQuestionIndex];
 
-// Export the component
+    return (
+      <div>
+        <h2>Question {currentQuestionIndex + 1}</h2>
+        <p>{currentQuestion.question}</p>
+        <ul>
+          {currentQuestion.answers.map((answer, index) => (
+            <li key={index} onClick={() => this.handleAnswer(answer.option)}>
+              {answer.text}
+            </li>
+          ))}
+        </ul>
+        {showConfirmation && (
+          <div>
+            <p>{isPracticeMode ? "Are you sure you want to continue to the next question?" : "Is this your final answer?"}</p>
+            {selectedAnswer && (
+              <p>Selected answer: {selectedAnswer}</p>
+            )}
+            <button onClick={() => this.handleConfirmAnswer(true)}>Yes</button>
+            <button onClick={() => this.handleConfirmAnswer(false)}>No</button>
+          </div>
+        )}
+        {!showConfirmation && (
+          <button onClick={this.handleNextQuestion}>{isPracticeMode ? "Continue to next question" : "Next question"}</button>
+        )}
+      </div>
+    );
+  }
+}
+
 export default TriviaGame;

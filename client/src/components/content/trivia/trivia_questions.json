@@ -1,20 +1,8 @@
 [
  
+  
   {
     "id":"1",
-    "question": "In literature, which Shakespearean play features the character Iago as its primary antagonist?",
-    "answers": [
-      {"option": "A", "text": "Hamlet"},
-      {"option": "B", "text": "Macbeth"},
-      {"option": "C", "text": "Romeo and Juliet"},
-      {"option": "D", "text": "Othello"},
-      {"option": "E", "text": "King Lear"},
-      {"option": "F", "text": "Julius Caesar"}
-    ],
-    "correct_answer": "D"
-  },
-  {
-    "id":"2",
     "question": "What is the capital city of Mongolia?",
     "answers": [
       {"option": "A", "text": "Moshkntar"},
@@ -25,6 +13,19 @@
       {"option": "F", "text": "Dushanbe"}
     ],
     "correct_answer": "C"
+  },
+  {
+    "id":"2",
+    "question": "In literature, which Shakespearean play features the character Iago as its primary antagonist?",
+    "answers": [
+      {"option": "A", "text": "Hamlet"},
+      {"option": "B", "text": "Macbeth"},
+      {"option": "C", "text": "Romeo and Juliet"},
+      {"option": "D", "text": "Othello"},
+      {"option": "E", "text": "King Lear"},
+      {"option": "F", "text": "Julius Caesar"}
+    ],
+    "correct_answer": "D"
   },
   {
     "id":"3",
