@@ -125,10 +125,10 @@ class Start extends Component {
 
   handleConfirmation = (confirmed) => {
     
-    const { yesClickCount, practiceMode,isLast } = this.state;
+    const { yesClickCount, practiceMode,isLast,currentQuestionIndex,gameCondition } = this.state;
     console.log("#####> yes button was clicked NUM of clicks=" + yesClickCount+"    isLast="+isLast);
     //const updatedYesClickCount = confirmed ? yesClickCount + 1 : yesClickCount;
-  if(isLast){
+  if((gameCondition=="OneShot" && currentQuestionIndex==4)|| false){
   console.log("Before setState()  yesClickCount=" + yesClickCount + "   confirmed=" + confirmed);
 
   // Increment yesClickCount
@@ -193,7 +193,7 @@ render() {
     <div className="trivia-container">
       {showQuestion && (
         <div>
-          {currentQuestionIndex < NUM_OF_PRACTICE_QUESTIONS && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+          {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS-1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
           <p>Please read the following question. Pick your best answer and keep it in mind.</p>
           <p>{question.question}</p>
           <ul>
@@ -219,7 +219,7 @@ render() {
           {!showConfirmation && <button onClick={this.handleNext}>I have an answer in my mind</button>}
           {showConfirmation && (
             <div>
-              {currentQuestionIndex <= NUM_OF_PRACTICE_QUESTIONS  && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+              {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS-1)  && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
               <p>Correct answer is: {correctAnswer}</p>
               <p>Is this the answer you had in mind?</p>
               <button onClick={() => this.handleConfirmation(true)}>Yes</button>
