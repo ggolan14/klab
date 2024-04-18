@@ -5,6 +5,7 @@ import practice_questions from './practice_questions.json';
 import {getTimeDate} from "../../../utils/app_utils";
 import {NewLogs} from "../../../actions/logger";
 import {DebuggerModalView, KeyTableID} from "../../screens/gameHandle/game_handle";
+import TriviaIntroduction from './TriviaIntroduction';
 import { number } from 'prop-types';
 const ThisExperiment = 'Trivia';
 
@@ -71,10 +72,13 @@ class Start extends Component {
       practiceMode: true,
       isLast: false,
       gameCondition:GameCondition,
+      triviaStarted: false,
       
     };
   }
-
+  handleStartTrivia = () => {
+    this.setState({ triviaStarted: true });
+  }
   handleNext = () => {
     console.log("---> I have an answer was clicked")
     const { currentQuestionIndex, practiceMode,gameCondition ,isLast} = this.state;
@@ -87,7 +91,7 @@ class Start extends Component {
     lastIndex = 4;
     }
     else{
-    lastIndex = questions.length-1;
+    lastIndex = 7;
     console.log("----------> Repeated lastIndex="+lastIndex)
     }
     console.log("---> in handleNext  practiceMode="+practiceMode+"  lastIndex="+lastIndex+ "  currentQuestionIndex="+currentQuestionIndex)
@@ -126,9 +130,9 @@ class Start extends Component {
   handleConfirmation = (confirmed) => {
     
     const { yesClickCount, practiceMode,isLast,currentQuestionIndex,gameCondition } = this.state;
-    console.log("#####> yes button was clicked NUM of clicks=" + yesClickCount+"    isLast="+isLast);
+    console.log("---> @@@@@@ In handle confirmation.  yes button was clicked NUM of clicks=" + yesClickCount+"    isLast="+isLast);
     //const updatedYesClickCount = confirmed ? yesClickCount + 1 : yesClickCount;
-  if((gameCondition=="OneShot" && currentQuestionIndex==4)|| false){
+  if((gameCondition=="OneShot" && currentQuestionIndex==4) || (gameCondition=="Repeated" && currentQuestionIndex==7)){
   console.log("Before setState()  yesClickCount=" + yesClickCount + "   confirmed=" + confirmed);
 
   // Increment yesClickCount
@@ -183,7 +187,7 @@ class Start extends Component {
 
 
 render() {
-  const { currentQuestionIndex, showConfirmation, correctAnswer, showResult, showQuestion, yesClickCount, practiceMode, gameCondition} = this.state;
+  const { currentQuestionIndex, showConfirmation, correctAnswer, showResult, showQuestion, yesClickCount, practiceMode, gameCondition,triviaStarted} = this.state;
   console.log("---> in render   currentQuestionIndex="+currentQuestionIndex +"   showConfirmation="+showConfirmation +"   correctAnswer="+correctAnswer +"   showResult="+showResult +"   showQuestion="+showQuestion +"   yesClickCount="+yesClickCount+"    practiceMode="+practiceMode)
   let questions = trivia_questions;
   const question = questions[currentQuestionIndex];
@@ -191,6 +195,12 @@ render() {
 
   return (
     <div className="trivia-container">
+      {/* Conditionally render TriviaIntroduction or the previous behavior */}
+      {!triviaStarted ? (
+        <TriviaIntroduction onStartTrivia={this.handleStartTrivia} />
+      ) : (
+        // Add your previous return behavior here
+        <div>
       {showQuestion && (
         <div>
           {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS-1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
@@ -227,6 +237,8 @@ render() {
               <p>Note: you will receive a bonus for participating!</p>
             </div>
           )}
+        </div>
+      )}
         </div>
       )}
     </div>
