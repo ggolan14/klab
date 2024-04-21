@@ -2,7 +2,7 @@
  
   {
     "id":"0",
-    "question": "Practice #1 : What is the tiny piece at the end of a shoelace called?",
+    "question": "What is the tiny piece at the end of a shoelace called?",
     "answers": [
       {"option": "A", "text": "Shoe stopper"},
       {"option": "B", "text": "Lace Knob"},
@@ -15,7 +15,7 @@
   },
   {
     "id":"0",
-    "question": "Practice #2 :Originally, Amazon only sold what kind of product?",
+    "question": "Originally, Amazon only sold what kind of product?",
     "answers": [
       {"option": "A", "text": "Books"},
       {"option": "B", "text": "Food"},
@@ -28,7 +28,7 @@
   },
   {
     "id":"0",
-    "question": "Practice #3 :Who was the only British Pope ever?",
+    "question": "Who was the only British Pope ever?",
     "answers": [
       {"option": "A", "text": "Alexander VI"},
       {"option": "B", "text": "Clement VII"},
@@ -89,6 +89,19 @@
       {"option": "D", "text": "Athena"},
       {"option": "E", "text": "Artemis"},
       {"option": "F", "text": "Hestia"}
+    ],
+    "correct_answer": "F"
+  },
+  {
+    "id":"8",
+    "question": "DUMMY",
+    "answers": [
+      {"option": "A", "text": "DUMMY"},
+      {"option": "B", "text": "DUMMY"},
+      {"option": "C", "text": "DUMMY"},
+      {"option": "D", "text": "DUMMY"},
+      {"option": "E", "text": "DUMMY"},
+      {"option": "F", "text": "DUMMY"}
     ],
     "correct_answer": "F"
   }

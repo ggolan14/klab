@@ -4,7 +4,7 @@ import {DebuggerModalView} from "../../screens/gameHandle/game_handle";
 
 
 const Summary = ({SummaryArgs}) => {
-    console.log("---> in Summary3")
+    console.log("---> in Summary")
 
    // const DebugMode = Object.keys(SummaryArgs.debug_args).length > 0;
 

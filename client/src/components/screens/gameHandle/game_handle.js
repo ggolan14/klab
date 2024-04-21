@@ -333,7 +333,7 @@ const constantLineValues = (part) => {
 }
 
 const insertGameLine = (line) => {
-    console.log("---> in game_handle.js insertGameLine line.NumOfYesAnswers="+line.NumOfYesAnswers);
+    //console.log("---> in game_handle.js insertGameLine line.NumOfYesAnswers="+line.NumOfYesAnswers);
     if (!Array.isArray(DB_RECORDS.Game))
         DB_RECORDS.Game = [];
 
