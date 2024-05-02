@@ -69,22 +69,6 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
         },
         {
             type: 'Select',
-            label: 'Tutorial:',
-            show: true,
-            options: [
-                {label: 'Yes', value: 'Yes'},
-                {label: 'No', value: 'No'},
-            ],
-            value: game_settings.general.w_t,
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'general',
-                key2: 'w_t',
-                value,
-            })
-        },
-        {
-            type: 'Select',
             label: 'Practice:',
             show: true,
             options: [

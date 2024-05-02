@@ -272,8 +272,7 @@ function SetLimitedTime(status){
 }
 
 const sendGameDataToDB = async () => {
-console.log("---> in game_handle sendGameDataToDB")
-    RecordGame({
+     RecordGame({
         Exp: CurrentExperiments,
         ExpID: EXP_ID,
         Records: stringify(DB_RECORDS.Game),

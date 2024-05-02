@@ -1,40 +1,30 @@
 import React, { Component } from 'react';
 import './gameStyles.css';
 import trivia_questions from './trivia_questions.json';
-import practice_questions from './practice_questions.json';
 import {getTimeDate} from "../../../utils/app_utils";
 import {NewLogs} from "../../../actions/logger";
 import {DebuggerModalView, KeyTableID} from "../../screens/gameHandle/game_handle";
 import TriviaIntroduction from './TriviaIntroduction';
-import { number } from 'prop-types';
 const ThisExperiment = 'Trivia';
 
 
 
 let UserId = 'empty';
 let RunningName = '-';
-let StartTime = null;
-let GAME_POINTS = 0;
-let SUM_OF_CUPS = 0;
-let GameSet = {};
-let PaymentsSettings = null;
+//let StartTime = null;
+//let GAME_POINTS = 0;
+//let SUM_OF_CUPS = 0;
+//let GameSet = {};
+//let PaymentsSettings = null;
 let GameCondition = null;
 let NUM_OF_PRACTICE_QUESTIONS=4;
 let lastIndex;
-
-
-/*
-const ResetAll = () => {
-  UserId = 'empty';
-  RunningName = '-';
-  StartTime = null;
-  GameSet = {};
-  PaymentsSettings = null;
-  GAME_POINTS = 0;
-  SUM_OF_CUPS = 0;
-  GameCondition = null;
-};
-*/
+let startShowQuestionTimer=0;
+let endShowQuestionTimer=0;
+let startShowConfirmationTimer=0;
+let endShowConfirmationTimer=0;
+let totalShowQuestionTime=0;
+let totalShowConfirmationTime=0;
 
 class Start extends Component {
   constructor(props) {
@@ -77,99 +67,94 @@ class Start extends Component {
       noClickCount: 0,
       practiceMode: true,
       isLast: false,
-      //lastIndex: 0,
       gameCondition:GameCondition,
       hideMessages: false,
-      
+     
     };
   }
   handleHideMessages = () => {
-    console.log("--------------------------------------> handleHideMessages")
     this.setState({ hideMessages: true });
   }
   handleNext = () => {
-    //console.log("---> I have an answer was clicked")
     const { currentQuestionIndex, practiceMode,gameCondition ,isLast } = this.state;
-    console.log("@@@@@ in handleNext currentQuestionIndex="+currentQuestionIndex)
     let questions = [];
     questions = trivia_questions;
-    
-    console.log("++++++ currentQuestionIndex="+currentQuestionIndex+"   lastIndex="+lastIndex +"   isLast="+isLast)
-    
-      const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.option === questions[currentQuestionIndex].correct_answer).text;
-      // Increment the index to show the next question
+    const correctAnswer = questions[currentQuestionIndex].answers.find(answer => answer.option === questions[currentQuestionIndex].correct_answer).text;
+      endShowQuestionTimer=getTimeDate().now;
+      startShowConfirmationTimer=getTimeDate().now;
+      totalShowQuestionTime=endShowQuestionTimer-startShowQuestionTimer;
+      console.log("---> 111 questionIndex="+currentQuestionIndex +"   updating totalShowQuestionTime to:"+totalShowQuestionTime)
       this.setState(prevState => ({
         currentQuestionIndex: Math.min(prevState.currentQuestionIndex + 1, lastIndex),
-        showConfirmation: true,
         correctAnswer: correctAnswer,
         showQuestion: false,
-        showConfirmation:true
-      }));
-    
-      
-
-
-     // if (!practiceMode) {
-       
-     // }
-      
- ///   }
+        showConfirmation:true,
+        }));
   };
  
 
   handleConfirmation = (confirmed) => {
-   // console.log("-------> ####  this.state.yesCount="+this.state.yesClickCount+ "  this.state.noCount="+this.state.noClickCount )
-    
     const { currentQuestionIndex, showConfirmation,  showQuestion, gameCondition,hideMessages} = this.state;
-    console.log("######## in handleConfirmation currentQuestionIndex="+currentQuestionIndex+"  lastIndex")
-    
-  
-
+    const currentTime = getTimeDate().now
+    endShowConfirmationTimer=getTimeDate().now;
+    totalShowConfirmationTime = endShowConfirmationTimer - startShowConfirmationTimer;
     if (currentQuestionIndex+1 == lastIndex) {
-      console.log("---> in handleNext setting isLast to true");
-      this.setState(prevState => ({
+      endShowQuestionTimer=getTimeDate().now;
+      this.setState(prevState => (
+        {
         isLast: true,
         showConfirmation: false,
         showQuestion: false,
-        //currentQuestionIndex: 0 // Reset to the first question of trivia mode
-     }));
+       }), () => {
+    
+});
     }
-
+    
     if (confirmed) {
-      this.setState(prevState => ({
+      startShowQuestionTimer=getTimeDate().now;
+      //console.log("!!!!!!! Show question 2 "+getTimeDate().now+"  currentQuestionIndex="+currentQuestionIndex)
+      this.setState(prevState => (
+        
+        {
         showResult: false,
-        yesClickCount: prevState.yesClickCount + 1,
+        yesClickCount: currentQuestionIndex>(NUM_OF_PRACTICE_QUESTIONS-1) ? prevState.yesClickCount + 1:prevState.yesClickCount,
         showQuestion: currentQuestionIndex != lastIndex,
         showConfirmation:false,
       }), () => {
         const db_row = {
+          QuestionIndex: currentQuestionIndex-3,  // total 
           NumOfYesAnswers: this.state.yesClickCount,
           NumOfNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
+          HaveAnAnswerTime:totalShowQuestionTime,
+          ConfirmationTime:totalShowConfirmationTime,
         };
-        console.log("---> currentQuestionIndex="+currentQuestionIndex + "  NUM_OF_PRACTICE_QUESTIONS="+NUM_OF_PRACTICE_QUESTIONS)
         
         if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
-          this.insertGameLine(true, this.state.yesClickCount, this.state.noClickCount,db_row);
+          this.insertGameLine(db_row);
           this.sendDataToDB(currentQuestionIndex);
         }
       });
-    
     } else {
+      startShowQuestionTimer=getTimeDate().now;
+     // console.log("!!!!!!! Show question  1"+getTimeDate().now+"  currentQuestionIndex="+currentQuestionIndex)
       this.setState(prevState => ({
         showResult: false,
-        noClickCount: prevState.noClickCount + 1,
+        noClickCount: currentQuestionIndex>(NUM_OF_PRACTICE_QUESTIONS-1) ? prevState.noClickCount + 1 : prevState.noClickCount,
         showQuestion: currentQuestionIndex != lastIndex,
         showConfirmation:false,
       }), () => {
         const db_row = {
-        NumOfNoAnswers: this.state.noClickCount,
-        GameCondition: GameCondition      
+          QuestionIndex: currentQuestionIndex-3,
+          NumOfYesAnswers: this.state.yesClickCount,
+          NumOfNoAnswers: this.state.noClickCount,
+          GameCondition: GameCondition,
+          HaveAnAnswerTime:totalShowQuestionTime,
+          ConfirmationTime:totalShowConfirmationTime,
+              
       };
-      console.log("---> db_row.noCount="+db_row.noClickCount)
-        
-        if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
-          this.insertGameLine(false, this.state.yesClickCount, this.state.noClickCount,db_row);
+       if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
+          this.insertGameLine(db_row);
           this.sendDataToDB(currentQuestionIndex);
         }
       });
@@ -177,17 +162,13 @@ class Start extends Component {
    
    }
   
-  insertGameLine = (confirmed, yesClickCount, noClickCount,db_row) => {
-     console.log("%%%%  in insertGameLine()")
- //    console.log(`User selected ${confirmed ? 'Yes' : 'No'}`);
- //   console.log(`Yes count: ${yesClickCount}, No count: ${noClickCount}`);
-     // Call insertGameLine with updated db_row
-     this.props.insertGameLine(db_row);
+  insertGameLine = (db_row) => {
+      // console.log("%%%%  in insertGameLine()   NumOfNoAnswers="+db_row.NumOfNoAnswers+"    NumOfYesAnswers="+db_row.NumOfYesAnswers)
+      this.props.insertGameLine(db_row);
   }
 
   sendDataToDB = (currentQuestionIndex) => {
-   // const { currentQuestionIndex2} = this.state;
-    console.log("********  in sendDataToDB() lastIndex="+lastIndex+ "  currentQuestionIndex="+currentQuestionIndex)
+   // console.log("********  in sendDataToDB() lastIndex="+lastIndex+ "  currentQuestionIndex="+currentQuestionIndex)
     const current_time = getTimeDate();
     const summary_args = {
       //game_points: 56,
@@ -219,62 +200,56 @@ class Start extends Component {
 
 
 render() {
-  const { currentQuestionIndex, showConfirmation, correctAnswer, showResult, showQuestion, yesClickCount, practiceMode, gameCondition,hideMessages,isLast} = this.state;
-  console.log("$$$$$$$$ in render   currentQuestionIndex="+currentQuestionIndex +"   showConfirmation="+showConfirmation +"   correctAnswer="+correctAnswer +"   showResult="+showResult +"   showQuestion="+showQuestion +"   yesClickCount="+yesClickCount+"    practiceMode="+practiceMode+"   isLast="+isLast)
+  const { currentQuestionIndex, showConfirmation, correctAnswer, showResult, showQuestion, yesClickCount,noClickCount, practiceMode, gameCondition,hideMessages,isLast} = this.state;
+  //console.log("$$$$$$$$ in render   currentQuestionIndex="+currentQuestionIndex +"   showConfirmation="+showConfirmation +"   correctAnswer="+correctAnswer +"   showResult="+showResult +"   showQuestion="+showQuestion +"   yesClickCount="+yesClickCount+"    practiceMode="+practiceMode+"   isLast="+isLast)
   let questions = trivia_questions;
   const question = questions[currentQuestionIndex];
   const { answers } = question;
+  const date = new Date();
 
   return (
     <div className="trivia-container">
-      {/* Conditionally render TriviaIntroduction or the previous behavior */}
-      {!hideMessages ? (
-        <TriviaIntroduction onHideMessages={this.handleHideMessages} />
+     
+      {(!hideMessages) ? (
+        <TriviaIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentQuestionIndex} />
       ) : (
         // Add your previous return behavior here
          <div>
-          {showQuestion ? (
-        <div>
-          {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS-1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
-          <p>Please read the following question. Pick your best answer and keep it in mind.</p>
-          <p>{question.question}</p>
-          <ul>
-            {answers.map((answer, index) => (
-              <li key={index}>{answer.option}. {answer.text}</li>
-            ))}
-          </ul>
-          {<button onClick={this.handleNext}>I have an answer in my mind</button>}
           <DebuggerModalView>
             <p>Current Question Index: {currentQuestionIndex+1}</p>
             <p>Game mode: {gameCondition}</p>
             <p>Is in practice: {practiceMode==true?"Yes":"No"}</p>
+            <p>Num of YES clicks: {yesClickCount}</p>
+            <p>Num of NO clicks: {noClickCount}</p>
           </DebuggerModalView> 
-        </div>
+          {showQuestion ? (
+            <div>
+              {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS-1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+              <p>Please read the following question. Pick your best answer and keep it in mind.</p>
+              <p>{question.question}</p>
+              <ul>
+                {answers.map((answer, index) => (
+                  <li key={index}>{answer.option}. {answer.text}</li>
+                ))}
+              </ul>
+              {<button onClick={this.handleNext}>I have an answer in my mind</button>}
+              
+            </div>
       ) : (
-        
-
-
-
-        
-        <div>
-
-
-      {( showConfirmation)  && (
-        <>
-          {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS-1)  && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
-			  <p>Correct answer is: {correctAnswer}</p>
-              <p>Is this the answer you had in mind?</p>
-              <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-              <button onClick={() => this.handleConfirmation(false)}>No</button>
-              <p>Note: you will receive a bonus only if you report "Yes"</p>
-        </>
+            <div>
+              {( showConfirmation)  && (
+                <>
+                  {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS-1)  && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+                <p>Correct answer is: {correctAnswer}</p>
+                      <p>Is this the answer you had in mind?</p>
+                      <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                      <button onClick={() => this.handleConfirmation(false)}>No</button>
+                      <p>Note: you will receive a bonus only if you report "Yes"</p>
+                </>
+              )}
+            </div>
       )}
-
-
-       
         </div>
-      )}
-          </div>
       )}
     </div>
   );
