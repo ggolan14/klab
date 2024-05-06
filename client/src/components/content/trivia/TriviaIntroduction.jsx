@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './gameStyles.css';
 
 class TriviaIntroduction extends Component {
     
@@ -39,7 +39,7 @@ class TriviaIntroduction extends Component {
     const { messages, currentIndex } = this.state;
 
     return (
-      <div>
+      <div className="introduction">
         {currentIndex === 1 && <h2>Welcome to the trivia game!</h2>}
         {/* Display the current message */}
         <p>{messages[currentIndex]}</p>
