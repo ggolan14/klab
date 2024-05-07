@@ -12,11 +12,6 @@ const ThisExperiment = 'Trivia';
 
 let UserId = 'empty';
 let RunningName = '-';
-//let StartTime = null;
-//let GAME_POINTS = 0;
-//let SUM_OF_CUPS = 0;
-//let GameSet = {};
-//let PaymentsSettings = null;
 let GameCondition = null;
 let NUM_OF_PRACTICE_QUESTIONS=4;
 let lastIndex;
@@ -26,7 +21,8 @@ let startShowConfirmationTimer=0;
 let endShowConfirmationTimer=0;
 let totalShowQuestionTime=0;
 let totalShowConfirmationTime=0;
-let practiceIsOver = false;
+const yesButtonInRight = Math.random() < 0.5;
+
 
 class Start extends Component {
   constructor(props) {
@@ -75,11 +71,38 @@ class Start extends Component {
       gameCondition:GameCondition,
       hideMessages: false,
       practiceIsOver:false,
+      hideTriviaCompleted:false,
+      showWelcomeToFoodPreference:false,
+      userAnswers: {},
      
     };
   }
+
+  addRecord = (questionIndex, value) => {
+    const { userAnswers } = this.state;
+    console.log("---> length before  "+userAnswers.length)
+    this.setState(prevState => ({
+      userAnswers: {
+        ...prevState.userAnswers,
+        [questionIndex]: value
+      }
+    }));
+    console.log("---> length after  "+userAnswers.length)
+  };
+
   handleHideMessages = () => {
     this.setState({ hideMessages: true });
+  }
+
+  handelHideTriviaCompleted= () => {
+    console.log("---> in handelHideTriviaCompleted setting hideTriviaCompleted to true and showWelcomeToFoodPreference to true")
+
+    this.setState({ hideTriviaCompleted: true, showWelcomeToFoodPreference:true });
+  }
+
+  handelHideWelcomeToFoodPreference= () => {
+    console.log("---> in handelHideWelcomeToFoodPreference setting showWelcomeToFoodPreference to false")
+    this.setState({ showWelcomeToFoodPreference: false });
   }
 
   handleHidePracticeIsOver = () => {
@@ -109,6 +132,7 @@ class Start extends Component {
     const currentTime = getTimeDate().now
     endShowConfirmationTimer=getTimeDate().now;
     totalShowConfirmationTime = endShowConfirmationTimer - startShowConfirmationTimer;
+    
     if (currentQuestionIndex+1 == lastIndex) {
       endShowQuestionTimer=getTimeDate().now;
       this.setState(prevState => (
@@ -144,9 +168,11 @@ class Start extends Component {
         };
         
         if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
+          this.addRecord(currentQuestionIndex-3, confirmed?'Yes':'No');
           this.insertGameLine(db_row);
           this.sendDataToDB(false);
         }
+        
       });
     } else {
       startShowQuestionTimer=getTimeDate().now;
@@ -169,6 +195,7 @@ class Start extends Component {
               
       };
        if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
+          this.addRecord(currentQuestionIndex-3, confirmed?'Yes':'No');
           this.insertGameLine(db_row);
           this.sendDataToDB(false);
         }
@@ -189,8 +216,8 @@ class Start extends Component {
   sendDataToDB = (send) => {
    // console.log("********  in sendDataToDB() lastIndex="+lastIndex+ "  currentQuestionIndex="+currentQuestionIndex)
     const current_time = getTimeDate();
-/*
-    var total_bonus=this.calculateBonus();
+
+    var total_bonus=this.addGameBonus();
     this.PaymentsSettings.total_bonus = total_bonus;
     
             this.props.insertPayment({
@@ -202,23 +229,22 @@ class Start extends Component {
                 Time: current_time.time,
                 Date: current_time.date
             });
-*/
 
-var total_bonus=123;
-this.PaymentsSettings.total_bonus = total_bonus;
 
-        this.props.insertPayment({
-            exchange_ratio: "1",
-            bonus_endowment:"2",
-            show_up_fee: "3",
-            sign_of_reward: "4",
-            bonus_payment:"5",
-            Time: current_time.time,
-            Date: current_time.date
-        });
+
+
     const summary_args = {
       //game_points: 56,
     };
+    const reward_sum=555;
+    var temp_sign_of_reward = this.PaymentsSettings.sign_of_reward
+    console.log("++++++++++++++++++++++ temp_sign_of_reward="+temp_sign_of_reward)
+
+    let debug_args = {
+      TrialsForBonus: 88,
+      reward_sum,
+      temp_sign_of_reward,
+    }
     this.props.sendGameDataToDB().then(
       res => {
           NewLogs({
@@ -234,7 +260,9 @@ this.PaymentsSettings.total_bonus = total_bonus;
               },
           }).then((res) => {});
           if(send ){
-           this.props.callbackFunction('FinishGame', { need_summary: true, args: summary_args });
+            debug_args.reward_sum=total_bonus;
+            debug_args.sign_of_reward=temp_sign_of_reward;
+            this.props.callbackFunction('FinishGame', { need_summary: true, args: debug_args });
           }
           
       }
@@ -253,24 +281,70 @@ this.PaymentsSettings.total_bonus = total_bonus;
  }
 
  addGameBonus(game_data){
-  console.log("-------------> in addGameBonus");
-  var selectedQuestion= Math.floor(Math.random() * game_data.length);
-  var selectedQuestionPoints=game_data[selectedQuestion].Answer==1 ? 999 : 0;
-  console.log("---> game_data.length="+game_data.length + "   selectedQuestion="+(selectedQuestion+1)+"   selectedQuestionPoints="+selectedQuestionPoints)
+  const { userAnswers} = this.state;
+  
+  const keys = Object.keys(this.state.userAnswers);
+    const randomIndex = Math.floor(Math.random() * keys.length);
+    const randomKey = keys[randomIndex];
+
+    // Get the corresponding value
+  const randomValue = this.state.userAnswers[randomKey];
+  var selectedQuestion= Math.floor(Math.random() * userAnswers.length);
+  var selectedQuestionPoints = randomValue == 'Yes' ? 1 : 0;
+  console.log("-------------> in addGameBonus selectedQuestion="+randomKey+"   selectedQuestionPoints="+selectedQuestionPoints);
   this.TotalBonus.push(selectedQuestionPoints);
+  return selectedQuestionPoints;
   }
 
   render() {
-    const { currentQuestionIndex, showConfirmation, correctAnswer, showResult, showQuestion, yesClickCount, noClickCount, practiceMode, gameCondition, hideMessages,practiceIsOver, isLast } = this.state;
+    const { currentQuestionIndex, showConfirmation, correctAnswer, hideTriviaCompleted,showWelcomeToFoodPreference, 
+      showQuestion, yesClickCount, noClickCount, practiceMode, gameCondition, 
+      hideMessages,practiceIsOver } = this.state;
     let questions = trivia_questions;
     const question = questions[currentQuestionIndex];
     const { answers } = question;
 
     // Declare a variable to hold the JSX for FoodPreference
     let foodPreferenceComponent = null;
+    console.log("--->  in rendrer hideTriviaCompleted="+hideTriviaCompleted+"  showWelcomeToFoodPreference="+showWelcomeToFoodPreference)
     console.log("--->  questions.length="+questions.length+"  currentQuestionIndex="+currentQuestionIndex +" showQuestion="+showQuestion+"   showConfirmation="+showConfirmation+"  practiceIsOver="+practiceIsOver)
     // Check if currentQuestionIndex is equal to 3
-    if (currentQuestionIndex === questions.length -1 && !showConfirmation) {
+    const  oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentQuestionIndex ==NUM_OF_PRACTICE_QUESTIONS;
+    const  repeatedLast = GameCondition == "Repeated" && !showConfirmation && currentQuestionIndex === questions.length -1;
+    console.log("---> 111 oneShotLast="+oneShotLast+"  repeatedLast="+repeatedLast)
+    if (oneShotLast ||  repeatedLast ) {
+      console.log("---> 222")
+      if(!hideTriviaCompleted){
+        console.log("---> 333")
+        return (
+          <div className="practice-is-over">
+            <h3>You completed the “trivia game”</h3>
+            <p>
+            You will now receive a food preference survey. <br></br>
+            Note that you cannot leave or stop responding until you have completed the entire study and <br></br>
+            have received your completion code, or else you will not receive compensation.
+            </p>
+            <button onClick={this.handelHideTriviaCompleted}>Next</button>
+          </div>
+        ) 
+        
+      }
+      if(showWelcomeToFoodPreference){
+        console.log("---> 444")
+        return (
+          <div className="practice-is-over">
+              <h3>Welcome to the food preference survey</h3>
+              <p>
+              In this survey, we are interested in people’s food preferences. 
+              You will be asked one question about your food preferences.<br></br> 
+              Please answer the question according to your actual preferences.
+
+              </p>
+              <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
+            </div>
+            )
+      }
+      
         // If equal, assign FoodPreference JSX to the variable
         return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB}/>
         
@@ -324,8 +398,19 @@ this.PaymentsSettings.total_bonus = total_bonus;
                                     {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
                                     <p>Correct answer is: {correctAnswer}</p>
                                     <p>Is this the answer you had in mind?</p>
-                                    <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                                    <button onClick={() => this.handleConfirmation(false)}>No</button>
+
+                                    {yesButtonInRight ? 
+                                    ( <>
+                                      <button onClick={() => this.handleConfirmation(false)}>No</button>
+                                      <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                                      </>
+                                    ) : (  
+                                      <>
+                                      <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                                      <button onClick={() => this.handleConfirmation(false)}>No</button>
+                                      </>
+                                    )}
+
                                     <p>Note: you will receive a bonus only if you report "Yes"</p>
                                 </>
                             )}

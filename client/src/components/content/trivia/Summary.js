@@ -4,14 +4,15 @@ import {DebuggerModalView} from "../../screens/gameHandle/game_handle";
 
 
 const Summary = ({SummaryArgs}) => {
-    console.log("---> in Summary")
-
-   // const DebugMode = Object.keys(SummaryArgs.debug_args).length > 0;
-
-    return (
-        <div>
-           You will now receive a food preference survey. Note that you cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
-        </div>
+   
+     return (
+        <label>
+            Based on the points you earned, your bonus payment is {SummaryArgs.sign_of_reward}{SummaryArgs.reward_sum}.<br/>
+            You will get your bonus after all participants will finish the games<br/>
+            Please press the button below to complete the exit survey.<br/>
+            The short survey includes only a few questions, after which you will get your completion code.<br/>
+            Important: we will not be able to pay you if you do not complete the survey!
+        </label>
     )
 };
 
