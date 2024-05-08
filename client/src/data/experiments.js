@@ -20,6 +20,7 @@ const EXPERIMENTS_LABELS_NAMES = {
 };
 
 const EXPERIMENTS_NAMES_LABELS = {
+    Trivia: 'Trivia',
     TryOrGiveUp: 'TwoMatricesExperiment',
     PointsGame: 'PointsGame',
     PointsGameSh: 'PointsGameSh',
@@ -49,7 +50,7 @@ export const GetExperimentLabel = exp => {
 }
 
 const exp_paths = (exp) => {
-
+//console.log("---> exp = "+exp+"   GetExperimentLabel(exp)="+GetExperimentLabel(exp))
     return  {
         main_pathname: '/' + exp + '/main',
         start_pathname: '/' + GetExperimentLabel(exp),

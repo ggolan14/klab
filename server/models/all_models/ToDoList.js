@@ -7,11 +7,11 @@ const ToDoListSchema = new mongoose.Schema({
         },
         open_by: {
             type: String,
-            required: true
+            //required: true
         },
         subject: {
             type: String,
-            required: true,
+            //required: true,
         },
         description: {
             type: String,

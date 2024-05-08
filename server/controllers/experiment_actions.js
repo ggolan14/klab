@@ -13,6 +13,7 @@ const consentFormModel = getModelPack('ConsentForms').ConsentForms;
 // @route   POST /api/record_game
 // @access  Private
 const addNewUserRecords = asyncHandler(async (req, res) => {
+    console.log("---> in experiment_actions.js addNewUserRecords()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {Exp, UserId, Records, RunningName, cDate, ISA, Mode, Version} = req.body;
@@ -46,7 +47,7 @@ const addNewUserRecords = asyncHandler(async (req, res) => {
             Logger({
                 logs_target: Exp,
                 logs_extension: '.log',
-                data: `addNewUserRecords2 IP=${IP} UserId=${UserId} ExpId=${doc._id.toString()} Ver=${Version}`,
+                data: `addNewUserRecords IP=${IP} UserId=${UserId} ExpId=${doc._id.toString()} Ver=${Version}`,
                 sync: false
             });
             return res.json({msg: doc._id.toString(), status: "OK"});
@@ -71,6 +72,7 @@ const addNewUserRecords = asyncHandler(async (req, res) => {
 // @route   POST /api/record_game
 // @access  Private
 const addNewRecord = asyncHandler(async (req, res) => {
+    console.log("---> in experiment_actions.js addNewRecord()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {Exp, ExpID, Records} = req.body;
@@ -133,6 +135,7 @@ const addNewRecord = asyncHandler(async (req, res) => {
 // @route   POST /api/record_game
 // @access  Private
 const finishRecord = asyncHandler(async (req, res) => {
+    console.log("---> in experiment_actions.js finishRecord()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {Exp, ExpID, Records, Date} = req.body;
@@ -203,7 +206,7 @@ const finishRecord = asyncHandler(async (req, res) => {
 // @route   GET /api/rdc/
 // @access  Public
 const getRedirectTo = asyncHandler(async (req, res) => {
-
+    console.log("---> in experiment_actions.js getRedirectTo()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {ex, ve, ex_id, user_id} = req.params;
@@ -250,6 +253,7 @@ const getRedirectTo = asyncHandler(async (req, res) => {
 // @route   GET /api/st_ex/
 // @access  Public
 const getIsExpReady = asyncHandler(async (req, res) => {
+    console.log("---> in experiment_actions.js getIsExpReady()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {exp} = req.params;
@@ -287,6 +291,7 @@ const getIsExpReady = asyncHandler(async (req, res) => {
 // @route   GET /api/consent_form/
 // @access  Private
 const getGameConsentForm = asyncHandler(async (req, res) => {
+    console.log("---> in experiment_actions.js getGameConsentForm()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {exp} = req.params;

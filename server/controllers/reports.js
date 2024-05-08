@@ -11,6 +11,7 @@ const Logger = require("../logger");
 // const { createCanvas, loadImage } = require('canvas')
 
 const addLineToGame = (records, isArray, game_table) => {
+    console.log("---> addLineToGame")
     let game = [];
     let add_to_game_line = {
         ExpID: records._id.toString(),
@@ -34,6 +35,7 @@ const addLineToGame = (records, isArray, game_table) => {
 }
 
 const filtersCreate = (filters) => {
+    console.log("---> filtersCreate")
     let new_filters= {};
     new_filters['$and'] = [];
     for (let i=0; i<filters.length; i++){
@@ -49,10 +51,12 @@ const filtersCreate = (filters) => {
 const ExpsTables = ['Game', 'UserDetails', 'KeyTable', 'Summary', 'Payment'];
 
 const ExpMoreRec = exp => {
+    console.log("---> ExpMoreRec")
     return {SP: 'NFC', RepeatedChoice: ['SupportTools', 'ComprehensionChecks']}[exp];
 };
 
 const ExpGameDataSize = exp => {
+    console.log("---> ExpGameDataSize")
     const object_exp = ['RepeatedChoice'];
     if (object_exp.indexOf(exp) > -1)
         return {
@@ -62,6 +66,7 @@ const ExpGameDataSize = exp => {
 };
 
 const ExpGameGroup = exp => {
+    console.log("---> ExpGameGroup")
     switch (exp){
         case 'RepeatedChoice':
             return {
@@ -79,6 +84,7 @@ const ExpGameGroup = exp => {
 };
 
 const ExpGameProject= exp => {
+    console.log("---> ExpGameProject")
     switch (exp){
         case 'RepeatedChoice':
             return {
@@ -96,6 +102,7 @@ const ExpGameProject= exp => {
 };
 
 const ExpGameAddFields = exp => {
+    console.log("---> ExpGameAddFields")
     switch (exp){
         case 'RepeatedChoice':
             return {
@@ -160,6 +167,7 @@ const ExpGameAddFields = exp => {
 // @route   GET /api/get_filters/
 // @access  Private
 const getFilters2 = asyncHandler(async (req, res) => {
+    console.log("---> getFilters2")
 
     let {exp, filters} = req.body;
 
@@ -214,29 +222,36 @@ const getFilters2 = asyncHandler(async (req, res) => {
 });
 
 const getFilters = asyncHandler(async (req, res) => {
+    console.log("---> getFilters")
 
     let {exp, filters} = req.body;
+    console.log("---> getFilters 111")
 
     try {
-
+        console.log("---> getFilters 222")
         let model_pack = getModelPack(exp);
 
-        if (!model_pack)
+        if (!model_pack){
+            console.log("---> getFilters 333 error")
             return res.status(400).json({error: 'Error'});
-
+        }
+        console.log("---> getFilters 100")
         let filters_create = [];
 
         if (filters.runnings && filters.runnings.length > 0){
+            console.log("---> getFilters 101")
             filters_create.push({
                 RunningName: {$in: filters.runnings}
             });
         }
         if (filters.versions && filters.versions.length > 0){
+            console.log("---> getFilters 102")
             filters_create.push({
                 Version: {$in: filters.versions}
             });
         }
         if (filters.permissions && filters.permissions.length > 0){
+            console.log("---> getFilters 103")
             filters_create.push({
                 Permission: {$in: filters.permissions}
             });
@@ -246,7 +261,7 @@ const getFilters = asyncHandler(async (req, res) => {
         //         UserId: {$in: filters.users}
         //     });
         // }
-
+        console.log("---> getFilters 104")
         let match_filters = {
             $and: [
                 {
@@ -278,6 +293,7 @@ const getFilters = asyncHandler(async (req, res) => {
             ]
         };
         if (filters_create.length > 0){
+            console.log("---> getFilters 105")
             for (let i=0; i<filters_create.length; i++){
                 match_filters.$and.push(filters_create[i]);
             }
@@ -293,6 +309,7 @@ const getFilters = asyncHandler(async (req, res) => {
                     permissions: {$addToSet: '$Permission'},
                 }}
         ]);
+        console.log("---> getFilters 106 results.size="+results.size)
         if (results && results[0])
          delete results[0]._id;
 
@@ -314,6 +331,7 @@ const getFilters = asyncHandler(async (req, res) => {
 // @route   GET /api/get_filters/
 // @access  Private
 const getExpRuns = asyncHandler(async (req, res) => {
+    console.log("---> getExpRuns")
 
     let {exp} = req.params;
 
@@ -341,6 +359,7 @@ const getExpRuns = asyncHandler(async (req, res) => {
 // @route   GET /api/get_filters/
 // @access  Private
 const getRunVers = asyncHandler(async (req, res) => {
+    console.log("---> getRunVers")
 
     let {exp, run} = req.body;
 
@@ -378,7 +397,7 @@ const getRunVers = asyncHandler(async (req, res) => {
 // @route   GET /api/get_filters/
 // @access  Private
 const getRunVerUsers = asyncHandler(async (req, res) => {
-
+    console.log("---> getRunVerUsers")
     let {exp, run, ver} = req.body;
 
     try {
@@ -406,6 +425,7 @@ const getRunVerUsers = asyncHandler(async (req, res) => {
 // @route   GET /api/get_data/
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
+    console.log("---> getData")
     try {
         let {exp, filters, tables} = req.body;
         let model_pack = getModelPack(exp);
@@ -513,6 +533,7 @@ const getData = asyncHandler(async (req, res) => {
 });
 
 const downloadData = asyncHandler(async (req, res) => {
+    console.log("---> downloadData")
 
     let {exp, filters} = req.query;
 
@@ -738,6 +759,7 @@ const downloadData = asyncHandler(async (req, res) => {
 });
 
 const wpImages = asyncHandler(async (req, res) => {
+    console.log("---> wpImages")
     // let {exp, filters} = req.query;
     // const IP = req.headers['x-real-ip'] || '0.0.0.0';
     //
@@ -827,7 +849,7 @@ const wpImages = asyncHandler(async (req, res) => {
 // @route   DELETE /api/delete_data/
 // @access  Private
 const deleteData = asyncHandler(async (req, res) => {
-
+    console.log("---> deleteData")
     const {exp, user_id} = req.query;
 
     try {

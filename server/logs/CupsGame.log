@@ -165,3 +165,77 @@
 19-04-2023 | 14:30:51 | finishRecord IP=0.0.0.0 ExpID=643fd0ce46c471910e526cc0
 24-04-2023 | 11:59:43 | getIsExpReady IP=0.0.0.0 status=Y
 24-04-2023 | 11:59:43 | getGameConsentForm IP=0.0.0.0
+08-04-2024 | 12:14:46 | getIsExpReady IP=0.0.0.0 status=Y
+08-04-2024 | 12:14:46 | getGameConsentForm IP=0.0.0.0
+08-04-2024 | 12:14:51 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+08-04-2024 | 12:14:51 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+08-04-2024 | 12:14:51 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=6613b58b00ec4355644ceba5 Ver=test
+08-04-2024 | 12:19:03 | addNewRecord IP=0.0.0.0 ExpID=6613b58b00ec4355644ceba5 Length=3
+08-04-2024 | 12:22:51 | getIsExpReady IP=0.0.0.0 status=Y
+08-04-2024 | 12:22:51 | getGameConsentForm IP=0.0.0.0
+08-04-2024 | 12:22:57 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+08-04-2024 | 12:22:57 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+08-04-2024 | 12:22:57 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=6613b77100ec4355644cebdc Ver=test
+08-04-2024 | 12:23:37 | addNewRecord IP=0.0.0.0 ExpID=6613b77100ec4355644cebdc Length=3
+08-04-2024 | 12:24:18 | finishRecord IP=0.0.0.0 ExpID=6613b77100ec4355644cebdc
+09-04-2024 | 07:54:26 | getIsExpReady IP=0.0.0.0 status=Y
+09-04-2024 | 07:54:26 | getGameConsentForm IP=0.0.0.0
+09-04-2024 | 07:54:29 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+09-04-2024 | 07:54:29 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+09-04-2024 | 07:54:29 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=6614ca054a32fc3e1cde1a88 Ver=test
+09-04-2024 | 07:54:41 | addNewRecord IP=0.0.0.0 ExpID=6614ca054a32fc3e1cde1a88 Length=3
+09-04-2024 | 07:57:05 | finishRecord IP=0.0.0.0 ExpID=6614ca054a32fc3e1cde1a88
+09-04-2024 | 07:59:31 | getIsExpReady IP=0.0.0.0 status=Y
+09-04-2024 | 07:59:31 | getGameConsentForm IP=0.0.0.0
+09-04-2024 | 07:59:35 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+09-04-2024 | 07:59:35 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+09-04-2024 | 07:59:35 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=6614cb374a32fc3e1cde1ab9 Ver=test
+09-04-2024 | 08:01:50 | addNewRecord IP=0.0.0.0 ExpID=6614cb374a32fc3e1cde1ab9 Length=3
+09-04-2024 | 08:03:54 | finishRecord IP=0.0.0.0 ExpID=6614cb374a32fc3e1cde1ab9
+09-04-2024 | 08:03:56 | getIsExpReady IP=0.0.0.0 status=Y
+09-04-2024 | 08:03:56 | getGameConsentForm IP=0.0.0.0
+09-04-2024 | 08:04:03 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+09-04-2024 | 08:04:03 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+09-04-2024 | 08:04:03 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=6614cc434a32fc3e1cde1ae1 Ver=test
+09-04-2024 | 08:11:31 | addNewRecord IP=0.0.0.0 ExpID=6614cc434a32fc3e1cde1ae1 Length=3
+09-04-2024 | 08:11:34 | finishRecord IP=0.0.0.0 ExpID=6614cc434a32fc3e1cde1ae1
+14-04-2024 | 10:53:56 | getIsExpReady IP=0.0.0.0 status=Y
+14-04-2024 | 10:53:56 | getGameConsentForm IP=0.0.0.0
+14-04-2024 | 10:54:00 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+14-04-2024 | 10:54:00 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+14-04-2024 | 10:54:00 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661b8b9895c3ef423894bbbe Ver=test
+14-04-2024 | 10:54:25 | addNewRecord IP=0.0.0.0 ExpID=661b8b9895c3ef423894bbbe Length=3
+14-04-2024 | 14:35:30 | getIsExpReady IP=0.0.0.0 status=Y
+14-04-2024 | 14:35:30 | getGameConsentForm IP=0.0.0.0
+14-04-2024 | 14:35:35 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+14-04-2024 | 14:35:35 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+14-04-2024 | 14:35:35 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661bbf8795c3ef423894c2ca Ver=test
+14-04-2024 | 14:35:47 | addNewRecord IP=0.0.0.0 ExpID=661bbf8795c3ef423894c2ca Length=3
+14-04-2024 | 14:35:58 | finishRecord IP=0.0.0.0 ExpID=661bbf8795c3ef423894c2ca
+14-04-2024 | 14:47:31 | getIsExpReady IP=0.0.0.0 status=Y
+14-04-2024 | 14:47:31 | getGameConsentForm IP=0.0.0.0
+14-04-2024 | 14:47:37 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+14-04-2024 | 14:47:37 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+14-04-2024 | 14:47:37 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661bc25995c3ef423894c396 Ver=test
+14-04-2024 | 15:18:01 | getIsExpReady IP=0.0.0.0 status=Y
+14-04-2024 | 15:18:01 | getGameConsentForm IP=0.0.0.0
+14-04-2024 | 15:18:07 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+14-04-2024 | 15:18:07 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+14-04-2024 | 15:18:07 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661bc97f95c3ef423894c4d2 Ver=test
+14-04-2024 | 15:27:40 | getIsExpReady IP=0.0.0.0 status=Y
+14-04-2024 | 15:27:40 | getGameConsentForm IP=0.0.0.0
+14-04-2024 | 15:27:44 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+14-04-2024 | 15:27:44 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+14-04-2024 | 15:27:44 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661bcbc095c3ef423894c53e Ver=test
+16-04-2024 | 10:32:00 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2024 | 10:32:00 | getGameConsentForm IP=0.0.0.0
+16-04-2024 | 10:32:04 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+16-04-2024 | 10:32:04 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+16-04-2024 | 10:32:04 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661e29743fa9ec31b02c6984 Ver=test
+16-04-2024 | 10:32:21 | addNewRecord IP=0.0.0.0 ExpID=661e29743fa9ec31b02c6984 Length=3
+16-04-2024 | 12:32:03 | getIsExpReady IP=0.0.0.0 status=Y
+16-04-2024 | 12:32:03 | getGameConsentForm IP=0.0.0.0
+16-04-2024 | 12:32:06 | getGameVersion IP=0.0.0.0 UserId=ggolan@technion.ac.il
+16-04-2024 | 12:32:06 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il Ver=test
+16-04-2024 | 12:32:06 | addNewUserRecords IP=0.0.0.0 UserId=ggolan@technion.ac.il ExpId=661e45965a464d0244d59601 Ver=test
+16-04-2024 | 12:32:22 | addNewRecord IP=0.0.0.0 ExpID=661e45965a464d0244d59601 Length=3
