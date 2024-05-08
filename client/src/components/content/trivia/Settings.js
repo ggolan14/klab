@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {DivContainer} from "../../screens/settings/elements_builder";
 import {convertPointsRatio} from "../../screens/settings/settings";
 import ColorPicker from "../../layout/colorPicker/color_picker";
-import './togStyles.css';
+//import './togStyles.css';
 
 
 
