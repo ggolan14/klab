@@ -1,0 +1,108 @@
+[
+ 
+  {
+    "id":"0",
+    "question": "What is the tiny piece at the end of a shoelace called?",
+    "answers": [
+      {"option": "A", "text": "Shoe stopper"},
+      {"option": "B", "text": "Lace Knob"},
+      {"option": "C", "text": "Nub"},
+      {"option": "D", "text": "Aglet"},
+      {"option": "E", "text": "Lace Tag"},
+      {"option": "F", "text": "Lacelet"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"0",
+    "question": "Originally, Amazon only sold what kind of product?",
+    "answers": [
+      {"option": "A", "text": "Books"},
+      {"option": "B", "text": "Food"},
+      {"option": "C", "text": "Furniture"},
+      {"option": "D", "text": "Office supplies"},
+      {"option": "E", "text": "Clothing"},
+      {"option": "F", "text": "Electronics"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"0",
+    "question": "Who was the only British Pope ever?",
+    "answers": [
+      {"option": "A", "text": "Alexander VI"},
+      {"option": "B", "text": "Clement VII"},
+      {"option": "C", "text": "Gregory I"},
+      {"option": "D", "text": "Adrian IV"},
+      {"option": "E", "text": "Nicholas V"},
+      {"option": "F", "text": "Julius II"}
+    ],
+    "correct_answer": "D"
+  },
+
+  {
+    "id":"4",
+    "question": "What is the capital city of Mongolia?",
+    "answers": [
+      {"option": "A", "text": "Moshkntar"},
+      {"option": "B", "text": "Astana"},
+      {"option": "C", "text": "Ulaanbaatar"},
+      {"option": "D", "text": "Bishkek"},
+      {"option": "E", "text": "Tashkent"},
+      {"option": "F", "text": "Dushanbe"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"5",
+    "question": "In literature, which Shakespearean play features the character Iago as its primary antagonist?",
+    "answers": [
+      {"option": "A", "text": "Hamlet"},
+      {"option": "B", "text": "Macbeth"},
+      {"option": "C", "text": "Romeo and Juliet"},
+      {"option": "D", "text": "Othello"},
+      {"option": "E", "text": "King Lear"},
+      {"option": "F", "text": "Julius Caesar"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"6",
+    "question": "Which ancient civilization built the city of Machu Picchu?",
+    "answers": [
+      {"option": "A", "text": "Aztecs"},
+      {"option": "B", "text": "Egyptians"},
+      {"option": "C", "text": "Greeks"},
+      {"option": "D", "text": "Incas"},
+      {"option": "E", "text": "Romans"},
+      {"option": "F", "text": "Mayans"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"7",
+    "question": "In Greek mythology, who is the goddess of Home family, and domesticity?",
+    "answers": [
+      {"option": "A", "text": "Aphrodite"},
+      {"option": "B", "text": "Hera"},
+      {"option": "C", "text": "Demeter"},
+      {"option": "D", "text": "Athena"},
+      {"option": "E", "text": "Artemis"},
+      {"option": "F", "text": "Hestia"}
+    ],
+    "correct_answer": "F"
+  },
+  {
+    "id":"8",
+    "question": "DUMMY",
+    "answers": [
+      {"option": "A", "text": "DUMMY"},
+      {"option": "B", "text": "DUMMY"},
+      {"option": "C", "text": "DUMMY"},
+      {"option": "D", "text": "DUMMY"},
+      {"option": "E", "text": "DUMMY"},
+      {"option": "F", "text": "DUMMY"}
+    ],
+    "correct_answer": "F"
+  }
+]

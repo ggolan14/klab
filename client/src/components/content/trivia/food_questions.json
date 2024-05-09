@@ -1,0 +1,19 @@
+[
+    {
+      "question": "Which dessert do you prefer?",
+      "choices": ["Chocolate cake", "Apple pie", "Ice cream", "Cheesecake", "Brownies","I don't have a preference"]
+    },
+    {
+      "question": "Which protein source do you prefer?",
+      "choices": ["Chicken", "Beef","Fish", "Tofu","Pork", "I don't have a preference"]
+    },
+    {
+      "question": "Which type of pasta do you prefert?",
+      "choices": ["Spaghetti", "Penne","Fettuccine", "Rigatoni","Linguine", "I don't have a preference"]
+    },
+    {
+      "question": "Which breakfast food do you prefer?",
+      "choices": ["Pancakes", "Eggs and bacon","Oatmeal", "Yogurt and granola","Avocado toast", "I don't have a preference"]
+    }
+]
+  
