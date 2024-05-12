@@ -329,16 +329,27 @@ class Start extends Component {
         ) 
         
       }
-      if(showWelcomeToFoodPreference){
+      if(showWelcomeToFoodPreference && GameCondition == "OneShot"){
         console.log("---> 444")
         return (
           <div className="practice-is-over">
               <h3>Welcome to the food preference survey</h3>
               <p>
-              In this survey, we are interested in people’s food preferences. 
-              You will be asked one question about your food preferences.<br></br> 
-              Please answer the question according to your actual preferences.
-
+              In this survey, we are interested in people’s food preferences. You will  
+              be asked 40 questions about your food preferences. Please answer all  
+              40 questions according to your actual preferences.
+              </p>
+              <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
+            </div>
+            )
+      }
+      if(showWelcomeToFoodPreference && GameCondition == "Repeated"){
+        console.log("---> 444")
+        return (
+          <div className="practice-is-over">
+              <h3>Welcome to the food preference survey</h3>
+              <p>
+              In this survey, we are interested in people’s food preferences. You will be asked one question about your food preferences.<br/>Please answer the question according to your actual preferences.
               </p>
               <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
             </div>
@@ -349,14 +360,27 @@ class Start extends Component {
         return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB}/>
         
     }
-    if(currentQuestionIndex === NUM_OF_PRACTICE_QUESTIONS - 1 && !practiceIsOver && !showConfirmation){
+    if(GameCondition == "OneShot" && currentQuestionIndex === NUM_OF_PRACTICE_QUESTIONS - 1 && !practiceIsOver && !showConfirmation){
+      return (
+        <div className="practice-is-over">
+          <h3>Practice is Over</h3>
+          <p>
+            You will now play the trivia game for real bonus.<br></br>
+            You will play one round of the trivia game.<br></br>
+            Remember: If the correct answer is the one you had in mind, you will receive a 1£ bonus!
+          </p>
+          <button onClick={this.handleHidePracticeIsOver}>Next</button>
+        </div>
+      )
+    }
+    if(GameCondition == "Repeated" && currentQuestionIndex === NUM_OF_PRACTICE_QUESTIONS - 1 && !practiceIsOver && !showConfirmation){
       return (
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
           <p>
             You will now play the trivia game for real bonus.<br></br>
             You will play 40 rounds of the trivia game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct answer is the one you had in mind, you will receive a £1 bonus!
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct answer is the one you had in mind, you will receive a 1£ bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
