@@ -36,11 +36,11 @@ class Start extends Component {
 
     if (cond === 'o'){
             GameCondition = 'OneShot';
-            lastIndex=4;
+            lastIndex=4; // 3 practice questions + 1 trivia questions
         }
         else if (cond === 'r'){
             GameCondition = 'Repeated';
-            lastIndex=7;
+            lastIndex=43; // 3 practice questions + 40 trivia questions
         }
         else if (cond === 'rand') {
             // GameCondition = 'Random';
@@ -410,7 +410,7 @@ class Start extends Component {
                             <p>{question.question}</p>
                             <ul>
                                 {answers.map((answer, index) => (
-                                    <li key={index}>{answer.option}. {answer.text}</li>
+                                    <li key={index}>{answer.text}</li>
                                 ))}
                             </ul>
                             <button onClick={this.handleNext}>I have an answer in my mind</button>
