@@ -735,6 +735,7 @@ const summary_lang = summary_args => {
 const Summary = ({exp, finishCallback, summary_args}) => {
     console.log("--->in summarry")
     const language = summary_lang(summary_args);
+    let buttonText = "Move to exit survey";
     const [expSummary, setExpSummary] = useState(null);
     const [disableBtn, setDisableBtn] = useState(true);
 
@@ -752,6 +753,14 @@ const Summary = ({exp, finishCallback, summary_args}) => {
     }, [exp, summary_args]);
 
     if (!expSummary) return <></>;
+    const currentPath=window.location.pathname;
+    if(currentPath.includes('Trivia')){
+        buttonText = "Get completion code"
+    }else if(language === 'German'){
+        buttonText= "Beenden"
+    }else{
+        buttonText = 'Move to exit survey';
+    }
 
     // GameSetting.language === 'German'
     return (
@@ -787,12 +796,10 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                         //language === 'German' ? 'Bitte wenden Sie sich an den Versuchsleiter.' : 'To get your completion code, please press the button below without closing the window.'
                     }
                 </label>
-                <button
-                  disabled={disableBtn}
-                  onClick={disableBtn? undefined : () => finishCallback()}
+                <button disabled={disableBtn} onClick={disableBtn? undefined : () => finishCallback()}
                 >
                     {
-                        language === 'German' ? 'Beenden' : 'Move to exit survey'
+                        buttonText
                     }
                 </button>
             </div>
