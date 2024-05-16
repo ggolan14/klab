@@ -13,7 +13,7 @@ class TriviaIntroduction extends Component {
     );
     const message_2 = (
       <span>
-        In this game, you will be presented with a multiple-choice trivia question. Your task is to think of the correct answer to the question and keep it in your mind.<br/>After the question is presented and you decide on your answer, the correct answer will be revealed and you will be asked to report whether it matches the one you had in mind.<br/>If the correct answer is the one you had in mind, you will you will receive a 1£ bonus.<br/>If the correct answer is not the one you had in mind, you will not receive a bonus.
+        In this game, you will be presented with a multiple-choice trivia question. Your task is to think of the correct answer to the question and keep it in your mind.<br/>After the question is presented and you decide on your answer, the correct answer will be revealed and you will be asked to report whether it matches the one you had in mind.<br/>If the correct answer <strong>is</strong> the one you had in mind, you will you will receive <strong>a £1 bonus.</strong><br/>If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
       </span>
     );
     const message_3 = (

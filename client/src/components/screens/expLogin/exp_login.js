@@ -49,8 +49,8 @@ class ExpLogin extends React.Component {
                 errors_inputs_info.push('Age');
             if (this.state.age && this.state.age < 18)
                 errors_inputs_info.push('You must be 18 or older');
-            if (this.state.age && this.state.age > 70)
-                errors_inputs_info.push('You must be younger than 70');
+            if (this.state.age && this.state.age > 80)
+                errors_inputs_info.push('You must be younger than 80');
             if (!this.state.gender)
                 errors_inputs_info.push('Gender');
 

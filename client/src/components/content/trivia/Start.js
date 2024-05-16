@@ -36,11 +36,11 @@ class Start extends Component {
 
     if (cond === 'o'){
             GameCondition = 'OneShot';
-            lastIndex=4;
+            lastIndex=4; // 3 practice questions + 1 trivia questions
         }
         else if (cond === 'r'){
             GameCondition = 'Repeated';
-            lastIndex=7;
+            lastIndex=43; // 3 practice questions + 40 trivia questions
         }
         else if (cond === 'rand') {
             // GameCondition = 'Random';
@@ -367,7 +367,7 @@ class Start extends Component {
           <p>
             You will now play the trivia game for real bonus.<br></br>
             You will play one round of the trivia game.<br></br>
-            Remember: If the correct answer is the one you had in mind, you will receive a 1£ bonus!
+            Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
@@ -380,7 +380,7 @@ class Start extends Component {
           <p>
             You will now play the trivia game for real bonus.<br></br>
             You will play 40 rounds of the trivia game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct answer is the one you had in mind, you will receive a 1£ bonus!
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct answer is the one you had in mind, you will receive a £1 bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
@@ -405,12 +405,12 @@ class Start extends Component {
                     </DebuggerModalView>
                     {showQuestion ? (
                         <div>
-                            {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+                            {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
                             <p>Please read the following question. Pick your best answer and keep it in mind.</p>
                             <p>{question.question}</p>
                             <ul>
                                 {answers.map((answer, index) => (
-                                    <li key={index}>{answer.option}. {answer.text}</li>
+                                    <li key={index}>{answer.text}</li>
                                 ))}
                             </ul>
                             <button onClick={this.handleNext}>I have an answer in my mind</button>
@@ -419,7 +419,7 @@ class Start extends Component {
                         <div>
                             {showConfirmation && (
                                 <>
-                                    {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is practice round</span>}
+                                    {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
                                     <p>Correct answer is: {correctAnswer}</p>
                                     <p>Is this the answer you had in mind?</p>
 
@@ -435,7 +435,18 @@ class Start extends Component {
                                       </>
                                     )}
 
-                                    <p>Note: you will receive a bonus only if you report "Yes"</p>
+                                    {GameCondition == "OneShot" ? 
+                                    ( <>
+                                      <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
+                                      </>
+                                    ) : (  
+                                      <>
+                                      <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
+                                      </>
+                                    )}
+
+                                   
+                                    
                                 </>
                             )}
                         </div>
