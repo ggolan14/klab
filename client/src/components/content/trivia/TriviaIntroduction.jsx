@@ -8,12 +8,12 @@ class TriviaIntroduction extends Component {
 
     const message_1 =  (
       <span>
-        This study includes two parts.<br/>In the first part, you will play the trivia game and can win a bonus based on your performance. In the second part, you will fill out a food preference survey with no bonus.<br/>Note that you should not leave or stop responding until you have completed the entire study and have received your completion code.<br/>If you leave or stop responding before completing the two parts, you will not receive compensation.<br/>
+        This study includes two parts.<br/>In the first part, you will play the trivia game and can win a bonus based on your performance.<br/>In the second part, you will fill out a food preference survey with no bonus.<br/>Note that you should not leave or stop responding until you have completed the entire study<br/>and have received your completion code.<br/>If you leave or stop responding before completing the two parts,<br/>you will not receive compensation.<br/>
       </span>
     );
     const message_2 = (
       <span>
-        In this game, you will be presented with a multiple-choice trivia question. Your task is to think of the correct answer to the question and keep it in your mind.<br/>After the question is presented and you decide on your answer, the correct answer will be revealed and you will be asked to report whether it matches the one you had in mind.<br/>If the correct answer <strong>is</strong> the one you had in mind, you will you will receive <strong>a £1 bonus.</strong><br/>If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
+        In this game, you will be presented with a multiple-choice trivia question.<br/>Your task is to think of the correct answer to the question and keep it in your mind.<br/>After the question is presented and you decide on your answer,<br/>the correct answer will be revealed and you will be asked to report whether it matches the one you had in mind.<br/>If the correct answer <strong>is</strong> the one you had in mind, you will you will receive <strong>a £1 bonus.</strong><br/>If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
       </span>
     );
     const message_3 = (
