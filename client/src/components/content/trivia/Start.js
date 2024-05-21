@@ -330,7 +330,6 @@ class Start extends Component {
         
       }
       if(showWelcomeToFoodPreference && GameCondition == "OneShot"){
-        console.log("---> 444")
         return (
           <div className="practice-is-over">
               <h3>Welcome to the food preference survey</h3>
@@ -344,7 +343,6 @@ class Start extends Component {
             )
       }
       if(showWelcomeToFoodPreference && GameCondition == "Repeated"){
-        console.log("---> 444")
         return (
           <div className="practice-is-over">
               <h3>Welcome to the food preference survey</h3>

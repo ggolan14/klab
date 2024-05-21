@@ -9,7 +9,11 @@ class FoodPreference extends Component {
   constructor(props) {
     super(props);
     GameCondition=props.GameCondition;
-    NUM_OF_QUESTIONS = GameCondition=="Repeated" ? 1 : questions.length
+    if(GameCondition=="Repeated"){
+      questions.splice(0, questions.length - 1);
+    }
+    NUM_OF_QUESTIONS = questions.length
+
     this.state = {
       answers: {}, // Store the selected answers
       currentQuestionIndex: 0
