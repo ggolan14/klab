@@ -754,7 +754,9 @@ const Summary = ({exp, finishCallback, summary_args}) => {
 
     if (!expSummary) return <></>;
     const currentPath=window.location.pathname;
-    
+    if(currentPath.includes('QueenGarden')){
+        buttonText = "Move to exit survey"
+    }
     // GameSetting.language === 'German'
     return (
         <div
