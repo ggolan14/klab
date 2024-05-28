@@ -2202,6 +2202,7 @@ const defaultVersions = {
                 // e_c: 1, // Equipment Cost
                 r_v: 1, // Reward Value
                 t_c: 1, // Toll Cost:
+                c_c: 1, // Toll Cost:
             },
             g_b: [
                 {
@@ -2213,6 +2214,7 @@ const defaultVersions = {
                     a: 0.2, // Adaptability
                     r_v: 1, // Reward Value
                     t_c: 1, // Toll Cost:
+                    c_c: 1, // Toll Cost:
                     // pe: 1, // Penalty
                     // e_c: 1, // Equipment Cost
                 },
@@ -2225,6 +2227,7 @@ const defaultVersions = {
                     a: 0.2, // Adaptability
                     r_v: 1, // Reward Value
                     t_c: 1, // Toll Cost:
+                    c_c: 1, // Toll Cost:
                     // pe: 1, // Penalty
                     // e_c: 1, // Equipment Cost
                 },

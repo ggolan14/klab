@@ -15,6 +15,7 @@ const new_game_props = {
     // e_c: 1, // Equipment Cost
     r_v: 1, // Reward Value
     t_c: 1, // Toll Cost:
+    c_c: 1, // Toll Cost:
 };
 
 const GameElement = ({gameSelect, game_props, editGame}) => {
@@ -71,6 +72,17 @@ const GameElement = ({gameSelect, game_props, editGame}) => {
             label_after: '',
             pattern: '',
             callback: value => editGame(gameSelect, 't_c', value)
+        },
+        {
+            type: 'Input',
+            label: 'Clearing cost:', // Mileage/Travel
+            show: true,
+            class_name: '',
+            value: game_props.c_c,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
+            callback: value => editGame(gameSelect, 'c_c', value)
         },
         {
             type: 'Input',
