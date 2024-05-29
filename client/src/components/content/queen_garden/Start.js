@@ -67,6 +67,7 @@ class Start extends React.Component {
               Adaptability: g.a,
               RewardValue: g.r_v,
               TollCost: g.t_c,
+              ClearingCost: g.c_c,
           })
         );
         if (this.GameSet.GamesOrder === 'NoRandom'){
@@ -92,7 +93,7 @@ class Start extends React.Component {
             }
         }
 
-        const {t, p0, a, r_v, t_c} = props.game_settings.game.pt_g;
+        const {t, p0, a, r_v, t_c,c_c} = props.game_settings.game.pt_g;
         const PracticeGame = {
             GameID: 0,
             GameOrder: 0,
@@ -101,6 +102,7 @@ class Start extends React.Component {
             Adaptability: a,
             RewardValue: r_v,
             TollCost: t_c,
+            ClearingCost: c_c,
         };
 
         this.GameSet.GamesBank = [PracticeGame, ...this.GameSet.GamesBank];
@@ -113,6 +115,8 @@ class Start extends React.Component {
             isLoading: true,
             game_settings: this.GameSet,
             current_game_index: this.GameSet.WithPractice === 'Yes'? 0 : 1,
+            finalReward: 0,
+            needToPayClearing: false,
             showWelcomeMessage: true
 
         };
@@ -369,6 +373,8 @@ class Start extends React.Component {
                 value={{
                   game_settings: this.state.game_settings,
                   current_game_index: this.state.current_game_index,
+                  finalReward: this.state.finalReward,
+                  needToPayClearing: this.state.needToPayClearing,
                   DebugMode: this.DebugMode,
                 }}
               >

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext,useRef } from "react";
 import {QueenGardenContext} from "../context/qg_context";
 import ImgKnight from '../images/knight.png';
 import ImgBear from '../images/bear.png';
@@ -72,7 +72,7 @@ const InstructionsScreen2 = () => {
       To move the wagon, you have to click where you want it to go.
       To use the {game_settings.Labels.CrownHighway}:
       <br/><br/>
-      1:Click on the road sign that says {game_settings.Labels.CrownHighway}
+      1:Click on the road sign that says {game_settings.Labels.SignpostQueen}
       <br/><br/>
       2:Click on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight}
 
@@ -111,24 +111,41 @@ const InstructionsCrownTollFinish = () => {
 
 const InstructionsCrownTollFinishReturn = () => {
   const {game_settings} = useContext(QueenGardenContext);
+  // Static variable to track if the component has been rendered before
+  if (InstructionsCrownTollFinishReturn.isFirstTime === undefined) {
+    InstructionsCrownTollFinishReturn.isFirstTime = true;
+  }
 
-  return (
-    <p>
-      You have now returned to the outskirts of the Shadewood forest where you live.
-      Before you can begin making deliveries in earnest,
-      you need to travel to {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} once more to hire additional workers.
+  if (InstructionsCrownTollFinishReturn.isFirstTime) {
+    InstructionsCrownTollFinishReturn.isFirstTime = false; // Set to false after the first render
+    return (
+      <p>
+        You have now returned to the outskirts of the Shadewood forest where you live.
+        Before you can begin making deliveries in earnest,
+        you need to travel to {game_settings.Labels.KingdomRight} once more to hire additional workers.
+        <br/><br/>
+        The {game_settings.Labels.CrownHighway} is shut down today, so you will have to travel through the Shadewood forest.
+        There are 4 paths to choose from. Right now,
+        you decide to take the {game_settings.Labels.SignpostRoad1}
+        <br/><br/>
+        Click on the sign that says "{game_settings.Labels.SignpostRoad1}"
+        <br/><br/>
+       
+      </p>
+    );
+  } else {
+    return <p>
+      Looking at the Shadewood, you notice that it is incredibly overgrown. You spend a great deal of time clearing the path to get your cart through.
       <br/><br/>
-      The {game_settings.Labels.CrownHighway} is shut down today, so you will have to travel through the Shadewood forest.
-      There are 4 paths to choose from. Right now,
-      you decide to take the {game_settings.Labels.SignpostRoad1}
+      Once you make it through to Zorea and hire some hands, you will be able to pay them to clear the path.
       <br/><br/>
-      1:Click on the sign that says "{game_settings.Labels.SignpostRoad1}"
+      Click on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight}
       <br/><br/>
-      2:Click on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight}
-
-    </p>
-  )
+    </p>;
+  }
 };
+
+export default InstructionsCrownTollFinishReturn;
 
 const InstructionsRoad1TollRisk = () => {
   const {game_settings} = useContext(QueenGardenContext);
@@ -159,9 +176,9 @@ const InstructionsRoad1TollDishonest = () => {
       <br/><br/>
       You inform the guardsman that you are travelling to {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} to hire additional workers.
       <br/><br/>
-      The guard tells you that he and his fellow guards are patrolling the forest paths for smugglers. He tells you that increased foot traffic means he’ll have to bring more guards tomorrow.
+      The guard tells you that he and his fellow guards are patrolling the forest paths for smugglers.
       <br/><br/>
-      The guards react to repeat activity in the Shadewood forest, the more a path is used the larger the forces patrolling it, increasing the likelihood of getting stopped in the future. Awareness decays over time, as guards shift towards more frequently used pathways.
+      The guards may react to activity in the Shadewood forest, possibly increasing the likelihood of getting stopped in the future.
     </p>
   )
 }
@@ -198,11 +215,13 @@ const InstructionsRoad1TollFinishReturn = () => {
       <br/><br/>
       You will have to travel through the Shadewood again. Since you took {game_settings.Labels.SignpostRoad1} yesterday, you decide to do so again.
       <br/><br/>
-      1: Click on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} again
-      <br/><br/>
       Note: Repeat Travel along the same route requires
       clicking only on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} the wagon begins by default
-      at the entrance to the previously used route
+      at the entrance to the previously used route.
+      <br></br>
+      <br></br>
+      Please click on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} again
+      <br/><br/>
     </p>
   )
 };
@@ -212,9 +231,13 @@ const InstructionsStep10 = () => {
 
   return (
     <p>
-      As you travel within the woods you notice that there is some sign of your previous activity travelling this route.
+      As you travel within the woods you note that the route remains clear.
+
       <br/><br/>
-      NOTE: Repeat travel along a forest route generates signs of activity, {game_settings.GameCondition === 'Risk'?'which means Hungry Bears are more likely to be watching that path.':'which means Guards are more likely to patrol that path later.'}
+      NOTE: Travelling along a forest route for the first time requires clearing the brush, which you pay your hired workers to accomplish. The cost is {game_settings.GamesBank[0].ClearingCost} coins.
+      <br/><br/>
+      The plants in the Shadewood grow quickly, if you take another route and return later the path will need to be cleared again.
+      <br/><br/>
     </p>
   )
 };
@@ -223,7 +246,7 @@ const InstructionsStep15 = () => {
 
   return (
     <p>
-      You have Successfully registered at the Merchants Guild and now can begin making deliveries. To get a feel for things you will be given some time to practice.
+      You have successfully registered at the Merchants Guild and now can begin making deliveries. To get a feel for things you will be given some time to practice.
     </p>
   )
 };
@@ -269,6 +292,8 @@ const BeforeFirstGame = () => {
       <br/><br/>
       The toll when traveling the {game_settings.Labels.CrownHighway} is {current_game_settings.TollCost}
       <br/><br/>
+      The cost of clearing a road in the shadewood is {current_game_settings.ClearingCost}
+      <br/><br/>
       Click Start when ready to begin…
     </p>
   )
@@ -291,6 +316,8 @@ const BeforeXGame = () => {
       Reward for Delivery: {current_game_settings.RewardValue}
       <br/><br/>
       Toll: {current_game_settings.TollCost}
+      <br/><br/>
+      Clearing cost: {current_game_settings.ClearingCost}
       <br/><br/>
       Click Start when ready to begin…
     </p>
@@ -348,26 +375,34 @@ export const DeliveryFailed = () => {
 };
 
 export const DeliveryToll = () => {
+  
+  const {current_game_index, game_settings} = useContext(QueenGardenContext);
+
+  const games_count = game_settings.GamesBank.reduce((total, game) => game.GameID === 0? 0 : total+1, 0);
+
+  const current_game_settings = game_settings.GamesBank[current_game_index];
   return (
     <div
       className='qg_delivery_toll'
     >
       <p>
-        CROWN HIGHWAY TOLL
+        CROWN HIGHWAY TOLL = {current_game_settings.TollCost}
       </p>
     </div>
   )
 };
 
 export const GainMessage = ({message_more_info}) => {
-  const {game_settings, current_game_index} = useContext(QueenGardenContext);
+  const {game_settings, current_game_index,finalReward, needToPayClearing} = useContext(QueenGardenContext);
+  console.log("---> in Gain message Reward = "+finalReward+"   needToPayClearing="+needToPayClearing)
 
-  const {TollCost, RewardValue} = game_settings.GamesBank[current_game_index];
+  const {TollCost, RewardValue,ClearingCost} = game_settings.GamesBank[current_game_index];
 
   const {from_queen_road} = message_more_info;
 
-  const net_gain = from_queen_road? (RewardValue-TollCost) : RewardValue;
-  let coinsStr= TollCost !== 1 ? 'coins. ' : 'coin. ';
+  const net_gain = from_queen_road? (RewardValue-TollCost) : finalReward;
+  let coinsStrToll= TollCost !== 1 ? 'coins. ' : 'coin. ';
+  let coinsStrCleaning= ClearingCost !== 1 ? 'coins. ' : 'coin. ';
   
     
   
@@ -379,14 +414,18 @@ export const GainMessage = ({message_more_info}) => {
         You have successfully delivered the plants to the Queen’s castle.<br/>
         You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1?'s':''} upon successful delivery.
         <br/><br/>
+        {from_queen_road && (
+          `Your total cost was ${TollCost} `+coinsStrToll
+        )}
         
 
+        {needToPayClearing && (
+         `Your total cost was ${ClearingCost} `+coinsStrCleaning 
 
-        {from_queen_road && (
-          `Your total cost was ${TollCost} `+coinsStr
         )}
       <br></br>
-        so your net gain is {net_gain} coins
+      <br></br>
+        Your net gain is {net_gain} coins
       </p>
       {/*<img src={ImgGain}/>*/}
     </div>
@@ -421,12 +460,14 @@ export const QueenGardenGameMessageImg = ({message_id, from_road}) => {
   const {GameCondition} = game_settings;
 
   let img_id, img_scale_up = 'qg_game_msg_img_scale_default';
+  
   if (message_id === 'DeliveryFailed') {
-    img_id = `DeliveryFailed${GameCondition}`;
+    img_id = GameCondition=="D" ? "DeliveryFailedDishonest" : "DeliveryFailedRisk"
     img_scale_up = 'qg_game_msg_img_scale_failed';
   }
   else if (message_id === 'InstructionsRoad1Toll') {
-    img_id = `InstructionsRoad1Toll${GameCondition}`;
+    //img_id = `InstructionsRoad1Toll${GameCondition}`;
+    img_id = GameCondition=="D" ? "DeliveryFailedDishonest" : "DeliveryFailedRisk"
   }
   else if (message_id === 'GainMessage'){
     img_id = message_id;
@@ -435,7 +476,9 @@ export const QueenGardenGameMessageImg = ({message_id, from_road}) => {
   else
     img_id = message_id;
 
+    
   const image_ = MESSAGES_IMAGES[img_id];
+  console.log("---> img_id="+img_id +"   message_id="+message_id+"   image_="+image_)
   if (!image_) return <></>;
 
   return (
