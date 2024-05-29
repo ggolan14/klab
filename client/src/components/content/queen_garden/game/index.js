@@ -26,6 +26,7 @@ class QueenGardenGame extends React.Component {
       loading: true,
       debugger_props: {},
       game_loading: true,
+      last_road:0,
       ...BoardInitialState()
     }
 
@@ -63,6 +64,8 @@ class QueenGardenGame extends React.Component {
 
   changeWagonPlace = road_index => {
     let sc = this.state;
+
+    console.log("---> in GAME changeWagonPlace.   FROM: "+sc.wagon_place+"  TO: "+road_index)
     if (road_index === 'castle'){
       sc.disable_castle_click = true;
       sc.disable_road_click = true;
@@ -76,18 +79,35 @@ class QueenGardenGame extends React.Component {
       let random_number = '', road_p = '';
       // let busted = true;
       let busted = FROM_ROAD === 'queen';
-
-      let Reward = 0, Pay = 0, TrialPoints;
+      
+      let needToPay = false;
+      if(sc.wagon_place != "base"){
+        needToPay = sc.last_road != sc.wagon_place;
+      }
+      
+      sc.last_road = sc.wagon_place;
+      let Reward = 0, Pay = 0, TrialPoints , ClearingCost;
       if (FROM_ROAD !== 'queen'){
         random_number = Math.round(Math.random() * 1000)/1000;
         road_p = roads_prob['road' + FROM_ROAD];
         busted = random_number <= road_p;
 
-        if (!busted)
+        if (!busted){
           Reward = this.level_settings.RewardValue;
+          ClearingCost = this.level_settings.ClearingCost;
+          if(needToPay){
+            Reward = Reward - ClearingCost
+          }
+          this.context.needToPayClearing = needToPay;
+          this.context.finalReward = Reward;
+          console.log("---> needToPay="+needToPay+"  finalReward="+Reward)
+        }
       }
       else {
         Pay = this.level_settings.TollCost;
+        if(needToPay){
+          Pay = Pay + ClearingCost;
+        }
         Reward = this.level_settings.RewardValue;
       }
 

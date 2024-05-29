@@ -115,6 +115,8 @@ class Start extends React.Component {
             isLoading: true,
             game_settings: this.GameSet,
             current_game_index: this.GameSet.WithPractice === 'Yes'? 0 : 1,
+            finalReward: 0,
+            needToPayClearing: false,
             showWelcomeMessage: true
 
         };
@@ -371,6 +373,8 @@ class Start extends React.Component {
                 value={{
                   game_settings: this.state.game_settings,
                   current_game_index: this.state.current_game_index,
+                  finalReward: this.state.finalReward,
+                  needToPayClearing: this.state.needToPayClearing,
                   DebugMode: this.DebugMode,
                 }}
               >
