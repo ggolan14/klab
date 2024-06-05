@@ -157,8 +157,8 @@ class Start extends Component {
         showConfirmation:false,
       }), () => {
         const db_row = {
-          QuestionIndex: currentQuestionIndex-3,  // total 
-          QuestionType:"Trivia",
+          QuestionIndex: currentQuestionIndex,  // total 
+          QuestionType: currentQuestionIndex < NUM_OF_PRACTICE_QUESTIONS ? "Practice" : "Trivia",
           Answer: 1,
           TotalYesAnswers: this.state.yesClickCount,
           TotalNoAnswers: this.state.noClickCount,
@@ -202,6 +202,7 @@ class Start extends Component {
       });
     }
    
+    
    }
   
   insertGameLine = (db_row) => {
@@ -218,15 +219,15 @@ class Start extends Component {
     const current_time = getTimeDate();
     
 
-    const summary_args = {
+    //const summary_args = {
       //game_points: 56,
-    };
-    const reward_sum=555;
+   // };
+    var reward_sum=0;
     var temp_sign_of_reward = this.PaymentsSettings.sign_of_reward
-    console.log("++++++++++++++++++++++ temp_sign_of_reward="+temp_sign_of_reward)
+   // console.log("++++++++++++++++++++++ temp_sign_of_reward="+temp_sign_of_reward)
 
     let debug_args = {
-      TrialsForBonus: 88,
+     // TrialsForBonus: 88,
       reward_sum,
       temp_sign_of_reward,
     }
@@ -295,7 +296,8 @@ class Start extends Component {
     the user answer (question #4 need to ignore practice questions) otherwise need to pick 
     random question between 1 and 40
   */
-  const randomIndex= GameCondition == "OneShot" ? 4 : Math.floor(Math.random() * (40 - 3 + 1)) + 3;
+ 
+  const randomIndex= GameCondition == "OneShot" ? 4 : Math.floor(Math.random() * (43 - 3 + 1)) + 3;
   const randomSelectedQuestion = keys[randomIndex-1];
   const randomSelectedQuestionValue = this.state.userAnswers[randomSelectedQuestion];
   var selectedQuestionPoints = randomSelectedQuestionValue == 'Yes' ? 1 : 0;
