@@ -167,11 +167,11 @@ class Start extends Component {
           ConfirmationTime:totalShowConfirmationTime,
         };
         
-        if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
-          this.addRecord(currentQuestionIndex-3, confirmed?'Yes':'No');
+       // if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
+          this.addRecord(currentQuestionIndex, confirmed?'Yes':'No');
           this.insertGameLine(db_row);
           this.sendDataToDB(false);
-        }
+       // }
         
       });
     } else {
@@ -179,13 +179,13 @@ class Start extends Component {
      // console.log("!!!!!!! Show question  1"+getTimeDate().now+"  currentQuestionIndex="+currentQuestionIndex)
       this.setState(prevState => ({
         showResult: false,
-        noClickCount: currentQuestionIndex>(NUM_OF_PRACTICE_QUESTIONS-1) ? prevState.noClickCount + 1 : prevState.noClickCount,
+        noClickCount: prevState.noClickCount + 1,
         showQuestion: currentQuestionIndex != lastIndex,
         showConfirmation:false,
       }), () => {
         const db_row = {
-          QuestionIndex: currentQuestionIndex-3,
-          QuestionType:"Trivia",
+          QuestionIndex: currentQuestionIndex,
+          QuestionType: currentQuestionIndex < NUM_OF_PRACTICE_QUESTIONS ? "Practice" : "Trivia",
           Answer: 0,
           TotalYesAnswers: this.state.yesClickCount,
           TotalNoAnswers: this.state.noClickCount,
@@ -194,11 +194,11 @@ class Start extends Component {
           ConfirmationTime:totalShowConfirmationTime,
               
       };
-       if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
-          this.addRecord(currentQuestionIndex-3, confirmed?'Yes':'No');
+       //if(currentQuestionIndex >= NUM_OF_PRACTICE_QUESTIONS){
+          this.addRecord(currentQuestionIndex, confirmed?'Yes':'No');
           this.insertGameLine(db_row);
           this.sendDataToDB(false);
-        }
+     //   }
       });
     }
    
@@ -216,22 +216,7 @@ class Start extends Component {
   sendDataToDB = (send) => {
    // console.log("********  in sendDataToDB() lastIndex="+lastIndex+ "  currentQuestionIndex="+currentQuestionIndex)
     const current_time = getTimeDate();
-
-    var total_bonus=this.addGameBonus();
-    this.PaymentsSettings.total_bonus = total_bonus;
     
-            this.props.insertPayment({
-                exchange_ratio: this.PaymentsSettings.exchange_ratio,
-                bonus_endowment: this.PaymentsSettings.bonus_endowment,
-                show_up_fee: this.PaymentsSettings.show_up_fee,
-                sign_of_reward: this.PaymentsSettings.sign_of_reward,
-                bonus_payment:this.PaymentsSettings.total_bonus,
-                Time: current_time.time,
-                Date: current_time.date
-            });
-
-
-
 
     const summary_args = {
       //game_points: 56,
@@ -260,6 +245,26 @@ class Start extends Component {
               },
           }).then((res) => {});
           if(send ){
+            var result=this.addGameBonus();
+            var total_bonus = result.selectedQuestionPoints;
+            var randomSelectedQuestion = result.randomSelectedQuestion;
+
+            this.PaymentsSettings.total_bonus = total_bonus;
+            this.PaymentsSettings.randomSelectedQuestion = randomSelectedQuestion;
+    
+            this.props.insertPayment({
+                exchange_ratio: this.PaymentsSettings.exchange_ratio,
+                bonus_endowment: this.PaymentsSettings.bonus_endowment,
+                show_up_fee: this.PaymentsSettings.show_up_fee,
+                sign_of_reward: this.PaymentsSettings.sign_of_reward,
+                random_question_Index: this.PaymentsSettings.randomSelectedQuestion,
+                bonus_payment:this.PaymentsSettings.total_bonus,
+                Time: current_time.time,
+                Date: current_time.date
+            });
+
+
+
             debug_args.reward_sum=total_bonus;
             debug_args.sign_of_reward=temp_sign_of_reward;
             this.props.callbackFunction('FinishGame', { need_summary: true, args: debug_args });
@@ -284,16 +289,22 @@ class Start extends Component {
   const { userAnswers} = this.state;
   
   const keys = Object.keys(this.state.userAnswers);
-    const randomIndex = Math.floor(Math.random() * keys.length);
-    const randomKey = keys[randomIndex];
-
-    // Get the corresponding value
-  const randomValue = this.state.userAnswers[randomKey];
-  var selectedQuestion= Math.floor(Math.random() * userAnswers.length);
-  var selectedQuestionPoints = randomValue == 'Yes' ? 1 : 0;
-  console.log("-------------> in addGameBonus selectedQuestion="+randomKey+"   selectedQuestionPoints="+selectedQuestionPoints);
+  keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${this.state.userAnswers[key]}`); });
+  /*
+    if GameCondition is OneShot , the selected question will be the trivia question that
+    the user answer (question #4 need to ignore practice questions) otherwise need to pick 
+    random question between 1 and 40
+  */
+  const randomIndex= GameCondition == "OneShot" ? 4 : Math.floor(Math.random() * (40 - 3 + 1)) + 3;
+  const randomSelectedQuestion = keys[randomIndex-1];
+  const randomSelectedQuestionValue = this.state.userAnswers[randomSelectedQuestion];
+  var selectedQuestionPoints = randomSelectedQuestionValue == 'Yes' ? 1 : 0;
+  console.log("-------------> in addGameBonus selectedQuestion="+randomSelectedQuestion+"   selectedQuestionPoints="+selectedQuestionPoints);
   this.TotalBonus.push(selectedQuestionPoints);
-  return selectedQuestionPoints;
+  return {
+    selectedQuestionPoints: selectedQuestionPoints,
+    randomSelectedQuestion : randomSelectedQuestion
+    };
   }
 
   render() {
