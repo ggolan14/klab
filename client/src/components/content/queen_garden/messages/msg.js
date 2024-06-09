@@ -467,7 +467,7 @@ export const QueenGardenGameMessageImg = ({message_id, from_road}) => {
   }
   else if (message_id === 'InstructionsRoad1Toll') {
     //img_id = `InstructionsRoad1Toll${GameCondition}`;
-    img_id = GameCondition=="D" ? "DeliveryFailedDishonest" : "DeliveryFailedRisk"
+    img_id = GameCondition=="D" ? "DeliveryFailedDishonest" : "InstructionsRoad1TollRisk"
   }
   else if (message_id === 'GainMessage'){
     img_id = message_id;
