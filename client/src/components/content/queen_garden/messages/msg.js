@@ -38,7 +38,6 @@ export const DishonestInstructions1 = () => {
 
 const InstructionsScreen1 = () => {
   const {game_settings} = useContext(QueenGardenContext);
-
   return (
     <div
       className=''
@@ -53,7 +52,7 @@ const InstructionsScreen1 = () => {
         Queen Garden
       </label>
       {
-        game_settings.GameCondition === 'Risk'? <RiskInstructions1/> : <DishonestInstructions1/>
+        game_settings.GameCondition === 'R'? <RiskInstructions1/> : <DishonestInstructions1/>
       }
     </div>
   )
@@ -185,8 +184,7 @@ const InstructionsRoad1TollDishonest = () => {
 
 const InstructionsRoad1Toll = () => {
   const {game_settings} = useContext(QueenGardenContext);
-
-  const MsgWrapper = game_settings.GameCondition === 'Risk'? InstructionsRoad1TollRisk : InstructionsRoad1TollDishonest;
+  const MsgWrapper = game_settings.GameCondition === 'R'? InstructionsRoad1TollRisk : InstructionsRoad1TollDishonest;
 
   return (
     <MsgWrapper/>
@@ -302,7 +300,6 @@ const BeforeFirstGame = () => {
 const BeforeXGame = () => {
   const {current_game_index, game_settings} = useContext(QueenGardenContext);
   const current_game_settings = game_settings.GamesBank[current_game_index];
-
   return (
     <p>
       <b>
@@ -311,7 +308,7 @@ const BeforeXGame = () => {
       <br/>
       You will now play Game {current_game_index}.
       <br/><br/>
-      Note! {game_settings.GameCondition === 'Risk'? 'Bears' : 'Guards'} may behave differently than previously
+      Note! {game_settings.GameCondition === 'R'? 'Bears' : 'Guards'} may behave differently than previously
       <br/><br/>
       Reward for Delivery: {current_game_settings.RewardValue}
       <br/><br/>
@@ -420,7 +417,7 @@ export const GainMessage = ({message_more_info}) => {
         
 
         {needToPayClearing && (
-         `Your total cost was ${ClearingCost} `+coinsStrCleaning 
+         `Your total cost to clear the path was ${ClearingCost} `+coinsStrCleaning 
 
         )}
       <br></br>
