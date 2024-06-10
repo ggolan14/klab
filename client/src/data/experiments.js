@@ -1,5 +1,6 @@
 const EXPERIMENTS_LABELS_NAMES = {
     TwoMatricesExperiment: 'TryOrGiveUp',
+    Trivia: 'Trivia',
     PointsGame: 'PointsGame',
     PointsGameSh: 'PointsGameSh',
     WordPuzzle: 'WordPuzzle',

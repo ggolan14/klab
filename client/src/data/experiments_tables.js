@@ -1,4 +1,12 @@
 export const AllExperiments ={
+    Trivia: {
+        main_pathname: '/Trivia/main',
+        settings_pathname: '/Trivia/settings',
+        start_pathname: '/Trivia/start',
+        reports_pathname: '/Trivia/reports',
+        consent_pathname: '/Trivia/consent',
+        exp_messages_pathname: '/Trivia/exp_messages',
+    },
     TryOrGiveUp: {
         main_pathname: '/TryOrGiveUp/main',
         settings_pathname: '/TryOrGiveUp/settings',
@@ -148,6 +156,9 @@ export const getExperimentPaths = experiment => {
 }
 
 const ExperimentsTablesCols = {
+    Trivia: {
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
     TryOrGiveUp: {
         // game:
     },
