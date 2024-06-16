@@ -57,6 +57,14 @@ class Start extends Component {
             else
                 GameCondition = 'Repeated';
         }
+
+        //set lastIndex according to GameCondition . 
+        if(GameCondition == "OneShot"){
+          lastIndex=4;
+        }else{
+          lastIndex=43;
+		    }
+			
     
     this.state = {
       currentQuestionIndex: 0,
