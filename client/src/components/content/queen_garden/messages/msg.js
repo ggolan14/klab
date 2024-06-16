@@ -1,6 +1,7 @@
 import React, {useContext,useRef } from "react";
 import {QueenGardenContext} from "../context/qg_context";
 import ImgKnight from '../images/knight.png';
+import ImgKnight2 from '../images/knight2.png';
 import ImgBear from '../images/bear.png';
 import ImgToll from '../images/toll_highway.png';
 import ImgGain from '../images/gain.png';
@@ -14,7 +15,7 @@ export const RiskInstructions1 = () => {
     <p>
       You have been tasked with delivering plants for the Queen of the realm. The plants are grown in a greenhouse on the outskirts of the forest. Your job is to pick up the plants from the greenhouse, and deliver them to her castle. You will be paid {game_settings.GamesBank[0].RewardValue} coin{Number(game_settings.GamesBank[0].RewardValue) !== 1? 's' : ''} upon successful delivery.
       <br/><br/>
-      She reminds you of the recent attacks on merchants by bears in the Shadewood and so emphasizes using the highway that goes around the forest.
+      She tells you about recent attacks on merchants by bears in the Shadewood and so emphasizes using the highway that goes around the forest.
       <br/><br/>
       As an experienced merchant, you know that the cost of travel along the {game_settings.Labels.CrownHighway} is {game_settings.GamesBank[0].TollCost} coin{Number(game_settings.GamesBank[0].TollCost) !== 1? 's' : ''}.
       <br/><br/>
@@ -29,7 +30,7 @@ export const DishonestInstructions1 = () => {
     <p>
       You have been tasked with delivering plants for the Queen of the realm. The plants are grown in a greenhouse on the outskirts of the forest. Your job is to pick up the plants from the greenhouse, and deliver them to her castle.
       <br/><br/>
-      She emphasizes the importance of sunlight for the health of the plants, and so as part of the contract tells you that all travel through the Shadewood forest is banned. Instead, you are required to travel the {game_settings.Labels.CrownHighway}. You will be paid {game_settings.GamesBank[0].RewardValue} coin{Number(game_settings.GamesBank[0].RewardValue) !== 1? 's' : ''} upon successful delivery.
+      She emphasizes the importance of sunlight for the health of the plants, and so as part of the contract tells you that all deliveries through the Shadewood forest are banned, and guards are patrolling the forest to enforce the delivery ban. Instead, you are required to travel the {game_settings.Labels.CrownHighway}. You will be paid {game_settings.GamesBank[0].RewardValue} coin{Number(game_settings.GamesBank[0].RewardValue) !== 1? 's' : ''} upon successful delivery.
       <br/><br/>
       As an experienced merchant, you know that the cost of travel along the {game_settings.Labels.CrownHighway} is {game_settings.GamesBank[0].TollCost} coin{Number(game_settings.GamesBank[0].TollCost) !== 1? 's' : ''}.
     </p>
@@ -121,7 +122,7 @@ const InstructionsCrownTollFinishReturn = () => {
       <p>
         You have now returned to the outskirts of the Shadewood forest where you live.
         Before you can begin making deliveries in earnest,
-        you need to travel to {game_settings.Labels.KingdomRight} once more to hire additional workers.
+        you need to travel to the {game_settings.Labels.KingdomRight} once more to hire additional workers.
         <br/><br/>
         The {game_settings.Labels.CrownHighway} is shut down today, so you will have to travel through the Shadewood forest.
         There are 4 paths to choose from. Right now,
@@ -136,7 +137,7 @@ const InstructionsCrownTollFinishReturn = () => {
     return <p>
       Looking at the Shadewood, you notice that it is incredibly overgrown. You spend a great deal of time clearing the path to get your cart through.
       <br/><br/>
-      Once you make it through to Zorea and hire some hands, you will be able to pay them to clear the path.
+      Once you make it through to Zorea and hire some workers, you will be able to pay them to clear the path.
       <br/><br/>
       Click on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight}
       <br/><br/>
@@ -151,6 +152,7 @@ const InstructionsRoad1TollRisk = () => {
 
   return (
     <p>
+     
       Travelling through the Shadewood you are stopped by another caravan.
       <br/><br/>
       "Ho there Traveller! Where are you headed?"
@@ -159,7 +161,8 @@ const InstructionsRoad1TollRisk = () => {
       <br/><br/>
       The Merchant warns you to be careful travelling through the Shadewood, as the bears in the area have become increasingly aggressive, attacking shipments of food and plants to {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight}.
       <br/><br/>
-      Bears react to repeat activity in the Shadewood. The more a path is used , the more bears prowl it, increasing the likelihood of getting attacked in the future. But their awareness decays over time, so bears will prowl less on pathways that have not been used for a while.
+      Bears may react to repeat activity within the Shadewood, possibly increasing the likelihood of attacks in the future.
+    
     </p>
   )
 }
@@ -213,8 +216,8 @@ const InstructionsRoad1TollFinishReturn = () => {
       <br/><br/>
       You will have to travel through the Shadewood again. Since you took {game_settings.Labels.SignpostRoad1} yesterday, you decide to do so again.
       <br/><br/>
-      Note: Repeat Travel along the same route requires
-      clicking only on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight} the wagon begins by default
+      Note: Repeat travel along the same route requires
+      clicking only on {game_settings.Labels.KingdomLeft} {game_settings.Labels.KingdomRight}. The wagon begins by default
       at the entrance to the previously used route.
       <br></br>
       <br></br>
@@ -232,9 +235,9 @@ const InstructionsStep10 = () => {
       As you travel within the woods you note that the route remains clear.
 
       <br/><br/>
-      NOTE: Travelling along a forest route for the first time requires clearing the brush, which you pay your hired workers to accomplish. The cost is {game_settings.GamesBank[0].ClearingCost} coins.
+      NOTE: Travelling along a forest route for the first time requires clearing the brush, which you pay your hired workers to accomplish.
       <br/><br/>
-      The plants in the Shadewood grow quickly, if you take another route and return later the path will need to be cleared again.
+      The plants in the Shadewood grow quickly, so if you take another route and return later the path will need to be cleared again.
       <br/><br/>
     </p>
   )
@@ -290,7 +293,7 @@ const BeforeFirstGame = () => {
       <br/><br/>
       The toll when traveling the {game_settings.Labels.CrownHighway} is {current_game_settings.TollCost}
       <br/><br/>
-      The cost of clearing a road in the shadewood is {current_game_settings.ClearingCost}
+      The cost of clearing a road in the Shadewood is {current_game_settings.ClearingCost}
       <br/><br/>
       Click Start when ready to begin…
     </p>
@@ -349,8 +352,10 @@ const DeliveryFailedText = ({ GameCondition }) => {
     </p>
   ) : (
     <p>
-      You have been caught by the Queens Guard. Since you violated the terms of your contract,
-      by travelling through the Shadewood, they have confiscated your wares.
+      You have been caught by the Queen's Guard. Since you violated the terms of your contract,
+      by delivering plants through the Shadewood, they have confiscated your wares.
+      You Gain nothing for this run.
+
       <br/><br/>
       You gain nothing for this run
     </p>
@@ -464,7 +469,7 @@ export const QueenGardenGameMessageImg = ({message_id, from_road}) => {
   }
   else if (message_id === 'InstructionsRoad1Toll') {
     //img_id = `InstructionsRoad1Toll${GameCondition}`;
-    img_id = GameCondition=="D" ? "DeliveryFailedDishonest" : "InstructionsRoad1TollRisk"
+    img_id = GameCondition=="D" ? "InstructionsRoad1TollDishonest" : "InstructionsRoad1TollRisk"
   }
   else if (message_id === 'GainMessage'){
     img_id = message_id;
