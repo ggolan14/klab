@@ -46,6 +46,7 @@ class Start extends React.Component {
         let RunCounter = KeyTableID();
 
         let game_condition = props.game_settings.game.cond;
+        console.log("---> game_condition="+game_condition)
         if (game_condition === 'Ra'){
             const rnd = Math.floor(Math.random() * 2);
             this.GameSet.GameCondition = rnd? 'Risk' : 'Dishonest';
@@ -53,10 +54,13 @@ class Start extends React.Component {
         else if (game_condition === 'U'){
             this.GameSet.GameCondition = RunCounter%2? 'Risk' : 'Dishonest';
         }
-        else {
-            this.GameSet.GameCondition = game_condition;
+        else if (game_condition === 'R'){
+            this.GameSet.GameCondition = 'Risk';
         }
-
+        else if(game_condition === 'D') {
+            this.GameSet.GameCondition = 'Dishonest';
+        }   
+        console.log("---> this.GameSet.GameCondition="+this.GameSet.GameCondition)
 
         let GamesBank = props.game_settings.game.g_b.map(
           (g, i) => ({

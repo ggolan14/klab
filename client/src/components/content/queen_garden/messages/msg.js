@@ -53,7 +53,7 @@ const InstructionsScreen1 = () => {
         Queen Garden
       </label>
       {
-        game_settings.GameCondition === 'R'? <RiskInstructions1/> : <DishonestInstructions1/>
+        game_settings.GameCondition === 'Risk'? <RiskInstructions1/> : <DishonestInstructions1/>
       }
     </div>
   )
@@ -187,7 +187,7 @@ const InstructionsRoad1TollDishonest = () => {
 
 const InstructionsRoad1Toll = () => {
   const {game_settings} = useContext(QueenGardenContext);
-  const MsgWrapper = game_settings.GameCondition === 'R'? InstructionsRoad1TollRisk : InstructionsRoad1TollDishonest;
+  const MsgWrapper = game_settings.GameCondition === 'Risk'? InstructionsRoad1TollRisk : InstructionsRoad1TollDishonest;
 
   return (
     <MsgWrapper/>
@@ -311,7 +311,7 @@ const BeforeXGame = () => {
       <br/>
       You will now play Game {current_game_index}.
       <br/><br/>
-      Note! {game_settings.GameCondition === 'R'? 'Bears' : 'Guards'} may behave differently than previously
+      Note! {game_settings.GameCondition === 'Risk'? 'Bears' : 'Guards'} may behave differently than previously
       <br/><br/>
       Reward for Delivery: {current_game_settings.RewardValue}
       <br/><br/>
@@ -344,7 +344,7 @@ const GameMsg = () => {
 const DeliveryFailedText = ({ GameCondition }) => {
   console.log("---> GameCondition:", GameCondition); // Log the GameCondition to the console
 
-  return (GameCondition === 'R' || GameCondition === 'Risk')? (
+  return (GameCondition === 'Risk')? (
     <p>
       You have been attacked by a bear in the forest, you leave your flowers behind and flee.
       <br/><br/>
@@ -460,17 +460,19 @@ export const getMessage = message_id => MESSAGES[message_id];
 export const QueenGardenGameMessageImg = ({message_id, from_road}) => {
   const {game_settings} = useContext(QueenGardenContext);
   const {GameCondition} = game_settings;
+  console.log("----> in getMessage()  GameCondition="+GameCondition)
 
   let img_id, img_scale_up = 'qg_game_msg_img_scale_default';
   
   if (message_id === 'DeliveryFailed') {
-    img_id = GameCondition=="D" ? "DeliveryFailedDishonest" : "DeliveryFailedRisk"
+    img_id = GameCondition=="Dishonest" ? "DeliveryFailedDishonest" : "DeliveryFailedRisk"
     img_scale_up = 'qg_game_msg_img_scale_failed';
   }
   else if (message_id === 'InstructionsRoad1Toll') {
     //img_id = `InstructionsRoad1Toll${GameCondition}`;
-    img_id = GameCondition=="D" ? "InstructionsRoad1TollDishonest" : "InstructionsRoad1TollRisk"
+    img_id = GameCondition=="Dishonest" ? "InstructionsRoad1TollDishonest" : "InstructionsRoad1TollRisk"
   }
+  //InstructionsRoad1Toll
   else if (message_id === 'GainMessage'){
     img_id = message_id;
     img_scale_up = 'qg_game_msg_img_scale_gain';
