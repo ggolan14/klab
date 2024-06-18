@@ -348,16 +348,14 @@ const DeliveryFailedText = ({ GameCondition }) => {
     <p>
       You have been attacked by a bear in the forest, you leave your flowers behind and flee.
       <br/><br/>
-      You gain nothing for this run
+      You gain nothing for this run.
     </p>
   ) : (
     <p>
       You have been caught by the Queen's Guard. Since you violated the terms of your contract,
       by delivering plants through the Shadewood, they have confiscated your wares.
-      You Gain nothing for this run.
-
       <br/><br/>
-      You gain nothing for this run
+      You gain nothing for this run.
     </p>
   );
 };

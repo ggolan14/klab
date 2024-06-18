@@ -129,6 +129,7 @@ class QueenGardenGame extends React.Component {
       // };
 
       TrialPoints = Reward - Pay;
+      console.log("------> in change wagon place : TrialPoints="+TrialPoints+"  Reward="+Reward+"   Pay="+Pay)
       this.game_points = this.game_points + TrialPoints;
 
       const {game_settings} = this.context;
