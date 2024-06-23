@@ -1,0 +1,156 @@
+/* Debugger */
+.Q_G-Debugger {
+    display: grid;
+    padding: 0.5rem 0.7rem;
+    pointer-events: none;
+    row-gap: 0.5rem;
+}
+
+.Q_G-Debugger>button {
+    margin: auto;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.Q_G-Debugger label {
+    color: black;
+    width: max-content;
+}
+
+.Q_G-Debugger span {
+    color: #8103a0;
+    margin-left: 5px;
+}
+
+.Q_G-Debugger>label{
+    font-weight: bold;
+}
+
+.Q_G-Debugger_collapse {
+    display: grid;
+    row-gap: 5px;
+}
+
+.Q_G-Debugger_collapseHead {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+    grid-column-gap: 5px;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.Q_G-Debugger_collapseHead *{
+    pointer-events: all;
+    cursor: pointer;
+}
+.Q_G-Debugger_collapseHead>label:first-child {
+    background-color: #2a0170;
+    border: 1px solid black;
+    width: 20px;
+    height: 20px;
+    line-height: 12px;
+    border-radius: 50%;
+    font-size: 25px;
+    color: #fff;
+    text-align: center;
+}
+
+.Q_G-Debugger_collapseHead>label:not(:first-child) {
+    font-size: 20px;
+    width: 100%;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.Q_G-Debugger_collapseData {
+    display: grid;
+    border: 1px solid black;
+    padding: 2px 5px;
+    background-color: #9a9a9a;
+    cursor: default;
+    pointer-events: all;
+}
+
+.Q_G-Debugger_collapseData * {
+    cursor: default;
+    pointer-events: all;
+}
+
+.Debugger_collapseDataVertical {
+    row-gap: 2px;
+}
+
+.Debugger_collapseDataHorizontal {
+    grid-auto-flow: column;
+    max-width: 200px;
+    overflow-x: scroll;
+    padding-bottom: 15px;
+    column-gap: 10px;
+}
+
+.Q_G-Debugger_collapseItemInfo {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 5px;
+    align-items: center;
+}
+
+.Q_G-Debugger_collapseItemInfo>label{
+    background-color: #2a0170;
+    color: white;
+    padding: 2px 5px;
+}
+
+.Q_G-Debugger_collapseMoreLbl{
+    margin-left: 10px;
+    font-size: large;
+    color: #ffffff !important;
+    background-color: #01009b;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.Q_G-Debugger_collapseArrayList {
+    display: grid;
+    row-gap: 5px;
+    max-height: 200px;
+    overflow-y: scroll;
+    cursor: default;
+    pointer-events: all;
+}
+
+.Debugger_collapseDataHorizontal::-webkit-scrollbar,
+.Q_G-Debugger_collapseArrayList::-webkit-scrollbar{
+    height: 10px;
+    width: 10px;
+}
+
+/* Track */
+.Debugger_collapseDataHorizontal::-webkit-scrollbar-track,
+.Q_G-Debugger_collapseArrayList::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+/* Handle */
+.Debugger_collapseDataHorizontal::-webkit-scrollbar-thumb,
+.Q_G-Debugger_collapseArrayList::-webkit-scrollbar-thumb{
+    background: #067688;
+}
+
+/* Handle on hover */
+.Debugger_collapseDataHorizontal::-webkit-scrollbar-thumb:hover,
+.Q_G-Debugger_collapseArrayList::-webkit-scrollbar-thumb:hover{
+    background: #214593;
+}
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 100vh; /* Set height to 100% of the viewport height */
+    padding: 60px;
+    h1 {
+        font-size: 50px;
+      }
+  }

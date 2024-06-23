@@ -1,0 +1,31 @@
+.qg_land {
+    height: var(--LAND_HEIGHT);
+    background: var(--LAND_COLOR);
+    overflow: hidden;
+    z-index: 2;
+    margin: auto;
+    position: fixed;
+    left: 50%;
+}
+
+.qg_land_side_top {
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+    width: var(--TOP_LAND_WIDTH);
+    top: 0%;
+    transform: translate(-50%, -0%);
+}
+
+.qg_land_side_bottom {
+    border-top-right-radius: 30%;
+    border-top-left-radius: 30%;
+    width: var(--BOTTOM_LAND_WIDTH);
+    top: 100%;
+    transform: translate(-50%, -100%);
+}
+
+.land-flowers {
+    position: absolute;
+    bottom: 100px;
+    left: 2%;
+}
