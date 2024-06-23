@@ -79,6 +79,14 @@ export const AllExperiments ={
         consent_pathname: '/QueenGarden2/consent',
         exp_messages_pathname: '/QueenGarden2/exp_messages',
     },
+    QueenGarden3: {
+        main_pathname: '/QueenGarden3/main',
+        settings_pathname: '/QueenGarden3/settings',
+        start_pathname: '/QueenGarden3/start',
+        reports_pathname: '/QueenGarden3/reports',
+        consent_pathname: '/QueenGarden3/consent',
+        exp_messages_pathname: '/QueenGarden3/exp_messages',
+    },
     SP: {
         main_pathname: '/SP/main',
         settings_pathname: '/SP/settings',

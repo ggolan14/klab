@@ -6,6 +6,7 @@ const {SPUsersRecords, SPVersions} = require('./all_models/SP');
 const {RepeatedChoiceVersions, RepeatedChoiceUsersRecords} = require('./all_models/RepeatedChoice');
 const {QueenGardenVersions, QueenGardenUsersRecords} = require('./all_models/QueenGarden');
 const {QueenGarden2Versions, QueenGarden2UsersRecords} = require('./all_models/QueenGarden2');
+const {QueenGarden3Versions, QueenGarden3UsersRecords} = require('./all_models/QueenGarden3');
 const {ReversibleMatricesVersions, ReversibleMatricesUsersRecords} = require('./all_models/ReversibleMatrices');
 const {SignatureTimingEffectVersions, SignatureTimingEffectUsersRecords} = require('./all_models/SignatureTimingEffect');
 const {CupsGameVersions, CupsGameUsersRecords} = require('./all_models/CupsGame');
@@ -2324,6 +2325,82 @@ const defaultVersions = {
             consent_form: 'No'
         },
     },
+    QueenGarden3: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            c_l_txt: 'Zorea',
+            c_r_txt: 'kingdom',
+            ch_txt: 'CROWN_HIGHWAY',
+            r1_txt: 'Road #1',
+            r2_txt: 'Road #2',
+            r3_txt: 'Road #3',
+            r4_txt: 'Road #4',
+            qg_txt: 'Crown road',
+            w_t: 'Yes',
+            w_p: 'Yes',
+            pt: 1,
+            r_h: 's', // road hover: n-none a-all r-road s-signpost
+            tutorial_f_p: 1,
+            tutorial_r_t: 1,
+            g_o: 'r', // games order r-random n_r no random (Ascending)
+            cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
+            pt_g: { // practice_game
+                t: 3, // Trials
+                // r_v: 1, // Reward Value
+                // m_t_c: 1, // Mileage/Travel/Toll Cost:
+                p0: 0.05,  // first Probability
+                a: 0.2, // Adaptability
+                // pe: 1, // Penalty
+                // e_c: 1, // Equipment Cost
+                r_v: 1, // Reward Value
+                t_c: 1, // Toll Cost:
+                c_c: 1, // Toll Cost:
+            },
+            g_b: [
+                {
+                    active: 'Yes',
+                    t: 3, // Trials
+                    // r_v: 1, // Reward Value
+                    // m_t_c: 1, // Mileage/Travel/Toll Cost:
+                    p0: 0.05,  // first Probability
+                    a: 0.2, // Adaptability
+                    r_v: 1, // Reward Value
+                    t_c: 1, // Toll Cost:
+                    c_c: 1, // Toll Cost:
+                    // pe: 1, // Penalty
+                    // e_c: 1, // Equipment Cost
+                },
+                {
+                    active: 'No',
+                    t: 3, // Trials
+                    // r_v: 1, // Reward Value
+                    // m_t_c: 1, // Mileage/Travel/Toll Cost:
+                    p0: 0.05,  // first Probability
+                    a: 0.2, // Adaptability
+                    r_v: 1, // Reward Value
+                    t_c: 1, // Toll Cost:
+                    c_c: 1, // Toll Cost:
+                    // pe: 1, // Penalty
+                    // e_c: 1, // Equipment Cost
+                },
+            ]
+        },
+        payments: {
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            need_summary: true,
+            redirect_to: "",
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'No'
+        },
+    },
 }
 
 const AllModels = {
@@ -2380,6 +2457,11 @@ const AllModels = {
     QueenGarden2: {
         versions: QueenGarden2Versions,
         records: QueenGarden2UsersRecords,
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
+    QueenGarden3: {
+        versions: QueenGarden3Versions,
+        records: QueenGarden3UsersRecords,
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },
     SP: {

@@ -8,7 +8,7 @@ import QueenGardenTutorial from "./tutorial";
 import QueenGardenGame from "./game";
 import {QueenGardenGameLoading} from "./game/game_loading";
 
-const ThisExperiment = 'QueenGarden';
+const ThisExperiment = 'QueenGarden2';
 let firstTime = true;
 class Start extends React.Component {
 
