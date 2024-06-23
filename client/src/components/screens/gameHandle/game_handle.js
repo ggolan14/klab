@@ -781,7 +781,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
     }
     
     if(checkExperimentPath("QueenGarden2")){
-        finishScreenTitle = "You have completed Part one of the study"
+        finishScreenTitle = "You have completed part one of the study"
     }
     // GameSetting.language === 'German'
     return (
