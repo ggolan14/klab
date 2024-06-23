@@ -795,7 +795,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
         buttonText = "Move to exit survey"
     }
     
-    if(checkExperimentPath("QueenGarden2") || checkExperimentPath("QueenGarden3")){
+    if(checkExperimentPath("QueenGarden2")){
         finishScreenTitle = "You have completed part one of the study"
     }
     // GameSetting.language === 'German'

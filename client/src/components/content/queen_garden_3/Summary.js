@@ -5,8 +5,7 @@ const Summary = (props) => {
      console.log("---> final_bonus="+final_bonus)
      return (
         <label>
-            Please press the button below to complete the exit survey.<br/>
-            The short survey includes only a few questions. 
+            Please press the button below to complete your submission<br/>
         </label>
     )
 };

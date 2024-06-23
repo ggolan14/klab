@@ -353,13 +353,8 @@ class Start extends React.Component {
                   <h1>Welcome to the Queen’s Garden Study</h1>
                   <h2>
                   <p>
-                    
-                    <label>Thank you for taking part in this experiment. Today you will be playing the Queen’s Garden Game. You will begin by first completing the games tutorial.</label><br></br>
-                    <label>Following the tutorial, you will  have a couple practice trials of the game before you start playing for real. Once the game begins you will play two separate instances of the game, each game includes many trials.</label><br></br>
-                    <label>Your goal is to earn as many points as possible across all trials, in both games.</label><br></br>
-                    <label>Once you have completed the games you will be redirected to take a brief exit survey.</label><br></br>
-                    <label>In order to receive credit for participation you are asked to complete all games, and exit survey.</label><br></br>
-                    
+                    <label>Thank you for your continued participation in this experiment. You have elected to donate some of your extra time and so we ask that you continue playing the game for the time you have selected.</label><br></br>
+                    <label>The game remains much the same, but some things may have changed. We ask that you continue to attempt to maximize your score for however many trials you will play. Once you have completed your allotted trials your participation will have concluded.</label><br></br>
                   </p>
                   </h2>
                   <button style={{ fontSize: '40px', marginTop: '10px' }} onClick={this.handleOkButtonClick}>Move to the Queen's Garden Game</button>
