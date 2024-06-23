@@ -1,0 +1,123 @@
+.signpost {
+    position: absolute;
+    width: max-content;
+    /*max-width: 500px;*/
+    /*width: calc(var(--BOTTOM_LAND_WIDTH)/6);*/
+    /*width: min(max-content, calc(var(--BOTTOM_LAND_WIDTH)/6));*/
+    height: calc(var(--LAND_HEIGHT)/4);
+    /*height: 200px;*/
+    z-index: 10;
+    cursor: pointer;
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+.signpost_queen {
+    left: 0% !important;
+    top: 85% !important;
+    rotate: 40deg;
+    transform: translate(-50%, -50%);
+}
+
+.signpost_1 {
+    left: -30% !important;
+    top: 105% !important;
+    rotate: -30deg;
+    transform: translate(-50%, -50%);
+}
+.signpost_2 {
+    left: -50% !important;
+    top: 105% !important;
+    rotate: -10deg;
+    transform: translate(-50%, -50%);
+}
+.signpost_3 {
+    left: 130% !important;
+    top: 110% !important;
+    rotate: 12deg;
+    transform: translate(-50%, -50%);
+}
+.signpost_4 {
+    left: 125% !important;
+    top: 115% !important;
+    rotate: 20deg;
+    transform: translate(-50%, -50%);
+}
+
+
+.signpost_sign {
+    background-color: #005000;
+    color: #ffffff;
+    display: inline-block;
+    height: 100%;
+    width: max-content;
+    font-size: 16px;
+    /*margin: auto;*/
+}
+
+.signpost_sign_1,
+.signpost_sign_queen,
+.signpost_sign_2{
+    clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+    padding: 3% 20% 5% 5%;
+}
+
+.signpost_sign_3,
+.signpost_sign_4{
+    clip-path: polygon(
+            13% 0%,
+            100% 0,
+            100% 100%,
+            13% 100%,
+            0% 50%
+    );
+    /*padding: 0.5rem 0.5rem 0.5rem 1.5rem;*/
+    padding: 3% 5% 5% 25%;
+
+    /*padding: 3% 5% 5% 15%;*/
+}
+
+.signpost_leg {
+    background-color: #733f00;
+    height: 100%;
+    width: 25%;
+}
+
+.signpost_leg_queen,
+.signpost_leg_1,
+.signpost_leg_2 {
+    margin-right: auto;
+    margin-left: 30%;
+}
+
+.signpost_leg_3,
+.signpost_leg_4 {
+    margin-right: 10%;
+    margin-left: auto;
+}
+
+.signpost_sign_left {
+    clip-path: polygon(
+            1rem 0%,
+            100% 0,
+            100% 100%,
+            1rem 100%,
+            0% 1rem
+    );
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+
+    /*clip-path: polygon(0% 0%, calc(100% - 1rem) 0, 100% 50%, calc(100% - 1rem) 100%, 0% 100%);*/
+}
+
+.signpost:hover .signpost_sign{
+    background-color: #1429ad;
+    color: #ff0000;
+}
+
+.signpost:hover .signpost_leg{
+    background-color: #14adad;
+}
+
+
+
+
