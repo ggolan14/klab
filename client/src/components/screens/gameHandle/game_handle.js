@@ -35,6 +35,9 @@ import RepeatedChoiceSummary from "../../content/repeated_choice/Summary";
 import QueenGardenStart from "../../content/queen_garden/Start";
 import QueenGardenSummary from "../../content/queen_garden/Summary";
 
+import QueenGarden2Start from "../../content/queen_garden_2/Start";
+import QueenGarden2Summary from "../../content/queen_garden_2/Summary";
+
 import MetaSamplingStart from "../../content/meta_sampling/Start";
 import MetaSamplingSummary from '../../content/meta_sampling/Summary';
 import SPStart from "../../content/sp/Start";
@@ -449,6 +452,7 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         CognitiveTask2: <CognitiveTask2Start/>,
         RepeatedChoice: <RepeatedChoiceStart {...game_props}/>,
         QueenGarden: <QueenGardenStart {...game_props}/>,
+        QueenGarden2: <QueenGarden2Start {...game_props}/>,
         SP: <SPStart {...game_props}/>,
         DFE: <DFEStart/>,
         PL_PATTERN: <PLPatternStart/>,
@@ -480,6 +484,17 @@ const getSummary = ({exp, summary_args}) => {
             label: 'Queen Garden',
             element: () => (
                 <QueenGardenSummary
+                  summary_args={summary_args}
+                  ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                  SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                  GameBonus={DB_RECORDS.Payment.bonus_payment}
+                />
+            )
+        },
+        QueenGarden2: {
+            label: 'Queen Garden',
+            element: () => (
+                <QueenGarden2Summary
                   summary_args={summary_args}
                   ShowUpFee={DB_RECORDS.Payment.show_up_fee}
                   SignOfReward={DB_RECORDS.Payment.sign_of_reward}
@@ -732,10 +747,17 @@ const summary_lang = summary_args => {
     return language;
 }
 
+function checkExperimentPath(exp) {
+    const currentPath = window.location.pathname;
+    const regex = new RegExp(`\\b${exp}\\b`, 'i'); // 'i' flag for case-insensitive search
+    return regex.test(currentPath);
+  }
+
 const Summary = ({exp, finishCallback, summary_args}) => {
     console.log("--->in summarry")
     const language = summary_lang(summary_args);
     let buttonText = "Get completion code";
+    let finishScreenTitle = "You finished the study!"
     const [expSummary, setExpSummary] = useState(null);
     const [disableBtn, setDisableBtn] = useState(true);
 
@@ -757,6 +779,10 @@ const Summary = ({exp, finishCallback, summary_args}) => {
     if(currentPath.includes('QueenGarden')){
         buttonText = "Move to exit survey"
     }
+    
+    if(checkExperimentPath("QueenGarden2")){
+        finishScreenTitle = "You have completed Part one of the study"
+    }
     // GameSetting.language === 'German'
     return (
         <div
@@ -770,7 +796,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                 </label>
                 <label className='exp-summary-h2'>
                     {
-                        language === 'German' ? 'Sie haben die Studie abgeschlossen!' : 'You finished the study!'
+                        language === 'German' ? 'Sie haben die Studie abgeschlossen!' : finishScreenTitle
                     }
                 </label>
                 {expSummary.element()}

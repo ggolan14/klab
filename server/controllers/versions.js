@@ -194,6 +194,31 @@ const fixGameVersion = (exp, Version) => {
 
         return version;
     }
+    else if (exp === 'QueenGarden2'){
+        let version = {...Version};
+        try {
+            let games_bank = version.game.g_b;
+            let final_games_bank = [];
+
+            if (games_bank.length === 0)  throw 'err';
+            for (let i=0; i<games_bank.length; i++){
+                const {active, ...game_props} = games_bank[i];
+                if (active === 'Yes'){
+                    final_games_bank.push(game_props);
+                }
+            }
+            if (!final_games_bank.length)
+                throw 'err';
+
+            version.game.g_b = final_games_bank;
+            version.error = false;
+        }
+        catch (e) {
+            version.error = true;
+        }
+
+        return version;
+    }
 
     return Version;
 

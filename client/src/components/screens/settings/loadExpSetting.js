@@ -9,6 +9,7 @@ import PointsGame from '../../content/points_game/Settings';
 import PointsGameSh from '../../content/points_game_sh/Settings';
 import RepeatedChoice from '../../content/repeated_choice/Settings';
 import QueenGarden from '../../content/queen_garden/Settings';
+import QueenGarden2 from '../../content/queen_garden_2/Settings';
 import SP from '../../content/sp/Settings';
 import Trivia from '../../content/trivia/Settings';
 import TryOrGiveUp from '../../content/try_or_give_up/Settings';
@@ -30,6 +31,7 @@ const EXPERIMENTS_LIST = {
     PointsGameSh,
     RepeatedChoice,
     QueenGarden,
+    QueenGarden2,
     SP,
     TryOrGiveUp,
     Trivia,
