@@ -533,9 +533,10 @@ const getData = asyncHandler(async (req, res) => {
 });
 
 const downloadData = asyncHandler(async (req, res) => {
-    console.log("---> downloadData")
-
+    
     let {exp, filters} = req.query;
+
+    console.log('---> downloadData()    Runnings:', filters.runnings, 'Versions:', filters.versions, 'Users:', filters.users, 'Permissions:', filters.permissions);
 
     try {
         //     return res.status(400).json({error: 'No tables'});
@@ -579,6 +580,8 @@ const downloadData = asyncHandler(async (req, res) => {
                 UserId: {$in: filters.users}
             });
         }
+
+        console.log("Final Query:", JSON.stringify(filters_create, null, 2));
         // if (filters.users.length > 0){
         //     filters_create.push({
         //         UserId: {$in: filters.users}

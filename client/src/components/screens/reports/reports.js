@@ -240,6 +240,7 @@ class Reports extends React.Component {
                         users: res.data.filters.users,
                         permissions: getPermissions(),
                     };
+                    console.log('---> getAllFilters() Runnings:', sc.filters_values.runnings, 'Versions:', sc.filters_values.versions, 'Users:', sc.filters_values.users, 'Permissions:', sc.filters_values.permissions);
 
                     // console.log('sc.filters_selected', sc.filters_selected);
 
