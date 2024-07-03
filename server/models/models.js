@@ -2600,7 +2600,7 @@ const addNewExperiment = asyncHandler(async (req, res) => {
         new_model = {
             exp: NewExp,
             status: 'READY',
-            created_by: 'elirand574@gmail.com',
+            created_by: 'ggolan@technion.ac.il',
             date_modified: getTimeDate().date,
             date_created: getTimeDate().date
         };
@@ -2663,29 +2663,6 @@ const UsersData2 = [
         gender: 'Male',
         age: 54,
         // Experiments: [],
-    },
-    {
-        name: 'Eliran Dahan',
-        email: 'elirand574@gmail.com',
-        password: bcrypt.hashSync('12345', 10),
-        permission: 'SuperAdmin',
-        gender: 'Male',
-        age: 1,
-        // Experiments: [],
-    },
-    {
-        name: 'Eliran Dahan2',
-        email: 'aa@bb',
-        password: bcrypt.hashSync('12345', 10),
-        permission: 'Admin',
-        gender: 'Male',
-        age: 1,
-        Experiments: [
-            'CognitiveTask'
-        ],
-        chat_last_seen: {
-            CognitiveTask: 0
-        }
     },
     {
         name: 'Kinneret Teodorescu',
@@ -3123,7 +3100,7 @@ console.log("---> EMPTY_COLLECTIONS")
             let new_model = {
                 exp: EXP_LIST[i],
                 status: (EXP_LIST[i] === 'WordPuzzle' || EXP_LIST[i] === 'RepeatedChoice') ? 'READY' : 'DEV',
-                created_by: 'elirand574@gmail.com',
+                created_by: 'ggolan@technion.ac.il',
                 date_modified: getTimeDate().date,
                 date_created: getTimeDate().date
             };
@@ -3259,7 +3236,7 @@ const DevReset = async () => {
         // const password = '12345';
         const password = await bcrypt.hashSync('12345', 10);
 
-        let user = await UserModel.findOneAndUpdate({email: 'elirand574@gmail.com'}, {password});
+        let user = await UserModel.findOneAndUpdate({email: 'ggolan@technion.ac.il'}, {password});
         console.log('user', user);
         // await user.save();
 
@@ -3310,9 +3287,9 @@ app.use('*', async (req, res, next) => {
       let default_user = {
         age: "1",
         date: new Date(),
-        email: "elirand574@gmail.com",
+        email: "ggolan@technion.ac.il",
         gender: "Male",
-        name: "Eliran",
+        name: "Guy",
         password,
         permission: "Admin"
       }
@@ -3321,7 +3298,7 @@ app.use('*', async (req, res, next) => {
 
       await user.save();
       let new_user_permissions = new UsersPermmissions({
-        email: 'elirand574@gmail.com',
+        email: 'ggolan@technion.ac.il',
         permission: 'SuperAdmin',
         experiments: [],
       });

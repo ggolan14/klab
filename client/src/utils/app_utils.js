@@ -58,7 +58,7 @@ export const isSuperAdminUser = () => {
 export const isDevUser = () => {
     try {
         const {email, permission} = GetStoreState().auth.user;
-        return permission === 'SuperAdmin' && email === 'elirand574@gmail.com';
+        return permission === 'SuperAdmin' && email === 'ggolan@technion.ac.il';
     }
     catch (e) {
         return false;
