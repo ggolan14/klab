@@ -358,7 +358,7 @@ class Start extends React.Component {
                     <label>Following the tutorial, you will  have a couple practice trials of the game before you start playing for real. Once the game begins you will play two separate instances of the game, each game includes many trials.</label><br></br>
                     <label>Your goal is to earn as many points as possible across all trials, in both games.</label><br></br>
                     <label>Once you have completed the games you will be redirected to take a brief exit survey.</label><br></br>
-                    <label>In order to receive credit for participation you are asked to complete all games, and exit survey.</label><br></br>
+                    <label>There will be two game sessions to play, along with an exit survey.</label><br></br>
                     
                   </p>
                   </h2>
