@@ -1,0 +1,45 @@
+.dice {
+    margin: 20px auto;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0) rotateY(0);
+    transition: transform 1s;
+  }
+  
+  .face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: white;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+  }
+  
+  .front { transform: rotateY(0deg) translateZ(50px); }
+  .back { transform: rotateY(180deg) translateZ(50px); }
+  .right { transform: rotateY(90deg) translateZ(50px); }
+  .left { transform: rotateY(-90deg) translateZ(50px); }
+  .top { transform: rotateX(90deg) translateZ(50px); }
+  .bottom { transform: rotateX(-90deg) translateZ(50px); }
+  
+  .rolling {
+    animation: roll 1s infinite;
+  }
+  
+  @keyframes roll {
+    0% { transform: rotateX(0) rotateY(0); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+  }
+  
+  .show-1 { transform: rotateX(0deg) rotateY(0deg); }
+  .show-2 { transform: rotateX(-90deg) rotateY(0deg); }
+  .show-3 { transform: rotateX(0deg) rotateY(90deg); }
+  .show-4 { transform: rotateX(0deg) rotateY(-90deg); }
+  .show-5 { transform: rotateX(90deg) rotateY(0deg); }
+  .show-6 { transform: rotateX(180deg) rotateY(0deg); }
+  

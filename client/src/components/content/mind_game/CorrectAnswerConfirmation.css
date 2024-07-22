@@ -1,0 +1,32 @@
+/* CorectAnswerConfirmation.css */
+
+.next-confirmation-dialog {
+    background-color: white;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    
+  }
+  
+  .next-confirmation-dialog p {
+    margin-bottom: 10px;
+  }
+  
+  .next-confirmation-dialog button {
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+  }
+  
+  .next-confirmation-dialog button:last-child {
+    margin-right: 0;
+    background-color: #f44336;
+  }
+  

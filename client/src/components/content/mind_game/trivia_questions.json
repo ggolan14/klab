@@ -1,0 +1,576 @@
+[
+ 
+  {
+    "id":"0",
+    "question": "What is the tiny piece at the end of a shoelace called?",
+    "answers": [
+      {"option": "A", "text": "Shoe stopper"},
+      {"option": "B", "text": "Lace Knob"},
+      {"option": "C", "text": "Nub"},
+      {"option": "D", "text": "Aglet"},
+      {"option": "E", "text": "Lace Tag"},
+      {"option": "F", "text": "Lacelet"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"0",
+    "question": "Originally, Amazon only sold what kind of product?",
+    "answers": [
+      {"option": "A", "text": "Books"},
+      {"option": "B", "text": "Food"},
+      {"option": "C", "text": "Furniture"},
+      {"option": "D", "text": "Office supplies"},
+      {"option": "E", "text": "Clothing"},
+      {"option": "F", "text": "Electronics"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"0",
+    "question": "Who was the only British Pope ever?",
+    "answers": [
+      {"option": "A", "text": "Alexander VI"},
+      {"option": "B", "text": "Clement VII"},
+      {"option": "C", "text": "Gregory I"},
+      {"option": "D", "text": "Adrian IV"},
+      {"option": "E", "text": "Nicholas V"},
+      {"option": "F", "text": "Julius II"}
+    ],
+    "correct_answer": "D"
+  },
+
+  {
+    "id":"1",
+    "question": "What is the capital city of Mongolia?",
+    "answers": [
+      {"option": "A", "text": "Moshkntar"},
+      {"option": "B", "text": "Astana"},
+      {"option": "C", "text": "Ulaanbaatar"},
+      {"option": "D", "text": "Bishkek"},
+      {"option": "E", "text": "Tashkent"},
+      {"option": "F", "text": "Dushanbe"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"2",
+    "question": "Which philosopher is associated with the concept of the veil of ignorance?",
+    "answers": [
+      {"option": "A", "text": "John Stuart Mill"},
+      {"option": "B", "text": "Immanuel Kant"},
+      {"option": "C", "text": "John Rawls"},
+      {"option": "D", "text": "Friedrich Nietzsche"},
+      {"option": "E", "text": "Jean-Jacques Rousseau"},
+      {"option": "F", "text": "Aristotle"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"3",
+    "question": "Which ancient civilization built the city of Machu Picchu?",
+    "answers": [
+      {"option": "A", "text": "Aztecs"},
+      {"option": "B", "text": "Egyptians"},
+      {"option": "C", "text": "Greeks"},
+      {"option": "D", "text": "Incas"},
+      {"option": "E", "text": "Romans"},
+      {"option": "F", "text": "Mayans"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"4",
+    "question": "In Greek mythology, who is the goddess of Home family, and domesticity?",
+    "answers": [
+      {"option": "A", "text": "Aphrodite"},
+      {"option": "B", "text": "Hera"},
+      {"option": "C", "text": "Demeter"},
+      {"option": "D", "text": "Athena"},
+      {"option": "E", "text": "Artemis"},
+      {"option": "F", "text": "Hestia"}
+    ],
+    "correct_answer": "F"
+  },
+  {
+    "id":"5",
+    "question": "What is the term for the psychological phenomenon where people of higher ability tend to perform lower than their actual ability in competitive situations?",
+    "answers": [
+      {"option": "A", "text": "AphroDunning-Kruger effect"},
+      {"option": "B", "text": "Imposter syndrome"},
+      {"option": "C", "text": "Cognitive dissonance"},
+      {"option": "D", "text": "Hawthorne effect"},
+      {"option": "E", "text": "Stockholm syndrome"},
+      {"option": "F", "text": "Pygmalion effect"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"6",
+    "question": "How many legs does a cat have?",
+    "answers": [
+      {"option": "A", "text": "Two"},
+      {"option": "B", "text": "Four"},
+      {"option": "C", "text": "Six"},
+      {"option": "D", "text": "Eight"},
+      {"option": "E", "text": "Ten"},
+      {"option": "F", "text": "Twelve"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"7",
+    "question": "Who was the architect of the United States Capitol building in Washington, D.C?",
+    "answers": [
+      {"option": "A", "text": "Frank Lloyd Wright"},
+      {"option": "B", "text": "I. M. Pei"},
+      {"option": "C", "text": "William Thornton"},
+      {"option": "D", "text": "Thomas Jefferson"},
+      {"option": "E", "text": "Daniel Burnham"},
+      {"option": "F", "text": "rederick Law Olmsted"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"8",
+    "question": "Which famous physicist developed the theory of general relativity?",
+    "answers": [
+      {"option": "A", "text": "Isaac Newton"},
+      {"option": "B", "text": "Niels Bohr"},
+      {"option": "C", "text": "Albert Einstein"},
+      {"option": "D", "text": "Max Planck"},
+      {"option": "E", "text": "Werner Heisenberg"},
+      {"option": "F", "text": "Marie Curie"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"9",
+    "question": "Who was the first name of the mathematician responsible for Fermat's Last Theorem?",
+    "answers": [
+      {"option": "A", "text": "Simon"},
+      {"option": "B", "text": "Carl"},
+      {"option": "C", "text": "Pierre"},
+      {"option": "D", "text": "Andrew"},
+      {"option": "E", "text": "Leonhard"},
+      {"option": "F", "text": "Évariste"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"10",
+    "question": "Which element is the most abundant in the Earth's crust?",
+    "answers": [
+      {"option": "A", "text": "Iron"},
+      {"option": "B", "text": "Oxygen"},
+      {"option": "C", "text": "Silicon"},
+      {"option": "D", "text": "Aluminum"},
+      {"option": "E", "text": "Calcium"},
+      {"option": "F", "text": "Sodium"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"11",
+    "question": "Which ancient Greek mathematician is credited with the discovery of the method of exhaustion, a precursor to calculus?",
+    "answers": [
+      {"option": "A", "text": "Euclid"},
+      {"option": "B", "text": "Pythagoras"},
+      {"option": "C", "text": "Archimedes"},
+      {"option": "D", "text": "Diophantus"},
+      {"option": "E", "text": "Thales"},
+      {"option": "F", "text": "Apollonius"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"12",
+    "question": "Who wrote the classic novel One Hundred Years of Solitude?",
+    "answers": [
+      {"option": "A", "text": "Gabriel García Márquez"},
+      {"option": "B", "text": "Isabel Allende"},
+      {"option": "C", "text": "Julio Cortázar"},
+      {"option": "D", "text": "Jorge Luis Borges"},
+      {"option": "E", "text": "Mario Vargas Llosa"},
+      {"option": "F", "text": "Carlos Fuentes"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"13",
+    "question": "What is the chemical symbol for the element gold?",
+    "answers": [
+      {"option": "A", "text": "Au"},
+      {"option": "B", "text": "Ag"},
+      {"option": "C", "text": "Fe"},
+      {"option": "D", "text": "Cu"},
+      {"option": "E", "text": "Pt"},
+      {"option": "F", "text": "Hg"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"14",
+    "question": "In which year did the Russian Revolution, leading to the establishment of the Soviet Union, take place?",
+    "answers": [
+      {"option": "A", "text": "1905"},
+      {"option": "B", "text": "1917"},
+      {"option": "C", "text": "1923"},
+      {"option": "D", "text": "1930"},
+      {"option": "E", "text": "1945"},
+      {"option": "F", "text": "1956"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"15",
+    "question": "Which ancient civilization developed the first known positional numeral system, the precursor to our modern number system?",
+    "answers": [
+      {"option": "A", "text": "Roman"},
+      {"option": "B", "text": "Babylonian"},
+      {"option": "C", "text": "Greek"},
+      {"option": "D", "text": "Egyptian"},
+      {"option": "E", "text": "Mayan"},
+      {"option": "F", "text": "Chinese"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"16",
+    "question": "Which Shakespearean play features the famous line, To be, or not to be: that is the question?",
+    "answers": [
+      {"option": "A", "text": "Hamlet"},
+      {"option": "B", "text": "Macbeth"},
+      {"option": "C", "text": "Romeo and Juliet"},
+      {"option": "D", "text": "Othello"},
+      {"option": "E", "text": "King Lear"},
+      {"option": "F", "text": "Julius Caesar"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"17",
+    "question": "Which chemical element has the highest melting point?",
+    "answers": [
+      {"option": "A", "text": "Tungsten"},
+      {"option": "B", "text": "Platinum"},
+      {"option": "C", "text": "Titanium"},
+      {"option": "D", "text": "Osmium"},
+      {"option": "E", "text": "Rhenium"},
+      {"option": "F", "text": "Iridium"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"18",
+    "question": "In which year did the first modern Olympic Games take place?",
+    "answers": [
+      {"option": "A", "text": "1886"},
+      {"option": "B", "text": "1892"},
+      {"option": "C", "text": "1898"},
+      {"option": "D", "text": "1904"},
+      {"option": "E", "text": "1876"},
+      {"option": "F", "text": "1896"}
+    ],
+    "correct_answer": "F"
+  },
+  {
+    "id":"19",
+    "question": "What is the name of the theoretical framework that aims to reconcile general relativity and quantum mechanics?",
+    "answers": [
+      {"option": "A", "text": "Quantum field theory"},
+      {"option": "B", "text": "Loop quantum gravity"},
+      {"option": "C", "text": "M-theory"},
+      {"option": "D", "text": "String theory"},
+      {"option": "E", "text": "Grand Unified Theory"},
+      {"option": "F", "text": "Supersymmetry"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"20",
+    "question": "In computer science, what does the acronym DNS stand for?",
+    "answers": [
+      {"option": "A", "text": "Dynamic Network Services"},
+      {"option": "B", "text": "Domain Name System"},
+      {"option": "C", "text": "Digital Network Security"},
+      {"option": "D", "text": "Data Node Server"},
+      {"option": "E", "text": "Distributed Network Storage"},
+      {"option": "F", "text": "Domain Naming Service"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"21",
+    "question": "What is the capital of France?",
+    "answers": [
+      {"option": "A", "text": "Berlin"},
+      {"option": "B", "text": "Madrid"},
+      {"option": "C", "text": "Paris"},
+      {"option": "D", "text": "Rome"},
+      {"option": "E", "text": "London"},
+      {"option": "F", "text": "Beijing"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"22",
+    "question": "Which country was the first non-host to win the FIFA World Cup twice consecutively, achieving this feat in 1934 and 1938?",
+    "answers": [
+      {"option": "A", "text": "Brazil"},
+      {"option": "B", "text": "Italy"},
+      {"option": "C", "text": "Germany"},
+      {"option": "D", "text": "Argentina"},
+      {"option": "E", "text": "Uruguay"},
+      {"option": "F", "text": "England"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"23",
+    "question": "What ancient civilization is credited with the invention of the wheel?",
+    "answers": [
+      {"option": "A", "text": "Roman"},
+      {"option": "B", "text": "Greek"},
+      {"option": "C", "text": "Sumerian"},
+      {"option": "D", "text": "Egyptian"},
+      {"option": "E", "text": "Chinese"},
+      {"option": "F", "text": "Indus Valley"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"24",
+    "question": "Who composed the famous classical piece The Four Seasons?",
+    "answers": [
+      {"option": "A", "text": "Ludwig van Beethoven"},
+      {"option": "B", "text": "Wolfgang Amadeus Mozart"},
+      {"option": "C", "text": "Antonio Vivaldi"},
+      {"option": "D", "text": "Johann Sebastian Bach"},
+      {"option": "E", "text": "Franz Schubert"},
+      {"option": "F", "text": "yotr Ilyich Tchaikovsky"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"25",
+    "question": "What is the capital city of Bhutan?",
+    "answers": [
+      {"option": "A", "text": "Kathmandu"},
+      {"option": "B", "text": "Thimphu"},
+      {"option": "C", "text": "Dhaka"},
+      {"option": "D", "text": "Ulaanbaatar"},
+      {"option": "E", "text": "Colombo"},
+      {"option": "F", "text": "Islamabad"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"26",
+    "question": "In literature, what does the term bildungsroman refer to?",
+    "answers": [
+      {"option": "A", "text": "Epic poem"},
+      {"option": "B", "text": "Coming-of-age novel"},
+      {"option": "C", "text": "Satirical play"},
+      {"option": "D", "text": "Historical biography"},
+      {"option": "E", "text": "Philosophical treatise"},
+      {"option": "F", "text": "Mystery thriller"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"27",
+    "question": "Which planet is known as the Morning Star or the Evening Star and is often visible shortly before sunrise or after sunset?",
+    "answers": [
+      {"option": "A", "text": "Mars"},
+      {"option": "B", "text": "Venus"},
+      {"option": "C", "text": "Mercury"},
+      {"option": "D", "text": "Jupiter"},
+      {"option": "E", "text": "Saturn"},
+      {"option": "F", "text": "Uranus"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"28",
+    "question": "What is the primary component of Earth's atmosphere?",
+    "answers": [
+      {"option": "A", "text": "Oxygen"},
+      {"option": "B", "text": "Nitrogen"},
+      {"option": "C", "text": "Carbon dioxide"},
+      {"option": "D", "text": "Argon"},
+      {"option": "E", "text": "Hydrogen"},
+      {"option": "F", "text": "Helium"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"29",
+    "question": "What is the largest planet in our solar system?",
+    "answers": [
+      {"option": "A", "text": "Earth"},
+      {"option": "B", "text": "Jupiter"},
+      {"option": "C", "text": "Mars"},
+      {"option": "D", "text": "Saturn"},
+      {"option": "E", "text": "Venus"},
+      {"option": "F", "text": "Neptune"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"30",
+    "question": "Who wrote the dystopian novel Brave New World?",
+    "answers": [
+      {"option": "A", "text": "Aldous Huxley"},
+      {"option": "B", "text": "George Orwell"},
+      {"option": "C", "text": "Ray Bradbury"},
+      {"option": "D", "text": "Margaret Atwood"},
+      {"option": "E", "text": "Yevgeny Zamyatin"},
+      {"option": "F", "text": "H.G. Wells"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"31",
+    "question": "Which famous detective novel features the fictional detective Hercule Poirot?",
+    "answers": [
+      {"option": "A", "text": "The Hound of the Baskervilles"},
+      {"option": "B", "text": "Murder on the Orient Express"},
+      {"option": "C", "text": "The Maltese Falcon"},
+      {"option": "D", "text": "The Big Sleep"},
+      {"option": "E", "text": "Agatha Christie"},
+      {"option": "F", "text": "The Murder of Roger Ackroyd"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"32",
+    "question": "Which programming language is known for its use in statistical computing and analysis?",
+    "answers": [
+      {"option": "A", "text": "Python"},
+      {"option": "B", "text": "R"},
+      {"option": "C", "text": "Java"},
+      {"option": "D", "text": "C++"},
+      {"option": "E", "text": "Ruby"},
+      {"option": "F", "text": "Swift"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"33",
+    "question": "Which of the following mathematical constants represents the ratio of a circle's circumference to its diameter?",
+    "answers": [
+      {"option": "A", "text": "π"},
+      {"option": "B", "text": "φ"},
+      {"option": "C", "text": "ε"},
+      {"option": "D", "text": "ψ"},
+      {"option": "E", "text": "γ"},
+      {"option": "F", "text": "τ"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"34",
+    "question": "Who is the author of the science fiction novel Dune?",
+    "answers": [
+      {"option": "A", "text": "Isaac Asimov"},
+      {"option": "B", "text": "Arthur C. Clarke"},
+      {"option": "C", "text": "H.G. Wells"},
+      {"option": "D", "text": "Philip K. Dick"},
+      {"option": "E", "text": "Ray Bradbury"},
+      {"option": "F", "text": "Frank Herbert"}
+    ],
+    "correct_answer": "F"
+  },
+  {
+    "id":"35",
+    "question": "What is the currency of the United States?",
+    "answers": [
+      {"option": "A", "text": "Euro"},
+      {"option": "B", "text": "Pound Sterling"},
+      {"option": "C", "text": "Yen"},
+      {"option": "D", "text": "Dollar"},
+      {"option": "E", "text": "Rupee"},
+      {"option": "F", "text": "Peso"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"36",
+    "question": "Who is the famous fictional spy created by author Ian Fleming?",
+    "answers": [
+      {"option": "A", "text": "Jason Bourne"},
+      {"option": "B", "text": "Jack Ryan"},
+      {"option": "C", "text": "James Bond"},
+      {"option": "D", "text": "George Smiley"},
+      {"option": "E", "text": "Hercule Poirot"},
+      {"option": "F", "text": "Sherlock Holmes"}
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id":"37",
+    "question": "Which ancient Greek philosopher is often referred to as the Laughing Philosopher?",
+    "answers": [
+      {"option": "A", "text": "Socrates"},
+      {"option": "B", "text": "Democritus"},
+      {"option": "C", "text": "Heraclitus"},
+      {"option": "D", "text": "Thales"},
+      {"option": "E", "text": "Anaxagoras"},
+      {"option": "F", "text": "Parmenides"}
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id":"38",
+    "question": "In which country would you find the ancient city of Petra, famous for its rock-cut architecture",
+    "answers": [
+      {"option": "A", "text": "Greece"},
+      {"option": "B", "text": "Italy"},
+      {"option": "C", "text": "Egypt"},
+      {"option": "D", "text": "Jordan"},
+      {"option": "E", "text": "Turkey"},
+      {"option": "F", "text": "Lebanon"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"39",
+    "question": "In literature, which Shakespearean play features the character Iago as its primary antagonist?",
+    "answers": [
+      {"option": "A", "text": "Hamlet"},
+      {"option": "B", "text": "Macbeth"},
+      {"option": "C", "text": "Romeo and Juliet"},
+      {"option": "D", "text": "Othello"},
+      {"option": "E", "text": "King Lear"},
+      {"option": "F", "text": "Julius Caesar"}
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id":"40",
+    "question": "What is the term for the phenomenon where a liquid spontaneously moves up a narrow tube against the force of gravity?",
+    "answers": [
+      {"option": "A", "text": "Capillary action"},
+      {"option": "B", "text": "Osmotic pressure"},
+      {"option": "C", "text": "Viscosity"},
+      {"option": "D", "text": "Surface tension"},
+      {"option": "E", "text": "Brownian motion"},
+      {"option": "F", "text": "Pascal's principle"}
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id":"41",
+    "question": "DUMMY",
+    "answers": [
+      {"option": "A", "text": "DUMMY"},
+      {"option": "B", "text": "DUMMY"},
+      {"option": "C", "text": "DUMMY"},
+      {"option": "D", "text": "DUMMY"},
+      {"option": "E", "text": "DUMMY"},
+      {"option": "F", "text": "DUMMY"}
+    ],
+    "correct_answer": "F"
+  }
+]

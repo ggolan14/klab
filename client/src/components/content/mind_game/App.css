@@ -1,0 +1,58 @@
+body {
+    font-size: 18px; /* Set the base font size larger */
+  }
+  
+  .dice-roll-container, .centered-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height to center vertically */
+    text-align: center;
+  }
+  
+  .dice-roll-animation {
+    margin-top: 20px;
+    perspective: 1000px; /* Add perspective for 3D effect */
+  }
+  
+  .dice {
+    width: 100px; /* Increase the size of the dice */
+    height: 100px; /* Increase the size of the dice */
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0) rotateY(0);
+    animation: roll 2s ease-in-out forwards;
+  }
+  
+  .dice-face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    border: 2px solid #333;
+  }
+  
+  .face-1  { background: #f00; color: #fff; transform: rotateY(0deg) translateZ(50px); }
+  .face-2  { background: #0f0; color: #fff; transform: rotateY(90deg) translateZ(50px); }
+  .face-3  { background: #00f; color: #fff; transform: rotateY(180deg) translateZ(50px); }
+  .face-4  { background: #ff0; color: #000; transform: rotateY(-90deg) translateZ(50px); }
+  .face-5  { background: #0ff; color: #000; transform: rotateX(90deg) translateZ(50px); }
+  .face-6  { background: #f0f; color: #000; transform: rotateX(-90deg) translateZ(50px); }
+  
+  @keyframes roll {
+    0% {
+      transform: rotateX(0) rotateY(0);
+    }
+    100% {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+  
+  h1, h2, h3, p, button {
+    font-size: 1.5em; /* Scale up the font size for all text elements */
+  }
+  

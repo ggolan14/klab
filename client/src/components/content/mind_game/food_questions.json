@@ -1,0 +1,443 @@
+[
+  {
+    "question": "Which dessert do you prefer?",
+    "choices": [
+      "Chocolate cake",
+      "Apple pie",
+      "Ice cream",
+      "Cheesecake",
+      "Brownies",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which protein source do you prefer?",
+    "choices": [
+      "Chicken",
+      "Beef",
+      "Fish",
+      "Tofu",
+      "Seitan",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of pasta do you prefer?",
+    "choices": [
+      "Spaghetti",
+      "Penne",
+      "Fettuccine",
+      "Rigatoni",
+      "Linguine",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which breakfast food do you prefer?",
+    "choices": [
+      "Pancakes",
+      "Eggs and bacon",
+      "Oatmeal",
+      "Yogurt and granola",
+      "Avocado toast",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What is your preferred type of cuisine?",
+    "choices": [
+      "Italian",
+      "Mexican",
+      "Chinese",
+      "Indian",
+      "American",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which vegetable do you prefer as a side dish?",
+    "choices": [
+      "Broccoli",
+      "Carrots",
+      "Green beans",
+      "Asparagus",
+      "Brussels sprouts",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What is your preferred type of cheese?",
+    "choices": [
+      "Cheddar",
+      "Mozzarella",
+      "Parmesan",
+      "Vegan cheese",
+      "Goat cheese",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which fruit do you prefer?",
+    "choices": [
+      "Apple",
+      "Banana",
+      "Strawberry",
+      "Mango",
+      "Pineapple",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which soup do you prefer?",
+    "choices": [
+      "Chicken noodle",
+      "Tomato",
+      "Minestrone",
+      "Butternut squash",
+      "Clam chowder",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of bread do you prefer?",
+    "choices": [
+      "Whole wheat",
+      "Sourdough",
+      "Rye",
+      "Baguette",
+      "Ciabatta",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of pizza topping do you prefer?",
+    "choices": [
+      "Pepperoni",
+      "Margherita (tomato and mozzarella)",
+      "Hawaiian (ham and pineapple)",
+      "Vegetarian (assorted vegetables)",
+      "Meat lover's (various meats)",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of sandwich filling do you prefer?",
+    "choices": [
+      "Turkey and cheese",
+      "Tuna salad",
+      "Veggie (various vegetables)",
+      "Ham and Swiss",
+      "Chicken salad",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among the following salad dressings, which one do you prefer?",
+    "choices": [
+      "Ranch",
+      "Balsamic vinaigrette",
+      "Caesar",
+      "Italian",
+      "Honey mustard",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of burger do you prefer?",
+    "choices": [
+      "Classic cheeseburger",
+      "Veggie burger",
+      "Bacon burger",
+      "BBQ burger",
+      "Mushroom Swiss burger",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of pasta sauce do you prefer?",
+    "choices": [
+      "Marinara",
+      "Alfredo",
+      "Pesto",
+      "Carbonara",
+      "Arrabbiata",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among these breakfast cereals, which one do you prefer?",
+    "choices": [
+      "Corn flakes",
+      "Granola",
+      "Oatmeal",
+      "Rice cereal",
+      "Bran flakes",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of nuts do you prefer as a snack?",
+    "choices": [
+      "Almonds",
+      "Peanuts",
+      "Cashews",
+      "Walnuts",
+      "Pistachios",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of coffee do you prefer?",
+    "choices": [
+      "Espresso",
+      "Latte",
+      "Cappuccino",
+      "Americano",
+      "Mocha",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of tea do you prefer?",
+    "choices": [
+      "Green tea",
+      "Black tea",
+      "Herbal tea",
+      "Chai tea",
+      "Oolong tea",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among these breakfast pastries, which one do you prefer?",
+    "choices": [
+      "Croissant",
+      "Danish pastry",
+      "Cinnamon roll",
+      "Muffin",
+      "Bagel",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of sushi do you prefer?",
+    "choices": [
+      "California roll",
+      "Salmon nigiri",
+      "Tuna sashimi",
+      "Spicy tuna roll",
+      "Vegetable roll",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of sauce do you prefer on your wings?",
+    "choices": [
+      "Buffalo",
+      "Barbecue",
+      "Teriyaki",
+      "Honey mustard",
+      "Garlic Parmesan",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among these ice cream flavors, which one do you prefer?",
+    "choices": [
+      "Vanilla",
+      "Chocolate",
+      "Strawberry",
+      "Cookies and cream",
+      "Mint chocolate chip",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of salad greens do you prefer?",
+    "choices": [
+      "Romaine lettuce",
+      "Mixed greens",
+      "Spinach",
+      "Arugula",
+      "Iceberg lettuce",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of potato dish do you prefer?",
+    "choices": [
+      "Mashed potatoes",
+      "French fries",
+      "Baked potato",
+      "Potato salad",
+      "Hash browns",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among these fruit juices, which one do you prefer?",
+    "choices": [
+      "Orange juice",
+      "Apple juice",
+      "Cranberry juice",
+      "Grape juice",
+      "Pineapple juice",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among these curry dishes, which one do you prefer?",
+    "choices": [
+      "Chicken curry",
+      "Vegetable curry",
+      "Lamb curry",
+      "Paneer curry",
+      "Shrimp curry",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of bread do you prefer for sandwiches?",
+    "choices": [
+      "Whole grain",
+      "White",
+      "Sourdough",
+      "Multigrain",
+      "Rye",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Among these breakfast beverages, which one do you prefer?",
+    "choices": [
+      "Coffee",
+      "Tea",
+      "Orange juice",
+      "Apple juice",
+      "Milk",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of chocolate do you prefer?",
+    "choices": [
+      "Milk chocolate",
+      "Dark chocolate",
+      "White chocolate",
+      "Chocolate truffles",
+      "Chocolate bars with nuts",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of fruit smoothie do you prefer?",
+    "choices": [
+      "Strawberry banana",
+      "Mango pineapple",
+      "Mixed berry",
+      "Peach",
+      "Green (spinach, kale, etc.)",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of pie filling do you prefer?",
+    "choices": [
+      "Apple",
+      "Cherry",
+      "Pumpkin",
+      "Pecan",
+      "Blueberry",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of hot sauce do you prefer?",
+    "choices": [
+      "Sriracha",
+      "Tabasco",
+      "Frank's RedHot",
+      "Cholula",
+      "Texas Pete",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which type of salad toppings do you prefer?",
+    "choices": [
+      "Croutons",
+      "Cherry tomatoes",
+      "Cucumber slices",
+      "Red onion",
+      "Avocado",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of omelette filling do you prefer?",
+    "choices": [
+      "Cheese",
+      "Ham",
+      "Spinach",
+      "Mushroom",
+      "Bell peppers",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of canned soup do you prefer?",
+    "choices": [
+      "Chicken noodle",
+      "Tomato",
+      "Vegetable",
+      "Clam chowder",
+      "Minestrone",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of topping do you prefer on yogurt?",
+    "choices": [
+      "Granola",
+      "Fresh fruit (e.g., berries, bananas)",
+      "Honey",
+      "Nuts (e.g., almonds, walnuts)",
+      "Chocolate chips",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of topping do you prefer on pancakes?",
+    "choices": [
+      "Maple syrup",
+      "Fresh fruit (e.g., strawberries, blueberries)",
+      "Chocolate chips",
+      "Whipped cream",
+      "Nutella",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "What type of fried food do you prefer?",
+    "choices": [
+      "French fries",
+      "Chicken wings",
+      "Onion rings",
+      "Fried calamari",
+      "Mozzarella sticks",
+      "I don't have a preference"
+    ]
+  },
+  {
+    "question": "Which of the following options best describes your dietary preferences?",
+    "choices": [
+      "Omnivorous (can eat everything)",
+      "Vegetarian (do not eat meat or seafood)",
+      "Pescatarian (eat seafood but not meat)",
+      "Flexitarian (mostly vegetarian but occasionally eat meat or seafood)",
+      "Vegan (do not eat meat, seafood, or any animal product)",
+      "Mostly vegan (do not eat meat or seafood, but occasionally eat eggs or milk)."
+    ]
+  }
+  
+]
