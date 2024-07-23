@@ -13,6 +13,8 @@ import QueenGarden2 from '../../content/queen_garden_2/Settings';
 import QueenGarden3 from '../../content/queen_garden_3/Settings';
 import SP from '../../content/sp/Settings';
 import Trivia from '../../content/trivia/Settings';
+import MindGame from '../../content/mind_game/Settings';
+import MixedGame from '../../content/mixed_game/Settings';
 import TryOrGiveUp from '../../content/try_or_give_up/Settings';
 import WordPuzzle from '../../content/word_puzzle/Settings';
 import ReversibleMatrices from '../../content/reversible_matrices/Settings';
@@ -37,6 +39,8 @@ const EXPERIMENTS_LIST = {
     SP,
     TryOrGiveUp,
     Trivia,
+    MindGame,
+    MixedGame,
     WordPuzzle,
     ReversibleMatrices,
     SignatureTimingEffect,

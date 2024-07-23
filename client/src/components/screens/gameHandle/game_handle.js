@@ -12,6 +12,13 @@ import TryOrGiveUpSummary from "../../content/try_or_give_up/Summary";
 import TriviaStart from "../../content/trivia/Start";
 import TriviaSummary from "../../content/trivia/Summary";
 
+import MindGameStart from "../../content/mind_game/Start";
+import MindGameSummary from "../../content/mind_game/Summary";
+
+
+import MixedGameStart from "../../content/mixed_game/Start";
+import MixedGameSummary from "../../content/mixed_game/Summary";
+
 import PointsGameStart from "../../content/points_game/Start";
 import PointsGameSummary from "../../content/points_game/Summary";
 
@@ -413,12 +420,43 @@ const insertPayment = (payment) => {
     };
 };
 
-const myFunc = () => {
-    console.log("-----------> my func")
-};
-
 const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr}) => {
     console.log("---> in game_handle.js getGame ");
+    let contition=""
+    const TRIVIA_ONE_SHOT = 0;
+    const MIND_GAME_REPEATED = 1;
+    const TRIVIA_REPEATED = 2;
+    const MIND_GAME_ONE_SHOT = 3;
+
+
+    if(exp==="MixedGame"){
+        let RunCounter = KeyTableID();
+        let type=RunCounter%4
+        if(type==TRIVIA_ONE_SHOT){
+            exp="Trivia"
+            contition="o"
+        }else if(type==MIND_GAME_REPEATED){
+            exp="MindGame"
+            contition="r"
+        }else if(type==TRIVIA_REPEATED){
+            exp="Trivia"
+            contition="r"
+        }else if(type==MIND_GAME_ONE_SHOT){
+            exp="MindGame"
+            contition="o"
+        }
+    }else{
+        contition=game_settings.game.cond;
+    }
+
+    const setCondForComponent = (componentType, game_settings,newVal) => {
+        const newGameSettings = {...game_settings};
+        if (componentType === "Trivia" || componentType === "MindGame") {
+            newGameSettings.game.cond = newVal;
+        } 
+        return newGameSettings;
+    };
+
     const game_props = {
         SetLimitedTime,
         dmr,
@@ -430,7 +468,6 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         sendGameDataToDB,
         insertTextInput,
         getTextInput,
-        myFunc,
         insertTaskGameLine,
         insertPayment,
         insertLineCustomTable,
@@ -442,9 +479,11 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         user_id: DB_RECORDS.UserDetails.UserId,
         callbackFunction
     };
+    
     const game_list = {
-        
-        Trivia:<TriviaStart {...game_props}/>,
+        MixedGame:<MixedGameStart {...game_props}/>,
+        MindGame: <MindGameStart {...game_props} game_settings={setCondForComponent("MindGame", game_settings,contition)} />,
+        Trivia: <TriviaStart {...game_props} game_settings={setCondForComponent("Trivia", game_settings,contition)} />,
         TryOrGiveUp: <TryOrGiveUpStart {...game_props}/>,
         PointsGame: <PointsGameStart {...game_props}/>,
         PointsGameSh: <PointsGameShStart/>,
@@ -466,7 +505,7 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         CupsGame: <CupsGameStart {...game_props}/>,
         NoCupsGame: <NoCupsGameStart {...game_props}/>,
     };
-
+    
     return game_list[exp];
 };
 
@@ -633,6 +672,22 @@ const getSummary = ({exp, summary_args}) => {
             label: 'Trivia',
             element: () => (
                 <TriviaSummary
+                    SummaryArgs={summary_args}
+                />
+            )
+        },
+        MindGameStart: {
+            label: 'MindGame',
+            element: () => (
+                <MindGameSummary
+                    SummaryArgs={summary_args}
+                />
+            )
+        },
+        MixedGameStart: {
+            label: 'MixedGame',
+            element: () => (
+                <MixedGameSummary
                     SummaryArgs={summary_args}
                 />
             )
@@ -1173,7 +1228,6 @@ class GameHandle extends React.Component {
         // }
         this.props.setWaitForAction(true);
         let current_exp = this.exp;
-
         getExpState(current_exp).then(
             exp_state_res => {
                 let sc = this.state;
@@ -1670,7 +1724,6 @@ class GameHandle extends React.Component {
                 );
             case 'Game':
                 OnBeforeUnload(true);
-                console.log("---------> this.state.force_full_screen="+this.state.force_full_screen)
                 if (this.state.force_full_screen)
                     return (
                         <HandleFullScreen
@@ -1678,7 +1731,7 @@ class GameHandle extends React.Component {
                         >
                             <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp}/>
                             {
-                                getGame({
+                               getGame({
                                     exp: this.exp,
                                     game_settings: this.state.game_settings,
                                     more: this.state.more,
@@ -1688,7 +1741,7 @@ class GameHandle extends React.Component {
                                     dmr: this.state.debuggerModeRunning
                                 })
                             }
-
+                            
                             {
                                 this.state.debuggerModeRunning && <DebuggerWindows/>
                             }

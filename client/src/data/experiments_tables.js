@@ -7,6 +7,22 @@ export const AllExperiments ={
         consent_pathname: '/Trivia/consent',
         exp_messages_pathname: '/Trivia/exp_messages',
     },
+    MindGame: {
+        main_pathname: '/MindGame/main',
+        settings_pathname: '/MindGame/settings',
+        start_pathname: '/MindGame/start',
+        reports_pathname: '/MindGame/reports',
+        consent_pathname: '/MindGame/consent',
+        exp_messages_pathname: '/MindGame/exp_messages',
+    },
+    MixedGame: {
+        main_pathname: '/MixedGame/main',
+        settings_pathname: '/MixedGame/settings',
+        start_pathname: '/MixedGame/start',
+        reports_pathname: '/MixedGame/reports',
+        consent_pathname: '/MixedGame/consent',
+        exp_messages_pathname: '/MixedGame/exp_messages',
+    },
     TryOrGiveUp: {
         main_pathname: '/TryOrGiveUp/main',
         settings_pathname: '/TryOrGiveUp/settings',
@@ -172,6 +188,12 @@ export const getExperimentPaths = experiment => {
 }
 
 const ExperimentsTablesCols = {
+    MindGame: {
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
+    MixedGame: {
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
     Trivia: {
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },

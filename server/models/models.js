@@ -20,6 +20,8 @@ const {PointsGameShVersions, PointsGameShUsersRecords} = require('./all_models/P
 const {PointsGameVersions, PointsGameUsersRecords} = require('./all_models/PointsGame');
 const {TryOrGiveUpVersions, TryOrGiveUpUsersRecords} = require('./all_models/TryOrGiveUp');
 const {TriviaVersions, TriviaUsersRecords} = require('./all_models/Trivia');
+const {MindGameVersions, MindGameUsersRecords} = require('./all_models/MindGame');
+const {MixedGameVersions, MixedGameUsersRecords} = require('./all_models/MixedGame');
 const User = require('./all_models/User');
 const ConsentForms = require('./all_models/ConsentForms');
 const ActiveSettings = require('./all_models/ActiveSettings');
@@ -73,6 +75,70 @@ const getModelPack = model => {
 };
 
 const defaultVersions = {
+    MixedGame: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            force_full_screen: "false",
+            cond: 'o',
+            s_c: false,
+            trials: 40,
+            reward: 100,
+            no_ask: 'None'  // ['None', 'Random', 1-10]
+        },
+        payments: {
+            // COINSIGN: "pound",
+            // SHOWUP: 2,
+            // EXCHANGERATIO: 100,
+            // INITIALBONUS: 0.4,
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            // TIMEOUT: "00:00",
+            // EXPNAME: "",
+            redirect_to: "",
+            need_summary: true,
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'Yes'
+        },
+    },
+    MindGame: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            force_full_screen: "false",
+            cond: 'o',
+            s_c: false,
+            trials: 40,
+            reward: 100,
+            no_ask: 'None'  // ['None', 'Random', 1-10]
+        },
+        payments: {
+            // COINSIGN: "pound",
+            // SHOWUP: 2,
+            // EXCHANGERATIO: 100,
+            // INITIALBONUS: 0.4,
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            // TIMEOUT: "00:00",
+            // EXPNAME: "",
+            redirect_to: "",
+            need_summary: true,
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'Yes'
+        },
+    },
     
     Trivia: {
         version: 'test',
@@ -2404,6 +2470,18 @@ const defaultVersions = {
 }
 
 const AllModels = {
+    MixedGame: {
+        versions: MixedGameVersions,
+        records: MixedGameUsersRecords,
+        extra: {},
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
+    MindGame: {
+        versions: MindGameVersions,
+        records: MindGameUsersRecords,
+        extra: {},
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
     Trivia: {
         versions: TriviaVersions,
         records: TriviaUsersRecords,
@@ -2555,8 +2633,9 @@ const addNewExperiment = asyncHandler(async (req, res) => {
         return res.json({error: 'Illegal command'});
 
     let exp_exist = await getModelPack('ExpDevDetails').ExpDevDetails.findOne({exp: NewExp});
-    if (exp_exist)
+    if (exp_exist){
         return res.json({error: 'Exp exist'});
+    }
 
     try {
         let Model = getModelPack('ConsentForms').ConsentForms;

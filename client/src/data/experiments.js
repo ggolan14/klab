@@ -1,6 +1,8 @@
 const EXPERIMENTS_LABELS_NAMES = {
     TwoMatricesExperiment: 'TryOrGiveUp',
     Trivia: 'Trivia',
+    MindGame:'MindGame',
+    MixedGame:'MixedGame',
     PointsGame: 'PointsGame',
     PointsGameSh: 'PointsGameSh',
     WordPuzzle: 'WordPuzzle',
@@ -24,6 +26,8 @@ const EXPERIMENTS_LABELS_NAMES = {
 
 const EXPERIMENTS_NAMES_LABELS = {
     Trivia: 'Trivia',
+    MindGame:'MindGame',
+    MixedGame:'MixedGame',
     TryOrGiveUp: 'TwoMatricesExperiment',
     PointsGame: 'PointsGame',
     PointsGameSh: 'PointsGameSh',
