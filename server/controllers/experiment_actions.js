@@ -72,7 +72,7 @@ const addNewUserRecords = asyncHandler(async (req, res) => {
 // @route   POST /api/record_game
 // @access  Private
 const addNewRecord = asyncHandler(async (req, res) => {
-    console.log("---> in experiment_actions.js addNewRecord()")
+    //console.log("---> in experiment_actions.js addNewRecord()")
     const IP = req.headers['x-real-ip'] || '0.0.0.0';
 
     const {Exp, ExpID, Records} = req.body;

@@ -285,6 +285,7 @@ function SetLimitedTime(status){
 }
 
 const sendGameDataToDB = async () => {
+    console.log("---> in game_handle sendGameDataToDB")
      RecordGame({
         Exp: CurrentExperiments,
         ExpID: EXP_ID,
@@ -345,18 +346,17 @@ const constantLineValues = (part) => {
 }
 
 const insertGameLine = (line) => {
-    //console.log("---> in game_handle.js insertGameLine line.NumOfYesAnswers="+line.NumOfYesAnswers);
+    
     if (!Array.isArray(DB_RECORDS.Game))
         DB_RECORDS.Game = [];
-
     DB_RECORDS.Game.push({
         ...constantLineValues('GAME'),
         ...line
     });
+   
 };
 
 const insertGameArray = (rec_arr) => {
-    console.log("---> in game_handle.js insertGameArray rec_arr.size="+rec_arr.size);
     DB_RECORDS.Game = rec_arr.map(
         rec => ({
             ...constantLineValues('GAME'),
@@ -366,7 +366,6 @@ const insertGameArray = (rec_arr) => {
 };
 
 const insertTextInput = (input_key, value) => {
-    console.log("---> in game_handle.js insertTextInput ");
     DB_RECORDS.Summary[input_key] = value;
 };
 
@@ -375,7 +374,6 @@ const getTextInput = (input_key) => {
 };
 
 const getTable = table => {
-    console.log("---> in game_handle.js getTable ");
     return DB_RECORDS[table];
 };
 
@@ -394,7 +392,6 @@ const insertTaskGameLine = (task, line) => {
 };
 
 const insertLineCustomTable = (table, line, type) => {
-    console.log("---> in game_handle.js insertLineCustomTable ");
     if (DB_RECORDS.MoreRec[table] === undefined){
         if (type === 'array')
             DB_RECORDS.MoreRec[table] = [];
@@ -413,7 +410,6 @@ const insertLineCustomTable = (table, line, type) => {
 };
 
 const insertPayment = (payment) => {
-    console.log("---> in game_handle.js insertPayment ");
     DB_RECORDS.Payment = {
         ...constantLineValues('PAYMENT'),
         ...payment
@@ -421,7 +417,6 @@ const insertPayment = (payment) => {
 };
 
 const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr}) => {
-    console.log("---> in game_handle.js getGame ");
     let contition=""
     const TRIVIA_ONE_SHOT = 0;
     const MIND_GAME_REPEATED = 1;
@@ -676,7 +671,7 @@ const getSummary = ({exp, summary_args}) => {
                 />
             )
         },
-        MindGameStart: {
+        MindGame: {
             label: 'MindGame',
             element: () => (
                 <MindGameSummary
@@ -684,7 +679,7 @@ const getSummary = ({exp, summary_args}) => {
                 />
             )
         },
-        MixedGameStart: {
+        MixedGame: {
             label: 'MixedGame',
             element: () => (
                 <MixedGameSummary
@@ -721,7 +716,7 @@ const getSummary = ({exp, summary_args}) => {
  */
 
 const HandleFullScreen = (props) => {
-    console.log("---> in game_handle.js HandleFullScreen ");
+   // console.log("---> in game_handle.js HandleFullScreen ");
     const handle = useFullScreenHandle();
     useEffect(() => {
         if (props.action_time_alert)
@@ -774,7 +769,7 @@ const HandleFullScreen = (props) => {
 };
 
 const UnMoveComponent = ({callback}) => {
-    console.log("---> in game_handle.js UnMoveComponent ");
+   // console.log("---> in game_handle.js UnMoveComponent ");
     const second_warning = useRef(null);
 
     useEffect(() => {
@@ -808,7 +803,7 @@ const UnMoveComponent = ({callback}) => {
 };
 
 const summary_lang = summary_args => {
-    console.log("---> in game_handle.js summary_lang ");
+   // console.log("---> in game_handle.js summary_lang ");
     let language = 'English';
     try {
         if(summary_args.language) language = summary_args.language;
@@ -824,7 +819,7 @@ function checkExperimentPath(exp) {
   }
 
 const Summary = ({exp, finishCallback, summary_args}) => {
-    console.log("--->in summarry")
+   // console.log("--->in summarry")
     const language = summary_lang(summary_args);
     let buttonText = "Get completion code";
     let finishScreenTitle = "You finished the study!"
@@ -988,7 +983,7 @@ const RunningError = ({exp}) => {
 };
 
 const NotReady = ({exp}) => {
-    console.log("--->in NotReady")
+   // console.log("--->in NotReady")
     return (
         <>
             <label>Not ready</label>
@@ -1387,7 +1382,7 @@ class GameHandle extends React.Component {
     }
 
     recordsFinishGame = (params) => {
-        console.log("---> in game_handle.js recordsFinishGame ");
+      //  console.log("---> in game_handle.js recordsFinishGame ");
         this.props.setWaitForAction(true);
         let game_points;
         try {
@@ -1773,7 +1768,6 @@ class GameHandle extends React.Component {
                     </>
                 )
             case 'Summary':
-                console.log('Summary ---> 222'); // Add your log printout here
                 return (
                     <>
                         <Summary summary_args={this.state.summary_args} exp={this.exp} finishCallback={this.recordsFinishGame}/>
@@ -1849,7 +1843,7 @@ class GameHandle extends React.Component {
                 </div>
             </>
         );
-        console.log("---> 000")
+      
     };
 
 }
