@@ -98,15 +98,15 @@ const Start = (props) => {
         [step]: userAnswer
       };
       answers=newUserAnswers;
-      console.log("---> AFTER in addRecord    userAnswers.size=" + Object.keys(newUserAnswers).length);
+      // console.log("---> AFTER in addRecord    userAnswers.size=" + Object.keys(newUserAnswers).length);
       return newUserAnswers;
     });
   };
 
   const insertGameLine = (db_row) => {
-    console.log("---> 111 in insertGameLine() "+db_row.Step)
+    // console.log("---> 111 in insertGameLine() "+db_row.Step)
     props.insertGameLine(db_row);
-    console.log("---> 222 in insertGameLine() "+db_row.Step)
+    // console.log("---> 222 in insertGameLine() "+db_row.Step)
   }
 
 
@@ -115,7 +115,7 @@ const Start = (props) => {
 
   const addGameBonus = (game_data) => {
     const keys = Object.keys(answers);
-    console.log("Number of keys in answers:", keys.length);
+    // console.log("Number of keys in answers:", keys.length);
 
     keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${answers[key]}`); });
 
@@ -126,7 +126,7 @@ const Start = (props) => {
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = answers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
-    console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
+    // console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
     
     // Example TotalBonus array, make sure it is defined in your component
     const TotalBonus = [];
@@ -142,7 +142,7 @@ const Start = (props) => {
   };
 
   const sendDataToDB = (send) => {
-    console.log("---> 111")
+    // console.log("---> 111")
     const current_time = getTimeDate();
     var reward_sum = 0;
     var temp_sign_of_reward = props.game_settings.payments.sign_of_reward;
@@ -150,7 +150,7 @@ const Start = (props) => {
       reward_sum,
       temp_sign_of_reward,
     }
-    console.log("---> 222")
+    // console.log("---> 222")
     props.sendGameDataToDB().then(
       res => {
         NewLogs({
@@ -195,11 +195,11 @@ const Start = (props) => {
   }
 
   const handleHide = () => {
-   console.log("=====> setting hidePracticeIsOver= to true")
+   // console.log("=====> setting hidePracticeIsOver= to true")
    sethidePracticeIsOver(true)
   }
       
-  console.log("------> in render step="+step+"  hidePracticeIsOver="+hidePracticeIsOver)
+  // console.log("------> in render step="+step+"  hidePracticeIsOver="+hidePracticeIsOver)
 
   if (step==6 && !hidePracticeIsOver) {
     return <div className="introduction">
