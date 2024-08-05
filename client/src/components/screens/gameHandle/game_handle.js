@@ -1082,9 +1082,8 @@ const DebuggerSize = {
     height: 0
 }
 
-const DebuggerWindows = () => {
-    DebuggerRef = useRef(null);
-
+export const DebuggerWindows = ({ children }) => {
+    const DebuggerRef = useRef(null);
     const [show, setShow] = useState(true);
 
     useEffect(() => {
@@ -1099,18 +1098,16 @@ const DebuggerWindows = () => {
             DebuggerSize.width = w;
             DebuggerSize.height = h;
             DebuggerRefDown = false;
-            // const event = new CustomEvent('resize', { detail: { width: w, height: h } });
-            // el.dispatchEvent(event);
         }
         const observer = new MutationObserver(checkResize);
         observer.observe(element, { attributes: true, attributeOldValue: true, attributeFilter: ['style'] });
     }, []);
-
+    console.log("----------------------> DebuggerWindow")
     return (
+        
         <div
             onDoubleClick={() => setShow(!show)}
             className='debugger-mode unselectable'
-            // ref={DebuggerRef}
             ref={DebuggerRef}
             onMouseUp={() => DebuggerRefDown = false}
             onMouseDown={e => {
@@ -1123,21 +1120,16 @@ const DebuggerWindows = () => {
                 DebuggerRefDown = true;
             }}
         >
-            <label
-                className='debugger-mode-header unselectable'
-                // onMouseUp={() => DebuggerRefDown = false}
-            >
-                Move
-            </label>
-
-            <div
-                className={'unselectable ' + (show ? '' : 'hide-elem')}
-                id='debugger-mode-body'
-            >
+            <label className='debugger-mode-header unselectable'>Move</label>
+            <div className={'unselectable ' + (show ? '' : 'hide-elem')} id='debugger-mode-body'>
+                {children}
             </div>
         </div>
-    )
+    );
 }
+
+
+
 
 class GameHandle extends React.Component {
 

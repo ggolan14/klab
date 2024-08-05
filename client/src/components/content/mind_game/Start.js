@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './App.css'; // Import the CSS file
 import IntroductionScreen_1 from './IntroductionScreen_1';
 import IntroductionScreen_2 from './IntroductionScreen_2';
-import PracticeRound from './PracticeRound';
-import RealGameRound from './RealGameRound';
+import GameRound from './GameRound';
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import { getTimeDate } from "../../../utils/app_utils";
 import { NewLogs } from "../../../actions/logger";
+import { DebuggerWindows } from '../../screens/gameHandle/game_handle';
 const ThisExperiment = 'MindGame';
 
 let answers={};
@@ -21,13 +21,12 @@ let NUM_OF_REPEATED_REAL_ROUNDS = 5;
 let NUM_OF_PRACTICE_ROUNDS=3;
 let NUM_OF_INTRODUCTION_STEPS=3;
 let finish_step=0;
+let DebugMode = null;
 
 const Start = (props) => {
   let RunCounter = KeyTableID();
-  
+  DebugMode = props.dmr;
 
-  
- // console.log("--------> MindGame RunCounter="+RunCounter)
  PaymentsSettings = props.game_settings.payments;
  let cond = props.game_settings.game.cond;
 
@@ -57,22 +56,15 @@ const Start = (props) => {
   }
   finish_step = GameCondition=='OneShot' ? NUM_OF_PRACTICE_ROUNDS+NUM_OF_INTRODUCTION_STEPS+1 : NUM_OF_PRACTICE_ROUNDS+NUM_OF_INTRODUCTION_STEPS+NUM_OF_REPEATED_REAL_ROUNDS
   
-  
-  console.log("------------> MindGame GameCondition = "+GameCondition+"  cond="+cond+" finish_step="+finish_step)
-  //this.props=props;
   const [step, setStep] = useState(1); // Track current step of the game
   const [userAnswers, setUserAnswers] = useState({}); // Track current step of the game
-  //const [practiceOver, setPracticeOver] = useState(false); // Track current step of the game
   const [hidePracticeIsOver, sethidePracticeIsOver] = useState(false); // Track current step of the game
-  
-  
   const handleNext = () => {
     console.log("---> in Start.handleNext() step="+step)
     const db_row = {
       RoundNumber: step,  // total 
       Answer: answers[step],
     };
-    console.log("===================> step="+step)
     if(step>2){
       insertGameLine(db_row);
       if((GameCondition=='OneShot' && step==finish_step-1)|| (GameCondition=='Repeated' && step==finish_step-1))
@@ -91,7 +83,6 @@ const Start = (props) => {
 
   const addRecord = (userAnswer) => {
     console.log("---> BEFORE in addRecord    userAnswer=" + userAnswer + "  userAnswers.size=" + Object.keys(userAnswers).length);
-  
     setUserAnswers(prevState => {
       const newUserAnswers = {
         ...prevState,
@@ -104,30 +95,18 @@ const Start = (props) => {
   };
 
   const insertGameLine = (db_row) => {
-    // console.log("---> 111 in insertGameLine() "+db_row.Step)
     props.insertGameLine(db_row);
-    // console.log("---> 222 in insertGameLine() "+db_row.Step)
   }
-
-
-
-
 
   const addGameBonus = (game_data) => {
     const keys = Object.keys(answers);
-    // console.log("Number of keys in answers:", keys.length);
-
     keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${answers[key]}`); });
-
-   // const GameCondition = "OneShot"; // Example condition, replace with actual logic
-    //const NUM_OF_REPEATED_REAL_ROUNDS = 5; // Example number, replace with actual logic
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 3;
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = answers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
     // console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
-    
     // Example TotalBonus array, make sure it is defined in your component
     const TotalBonus = [];
     TotalBonus.push(selectedRoundPoints);
@@ -150,7 +129,7 @@ const Start = (props) => {
       reward_sum,
       temp_sign_of_reward,
     }
-    // console.log("---> 222")
+    
     props.sendGameDataToDB().then(
       res => {
         NewLogs({
@@ -195,11 +174,11 @@ const Start = (props) => {
   }
 
   const handleHide = () => {
-   // console.log("=====> setting hidePracticeIsOver= to true")
+   
    sethidePracticeIsOver(true)
   }
       
-  // console.log("------> in render step="+step+"  hidePracticeIsOver="+hidePracticeIsOver)
+  
 
   if (step==6 && !hidePracticeIsOver) {
     return <div className="introduction">
@@ -221,14 +200,20 @@ const Start = (props) => {
     
     
     <div>
-      <DebuggerModalView>
-        <p>Game mode:Mind game </p>
-      </DebuggerModalView>
+        {DebugMode && (
+        <DebuggerWindows>
+          <p>Game mode: Mind game</p>
+          <p>Game condition: {GameCondition}</p>
+          {step > 2 && (
+            <p>Round: {step - 2}</p>
+          )}
+        </DebuggerWindows>
+      )}
       {step === 1 && <IntroductionScreen_1 onNext={handleNext}/>}
       {step === 2 && <IntroductionScreen_2 onNext={handleNext} signOfReward={props.game_settings.payments.sign_of_reward}/>}
-      {step >= 3 && step <= 5 && <PracticeRound onAdd={addRecord} onNext={handleNext} signOfReward={props.game_settings.payments.sign_of_reward}/>}
+      {step >= 3 && step <= 5 && <GameRound isPractice={true} onAdd={addRecord} onNext={handleNext} signOfReward={props.game_settings.payments.sign_of_reward}/>}
       {/* Render PracticeRound three times */}
-      {step >= 6 && step < finish_step && <RealGameRound onAdd={addRecord} onNext={handleNext} signOfReward={props.game_settings.payments.sign_of_reward} />}
+      {step >= 6 && step < finish_step && <GameRound isPractice={false} onAdd={addRecord} onNext={handleNext} signOfReward={props.game_settings.payments.sign_of_reward} />}
       {/* Render RealGameRound four times */}
       {(GameCondition === "OneShot" && step ===  finish_step) || (GameCondition === "Repeated" && step === finish_step) ? (
            <p className="dice-roll-container">Game completed</p>
