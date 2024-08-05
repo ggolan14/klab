@@ -161,6 +161,8 @@ class Start extends Component {
             GameCondition: GameCondition,
             HaveAnAnswerTime: totalShowQuestionTime,
             ConfirmationTime: totalShowConfirmationTime,
+            Game: "Trivia",
+           
           };
 
           
