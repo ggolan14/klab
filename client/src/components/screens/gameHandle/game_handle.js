@@ -1120,7 +1120,7 @@ export const DebuggerWindows = ({ children }) => {
                 DebuggerRefDown = true;
             }}
         >
-            <label className='debugger-mode-header unselectable'>Move</label>
+            <label className='debugger-mode-header unselectable'>Move2</label>
             <div className={'unselectable ' + (show ? '' : 'hide-elem')} id='debugger-mode-body'>
                 {children}
             </div>
@@ -1755,7 +1755,7 @@ class GameHandle extends React.Component {
                         }
 
                         {
-                            this.state.debuggerModeRunning && <DebuggerWindows/>
+                           // this.state.debuggerModeRunning && <DebuggerWindows/>
                         }
                     </>
                 )
