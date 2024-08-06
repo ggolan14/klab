@@ -106,7 +106,7 @@ const Start = (props) => {
     const keys = Object.keys(answers);
     keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${answers[key]}`); });
 
-    const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 3;
+    const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = answers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
