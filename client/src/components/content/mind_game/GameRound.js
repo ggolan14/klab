@@ -68,8 +68,7 @@ const GameRound = ({ isPractice,onAdd, onNext, signOfReward }) => {
       setFinalTransform(getTransformForFace(rollResult)); // Set final transform based on roll result
       setRolling(false);
       setShowResult(true);
-      sendGameResult(userId, 'practice', rollResult);
-    }, 2000); // Show result after animation
+    }, 3000); // Show result after animation
   };
 
   const handleAnswer = (answer) => {
@@ -103,7 +102,7 @@ const GameRound = ({ isPractice,onAdd, onNext, signOfReward }) => {
           )}
           {diceVisible && (
             <div className="dice-roll-animation">
-              <div className="dice" style={{ transform: rolling ? '' : finalTransform, animation: rolling ? 'roll 2s ease-in-out forwards' : 'none' }}>
+              <div className="dice" style={{ transform: rolling ? '' : finalTransform, animation: rolling ? 'roll 4s ease-in-out forwards' : 'none' }}>
                 <div className="dice-face face-1">1</div>
                 <div className="dice-face face-2">2</div>
                 <div className="dice-face face-3">3</div>
