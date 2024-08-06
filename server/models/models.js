@@ -115,6 +115,7 @@ const defaultVersions = {
             force_full_screen: "false",
             cond: 'o',
             s_c: false,
+            num_of_real_rounds: 40,
             trials: 40,
             reward: 100,
             no_ask: 'None'  // ['None', 'Random', 1-10]

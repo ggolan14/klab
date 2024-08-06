@@ -1,56 +1,22 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {DivContainer} from "../../screens/settings/elements_builder";
-import {convertPointsRatio} from "../../screens/settings/settings";
+import { DivContainer } from "../../screens/settings/elements_builder";
+import { convertPointsRatio } from "../../screens/settings/settings";
 import ColorPicker from "../../layout/colorPicker/color_picker";
 //import './togStyles.css';
 
+const Settings = ({ game_settings, changeSettings, LAST_SETTING_NAME, versions_list, exp_more_settings }) => {
 
-
-
-
-const game_tooltip = {
-    game1: (
-        <label>Basic game</label>
-    ),
-    game2: (
-        <>
-            <label>Punishing "give-up" selections:</label>
-            <label>Every time a "give-up" key is selected,</label>
-            <label>F points are subtracted from the final trial's payoff.</label>
-        </>
-    ),
-    game3: (
-        <>
-            <label>Punishing exploitation of L results:</label>
-            <label>Every time an "L" key is selected,</label>
-            <label>F points are subtracted from the final trial's payoff.</label>
-        </>
-    ),
-    game4: (
-        <>
-            <label>Punishing "give-up" selections & exploitation of L results:</label>
-            <label>This game is combination of g=2 and g=3.</label>
-        </>
-    ),
-    game5: (
-        <>
-            <label>Rewarding exploration of new “try” keys:</label>
-            <label>Every time a new "try" key is selected,</label>
-            <label>F points are added to the final trial's payoff.</label>
-        </>
-    ),
-    game6: (
-        <>
-            <label>Rewarding every “try” selection:</label>
-            <label>Every time a "try" key is selected,</label>
-            <label>F points are added to the final trial's payoff.</label>
-        </>
-    ),
-
-};
-
-const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_list, exp_more_settings}) => {
+    useEffect(() => {
+        if (game_settings.game.cond === 'o') {
+            changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'num_of_real_rounds',
+                value: 1,
+            });
+        }
+    }, [game_settings.game.cond, changeSettings]);
 
     const general = [
         {
@@ -60,7 +26,7 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
             class_name: 'admin-settings-input-big ' + (game_settings.version === 'test' ? ' disabledElem ' : '') + ((game_settings.version !== LAST_SETTING_NAME && versions_list.indexOf(game_settings.version) > -1) ? 'highlight_error_input' : ''),
             value: game_settings.version,
             input_type: 'text',
-            callback: game_settings.version === 'test' ? () => {} : value => changeSettings({
+            callback: game_settings.version === 'test' ? () => { } : value => changeSettings({
                 settings_of: 'game_settings',
                 key: 'version',
                 key2: null,
@@ -72,8 +38,8 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
             label: 'Practice:',
             show: true,
             options: [
-                {label: 'Yes', value: 'Yes'},
-                {label: 'No', value: 'No'},
+                { label: 'Yes', value: 'Yes' },
+                { label: 'No', value: 'No' },
             ],
             value: game_settings.general.w_p,
             callback: value => changeSettings({
@@ -186,7 +152,7 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
             input_type: 'number',
             step: 0.1,
             min: 0,
-            // label_after: `${game_settings.payments.sign_of_reward}1=${game_settings.payments.exchange_ratio} ${game_settings.payments.exchange_ratio !== 1 ? 'points' : 'point'}         1 point=${game_settings.payments.sign_of_reward}${game_settings.payments.exchange_ratio === 0 ? 0 : 1/game_settings.payments.exchange_ratio}`,
+            // label_after: `${game_settings.payments.sign_of_reward}1=${game_settings.payments.exchange_ratio} ${game_settings.payments.exchange_ratio !== 1 ? 'points' : 'point'}         1 point=${game_settings.payments.sign_of_reward}${game_settings.payments.exchange_ratio === 0 ? 0 : 1 / game_settings.payments.exchange_ratio}`,
             label_after: convertPointsRatio(game_settings.payments.sign_of_reward, game_settings.payments.exchange_ratio),
             callback: value => changeSettings({
                 settings_of: 'game_settings',
@@ -260,8 +226,27 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                 key2: 'cond',
                 value,
             })
+        },
+        {
+            type: 'Input',
+            label: 'Num of Real Rounds:',
+            show: true,
+            class_name: '',
+            value: game_settings.game.num_of_real_rounds,
+            input_type: 'number',
+            step: 1,
+            min: 1,
+            max: 40,
+            disabled: game_settings.game.cond === 'o',
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'num_of_real_rounds',
+                value,
+            })
         }
-    ]
+    ];
+
     return (
         <>
             <DivContainer
@@ -301,12 +286,12 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                     className='admin-settings-section-raw admin-settings-section-b'
                     elements={payments}
                 />
-                
             </DivContainer>
+
             <DivContainer
                 className='admin-settings-section admin-settings-section-raw'
             >
-            <DivContainer
+                <DivContainer
                     className='admin-settings-section-col admin-settings-section-h'
                     elements={[{
                         type: 'Label',
@@ -318,14 +303,9 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                     className='admin-settings-section-raw admin-settings-section-b'
                     elements={game_elements}
                 />
-                </DivContainer>
-
-
-
-
-
+            </DivContainer>
         </>
-    )
+    );
 };
 
 Settings.propTypes = {
@@ -338,4 +318,3 @@ Settings.propTypes = {
 };
 
 export default Settings;
-

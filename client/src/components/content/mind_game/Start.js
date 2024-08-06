@@ -17,7 +17,7 @@ let PaymentsSettings;
 let GameCondition = null;
 let numOfRounds = 1;
 let TotalBonus = [];
-let NUM_OF_REPEATED_REAL_ROUNDS = 5;
+let NUM_OF_REPEATED_REAL_ROUNDS = 0;
 let NUM_OF_PRACTICE_ROUNDS=3;
 let NUM_OF_INTRODUCTION_STEPS=3;
 let finish_step=0;
@@ -26,9 +26,9 @@ let DebugMode = null;
 const Start = (props) => {
   let RunCounter = KeyTableID();
   DebugMode = props.dmr;
-
- PaymentsSettings = props.game_settings.payments;
- let cond = props.game_settings.game.cond;
+  PaymentsSettings = props.game_settings.payments;
+  NUM_OF_REPEATED_REAL_ROUNDS = props.game_settings.game.num_of_real_rounds;
+  let cond = props.game_settings.game.cond;
 
   if (cond === 'o') {
     GameCondition = 'OneShot';
