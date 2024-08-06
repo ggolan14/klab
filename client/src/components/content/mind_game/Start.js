@@ -59,11 +59,15 @@ const Start = (props) => {
   const [step, setStep] = useState(1); // Track current step of the game
   const [userAnswers, setUserAnswers] = useState({}); // Track current step of the game
   const [hidePracticeIsOver, sethidePracticeIsOver] = useState(false); // Track current step of the game
-  const handleNext = () => {
-    console.log("---> in Start.handleNext() step="+step)
+  
+  const handleNext = (dieOutcom) => {
+    console.log("---> in Start.handleNext() step="+step+"   dieOutcom = "+dieOutcom)
     const db_row = {
-      RoundNumber: step,  // total 
+      RoundNumber: (step>2 && step<6) ? 0 : (step-2),  // total 
       Answer: answers[step],
+      Game: "MindGame",
+      Condition: GameCondition,
+      DieOutcome: dieOutcom,
     };
     if(step>2){
       insertGameLine(db_row);
