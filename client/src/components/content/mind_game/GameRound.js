@@ -1,127 +1,90 @@
 import React, { useState } from 'react';
-import sendGameResult from './sendGameResult';
+import './style.css';
 
-const GameRound = ({ isPractice,onAdd, onNext, signOfReward }) => {
-  const [step, setStep] = useState(0);
-  const [diceRoll, setDiceRoll] = useState(null);
-  const [rolling, setRolling] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [phase1, setPhase1] = useState(true);
-  const [phase2, setPhase2] = useState(false);
-  const [phase3, setPhase3] = useState(false);
-  const [practiceNewRound, setPracticeNewRound] = useState(false);
-  const [diceVisible, setDiceVisible] = useState(false); // New state for dice visibility
-  const [finalTransform, setFinalTransform] = useState(''); // New state for final transform
-  const userId = 'user123'; // Example user ID, replace with actual user ID
+const GameRound = ({ onShowConfirmation }) => {
+  console.log("===> component loaded");
+  const [diceClass, setDiceClass] = useState('');
+  const [diceTransform, setDiceTransform] = useState('');
+  const [random, setRandom] = useState(1);
+  const [renderKey, setRenderKey] = useState(0); // State to trigger re-rendering
+  const [showButton, setShowButton] = useState(true);
+  const [doneText, setDoneText] = useState(''); // New state to control "Done" text
 
-  const handleNext = () => {
-    if (practiceNewRound) {
-        
-      setPhase1(true);
-      setPhase2(false);
-      setPhase3(false);
-    } else if (phase1) {
-        setDiceVisible(false)
-      setPhase1(false);
-      setPhase2(true);
-      setPhase3(false);
-    } else if (phase2) {
-      setPhase1(false);
-      setPhase2(false);
-      setPhase3(true);
-    } else if (phase3) {
-      setPhase1(true);
-      setPhase2(false);
-      setPhase3(false);
-    }
-    setStep(step + 1);
+  const getRandomDiceValue = () => {
+    let tmpRand = Math.floor(Math.random() * 6) + 1;
+    console.log("++++++> in getRandomDiceValue  tmpRand=" + tmpRand);
+    return tmpRand;
   };
 
-  const getTransformForFace = (face) => {
-    console.log("=========>  face="+face)
-    switch (face) {
-      case 1:
-        return 'rotateX(0deg) rotateY(0deg)';
-      case 2:
-        return 'rotateX(360deg) rotateY(270deg)';
-      case 3:
-        return 'rotateX(0deg) rotateY(180deg)';
-      case 4:
-        return 'rotateX(0deg) rotateY(90deg)';
-      case 5:
-        return 'rotateX(270deg) rotateY(360deg)';
-      case 6:
-        return 'rotateX(90deg) rotateY(360deg)';
-      default:
-        return 'rotateX(0deg) rotateY(0deg)';
-    }
+  const randomDice = () => {
+    console.log("===> in randomDice");
+    const random = getRandomDiceValue();
+    rollDice(random);
+    setRenderKey(prevKey => prevKey + 1); // Increment the key to trigger re-rendering
   };
 
-  const rollDice = () => {
-    setRolling(true);
-    setDiceVisible(true); // Set dice visibility to true when rolling starts
+  const rollDice = (random) => {
+    console.log("===> in roll dice 111 random=" + random);
+    setDiceClass('rolling');
+    console.log("===> in roll dice 222");
     setTimeout(() => {
-      const rollResult = Math.floor(Math.random() * 6) + 1;
-      //const rollResult = 2;
-      console.log("---> rollResult=" + rollResult);
-      setDiceRoll(rollResult);
-      setFinalTransform(getTransformForFace(rollResult)); // Set final transform based on roll result
-      setRolling(false);
-      setShowResult(true);
-    }, 3000); // Show result after animation
+      console.log("===> in roll dice 333");
+      let transform;
+      switch (random) {
+        case 1:
+          transform = 'rotateX(0deg) rotateY(0deg)';
+          break;
+        case 6:
+          transform = 'rotateX(180deg) rotateY(0deg)';
+          break;
+        case 2:
+          transform = 'rotateX(-90deg) rotateY(0deg)';
+          break;
+        case 5:
+          transform = 'rotateX(90deg) rotateY(0deg)';
+          break;
+        case 3:
+          transform = 'rotateX(0deg) rotateY(90deg)';
+          break;
+        case 4:
+          transform = 'rotateX(0deg) rotateY(-90deg)';
+          break;
+        default:
+          break;
+      }
+      console.log("===> in roll dice 444");
+      setDiceTransform(transform);
+      console.log("===> in roll dice 555");
+      setDiceClass('');
+      console.log("===> in roll dice 666");
+      setShowButton(false); // Hide the button after the dice roll
+      setDoneText(random); // Set the text to "Done"
+      //onShowConfirmation(random); // Call the confirmation function
+    }, 500);
   };
 
-  const handleAnswer = (answer) => {
-    console.log(`User answered: ${answer}`);
-    setShowResult(false);
-    setDiceRoll(null);
-    setPhase1(true);
-    setPhase2(false);
-    setPhase3(false);
-    onAdd(answer);
-    onNext(); // Proceed to the next round
-  };
+  console.log("===> component loaded with diceClass=" + diceClass + "   diceTransform=" + diceTransform + "  showButton=" + showButton);
 
   return (
-    <div className="dice-roll-container">
-      {isPractice && (
-        <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>
-      )}
-      {phase1 && (
-        <>
-          <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
-          <button onClick={handleNext}>Next</button>
-        </>
-      )}
-      {phase2 && (
-        <>
-          {!rolling && !showResult && (
-            <div>
-              <button onClick={rollDice}>Roll the dice</button>
-            </div>
-          )}
-          {diceVisible && (
-            <div className="dice-roll-animation">
-              <div className="dice" style={{ transform: rolling ? '' : finalTransform, animation: rolling ? 'roll 4s ease-in-out forwards' : 'none' }}>
-                <div className="dice-face face-1">1</div>
-                <div className="dice-face face-2">2</div>
-                <div className="dice-face face-3">3</div>
-                <div className="dice-face face-4">4</div>
-                <div className="dice-face face-5">5</div>
-                <div className="dice-face face-6">6</div>
-              </div>
-            </div>
-          )}
-          {showResult && (
-            <div>
-              <p>Is this the number you had in mind? {diceRoll}</p>
-              <button onClick={() => handleAnswer('Yes')}>Yes</button>
-              <button onClick={() => handleAnswer('No')}>No</button>
-              <br />
-              <label>Note: you will receive a {signOfReward}1 bonus only if you report "Yes"</label>
-            </div>
-          )}
-        </>
+    <div className="container">
+      <div className={`dice ${diceClass}`} style={{ transform: diceTransform }} key={renderKey}>
+        <div className="face front"></div>
+        <div className="face back"></div>
+        <div className="face top"></div>
+        <div className="face bottom"></div>
+        <div className="face right"></div>
+        <div className="face left"></div>
+      </div>
+      {showButton ? (
+        <div>
+          <button className="roll" onClick={randomDice}>
+            <h2>Roll Dice</h2>
+          </button>
+        </div>
+      ) : (
+        <div>
+          <h2>{doneText}</h2>
+        </div>
       )}
     </div>
   );

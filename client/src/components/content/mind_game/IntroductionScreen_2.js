@@ -6,7 +6,7 @@ const IntroductionScreen_2 = ({onNext, signOfReward }) => {
   return (
     <div className="introduction">
       <p>
-      <h2>Welcome to the Mind game!</h2>
+      <h2>Welcome to the Mind game2222!</h2>
         <br></br>
         In this game, you will be asked to think of a number between 1 and 6 and keep it in your mind.
         Then you will roll a virtual die.

@@ -1082,8 +1082,9 @@ const DebuggerSize = {
     height: 0
 }
 
-export const DebuggerWindows = ({ children }) => {
-    const DebuggerRef = useRef(null);
+const DebuggerWindows = () => {
+    DebuggerRef = useRef(null);
+
     const [show, setShow] = useState(true);
 
     useEffect(() => {
@@ -1098,16 +1099,18 @@ export const DebuggerWindows = ({ children }) => {
             DebuggerSize.width = w;
             DebuggerSize.height = h;
             DebuggerRefDown = false;
+            // const event = new CustomEvent('resize', { detail: { width: w, height: h } });
+            // el.dispatchEvent(event);
         }
         const observer = new MutationObserver(checkResize);
         observer.observe(element, { attributes: true, attributeOldValue: true, attributeFilter: ['style'] });
     }, []);
-    console.log("----------------------> DebuggerWindow")
+
     return (
-        
         <div
             onDoubleClick={() => setShow(!show)}
             className='debugger-mode unselectable'
+            // ref={DebuggerRef}
             ref={DebuggerRef}
             onMouseUp={() => DebuggerRefDown = false}
             onMouseDown={e => {
@@ -1120,16 +1123,21 @@ export const DebuggerWindows = ({ children }) => {
                 DebuggerRefDown = true;
             }}
         >
-            <label className='debugger-mode-header unselectable'>Move2</label>
-            <div className={'unselectable ' + (show ? '' : 'hide-elem')} id='debugger-mode-body'>
-                {children}
+            <label
+                className='debugger-mode-header unselectable'
+                // onMouseUp={() => DebuggerRefDown = false}
+            >
+                Move
+            </label>
+
+            <div
+                className={'unselectable ' + (show ? '' : 'hide-elem')}
+                id='debugger-mode-body'
+            >
             </div>
         </div>
-    );
+    )
 }
-
-
-
 
 class GameHandle extends React.Component {
 
@@ -1755,7 +1763,7 @@ class GameHandle extends React.Component {
                         }
 
                         {
-                           // this.state.debuggerModeRunning && <DebuggerWindows/>
+                            this.state.debuggerModeRunning && <DebuggerWindows/>
                         }
                     </>
                 )
