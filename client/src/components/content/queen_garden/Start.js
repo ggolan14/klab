@@ -332,6 +332,7 @@ class Start extends React.Component {
         console.log("---> in calculateBonus()  total_bonus="+total_bonus+"  exchange_ratio="+exchange_ratio)
         return total_bonus;
      }
+     /*
     addGameBonus(game_data){
         console.log("-------------> in addGameBonus");
         var selectedTrial= Math.floor(Math.random() * game_data.length);
@@ -339,6 +340,29 @@ class Start extends React.Component {
         console.log("---> game_data.length="+game_data.length + "   selectedTrial="+(selectedTrial+1)+"   selectedTrailPoints="+selectedTrailPoints)
         this.TotalBonus.push(selectedTrailPoints);
         }
+        */
+        addGameBonus(game_data) {
+            let selectedTrial;
+            let selectedTrailPoints;
+            const maxAttempts = 100; // Maximum number of attempts
+            let attempts = 0;
+            
+            do {
+                selectedTrial = Math.floor(Math.random() * game_data.length);
+                selectedTrailPoints = game_data[selectedTrial].TrialPoints;
+                console.log("-------------> selectedTrial="+selectedTrial+"   selectedTrailPoints="+selectedTrailPoints+"  attempts="+(attempts+1))
+                attempts++;
+                
+                // Break the loop if max attempts are reached
+                if (attempts >= maxAttempts) {
+                    console.error("Unable to find a valid TrialPoints value");
+                    return; // Or handle it as needed
+                }
+            } while (isNaN(selectedTrailPoints));
+            
+            this.TotalBonus.push(selectedTrailPoints);
+        }
+    
     handleOkButtonClick = () => {
             // Update state to hide the welcome message
             this.setState({ showWelcomeMessage: false });

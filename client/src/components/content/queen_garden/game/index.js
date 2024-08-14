@@ -81,7 +81,7 @@ class QueenGardenGame extends React.Component {
       let busted = FROM_ROAD === 'queen';
       
       let needToPay = false;
-      if(sc.wagon_place != "base"){
+      if(sc.wagon_place != "base" && sc.wagon_place != "queen"){
         needToPay = sc.last_road != sc.wagon_place;
       }
       
@@ -104,11 +104,13 @@ class QueenGardenGame extends React.Component {
         }
       }
       else {
+        
         Pay = this.level_settings.TollCost;
         if(needToPay){
           Pay = Pay + ClearingCost;
         }
         Reward = this.level_settings.RewardValue;
+        console.log("---> FROM_ROAD="+FROM_ROAD+"  needToPay="+needToPay+"  Pay="+Pay+"   ClearingCost=+"+ClearingCost+"   Reward="+Reward)
       }
 
       const w_p = busted? 'castle_toll_' : 'castle_full_';
