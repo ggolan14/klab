@@ -1,3 +1,4 @@
+//in this code i would like that the yes and no buttons will be one next to each other and not one above each other.  currently the buttons are one above each other.  i guess it is related to the "trivia-container" class .  the only css file that is imported is './gameStyles.css'   but in this file there is no trivia-container class.  how can i fix it?   these are my Start and component and gameStyles.css  
 import React, { Component } from 'react';
 import './gameStyles.css';
 import { getTimeDate } from "../../../utils/app_utils";
@@ -71,7 +72,7 @@ class Start extends Component {
       showConfirmation: false,
       correctAnswer: null,
       showResult: false,
-      showDice: true,
+      showDice: false,
       yesClickCount: 0,
       noClickCount: 0,
       practiceMode: true,
@@ -83,6 +84,14 @@ class Start extends Component {
       showWelcomeToFoodPreference: false,
       userAnswers: {},
       diceOutcome: 0,
+      diceClass: '',
+      diceTransform: '',
+      random: 1,
+      renderKey: 0, // State to trigger re-rendering
+      showButton: true,
+      newRound: false,
+      doneText: '' // State to control "Done" text
+
 
     };
   }
@@ -131,6 +140,7 @@ class Start extends Component {
       currentRoundIndex: Math.min(prevState.currentRoundIndex + 1, lastIndex),
       showDice: false,
       showConfirmation: true,
+      newRound: true,
     }));
   };
 
@@ -147,6 +157,7 @@ class Start extends Component {
           isLast: true,
           showConfirmation: false,
           showDice: false,
+          showButton: true,
         }), () => {
 
         });
@@ -157,8 +168,10 @@ class Start extends Component {
         this.setState(prevState => (
         {
           showResult: false,
+          newRound:true,
+          showButton: true,
           yesClickCount: currentRoundIndex > (NUM_OF_PRACTICE_ROUNDS - 1) ? prevState.yesClickCount + 1 : prevState.yesClickCount,
-          showDice: currentRoundIndex != lastIndex,
+          showDice: false,
           showConfirmation: false,
         }), () => {
           const db_row = {
@@ -183,8 +196,10 @@ class Start extends Component {
       startShowRoundTimer = getTimeDate().now;
       this.setState(prevState => ({
         showResult: false,
+        newRound:true,
+        showButton: true,
         noClickCount: prevState.noClickCount + 1,
-        showDice: currentRoundIndex != lastIndex,
+        showDice: false,
         showConfirmation: false,
       }), () => {
         const db_row = {
@@ -280,7 +295,7 @@ class Start extends Component {
 
   addGameBonus = (game_data) => {
    // const keys = Object.keys(answers);
-   // keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${answers[key]}`); });
+   // keys.forEach(key => { console.log(keys Key: ${key}, Value: ${answers[key]}); });
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
     const randomSelectedRound = 2;
@@ -297,21 +312,85 @@ class Start extends Component {
     };
   };
 
+
+  getRandomDiceValue = () => {
+    let tmpRand = Math.floor(Math.random() * 6) + 1;
+    console.log("++++++> in getRandomDiceValue  tmpRand=" + tmpRand);
+    return tmpRand;
+  };
+
+  randomDice = () => {
+    console.log("===> in randomDice");
+    this.random = this.getRandomDiceValue();
+    this.rollDice(this.random);
+    this.setState((prevState) => ({
+      renderKey: prevState.renderKey + 1, // Increment the key to trigger re-rendering
+    }));
+  };
+
+  rollDice = (random) => {
+    console.log("===> in roll dice 111 random=" + random);
+    this.setState({ diceClass: 'rolling' });
+    console.log("===> in roll dice 222");
+    setTimeout(() => {
+      console.log("===> in roll dice 333");
+      let transform;
+      switch (random) {
+        case 1:
+          transform = 'rotateX(0deg) rotateY(0deg)';
+          break;
+        case 6:
+          transform = 'rotateX(180deg) rotateY(0deg)';
+          break;
+        case 2:
+          transform = 'rotateX(-90deg) rotateY(0deg)';
+          break;
+        case 5:
+          transform = 'rotateX(90deg) rotateY(0deg)';
+          break;
+        case 3:
+          transform = 'rotateX(0deg) rotateY(90deg)';
+          break;
+        case 4:
+          transform = 'rotateX(0deg) rotateY(-90deg)';
+          break;
+        default:
+          break;
+      }
+      console.log("===> in roll dice 444");
+      this.setState({
+        diceTransform: transform,
+        diceClass: '',
+        showButton: false, // Hide the button after the dice roll
+        doneText: random, // Set the text to "Done"
+        showConfirmation:true,
+      });
+      //this.props.onShowConfirmation(random); // Call the confirmation function
+      console.log("===> in roll dice 666");
+    }, 500);
+  };
+
+
+
   render() {
     const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToFoodPreference,
       showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
-      hideMessages, practiceIsOver } = this.state;
-      console.log("----> showConfirmation="+showConfirmation+"  currentRoundIndex="+currentRoundIndex)
-    //let questions = trivia_questions;
-    //const question = questions[currentRoundIndex];
-    //const { answers } = question;
+      hideMessages, practiceIsOver,showButton,doneText,diceClass,diceTransform,newRound } = this.state;
+      console.log("111 ---> showConfirmation="+showConfirmation+"  currentRoundIndex="+currentRoundIndex+"   newRound="+newRound+"  showButton="+showButton)
+      console.log("222 ---> currentRoundIndex="+currentRoundIndex+"  hideMessages="+hideMessages+"  showDice="+showDice+"  showConfirmation="+showConfirmation+"   NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"  showButton="+showButton+"  newRound="+newRound)
+      if(!hideMessages){
+        return(
+          <MindGameIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} />
+        )
+      }
 
-    // Declare a variable to hold the JSX for FoodPreference
+     // Declare a variable to hold the JSX for FoodPreference
     let foodPreferenceComponent = null;
     // Check if currentRoundIndex is equal to 3
-    const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS;
-    const repeatedLast = GameCondition == "Repeated" && !showConfirmation && currentRoundIndex === NUM_OF_REPEATED_REAL_ROUNDS - 1;;
-    if (oneShotLast || repeatedLast) {
+    const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS+1;
+    const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex==NUM_OF_PRACTICE_ROUNDS+NUM_OF_REPEATED_REAL_ROUNDS) ;
+    console.log("---------> oneShotLast="+oneShotLast+"    repeatedLast="+repeatedLast+"  hideMindGameCompleted="+hideMindGameCompleted+"   lastIndex="+lastIndex+"  NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"   NUM_OF_REPEATED_REAL_ROUNDS="+NUM_OF_REPEATED_REAL_ROUNDS)
+    if ((oneShotLast || repeatedLast) && (currentRoundIndex != NUM_OF_PRACTICE_ROUNDS)) {
       if (!hideMindGameCompleted) {
         return (
           <div className="practice-is-over">
@@ -355,7 +434,118 @@ class Start extends Component {
       return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
 
     }
-    if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS - 1 && !practiceIsOver && !showConfirmation) {
+      
+      if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS  && !practiceIsOver && !showConfirmation) {
+        return (
+          <div className="practice-is-over">
+            <h3>Practice is Over</h3>
+            <p>
+              You will now play the mind game for real bonus.<br></br>
+              You will play one round of the mind game.<br></br>
+              Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
+            </p>
+            <button onClick={this.handleHidePracticeIsOver}>Next</button>
+          </div>
+        )
+      }
+      if (GameCondition == "Repeated" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS  && !practiceIsOver && !showConfirmation) {
+        return (
+          <div className="practice-is-over">
+            <h3>Practice is Over</h3>
+            <p>
+              You will now play the mind game for real bonus.<br></br>
+              You will play 40 rounds of the mind game.<br></br>
+              Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a £1 bonus!
+            </p>
+            <button onClick={this.handleHidePracticeIsOver}>Next</button>
+          </div>
+        )
+      }
+  
+      if(!showDice && !showConfirmation){
+      return(
+        
+        <div className="trivia-container">
+             <DebuggerModalView>
+              <p>Current Question Index: {currentRoundIndex + 1}</p>
+              <p>Game mode: {gameCondition}</p>
+              <p>Is in practice: {practiceMode == true ? "Yes" : "No"}</p>
+              <p>Num of YES clicks: {yesClickCount}</p>
+              <p>Num of NO clicks: {noClickCount}</p>
+            </DebuggerModalView>
+         <div >
+                {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
+                <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
+                <p>
+                
+                <button onClick={this.handleNext}>Next</button>
+                </p>
+                              
+              </div> 
+        </div>
+      )
+     }
+      if(newRound){
+        return (
+          
+          <div className="trivia-container">
+          <div className={`dice ${diceClass}`} style={{ transform: diceTransform }} key={0}>
+            <div className="face front"></div>
+            <div className="face back"></div>
+            <div className="face top"></div>
+            <div className="face bottom"></div>
+            <div className="face right"></div>
+            <div className="face left"></div>
+          </div>
+          {showButton ? (
+              <div>
+                <button className="roll" onClick={this.randomDice}>
+                  <h2>Roll Dice</h2>
+                </button>
+              </div>
+            ) : (
+              <div className="trivia-container">
+                 {showConfirmation && (
+                  <>
+                    {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
+                    <p>Is this the number that you had in mind?</p>
+
+                    {yesButtonInRight ?
+                      (<>
+                        <button onClick={() => this.handleConfirmation(false)}>No</button>
+                        <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                      </>
+                      ) : (
+                        <>
+                          <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                          <button onClick={() => this.handleConfirmation(false)}>No</button>
+                        </>
+                      )}
+
+                    {GameCondition == "OneShot" ?
+                      (<>
+                        <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
+                      </>
+                      ) : (
+                        <>
+                          <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
+                        </>
+                      )}
+                  </>
+                )}
+              </div>
+            )}
+        </div>
+        )
+          
+        
+      }
+    //let questions = trivia_questions;
+    //const question = questions[currentRoundIndex];
+    //const { answers } = question;
+
+    
+    if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
       return (
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
@@ -382,7 +572,9 @@ class Start extends Component {
       )
     }
 
+console.log("---> currentRoundIndex="+currentRoundIndex+"  hideMessages="+hideMessages+"  showDice="+showDice+"  showConfirmation="+showConfirmation+"   NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"  showButton="+showButton+"  newRound="+newRound)
     return (
+      
       <div className="trivia-container">
         {foodPreferenceComponent}
 
@@ -397,13 +589,14 @@ class Start extends Component {
               <p>Num of YES clicks: {yesClickCount}</p>
               <p>Num of NO clicks: {noClickCount}</p>
             </DebuggerModalView>
+            
             {(showDice && !showConfirmation) ? (
               <div>
-                {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
+                {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>444This is a practice round</span>}
                 <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
                 <p>
-                <GameRound onShowConfirmation={(diceOutcome) => this.handleShowConfirmation(diceOutcome)}/>
-                <button onClick={this.handleNext}>I have an answer in my mind</button>
+                
+                <button onClick={this.handleNext}>Next</button>
                 </p>
                               
               </div>
@@ -411,9 +604,8 @@ class Start extends Component {
               <div>
                 {showConfirmation && (
                   <>
-                    {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
-                    <p>Dice Number is: {result}</p>
-                    <p>Is this the number that you had in mind?</p>
+                    {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>555This is a practice round</span>}
+
 
                     {yesButtonInRight ?
                       (<>

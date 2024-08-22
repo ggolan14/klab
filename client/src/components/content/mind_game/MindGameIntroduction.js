@@ -68,7 +68,7 @@ class MindGameIntroduction extends Component {
     const { messages, currentIndex } = this.state;
 
     return (
-      <div className="introduction">
+      <div className="trivia-container">
         
         {/* Display the current message */}
         <p>{messages[currentIndex]}</p>
