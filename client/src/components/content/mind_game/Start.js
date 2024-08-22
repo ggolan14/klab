@@ -179,12 +179,12 @@ class Start extends Component {
         }), () => {
           const db_row = {
             RoundIndex: currentRoundIndex,  // total 
-            RoundType: currentRoundIndex < NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
+            RoundType: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
             Answer: 1,
             TotalYesAnswers: this.state.yesClickCount,
             TotalNoAnswers: this.state.noClickCount,
             GameCondition: GameCondition,
-            HaveAnAnswerTime: totalShowRoundTime,
+            IsThisTheNumber: totalShowRoundTime,
             ConfirmationTime: totalShowConfirmationTime,
           };
 
@@ -207,12 +207,12 @@ class Start extends Component {
       }), () => {
         const db_row = {
           RoundIndex: currentRoundIndex,
-          RoundType: currentRoundIndex < NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
+          RoundType: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
           Answer: 0,
           TotalYesAnswers: this.state.yesClickCount,
           TotalNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
-          HaveAnAnswerTime: totalShowRoundTime,
+          IsThisTheNumber: totalShowRoundTime,
           ConfirmationTime: totalShowConfirmationTime,
 
         };
