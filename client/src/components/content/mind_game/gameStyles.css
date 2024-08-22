@@ -81,3 +81,14 @@
     width: 1300px;
     margin: 0 auto;
   }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adds space between the buttons */
+  }
+  
+  .button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }

@@ -25,6 +25,8 @@ let endShowConfirmationTimer = 0;
 let totalShowRoundTime = 0;
 let totalShowConfirmationTime = 0;
 let result=0;
+let isStatic = true;
+let transform;
 const yesButtonInRight = Math.random() < 0.5;
 
 
@@ -147,6 +149,7 @@ class Start extends Component {
 
   handleConfirmation = (confirmed) => {
     const { currentRoundIndex, showConfirmation, showDice, gameCondition, hideMessages } = this.state;
+    isStatic = true;
     endShowConfirmationTimer = getTimeDate().now;
     totalShowConfirmationTime = endShowConfirmationTimer - startShowConfirmationTimer;
 
@@ -294,14 +297,17 @@ class Start extends Component {
   }
 
   addGameBonus = (game_data) => {
-   // const keys = Object.keys(answers);
-   // keys.forEach(key => { console.log(keys Key: ${key}, Value: ${answers[key]}); });
+    const {userAnswers} = this.state;
+    const keys = Object.keys(userAnswers);
+    keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${userAnswers[key]}`); });
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
-    const randomSelectedRound = 2;
-    const randomSelectedRoundValue = 999;
+    //const randomSelectedRound = 2;
+    //const randomSelectedRoundValue = 999;
+    const randomSelectedRound = keys[randomIndex - 1];
+    const randomSelectedRoundValue = userAnswers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
-    // console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
+     console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
     // Example TotalBonus array, make sure it is defined in your component
     const TotalBonus = [];
     TotalBonus.push(selectedRoundPoints);
@@ -321,21 +327,25 @@ class Start extends Component {
 
   randomDice = () => {
     console.log("===> in randomDice");
-    this.random = this.getRandomDiceValue();
+    isStatic = false;
+    this.random = isStatic ? -1 : this.getRandomDiceValue();
     this.rollDice(this.random);
-    this.setState((prevState) => ({
-      renderKey: prevState.renderKey + 1, // Increment the key to trigger re-rendering
-    }));
+    //this.setState((prevState) => ({
+     // renderKey: prevState.renderKey + 1, // Increment the key to trigger re-rendering
+    //}));
   };
 
   rollDice = (random) => {
     console.log("===> in roll dice 111 random=" + random);
-    this.setState({ diceClass: 'rolling' });
+    //this.setState({ diceClass: 'rolling' });
     console.log("===> in roll dice 222");
     setTimeout(() => {
       console.log("===> in roll dice 333");
-      let transform;
+      
       switch (random) {
+        case-1:
+          transform = 'rotateX(0deg) rotateY(-45deg)';
+          break;
         case 1:
           transform = 'rotateX(0deg) rotateY(0deg)';
           break;
@@ -354,10 +364,13 @@ class Start extends Component {
         case 4:
           transform = 'rotateX(0deg) rotateY(-90deg)';
           break;
+        case 7:
+          transform = 'rotateX(0deg) rotateY(-45deg)';
+          break;
         default:
           break;
       }
-      console.log("===> in roll dice 444");
+      console.log("===> in roll dice 444  transform="+transform);
       this.setState({
         diceTransform: transform,
         diceClass: '',
@@ -367,7 +380,7 @@ class Start extends Component {
       });
       //this.props.onShowConfirmation(random); // Call the confirmation function
       console.log("===> in roll dice 666");
-    }, 500);
+    }, 50);
   };
 
 
@@ -376,7 +389,7 @@ class Start extends Component {
     const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToFoodPreference,
       showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
       hideMessages, practiceIsOver,showButton,doneText,diceClass,diceTransform,newRound } = this.state;
-      console.log("111 ---> showConfirmation="+showConfirmation+"  currentRoundIndex="+currentRoundIndex+"   newRound="+newRound+"  showButton="+showButton)
+      console.log("111 ---> transform="+transform+"   isStatic="+isStatic+"  showConfirmation="+showConfirmation+"  currentRoundIndex="+currentRoundIndex+"   newRound="+newRound+"  showButton="+showButton)
       console.log("222 ---> currentRoundIndex="+currentRoundIndex+"  hideMessages="+hideMessages+"  showDice="+showDice+"  showConfirmation="+showConfirmation+"   NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"  showButton="+showButton+"  newRound="+newRound)
       if(!hideMessages){
         return(
@@ -390,6 +403,7 @@ class Start extends Component {
     const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS+1;
     const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex==NUM_OF_PRACTICE_ROUNDS+NUM_OF_REPEATED_REAL_ROUNDS) ;
     console.log("---------> oneShotLast="+oneShotLast+"    repeatedLast="+repeatedLast+"  hideMindGameCompleted="+hideMindGameCompleted+"   lastIndex="+lastIndex+"  NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"   NUM_OF_REPEATED_REAL_ROUNDS="+NUM_OF_REPEATED_REAL_ROUNDS)
+    
     if ((oneShotLast || repeatedLast) && (currentRoundIndex != NUM_OF_PRACTICE_ROUNDS)) {
       if (!hideMindGameCompleted) {
         return (
@@ -486,10 +500,11 @@ class Start extends Component {
       )
      }
       if(newRound){
+        let staticTransform="rotateX(45deg) rotateY(-45deg)"
+        let guy = !isStatic ? diceTransform : staticTransform
         return (
-          
           <div className="trivia-container">
-          <div className={`dice ${diceClass}`} style={{ transform: diceTransform }} key={0}>
+          <div className={`dice ${diceClass}`} style={{ transform: guy }} key={0}>
             <div className="face front"></div>
             <div className="face back"></div>
             <div className="face top"></div>
@@ -499,7 +514,7 @@ class Start extends Component {
           </div>
           {showButton ? (
               <div>
-                <button className="roll" onClick={this.randomDice}>
+                <button className="roll" onClick={() => this.randomDice(isStatic)}>
                   <h2>Roll Dice</h2>
                 </button>
               </div>
@@ -510,17 +525,19 @@ class Start extends Component {
                     {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
                     <p>Is this the number that you had in mind?</p>
 
-                    {yesButtonInRight ?
-                      (<>
+                    <div className="button-container">
+                      {yesButtonInRight ? (
+                        <>
                         <button onClick={() => this.handleConfirmation(false)}>No</button>
                         <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                      </>
-                      ) : (
+                        </>
+                    ) : (
                         <>
                           <button onClick={() => this.handleConfirmation(true)}>Yes</button>
                           <button onClick={() => this.handleConfirmation(false)}>No</button>
                         </>
-                      )}
+                  )}
+              </div>
 
                     {GameCondition == "OneShot" ?
                       (<>
