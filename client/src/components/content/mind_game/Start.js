@@ -503,10 +503,10 @@ class Start extends Component {
     }
     if (newRound) {
       let staticTransform = "rotateX(45deg) rotateY(-45deg)"
-      let guy = !isStatic ? diceTransform : staticTransform
+      let tmpDiceTransform = !isStatic ? diceTransform : staticTransform
       return (
         <div className="trivia-container">
-          <div className={`dice ${diceClass}`} style={{ transform: guy }} key={0}>
+          <div className={`dice ${diceClass}`} style={{ transform: tmpDiceTransform  }} key={0}>
             <div className="face front"></div>
             <div className="face back"></div>
             <div className="face top"></div>
