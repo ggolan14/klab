@@ -15,8 +15,8 @@ let UserId = 'empty';
 let RunningName = '-';
 let GameCondition = null;
 let NUM_OF_REPEATED_REAL_ROUNDS = 0;
-let NUM_OF_PRACTICE_ROUNDS=3;
-let NUM_OF_INTRODUCTION_STEPS=3;
+let NUM_OF_PRACTICE_ROUNDS = 3;
+let NUM_OF_INTRODUCTION_STEPS = 3;
 let lastIndex;
 let startShowRoundTimer = 0;
 let endShowRoundTimer = 0;
@@ -24,7 +24,7 @@ let startShowConfirmationTimer = 0;
 let endShowConfirmationTimer = 0;
 let totalShowRoundTime = 0;
 let totalShowConfirmationTime = 0;
-let result=0;
+let result = 0;
 let isStatic = true;
 let transform;
 const yesButtonInRight = Math.random() < 0.5;
@@ -58,15 +58,14 @@ class Start extends Component {
     }
     else if (cond === 'u_d') {
       // GameCondition = 'Uniform distribution';
-      if (RunCounter % 2){
+      if (RunCounter % 2) {
         GameCondition = 'OneShot';
       }
-      else
-      {
+      else {
         GameCondition = 'Repeated';
       }
     }
-    lastIndex = GameCondition=='OneShot' ? NUM_OF_PRACTICE_ROUNDS+NUM_OF_INTRODUCTION_STEPS+1 : NUM_OF_PRACTICE_ROUNDS+NUM_OF_INTRODUCTION_STEPS+NUM_OF_REPEATED_REAL_ROUNDS
+    lastIndex = GameCondition == 'OneShot' ? NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + 1 : NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + NUM_OF_REPEATED_REAL_ROUNDS
 
 
     this.state = {
@@ -113,10 +112,10 @@ class Start extends Component {
   }
 
   handleShowConfirmation = (diceOutcome) => {
-    console.log("-----------> in handle show confirmation diceOutcome="+diceOutcome)
+    console.log("-----------> in handle show confirmation diceOutcome=" + diceOutcome)
     result = diceOutcome;
-    this.setState({showConfirmation : true, diceOutcome})
-	}
+    this.setState({ showConfirmation: true, diceOutcome })
+  }
 
   handelHideMindGameCompleted = () => {
     this.setState({ hideMindGameCompleted: true, showWelcomeToFoodPreference: true });
@@ -133,8 +132,8 @@ class Start extends Component {
   handleNext = () => {
     const { currentRoundIndex } = this.state;
     let questions = [];
-   // questions = trivia_questions;
-   // const correctAnswer = questions[currentRoundIndex].answers.find(answer => answer.option === questions[currentRoundIndex].correct_answer).text;
+    // questions = trivia_questions;
+    // const correctAnswer = questions[currentRoundIndex].answers.find(answer => answer.option === questions[currentRoundIndex].correct_answer).text;
     endShowRoundTimer = getTimeDate().now;
     startShowConfirmationTimer = getTimeDate().now;
     totalShowRoundTime = endShowRoundTimer - startShowRoundTimer;
@@ -168,12 +167,12 @@ class Start extends Component {
 
     if (confirmed) {
       startShowRoundTimer = getTimeDate().now;
-        this.setState(prevState => (
+      this.setState(prevState => (
         {
           showResult: false,
-          newRound:true,
+          newRound: true,
           showButton: true,
-          yesClickCount: currentRoundIndex > (NUM_OF_PRACTICE_ROUNDS - 1) ? prevState.yesClickCount + 1 : prevState.yesClickCount,
+          yesClickCount: prevState.yesClickCount + 1,
           showDice: false,
           showConfirmation: false,
         }), () => {
@@ -188,18 +187,18 @@ class Start extends Component {
             ConfirmationTime: totalShowConfirmationTime,
           };
 
-          
+
           this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');
           this.insertGameLine(db_row);
           this.sendDataToDB(false);
-         
+
 
         });
     } else {
       startShowRoundTimer = getTimeDate().now;
       this.setState(prevState => ({
         showResult: false,
-        newRound:true,
+        newRound: true,
         showButton: true,
         noClickCount: prevState.noClickCount + 1,
         showDice: false,
@@ -259,6 +258,7 @@ class Start extends Component {
           var result = this.addGameBonus();
           var total_bonus = result.selectedRoundPoints;
           var randomSelectedRound = result.randomSelectedRound;
+          console.log("---> in sendDataToDB total_bonus="+total_bonus+"   randomSelectedRound="+randomSelectedRound)
 
           this.PaymentsSettings.total_bonus = total_bonus;
           this.PaymentsSettings.randomSelectedRound = randomSelectedRound;
@@ -297,20 +297,22 @@ class Start extends Component {
   }
 
   addGameBonus = (game_data) => {
-    const {userAnswers} = this.state;
+    const { userAnswers } = this.state;
     const keys = Object.keys(userAnswers);
     keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${userAnswers[key]}`); });
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
+    console.log("--->  randomIndex="+randomIndex+"   ")
     //const randomSelectedRound = 2;
     //const randomSelectedRoundValue = 999;
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = userAnswers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
-     console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
+    console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
     // Example TotalBonus array, make sure it is defined in your component
     const TotalBonus = [];
     TotalBonus.push(selectedRoundPoints);
+    console.log("---> in addGameBonus selectedRoundPoints="+selectedRoundPoints+"   randomSelectedRound="+randomSelectedRound)
 
     return {
       selectedRoundPoints: selectedRoundPoints,
@@ -331,7 +333,7 @@ class Start extends Component {
     this.random = isStatic ? -1 : this.getRandomDiceValue();
     this.rollDice(this.random);
     //this.setState((prevState) => ({
-     // renderKey: prevState.renderKey + 1, // Increment the key to trigger re-rendering
+    // renderKey: prevState.renderKey + 1, // Increment the key to trigger re-rendering
     //}));
   };
 
@@ -341,9 +343,9 @@ class Start extends Component {
     console.log("===> in roll dice 222");
     setTimeout(() => {
       console.log("===> in roll dice 333");
-      
+
       switch (random) {
-        case-1:
+        case -1:
           transform = 'rotateX(0deg) rotateY(-45deg)';
           break;
         case 1:
@@ -370,13 +372,13 @@ class Start extends Component {
         default:
           break;
       }
-      console.log("===> in roll dice 444  transform="+transform);
+      console.log("===> in roll dice 444  transform=" + transform);
       this.setState({
         diceTransform: transform,
         diceClass: '',
         showButton: false, // Hide the button after the dice roll
         doneText: random, // Set the text to "Done"
-        showConfirmation:true,
+        showConfirmation: true,
       });
       //this.props.onShowConfirmation(random); // Call the confirmation function
       console.log("===> in roll dice 666");
@@ -388,22 +390,22 @@ class Start extends Component {
   render() {
     const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToFoodPreference,
       showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
-      hideMessages, practiceIsOver,showButton,doneText,diceClass,diceTransform,newRound } = this.state;
-      console.log("111 ---> transform="+transform+"   isStatic="+isStatic+"  showConfirmation="+showConfirmation+"  currentRoundIndex="+currentRoundIndex+"   newRound="+newRound+"  showButton="+showButton)
-      console.log("222 ---> currentRoundIndex="+currentRoundIndex+"  hideMessages="+hideMessages+"  showDice="+showDice+"  showConfirmation="+showConfirmation+"   NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"  showButton="+showButton+"  newRound="+newRound)
-      if(!hideMessages){
-        return(
-          <MindGameIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} />
-        )
-      }
+      hideMessages, practiceIsOver, showButton, doneText, diceClass, diceTransform, newRound } = this.state;
+    console.log("111 ---> transform=" + transform + "   isStatic=" + isStatic + "  showConfirmation=" + showConfirmation + "  currentRoundIndex=" + currentRoundIndex + "   newRound=" + newRound + "  showButton=" + showButton)
+    console.log("222 ---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
+    if (!hideMessages) {
+      return (
+        <MindGameIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} />
+      )
+    }
 
-     // Declare a variable to hold the JSX for FoodPreference
+    // Declare a variable to hold the JSX for FoodPreference
     let foodPreferenceComponent = null;
     // Check if currentRoundIndex is equal to 3
-    const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS+1;
-    const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex==NUM_OF_PRACTICE_ROUNDS+NUM_OF_REPEATED_REAL_ROUNDS) ;
-    console.log("---------> oneShotLast="+oneShotLast+"    repeatedLast="+repeatedLast+"  hideMindGameCompleted="+hideMindGameCompleted+"   lastIndex="+lastIndex+"  NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"   NUM_OF_REPEATED_REAL_ROUNDS="+NUM_OF_REPEATED_REAL_ROUNDS)
-    
+    const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + 1;
+    const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + NUM_OF_REPEATED_REAL_ROUNDS);
+    console.log("---------> oneShotLast=" + oneShotLast + "    repeatedLast=" + repeatedLast + "  hideMindGameCompleted=" + hideMindGameCompleted + "   lastIndex=" + lastIndex + "  NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "   NUM_OF_REPEATED_REAL_ROUNDS=" + NUM_OF_REPEATED_REAL_ROUNDS)
+
     if ((oneShotLast || repeatedLast) && (currentRoundIndex != NUM_OF_PRACTICE_ROUNDS)) {
       if (!hideMindGameCompleted) {
         return (
@@ -448,62 +450,62 @@ class Start extends Component {
       return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
 
     }
-      
-      if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS  && !practiceIsOver && !showConfirmation) {
-        return (
-          <div className="practice-is-over">
-            <h3>Practice is Over</h3>
-            <p>
-              You will now play the mind game for real bonus.<br></br>
-              You will play one round of the mind game.<br></br>
-              Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
-            </p>
-            <button onClick={this.handleHidePracticeIsOver}>Next</button>
-          </div>
-        )
-      }
-      if (GameCondition == "Repeated" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS  && !practiceIsOver && !showConfirmation) {
-        return (
-          <div className="practice-is-over">
-            <h3>Practice is Over</h3>
-            <p>
-              You will now play the mind game for real bonus.<br></br>
-              You will play 40 rounds of the mind game.<br></br>
-              Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a £1 bonus!
-            </p>
-            <button onClick={this.handleHidePracticeIsOver}>Next</button>
-          </div>
-        )
-      }
-  
-      if(!showDice && !showConfirmation){
-      return(
-        
-        <div className="trivia-container">
-             <DebuggerModalView>
-              <p>Current Question Index: {currentRoundIndex + 1}</p>
-              <p>Game mode: {gameCondition}</p>
-              <p>Is in practice: {practiceMode == true ? "Yes" : "No"}</p>
-              <p>Num of YES clicks: {yesClickCount}</p>
-              <p>Num of NO clicks: {noClickCount}</p>
-            </DebuggerModalView>
-         <div >
-                {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
-                <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
-                <p>
-                
-                <button onClick={this.handleNext}>Next</button>
-                </p>
-                              
-              </div> 
+
+    if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
+      return (
+        <div className="practice-is-over">
+          <h3>Practice is Over</h3>
+          <p>
+            You will now play the mind game for real bonus.<br></br>
+            You will play one round of the mind game.<br></br>
+            Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
+          </p>
+          <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
       )
-     }
-      if(newRound){
-        let staticTransform="rotateX(45deg) rotateY(-45deg)"
-        let guy = !isStatic ? diceTransform : staticTransform
-        return (
-          <div className="trivia-container">
+    }
+    if (GameCondition == "Repeated" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
+      return (
+        <div className="practice-is-over">
+          <h3>Practice is Over</h3>
+          <p>
+            You will now play the mind game for real bonus.<br></br>
+            You will play 40 rounds of the mind game.<br></br>
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a £1 bonus!
+          </p>
+          <button onClick={this.handleHidePracticeIsOver}>Next</button>
+        </div>
+      )
+    }
+
+    if (!showDice && !showConfirmation) {
+      return (
+
+        <div className="trivia-container">
+          <DebuggerModalView>
+            <p>Current Question Index: {currentRoundIndex + 1}</p>
+            <p>Game mode: {gameCondition}</p>
+            <p>Is in practice: {practiceMode == true ? "Yes" : "No"}</p>
+            <p>Num of YES clicks: {yesClickCount}</p>
+            <p>Num of NO clicks: {noClickCount}</p>
+          </DebuggerModalView>
+          <div >
+            {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
+            <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
+            <p>
+
+              <button onClick={this.handleNext}>Next</button>
+            </p>
+
+          </div>
+        </div>
+      )
+    }
+    if (newRound) {
+      let staticTransform = "rotateX(45deg) rotateY(-45deg)"
+      let guy = !isStatic ? diceTransform : staticTransform
+      return (
+        <div className="trivia-container">
           <div className={`dice ${diceClass}`} style={{ transform: guy }} key={0}>
             <div className="face front"></div>
             <div className="face back"></div>
@@ -513,55 +515,55 @@ class Start extends Component {
             <div className="face left"></div>
           </div>
           {showButton ? (
-              <div>
-                <button className="roll" onClick={() => this.randomDice(isStatic)}>
-                  <h2>Roll Dice</h2>
-                </button>
-              </div>
-            ) : (
-              <div className="trivia-container">
-                 {showConfirmation && (
-                  <>
-                    {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
-                    <p>Is this the number that you had in mind?</p>
+            <div>
+              <button className="roll" onClick={() => this.randomDice(isStatic)}>
+                <h2>Roll Dice</h2>
+              </button>
+            </div>
+          ) : (
+            <div className="trivia-container">
+              {showConfirmation && (
+                <>
+                  {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
+                  <p>Is this the number that you had in mind?</p>
 
-                    <div className="button-container">
-                      {yesButtonInRight ? (
-                        <>
+                  <div className="button-container">
+                    {yesButtonInRight ? (
+                      <>
                         <button onClick={() => this.handleConfirmation(false)}>No</button>
                         <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                        </>
-                    ) : (
-                        <>
-                          <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                          <button onClick={() => this.handleConfirmation(false)}>No</button>
-                        </>
-                  )}
-              </div>
-
-                    {GameCondition == "OneShot" ?
-                      (<>
-                        <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
                       </>
-                      ) : (
-                        <>
-                          <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
-                        </>
-                      )}
-                  </>
-                )}
-              </div>
-            )}
+                    ) : (
+                      <>
+                        <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                        <button onClick={() => this.handleConfirmation(false)}>No</button>
+                      </>
+                    )}
+                  </div>
+
+                  {GameCondition == "OneShot" ?
+                    (<>
+                      <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
+                    </>
+                    ) : (
+                      <>
+                        <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
+                      </>
+                    )}
+                </>
+              )}
+            </div>
+          )}
         </div>
-        )
-          
-        
-      }
+      )
+
+
+    }
     //let questions = trivia_questions;
     //const question = questions[currentRoundIndex];
     //const { answers } = question;
 
-    
+
     if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
       return (
         <div className="practice-is-over">
@@ -589,9 +591,9 @@ class Start extends Component {
       )
     }
 
-console.log("---> currentRoundIndex="+currentRoundIndex+"  hideMessages="+hideMessages+"  showDice="+showDice+"  showConfirmation="+showConfirmation+"   NUM_OF_PRACTICE_ROUNDS="+NUM_OF_PRACTICE_ROUNDS+"  showButton="+showButton+"  newRound="+newRound)
+    console.log("---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
     return (
-      
+
       <div className="trivia-container">
         {foodPreferenceComponent}
 
@@ -606,16 +608,16 @@ console.log("---> currentRoundIndex="+currentRoundIndex+"  hideMessages="+hideMe
               <p>Num of YES clicks: {yesClickCount}</p>
               <p>Num of NO clicks: {noClickCount}</p>
             </DebuggerModalView>
-            
+
             {(showDice && !showConfirmation) ? (
               <div>
                 {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>444This is a practice round</span>}
                 <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
                 <p>
-                
-                <button onClick={this.handleNext}>Next</button>
+
+                  <button onClick={this.handleNext}>Next</button>
                 </p>
-                              
+
               </div>
             ) : (
               <div>
