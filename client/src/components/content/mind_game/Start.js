@@ -480,7 +480,8 @@ class Start extends Component {
       let staticTransform = "rotateX(45deg) rotateY(-45deg)"
       let tmpDiceTransform = !isStatic ? diceTransform : staticTransform
       return (
-        <div className="trivia-container">
+        <div class="wrapper">
+        <div className="container">
           <div className={`dice ${diceClass}`} style={{ transform: tmpDiceTransform  }} key={0}>
             <div className="face front"></div>
             <div className="face back"></div>
@@ -496,7 +497,7 @@ class Start extends Component {
               </button>
             </div>
           ) : (
-            <div className="trivia-container">
+            <div className="container">
               {showConfirmation && (
                 <>
                   {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
@@ -529,6 +530,7 @@ class Start extends Component {
               )}
             </div>
           )}
+        </div>
         </div>
       )
 
@@ -569,7 +571,7 @@ class Start extends Component {
     console.log("---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
     return (
 
-      <div className="trivia-container">
+      <div className="container">
         {foodPreferenceComponent}
 
         {!hideMessages ? (

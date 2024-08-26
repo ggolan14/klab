@@ -19,16 +19,30 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-   
 }
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background: white; /* Optional background */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    box-sizing: border-box; /* Ensure padding doesn't affect the size */
+}
+
 .container{
     display: grid;
     place-items: center;
-    width: 250px;
-    background: #eee;
+    background:white;
     padding: 60px 0 40px;
-    border-radius: 30px;
+    border-radius: 10px;
+    height: 500; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
     box-shadow: rgba(0,0,0,0.1);
+    font-size: 25px;
 }
 .dice{
     position: relative;
