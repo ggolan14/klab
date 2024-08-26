@@ -18,6 +18,9 @@ let NUM_OF_REPEATED_REAL_ROUNDS = 0;
 let NUM_OF_PRACTICE_ROUNDS = 3;
 let NUM_OF_INTRODUCTION_STEPS = 3;
 let lastIndex;
+let startTimer=0;
+let endTimer=0;
+let totalTimer=0;
 let startShowRoundTimer = 0;
 let endShowRoundTimer = 0;
 let startShowConfirmationTimer = 0;
@@ -91,9 +94,7 @@ class Start extends Component {
       renderKey: 0, // State to trigger re-rendering
       showButton: true,
       newRound: false,
-      doneText: '' // State to control "Done" text
-
-
+      diceOutcome: '' 
     };
   }
 
@@ -108,13 +109,7 @@ class Start extends Component {
   };
 
   handleHideMessages = () => {
-    this.setState({ hideMessages: true });
-  }
-
-  handleShowConfirmation = (diceOutcome) => {
-    console.log("-----------> in handle show confirmation diceOutcome=" + diceOutcome)
-    result = diceOutcome;
-    this.setState({ showConfirmation: true, diceOutcome })
+    this.setState({ hideMessages: true });  // set hideMessages to true (i.e. don't render introduction messages)
   }
 
   handelHideMindGameCompleted = () => {
@@ -132,11 +127,6 @@ class Start extends Component {
   handleNext = () => {
     const { currentRoundIndex } = this.state;
     let questions = [];
-    // questions = trivia_questions;
-    // const correctAnswer = questions[currentRoundIndex].answers.find(answer => answer.option === questions[currentRoundIndex].correct_answer).text;
-    endShowRoundTimer = getTimeDate().now;
-    startShowConfirmationTimer = getTimeDate().now;
-    totalShowRoundTime = endShowRoundTimer - startShowRoundTimer;
     this.setState(prevState => ({
       currentRoundIndex: Math.min(prevState.currentRoundIndex + 1, lastIndex),
       showDice: false,
@@ -149,8 +139,9 @@ class Start extends Component {
   handleConfirmation = (confirmed) => {
     const { currentRoundIndex, showConfirmation, showDice, gameCondition, hideMessages } = this.state;
     isStatic = true;
-    endShowConfirmationTimer = getTimeDate().now;
-    totalShowConfirmationTime = endShowConfirmationTimer - startShowConfirmationTimer;
+    endTimer=getTimeDate().now;
+    totalTimer = endTimer - startTimer;
+    console.log("===> in handleConfirmation totalTimer=" + totalTimer);
 
     if (currentRoundIndex + 1 == lastIndex) {
       endShowRoundTimer = getTimeDate().now;
@@ -183,8 +174,7 @@ class Start extends Component {
             TotalYesAnswers: this.state.yesClickCount,
             TotalNoAnswers: this.state.noClickCount,
             GameCondition: GameCondition,
-            IsThisTheNumber: totalShowRoundTime,
-            ConfirmationTime: totalShowConfirmationTime,
+            IsThisTheNumberConfirmationTime: totalTimer,
           };
 
 
@@ -211,8 +201,7 @@ class Start extends Component {
           TotalYesAnswers: this.state.yesClickCount,
           TotalNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
-          IsThisTheNumber: totalShowRoundTime,
-          ConfirmationTime: totalShowConfirmationTime,
+          IsThisTheNumberConfirmationTime: totalTimer,
 
         };
         this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');
@@ -249,7 +238,7 @@ class Start extends Component {
           action: 'G.E.S',
           type: 'LogGameType',
           more_params: {
-            game_points: "TBD",
+            game_points: "N/A",
             local_t: current_time.time,
             local_d: current_time.date,
           },
@@ -302,17 +291,13 @@ class Start extends Component {
     keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${userAnswers[key]}`); });
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
-    console.log("--->  randomIndex="+randomIndex+"   ")
-    //const randomSelectedRound = 2;
-    //const randomSelectedRoundValue = 999;
+    console.log("--->  in addGameBonus()   randomIndex="+randomIndex+"   ")
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = userAnswers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
-    console.log("-------------> in addGameBonus randomSelectedRound=" + randomSelectedRound + "   selectedRoundPoints=" + selectedRoundPoints);
-    // Example TotalBonus array, make sure it is defined in your component
     const TotalBonus = [];
     TotalBonus.push(selectedRoundPoints);
-    console.log("---> in addGameBonus selectedRoundPoints="+selectedRoundPoints+"   randomSelectedRound="+randomSelectedRound)
+    console.log("---> in addGameBonus() selectedRoundPoints="+selectedRoundPoints+"   randomSelectedRound="+randomSelectedRound)
 
     return {
       selectedRoundPoints: selectedRoundPoints,
@@ -323,29 +308,21 @@ class Start extends Component {
 
   getRandomDiceValue = () => {
     let tmpRand = Math.floor(Math.random() * 6) + 1;
-    console.log("++++++> in getRandomDiceValue  tmpRand=" + tmpRand);
     return tmpRand;
   };
 
   randomDice = () => {
-    console.log("===> in randomDice");
     isStatic = false;
     this.random = isStatic ? -1 : this.getRandomDiceValue();
     this.rollDice(this.random);
-    //this.setState((prevState) => ({
-    // renderKey: prevState.renderKey + 1, // Increment the key to trigger re-rendering
-    //}));
-  };
+    };
 
   rollDice = (random) => {
-    console.log("===> in roll dice 111 random=" + random);
-    //this.setState({ diceClass: 'rolling' });
-    console.log("===> in roll dice 222");
+    console.log("===> in roll dice random=" + random);
+    startTimer=getTimeDate().now;
     setTimeout(() => {
-      console.log("===> in roll dice 333");
-
       switch (random) {
-        case -1:
+        case -1: // in case of -1 display static dice
           transform = 'rotateX(0deg) rotateY(-45deg)';
           break;
         case 1:
@@ -372,16 +349,15 @@ class Start extends Component {
         default:
           break;
       }
-      console.log("===> in roll dice 444  transform=" + transform);
       this.setState({
         diceTransform: transform,
         diceClass: '',
         showButton: false, // Hide the button after the dice roll
-        doneText: random, // Set the text to "Done"
+        diceOutcome: random, // Set the text to "Done"
         showConfirmation: true,
       });
       //this.props.onShowConfirmation(random); // Call the confirmation function
-      console.log("===> in roll dice 666");
+      startShowConfirmationTimer=getTimeDate().now;
     }, 50);
   };
 
@@ -390,7 +366,7 @@ class Start extends Component {
   render() {
     const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToFoodPreference,
       showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
-      hideMessages, practiceIsOver, showButton, doneText, diceClass, diceTransform, newRound } = this.state;
+      hideMessages, practiceIsOver, showButton, diceOutcome, diceClass, diceTransform, newRound } = this.state;
     console.log("111 ---> transform=" + transform + "   isStatic=" + isStatic + "  showConfirmation=" + showConfirmation + "  currentRoundIndex=" + currentRoundIndex + "   newRound=" + newRound + "  showButton=" + showButton)
     console.log("222 ---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
     if (!hideMessages) {
@@ -401,7 +377,6 @@ class Start extends Component {
 
     // Declare a variable to hold the JSX for FoodPreference
     let foodPreferenceComponent = null;
-    // Check if currentRoundIndex is equal to 3
     const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + 1;
     const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + NUM_OF_REPEATED_REAL_ROUNDS);
     console.log("---------> oneShotLast=" + oneShotLast + "    repeatedLast=" + repeatedLast + "  hideMindGameCompleted=" + hideMindGameCompleted + "   lastIndex=" + lastIndex + "  NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "   NUM_OF_REPEATED_REAL_ROUNDS=" + NUM_OF_REPEATED_REAL_ROUNDS)
