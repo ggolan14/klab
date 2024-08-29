@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
 import './gameStyles.css';
 import { formatPrice } from '../../utils/StringUtils';
-class MindGameIntroduction extends Component {
+class ResourceAllocationIntroduction extends Component {
     
   constructor(props) {
     super(props);
 
     const message_1 =  (
       <span>
-        <p>This study includes two parts. 
-        <br></br>
-        In the first part, you will play the “mind-game” and can win a bonus depending on your performance. 
-        <br></br>
-        In the second part, you will be asked to answer several questions about your self assessment and preferences and there will be no bonus.
-        <br></br>
-        <br></br>
-        Note that you should not leave or stop responding until you have completed the entier study and have recieved your completion code.
-        If you leave or stop responding before completing the two games, you will not recieve compension.
-
-      </p>
+        <p>
+         Imagine that you are a manager at a large company. Two employees named Bill and James also work at the company. Bill and James both do the same job and make the same salary each year. This year, Bill and James received the same evaluations, which were the highest in the company. The company has decided to reward Bill and James for their exceptionally good work.
+         The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted. 
+        </p>
       </span>
     );
+    
     const message_2 = (
       <span>
         <p>
-        <h2><b>Welcome to the Mind game!</b></h2>
-        <br></br>
-        In this game, you will be asked to think of a number between 1 and 6 and keep it in your mind. Then, you will roll a virtual die.
-        You wil be asked to report if the number you rolled is the one you had in mind.
-        <br></br>
-        If the number you rolled <b>is</b> the one you had in mind, you <b>will</b> receive a {formatPrice(1,this.props.signOfReward)} bonus.
-        <br></br>
-        if the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> recieve a bonus.
-        <br></br>
+        You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
+        You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
         </p>
       </span>
     );
@@ -94,4 +81,4 @@ class MindGameIntroduction extends Component {
   }
 }
 
-export default MindGameIntroduction;
+export default ResourceAllocationIntroduction;

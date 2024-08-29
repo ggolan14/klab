@@ -6,7 +6,9 @@ import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import MindGameIntroduction from './MindGameIntroduction';
 import FoodPreference from './FoodPreference';
+import { formatPrice } from '../../utils/StringUtils';
 import GameRound from './GameRound';
+import ResourceAllocation from './ResourceAllocation';
 const ThisExperiment = 'MindGame';
 
 
@@ -28,6 +30,7 @@ let endShowConfirmationTimer = 0;
 let totalShowRoundTime = 0;
 let totalShowConfirmationTime = 0;
 let result = 0;
+let SignOfReward = '$';
 let isStatic = true;
 let transform;
 const yesButtonInRight = Math.random() < 0.5;
@@ -42,6 +45,7 @@ class Start extends Component {
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
     NUM_OF_REPEATED_REAL_ROUNDS = props.game_settings.game.num_of_real_rounds;
+    SignOfReward = props.game_settings.payments.sign_of_reward;
 
     let cond = props.game_settings.game.cond;
 
@@ -85,7 +89,7 @@ class Start extends Component {
       hideMessages: false,
       practiceIsOver: false,
       hideMindGameCompleted: false,
-      showWelcomeToFoodPreference: false,
+      showWelcomeToNextTask: false,
       userAnswers: {},
       diceOutcome: 0,
       diceClass: '',
@@ -113,11 +117,11 @@ class Start extends Component {
   }
 
   handelHideMindGameCompleted = () => {
-    this.setState({ hideMindGameCompleted: true, showWelcomeToFoodPreference: true });
+    this.setState({ hideMindGameCompleted: true, showWelcomeToNextTask: true });
   }
 
-  handelHideWelcomeToFoodPreference = () => {
-    this.setState({ showWelcomeToFoodPreference: false });
+  handelHideWelcomeToNextTask = () => {
+    this.setState({ showWelcomeToNextTask: false });
   }
 
   handleHidePracticeIsOver = () => {
@@ -364,14 +368,14 @@ class Start extends Component {
 
 
   render() {
-    const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToFoodPreference,
+    const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToNextTask,
       showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
       hideMessages, practiceIsOver, showButton, diceOutcome, diceClass, diceTransform, newRound } = this.state;
     console.log("111 ---> transform=" + transform + "   isStatic=" + isStatic + "  showConfirmation=" + showConfirmation + "  currentRoundIndex=" + currentRoundIndex + "   newRound=" + newRound + "  showButton=" + showButton)
     console.log("222 ---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
     if (!hideMessages) {
       return (
-        <MindGameIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} />
+        <MindGameIntroduction signOfReward={SignOfReward} onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} props/>
       )
     }
 
@@ -382,10 +386,10 @@ class Start extends Component {
     console.log("---------> oneShotLast=" + oneShotLast + "    repeatedLast=" + repeatedLast + "  hideMindGameCompleted=" + hideMindGameCompleted + "   lastIndex=" + lastIndex + "  NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "   NUM_OF_REPEATED_REAL_ROUNDS=" + NUM_OF_REPEATED_REAL_ROUNDS)
 
     if ((oneShotLast || repeatedLast) && (currentRoundIndex != NUM_OF_PRACTICE_ROUNDS)) {
-      if (!hideMindGameCompleted) {
+      if (!hideMindGameCompleted && GameCondition == "Repeated") {
         return (
           <div className="practice-is-over">
-            <h3>You completed the "Mind Game”</h3>
+            <h3>You completed the "mind-game”</h3>
             <p>
               You will now receive a food preference survey. <br></br>
               Note that you cannot leave or stop responding until you have completed the entire study and <br></br>
@@ -396,33 +400,46 @@ class Start extends Component {
         )
 
       }
-      if (showWelcomeToFoodPreference && GameCondition == "OneShot") {
+      else if (!hideMindGameCompleted && GameCondition == "OneShot") {
         return (
           <div className="practice-is-over">
-            <h3>Welcome to the food preference survey</h3>
+            <h3>You completed the "mind-game”</h3>
             <p>
-              In this survey, we are interested in people’s food preferences. You will
-              be asked 40 questions about your food preferences. Please answer all
-              40 questions according to your actual preferences.
+              You will now fill out a short resource allocation survey. 
+              Note that you cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
             </p>
-            <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
+            <button onClick={this.handelHideMindGameCompleted}>Next</button>
+          </div>
+        )
+
+      }
+      if (showWelcomeToNextTask && GameCondition == "OneShot") {
+        return (
+          <div className="practice-is-over">
+            <h3>Welcome to the resource allocation survey</h3>
+            <p>
+            Please read the scenario and answer the following questions
+            </p>
+            <button onClick={this.handelHideWelcomeToNextTask}>Next</button>
           </div>
         )
       }
-      if (showWelcomeToFoodPreference && GameCondition == "Repeated") {
+      if (showWelcomeToNextTask && GameCondition == "Repeated") {
         return (
           <div className="practice-is-over">
             <h3>Welcome to the food preference survey</h3>
             <p>
               In this survey, we are interested in people’s food preferences. You will be asked one question about your food preferences.<br />Please answer the question according to your actual preferences.
             </p>
-            <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
+            <button onClick={this.handelHideWelcomeToNextTask}>Next</button>
           </div>
         )
       }
 
-      // If equal, assign FoodPreference JSX to the variable
-      return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
+      if(GameCondition == "Repeated"){
+        return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} /> 
+      }else if(GameCondition == "OneShot")
+      return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
 
     }
 
@@ -431,9 +448,9 @@ class Start extends Component {
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
           <p>
-            You will now play the mind game for real bonus.<br></br>
+            You will now play the mind-game for real bonus.<br></br>
             You will play one round of the mind game.<br></br>
-            Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
+            Remember: if the number you roll is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)} bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
@@ -444,9 +461,9 @@ class Start extends Component {
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
           <p>
-            You will now play the mind game for real bonus.<br></br>
+            You will now play the mind-game for real bonus.<br></br>
             You will play 40 rounds of the mind game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a £1 bonus!
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)} bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
@@ -466,7 +483,7 @@ class Start extends Component {
           </DebuggerModalView>
           <div >
             {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
-            <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
+            <p>Think of one of the following numbers:<br /><b>1,2,3,4,5,6<br/>keep this number in your mind.</b></p>
             <p>
 
               <button onClick={this.handleNext}>Next</button>
@@ -480,8 +497,27 @@ class Start extends Component {
       let staticTransform = "rotateX(45deg) rotateY(-45deg)"
       let tmpDiceTransform = !isStatic ? diceTransform : staticTransform
       return (
-        <div class="wrapper">
-        <div className="container">
+       
+
+     
+           
+        
+        <div className="wrapper">
+          <div className="container">
+          <br></br>
+          {isStatic && (
+                    <>
+                        <br />
+                        {currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS && (
+                            <span style={{ fontWeight: 'bold', color: 'red' }}>
+                                This is a practice round
+                            </span>
+                        )}
+                        <br/>
+                    </>
+                )}
+          <br></br>
+          <br></br>
           <div className={`dice ${diceClass}`} style={{ transform: tmpDiceTransform  }} key={0}>
             <div className="face front"></div>
             <div className="face back"></div>
@@ -493,7 +529,7 @@ class Start extends Component {
           {showButton ? (
             <div>
               <button className="roll" onClick={() => this.randomDice(isStatic)}>
-                <h2>Roll Dice</h2>
+                <h2>Roll the die</h2>
               </button>
             </div>
           ) : (
@@ -519,11 +555,11 @@ class Start extends Component {
 
                   {GameCondition == "OneShot" ?
                     (<>
-                      <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
+                      <p>Note: You will receive a {formatPrice(1,SignOfReward)} bonus only if you report "Yes"</p>
                     </>
                     ) : (
                       <>
-                        <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
+                        <p>Note: If this round will be selected, you will receive a {formatPrice(1,SignOfReward)} bonus only if you report "Yes"</p>
                       </>
                     )}
                 </>
@@ -546,11 +582,11 @@ class Start extends Component {
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
           <p>
-            You will now play the mind game for real bonus.<br></br>
+            You will now play the mind-game for real bonus.<br></br>
             You will play one round of the mind game.<br></br>
-            Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
+            Remember: If the correct answer is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)}1 bonus!
           </p>
-          <button onClick={this.handleHidePracticeIsOver}>Next</button>
+          <button onClick={this.handleHidePracticeIsOver}>Start real game</button>
         </div>
       )
     }
@@ -559,11 +595,11 @@ class Start extends Component {
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
           <p>
-            You will now play the mind game for real bonus.<br></br>
+            You will now play the mind-game for real bonus.<br></br>
             You will play 40 rounds of the mind game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a £1 bonus!
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round you reported that the number you rolled is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)} bonus!
           </p>
-          <button onClick={this.handleHidePracticeIsOver}>Next</button>
+          <button onClick={this.handleHidePracticeIsOver}>Start real game</button>
         </div>
       )
     }
@@ -575,7 +611,7 @@ class Start extends Component {
         {foodPreferenceComponent}
 
         {!hideMessages ? (
-          <MindGameIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} />
+          <MindGameIntroduction onHideMessages={this.handleHideMessages}/>
         ) : (
           <div>
             <DebuggerModalView>
@@ -588,8 +624,8 @@ class Start extends Component {
 
             {(showDice && !showConfirmation) ? (
               <div>
-                {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>444This is a practice round</span>}
-                <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind</p>
+                {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
+                <p>Think of one of the following numbers:<br />1,2,3,4,5,6<br />keep this number in your mind.</p>
                 <p>
 
                   <button onClick={this.handleNext}>Next</button>
@@ -600,7 +636,7 @@ class Start extends Component {
               <div>
                 {showConfirmation && (
                   <>
-                    {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>555This is a practice round</span>}
+                    {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
 
 
                     {yesButtonInRight ?
@@ -617,11 +653,11 @@ class Start extends Component {
 
                     {GameCondition == "OneShot" ?
                       (<>
-                        <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
+                        <p>Note: You will receive a {formatPrice(1,SignOfReward)} bonus only if you report "Yes"</p>
                       </>
                       ) : (
                         <>
-                          <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
+                          <p>Note: If this round will be selected, you will receive a {formatPrice(1,SignOfReward)} bonus only if you report "Yes"</p>
                         </>
                       )}
                   </>
