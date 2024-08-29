@@ -9,8 +9,9 @@ import FoodPreference from './FoodPreference';
 import { formatPrice } from '../../utils/StringUtils';
 import GameRound from './GameRound';
 import ResourceAllocation from './ResourceAllocation';
-const ThisExperiment = 'MindGame';
 
+const ThisExperiment = 'MindGame';
+const STATIC_TRANSFORM = "rotateX(45deg) rotateY(-45deg)";
 
 
 let UserId = 'empty';
@@ -23,13 +24,6 @@ let lastIndex;
 let startTimer=0;
 let endTimer=0;
 let totalTimer=0;
-let startShowRoundTimer = 0;
-let endShowRoundTimer = 0;
-let startShowConfirmationTimer = 0;
-let endShowConfirmationTimer = 0;
-let totalShowRoundTime = 0;
-let totalShowConfirmationTime = 0;
-let result = 0;
 let SignOfReward = '$';
 let isStatic = true;
 let transform;
@@ -148,7 +142,6 @@ class Start extends Component {
     console.log("===> in handleConfirmation totalTimer=" + totalTimer);
 
     if (currentRoundIndex + 1 == lastIndex) {
-      endShowRoundTimer = getTimeDate().now;
       this.setState(prevState => (
         {
           isLast: true,
@@ -161,7 +154,6 @@ class Start extends Component {
     }
 
     if (confirmed) {
-      startShowRoundTimer = getTimeDate().now;
       this.setState(prevState => (
         {
           showResult: false,
@@ -189,7 +181,6 @@ class Start extends Component {
 
         });
     } else {
-      startShowRoundTimer = getTimeDate().now;
       this.setState(prevState => ({
         showResult: false,
         newRound: true,
@@ -360,8 +351,6 @@ class Start extends Component {
         diceOutcome: random, // Set the text to "Done"
         showConfirmation: true,
       });
-      //this.props.onShowConfirmation(random); // Call the confirmation function
-      startShowConfirmationTimer=getTimeDate().now;
     }, 50);
   };
 
@@ -494,14 +483,9 @@ class Start extends Component {
       )
     }
     if (newRound) {
-      let staticTransform = "rotateX(45deg) rotateY(-45deg)"
-      let tmpDiceTransform = !isStatic ? diceTransform : staticTransform
+      
+      let tmpDiceTransform = !isStatic ? diceTransform : STATIC_TRANSFORM
       return (
-       
-
-     
-           
-        
         <div className="wrapper">
           <div className="container">
           <br></br>
@@ -572,38 +556,7 @@ class Start extends Component {
 
 
     }
-    //let questions = trivia_questions;
-    //const question = questions[currentRoundIndex];
-    //const { answers } = question;
-
-
-    if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
-      return (
-        <div className="practice-is-over">
-          <h3>Practice is Over</h3>
-          <p>
-            You will now play the mind-game for real bonus.<br></br>
-            You will play one round of the mind game.<br></br>
-            Remember: If the correct answer is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)}1 bonus!
-          </p>
-          <button onClick={this.handleHidePracticeIsOver}>Start real game</button>
-        </div>
-      )
-    }
-    if (GameCondition == "Repeated" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS - 1 && !practiceIsOver && !showConfirmation) {
-      return (
-        <div className="practice-is-over">
-          <h3>Practice is Over</h3>
-          <p>
-            You will now play the mind-game for real bonus.<br></br>
-            You will play 40 rounds of the mind game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round you reported that the number you rolled is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)} bonus!
-          </p>
-          <button onClick={this.handleHidePracticeIsOver}>Start real game</button>
-        </div>
-      )
-    }
-
+   
     console.log("---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
     return (
 
