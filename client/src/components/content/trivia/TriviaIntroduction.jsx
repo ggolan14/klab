@@ -8,7 +8,7 @@ class TriviaIntroduction extends Component {
 
     const message_1 =  (
       <span>
-        This study includes two parts.<br/>In the first part, you will play the trivia game and can win a bonus based on your performance.<br/>In the second part, you will fill out a food preference survey with no bonus.<br/>Note that you should not leave or stop responding until you have completed the entire study<br/>and have received your completion code.<br/>If you leave or stop responding before completing the two parts,<br/>you will not receive compensation.<br/>
+        This study includes two parts.<br/>In the first part, you will play the trivia-game and can win a bonus based on your performance.<br/>In the second part, you will fill out a food preference survey with no bonus.<br/>Note that you should not leave or stop responding until you have completed the entire study<br/>and have received your completion code.<br/>If you leave or stop responding before completing the two parts,<br/>you will not receive compensation.<br/>
       </span>
     );
     const message_2 = (

@@ -6,6 +6,7 @@ import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import TriviaIntroduction from './TriviaIntroduction';
 import FoodPreference from './FoodPreference';
+import ResourceAllocation from '../mind_game/ResourceAllocation';
 const ThisExperiment = 'Trivia';
 
 
@@ -311,11 +312,10 @@ class Start extends Component {
       if (!hideTriviaCompleted) {
         return (
           <div className="practice-is-over">
-            <h3>You completed the “trivia game”</h3>
+            <h3>You completed the “trivia-game”</h3>
             <p>
-              You will now receive a food preference survey. <br></br>
-              Note that you cannot leave or stop responding until you have completed the entire study and <br></br>
-              have received your completion code, or else you will not receive compensation.
+            You will now fill out a short resource allocation survey. 
+            Note that you cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
             </p>
             <button onClick={this.handelHideTriviaCompleted}>Next</button>
           </div>
@@ -325,11 +325,9 @@ class Start extends Component {
       if (showWelcomeToFoodPreference && GameCondition == "OneShot") {
         return (
           <div className="practice-is-over">
-            <h3>Welcome to the food preference survey</h3>
+            <h3>Welcome to the resource allocation survey</h3>
             <p>
-              In this survey, we are interested in people’s food preferences. You will
-              be asked 40 questions about your food preferences. Please answer all
-              40 questions according to your actual preferences.
+              Please read the scenario and answer the following questions
             </p>
             <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
           </div>
@@ -348,8 +346,14 @@ class Start extends Component {
       }
 
       // If equal, assign FoodPreference JSX to the variable
-      return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
 
+      if(GameCondition == "Repeated"){
+        return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
+      }else if(GameCondition == "OneShot")
+      return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
+
+         
+      
     }
     if (GameCondition == "OneShot" && currentQuestionIndex === NUM_OF_PRACTICE_QUESTIONS - 1 && !practiceIsOver && !showConfirmation) {
       return (

@@ -6,8 +6,8 @@ import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import MindGameIntroduction from './MindGameIntroduction';
 import FoodPreference from './FoodPreference';
-import { formatPrice , getGameCondition } from '../../utils/StringUtils';
-import Constants from '../../utils/Constants';
+import { formatPrice } from '../../utils/StringUtils';
+import GameRound from './GameRound';
 import ResourceAllocation from './ResourceAllocation';
 
 const ThisExperiment = 'MindGame';
@@ -42,10 +42,31 @@ class Start extends Component {
     SignOfReward = props.game_settings.payments.sign_of_reward;
 
     let cond = props.game_settings.game.cond;
-    GameCondition = getGameCondition(cond , RunCounter) //get game condition from 
-    console.log("++++ GameCondition = "+GameCondition)
 
-    lastIndex = GameCondition == Constants.ONE_SHOT ? NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + 1 : NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + NUM_OF_REPEATED_REAL_ROUNDS
+    if (cond === 'o') {
+      GameCondition = 'OneShot';
+    }
+    else if (cond === 'r') {
+      GameCondition = 'Repeated';
+    }
+    else if (cond === 'rand') {
+      // GameCondition = 'Random';
+      let rnd = Math.floor(Math.random() * 2);
+      if (rnd)
+        GameCondition = 'OneShot';
+      else
+        GameCondition = 'Repeated';
+    }
+    else if (cond === 'u_d') {
+      // GameCondition = 'Uniform distribution';
+      if (RunCounter % 2) {
+        GameCondition = 'OneShot';
+      }
+      else {
+        GameCondition = 'Repeated';
+      }
+    }
+    lastIndex = GameCondition == 'OneShot' ? NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + 1 : NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + NUM_OF_REPEATED_REAL_ROUNDS
 
 
     this.state = {
@@ -264,7 +285,7 @@ class Start extends Component {
     const keys = Object.keys(userAnswers);
     keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${userAnswers[key]}`); });
 
-    const randomIndex = GameCondition === Constants.ONE_SHOT ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
+    const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
     console.log("--->  in addGameBonus()   randomIndex="+randomIndex+"   ")
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = userAnswers[randomSelectedRound];
@@ -349,12 +370,12 @@ class Start extends Component {
 
     // Declare a variable to hold the JSX for FoodPreference
     let foodPreferenceComponent = null;
-    const oneShotLast = GameCondition == Constants.ONE_SHOT && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + 1;
-    const repeatedLast = GameCondition == Constants.REPEATED && !showConfirmation && (currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + NUM_OF_REPEATED_REAL_ROUNDS);
+    const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + 1;
+    const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + NUM_OF_REPEATED_REAL_ROUNDS);
     console.log("---------> oneShotLast=" + oneShotLast + "    repeatedLast=" + repeatedLast + "  hideMindGameCompleted=" + hideMindGameCompleted + "   lastIndex=" + lastIndex + "  NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "   NUM_OF_REPEATED_REAL_ROUNDS=" + NUM_OF_REPEATED_REAL_ROUNDS)
 
     if ((oneShotLast || repeatedLast) && (currentRoundIndex != NUM_OF_PRACTICE_ROUNDS)) {
-      if (!hideMindGameCompleted && GameCondition == Constants.REPEATED) {
+      if (!hideMindGameCompleted && GameCondition == "Repeated") {
         return (
           <div className="practice-is-over">
             <h3>You completed the "mind-game”</h3>
@@ -368,7 +389,7 @@ class Start extends Component {
         )
 
       }
-      else if (!hideMindGameCompleted && GameCondition == Constants.ONE_SHOT) {
+      else if (!hideMindGameCompleted && GameCondition == "OneShot") {
         return (
           <div className="practice-is-over">
             <h3>You completed the "mind-game”</h3>
@@ -381,7 +402,7 @@ class Start extends Component {
         )
 
       }
-      if (showWelcomeToNextTask && GameCondition == Constants.ONE_SHOT) {
+      if (showWelcomeToNextTask && GameCondition == "OneShot") {
         return (
           <div className="practice-is-over">
             <h3>Welcome to the resource allocation survey</h3>
@@ -392,7 +413,7 @@ class Start extends Component {
           </div>
         )
       }
-      if (showWelcomeToNextTask && GameCondition == Constants.REPEATED) {
+      if (showWelcomeToNextTask && GameCondition == "Repeated") {
         return (
           <div className="practice-is-over">
             <h3>Welcome to the food preference survey</h3>
@@ -404,14 +425,14 @@ class Start extends Component {
         )
       }
 
-      if(GameCondition == Constants.REPEATED){
+      if(GameCondition == "Repeated"){
         return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} /> 
-      }else if(GameCondition == Constants.ONE_SHOT)
+      }else if(GameCondition == "OneShot")
       return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
 
     }
 
-    if (GameCondition == Constants.ONE_SHOT && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
+    if (GameCondition == "OneShot" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
       return (
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
@@ -424,7 +445,7 @@ class Start extends Component {
         </div>
       )
     }
-    if (GameCondition == Constants.REPEATED && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
+    if (GameCondition == "Repeated" && currentRoundIndex === NUM_OF_PRACTICE_ROUNDS && !practiceIsOver && !showConfirmation) {
       return (
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
@@ -516,7 +537,7 @@ class Start extends Component {
                     )}
                   </div>
 
-                  {GameCondition == Constants.ONE_SHOT ?
+                  {GameCondition == "OneShot" ?
                     (<>
                       <p>Note: You will receive a {formatPrice(1,SignOfReward)} bonus only if you report "Yes"</p>
                     </>
@@ -583,7 +604,7 @@ class Start extends Component {
                         </>
                       )}
 
-                    {GameCondition == Constants.ONE_SHOT ?
+                    {GameCondition == "OneShot" ?
                       (<>
                         <p>Note: You will receive a {formatPrice(1,SignOfReward)} bonus only if you report "Yes"</p>
                       </>
