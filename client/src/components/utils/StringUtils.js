@@ -3,11 +3,10 @@ console.log("Constants:", Constants);
 
 export const formatPrice = (price, currency) => {
     switch (currency) {
-        case '£':
-            return `${currency}${price}`;
         case '$':
+        case '£':
         case '€':
-            return `${price}${currency}`;
+            return `${currency}${price}`;
         default:
             throw new Error('Unsupported currency');
     }

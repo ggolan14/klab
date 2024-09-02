@@ -873,9 +873,14 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                         }
                     </label>
                     <textarea
-                      style={{maxWidth: '95%'}}
-                      onChange={e => insertTextInput('UserFinalComments', e.target.value)}
-                    />
+                        style={{
+                            maxWidth: '95%',
+                            border: '1px solid #ccc', /* Light gray border */
+                            padding: '8px', /* Optional: Adds some padding inside the textarea */
+                            borderRadius: '4px' /* Optional: Rounds the corners slightly */
+                        }}
+  onChange={e => insertTextInput('UserFinalComments', e.target.value)}
+/>
                 </div>
                 <label className='exp-summary-h3'>
                     {

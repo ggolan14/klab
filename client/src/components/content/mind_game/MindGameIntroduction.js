@@ -40,13 +40,13 @@ class MindGameIntroduction extends Component {
       <span>
         <p>
         <br></br>
-        Let's try it out.
+        Let's try it out!
         <br></br>
         <br></br>
         You will now go through 3 <b>practice</b> rounds of mind game.
         <br></br>
         Note: The goal of the practice rounds is to help you understand the game.  You will not gain any bonus in these rounds, and your answers will not be recorded.  
-        you will be notified when the practice is over and the real game starts.
+        You will be notified when the practice is over and the real game starts.
       </p>
       </span>
     );

@@ -85,12 +85,13 @@
   .button-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Adds space between the buttons */
+    gap: 25px; /* Adds space between the buttons */
     border-radius: 30px;
     box-shadow: rgba(0,0,0,0.1);
   }
   
   .button-container button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px 25px;
+    font-size: 18px;
+    border-radius: 10px;
   }

@@ -6,6 +6,8 @@
     height: 100vh; /* Adjust the height as needed */
     padding: 30px; /* Add padding around the container */
     font-size: 25px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
   
 .trivia-container > * {

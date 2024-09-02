@@ -404,9 +404,11 @@ class Start extends Component {
       }
       if (showWelcomeToNextTask && GameCondition == "OneShot") {
         return (
-          <div className="practice-is-over">
-            <h3>Welcome to the resource allocation survey</h3>
+          <div className="trivia-container">
+            <h3><b>Welcome to the resource allocation survey</b></h3>
             <p>
+              <br></br>
+              <br></br>
             Please read the scenario and answer the following questions
             </p>
             <button onClick={this.handelHideWelcomeToNextTask}>Next</button>
@@ -470,7 +472,7 @@ class Start extends Component {
             <p>Num of YES clicks: {yesClickCount}</p>
             <p>Num of NO clicks: {noClickCount}</p>
           </DebuggerModalView>
-          <div >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', textAlign: 'center' }}>
             {currentRoundIndex < (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
             <p>Think of one of the following numbers:<br /><b>1,2,3,4,5,6<br/>keep this number in your mind.</b></p>
             <p>
