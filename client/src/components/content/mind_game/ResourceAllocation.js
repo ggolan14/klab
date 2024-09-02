@@ -1,48 +1,77 @@
 import React, { useState, useEffect } from 'react';
+import { getTimeDate } from "../../../utils/app_utils";
 
-const ResourceAllocation = ({ insertLine,sendDataToDB }) => {
+let startTimer = 0;
+let endTimer = 0;
+let totalTimer = 0;
+
+const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     const [step, setStep] = useState(1);
     const [screenOrder, setScreenOrder] = useState([4, 5]); // Initial screen order
-    const [userSelection2, setUserSelection2] = useState(4);
-    const [userSelection3, setUserSelection3] = useState(4);
-    const [userSelection4, setUserSelection4] = useState(4);
-    const [answers, setAnswers] = useState({
-        question6: "",
-        question7: "",
-        question8: "",
-        question9: "",
-    });
-  
-    
+    const [userSelection2, setUserSelection2] = useState(null);
+    const [userSelection3, setUserSelection3] = useState(null);
+    const [userSelection4, setUserSelection4] = useState(null);
+
+
+
+    const [answers, setAnswers] = useState({});
+
+
     useEffect(() => {
+        //console.log("--->  useEffect BEFORE    startTimer = "+startTimer+"   endTimer = "+endTimer+"   totalTimer = "+totalTimer)
+        //startTimer = getTimeDate().now;
+        //console.log("--->  useEffect AFTER    startTimer = "+startTimer+"   endTimer = "+endTimer+"   totalTimer = "+totalTimer)
         setScreenOrder(screenOrder.sort(() => Math.random() - 0.5));
     }, []);
 
-    const handleNext = () => {
-        console.log("-----> step="+step)
-        insertGameLine();
-        setStep(step + 1);
-      };
 
+    const handleNext = () => {
+        console.log("---> handleNext()   step= " + step + "  Current Answers Map:", answers); // Print the map here
+        console.log("--->  handleNext BEFORE    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
+        endTimer = getTimeDate().now;
+        totalTimer = endTimer - startTimer;
+        console.log("--->  handleNext AFTER    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
+
+        if (![1, 2, 3, 7, 9].includes(step)) {
+            insertGameLine();
+        }
+        setStep(step + 1);
+    };
+
+    const getQuestioType = () => {
+        switch (step) {
+            case 4:
+            case 5:
+                return "ResourceAllocation";
+            case 6:
+            case 8:
+            case 10:
+                return "Religion";
+            case 11:
+                return "FoodPreference";
+
+            default:
+                return "Unknown";
+        }
+    }
     const insertGameLine = () => {
-       
+
         const db_row = {
-            Step: step,  // total 
-            QuestionType:"ResourceAllocation",
+            ResourceQuestion: step,  // total 
+            QuestionType: getQuestioType(),
             Answer: answers[step],
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
-            Slider2: userSelection2,
-            Slider3: userSelection3,
-            Slider4: userSelection4,
-            HaveAnAnswerTime:"N/A",
-            ConfirmationTime:"N/A",
-          };
-          insertLine(db_row);
-          if(step==10){
+            TimeToAnswer: totalTimer,
+
+        };
+        insertLine(db_row);
+        if (step == 11) {
             sendDataToDB(db_row)
-          }
-      };
+        }
+    };
+
+
 
     const handleChange = (e) => {
         setAnswers({
@@ -51,150 +80,221 @@ const ResourceAllocation = ({ insertLine,sendDataToDB }) => {
         });
     };
 
+    const handleSliderChange = (sliderValue, sliderStep) => {
+        console.log("---> handleSliderChange step=" + sliderStep + " sliderValue=" + sliderValue);
+        setAnswers((prevAnswers) => ({
+            ...prevAnswers,
+            [sliderStep]: sliderValue,
+        }));
+    };
+
     const isNextDisabled = () => {
-        console.log("---> isNextDisabled    step="+step)
-        if ([6, 8, 9, 10].includes(step)) {
-            return !answers[`question${step}`];
+        console.log("---> isNextDisabled   step=" + step + "  userSelection2=" + userSelection2 + "   userSelection3=" + userSelection3 + "   userSelection4=" + userSelection4)
+        if (step == 4 && userSelection2 === null)  // if slider was not selected , disable the next button.
+            return true;
+        if (step == 5 && userSelection3 === null)
+            return true;
+        if (step == 8 && userSelection4 == null)
+            return true;
+        if ([6, 9, 10, 11].includes(step)) {  // if no answer was selected , disable next button
+            return !answers[step];
         }
+
         return false;
     };
-console.log("---> "+answers.size)
+
     return (
-        <div  className="trivia-container">
+        <div className="trivia-container">
             {step === 1 && <p>
                 Imagine that you are a manager at a large company. Two employees named Bill and James also work at the company. Bill and James both do the same job and make the same salary each year. This year, Bill and James received the same evaluations, which were the highest in the company. The company has decided to reward Bill and James for their exceptionally good work.
-                The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted. 
-                </p>}
+                The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.
+            </p>}
             {step === 2 && (
                 <div>
                     <p style={{ color: 'lightgray' }}>Imagine that you are a manager at a large company. Two employees named Bill and James also work at the company. Bill and James both do the same job and make the same salary each year. This year, Bill and James received the same evaluations, which were the highest in the company. The company has decided to reward Bill and James for their exceptionally good work.
-                        The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted. 
+                        The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.
                     </p>
                     <p style={{ color: 'black' }}>
-                        Bill and James have each been given one concert package. You have been asked to decide what to do with the third concert package. 
+                        Bill and James have each been given one concert package. You have been asked to decide what to do with the third concert package.
                     </p>
                 </div>
             )}
             {step === 3 && <p>
                 You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
+                <br></br>
+                <br></br>
                 You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
 
-                </p>}
+            </p>}
+
             {step === screenOrder[0] && (
                 <div>
                     <p style={{ color: 'lightgray' }}>
-                    You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                    You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
+                        You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
+                        <br></br>
+                        <br></br>
+                        You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
                     </p>
-                    <p style={{ color: 'black' }}>To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to you, the manager? 
+                    <p style={{ color: 'black' }}>To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to you, the manager?
                     </p>
-                    <div>
+                    <br></br>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span style={{ marginRight: '10px' }}>Not at all</span>
                         <input
                             type="range"
                             min="1"
                             max="7"
-                            value={userSelection2}
-                            onChange={(e) => setUserSelection2(e.target.value)}
+                            value={userSelection2 || ''}
+                            onChange={(e) => {
+                                setUserSelection2(e.target.value);
+                                handleSliderChange(e.target.value, 4); // Save slider value
+                            }}
+                            style={{ width: '200px', margin: '0 10px' }}
                         />
-                        <p>Your selection: {userSelection2}</p>
+                        <span style={{ marginLeft: '10px' }}>Great extent</span>
                     </div>
+                    <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
+                        {userSelection2 !== null ? (
+                            userSelection2
+                        ) : (
+                            <span style={{ color: 'red' }}> None (please select a value)</span>
+                        )}
+                    </p>
                 </div>
             )}
             {step === screenOrder[1] && (
                 <div>
                     <p style={{ color: 'lightgray' }}>
-                    You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                    You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
+                        You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
+                        <br></br>
+                        <br></br>
+                        You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
                     </p>
-                    <p style={{ color: 'black' }}>To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to chance? 
+                    <p style={{ color: 'black' }}>To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to you, the chance?
                     </p>
-                    <div>
+                    <br></br>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span style={{ marginRight: '10px' }}>Not at all</span>
                         <input
                             type="range"
                             min="1"
                             max="7"
-                            value={userSelection3}
-                            onChange={(e) => setUserSelection3(e.target.value)}
+                            value={userSelection3 || ''}
+                            onChange={(e) => {
+                                setUserSelection3(e.target.value);
+                                handleSliderChange(e.target.value, 5); // Save slider value
+                            }}
+                            style={{ width: '200px', margin: '0 10px' }}
                         />
-                        <p>Your selection: {userSelection3}</p>
+                        <span style={{ marginLeft: '10px' }}>Great extent</span>
                     </div>
+                    <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
+                        {userSelection3 !== null ? (
+                            userSelection3
+                        ) : (
+                            <span style={{ color: 'red' }}> None (please select a value)</span>
+                        )}
+                    </p>
+
+
                 </div>
             )}
             {step === 6 && (
                 <div>
                     <p>According to the scenario, what type of resource was the manager asked to decide upon? </p>
                     <div onChange={handleChange}>
-                        <label><input type="radio" name="question6" value="Option 1" /> A new computer </label><br />
-                        <label><input type="radio" name="question6" value="Option 2" /> A parking spot</label><br />
-                        <label><input type="radio" name="question6" value="Option 3" /> A concert package</label><br />
-                        <label><input type="radio" name="question6" value="Option 4" /> A large office</label><br />
-                        <label><input type="radio" name="question6" value="Option 5" /> The scenario did not specify</label><br />
+                        <label><input type="radio" name="6" value="1" /> A new computer </label><br />
+                        <label><input type="radio" name="6" value="2" /> A parking spot</label><br />
+                        <label><input type="radio" name="6" value="3" /> A concert package</label><br />
+                        <label><input type="radio" name="6" value="4" /> A large office</label><br />
+                        <label><input type="radio" name="6" value="5" /> The scenario did not specify</label><br />
                     </div>
                 </div>
             )}
 
             {step === 7 && (
                 <div>
-                    <p>You are almost done! 
-                        We have 4 last questions regarding your self-assessment and food preferences. 
+                    <p>You are almost done!
+                        <br></br>
+                        We have 4 last questions regarding your self-assessment and food preferences.
                         Please answer the questions according to your true assessment and actual preferences.
                     </p>
-                    <div>
-                        <input
-                            type="range"
-                            min="0"
-                            max="10"
-                            value={userSelection4}
-                            onChange={(e) => setUserSelection4(e.target.value)}
-                        />
-                        <p>Your selection: {userSelection4}</p>
-                    </div>
+
                 </div>
             )}
 
             {step === 8 && (
                 <div>
-                    <p>Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?</p>
-                    <div onChange={handleChange}>
-                        <label><input type="radio" name="question8" value="Every day" /> Every day</label><br />
-                        <label><input type="radio" name="question8" value="More than once a week" /> More than once a week</label><br />
-                        <label><input type="radio" name="question8" value="Once a week" /> Once a week</label><br />
-                        <label><input type="radio" name="question8" value="At least once a month" /> At least once a month</label><br />
-                        <label><input type="radio" name="question8" value="Only on special holy days" /> Only on special holy days</label><br />
-                        <label><input type="radio" name="question8" value="Less often" /> Less often</label><br />
-                        <label><input type="radio" name="question8" value="Never" /> Never</label>
-                    </div>
+                    <span style={{ marginRight: '10px' }}>Not at all religious</span>
+                    <input
+                        type="range"
+                        min="1"
+                        max="10"
+                        value={userSelection4 || ''}
+                        onChange={(e) => {
+                            setUserSelection4(e.target.value);
+                            handleSliderChange(e.target.value, 8); // Save slider value
+                        }}
+                        style={{ width: '400px', margin: '0 10px' }}
+                    />
+                    <span style={{ marginLeft: '10px' }}>Very religious</span>
+                    <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
+                        {userSelection4 !== null ? (
+                            userSelection4
+                        ) : (
+                            <span style={{ color: 'red' }}> None (please select a value)</span>
+                        )}
+                    </p>
                 </div>
+
             )}
+
             {step === 9 && (
                 <div>
-                    <p>Apart from when you are at religious services, how often, if at all, do you pray?</p>
+                    <p>Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?</p>
                     <div onChange={handleChange}>
-                    <label><input type="radio" name="question7" value="Every day" /> Every day</label><br />
-                        <label><input type="radio" name="question9" value="More than once a week" /> More than once a week</label><br />
-                        <label><input type="radio" name="question9" value="Once a week" /> Once a week</label><br />
-                        <label><input type="radio" name="question9" value="At least once a month" /> At least once a month</label><br />
-                        <label><input type="radio" name="question9" value="Only on special holy days" /> Only on special holy days</label><br />
-                        <label><input type="radio" name="question9" value="Less often" /> Less often</label><br />
-                        <label><input type="radio" name="question9" value="Never" /> Never</label>
+                        <label><input type="radio" name="9" value="1" /> Every day</label><br />
+                        <label><input type="radio" name="9" value="2" /> More than once a week</label><br />
+                        <label><input type="radio" name="9" value="3" /> Once a week</label><br />
+                        <label><input type="radio" name="9" value="4" /> At least once a month</label><br />
+                        <label><input type="radio" name="9" value="5" /> Only on special holy days</label><br />
+                        <label><input type="radio" name="9" value="6" /> Less often</label><br />
+                        <label><input type="radio" name="9" value="7" /> Never</label>
                     </div>
                 </div>
             )}
             {step === 10 && (
                 <div>
+                    <p>Apart from when you are at religious services, how often, if at all, do you pray?</p>
+                    <div onChange={handleChange}>
+                        <label><input type="radio" name="10" value="1" /> Every day</label><br />
+                        <label><input type="radio" name="10" value="2" /> More than once a week</label><br />
+                        <label><input type="radio" name="10" value="3" /> Once a week</label><br />
+                        <label><input type="radio" name="10" value="4" /> At least once a month</label><br />
+                        <label><input type="radio" name="10" value="5" /> Only on special holy days</label><br />
+                        <label><input type="radio" name="10" value="6" /> Less often</label><br />
+                        <label><input type="radio" name="10" value="7" /> Never</label>
+                    </div>
+                </div>
+            )}
+            {step === 11 && (
+                <div>
                     <p>Which of the following options best describes your dietary preferences?</p>
                     <div onChange={handleChange}>
-                        <label><input type="radio" name="question10" value="Omnivorous" /> Omnivorous (can eat everything)</label><br />
-                        <label><input type="radio" name="question10" value="Vegetarian" /> Vegetarian (do not eat meat or seafood)</label><br />
-                        <label><input type="radio" name="question10" value="Pescatarian" /> Pescatarian (eat seafood but not meat)</label><br />
-                        <label><input type="radio" name="question10" value="Flexitarian" /> Flexitarian (mostly vegetarian but occasionally eat meat or seafood)</label><br />
-                        <label><input type="radio" name="question10" value="Vegan" /> Vegan (do not eat meat, seafood, or any animal product)</label><br />
-                        <label><input type="radio" name="question10" value="Mostly vegan" /> Mostly vegan (do not eat meat or seafood, but occasionally eat eggs or milk).</label>
+                        <label><input type="radio" name="11" value="1" /> Omnivorous (can eat everything)</label><br />
+                        <label><input type="radio" name="11" value="2" /> Vegetarian (do not eat meat or seafood)</label><br />
+                        <label><input type="radio" name="11" value="3" /> Pescatarian (eat seafood but not meat)</label><br />
+                        <label><input type="radio" name="11" value="4" /> Flexitarian (mostly vegetarian but occasionally eat meat or seafood)</label><br />
+                        <label><input type="radio" name="11" value="5" /> Vegan (do not eat meat, seafood, or any animal product)</label><br />
+                        <label><input type="radio" name="11" value="6" /> Mostly vegan (do not eat meat or seafood, but occasionally eat eggs or milk).</label>
                     </div>
                 </div>
             )}
 
-            <button onClick={handleNext} disabled={isNextDisabled()}> {step < 10 ? "Next" : "Submit"}</button>
+            <button onClick={handleNext} disabled={isNextDisabled()}> {step < 11 ? "Next" : "Submit"}</button>
         </div>
     );
 };
