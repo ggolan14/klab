@@ -4,6 +4,7 @@ import { getTimeDate } from "../../../utils/app_utils";
 let startTimer = 0;
 let endTimer = 0;
 let totalTimer = 0;
+let timeForStep = 0;
 
 const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     const [step, setStep] = useState(1);
@@ -11,7 +12,8 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     const [userSelection2, setUserSelection2] = useState(null);
     const [userSelection3, setUserSelection3] = useState(null);
     const [userSelection4, setUserSelection4] = useState(null);
-
+    const [startTime, setStartTime] = useState(null);
+    const [timeSpent, setTimeSpent] = useState({});
 
 
     const [answers, setAnswers] = useState({});
@@ -23,15 +25,22 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         //console.log("--->  useEffect AFTER    startTimer = "+startTimer+"   endTimer = "+endTimer+"   totalTimer = "+totalTimer)
         setScreenOrder(screenOrder.sort(() => Math.random() - 0.5));
     }, []);
-
+    useEffect(() => {
+        // Set the start time when the step changes
+        setStartTime(getTimeDate().now);
+    }, [step]);
 
     const handleNext = () => {
-        console.log("---> handleNext()   step= " + step + "  Current Answers Map:", answers); // Print the map here
-        console.log("--->  handleNext BEFORE    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
-        endTimer = getTimeDate().now;
-        totalTimer = endTimer - startTimer;
-        console.log("--->  handleNext AFTER    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
+        //console.log("---> handleNext()   step= " + step + "  Current Answers Map:", answers); // Print the map here
+       // console.log("--->  handleNext BEFORE    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
+       // endTimer = getTimeDate().now;
+       // totalTimer = endTimer - startTimer;
+       // console.log("--->  handleNext AFTER    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
 
+       const endTime = getTimeDate().now;
+       timeForStep = endTime - startTime;
+       console.log("?????? step="+step+"  timeForStep="+timeForStep)
+       setTimeSpent(prev => ({ ...prev, [step]: timeForStep }));
         if (![1, 2, 3, 7, 9].includes(step)) {
             insertGameLine();
         }
@@ -55,14 +64,14 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         }
     }
     const insertGameLine = () => {
-
         const db_row = {
             ResourceQuestion: step,  // total 
             QuestionType: getQuestioType(),
             Answer: answers[step],
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
-            TimeToAnswer: totalTimer,
+            TimeToAnswer:   timeForStep,
+          // TimeToAnswer:   "77",
 
         };
         insertLine(db_row);
@@ -90,10 +99,17 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
 
     const isNextDisabled = () => {
         console.log("---> isNextDisabled   step=" + step + "  userSelection2=" + userSelection2 + "   userSelection3=" + userSelection3 + "   userSelection4=" + userSelection4)
-        if (step == 4 && userSelection2 === null)  // if slider was not selected , disable the next button.
+        
+        if (step==4 && (screenOrder[0] ==4 && userSelection2 === null))  // if slider was not selected , disable the next button.
             return true;
-        if (step == 5 && userSelection3 === null)
+        else if(step==4 && (screenOrder[0] ==5 && userSelection3 === null))
             return true;
+        
+        if(step==5 && (screenOrder[1] ==4 && userSelection2 === null))
+            return true;
+        else if (step==5 && (screenOrder[1] == 5 && userSelection3 === null))
+            return true;
+
         if (step == 8 && userSelection4 == null)
             return true;
         if ([6, 9, 10, 11].includes(step)) {  // if no answer was selected , disable next button
@@ -147,7 +163,8 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             value={userSelection2 || ''}
                             onChange={(e) => {
                                 setUserSelection2(e.target.value);
-                                handleSliderChange(e.target.value, 4); // Save slider value
+                              //  handleSliderChange(e.target.value, 4); // Save slider value
+                              handleSliderChange(e.target.value, screenOrder[0]); // Save slider value
                             }}
                             style={{ width: '200px', margin: '0 10px' }}
                         />
@@ -183,7 +200,8 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             value={userSelection3 || ''}
                             onChange={(e) => {
                                 setUserSelection3(e.target.value);
-                                handleSliderChange(e.target.value, 5); // Save slider value
+                               // handleSliderChange(e.target.value, 5); // Save slider value
+                               handleSliderChange(e.target.value, screenOrder[1]); // Save slider value
                             }}
                             style={{ width: '200px', margin: '0 10px' }}
                         />
