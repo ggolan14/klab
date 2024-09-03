@@ -441,9 +441,9 @@ class Start extends Component {
           <p>
             You will now play the mind-game for real bonus.<br></br>
             You will play one round of the mind game.<br></br>
-            Remember: if the number you roll is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)} bonus!
+            Remember: if the number you roll is the one you had in mind, <span style={{ textDecoration: "underline" }}>you will receive a {formatPrice(1, SignOfReward)} bonus!</span>
           </p>
-          <button onClick={this.handleHidePracticeIsOver}>Next</button>
+          <button onClick={this.handleHidePracticeIsOver}>Start real game</button>
         </div>
       )
     }
@@ -454,9 +454,10 @@ class Start extends Component {
           <p>
             You will now play the mind-game for real bonus.<br></br>
             You will play 40 rounds of the mind game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, you will receive a {formatPrice(1,SignOfReward)} bonus!
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct number is the one you had in mind, 
+            <span style={{ textDecoration: "underline" }}>you will receive a {formatPrice(1, SignOfReward)} bonus!</span>
           </p>
-          <button onClick={this.handleHidePracticeIsOver}>Next</button>
+          <button onClick={this.handleHidePracticeIsOver}>Start real game</button>
         </div>
       )
     }
