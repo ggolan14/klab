@@ -31,16 +31,9 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     }, [step]);
 
     const handleNext = () => {
-        //console.log("---> handleNext()   step= " + step + "  Current Answers Map:", answers); // Print the map here
-       // console.log("--->  handleNext BEFORE    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
-       // endTimer = getTimeDate().now;
-       // totalTimer = endTimer - startTimer;
-       // console.log("--->  handleNext AFTER    startTimer = " + startTimer + "   endTimer = " + endTimer + "   totalTimer = " + totalTimer)
-
-       const endTime = getTimeDate().now;
-       timeForStep = endTime - startTime;
-       console.log("?????? step="+step+"  timeForStep="+timeForStep)
-       setTimeSpent(prev => ({ ...prev, [step]: timeForStep }));
+        const endTime = getTimeDate().now;
+        timeForStep = endTime - startTime;
+        setTimeSpent(prev => ({ ...prev, [step]: timeForStep }));
         if (![1, 2, 3, 7, 9].includes(step)) {
             insertGameLine();
         }
@@ -70,9 +63,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
             Answer: answers[step],
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
-            TimeToAnswer:   timeForStep,
-          // TimeToAnswer:   "77",
-
+            TimeToAnswer: timeForStep,
         };
         insertLine(db_row);
         if (step == 11) {
@@ -99,15 +90,15 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
 
     const isNextDisabled = () => {
         console.log("---> isNextDisabled   step=" + step + "  userSelection2=" + userSelection2 + "   userSelection3=" + userSelection3 + "   userSelection4=" + userSelection4)
-        
-        if (step==4 && (screenOrder[0] ==4 && userSelection2 === null))  // if slider was not selected , disable the next button.
+
+        if (step == 4 && (screenOrder[0] == 4 && userSelection2 === null))  // if slider was not selected , disable the next button.
             return true;
-        else if(step==4 && (screenOrder[0] ==5 && userSelection3 === null))
+        else if (step == 4 && (screenOrder[0] == 5 && userSelection3 === null))
             return true;
-        
-        if(step==5 && (screenOrder[1] ==4 && userSelection2 === null))
+
+        if (step == 5 && (screenOrder[1] == 4 && userSelection2 === null))
             return true;
-        else if (step==5 && (screenOrder[1] == 5 && userSelection3 === null))
+        else if (step == 5 && (screenOrder[1] == 5 && userSelection3 === null))
             return true;
 
         if (step == 8 && userSelection4 == null)
@@ -147,35 +138,63 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                 <div>
                     <p style={{ color: 'lightgray' }}>
                         You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                        <br></br>
-                        <br></br>
+                        <br />
+                        <br />
                         You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
                     </p>
-                    <p style={{ color: 'black' }}>To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to you, the manager?
+                    <p style={{ color: 'black' }}>
+                        To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to chance?
                     </p>
-                    <br></br>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ marginRight: '10px' }}>Not at all</span>
-                        <input
-                            type="range"
-                            min="1"
-                            max="7"
-                            value={userSelection2 || ''}
-                            onChange={(e) => {
-                                setUserSelection2(e.target.value);
-                              //  handleSliderChange(e.target.value, 4); // Save slider value
-                              handleSliderChange(e.target.value, screenOrder[0]); // Save slider value
+                    <br />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                        {/* Slider and labels */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ marginRight: '12px' }}>Not at all</span>
+                            <input
+                                type="range"
+                                min="1"
+                                max="7"
+                                step="1"
+                                value={userSelection2 || ''}
+                                onChange={(e) => {
+                                    setUserSelection2(e.target.value);
+                                    handleSliderChange(e.target.value, screenOrder[0]); // Save slider value
+                                }}
+                                style={{
+                                    width: '350px',  // Width of the slider
+                                    margin: '0 5px',
+                                    appearance: 'none',
+                                    background: '#ddd',
+                                }}
+                            />
+                            <span style={{ marginLeft: '10px' }}>Great extent</span>
+                        </div>
+
+                        {/* Numbers below the slider */}
+                        <div
+                            style={{
+                                display: 'grid',
+                                gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
+                                width: '370px',  // Same width as the slider
+                                marginTop: '5px',
+
                             }}
-                            style={{ width: '200px', margin: '0 10px' }}
-                        />
-                        <span style={{ marginLeft: '10px' }}>Great extent</span>
+                        >
+                            {Array.from({ length: 7 }, (_, i) => (
+                                <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                            ))}
+                        </div>
                     </div>
+
+
+
                     <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
                         {userSelection2 !== null ? (
                             userSelection2
                         ) : (
-                            <span style={{ color: 'red' }}> None (please select a value)</span>
+                            <span style={{ color: 'red' }}>None (please select a value)</span>
                         )}
                     </p>
                 </div>
@@ -184,41 +203,68 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                 <div>
                     <p style={{ color: 'lightgray' }}>
                         You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                        <br></br>
-                        <br></br>
+                        <br />
+                        <br />
                         You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
                     </p>
-                    <p style={{ color: 'black' }}>To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to you, the chance?
+                    <p style={{ color: 'black' }}>
+                        To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to chance?
                     </p>
-                    <br></br>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ marginRight: '10px' }}>Not at all</span>
-                        <input
-                            type="range"
-                            min="1"
-                            max="7"
-                            value={userSelection3 || ''}
-                            onChange={(e) => {
-                                setUserSelection3(e.target.value);
-                               // handleSliderChange(e.target.value, 5); // Save slider value
-                               handleSliderChange(e.target.value, screenOrder[1]); // Save slider value
+                    <br />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                        {/* Slider and labels */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ marginRight: '12px' }}>Not at all</span>
+                            <input
+                                type="range"
+                                min="1"
+                                max="7"
+                                step="1"
+                                value={userSelection3 || ''}
+                                onChange={(e) => {
+                                    setUserSelection3(e.target.value);
+                                    handleSliderChange(e.target.value, screenOrder[1]); // Save slider value
+                                }}
+                                style={{
+                                    width: '350px',  // Width of the slider
+                                    margin: '0 5px',
+                                    appearance: 'none',
+                                    background: '#ddd',
+                                }}
+                            />
+                            <span style={{ marginLeft: '10px' }}>Great extent</span>
+                        </div>
+
+                        {/* Numbers below the slider */}
+                        <div
+                            style={{
+                                display: 'grid',
+                                gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
+                                width: '370px',  // Same width as the slider
+                                marginTop: '5px',
+
                             }}
-                            style={{ width: '200px', margin: '0 10px' }}
-                        />
-                        <span style={{ marginLeft: '10px' }}>Great extent</span>
+                        >
+                            {Array.from({ length: 7 }, (_, i) => (
+                                <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                            ))}
+                        </div>
                     </div>
+
+
+
                     <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
                         {userSelection3 !== null ? (
                             userSelection3
                         ) : (
-                            <span style={{ color: 'red' }}> None (please select a value)</span>
+                            <span style={{ color: 'red' }}>None (please select a value)</span>
                         )}
                     </p>
-
-
                 </div>
             )}
+
             {step === 6 && (
                 <div>
                     <p>According to the scenario, what type of resource was the manager asked to decide upon? </p>
@@ -245,31 +291,64 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
 
             {step === 8 && (
                 <div>
-                    <span style={{ marginRight: '10px' }}>Not at all religious</span>
-                    <input
-                        type="range"
-                        min="1"
-                        max="10"
-                        value={userSelection4 || ''}
-                        onChange={(e) => {
-                            setUserSelection4(e.target.value);
-                            handleSliderChange(e.target.value, 8); // Save slider value
-                        }}
-                        style={{ width: '400px', margin: '0 10px' }}
-                    />
-                    <span style={{ marginLeft: '10px' }}>Very religious</span>
+                    <p style={{ color: 'black' }}>
+                        Regardless of whether you belong to a particular religion, how religious would you say you are?
+                    </p>
+                    <br></br>
+                    <br></br>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                        {/* Slider and labels */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ marginRight: '12px' }}>Not at all</span>
+                            <input
+                                type="range"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value={userSelection4 || ''}
+                                onChange={(e) => {
+                                    setUserSelection4(e.target.value);
+                                    handleSliderChange(e.target.value, 8); // Save slider value
+                                }}
+                                style={{
+                                    width: '350px',  // Width of the slider
+                                    margin: '0 5px',
+                                    appearance: 'none',
+                                    background: '#ddd',
+                                }}
+                            />
+                            <span style={{ marginLeft: '10px' }}>Great extent</span>
+                        </div>
+
+                        {/* Numbers below the slider */}
+                        <div
+                            style={{
+                                display: 'grid',
+                                gridTemplateColumns: `repeat(10, 1fr)`, // 7 equally spaced columns
+                                width: '370px',  // Same width as the slider
+                                marginTop: '5px',
+
+                            }}
+                        >
+                            {Array.from({ length: 10 }, (_, i) => (
+                                <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                            ))}
+                        </div>
+                    </div>
+
+
+
                     <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
                         {userSelection4 !== null ? (
                             userSelection4
                         ) : (
-                            <span style={{ color: 'red' }}> None (please select a value)</span>
+                            <span style={{ color: 'red' }}>None (please select a value)</span>
                         )}
                     </p>
                 </div>
-
             )}
-
             {step === 9 && (
                 <div>
                     <p>Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?</p>
