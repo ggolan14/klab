@@ -61,6 +61,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
             ResourceQuestion: step,  // total 
             QuestionType: getQuestioType(),
             Answer: answers[step],
+            Keyword: getQuestioType(),
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
             TimeToAnswer: timeForStep,
