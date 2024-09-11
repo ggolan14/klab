@@ -3,6 +3,7 @@
   {
     "id":"0",
     "question": "What is the tiny piece at the end of a shoelace called?",
+	  "keyword": "Practice",
     "answers": [
       {"option": "A", "text": "Shoe stopper"},
       {"option": "B", "text": "Lace Knob"},
@@ -16,6 +17,7 @@
   {
     "id":"0",
     "question": "Originally, Amazon only sold what kind of product?",
+    "keyword": "Practice",
     "answers": [
       {"option": "A", "text": "Books"},
       {"option": "B", "text": "Food"},
@@ -29,6 +31,7 @@
   {
     "id":"0",
     "question": "Who was the only British Pope ever?",
+    "keyword": "Practice",
     "answers": [
       {"option": "A", "text": "Alexander VI"},
       {"option": "B", "text": "Clement VII"},
@@ -43,6 +46,7 @@
   {
     "id":"1",
     "question": "What is the capital city of Mongolia?",
+    "keyword": "Mongolia",
     "answers": [
       {"option": "A", "text": "Moshkntar"},
       {"option": "B", "text": "Astana"},
@@ -56,7 +60,8 @@
   {
     "id":"2",
     "question": "Which philosopher is associated with the concept of the veil of ignorance?",
-    "answers": [
+    "keyword": "Veil_ignorance",
+	"answers": [
       {"option": "A", "text": "John Stuart Mill"},
       {"option": "B", "text": "Immanuel Kant"},
       {"option": "C", "text": "John Rawls"},
@@ -69,6 +74,7 @@
   {
     "id":"3",
     "question": "Which ancient civilization built the city of Machu Picchu?",
+    "keyword": "Machu_picchu",
     "answers": [
       {"option": "A", "text": "Aztecs"},
       {"option": "B", "text": "Egyptians"},
@@ -82,6 +88,7 @@
   {
     "id":"4",
     "question": "In Greek mythology, who is the goddess of Home family, and domesticity?",
+    "keyword": "Goddess_of_home",
     "answers": [
       {"option": "A", "text": "Aphrodite"},
       {"option": "B", "text": "Hera"},
@@ -95,6 +102,7 @@
   {
     "id":"5",
     "question": "What is the term for the psychological phenomenon where people of higher ability tend to perform lower than their actual ability in competitive situations?",
+    "keyword": "Dunning_Kruger ",
     "answers": [
       {"option": "A", "text": "AphroDunning-Kruger effect"},
       {"option": "B", "text": "Imposter syndrome"},
@@ -107,20 +115,22 @@
   },
   {
     "id":"6",
-    "question": "How many legs does a cat have?",
+    "question": "What is the capital city of Eritrea?",
+    "keyword": "Eritrea",
     "answers": [
-      {"option": "A", "text": "Two"},
-      {"option": "B", "text": "Four"},
-      {"option": "C", "text": "Six"},
-      {"option": "D", "text": "Eight"},
-      {"option": "E", "text": "Ten"},
-      {"option": "F", "text": "Twelve"}
+      {"option": "A", "text": "Addis Ababa"},
+      {"option": "B", "text": "Mogadishu"},
+      {"option": "C", "text": "Asmara"},
+      {"option": "D", "text": "Khartoum"},
+      {"option": "E", "text": "Djibouti"},
+      {"option": "F", "text": "Kigali"}
     ],
-    "correct_answer": "B"
+    "correct_answer": "C"
   },
   {
     "id":"7",
     "question": "Who was the architect of the United States Capitol building in Washington, D.C?",
+    "keyword": "Capitol_architect",
     "answers": [
       {"option": "A", "text": "Frank Lloyd Wright"},
       {"option": "B", "text": "I. M. Pei"},
@@ -134,6 +144,7 @@
   {
     "id":"8",
     "question": "Which famous physicist developed the theory of general relativity?",
+    "keyword": "Relativity_theory",
     "answers": [
       {"option": "A", "text": "Isaac Newton"},
       {"option": "B", "text": "Niels Bohr"},
@@ -147,6 +158,7 @@
   {
     "id":"9",
     "question": "Who was the first name of the mathematician responsible for Fermat's Last Theorem?",
+    "keyword": "Fermat_name",
     "answers": [
       {"option": "A", "text": "Simon"},
       {"option": "B", "text": "Carl"},
@@ -160,6 +172,7 @@
   {
     "id":"10",
     "question": "Which element is the most abundant in the Earth's crust?",
+    "keyword": "Earth_element",
     "answers": [
       {"option": "A", "text": "Iron"},
       {"option": "B", "text": "Oxygen"},
@@ -173,6 +186,7 @@
   {
     "id":"11",
     "question": "Which ancient Greek mathematician is credited with the discovery of the method of exhaustion, a precursor to calculus?",
+    "keyword": "Method_exhaustion",
     "answers": [
       {"option": "A", "text": "Euclid"},
       {"option": "B", "text": "Pythagoras"},
@@ -186,6 +200,7 @@
   {
     "id":"12",
     "question": "Who wrote the classic novel One Hundred Years of Solitude?",
+    "keyword": "Solitude_author",
     "answers": [
       {"option": "A", "text": "Gabriel García Márquez"},
       {"option": "B", "text": "Isabel Allende"},
@@ -199,6 +214,7 @@
   {
     "id":"13",
     "question": "What is the chemical symbol for the element gold?",
+    "keyword": "Gold",
     "answers": [
       {"option": "A", "text": "Au"},
       {"option": "B", "text": "Ag"},
@@ -212,6 +228,7 @@
   {
     "id":"14",
     "question": "In which year did the Russian Revolution, leading to the establishment of the Soviet Union, take place?",
+    "keyword": "Year_USSR",
     "answers": [
       {"option": "A", "text": "1905"},
       {"option": "B", "text": "1917"},
@@ -225,6 +242,7 @@
   {
     "id":"15",
     "question": "Which ancient civilization developed the first known positional numeral system, the precursor to our modern number system?",
+    "keyword": "Numeral_system",
     "answers": [
       {"option": "A", "text": "Roman"},
       {"option": "B", "text": "Babylonian"},
@@ -238,6 +256,7 @@
   {
     "id":"16",
     "question": "Which Shakespearean play features the famous line, To be, or not to be: that is the question?",
+    "keyword": "Hamlet",
     "answers": [
       {"option": "A", "text": "Hamlet"},
       {"option": "B", "text": "Macbeth"},
@@ -251,6 +270,7 @@
   {
     "id":"17",
     "question": "Which chemical element has the highest melting point?",
+    "keyword": "Melting_point",
     "answers": [
       {"option": "A", "text": "Tungsten"},
       {"option": "B", "text": "Platinum"},
@@ -264,6 +284,7 @@
   {
     "id":"18",
     "question": "In which year did the first modern Olympic Games take place?",
+    "keyword": "Year_olympic",
     "answers": [
       {"option": "A", "text": "1886"},
       {"option": "B", "text": "1892"},
@@ -277,6 +298,7 @@
   {
     "id":"19",
     "question": "What is the name of the theoretical framework that aims to reconcile general relativity and quantum mechanics?",
+    "keyword": "String_theory",
     "answers": [
       {"option": "A", "text": "Quantum field theory"},
       {"option": "B", "text": "Loop quantum gravity"},
@@ -290,6 +312,7 @@
   {
     "id":"20",
     "question": "In computer science, what does the acronym DNS stand for?",
+    "keyword": "DNS",
     "answers": [
       {"option": "A", "text": "Dynamic Network Services"},
       {"option": "B", "text": "Domain Name System"},
@@ -302,20 +325,22 @@
   },
   {
     "id":"21",
-    "question": "What is the capital of France?",
+    "question": "Which African country has the largest population?",
+    "keyword": "African_population",
     "answers": [
-      {"option": "A", "text": "Berlin"},
-      {"option": "B", "text": "Madrid"},
-      {"option": "C", "text": "Paris"},
-      {"option": "D", "text": "Rome"},
-      {"option": "E", "text": "London"},
-      {"option": "F", "text": "Beijing"}
+      {"option": "A", "text": "Nigeria"},
+      {"option": "B", "text": "Ethiopia"},
+      {"option": "C", "text": "Egypt"},
+      {"option": "D", "text": "South Africa"},
+      {"option": "E", "text": "Democratic Republic of the Congo"},
+      {"option": "F", "text": "Tanzania"}
     ],
-    "correct_answer": "C"
+    "correct_answer": "A"
   },
   {
     "id":"22",
     "question": "Which country was the first non-host to win the FIFA World Cup twice consecutively, achieving this feat in 1934 and 1938?",
+    "keyword": "FIFA_twice",
     "answers": [
       {"option": "A", "text": "Brazil"},
       {"option": "B", "text": "Italy"},
@@ -329,6 +354,7 @@
   {
     "id":"23",
     "question": "What ancient civilization is credited with the invention of the wheel?",
+    "keyword": "Wheel",
     "answers": [
       {"option": "A", "text": "Roman"},
       {"option": "B", "text": "Greek"},
@@ -342,6 +368,7 @@
   {
     "id":"24",
     "question": "Who composed the famous classical piece The Four Seasons?",
+    "keyword": "Four_seasons",
     "answers": [
       {"option": "A", "text": "Ludwig van Beethoven"},
       {"option": "B", "text": "Wolfgang Amadeus Mozart"},
@@ -355,6 +382,7 @@
   {
     "id":"25",
     "question": "What is the capital city of Bhutan?",
+    "keyword": "Bhutan",
     "answers": [
       {"option": "A", "text": "Kathmandu"},
       {"option": "B", "text": "Thimphu"},
@@ -368,6 +396,7 @@
   {
     "id":"26",
     "question": "In literature, what does the term bildungsroman refer to?",
+    "keyword": "bildungsroman",
     "answers": [
       {"option": "A", "text": "Epic poem"},
       {"option": "B", "text": "Coming-of-age novel"},
@@ -381,6 +410,7 @@
   {
     "id":"27",
     "question": "Which planet is known as the Morning Star or the Evening Star and is often visible shortly before sunrise or after sunset?",
+    "keyword": "Morning_star",
     "answers": [
       {"option": "A", "text": "Mars"},
       {"option": "B", "text": "Venus"},
@@ -394,6 +424,7 @@
   {
     "id":"28",
     "question": "What is the primary component of Earth's atmosphere?",
+    "keyword": "Earth_atmosphere",
     "answers": [
       {"option": "A", "text": "Oxygen"},
       {"option": "B", "text": "Nitrogen"},
@@ -407,6 +438,7 @@
   {
     "id":"29",
     "question": "What is the largest planet in our solar system?",
+    "keyword": "Largest_planet",
     "answers": [
       {"option": "A", "text": "Earth"},
       {"option": "B", "text": "Jupiter"},
@@ -420,6 +452,7 @@
   {
     "id":"30",
     "question": "Who wrote the dystopian novel Brave New World?",
+    "keyword": "Brave_world_author",
     "answers": [
       {"option": "A", "text": "Aldous Huxley"},
       {"option": "B", "text": "George Orwell"},
@@ -433,6 +466,7 @@
   {
     "id":"31",
     "question": "Which famous detective novel features the fictional detective Hercule Poirot?",
+    "keyword": "Orient_express",
     "answers": [
       {"option": "A", "text": "The Hound of the Baskervilles"},
       {"option": "B", "text": "Murder on the Orient Express"},
@@ -446,6 +480,7 @@
   {
     "id":"32",
     "question": "Which programming language is known for its use in statistical computing and analysis?",
+    "keyword": "R",
     "answers": [
       {"option": "A", "text": "Python"},
       {"option": "B", "text": "R"},
@@ -459,6 +494,7 @@
   {
     "id":"33",
     "question": "Which of the following mathematical constants represents the ratio of a circle's circumference to its diameter?",
+    "keyword": "Pi",
     "answers": [
       {"option": "A", "text": "π"},
       {"option": "B", "text": "φ"},
@@ -472,6 +508,7 @@
   {
     "id":"34",
     "question": "Who is the author of the science fiction novel Dune?",
+    "keyword": "Dune_author",
     "answers": [
       {"option": "A", "text": "Isaac Asimov"},
       {"option": "B", "text": "Arthur C. Clarke"},
@@ -484,20 +521,22 @@
   },
   {
     "id":"35",
-    "question": "What is the currency of the United States?",
+    "question": "Which planet in our solar system has the longest day?",
+    "keyword": "Longest_day",
     "answers": [
-      {"option": "A", "text": "Euro"},
-      {"option": "B", "text": "Pound Sterling"},
-      {"option": "C", "text": "Yen"},
-      {"option": "D", "text": "Dollar"},
-      {"option": "E", "text": "Rupee"},
-      {"option": "F", "text": "Peso"}
+      {"option": "A", "text": "Earth"},
+      {"option": "B", "text": "Venus"},
+      {"option": "C", "text": "Jupiter"},
+      {"option": "D", "text": "Mars"},
+      {"option": "E", "text": "Saturn"},
+      {"option": "F", "text": "Uranus"}
     ],
-    "correct_answer": "D"
+    "correct_answer": "B"
   },
   {
     "id":"36",
     "question": "Who is the famous fictional spy created by author Ian Fleming?",
+    "keyword": "Spy_fleming",
     "answers": [
       {"option": "A", "text": "Jason Bourne"},
       {"option": "B", "text": "Jack Ryan"},
@@ -511,6 +550,7 @@
   {
     "id":"37",
     "question": "Which ancient Greek philosopher is often referred to as the Laughing Philosopher?",
+    "keyword": "Laughing_philosopher",
     "answers": [
       {"option": "A", "text": "Socrates"},
       {"option": "B", "text": "Democritus"},
@@ -524,6 +564,7 @@
   {
     "id":"38",
     "question": "In which country would you find the ancient city of Petra, famous for its rock-cut architecture",
+    "keyword": "Petra",
     "answers": [
       {"option": "A", "text": "Greece"},
       {"option": "B", "text": "Italy"},
@@ -537,6 +578,7 @@
   {
     "id":"39",
     "question": "In literature, which Shakespearean play features the character Iago as its primary antagonist?",
+    "keyword": "Lago",
     "answers": [
       {"option": "A", "text": "Hamlet"},
       {"option": "B", "text": "Macbeth"},
@@ -550,6 +592,7 @@
   {
     "id":"40",
     "question": "What is the term for the phenomenon where a liquid spontaneously moves up a narrow tube against the force of gravity?",
+    "keyword": "Liquid_tube",
     "answers": [
       {"option": "A", "text": "Capillary action"},
       {"option": "B", "text": "Osmotic pressure"},
@@ -563,6 +606,7 @@
   {
     "id":"41",
     "question": "DUMMY",
+    "keyword": "DUMMY",
     "answers": [
       {"option": "A", "text": "DUMMY"},
       {"option": "B", "text": "DUMMY"},

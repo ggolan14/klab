@@ -47,6 +47,7 @@ class FoodPreference extends Component {
         QuestionIndex: currentQuestionIndex,  // total 
         QuestionType:"FoodPreference",
         Answer: answer,
+        Keyword: "N/A",
         TotalYesAnswers: "N/A",
         TotalNoAnswers: "N/A",
         GameCondition: GameCondition,

@@ -157,6 +157,7 @@ class Start extends Component {
             QuestionIndex: currentQuestionIndex,  // total 
             QuestionType: currentQuestionIndex < NUM_OF_PRACTICE_QUESTIONS ? "Practice" : "Trivia",
             Answer: 1,
+            Keyword: trivia_questions[currentQuestionIndex].keyword,
             TotalYesAnswers: this.state.yesClickCount,
             TotalNoAnswers: this.state.noClickCount,
             GameCondition: GameCondition,
@@ -185,6 +186,7 @@ class Start extends Component {
           QuestionIndex: currentQuestionIndex,
           QuestionType: currentQuestionIndex < NUM_OF_PRACTICE_QUESTIONS ? "Practice" : "Trivia",
           Answer: 0,
+          Keyword: trivia_questions[currentQuestionIndex].keyword,
           TotalYesAnswers: this.state.yesClickCount,
           TotalNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
