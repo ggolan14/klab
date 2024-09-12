@@ -27,6 +27,7 @@ let totalTimer=0;
 let SignOfReward = '$';
 let isStatic = true;
 let transform;
+let extended_name;
 const yesButtonInRight = Math.random() < 0.5;
 
 
@@ -38,11 +39,13 @@ class Start extends Component {
     //let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
-    NUM_OF_REPEATED_REAL_ROUNDS = props.game_settings.game.num_of_real_rounds;
+    NUM_OF_REPEATED_REAL_ROUNDS = 40;
     SignOfReward = props.game_settings.payments.sign_of_reward;
 
+    extended_name = props.game_settings.game.extended_name;
+    console.log("---> extended_name="+extended_name) ;
     let cond = props.game_settings.game.cond;
-
+    
     if (cond === 'o') {
       GameCondition = 'OneShot';
     }
@@ -67,7 +70,7 @@ class Start extends Component {
       }
     }
     lastIndex = GameCondition == 'OneShot' ? NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + 1 : NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + NUM_OF_REPEATED_REAL_ROUNDS
-
+    console.log("------------------> Exp= "+ThisExperiment+"-"+GameCondition+"  lastIndex="+lastIndex)
 
     this.state = {
       currentRoundIndex: 0,
@@ -197,6 +200,7 @@ class Start extends Component {
           TotalNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
           IsThisTheNumberConfirmationTime: totalTimer,
+          Game:(!extended_name) ? "MindGame" : extended_name,
 
         };
         this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');

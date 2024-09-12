@@ -417,38 +417,46 @@ const insertPayment = (payment) => {
 };
 
 const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr}) => {
-    let contition=""
+    const additionalParams = {};
+    const extended_name="";
     const TRIVIA_ONE_SHOT = 0;
     const MIND_GAME_REPEATED = 1;
     const TRIVIA_REPEATED = 2;
     const MIND_GAME_ONE_SHOT = 3;
 
-
+    additionalParams.num_of_real_rounds = game_settings.game.num_of_real_rounds;
     if(exp==="MixedGame"){
         let RunCounter = KeyTableID();
         let type=RunCounter%4
         if(type==TRIVIA_ONE_SHOT){
-            exp="Trivia"
-            contition="o"
+            exp="Trivia";
+            additionalParams.cond = "o";
+            additionalParams.extended_name="MIXED_TRIVIA_ONE_SHOT";
         }else if(type==MIND_GAME_REPEATED){
-            exp="MindGame"
-            contition="r"
+            exp="MindGame";
+            additionalParams.cond = "r";
+            additionalParams.extended_name="MIXED_MIND_GAME_REPEATED";
         }else if(type==TRIVIA_REPEATED){
-            exp="Trivia"
-            contition="r"
+            exp="Trivia";
+            additionalParams.cond = "r";
+            additionalParams.extended_name="MIXED_TRIVIA_REPEATED";
         }else if(type==MIND_GAME_ONE_SHOT){
-            exp="MindGame"
-            contition="o"
+            exp="MindGame";
+            additionalParams.cond = "o";
+            additionalParams.extended_name="MIXED_MIND_GAME_ONE_SHOT";
         }
     }else{
-        contition=game_settings.game.cond;
+        additionalParams.cond = game_settings.game.cond;
     }
 
-    const setCondForComponent = (componentType, game_settings,newVal) => {
-        const newGameSettings = {...game_settings};
+
+    const setCondForComponent = (componentType, game_settings, additionalParams) => {
+        const newGameSettings = { ...game_settings };
         if (componentType === "Trivia" || componentType === "MindGame") {
-            newGameSettings.game.cond = newVal;
-        } 
+            Object.keys(additionalParams).forEach((key) => {
+                newGameSettings.game[key] = additionalParams[key];
+            });
+        }
         return newGameSettings;
     };
 
@@ -476,9 +484,9 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
     };
     
     const game_list = {
-        MixedGame:<MixedGameStart {...game_props}/>,
-        MindGame: <MindGameStart {...game_props} game_settings={setCondForComponent("MindGame", game_settings,contition)} />,
-        Trivia: <TriviaStart {...game_props} game_settings={setCondForComponent("Trivia", game_settings,contition)} />,
+        MixedGame:<MixedGameStart {...game_props} extended_name={extended_name} />,
+        MindGame: <MindGameStart {...game_props} game_settings={setCondForComponent("MindGame", game_settings, additionalParams)} />,
+        Trivia: <TriviaStart {...game_props} game_settings={setCondForComponent("Trivia", game_settings, additionalParams)} />,
         TryOrGiveUp: <TryOrGiveUpStart {...game_props}/>,
         PointsGame: <PointsGameStart {...game_props}/>,
         PointsGameSh: <PointsGameShStart/>,

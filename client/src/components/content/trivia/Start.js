@@ -30,6 +30,8 @@ class Start extends Component {
     super(props);
     this.TotalBonus = [];
     let RunCounter = KeyTableID();
+    let extended_name = props.game_settings.game.extended_name;
+    console.log("---> extended_name="+extended_name) ;
     let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
