@@ -62,7 +62,7 @@ class Start extends Component {
     } else {
       lastIndex = 43; // 3 practice questions + 40 trivia questions
     }
-
+    console.log("------------------> Exp= "+ThisExperiment+"-"+GameCondition+"  lastIndex="+lastIndex)
 
     this.state = {
       currentQuestionIndex: 0,
@@ -421,18 +421,19 @@ class Start extends Component {
                   <>
                     {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
                     <p>Correct answer is: {correctAnswer}</p>
+                    <br></br>
                     <p>Is this the answer you had in mind?</p>
 
                     {yesButtonInRight ?
-                      (<>
+                      (<div style={{ marginLeft: '60px', display: 'flex', gap: '15px' }}>
                         <button onClick={() => this.handleConfirmation(false)}>No</button>
                         <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                      </>
+                      </div>
                       ) : (
-                        <>
+                        <div style={{ marginLeft: '60px', display: 'flex', gap: '15px' }}>
                           <button onClick={() => this.handleConfirmation(true)}>Yes</button>
                           <button onClick={() => this.handleConfirmation(false)}>No</button>
-                        </>
+                        </div>
                       )}
 
                     {GameCondition == "OneShot" ?
