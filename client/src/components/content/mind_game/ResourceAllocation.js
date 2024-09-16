@@ -144,7 +144,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                         You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
                     </p>
                     <p style={{ color: 'black' }}>
-                        To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to chance?
+                        To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to manager?
                     </p>
                     <br />
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
