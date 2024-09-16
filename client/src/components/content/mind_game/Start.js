@@ -36,13 +36,14 @@ class Start extends Component {
     super(props);
     this.TotalBonus = [];
     let RunCounter = KeyTableID();
+
     //let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
     NUM_OF_REPEATED_REAL_ROUNDS = 40;
     SignOfReward = props.game_settings.payments.sign_of_reward;
 
-    extended_name = props.game_settings.game.extended_name;
+    this.extended_name = props.game_settings.game.extended_name;
     console.log("---> extended_name="+extended_name) ;
     let cond = props.game_settings.game.cond;
     
@@ -174,6 +175,7 @@ class Start extends Component {
             TotalNoAnswers: this.state.noClickCount,
             GameCondition: GameCondition,
             IsThisTheNumberConfirmationTime: totalTimer,
+            Game: !this.extended_name ? "MindGame" : this.extended_name,
           };
 
 
@@ -200,7 +202,7 @@ class Start extends Component {
           TotalNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
           IsThisTheNumberConfirmationTime: totalTimer,
-          Game:"MindGame",
+          Game: !this.extended_name ? "MindGame" : this.extended_name,
 
         };
         this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');

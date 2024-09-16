@@ -166,7 +166,7 @@ class Start extends Component {
             GameCondition: GameCondition,
             HaveAnAnswerTime: totalShowQuestionTime,
             ConfirmationTime: totalShowConfirmationTime,
-            Game: "Trivia",
+            Game: !this.extended_name ? "Trivia" : this.extended_name,
                       
           };
 
@@ -196,7 +196,7 @@ class Start extends Component {
           GameCondition: GameCondition,
           HaveAnAnswerTime: totalShowQuestionTime,
           ConfirmationTime: totalShowConfirmationTime,
-
+          Game: !this.extended_name ? "Trivia" : this.extended_name,
         };
 
 
