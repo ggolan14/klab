@@ -200,7 +200,7 @@ class Start extends Component {
           TotalNoAnswers: this.state.noClickCount,
           GameCondition: GameCondition,
           IsThisTheNumberConfirmationTime: totalTimer,
-          Game:(!extended_name) ? "MindGame" : extended_name,
+          Game:"MindGame",
 
         };
         this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');

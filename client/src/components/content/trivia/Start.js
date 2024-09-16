@@ -22,6 +22,7 @@ let startShowConfirmationTimer = 0;
 let endShowConfirmationTimer = 0;
 let totalShowQuestionTime = 0;
 let totalShowConfirmationTime = 0;
+//let extended_name;
 const yesButtonInRight = Math.random() < 0.5;
 
 
@@ -30,8 +31,8 @@ class Start extends Component {
     super(props);
     this.TotalBonus = [];
     let RunCounter = KeyTableID();
-    let extended_name = props.game_settings.game.extended_name;
-    console.log("---> extended_name="+extended_name) ;
+    this.extended_name = props.game_settings.game.extended_name;
+    console.log("---> extended_name="+this.extended_name) ;
     let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
@@ -166,7 +167,7 @@ class Start extends Component {
             HaveAnAnswerTime: totalShowQuestionTime,
             ConfirmationTime: totalShowConfirmationTime,
             Game: "Trivia",
-           
+                      
           };
 
          
@@ -316,13 +317,14 @@ class Start extends Component {
     // Check if currentQuestionIndex is equal to 3
     const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentQuestionIndex == NUM_OF_PRACTICE_QUESTIONS;
     const repeatedLast = GameCondition == "Repeated" && !showConfirmation && currentQuestionIndex === questions.length - 1;
+    const tempString = GameCondition == "OneShot" ? "resource allocation" : "food preferance"
     if (oneShotLast || repeatedLast) {
       if (!hideTriviaCompleted) {
         return (
           <div className="practice-is-over">
             <h3>You completed the “trivia-game”</h3>
             <p>
-            You will now fill out a short resource allocation survey. 
+            You will now fill out a short {tempString} survey. 
             Note that you cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
             </p>
             <button onClick={this.handelHideTriviaCompleted}>Next</button>
