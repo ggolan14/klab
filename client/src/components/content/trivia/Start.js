@@ -98,6 +98,7 @@ class Start extends Component {
   };
 
   handleHideMessages = () => {
+    startShowQuestionTimer = getTimeDate().now;
     this.setState({ hideMessages: true });
   }
 

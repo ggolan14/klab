@@ -168,7 +168,7 @@ class Start extends Component {
           showConfirmation: false,
         }), () => {
           const db_row = {
-            RoundIndex: currentRoundIndex,  // total 
+            RoundIndex: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? 0 : currentRoundIndex-NUM_OF_PRACTICE_ROUNDS,
             RoundType: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
             Answer: 1,
             TotalYesAnswers: this.state.yesClickCount,
@@ -195,7 +195,7 @@ class Start extends Component {
         showConfirmation: false,
       }), () => {
         const db_row = {
-          RoundIndex: currentRoundIndex,
+          RoundIndex: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? 0 : currentRoundIndex-NUM_OF_PRACTICE_ROUNDS,
           RoundType: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
           Answer: 0,
           TotalYesAnswers: this.state.yesClickCount,
