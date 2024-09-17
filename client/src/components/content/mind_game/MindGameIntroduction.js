@@ -8,7 +8,10 @@ class MindGameIntroduction extends Component {
 
     const message_1 =  (
       <span>
-        <p>This study includes two parts. 
+        <p>
+        <h2>Welcome to the study, let's start.</h2>
+        <br></br>
+        This study includes two parts. 
         <br></br>
         In the first part, you will play the “mind-game” and can win a bonus depending on your performance. 
         <br></br>
