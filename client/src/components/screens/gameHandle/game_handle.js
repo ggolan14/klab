@@ -877,7 +877,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                 <div>
                     <label className='exp-summary-h2'>
                         {
-                            language === 'German' ? 'Falls Sie noch Anmerkungen zur Studie haben, teilen Sie uns diese bitte hier mit:' : 'If you have comments please write it below:'
+                            language === 'German' ? 'Falls Sie noch Anmerkungen zur Studie haben, teilen Sie uns diese bitte hier mit:' : 'If you have comments, please provide them here.'
                         }
                     </label>
                     <textarea
@@ -952,6 +952,7 @@ const PlayError = ({state, exp}) => {
 };
 
 const NoActionRejected = ({state, exp}) => {
+    console.log("---> in NoActionRejected()   exp="+exp )
 
     return (
         <div
@@ -1687,9 +1688,9 @@ class GameHandle extends React.Component {
     }
 
     game_stages(){
-
+    console.log("---> in game_stages() ")
         let stage = this.game_handle[this.state.game_index];
-        
+        console.log("---> in game_stages() 111 stage="+stage)
         let user;
         try {
             if (this.state.isAuthenticated)
@@ -1704,8 +1705,10 @@ class GameHandle extends React.Component {
                     age: '',
                     gender: '',
                 };
+                console.log("---> in game_stages() 222 user.id="+user.id)
         }
         catch (e) {
+            console.log("---> in game_stages() 222 catch user.id="+user.id)
             user =  {
                 id: '',
                 age: '',
