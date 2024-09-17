@@ -44,7 +44,6 @@ class Start extends Component {
     SignOfReward = props.game_settings.payments.sign_of_reward;
 
     this.extended_name = props.game_settings.game.extended_name;
-    console.log("---> extended_name="+extended_name) ;
     let cond = props.game_settings.game.cond;
     
     if (cond === 'o') {
@@ -99,6 +98,24 @@ class Start extends Component {
       diceOutcome: '' 
     };
   }
+
+  componentDidMount(){
+    NewLogs({
+        user_id: this.UserId,
+        exp: ThisExperiment,
+        running_name: this.RunningName,
+        action: 'G.L',
+        type: 'LogGameType',
+        more_params: {
+            local_t: getTimeDate().time,
+            local_d: getTimeDate().date,
+        },
+    }).then((res) => {
+        this.START_APP_MIL = Date.now();
+        this.props.SetLimitedTime(true);
+        this.setState({isLoading: false});
+    });
+}
 
   addRecord = (roundIndex, value) => {
     const { userAnswers } = this.state;

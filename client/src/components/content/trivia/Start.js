@@ -32,7 +32,6 @@ class Start extends Component {
     this.TotalBonus = [];
     let RunCounter = KeyTableID();
     this.extended_name = props.game_settings.game.extended_name;
-    console.log("---> extended_name="+this.extended_name) ;
     let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
@@ -86,6 +85,24 @@ class Start extends Component {
 
     };
   }
+
+  componentDidMount(){
+    NewLogs({
+        user_id: this.UserId,
+        exp: ThisExperiment,
+        running_name: this.RunningName,
+        action: 'G.L',
+        type: 'LogGameType',
+        more_params: {
+            local_t: getTimeDate().time,
+            local_d: getTimeDate().date,
+        },
+    }).then((res) => {
+        this.START_APP_MIL = Date.now();
+        this.props.SetLimitedTime(true);
+        this.setState({isLoading: false});
+    });
+}
 
   addRecord = (questionIndex, value) => {
     const { userAnswers } = this.state;
