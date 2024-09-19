@@ -1,85 +1,84 @@
 .trivia-container {
-    display: flex;
-    flex-direction: column; /* Display components vertically */
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust the height as needed */
-    padding: 30px; /* Add padding around the container */
-    font-size: 25px;
-    margin-left: 100px;
-    margin-right: 100px;
+  display: flex;
+  flex-direction: column; /* Display components vertically */
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust the height as needed */
+  padding: 30px; /* Add padding around the container */
+  font-size: 25px;
+
 }
-  
+
 .trivia-container > * {
-    margin-bottom: 30px; /* Add margin between each component */
+  margin-bottom: 30px; /* Add margin between each component */
 }
 .trivia_d-sum-l-rp {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    column-gap: 0.5rem;
-    border: 1px solid;
-    width: max-content;
-    padding: 5px 10px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  column-gap: 0.5rem;
+  border: 1px solid;
+  width: max-content;
+  padding: 5px 10px;
 }
 
 .tog_d-sum-l-rpi {
-    margin-left: 5px;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    column-gap: 10px;
-    align-items: center;
+  margin-left: 5px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  column-gap: 10px;
+  align-items: center;
 }
 .tog_debug {
-    display: grid;
-    padding: 0.5rem 0.7rem;
+  display: grid;
+  padding: 0.5rem 0.7rem;
 }
 
 .tog_debug label {
-    color: black;
+  color: black;
 }
 .tog_debug span {
-    color: #8103a0;
-    margin-left: 5px;
+  color: #8103a0;
+  margin-left: 5px;
 }
 
 .tog_debug>div {
-    border: 1px solid black;
-    padding: 0.25rem;
-    display: grid;
-    background-color: #8d8d8d;
+  border: 1px solid black;
+  padding: 0.25rem;
+  display: grid;
+  background-color: #8d8d8d;
 }
 .practice-is-over {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
-  .practice-is-over h3 {
-    font-size: 36px; /* Adjust the font size for the heading */
-  }
-  
-  .practice-is-over p {
-    font-size: 32px; /* Adjust the font size for the paragraph */
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 700px;
+  margin: 0 auto;
+}
 
-  .practice-is-over button {
-    padding: 10px 20px; /* Adjust the padding to increase button size */
-    font-size: 18px; /* Adjust the font size of the button text */
-    
-  }
+.practice-is-over h3 {
+  font-size: 36px; /* Adjust the font size for the heading */
+}
 
-  .introduction {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    height: 100vh;
-    width: 1300px;
-    margin: 0 auto;
-  }
+.practice-is-over p {
+  font-size: 32px; /* Adjust the font size for the paragraph */
+}
+
+.practice-is-over button {
+  padding: 10px 20px; /* Adjust the padding to increase button size */
+  font-size: 18px; /* Adjust the font size of the button text */
+  
+}
+
+.introduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  height: 100vh;
+  width: 1300px;
+  margin: 0 auto;
+}

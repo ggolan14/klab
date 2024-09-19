@@ -13,6 +13,7 @@ const ThisExperiment = 'Trivia';
 
 let UserId = 'empty';
 let RunningName = '-';
+let SignOfReward = "$";
 let GameCondition = null;
 let NUM_OF_PRACTICE_QUESTIONS = 4;
 let lastIndex;
@@ -29,12 +30,14 @@ const yesButtonInRight = Math.random() < 0.5;
 class Start extends Component {
   constructor(props) {
     super(props);
+
     this.TotalBonus = [];
     let RunCounter = KeyTableID();
     this.extended_name = props.game_settings.game.extended_name;
     let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
     this.PaymentsSettings = props.game_settings.payments;
+    SignOfReward = props.game_settings.payments.sign_of_reward;
 
     if (cond === 'o') {
       GameCondition = 'OneShot';
@@ -130,7 +133,9 @@ class Start extends Component {
   handleHidePracticeIsOver = () => {
     this.setState({ practiceIsOver: true });
   }
-
+/*
+This function is invoked when user answerd question and would like to move to the next question.
+*/
   handleNext = () => {
     const { currentQuestionIndex } = this.state;
     let questions = [];
@@ -147,7 +152,9 @@ class Start extends Component {
     }));
   };
 
-
+/*
+This function is invoked when user confirmed (click yes or no).
+*/
   handleConfirmation = (confirmed) => {
     const { currentQuestionIndex, showConfirmation, showQuestion, gameCondition, hideMessages } = this.state;
     endShowConfirmationTimer = getTimeDate().now;
@@ -415,9 +422,9 @@ class Start extends Component {
         {foodPreferenceComponent}
 
         {!hideMessages ? (
-          <TriviaIntroduction onHideMessages={this.handleHideMessages} messageIndex={currentQuestionIndex} />
+          <TriviaIntroduction signOfReward={SignOfReward} gameCondition={GameCondition} onHideMessages={this.handleHideMessages} messageIndex={currentQuestionIndex} />
         ) : (
-          <div>
+          <div style={{ Width:800, position: 'absolute', top: 200, left: 400 }}>
             <DebuggerModalView>
               <p>Current Question Index: {currentQuestionIndex + 1}</p>
               <p>Game mode: {gameCondition}</p>
@@ -425,9 +432,9 @@ class Start extends Component {
               <p>Num of YES clicks: {yesClickCount}</p>
               <p>Num of NO clicks: {noClickCount}</p>
             </DebuggerModalView>
+            {(!practiceIsOver && currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS - 1)) && <span style={{  paddingBottom: '30px' ,fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
             {showQuestion ? (
               <div>
-                {currentQuestionIndex < (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
                 <p>Please read the following question. Pick your best answer and keep it in mind.</p>
                 <p>{question.question}</p>
                 <ul>
@@ -438,21 +445,21 @@ class Start extends Component {
                 <button onClick={this.handleNext}>I have an answer in my mind</button>
               </div>
             ) : (
-              <div>
+              <div style={{ paddingTop: '20px'}}>
                 {showConfirmation && (
                   <>
-                    {currentQuestionIndex <= (NUM_OF_PRACTICE_QUESTIONS - 1) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
-                    <p>Correct answer is: {correctAnswer}</p>
+                    
+                    <p>Correct answer is: <span style={{ fontWeight: 'bold' }}>{correctAnswer}</span></p>
                     <br></br>
                     <p>Is this the answer you had in mind?</p>
 
                     {yesButtonInRight ?
-                      (<div style={{ marginLeft: '60px', display: 'flex', gap: '15px' }}>
+                      (<div style={{ marginLeft: '60px', display: 'flex', gap: '30px' }}>
                         <button onClick={() => this.handleConfirmation(false)}>No</button>
                         <button onClick={() => this.handleConfirmation(true)}>Yes</button>
                       </div>
                       ) : (
-                        <div style={{ marginLeft: '60px', display: 'flex', gap: '15px' }}>
+                        <div style={{ marginLeft: '60px', display: 'flex', gap: '30px' }}>
                           <button onClick={() => this.handleConfirmation(true)}>Yes</button>
                           <button onClick={() => this.handleConfirmation(false)}>No</button>
                         </div>

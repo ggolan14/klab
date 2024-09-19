@@ -1,4 +1,4 @@
-//in this code i would like that the yes and no buttons will be one next to each other and not one above each other.  currently the buttons are one above each other.  i guess it is related to the "trivia-container" class .  the only css file that is imported is './gameStyles.css'   but in this file there is no trivia-container class.  how can i fix it?   these are my Start and component and gameStyles.css  
+
 import React, { Component } from 'react';
 import './gameStyles.css';
 import { getTimeDate } from "../../../utils/app_utils";
@@ -39,11 +39,11 @@ class Start extends Component {
 
     //let cond = props.game_settings.game.cond;
     this.Forward = this.Forward.bind(this);
-    this.PaymentsSettings = props.game_settings.payments;
+    this.PaymentsSettings = props.game_settings.payments; // holds the paymant settings of this experimants
     NUM_OF_REPEATED_REAL_ROUNDS = 40;
     SignOfReward = props.game_settings.payments.sign_of_reward;
 
-    this.extended_name = props.game_settings.game.extended_name;
+    this.extended_name = props.game_settings.game.extended_name; // extends the name of the experimnt to format
     let cond = props.game_settings.game.cond;
     
     if (cond === 'o') {
@@ -235,8 +235,11 @@ class Start extends Component {
     this.props.insertGameLine(db_row);
   }
 
+  /*
+  This function curentlly do nothing .
+  */
   Forward(finish_game, game_data) {
-    console.log("---> In Forward")
+    
   }
 
   sendDataToDB = (send) => {
@@ -387,7 +390,7 @@ class Start extends Component {
     console.log("222 ---> currentRoundIndex=" + currentRoundIndex + "  hideMessages=" + hideMessages + "  showDice=" + showDice + "  showConfirmation=" + showConfirmation + "   NUM_OF_PRACTICE_ROUNDS=" + NUM_OF_PRACTICE_ROUNDS + "  showButton=" + showButton + "  newRound=" + newRound)
     if (!hideMessages) {
       return (
-        <MindGameIntroduction signOfReward={SignOfReward} onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} props/>
+        <MindGameIntroduction gameCondition={GameCondition} signOfReward={SignOfReward} onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} props/>
       )
     }
 
@@ -548,20 +551,17 @@ class Start extends Component {
                 <>
                   {currentRoundIndex <= (NUM_OF_PRACTICE_ROUNDS) && <span style={{ fontWeight: 'bold', color: 'red' }}>This is a practice round</span>}
                   <p>Is this the number that you had in mind?</p>
-
-                  <div className="button-container">
-                    {yesButtonInRight ? (
-                      <>
+                  {yesButtonInRight ?
+                      (<div style={{ marginLeft: '60px', display: 'flex', gap: '30px' }}>
                         <button onClick={() => this.handleConfirmation(false)}>No</button>
                         <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                      </>
-                    ) : (
-                      <>
-                        <button onClick={() => this.handleConfirmation(true)}>Yes</button>
-                        <button onClick={() => this.handleConfirmation(false)}>No</button>
-                      </>
-                    )}
-                  </div>
+                      </div>
+                      ) : (
+                        <div style={{ marginLeft: '60px', display: 'flex', gap: '30px' }}>
+                          <button onClick={() => this.handleConfirmation(true)}>Yes</button>
+                          <button onClick={() => this.handleConfirmation(false)}>No</button>
+                        </div>
+                      )}
 
                   {GameCondition == "OneShot" ?
                     (<>
@@ -590,7 +590,7 @@ class Start extends Component {
         {foodPreferenceComponent}
 
         {!hideMessages ? (
-          <MindGameIntroduction onHideMessages={this.handleHideMessages}/>
+          <MindGameIntroduction gameCondition={GameCondition} onHideMessages={this.handleHideMessages} gameCondition={this.GameCondition}/>
         ) : (
           <div>
             <DebuggerModalView>

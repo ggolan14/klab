@@ -5,9 +5,29 @@ class MindGameIntroduction extends Component {
     
   constructor(props) {
     super(props);
-
+    console.log("-----> gameCondition="+this.props.gameCondition)
+    let message_2=null;
+       
     const message_1 =  (
       <span>
+        <p>
+        <h2>Welcome to the study, let's start.</h2>
+        <br></br>
+        This study includes two parts. 
+        <br></br>
+        In the first part, you will play the “mind-game” and can win a bonus depending on your performance. 
+        <br></br>
+        In the second part, you will fill out a food preference survey and there will be no bonus.
+        <br></br>
+        <br></br>
+        Note that you should not leave or stop responding until you have completed the entier study and have recieved your completion code.
+        If you leave or stop responding before completing the two parts, you will not recieve compension.
+
+      </p>
+      </span>
+    );
+  
+    <span>
         <p>
         <h2>Welcome to the study, let's start.</h2>
         <br></br>
@@ -19,12 +39,34 @@ class MindGameIntroduction extends Component {
         <br></br>
         <br></br>
         Note that you should not leave or stop responding until you have completed the entier study and have recieved your completion code.
-        If you leave or stop responding before completing the two games, you will not recieve compension.
+        If you leave or stop responding before completing the two parts, you will not recieve compension.
 
       </p>
       </span>
+  //}
+    
+    if(this.props.gameCondition == "Repeated"){
+
+    
+    message_2 = (
+      <span>
+        <p>
+        <h2><b>Welcome to the Mind game!</b></h2>
+        <br></br>
+        In this game, you will be asked to think of a number between 1 and 6 and keep it in your mind. Then, you will roll a virtual die.
+        You wil be asked to report if the number you rolled is the one you had in mind.
+        <br></br>
+        Once you completed the study, the computer will rendomally choose one round of the mind game.
+        <br></br>
+        If in this selected round you reported that the number you rolled is the one that you hade in mind, you <b>will</b> receive a {formatPrice(1,this.props.signOfReward)} bonus.
+        <br></br>
+        If in this selected round you reported that the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> recieve a bonus.
+        <br></br>
+        </p>
+      </span>
     );
-    const message_2 = (
+  }else{
+    message_2 = (
       <span>
         <p>
         <h2><b>Welcome to the Mind game!</b></h2>
@@ -39,6 +81,7 @@ class MindGameIntroduction extends Component {
         </p>
       </span>
     );
+  }
     const message_3 = (
       <span>
         <p>
@@ -46,7 +89,7 @@ class MindGameIntroduction extends Component {
         Let's try it out!
         <br></br>
         <br></br>
-        You will now go through 3 <b>practice</b> rounds of mind game.
+        You will now go through 3 practice rounds of the mind-game.<br/>Note: the goal of the practice rounds is to help you understand the game.<br/>You will not gain any bonus in these rounds and your answers will not be recorded.<br/>You will be notified when the practice is over and the real game starts. 
         <br></br>
         Note: The goal of the practice rounds is to help you understand the game.  You will not gain any bonus in these rounds, and your answers will not be recorded.  
         You will be notified when the practice is over and the real game starts.

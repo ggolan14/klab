@@ -104,7 +104,7 @@
     "question": "What is the term for the psychological phenomenon where people of higher ability tend to perform lower than their actual ability in competitive situations?",
     "keyword": "Dunning_Kruger ",
     "answers": [
-      {"option": "A", "text": "AphroDunning-Kruger effect"},
+      {"option": "A", "text": "Dunning-Kruger effect"},
       {"option": "B", "text": "Imposter syndrome"},
       {"option": "C", "text": "Cognitive dissonance"},
       {"option": "D", "text": "Hawthorne effect"},
@@ -375,7 +375,7 @@
       {"option": "C", "text": "Antonio Vivaldi"},
       {"option": "D", "text": "Johann Sebastian Bach"},
       {"option": "E", "text": "Franz Schubert"},
-      {"option": "F", "text": "yotr Ilyich Tchaikovsky"}
+      {"option": "F", "text": "Pyotr Ilyich Tchaikovsky"}
     ],
     "correct_answer": "C"
   },
@@ -577,7 +577,7 @@
   },
   {
     "id":"39",
-    "question": "In literature, which Shakespearean play features the character Iago as its primary antagonist?",
+    "question": "In literature, which Shakespearean play features the character Lago as its primary antagonist?",
     "keyword": "Lago",
     "answers": [
       {"option": "A", "text": "Hamlet"},
