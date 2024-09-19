@@ -9,9 +9,8 @@ const Summary = ({SummaryArgs}) => {
      return (
         <label>
             Thank you for your participation.
-            Your bounus is {formatPrice(SummaryArgs.reward_sum , SummaryArgs.sign_of_reward)} , and will be added to your participation payment.<br/>
+            Your bonus is {formatPrice(SummaryArgs.reward_sum , SummaryArgs.sign_of_reward)} , and will be added to your participation payment.<br/>
             To recieve your payment, please click below.
-
         </label>
     )
 };
