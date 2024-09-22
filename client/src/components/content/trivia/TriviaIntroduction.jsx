@@ -36,16 +36,13 @@ class TriviaIntroduction extends Component {
     </span>
     ) : (
       <span>
-        <h2>Welcome to the study, let's start.</h2>
-        <br />
-        This study includes two parts.
-        <br />In the first part, you will play the trivia-game and can win a bonus depending on your performance.
-        In the second part, you will be asked to answer several questions about your self-assessment and preferences and there will be no bonus.
-        <br /><br />
-        Note that you should not leave or stop responding until you have completed the entire study and have received your completion code.
-        If you leave or stop responding before completing the two parts, you will not receive compensation.
-        <br />
-      </span>
+      In this game, you will be presented with multiple-choice trivia questions, ranging in difficulty.
+      <br />
+      Your task is to think of the correct answer to the question and keep it in your mind.
+      <br />After the question is presented and you decide on your answer, the correct answer will be revealed, and you will be asked to report whether it matches the one you had in mind.
+      <br /> If the correct answer <strong>is</strong> the one you had in mind, you will receive a <strong>{formatPrice(1, this.props.signOfReward)} bonus.</strong> 
+      <br /> If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
+    </span>
     );
 
     const message_3 = (
@@ -63,6 +60,7 @@ class TriviaIntroduction extends Component {
   // Handle click on "Next" button
   handleNext = () => {
     const { currentIndex, messages } = this.state;
+    console.log("===> in handleNext  currentIndex="+currentIndex)
     // Increment index to display the next message
     if (currentIndex < messages.length - 1) {
       this.setState({ currentIndex: currentIndex + 1 });
@@ -74,7 +72,7 @@ class TriviaIntroduction extends Component {
 
   render() {
     const { messages, currentIndex } = this.state;
-
+    console.log("===> in render  currentIndex="+currentIndex)
     return (
       <div className="trivia-container">
         {currentIndex === 1 && <h2>Welcome to the trivia game!</h2>}

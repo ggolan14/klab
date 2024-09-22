@@ -5,50 +5,25 @@ class MindGameIntroduction extends Component {
     
   constructor(props) {
     super(props);
-    console.log("-----> gameCondition="+this.props.gameCondition)
-    let message_2=null;
-       
-    const message_1 =  (
-      <span>
-        <p>
-        <h2>Welcome to the study, let's start.</h2>
-        <br></br>
-        This study includes two parts. 
-        <br></br>
-        In the first part, you will play the “mind-game” and can win a bonus depending on your performance. 
-        <br></br>
-        In the second part, you will fill out a food preference survey and there will be no bonus.
-        <br></br>
-        <br></br>
-        Note that you should not leave or stop responding until you have completed the entier study and have recieved your completion code.
-        If you leave or stop responding before completing the two parts, you will not recieve compension.
+    console.log("===== this.props.signOfReward=" + this.props.signOfReward);
 
-      </p>
+    const isRepeated = this.props.gameCondition === "Repeated";
+
+    const part1 = (
+      <span>
+        <h2>Welcome to the study, let's start.</h2>
+        <br />
+        This study includes two parts.
+        <br />In the first part, you will play the mind-game and can win a bonus {isRepeated ? "depending on your performance." : "depending on your performance."}
+        <br />In the second part, {isRepeated ? "you will fill out a food preference survey and there will be no bonus." : "you will be asked to answer several questions about your self-assessment and preferences and there will be no bonus."}
+        <br /><br />
+        Note that you should not leave or stop responding until you have completed the entire study and have received your completion code.
+        If you leave or stop responding before completing the two parts, you will not receive compensation.
+        <br />
       </span>
     );
-  
-    <span>
-        <p>
-        <h2>Welcome to the study, let's start.</h2>
-        <br></br>
-        This study includes two parts. 
-        <br></br>
-        In the first part, you will play the “mind-game” and can win a bonus depending on your performance. 
-        <br></br>
-        In the second part, you will be asked to answer several questions about your self assessment and preferences and there will be no bonus.
-        <br></br>
-        <br></br>
-        Note that you should not leave or stop responding until you have completed the entier study and have recieved your completion code.
-        If you leave or stop responding before completing the two parts, you will not recieve compension.
 
-      </p>
-      </span>
-  //}
-    
-    if(this.props.gameCondition == "Repeated"){
-
-    
-    message_2 = (
+    const part2 = isRepeated ? (
       <span>
         <p>
         <h2><b>Welcome to the Mind game!</b></h2>
@@ -64,9 +39,7 @@ class MindGameIntroduction extends Component {
         <br></br>
         </p>
       </span>
-    );
-  }else{
-    message_2 = (
+    ) : (
       <span>
         <p>
         <h2><b>Welcome to the Mind game!</b></h2>
@@ -81,28 +54,15 @@ class MindGameIntroduction extends Component {
         </p>
       </span>
     );
-  }
+
     const message_3 = (
       <span>
-        <p>
-        <br></br>
-        Let's try it out!
-        <br></br>
-        <br></br>
-        You will now go through 3 practice rounds of the mind-game. 
-        <br></br>
-        Note: The goal of the practice rounds is to help you understand the game.  You will not gain any bonus in these rounds, and your answers will not be recorded.  
-        You will be notified when the practice is over and the real game starts.
-      </p>
+        Let’s try it out!<br /><br />You will now go through 3 practice rounds of the trivia game.<br />Note: the goal of the practice rounds is to help you understand the game.<br />You will not gain any bonus in these rounds and your answers will not be recorded.<br />You will be notified when the practice is over and the real game starts. 
       </span>
     );
 
     this.state = {
-      messages: [
-        message_1,
-        message_2,
-        message_3,
-        ],
+      messages: [part1, part2, message_3],
       currentIndex: 0 // Initial index to display the first message
     };
   }
