@@ -7,6 +7,7 @@ import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_han
 import TriviaIntroduction from './TriviaIntroduction';
 import FoodPreference from './FoodPreference';
 import ResourceAllocation from '../mind_game/ResourceAllocation';
+import { formatPrice } from '../../utils/StringUtils';
 const ThisExperiment = 'Trivia';
 
 
@@ -343,6 +344,7 @@ This function is invoked when user confirmed (click yes or no).
     const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentQuestionIndex == NUM_OF_PRACTICE_QUESTIONS;
     const repeatedLast = GameCondition == "Repeated" && !showConfirmation && currentQuestionIndex === questions.length - 1;
     const tempString = GameCondition == "OneShot" ? "resource allocation" : "food preferance"
+
     if (oneShotLast || repeatedLast) {
       if (!hideTriviaCompleted) {
         return (
@@ -362,7 +364,7 @@ This function is invoked when user confirmed (click yes or no).
           <div className="practice-is-over">
             <h3>Welcome to the resource allocation survey</h3>
             <p>
-              Please read the scenario and answer the following questions
+            Please read the following case carefully - this is the only case you will be asked about. We will then ask you several questions about it.
             </p>
             <button onClick={this.handelHideWelcomeToFoodPreference}>Next</button>
           </div>
@@ -390,14 +392,16 @@ This function is invoked when user confirmed (click yes or no).
          
       
     }
+    
     if (GameCondition == "OneShot" && currentQuestionIndex === NUM_OF_PRACTICE_QUESTIONS - 1 && !practiceIsOver && !showConfirmation) {
+      
       return (
         <div className="practice-is-over">
           <h3>Practice is Over</h3>
           <p>
             You will now play the trivia game for real bonus.<br></br>
             You will play one round of the trivia game.<br></br>
-            Remember: If the correct answer is the one you had in mind, you will receive a £1 bonus!
+            Remember: If the correct answer is the one you had in mind, you will receive a {formatPrice(1, SignOfReward)} bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
@@ -410,7 +414,7 @@ This function is invoked when user confirmed (click yes or no).
           <p>
             You will now play the trivia game for real bonus.<br></br>
             You will play 40 rounds of the trivia game.<br></br>
-            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct answer is the one you had in mind, you will receive a £1 bonus!
+            Remember: at the end of the study, one round will be randomly selected by the computer. If in that round the correct answer is the one you had in mind, you will receive a {formatPrice(1, SignOfReward)} bonus!
           </p>
           <button onClick={this.handleHidePracticeIsOver}>Next</button>
         </div>
@@ -467,11 +471,11 @@ This function is invoked when user confirmed (click yes or no).
 
                     {GameCondition == "OneShot" ?
                       (<>
-                        <p>Note: You will receive a £1 bonus only if you report "Yes"</p>
+                        <p>Note: You will receive a {formatPrice(1, SignOfReward)} bonus only if you report "Yes"</p>
                       </>
                       ) : (
                         <>
-                          <p>Note: If this round will be selected, you will receive a £1 bonus only if you report "Yes"</p>
+                          <p>Note: If this round will be selected, you will receive a {formatPrice(1, SignOfReward)} bonus only if you report "Yes"</p>
                         </>
                       )}
                   </>

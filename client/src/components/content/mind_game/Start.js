@@ -435,7 +435,7 @@ class Start extends Component {
             <p>
               <br></br>
               <br></br>
-            Please read the scenario and answer the following questions
+              Please read the following case carefully - this is the only case you will be asked about. We will then ask you several questions about it.
             </p>
             <button onClick={this.handelHideWelcomeToNextTask}>Next</button>
           </div>
