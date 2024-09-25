@@ -7,46 +7,52 @@ let totalTimer = 0;
 let timeForStep = 0;
 
 const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
-    const [step, setStep] = useState(1);
-    const [screenOrder, setScreenOrder] = useState([4, 5]); // Initial screen order
-    const [userSelection2, setUserSelection2] = useState(null);
-    const [userSelection3, setUserSelection3] = useState(null);
-    const [userSelection4, setUserSelection4] = useState(null);
+    const [currentStep, setCurrentStep] = useState(1);
+    const [coinLikelihood, setCoinLikelihood] = useState(null); // No default value
+    const [managerLikelihood, setManagerLikelihood] = useState(null); // No default value
+    const [explanation, setExplanation] = useState(''); // State to hold the user's explanation
+    const [answers, setAnswers] = useState({});
+    const [userSelection7, setUserSelection7] = useState(null);
     const [startTime, setStartTime] = useState(null);
     const [timeSpent, setTimeSpent] = useState({});
+    const [userSelection4_1, setUserSelection4_1] = useState(null);
+    const [userSelection4_2, setUserSelection4_2] = useState(null);
 
-
-    const [answers, setAnswers] = useState({});
-
-
-    useEffect(() => {
-        //console.log("--->  useEffect BEFORE    startTimer = "+startTimer+"   endTimer = "+endTimer+"   totalTimer = "+totalTimer)
-        //startTimer = getTimeDate().now;
-        //console.log("--->  useEffect AFTER    startTimer = "+startTimer+"   endTimer = "+endTimer+"   totalTimer = "+totalTimer)
-        setScreenOrder(screenOrder.sort(() => Math.random() - 0.5));
-    }, []);
     useEffect(() => {
         // Set the start time when the step changes
         setStartTime(getTimeDate().now);
-    }, [step]);
 
+        // Reset selection when entering any step that uses radio buttons
+        if ([9, 10, 11].includes(currentStep)) {
+            setAnswers(prevAnswers => ({
+                ...prevAnswers,
+                [currentStep]: null  // Reset the answer for the current step
+            }));
+        }
+
+    }, [currentStep]);
+
+    // Function to handle "Next" button click
     const handleNext = () => {
         const endTime = getTimeDate().now;
         timeForStep = endTime - startTime;
-        setTimeSpent(prev => ({ ...prev, [step]: timeForStep }));
-        if (![1, 2, 3, 7, 9].includes(step)) {
+        setTimeSpent(prev => ({ ...prev, [currentStep]: timeForStep }));
+
+        if (![1, 2, 3, 7].includes(currentStep)) {
             insertGameLine();
         }
-        setStep(step + 1);
+
+        setCurrentStep(prevStep => prevStep + 1);
     };
 
     const getQuestioType = () => {
-        switch (step) {
+        switch (currentStep) {
             case 4:
             case 5:
                 return "ResourceAllocation";
             case 6:
             case 8:
+            case 9:
             case 10:
                 return "Religion";
             case 11:
@@ -55,24 +61,26 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
             default:
                 return "Unknown";
         }
-    }
+    };
+
     const insertGameLine = () => {
+        let finalAnswer = currentStep === 4 ? answers["4_1"] : answers[currentStep];
+        console.log("@@@@ currentStep=" + currentStep + "   Answer=" + answers[currentStep]);
         const db_row = {
-            ResourceQuestion: step,  // total 
+            ResourceQuestion: currentStep,  // total 
             QuestionType: getQuestioType(),
-            Answer: answers[step],
-            Keyword: getQuestioType(),
+            Answer: currentStep === 5 ? explanation : finalAnswer,
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
             TimeToAnswer: timeForStep,
+            //  Comment: currentStep === 5 ? explanation : "N/A"
         };
         insertLine(db_row);
-        if (step == 11) {
-            sendDataToDB(db_row)
+
+        if (currentStep === 11) {
+            sendDataToDB(db_row);
         }
     };
-
-
 
     const handleChange = (e) => {
         setAnswers({
@@ -90,183 +98,201 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     };
 
     const isNextDisabled = () => {
-        console.log("---> isNextDisabled   step=" + step + "  userSelection2=" + userSelection2 + "   userSelection3=" + userSelection3 + "   userSelection4=" + userSelection4)
-
-        if (step == 4 && (screenOrder[0] == 4 && userSelection2 === null))  // if slider was not selected , disable the next button.
-            return true;
-        else if (step == 4 && (screenOrder[0] == 5 && userSelection3 === null))
-            return true;
-
-        if (step == 5 && (screenOrder[1] == 4 && userSelection2 === null))
-            return true;
-        else if (step == 5 && (screenOrder[1] == 5 && userSelection3 === null))
-            return true;
-
-        if (step == 8 && userSelection4 == null)
-            return true;
-        if ([6, 9, 10, 11].includes(step)) {  // if no answer was selected , disable next button
-            return !answers[step];
+        console.log("---> isNextDisabled   step=" + currentStep);
+        if (currentStep === 4) {
+            return !(userSelection4_1 != null && userSelection4_2 != null);
+        }
+        if (currentStep === 5) {
+            return !explanation;
         }
 
+        if (currentStep === 8) {
+            return userSelection7 == null;
+        }
+
+        if ([6, 9, 10, 11].includes(currentStep)) {  // if no answer was selected , disable next button
+            return !answers[currentStep];
+        }
         return false;
     };
 
-    return (
-        <div className="trivia-container">
-            {step === 1 && <p>
-                Imagine that you are a manager at a large company. Two employees named Bill and James also work at the company. Bill and James both do the same job and make the same salary each year. This year, Bill and James received the same evaluations, which were the highest in the company. The company has decided to reward Bill and James for their exceptionally good work.
-                The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.
-            </p>}
-            {step === 2 && (
-                <div>
-                    <p style={{ color: 'lightgray' }}>Imagine that you are a manager at a large company. Two employees named Bill and James also work at the company. Bill and James both do the same job and make the same salary each year. This year, Bill and James received the same evaluations, which were the highest in the company. The company has decided to reward Bill and James for their exceptionally good work.
-                        The company has a total of three concert packages to give Bill and James, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.
-                    </p>
-                    <p style={{ color: 'black' }}>
-                        Bill and James have each been given one concert package. You have been asked to decide what to do with the third concert package.
-                    </p>
-                </div>
-            )}
-            {step === 3 && <p>
-                You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                <br></br>
-                <br></br>
-                You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
+    // Content for each step
+    const renderStepContent = () => {
+        console.log("----> currentStep=" + currentStep + "    answers[" + currentStep + "]=" + answers[currentStep] + "    answers[" + (currentStep - 1) + "]=" + answers[currentStep - 1]);
+        // console.log("----> currentStep="+currentStep +"    answers["+currentStep+"]="+answers[currentStep]+ "    answers["+(currentStep-1)+"]="+answers[currentStep-1])
+        if (currentStep === 1) {
+            return (
+                <>
+                    <p>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
+                    <p>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
+                </>
+            );
+        }
 
-            </p>}
+        if (currentStep === 2) {
+            return (
+                <>
+                    <p style={{ color: 'lightgray' }}>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
+                    <p style={{ color: 'lightgray' }}>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
 
-            {step === screenOrder[0] && (
-                <div>
-                    <p style={{ color: 'lightgray' }}>
-                        You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                        <br />
-                        <br />
-                        You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
-                    </p>
-                    <p style={{ color: 'black' }}>
-                        To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to manager?
-                    </p>
-                    <br />
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <p>Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.</p>
+                    <p>The manager considers the following options:</p>
+                    <ol>
+                        <li>Revoke a package from both Bill and you.</li>
+                        <li>Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you.</li>
+                    </ol>
+                </>
+            );
+        }
 
-                        {/* Slider and labels */}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <span style={{ marginRight: '12px' }}>Not at all</span>
-                            <input
-                                type="range"
-                                min="1"
-                                max="7"
-                                step="1"
-                                value={userSelection2 || ''}
-                                onChange={(e) => {
-                                    setUserSelection2(e.target.value);
-                                    handleSliderChange(e.target.value, screenOrder[0]); // Save slider value
-                                }}
-                                style={{
-                                    width: '350px',  // Width of the slider
-                                    margin: '0 5px',
-                                    appearance: 'none',
-                                    background: '#ddd',
-                                }}
-                            />
-                            <span style={{ marginLeft: '10px' }}>Great extent</span>
-                        </div>
+        if (currentStep === 3) {
+            return (
+                <>
+                    <p style={{ color: 'lightgray' }}>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
+                    <p style={{ color: 'lightgray' }}>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
+                    <p style={{ color: 'lightgray' }}>Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.</p>
+                    <p style={{ color: 'lightgray' }}>The manager considers the following options:</p>
+                    <ol style={{ color: 'lightgray' }}>
+                        <li>Revoke a package from both Bill and you.</li>
+                        <li>Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you.</li>
+                    </ol>
 
-                        {/* Numbers below the slider */}
-                        <div
-                            style={{
-                                display: 'grid',
-                                gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
-                                width: '370px',  // Same width as the slider
-                                marginTop: '5px',
+                    <p>You recently found out that you had one package revoked.</p>
+                    <p>You wonder how the manager reached the decision to revoke your package.</p>
+                </>
+            );
+        }
 
-                            }}
-                        >
-                            {Array.from({ length: 7 }, (_, i) => (
-                                <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
-                            ))}
-                        </div>
+        if (currentStep === 4) {
+            return (
+                <>
+                    <p style={{ color: 'lightgray' }}>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
+                    <p style={{ color: 'lightgray' }}>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
+                    <p style={{ color: 'lightgray' }}>Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.</p>
+                    <p style={{ color: 'lightgray' }}>The manager considers the following options:</p>
+                    <ol style={{ color: 'lightgray' }}>
+                        <li>Revoke a package from both Bill and you.</li>
+                        <li>Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you.</li>
+                    </ol>
+                    <p style={{ color: 'lightgray' }}>You recently found out that you had one package revoked.  You recently found out that you had one package revoked. You wonder how the manager reached the decision to revoke your package</p>
+                    <br></br>
+                    <br></br>
+                    <p style={{ color: 'black' }}>How likely is it, in your opinion, that your outcome was determined by a coin? (scale: 1- not likely at all… 7 – very likely)</p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
+                    <span style={{ marginRight: '12px' }}>Not at all</span>
+                    <input
+                        type="range"
+                        min="1"
+                        max="7"
+                        step="1"
+                        value={userSelection4_1 || ''}
+                        onChange={(e) => {
+                            setUserSelection4_1(e.target.value);
+                            handleSliderChange(e.target.value, "4_1"); // Save slider value
+                        }}
+                        style={{
+                            width: '350px',  // Width of the slider
+                            margin: '0 5px',
+                            appearance: 'none',
+                            background: '#ddd',
+                        }}
+                    />
+                    <span style={{ marginLeft: '10px' }}>Very likely</span>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
+                            width: '370px',  // Same width as the slider
+                            marginTop: '5px',
+
+                        }}
+                    >
+                        {Array.from({ length: 7 }, (_, i) => (
+                            <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                        ))}
                     </div>
-
-
-
-                    <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
-                        {userSelection2 !== null ? (
-                            userSelection2
+                        {userSelection4_1 !== null ? (
+                            userSelection4_1
                         ) : (
                             <span style={{ color: 'red' }}>None (please select a value)</span>
                         )}
                     </p>
-                </div>
-            )}
-            {step === screenOrder[1] && (
-                <div>
-                    <p style={{ color: 'lightgray' }}>
-                        You have decided to flip a coin. If it lands on Heads, you will give the package to Bill; if it lands on Tails, you will give the package to James.
-                        <br />
-                        <br />
-                        You flipped the coin and it landed on Heads, so you gave Bill the extra package. Both employees know that your decision was made by a coin flip.
+                    <br></br>
+                    <br></br>
+
+                    <p style={{ color: 'black' }}>How likely is it, in your opinion, that your outcome was determined by the manager’s decision? (scale: 1- not likely at  all… 7 – very likely)
                     </p>
-                    <p style={{ color: 'black' }}>
-                        To what extent do you think that James, the employee who lost the coin flip and did not get the extra package, will attribute his loss to chance?
-                    </p>
-                    <br />
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
-                        {/* Slider and labels */}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <span style={{ marginRight: '12px' }}>Not at all</span>
-                            <input
-                                type="range"
-                                min="1"
-                                max="7"
-                                step="1"
-                                value={userSelection3 || ''}
-                                onChange={(e) => {
-                                    setUserSelection3(e.target.value);
-                                    handleSliderChange(e.target.value, screenOrder[1]); // Save slider value
-                                }}
-                                style={{
-                                    width: '350px',  // Width of the slider
-                                    margin: '0 5px',
-                                    appearance: 'none',
-                                    background: '#ddd',
-                                }}
-                            />
-                            <span style={{ marginLeft: '10px' }}>Great extent</span>
-                        </div>
-
-                        {/* Numbers below the slider */}
-                        <div
-                            style={{
-                                display: 'grid',
-                                gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
-                                width: '370px',  // Same width as the slider
-                                marginTop: '5px',
-
-                            }}
-                        >
-                            {Array.from({ length: 7 }, (_, i) => (
-                                <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
-                            ))}
-                        </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
+                    <span style={{ marginRight: '12px' }}>Not at all</span>
+                    <input
+                        type="range"
+                        min="1"
+                        max="7"
+                        step="1"
+                        value={userSelection4_2 || ''}
+                        onChange={(e) => {
+                            setUserSelection4_2(e.target.value);
+                            handleSliderChange(e.target.value, "4_2"); // Save slider value
+                        }}
+                        style={{
+                            width: '350px',  // Width of the slider
+                            margin: '0 5px',
+                            appearance: 'none',
+                            background: '#ddd',
+                        }}
+                    />
+                    <span style={{ marginLeft: '10px' }}>Very likely</span>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
+                            width: '370px',  // Same width as the slider
+                            marginTop: '5px',
+                        }}
+                    >
+                        {Array.from({ length: 7 }, (_, i) => (
+                            <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                        ))}
                     </div>
-
-
-
-                    <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
-                        {userSelection3 !== null ? (
-                            userSelection3
+                        {userSelection4_2 !== null ? (
+                            userSelection4_2
                         ) : (
                             <span style={{ color: 'red' }}>None (please select a value)</span>
                         )}
                     </p>
-                </div>
-            )}
 
-            {step === 6 && (
+                </>
+
+            );
+        }
+
+        if (currentStep === 5) {
+            return (
+                <>
+                    <p>Please explain why you think so:</p>
+                    <textarea
+                        value={explanation}
+                        onChange={(e) => setExplanation(e.target.value)}
+                        style={{
+                            width: '50%',
+                            height: '100px',
+                            border: '2px solid lightgray', // Change the border thickness, style, and color here
+                            borderRadius: '4px', // Optional: Add rounded corners
+                            padding: '10px', // Optional: Add padding for better text placement
+                        }}
+                        placeholder="Enter your explanation here"
+                    />
+                    <br></br>
+                    <br></br>
+                </>
+            );
+        }
+        if (currentStep === 6) {
+            return (
                 <div>
                     <p>According to the scenario, what type of resource was the manager asked to decide upon? </p>
                     <div onChange={handleChange}>
@@ -277,9 +303,11 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                         <label><input type="radio" name="6" value="5" /> The scenario did not specify</label><br />
                     </div>
                 </div>
-            )}
+            );
+        }
+        if (currentStep === 7) {
+            return (
 
-            {step === 7 && (
                 <div>
                     <p>You are almost done!
                         <br></br>
@@ -288,29 +316,25 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                     </p>
 
                 </div>
-            )}
+            );
+        }
 
-            {step === 8 && (
+        if (currentStep === 8) {
+            return (
                 <div>
-                    <p style={{ color: 'black' }}>
-                        Regardless of whether you belong to a particular religion, how religious would you say you are?
-                    </p>
-                    <br></br>
-                    <br></br>
+                    <p style={{ color: 'black' }}>Regardless of whether you belong to a particular religion, how religious would you say you are?</p>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
-                        {/* Slider and labels */}
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <span style={{ marginRight: '12px' }}>Not at all</span>
+                            <span style={{ marginRight: '12px' }}>Not at all religious</span>
                             <input
                                 type="range"
                                 min="1"
                                 max="10"
                                 step="1"
-                                value={userSelection4 || ''}
+                                value={userSelection7 || ''}
                                 onChange={(e) => {
-                                    setUserSelection4(e.target.value);
-                                    handleSliderChange(e.target.value, 8); // Save slider value
+                                    setUserSelection7(e.target.value);
+                                    handleSliderChange(e.target.value, currentStep); // Save slider value
                                 }}
                                 style={{
                                     width: '350px',  // Width of the slider
@@ -319,17 +343,15 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                                     background: '#ddd',
                                 }}
                             />
-                            <span style={{ marginLeft: '10px' }}>Great extent</span>
+                            <span style={{ marginLeft: '10px' }}>Very religious</span>
                         </div>
 
-                        {/* Numbers below the slider */}
                         <div
                             style={{
                                 display: 'grid',
-                                gridTemplateColumns: `repeat(10, 1fr)`, // 7 equally spaced columns
+                                gridTemplateColumns: 'repeat(10, 1fr)', // 10 equally spaced columns
                                 width: '370px',  // Same width as the slider
                                 marginTop: '5px',
-
                             }}
                         >
                             {Array.from({ length: 10 }, (_, i) => (
@@ -337,48 +359,50 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             ))}
                         </div>
                     </div>
-
-
-
                     <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
-                        {userSelection4 !== null ? (
-                            userSelection4
-                        ) : (
-                            <span style={{ color: 'red' }}>None (please select a value)</span>
-                        )}
+                        {userSelection7 !== null ? userSelection7 : <span style={{ color: 'red' }}>None (please select a value)</span>}
                     </p>
                 </div>
-            )}
-            {step === 9 && (
+            );
+        }
+
+        if (currentStep === 9) {
+            return (
                 <div>
                     <p>Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?</p>
                     <div onChange={handleChange}>
-                        <label><input type="radio" name="9" value="1" /> Every day</label><br />
-                        <label><input type="radio" name="9" value="2" /> More than once a week</label><br />
-                        <label><input type="radio" name="9" value="3" /> Once a week</label><br />
-                        <label><input type="radio" name="9" value="4" /> At least once a month</label><br />
-                        <label><input type="radio" name="9" value="5" /> Only on special holy days</label><br />
-                        <label><input type="radio" name="9" value="6" /> Less often</label><br />
-                        <label><input type="radio" name="9" value="7" /> Never</label>
+                        <label><input type="radio" name="9" value="1" checked={answers[9] === "1"} /> Every day</label><br />
+                        <label><input type="radio" name="9" value="2" checked={answers[9] === "2"} /> More than once a week</label><br />
+                        <label><input type="radio" name="9" value="3" checked={answers[9] === "3"} /> Once a week</label><br />
+                        <label><input type="radio" name="9" value="4" checked={answers[9] === "4"} /> At least once a month</label><br />
+                        <label><input type="radio" name="9" value="5" checked={answers[9] === "5"} /> Only on special holy days</label><br />
+                        <label><input type="radio" name="9" value="6" checked={answers[9] === "6"} /> Less often</label><br />
+                        <label><input type="radio" name="9" value="7" checked={answers[9] === "7"} /> Never</label>
                     </div>
                 </div>
-            )}
-            {step === 10 && (
+            );
+        }
+
+        if (currentStep === 10) {
+            return (
                 <div>
                     <p>Apart from when you are at religious services, how often, if at all, do you pray?</p>
                     <div onChange={handleChange}>
-                        <label><input type="radio" name="10" value="1" /> Every day</label><br />
-                        <label><input type="radio" name="10" value="2" /> More than once a week</label><br />
-                        <label><input type="radio" name="10" value="3" /> Once a week</label><br />
-                        <label><input type="radio" name="10" value="4" /> At least once a month</label><br />
-                        <label><input type="radio" name="10" value="5" /> Only on special holy days</label><br />
-                        <label><input type="radio" name="10" value="6" /> Less often</label><br />
-                        <label><input type="radio" name="10" value="7" /> Never</label>
+                        <label><input type="radio" name="10" value="1" checked={answers[10] === "1"} /> Every day</label><br />
+                        <label><input type="radio" name="10" value="2" checked={answers[10] === "2"} /> More than once a week</label><br />
+                        <label><input type="radio" name="10" value="3" checked={answers[10] === "3"} /> Once a week</label><br />
+                        <label><input type="radio" name="10" value="4" checked={answers[10] === "4"} /> At least once a month</label><br />
+                        <label><input type="radio" name="10" value="5" checked={answers[10] === "5"} /> Only on special holy days</label><br />
+                        <label><input type="radio" name="10" value="6" checked={answers[10] === "6"} /> Less often</label><br />
+                        <label><input type="radio" name="10" value="7" checked={answers[10] === "7"} /> Never</label>
                     </div>
                 </div>
-            )}
-            {step === 11 && (
+            );
+        }
+
+        if (currentStep === 11) {
+            return (
                 <div>
                     <p>Which of the following options best describes your dietary preferences?</p>
                     <div onChange={handleChange}>
@@ -390,9 +414,24 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                         <label><input type="radio" name="11" value="6" /> Mostly vegan (do not eat meat or seafood, but occasionally eat eggs or milk).</label>
                     </div>
                 </div>
-            )}
+            );
+        }
 
-            <button onClick={handleNext} disabled={isNextDisabled()}> {step < 11 ? "Next" : "Submit"}</button>
+        return null;
+    };
+
+    return (
+        <div style={{ margin: '30px' }}>
+            {renderStepContent()}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button
+                    onClick={handleNext}
+                    disabled={isNextDisabled()}
+                    style={{ padding: '12px 24px', fontSize: '16px' }} // Adjust the size here
+                >
+                    {currentStep < 11 ? "Next" : "Submit"}
+                </button>
+            </div>
         </div>
     );
 };
