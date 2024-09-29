@@ -202,13 +202,14 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                         style={{
                             display: 'grid',
                             gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
-                            width: '370px',  // Same width as the slider
+                            width: '390px',  // Same width as the slider
                             marginTop: '5px',
+                            marginLeft: '60px', // Adjust to align the numbers under the slider correctly
 
                         }}
                     >
                         {Array.from({ length: 7 }, (_, i) => (
-                            <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                            <span key={i} style={{fontSize: '11px',textAlign: 'center', }}> {i + 1}</span>
                         ))}
                     </div>
                     <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
@@ -219,12 +220,11 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             <span style={{ color: 'red' }}>None (please select a value)</span>
                         )}
                     </p>
+					<br></br>
                     <br></br>
-                    <br></br>
-
-                    <p style={{ color: 'black' }}>How likely is it, in your opinion, that your outcome was determined by the manager’s decision? (scale: 1- not likely at  all… 7 – very likely)
+					<p style={{ color: 'black' }}>How likely is it, in your opinion, that your outcome was determined by the manager’s decision? (scale: 1- not likely at  all… 7 – very likely)
                     </p>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
+                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
                     <span style={{ marginRight: '12px' }}>Not at all</span>
                     <input
                         type="range"
@@ -248,12 +248,14 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                         style={{
                             display: 'grid',
                             gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
-                            width: '370px',  // Same width as the slider
+                            width: '390px',  // Same width as the slider
                             marginTop: '5px',
+                            marginLeft: '60px', // Adjust to align the numbers under the slider correctly
+
                         }}
                     >
                         {Array.from({ length: 7 }, (_, i) => (
-                            <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
+                            <span key={i} style={{fontSize: '11px',textAlign: 'center', }}> {i + 1}</span>
                         ))}
                     </div>
                     <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
