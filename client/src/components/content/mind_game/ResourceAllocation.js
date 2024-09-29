@@ -325,46 +325,49 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
             return (
                 <div>
                     <p style={{ color: 'black' }}>Regardless of whether you belong to a particular religion, how religious would you say you are?</p>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <span style={{ marginRight: '12px' }}>Not at all religious</span>
-                            <input
-                                type="range"
-                                min="1"
-                                max="10"
-                                step="1"
-                                value={userSelection7 || ''}
-                                onChange={(e) => {
-                                    setUserSelection7(e.target.value);
-                                    handleSliderChange(e.target.value, currentStep); // Save slider value
-                                }}
-                                style={{
-                                    width: '350px',  // Width of the slider
-                                    margin: '0 5px',
-                                    appearance: 'none',
-                                    background: '#ddd',
-                                }}
-                            />
-                            <span style={{ marginLeft: '10px' }}>Very religious</span>
-                        </div>
+                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
+                    <span style={{ marginRight: '12px' }}>Not at all</span>
+                    <input
+                        type="range"
+                        min="1"
+                        max="10"
+                        step="1"
+                        value={userSelection7 || ''}
+                        onChange={(e) => {
+                            setUserSelection7(e.target.value);
+                            handleSliderChange(e.target.value, currentStep); // Save slider value
+                        }}
+                        style={{
+                            width: '365px',  // Width of the slider
+                            margin: '0 5px',
+                            appearance: 'none',
+                            background: '#ddd',
+                        }}
+                    />
+                    <span style={{ marginLeft: '10px' }}>Very religious</span>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(10, 1fr)`, // 10 equally spaced columns
+                            width: '375px',  // Same width as the slider
+                            marginTop: '5px',
+                            marginLeft: '75px', // Adjust to align the numbers under the slider correctly
 
-                        <div
-                            style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(10, 1fr)', // 10 equally spaced columns
-                                width: '370px',  // Same width as the slider
-                                marginTop: '5px',
-                            }}
-                        >
-                            {Array.from({ length: 10 }, (_, i) => (
-                                <span key={i} style={{ paddingLeft: '0px', marginRight: '10px', fontSize: '11px', textAlign: 'left' }}>{i + 1}</span>
-                            ))}
-                        </div>
+                        }}
+                    >
+                        {Array.from({ length: 10 }, (_, i) => (
+                            <span key={i} style={{fontSize: '11px',textAlign: 'center', }}> {i + 1}</span>
+                        ))}
                     </div>
-                    <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
-                        {userSelection7 !== null ? userSelection7 : <span style={{ color: 'red' }}>None (please select a value)</span>}
+                        {userSelection7 !== null ? (
+                            userSelection7
+                        ) : (
+                            <span style={{ color: 'red' }}>None (please select a value)</span>
+                        )}
                     </p>
+
                 </div>
             );
         }
