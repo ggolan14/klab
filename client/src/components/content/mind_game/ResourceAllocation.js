@@ -18,6 +18,20 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     const [userSelection4_1, setUserSelection4_1] = useState(null);
     const [userSelection4_2, setUserSelection4_2] = useState(null);
 
+
+    const keyValueData = {
+        3: 'N/A',
+        '4_1': 'How likely is it, in your opinion, that your outcome was determined by a coin?',
+        '4_2': 'How likely is it, in your opinion, that your outcome was determined by the manager’s decision?',
+        5: 'Please explain why you think so:',
+        6: 'According to the scenario, what type of resource was the manager asked to decide upon?',
+        7: 'N/A',
+        8: 'Regardless of whether you belong to a particular religion, how religious would you say you are?',
+        9: 'Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?',
+        10: 'Apart from when you are at religious services, how often, if at all, do you pray?',
+        11: 'Which of the following options best describes your dietary preferences?',
+      };
+
     useEffect(() => {
         // Set the start time when the step changes
         setStartTime(getTimeDate().now);
@@ -64,18 +78,35 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     };
 
     const insertGameLine = () => {
-        let finalAnswer = currentStep === 4 ? answers["4_1"] : answers[currentStep];
+        let finalAnswer
+        finalAnswer = currentStep === 4 ? answers["4_1"] : answers[currentStep];
+       
         console.log("@@@@ currentStep=" + currentStep + "   Answer=" + answers[currentStep]);
         const db_row = {
-            ResourceQuestion: currentStep,  // total 
+            ResourceQuestion: currentStep == 4 ? "4_A":currentStep,
             QuestionType: getQuestioType(),
             Answer: currentStep === 5 ? explanation : finalAnswer,
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
             TimeToAnswer: timeForStep,
+            Question: keyValueData[currentStep === 4 ? "4_1":currentStep]
             //  Comment: currentStep === 5 ? explanation : "N/A"
         };
         insertLine(db_row);
+        if(currentStep ==4){
+            finalAnswer = answers["4_2"] 
+        const db_row2 = {
+            ResourceQuestion: "4_B",  // total 
+            QuestionType: getQuestioType(),
+            Answer: finalAnswer,
+            TotalYesAnswers: "N/A",
+            TotalNoAnswers: "N/A",
+            TimeToAnswer: timeForStep,
+            Question: keyValueData[currentStep === 4 ? "4_2":currentStep]
+            //  Comment: currentStep === 5 ? explanation : "N/A"
+        };
+        insertLine(db_row2);
+    }
 
         if (currentStep === 11) {
             sendDataToDB(db_row);
@@ -177,7 +208,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                     <p style={{ color: 'lightgray' }}>You recently found out that you had one package revoked.  You recently found out that you had one package revoked. You wonder how the manager reached the decision to revoke your package</p>
                     <br></br>
                     <br></br>
-                    <p style={{ color: 'black' }}>How likely is it, in your opinion, that your outcome was determined by a coin? (scale: 1- not likely at all… 7 – very likely)</p>
+                    <p style={{ color: 'black' }}>{keyValueData["4_1"]} (scale: 1- not likely at all… 7 – very likely)</p>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
                     <span style={{ marginRight: '12px' }}>Not at all</span>
                     <input
@@ -222,7 +253,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                     </p>
 					<br></br>
                     <br></br>
-					<p style={{ color: 'black' }}>How likely is it, in your opinion, that your outcome was determined by the manager’s decision? (scale: 1- not likely at  all… 7 – very likely)
+					<p style={{ color: 'black' }}>{keyValueData["4_2"]} (scale: 1- not likely at  all… 7 – very likely)
                     </p>
                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
                     <span style={{ marginRight: '12px' }}>Not at all</span>
@@ -275,7 +306,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 5) {
             return (
                 <>
-                    <p>Please explain why you think so:</p>
+                    <p>{keyValueData[5]}</p>
                     <textarea
                         value={explanation}
                         onChange={(e) => setExplanation(e.target.value)}
@@ -296,7 +327,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 6) {
             return (
                 <div>
-                    <p>According to the scenario, what type of resource was the manager asked to decide upon? </p>
+                    <p>{keyValueData[6]} </p>
                     <div onChange={handleChange}>
                         <label><input type="radio" name="6" value="1" /> A new computer </label><br />
                         <label><input type="radio" name="6" value="2" /> A parking spot</label><br />
@@ -324,7 +355,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 8) {
             return (
                 <div>
-                    <p style={{ color: 'black' }}>Regardless of whether you belong to a particular religion, how religious would you say you are?</p>
+                    <p style={{ color: 'black' }}>{keyValueData[8]}</p>
                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
                     <span style={{ marginRight: '12px' }}>Not at all</span>
                     <input
@@ -375,7 +406,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 9) {
             return (
                 <div>
-                    <p>Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?</p>
+                    <p>{keyValueData[9]}</p>
                     <div onChange={handleChange}>
                         <label><input type="radio" name="9" value="1" checked={answers[9] === "1"} /> Every day</label><br />
                         <label><input type="radio" name="9" value="2" checked={answers[9] === "2"} /> More than once a week</label><br />
@@ -392,7 +423,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 10) {
             return (
                 <div>
-                    <p>Apart from when you are at religious services, how often, if at all, do you pray?</p>
+                    <p>{keyValueData[10]}</p>
                     <div onChange={handleChange}>
                         <label><input type="radio" name="10" value="1" checked={answers[10] === "1"} /> Every day</label><br />
                         <label><input type="radio" name="10" value="2" checked={answers[10] === "2"} /> More than once a week</label><br />
@@ -409,7 +440,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 11) {
             return (
                 <div>
-                    <p>Which of the following options best describes your dietary preferences?</p>
+                    <p>{keyValueData[11]}</p>
                     <div onChange={handleChange}>
                         <label><input type="radio" name="11" value="1" /> Omnivorous (can eat everything)</label><br />
                         <label><input type="radio" name="11" value="2" /> Vegetarian (do not eat meat or seafood)</label><br />
