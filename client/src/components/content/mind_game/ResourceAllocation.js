@@ -191,7 +191,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             handleSliderChange(e.target.value, "4_1"); // Save slider value
                         }}
                         style={{
-                            width: '350px',  // Width of the slider
+                            width: '355px',  // Width of the slider
                             margin: '0 5px',
                             appearance: 'none',
                             background: '#ddd',
@@ -237,7 +237,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             handleSliderChange(e.target.value, "4_2"); // Save slider value
                         }}
                         style={{
-                            width: '350px',  // Width of the slider
+                            width: '355px',  // Width of the slider
                             margin: '0 5px',
                             appearance: 'none',
                             background: '#ddd',
