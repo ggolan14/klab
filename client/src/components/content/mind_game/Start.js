@@ -430,11 +430,9 @@ class Start extends Component {
       }
       if (showWelcomeToNextTask && GameCondition == "OneShot") {
         return (
-          <div className="trivia-container">
+          <div className="trivia-container" >
             <h3><b>Welcome to the resource allocation survey</b></h3>
             <p>
-              <br></br>
-              <br></br>
               Please read the following case carefully - this is the only case you will be asked about. We will then ask you several questions about it.
             </p>
             <button onClick={this.handelHideWelcomeToNextTask}>Next</button>

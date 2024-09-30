@@ -462,7 +462,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     <div style={{ fontSize: '25px' }}> {/* Adjust font size here */}
         {renderStepContent()}
     </div>
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center' ,marginTop:'20px'}}>
         <button
             onClick={handleNext}
             disabled={isNextDisabled()}
