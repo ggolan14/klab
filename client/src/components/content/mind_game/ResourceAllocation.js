@@ -235,15 +235,16 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
                             width: '390px',  // Same width as the slider
                             marginTop: '5px',
-                            marginLeft: '60px', // Adjust to align the numbers under the slider correctly
+                            marginLeft: '97px', // Adjust to align the numbers under the slider correctly
 
                         }}
                     >
                         {Array.from({ length: 7 }, (_, i) => (
-                            <span key={i} style={{fontSize: '11px',textAlign: 'center', }}> {i + 1}</span>
+                            <span key={i} style={{fontSize: '18px', color:'green',  textAlign: 'center', }}> {i + 1}</span>
                         ))}
                     </div>
                     <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
+                        <br></br>
                         <b style={{ color: 'black' }}>Your selection:&nbsp; </b>
                         {userSelection4_1 !== null ? (
                             userSelection4_1
@@ -281,12 +282,12 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             gridTemplateColumns: `repeat(7, 1fr)`, // 7 equally spaced columns
                             width: '390px',  // Same width as the slider
                             marginTop: '5px',
-                            marginLeft: '60px', // Adjust to align the numbers under the slider correctly
+                            marginLeft: '97px', // Adjust to align the numbers under the slider correctly
 
                         }}
                     >
                         {Array.from({ length: 7 }, (_, i) => (
-                            <span key={i} style={{fontSize: '11px',textAlign: 'center', }}> {i + 1}</span>
+                            <span key={i} style={{fontSize: '18px',textAlign: 'center', }}> {i + 1}</span>
                         ))}
                     </div>
                     <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
@@ -457,18 +458,20 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     };
 
     return (
-        <div style={{ margin: '30px' }}>
-            {renderStepContent()}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button
-                    onClick={handleNext}
-                    disabled={isNextDisabled()}
-                    style={{ padding: '12px 24px', fontSize: '16px' }} // Adjust the size here
-                >
-                    {currentStep < 11 ? "Next" : "Submit"}
-                </button>
-            </div>
-        </div>
+<div style={{ margin: '150px' }}>
+    <div style={{ fontSize: '25px' }}> {/* Adjust font size here */}
+        {renderStepContent()}
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <button
+            onClick={handleNext}
+            disabled={isNextDisabled()}
+            style={{ padding: '12px 25px', fontSize: '25px', }} // Button size remains the same
+        >
+            {currentStep < 11 ? "Next" : "Submit"}
+        </button>
+    </div>
+</div>
     );
 };
 
