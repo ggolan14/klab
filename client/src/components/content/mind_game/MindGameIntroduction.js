@@ -57,7 +57,7 @@ class MindGameIntroduction extends Component {
 
     const message_3 = (
       <span>
-        Let’s try it out!<br /><br />You will now go through 3 practice rounds of the trivia game.<br />Note: the goal of the practice rounds is to help you understand the game.<br />You will not gain any bonus in these rounds and your answers will not be recorded.<br />You will be notified when the practice is over and the real game starts. 
+        Let’s try it out!<br /><br />You will now go through 3 practice rounds of the mind game.<br />Note: the goal of the practice rounds is to help you understand the game.<br />You will not gain any bonus in these rounds and your answers will not be recorded.<br />You will be notified when the practice is over and the real game starts. 
       </span>
     );
 
