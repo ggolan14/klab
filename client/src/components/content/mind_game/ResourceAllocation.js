@@ -17,12 +17,13 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     const [timeSpent, setTimeSpent] = useState({});
     const [userSelection4_1, setUserSelection4_1] = useState(null);
     const [userSelection4_2, setUserSelection4_2] = useState(null);
+    const [nonRobotAnswer, setNonRobotAnswer] = useState(''); // User's written answer for step 12
 
 
     const keyValueData = {
         3: 'N/A',
         '4_1': 'How likely is it, in your opinion, that your outcome was determined by a coin?',
-        '4_2': 'How likely is it, in your opinion, that your outcome was determined by the manager’s decision?',
+        '4_2': 'How likely is it, in your opinion, that your outcome was determined by the manager decision?',
         5: 'Please explain why you think so:',
         6: 'According to the scenario, what type of resource was the manager asked to decide upon?',
         7: 'N/A',
@@ -30,6 +31,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         9: 'Apart from special occasions such as weddings and funerals, about how often do you attend religious services nowadays?',
         10: 'Apart from when you are at religious services, how often, if at all, do you pray?',
         11: 'Which of the following options best describes your dietary preferences?',
+        12: 'What is your favorite breakfast food?',
       };
 
     useEffect(() => {
@@ -37,7 +39,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         setStartTime(getTimeDate().now);
 
         // Reset selection when entering any step that uses radio buttons
-        if ([9, 10, 11].includes(currentStep)) {
+        if ([9, 10, 11,12].includes(currentStep)) {
             setAnswers(prevAnswers => ({
                 ...prevAnswers,
                 [currentStep]: null  // Reset the answer for the current step
@@ -71,26 +73,34 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                 return "Religion";
             case 11:
                 return "FoodPreference";
-
+            case 12:
+                return "NonRobotVerification";
             default:
                 return "Unknown";
         }
     };
 
     const insertGameLine = () => {
-        let finalAnswer
-        finalAnswer = currentStep === 4 ? answers["4_1"] : answers[currentStep];
+        let finalAnswer ;
+        if(currentStep === 4){
+            finalAnswer=answers["4_1"]
+        }else if(currentStep === 5){
+            finalAnswer = explanation;
+        }else if(currentStep === 12){
+            finalAnswer = nonRobotAnswer;
+        }else{
+            finalAnswer = answers[currentStep];
+        }
        
         console.log("@@@@ currentStep=" + currentStep + "   Answer=" + answers[currentStep]);
         const db_row = {
-            ResourceQuestion: currentStep == 4 ? "4_A":currentStep,
+            ResourceQuestion: currentStep === 4 ? "4_A" : currentStep,
             QuestionType: getQuestioType(),
-            Answer: currentStep === 5 ? explanation : finalAnswer,
+            Answer: finalAnswer,
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
             TimeToAnswer: timeForStep,
-            Question: keyValueData[currentStep === 4 ? "4_1":currentStep]
-            //  Comment: currentStep === 5 ? explanation : "N/A"
+            Question: keyValueData[currentStep === 4 ? "4_1" : currentStep],
         };
         insertLine(db_row);
         if(currentStep ==4){
@@ -107,8 +117,8 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         };
         insertLine(db_row2);
     }
-
-        if (currentStep === 11) {
+        // Send all data to the database upon completion (step 12)
+        if (currentStep === 12) {
             sendDataToDB(db_row);
         }
     };
@@ -140,7 +150,10 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 8) {
             return userSelection7 == null;
         }
-
+        if (currentStep === 12) {
+            return nonRobotAnswer == null;
+        }
+        // Steps 6, 9, 10,11 and 12 require a radio button to be selected
         if ([6, 9, 10, 11].includes(currentStep)) {  // if no answer was selected , disable next button
             return !answers[currentStep];
         }
@@ -383,12 +396,12 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                             gridTemplateColumns: `repeat(10, 1fr)`, // 10 equally spaced columns
                             width: '375px',  // Same width as the slider
                             marginTop: '5px',
-                            marginLeft: '75px', // Adjust to align the numbers under the slider correctly
+                            marginLeft: '110px', // Adjust to align the numbers under the slider correctly
 
                         }}
                     >
                         {Array.from({ length: 10 }, (_, i) => (
-                            <span key={i} style={{fontSize: '11px',textAlign: 'center', }}> {i + 1}</span>
+                            <span key={i} style={{fontSize: '11px', color:'green',textAlign: 'center', }}> {i + 1}</span>
                         ))}
                     </div>
                     <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>
@@ -453,6 +466,27 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                 </div>
             );
         }
+        if (currentStep === 12) {
+            return (
+                <>
+                    <p>{keyValueData[12]}</p>
+                    <textarea
+                        value={nonRobotAnswer}
+                        onChange={(e) => setNonRobotAnswer(e.target.value)}
+                        style={{
+                            width: '50%',
+                            height: '100px',
+                            border: '2px solid lightgray', // Change the border thickness, style, and color here
+                            borderRadius: '4px', // Optional: Add rounded corners
+                            padding: '10px', // Optional: Add padding for better text placement
+                        }}
+                        placeholder="Enter your answer here"
+                    />
+                    <br></br>
+                    <br></br>
+                </>
+            );
+        }
 
         return null;
     };
@@ -462,13 +496,13 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
     <div style={{ fontSize: '25px' }}> {/* Adjust font size here */}
         {renderStepContent()}
     </div>
-    <div style={{ display: 'flex', justifyContent: 'center' ,marginTop:'20px'}}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
         <button
             onClick={handleNext}
             disabled={isNextDisabled()}
             style={{ padding: '12px 25px', fontSize: '25px', }} // Button size remains the same
         >
-            {currentStep < 11 ? "Next" : "Submit"}
+            {currentStep < 12 ? "Next" : "Submit"}
         </button>
     </div>
 </div>
