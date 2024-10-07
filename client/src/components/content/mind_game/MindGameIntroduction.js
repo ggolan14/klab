@@ -35,7 +35,7 @@ class MindGameIntroduction extends Component {
         <br></br>
         If in this selected round you reported that the number you rolled is the one that you hade in mind, you <b>will</b> receive a {formatPrice(1,this.props.signOfReward)} bonus.
         <br></br>
-        If in this selected round you reported that the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> recieve a bonus.
+        If in this selected round you reported that the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> receive a bonus.
         <br></br>
         </p>
       </span>
@@ -49,7 +49,7 @@ class MindGameIntroduction extends Component {
         <br></br>
         If the number you rolled <b>is</b> the one you had in mind, you <b>will</b> receive a {formatPrice(1,this.props.signOfReward)} bonus.
         <br></br>
-        if the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> recieve a bonus.
+        if the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> receive a bonus.
         <br></br>
         </p>
       </span>
