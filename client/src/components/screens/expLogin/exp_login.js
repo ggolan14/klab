@@ -44,7 +44,7 @@ class ExpLogin extends React.Component {
         if (option === 'LogInToGame'){
             let errors_inputs_info = [];
             if (!this.state.user_id)
-                errors_inputs_info.push('Prolific ID');
+                errors_inputs_info.push('User ID');
             if (!this.state.age)
                 errors_inputs_info.push('Age');
             if (this.state.age && this.state.age < 18)
@@ -170,11 +170,11 @@ class ExpLogin extends React.Component {
                                     className='exp-login-panel-id'
                                 >
                                     <td>
-                                        <label>{this.exp === 'RepeatedChoice' ? 'Participant ID' : 'Prolific ID'}:</label>
+                                        <label>{this.exp === 'RepeatedChoice' ? 'Participant ID' : 'User ID'}:</label>
                                     </td>
                                     <td>
                                         <input
-                                            className={this.state.errors_inputs_info.indexOf('Prolific ID') > -1 ? 'exp-login-item-error' : ''}
+                                            className={this.state.errors_inputs_info.indexOf('User ID') > -1 ? 'exp-login-item-error' : ''}
                                             type='text'
                                             disabled={this.mode === 'DEMO'}
                                             onKeyDown={e => [32, 191, 220].indexOf(e.keyCode) > -1 ? e.preventDefault() : {}}
