@@ -123,7 +123,7 @@ function ResetNewGame(){
     };
     DB_RECORDS.KeyTable = {
         ID: '',
-        ProlificID: '',
+        UserID: '',
         RunningName: '',
         Version: '',
         Mode: '',
@@ -153,7 +153,7 @@ function ResetAll() {
         },
         KeyTable: {
             ID: '',
-            ProlificID: '',
+            UserID: '',
             RunningName: '',
             Version: '',
             Mode: '',
@@ -1534,7 +1534,7 @@ class GameHandle extends React.Component {
                                 }, () => this.props.setWaitForAction(false));
                             }
                             DB_RECORDS.KeyTable.ID = res.data.run_id;
-                            DB_RECORDS.KeyTable.ProlificID = DB_RECORDS.UserDetails.UserId;
+                            DB_RECORDS.KeyTable.UserID = DB_RECORDS.UserDetails.UserId;
                             DB_RECORDS.KeyTable.RunningName = res.data.active_settings.running_name;
                             DB_RECORDS.KeyTable.Version = res.data.active_settings.version;
                             DB_RECORDS.KeyTable.Mode = res.data.active_settings.mode;
