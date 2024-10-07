@@ -17,6 +17,7 @@ serve/logs/QueenGarden.log
 
 # production
 client/build
+node_modules/*.*
 server/node_modules
 server/logs/
 
