@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import './exp_login.css';
 import {GetExperimentLabel} from "../../../data/experiments";
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 class ExpLogin extends React.Component {
 
@@ -170,7 +171,7 @@ class ExpLogin extends React.Component {
                                     className='exp-login-panel-id'
                                 >
                                     <td>
-                                        <label>{this.exp === 'RepeatedChoice' ? 'Participant ID' : 'User ID'}:</label>
+                                    <label>  {this.exp === 'RepeatedChoice' ? 'Participant ID'  : (this.exp === 'Trivia' || this.exp === 'MindGame') ? 'Worker ID' : 'User ID'}:</label>
                                     </td>
                                     <td>
                                         <input
