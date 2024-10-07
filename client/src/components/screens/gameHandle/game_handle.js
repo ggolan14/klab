@@ -1,9 +1,9 @@
-import React, {Fragment, useEffect, useRef, useState} from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import {connect} from "react-redux";
-import {Link, Navigate} from "react-router-dom";
-import {setGameMode, setWaitForAction} from "../../../actions/app_actions";
+import { connect } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+import { setGameMode, setWaitForAction } from "../../../actions/app_actions";
 
 import TryOrGiveUpStart from "../../content/try_or_give_up/Start";
 import TryOrGiveUpSummary from "../../content/try_or_give_up/Summary";
@@ -67,21 +67,21 @@ import NoCupsGameSummary from '../../content/no_cups_game/Summary';
 
 import DFEStart from "../../content/dfe/Start";
 import PLPatternStart from "../../content/pl_pattern/Start";
-import {getTimeDate} from "../../../utils/app_utils";
+import { getTimeDate } from "../../../utils/app_utils";
 import ConsentForm from "../consentForms/consent_form";
-import {getGameConsentForm, getGameVersion, getExpState, getEndCode, RecordGame, OpenNewRecord, FinishRecordGame} from "../../../actions/exp_actions";
+import { getGameConsentForm, getGameVersion, getExpState, getEndCode, RecordGame, OpenNewRecord, FinishRecordGame } from "../../../actions/exp_actions";
 import ExpLogin from "../expLogin/exp_login";
 import './game_handle.css';
-import {NewLogs} from "../../../actions/logger";
+import { NewLogs } from "../../../actions/logger";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 // import { Beforeunload } from 'react-beforeunload';
 
 import { stringify } from 'zipson';
 // import {AppUrl} from "../../../data/constants";
-import {GetExperimentName} from "../../../data/experiments";
-import {preventPageGoBack} from "../../../utils/helpers";
+import { GetExperimentName } from "../../../data/experiments";
+import { preventPageGoBack } from "../../../utils/helpers";
 import CodeError from "../../layout/error";
-import {CURRENT_URL} from "../../../utils/current_url";
+import { CURRENT_URL } from "../../../utils/current_url";
 
 
 /// navigator.sendBeacon
@@ -102,14 +102,14 @@ let CurrentExperiments = null;
 let SAVE_PART = 1;
 let VisibilityStatus = null;
 let FirstFullScreenChange = false;
-let mousePosition = {x: 0, y: 0};
-let offset = [0,0];
+let mousePosition = { x: 0, y: 0 };
+let offset = [0, 0];
 let DebuggerRef = null;
 let DebuggerRefDown = false;
 
 const getGameType = game => game === 'RepeatedChoice' ? DB_RECORDS.Game = {} : DB_RECORDS.Game = [];
 
-function ResetNewGame(){
+function ResetNewGame() {
     DB_RECORDS.Game = [];
     DB_RECORDS.MoreRec = {};
     DB_RECORDS.Payment = {};
@@ -183,7 +183,7 @@ function ResetAll() {
     getGameType(CurrentExperiments);
 }
 
-function insertMoreRecords(key, data){
+function insertMoreRecords(key, data) {
     DB_RECORDS.MoreRec[key] = data;
 }
 
@@ -196,8 +196,8 @@ const OnBeforeUnload = beforeunload => {
     // T.O Try to go out
     // G.O Go out
 
-    if (beforeunload){
-        window.onbeforeunload = function(){
+    if (beforeunload) {
+        window.onbeforeunload = function () {
             let log = {
                 user_id: DB_RECORDS.UserDetails.UserId,
                 exp: CurrentExperiments,
@@ -230,10 +230,10 @@ const OnBeforeUnload = beforeunload => {
                 type: 'application/json',
             };
             const blob = new Blob([JSON.stringify(body)], headers);
-            navigator.sendBeacon(CURRENT_URL()+'/api/logger', blob);
+            navigator.sendBeacon(CURRENT_URL() + '/api/logger', blob);
         });
 
-        document.addEventListener("visibilitychange", function() {
+        document.addEventListener("visibilitychange", function () {
             if (document.visibilityState === 'hidden' && VisibilityStatus !== 'hidden') {
 
                 let log = {
@@ -252,7 +252,7 @@ const OnBeforeUnload = beforeunload => {
 
                 VisibilityStatus = document.visibilityState;
             }
-            else if (document.visibilityState !== 'hidden' && VisibilityStatus === 'hidden'){
+            else if (document.visibilityState !== 'hidden' && VisibilityStatus === 'hidden') {
 
                 let log = {
                     user_id: DB_RECORDS.UserDetails.UserId,
@@ -280,13 +280,13 @@ const OnBeforeUnload = beforeunload => {
     }
 };
 
-function SetLimitedTime(status){
+function SetLimitedTime(status) {
     LIMITED_TIME = status;
 }
 
 const sendGameDataToDB = async () => {
     console.log("---> in game_handle sendGameDataToDB")
-     RecordGame({
+    RecordGame({
         Exp: CurrentExperiments,
         ExpID: EXP_ID,
         Records: stringify(DB_RECORDS.Game),
@@ -303,7 +303,7 @@ const sendGameDataToDB = async () => {
                         part: SAVE_PART,
                         id: EXP_ID
                     },
-                }).then((res) => {});
+                }).then((res) => { });
                 SAVE_PART++;
                 getGameType(CurrentExperiments);
                 return true;
@@ -319,7 +319,7 @@ const sendGameDataToDB = async () => {
                         id: EXP_ID,
                         error: 'catch'
                     },
-                }).then((res) => {});
+                }).then((res) => { });
                 this.props.setWaitForAction(false);
                 return false;
             }
@@ -327,7 +327,7 @@ const sendGameDataToDB = async () => {
     )
 };
 
-function getGameRecords(){
+function getGameRecords() {
     return [...DB_RECORDS.Game];
 }
 
@@ -338,7 +338,7 @@ const constantLineValues = (part) => {
         Version: DB_RECORDS.KeyTable.Version,
     };
 
-    if (part === 'GAME'){
+    if (part === 'GAME') {
         obj.Age = DB_RECORDS.UserDetails.Age;
         obj.Gender = DB_RECORDS.UserDetails.Gender;
     }
@@ -346,14 +346,14 @@ const constantLineValues = (part) => {
 }
 
 const insertGameLine = (line) => {
-    
+
     if (!Array.isArray(DB_RECORDS.Game))
         DB_RECORDS.Game = [];
     DB_RECORDS.Game.push({
         ...constantLineValues('GAME'),
         ...line
     });
-   
+
 };
 
 const insertGameArray = (rec_arr) => {
@@ -381,7 +381,7 @@ const insertTaskGameLine = (task, line) => {
     if (Array.isArray(DB_RECORDS.Game))
         DB_RECORDS.Game = {};
 
-    if (DB_RECORDS.Game[task] === undefined){
+    if (DB_RECORDS.Game[task] === undefined) {
         DB_RECORDS.Game[task] = [];
     }
 
@@ -392,7 +392,7 @@ const insertTaskGameLine = (task, line) => {
 };
 
 const insertLineCustomTable = (table, line, type) => {
-    if (DB_RECORDS.MoreRec[table] === undefined){
+    if (DB_RECORDS.MoreRec[table] === undefined) {
         if (type === 'array')
             DB_RECORDS.MoreRec[table] = [];
     }
@@ -416,36 +416,36 @@ const insertPayment = (payment) => {
     };
 };
 
-const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr}) => {
+const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr }) => {
     const additionalParams = {};
-    const extended_name="";
+    const extended_name = "";
     const TRIVIA_ONE_SHOT = 0;
     const MIND_GAME_REPEATED = 1;
     const TRIVIA_REPEATED = 2;
     const MIND_GAME_ONE_SHOT = 3;
 
     additionalParams.num_of_real_rounds = game_settings.game.num_of_real_rounds;
-    if(exp==="MixedGame"){
+    if (exp === "MixedGame") {
         let RunCounter = KeyTableID();
-        let type=RunCounter%4
-        if(type==TRIVIA_ONE_SHOT){
-            exp="Trivia";
+        let type = RunCounter % 4
+        if (type == TRIVIA_ONE_SHOT) {
+            exp = "Trivia";
             additionalParams.cond = "o";
-            additionalParams.extended_name="MIXED_TRIVIA_ONE_SHOT";
-        }else if(type==MIND_GAME_REPEATED){
-            exp="MindGame";
+            additionalParams.extended_name = "MIXED_TRIVIA_ONE_SHOT";
+        } else if (type == MIND_GAME_REPEATED) {
+            exp = "MindGame";
             additionalParams.cond = "r";
-            additionalParams.extended_name="MIXED_MIND_GAME_REPEATED";
-        }else if(type==TRIVIA_REPEATED){
-            exp="Trivia";
+            additionalParams.extended_name = "MIXED_MIND_GAME_REPEATED";
+        } else if (type == TRIVIA_REPEATED) {
+            exp = "Trivia";
             additionalParams.cond = "r";
-            additionalParams.extended_name="MIXED_TRIVIA_REPEATED";
-        }else if(type==MIND_GAME_ONE_SHOT){
-            exp="MindGame";
+            additionalParams.extended_name = "MIXED_TRIVIA_REPEATED";
+        } else if (type == MIND_GAME_ONE_SHOT) {
+            exp = "MindGame";
             additionalParams.cond = "o";
-            additionalParams.extended_name="MIXED_MIND_GAME_ONE_SHOT";
+            additionalParams.extended_name = "MIXED_MIND_GAME_ONE_SHOT";
         }
-    }else{
+    } else {
         additionalParams.cond = game_settings.game.cond;
     }
 
@@ -482,47 +482,47 @@ const getGame = ({exp, game_settings, more, isa, callbackFunction, setWaitForAct
         user_id: DB_RECORDS.UserDetails.UserId,
         callbackFunction
     };
-    
+
     const game_list = {
-        MixedGame:<MixedGameStart {...game_props} extended_name={extended_name} />,
+        MixedGame: <MixedGameStart {...game_props} extended_name={extended_name} />,
         MindGame: <MindGameStart {...game_props} game_settings={setCondForComponent("MindGame", game_settings, additionalParams)} />,
         Trivia: <TriviaStart {...game_props} game_settings={setCondForComponent("Trivia", game_settings, additionalParams)} />,
-        TryOrGiveUp: <TryOrGiveUpStart {...game_props}/>,
-        PointsGame: <PointsGameStart {...game_props}/>,
-        PointsGameSh: <PointsGameShStart/>,
-        WordPuzzle: <WordPuzzleStart {...game_props}/>,
-        AbstractAndDeclarationEffect: <AbstractAndDeclarationEffectStart {...game_props}/>,
-        SignatureAsReminder: <SignatureAsReminderStart {...game_props}/>,
-        CognitiveTask: <CognitiveTaskStart/>,
-        CognitiveTask2: <CognitiveTask2Start/>,
-        RepeatedChoice: <RepeatedChoiceStart {...game_props}/>,
-        QueenGarden: <QueenGardenStart {...game_props}/>,
-        QueenGarden2: <QueenGarden2Start {...game_props}/>,
-        QueenGarden3: <QueenGarden3Start {...game_props}/>,
-        SP: <SPStart {...game_props}/>,
-        DFE: <DFEStart/>,
-        PL_PATTERN: <PLPatternStart/>,
-        MetaSampling: <MetaSamplingStart {...game_props}/>,
-        ReversibleMatrices: <ReversibleMatricesStart {...game_props}/>,
-        SignatureTimingEffect: <SignatureTimingEffectStart {...game_props}/>,
-        CupsGame: <CupsGameStart {...game_props}/>,
-        NoCupsGame: <NoCupsGameStart {...game_props}/>,
+        TryOrGiveUp: <TryOrGiveUpStart {...game_props} />,
+        PointsGame: <PointsGameStart {...game_props} />,
+        PointsGameSh: <PointsGameShStart />,
+        WordPuzzle: <WordPuzzleStart {...game_props} />,
+        AbstractAndDeclarationEffect: <AbstractAndDeclarationEffectStart {...game_props} />,
+        SignatureAsReminder: <SignatureAsReminderStart {...game_props} />,
+        CognitiveTask: <CognitiveTaskStart />,
+        CognitiveTask2: <CognitiveTask2Start />,
+        RepeatedChoice: <RepeatedChoiceStart {...game_props} />,
+        QueenGarden: <QueenGardenStart {...game_props} />,
+        QueenGarden2: <QueenGarden2Start {...game_props} />,
+        QueenGarden3: <QueenGarden3Start {...game_props} />,
+        SP: <SPStart {...game_props} />,
+        DFE: <DFEStart />,
+        PL_PATTERN: <PLPatternStart />,
+        MetaSampling: <MetaSamplingStart {...game_props} />,
+        ReversibleMatrices: <ReversibleMatricesStart {...game_props} />,
+        SignatureTimingEffect: <SignatureTimingEffectStart {...game_props} />,
+        CupsGame: <CupsGameStart {...game_props} />,
+        NoCupsGame: <NoCupsGameStart {...game_props} />,
     };
-    
+
     return game_list[exp];
 };
 
-const getSummary = ({exp, summary_args}) => {
+const getSummary = ({ exp, summary_args }) => {
     console.log("---> in game_handle.js getSummary ");
     const game_list = {
         RepeatedChoice: {
             label: 'Repeated Choice',
             element: () => (
                 <RepeatedChoiceSummary
-                  summary_args={summary_args}
-                  SignOfReward={DB_RECORDS.Payment.SignOfReward}
-                  ShowUpFee={DB_RECORDS.Payment.ShowUpFee}
-                  GameBonus={DB_RECORDS.Payment.GameBonus}
+                    summary_args={summary_args}
+                    SignOfReward={DB_RECORDS.Payment.SignOfReward}
+                    ShowUpFee={DB_RECORDS.Payment.ShowUpFee}
+                    GameBonus={DB_RECORDS.Payment.GameBonus}
                 />
             )
         },
@@ -530,10 +530,10 @@ const getSummary = ({exp, summary_args}) => {
             label: 'Queen Garden',
             element: () => (
                 <QueenGardenSummary
-                  summary_args={summary_args}
-                  ShowUpFee={DB_RECORDS.Payment.show_up_fee}
-                  SignOfReward={DB_RECORDS.Payment.sign_of_reward}
-                  GameBonus={DB_RECORDS.Payment.bonus_payment}
+                    summary_args={summary_args}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    GameBonus={DB_RECORDS.Payment.bonus_payment}
                 />
             )
         },
@@ -541,10 +541,10 @@ const getSummary = ({exp, summary_args}) => {
             label: 'Queen Garden',
             element: () => (
                 <QueenGarden2Summary
-                  summary_args={summary_args}
-                  ShowUpFee={DB_RECORDS.Payment.show_up_fee}
-                  SignOfReward={DB_RECORDS.Payment.sign_of_reward}
-                  GameBonus={DB_RECORDS.Payment.bonus_payment}
+                    summary_args={summary_args}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    GameBonus={DB_RECORDS.Payment.bonus_payment}
                 />
             )
         },
@@ -552,10 +552,10 @@ const getSummary = ({exp, summary_args}) => {
             label: 'Queen Garden',
             element: () => (
                 <QueenGarden3Summary
-                  summary_args={summary_args}
-                  ShowUpFee={DB_RECORDS.Payment.show_up_fee}
-                  SignOfReward={DB_RECORDS.Payment.sign_of_reward}
-                  GameBonus={DB_RECORDS.Payment.bonus_payment}
+                    summary_args={summary_args}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    GameBonus={DB_RECORDS.Payment.bonus_payment}
                 />
             )
         },
@@ -724,7 +724,7 @@ const getSummary = ({exp, summary_args}) => {
  */
 
 const HandleFullScreen = (props) => {
-   // console.log("---> in game_handle.js HandleFullScreen ");
+    // console.log("---> in game_handle.js HandleFullScreen ");
     const handle = useFullScreenHandle();
     useEffect(() => {
         if (props.action_time_alert)
@@ -750,7 +750,7 @@ const HandleFullScreen = (props) => {
 
             <FullScreen handle={handle} onChange={(state, handle) => {
 
-                if (FirstFullScreenChange){
+                if (FirstFullScreenChange) {
                     let log = {
                         user_id: DB_RECORDS.UserDetails.UserId,
                         exp: CurrentExperiments,
@@ -776,12 +776,12 @@ const HandleFullScreen = (props) => {
     )
 };
 
-const UnMoveComponent = ({callback}) => {
-   // console.log("---> in game_handle.js UnMoveComponent ");
+const UnMoveComponent = ({ callback }) => {
+    // console.log("---> in game_handle.js UnMoveComponent ");
     const second_warning = useRef(null);
 
     useEffect(() => {
-        const timer=setInterval(() => {
+        const timer = setInterval(() => {
             let old_val = Number(second_warning.current.innerText);
             if (old_val > 0)
                 second_warning.current.innerText = old_val - 1;
@@ -798,8 +798,8 @@ const UnMoveComponent = ({callback}) => {
         <div className='game-handle_panel-UnMoveComponent'>
             <div>
                 <label>
-                    If no response is received in <span ref={second_warning}>{SecondWarning}</span> seconds,<br/>
-                    you will be <span>removed</span> from the study.<br/>
+                    If no response is received in <span ref={second_warning}>{SecondWarning}</span> seconds,<br />
+                    you will be <span>removed</span> from the study.<br />
                 </label>
                 <button
                     onClick={() => callback('RESTART_TIME')}
@@ -811,12 +811,12 @@ const UnMoveComponent = ({callback}) => {
 };
 
 const summary_lang = summary_args => {
-   // console.log("---> in game_handle.js summary_lang ");
+    // console.log("---> in game_handle.js summary_lang ");
     let language = 'English';
     try {
-        if(summary_args.language) language = summary_args.language;
+        if (summary_args.language) language = summary_args.language;
     }
-    catch (e) {}
+    catch (e) { }
     return language;
 }
 
@@ -824,18 +824,19 @@ function checkExperimentPath(exp) {
     const currentPath = window.location.pathname;
     const regex = new RegExp(`\\b${exp}\\b`, 'i'); // 'i' flag for case-insensitive search
     return regex.test(currentPath);
-  }
+}
 
-const Summary = ({exp, finishCallback, summary_args}) => {
-   // console.log("--->in summarry")
+const Summary = ({ exp, finishCallback, summary_args }) => {
+    // console.log("--->in summarry")
     const language = summary_lang(summary_args);
     let buttonText = "Get completion code";
+    let showCompletionCode = false; // if the experiment is Trivia or Mind game , show completion code , otherwise show button
     let finishScreenTitle = "You finished the study!"
     const [expSummary, setExpSummary] = useState(null);
     const [disableBtn, setDisableBtn] = useState(true);
 
     useEffect(() => {
-        const s_ = getSummary({exp, summary_args});
+        const s_ = getSummary({ exp, summary_args });
         setExpSummary(s_);
 
         if (language === 'English')
@@ -843,17 +844,19 @@ const Summary = ({exp, finishCallback, summary_args}) => {
         else {
             setTimeout(() => {
                 setDisableBtn(false);
-            }, 1000*60);
+            }, 1000 * 60);
         }
     }, [exp, summary_args]);
 
     if (!expSummary) return <></>;
-    const currentPath=window.location.pathname;
-    if(currentPath.includes('QueenGarden')){
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('QueenGarden')) {
         buttonText = "Move to exit survey"
+    } else if (currentPath.includes('Trivia') || currentPath.includes('MindGame')) {
+        showCompletionCode = true;
     }
-    
-    if(checkExperimentPath("QueenGarden2")){
+
+    if (checkExperimentPath("QueenGarden2")) {
         finishScreenTitle = "You have completed part one of the study"
     }
     // GameSetting.language === 'German'
@@ -873,7 +876,7 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                     }
                 </label>
                 {expSummary.element()}
-                
+
                 <div>
                     <label className='exp-summary-h2'>
                         {
@@ -887,28 +890,31 @@ const Summary = ({exp, finishCallback, summary_args}) => {
                             padding: '8px', /* Optional: Adds some padding inside the textarea */
                             borderRadius: '4px' /* Optional: Rounds the corners slightly */
                         }}
-  onChange={e => insertTextInput('UserFinalComments', e.target.value)}
-/>
+                        onChange={e => insertTextInput('UserFinalComments', e.target.value)}
+                    />
                 </div>
-                <label className='exp-summary-h3'>
-                    {
-                        //language === 'German' ? 'Bitte wenden Sie sich an den Versuchsleiter.' : 'To get your completion code, please press the button below without closing the window.'
-                    }
-                </label>
-                <button disabled={disableBtn} onClick={disableBtn? undefined : () => finishCallback()}
-                >
-                    {
-                        buttonText
-                    }
-                </button>
+                {
+                    showCompletionCode ? (
+                        <label className='exp-summary-h3'>
+                            {"Your code is: BokNq7emXT0f"}
+                        </label>
+                    ) : (
+                        <button
+                            disabled={disableBtn}
+                            onClick={disableBtn ? undefined : () => finishCallback()}
+                        >
+                            {buttonText}
+                        </button>
+                    )
+                }
             </div>
         </div>
     )
 };
 
-const ReturnToMainLink = ({state, exp, className, label}) => {
-   // console.log("--->in ReturnToMainLink exp="+exp+"  className="+className+"   label="+label)
-    if (state !== null){
+const ReturnToMainLink = ({ state, exp, className, label }) => {
+    // console.log("--->in ReturnToMainLink exp="+exp+"  className="+className+"   label="+label)
+    if (state !== null) {
         if (!state || !state.isAuthenticated) return <></>;
     }
     return (
@@ -916,7 +922,7 @@ const ReturnToMainLink = ({state, exp, className, label}) => {
             className={className}
             // to={`/todo`}
             to={`/${exp}/main`}
-            state={{exp}}
+            state={{ exp }}
             replace={true}
         >
             {label}
@@ -924,7 +930,7 @@ const ReturnToMainLink = ({state, exp, className, label}) => {
     )
 }
 
-const PlayError = ({state, exp}) => {
+const PlayError = ({ state, exp }) => {
 
     return (
         <div
@@ -934,7 +940,7 @@ const PlayError = ({state, exp}) => {
             <label>Game <span>Ends</span> now.</label>
             <label>You may now close the tab</label>
 
-            <ReturnToMainLink label='Return to main' className='button-item' state={state} exp={exp}/>
+            <ReturnToMainLink label='Return to main' className='button-item' state={state} exp={exp} />
 
             {
                 state && ((state.active_settings && state.active_settings.mode !== 'Real') || state.isAuthenticated) && (
@@ -951,8 +957,8 @@ const PlayError = ({state, exp}) => {
     );
 };
 
-const NoActionRejected = ({state, exp}) => {
-    console.log("---> in NoActionRejected()   exp="+exp )
+const NoActionRejected = ({ state, exp }) => {
+    console.log("---> in NoActionRejected()   exp=" + exp)
 
     return (
         <div
@@ -964,7 +970,7 @@ const NoActionRejected = ({state, exp}) => {
             <label><span className='b3'>Thank you</span></label>
 
             <div>
-                <ReturnToMainLink label='Return to main' className='button-item' state={state} exp={exp}/>
+                <ReturnToMainLink label='Return to main' className='button-item' state={state} exp={exp} />
                 {
                     state && ((state.active_settings && state.active_settings.mode !== 'Real') || state.isAuthenticated) && (
                         <button
@@ -981,7 +987,7 @@ const NoActionRejected = ({state, exp}) => {
     );
 };
 
-const RunningError = ({exp}) => {
+const RunningError = ({ exp }) => {
     return (
         <div
             className='play_error'
@@ -996,13 +1002,13 @@ const RunningError = ({exp}) => {
     );
 };
 
-const NotReady = ({exp}) => {
-   // console.log("--->in NotReady")
+const NotReady = ({ exp }) => {
+    // console.log("--->in NotReady")
     return (
         <>
             <label>Not ready</label>
 
-            <ReturnToMainLink label='Return to main' className='button-item' state={null} exp={exp}/>
+            <ReturnToMainLink label='Return to main' className='button-item' state={null} exp={exp} />
         </>
     );
 };
@@ -1032,30 +1038,30 @@ const RedirectingWait = () => {
 };
 
 const getBrowserDetails = () => {
-  try {
-      navigator.sayswho= (function(){
-          var ua= navigator.userAgent;
-          var tem;
-          var M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-          if(/trident/i.test(M[1])){
-              tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
-              return 'IE '+(tem[1] || '');
-          }
-          if(M[1]=== 'Chrome'){
-              tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
-              if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-          }
-          M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-          if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
-          return M.join(' ');
-      })();
+    try {
+        navigator.sayswho = (function () {
+            var ua = navigator.userAgent;
+            var tem;
+            var M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+            if (/trident/i.test(M[1])) {
+                tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+                return 'IE ' + (tem[1] || '');
+            }
+            if (M[1] === 'Chrome') {
+                tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+                if (tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+            }
+            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+            if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+            return M.join(' ');
+        })();
 
-      const sayswho = navigator.sayswho;
-      return sayswho;
-  }
-  catch (e) {
-      return '';
-  }
+        const sayswho = navigator.sayswho;
+        return sayswho;
+    }
+    catch (e) {
+        return '';
+    }
 }
 
 export class DebuggerModalView extends React.Component {
@@ -1128,7 +1134,7 @@ const DebuggerWindows = () => {
             ref={DebuggerRef}
             onMouseUp={() => DebuggerRefDown = false}
             onMouseDown={e => {
-                const {top, left} = DebuggerRef.current.getBoundingClientRect();
+                const { top, left } = DebuggerRef.current.getBoundingClientRect();
 
                 offset = [
                     left - e.clientX,
@@ -1139,7 +1145,7 @@ const DebuggerWindows = () => {
         >
             <label
                 className='debugger-mode-header unselectable'
-                // onMouseUp={() => DebuggerRefDown = false}
+            // onMouseUp={() => DebuggerRefDown = false}
             >
                 Move
             </label>
@@ -1165,7 +1171,7 @@ class GameHandle extends React.Component {
         try {
             exp_ = this.props.location.state.exp;
         }
-        catch (e){
+        catch (e) {
             exp_ = undefined;
         }
 
@@ -1174,7 +1180,7 @@ class GameHandle extends React.Component {
             try {
                 exp_ = GetExperimentName(window.location.pathname.replace('/', ''));
             }
-            catch (e){
+            catch (e) {
                 exp_ = undefined;
             }
 
@@ -1246,7 +1252,7 @@ class GameHandle extends React.Component {
                         throw new CodeError('err', 404);
                     sc.not_ready = exp_state_res.data.msg;
 
-                    if (exp_state_res.data.msg === 'Y'){
+                    if (exp_state_res.data.msg === 'Y') {
                         this.props.setGameMode(true);
                         getGameConsentForm(current_exp).then(
                             res => {
@@ -1256,7 +1262,7 @@ class GameHandle extends React.Component {
 
                                     if (res.data.cf === 'N')
                                         sc.game_index += 2;
-                                    else{
+                                    else {
                                         sc.consent_form = res.data.cf_b;
                                         sc.game_index += 1;
                                     }
@@ -1285,10 +1291,10 @@ class GameHandle extends React.Component {
 
         ActionTimeLast = Date.now();
         this.ActionTimerInterval = setInterval(() => {
-            if (ActionTime !== null && SecondWarning !== null){
-                if (LIMITED_TIME && !SecondWarningShow){
+            if (ActionTime !== null && SecondWarning !== null) {
+                if (LIMITED_TIME && !SecondWarningShow) {
                     let NowAction = Date.now();
-                    if ((NowAction - ActionTimeLast) >= ActionTime*1000){
+                    if ((NowAction - ActionTimeLast) >= ActionTime * 1000) {
                         this.setState(() => {
                             return {
                                 action_time_alert: true
@@ -1314,7 +1320,7 @@ class GameHandle extends React.Component {
         ActionTimeLast = Date.now();
         let sc = this.state;
         sc.action_time_alert = false;
-        if (option === 'END_TIME'){
+        if (option === 'END_TIME') {
             NewLogs({
                 user_id: DB_RECORDS.UserDetails.UserId,
                 exp: this.exp,
@@ -1328,14 +1334,14 @@ class GameHandle extends React.Component {
                     local_t: getTimeDate().time,
                     local_d: getTimeDate().date,
                 },
-            }).then((res) => {});
+            }).then((res) => { });
             sc.no_action_rejected = true;
         }
         // else if (option === 'RESTART_TIME'){}
         this.setState(sc);
     }
 
-    getEndCode(){
+    getEndCode() {
         this.props.setWaitForAction(true);
 
         getEndCode({
@@ -1360,10 +1366,10 @@ class GameHandle extends React.Component {
                         local_t: getTimeDate().time,
                         local_d: getTimeDate().date,
                     },
-                }).then((res) => {});
+                }).then((res) => { });
                 if (redirect && !redirect.startsWith('http'))
                     redirect = 'https://' + redirect;
-                this.setState({redirect_to: redirect}, this.props.setWaitForAction(false));
+                this.setState({ redirect_to: redirect }, this.props.setWaitForAction(false));
             }
         )
     }
@@ -1371,7 +1377,7 @@ class GameHandle extends React.Component {
     finishGame(new_game) {
         this.props.setWaitForAction(true);
         let sc = this.state;
-        if (new_game){
+        if (new_game) {
             ResetNewGame();
             getGameType(CurrentExperiments);
             sc.game_index = 2;
@@ -1396,7 +1402,7 @@ class GameHandle extends React.Component {
     }
 
     recordsFinishGame = (params) => {
-      //  console.log("---> in game_handle.js recordsFinishGame ");
+        //  console.log("---> in game_handle.js recordsFinishGame ");
         this.props.setWaitForAction(true);
         let game_points;
         try {
@@ -1422,9 +1428,9 @@ class GameHandle extends React.Component {
                     try {
                         new_game = params.new_game;
                     }
-                    catch (e) {}
+                    catch (e) { }
 
-                    if (res.data.msg === 'RecordSaved'){
+                    if (res.data.msg === 'RecordSaved') {
                         NewLogs({
                             user_id: DB_RECORDS.UserDetails.UserId,
                             exp: CurrentExperiments,
@@ -1484,8 +1490,8 @@ class GameHandle extends React.Component {
     }
 
     // ng = 'NewGame
-    callbackFunction(option, params){
-        if (option === 'ConsentForm'){
+    callbackFunction(option, params) {
+        if (option === 'ConsentForm') {
             let sc = this.state;
             if (params === 'user_not_consent') {
                 sc.user_rejected = true;
@@ -1496,12 +1502,12 @@ class GameHandle extends React.Component {
             this.setState(sc);
 
         }
-        else if (option === 'UserRequestToQuit'){
+        else if (option === 'UserRequestToQuit') {
             let sc = this.state;
             sc.user_rejected = true;
             this.setState(sc);
         }
-        else if (option === 'ExpLogin'){
+        else if (option === 'ExpLogin') {
             this.props.setWaitForAction(true);
             const isAuth = this.state.isAuthenticated;
             DB_RECORDS.UserDetails = params;
@@ -1516,18 +1522,18 @@ class GameHandle extends React.Component {
                 DB_RECORDS.UserDetails.Langs = navigator.languages.join(' | ');
                 const aaa = date.toString().match(/\(([A-Za-z\s].*)\)/);
                 const bbb = date.toString().match(/([A-Z]+[-][0-9]+)/);
-                DB_RECORDS.UserDetails.EDT = (aaa&&Array.isArray(aaa)) ? aaa[1] : '';
-                DB_RECORDS.UserDetails.GMT = (bbb&&Array.isArray(bbb)) ? bbb[1] : '';
+                DB_RECORDS.UserDetails.EDT = (aaa && Array.isArray(aaa)) ? aaa[1] : '';
+                DB_RECORDS.UserDetails.GMT = (bbb && Array.isArray(bbb)) ? bbb[1] : '';
             }
             catch (e) {
             }
 
-            this.setState({isLoading: true}, () => {
+            this.setState({ isLoading: true }, () => {
 
                 getGameVersion(this.exp, DB_RECORDS.UserDetails.UserId, isAuth, this.need_new_game).then(
                     res => {
                         try {
-                            if (res.data.error){
+                            if (res.data.error) {
                                 return this.setState({
                                     isLoading: false,
                                     play_error: true,
@@ -1555,7 +1561,7 @@ class GameHandle extends React.Component {
                             }
 
                             ActionTime = Number(res.data.version.general.action_time);
-                            if (!ActionTime){
+                            if (!ActionTime) {
                                 clearInterval(this.ActionTimerInterval);
                                 ActionTime = null;
                             }
@@ -1613,7 +1619,7 @@ class GameHandle extends React.Component {
                                                 // game_points: params.args.game_points || 0,
                                                 error: 'catch'
                                             },
-                                        }).then((res) => {});
+                                        }).then((res) => { });
                                         this.props.setWaitForAction(false);
                                     }
                                 }
@@ -1631,12 +1637,12 @@ class GameHandle extends React.Component {
                 )
             });
         }
-        else if (option === 'ReturnToConsent'){
+        else if (option === 'ReturnToConsent') {
             let sc = this.state;
             sc.game_index--;
             this.setState(sc);
         }
-        else if (option === 'FinishGame'){
+        else if (option === 'FinishGame') {
             this.props.setWaitForAction(true);
             let end_time = getTimeDate().time;
             let elapsed = Date.now() - EntranceTime;
@@ -1660,7 +1666,7 @@ class GameHandle extends React.Component {
                     local_t: end_time,
                     local_d: getTimeDate().date,
                 },
-            }).then((res) => {});
+            }).then((res) => { });
 
             // DB_RECORDS.Summary.TextInput = params.args.text_input || '';
             DB_RECORDS.Summary.StartTime = getTimeDate(EntranceTime).time;
@@ -1674,7 +1680,7 @@ class GameHandle extends React.Component {
             }
             this.need_new_game = params.new_game;
 
-            if (params.need_summary === true){
+            if (params.need_summary === true) {
 
                 let sc = this.state;
                 sc.game_index++;
@@ -1687,29 +1693,29 @@ class GameHandle extends React.Component {
         }
     }
 
-    game_stages(){
-    console.log("---> in game_stages() ")
+    game_stages() {
+        console.log("---> in game_stages() ")
         let stage = this.game_handle[this.state.game_index];
-        console.log("---> in game_stages() 111 stage="+stage)
+        console.log("---> in game_stages() 111 stage=" + stage)
         let user;
         try {
             if (this.state.isAuthenticated)
-                user =  {
+                user = {
                     id: this.state.auth.user.email,
                     age: this.state.auth.user.age,
                     gender: this.state.auth.user.gender,
                 };
             else
-                user =  {
+                user = {
                     id: '',
                     age: '',
                     gender: '',
                 };
-                console.log("---> in game_stages() 222 user.id="+user.id)
+            console.log("---> in game_stages() 222 user.id=" + user.id)
         }
         catch (e) {
-            console.log("---> in game_stages() 222 catch user.id="+user.id)
-            user =  {
+            console.log("---> in game_stages() 222 catch user.id=" + user.id)
+            user = {
                 id: '',
                 age: '',
                 gender: '',
@@ -1717,20 +1723,20 @@ class GameHandle extends React.Component {
         }
 
 
-        switch (stage){
-            
+        switch (stage) {
+
             case 'ConsentForm':
                 return (
                     <>
-                        <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp}/>
-                        <ConsentForm consent_form={this.state.consent_form} callback={this.callbackFunction} mode={this.state.isAuthenticated ? 'DEMO' : 'GAME'}/>
+                        <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp} />
+                        <ConsentForm consent_form={this.state.consent_form} callback={this.callbackFunction} mode={this.state.isAuthenticated ? 'DEMO' : 'GAME'} />
                     </>
                 );
             case 'ExpLogin':
                 return (
                     <>
-                        <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp}/>
-                        <ExpLogin have_consent={this.state.consent_form !== null} callback={this.callbackFunction} mode={'GAME'} exp={this.exp} user={user} isAdmin={this.state.isAuthenticated}/>
+                        <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp} />
+                        <ExpLogin have_consent={this.state.consent_form !== null} callback={this.callbackFunction} mode={'GAME'} exp={this.exp} user={user} isAdmin={this.state.isAuthenticated} />
                     </>
                 );
             case 'Game':
@@ -1740,9 +1746,9 @@ class GameHandle extends React.Component {
                         <HandleFullScreen
                             action_time_alert={this.state.action_time_alert}
                         >
-                            <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp}/>
+                            <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp} />
                             {
-                               getGame({
+                                getGame({
                                     exp: this.exp,
                                     game_settings: this.state.game_settings,
                                     more: this.state.more,
@@ -1752,9 +1758,9 @@ class GameHandle extends React.Component {
                                     dmr: this.state.debuggerModeRunning
                                 })
                             }
-                            
+
                             {
-                                this.state.debuggerModeRunning && <DebuggerWindows/>
+                                this.state.debuggerModeRunning && <DebuggerWindows />
                             }
                         </HandleFullScreen>
                     );
@@ -1762,9 +1768,9 @@ class GameHandle extends React.Component {
                 return (
                     <>
                         <ReturnToMainLink
-                          label={<span>&#9664;</span>}
-                          className='game-handle_back_to_main'
-                          state={this.state} exp={this.exp}
+                            label={<span>&#9664;</span>}
+                            className='game-handle_back_to_main'
+                            state={this.state} exp={this.exp}
                         />
                         {
                             getGame({
@@ -1779,16 +1785,16 @@ class GameHandle extends React.Component {
                         }
 
                         {
-                            this.state.debuggerModeRunning && <DebuggerWindows/>
+                            this.state.debuggerModeRunning && <DebuggerWindows />
                         }
                     </>
                 )
             case 'Summary':
                 return (
                     <>
-                        <Summary summary_args={this.state.summary_args} exp={this.exp} finishCallback={this.recordsFinishGame}/>
+                        <Summary summary_args={this.state.summary_args} exp={this.exp} finishCallback={this.recordsFinishGame} />
                         {
-                            this.state.debuggerModeRunning && <DebuggerWindows/>
+                            this.state.debuggerModeRunning && <DebuggerWindows />
                         }
                     </>
                 )
@@ -1806,45 +1812,45 @@ class GameHandle extends React.Component {
         }
         if ((this.state.redirect_to !== null && !this.state.redirect_to) || this.state.play_error || this.state.user_rejected || (this.state.user_finish_game && this.state.active_settings.mode !== 'Real') || (this.state.user_finish_game && this.state.isAuthenticated)) {
             OnBeforeUnload(false);
-            return <PlayError state={this.state} exp={this.exp}/>;
+            return <PlayError state={this.state} exp={this.exp} />;
         }
         if (this.state.no_action_rejected) {
             OnBeforeUnload(false);
-            return <NoActionRejected state={this.state} exp={this.exp}/>;
+            return <NoActionRejected state={this.state} exp={this.exp} />;
         }
         if (this.state.user_finish_game)
             return <RedirectingWait />;
         if (this.state.running_error) {
             OnBeforeUnload(false);
-            return <RunningError exp={this.exp}/>;
+            return <RunningError exp={this.exp} />;
         }
         if (this.state.not_found || (this.state.not_ready === 'N' && !this.state.isAuthenticated)) {
             OnBeforeUnload(false);
-            return <Navigate to='/not_found'/>;
+            return <Navigate to='/not_found' />;
         }
         if (this.state.not_ready === 'N' && this.state.isAuthenticated) {
             OnBeforeUnload(false);
-            return <NotReady exp={this.exp}/>;
+            return <NotReady exp={this.exp} />;
         }
         return (
             <>
-                { this.state.action_time_alert && <UnMoveComponent callback={this.actionTimerOptions}/> }
+                {this.state.action_time_alert && <UnMoveComponent callback={this.actionTimerOptions} />}
                 <div
                     className={'game-handle_panel ' + (this.state.action_time_alert ? 'dimming-page' : '')}
                     onMouseUp={() => DebuggerRefDown = false}
                     onMouseMove={(event) => {
                         ActionTimeLast = Date.now();
-                        if (this.state.debuggerModeRunning){
-                            if (DebuggerRef && DebuggerRefDown){
+                        if (this.state.debuggerModeRunning) {
+                            if (DebuggerRef && DebuggerRefDown) {
                                 event.preventDefault();
                                 mousePosition = {
-                                    x : event.clientX,
-                                    y : event.clientY
+                                    x: event.clientX,
+                                    y: event.clientY
 
                                 };
 
                                 DebuggerRef.current.style.left = (mousePosition.x + offset[0]) + 'px';
-                                DebuggerRef.current.style.top  = (mousePosition.y + offset[1]) + 'px';
+                                DebuggerRef.current.style.top = (mousePosition.y + offset[1]) + 'px';
                             }
                         }
                     }}
@@ -1859,7 +1865,7 @@ class GameHandle extends React.Component {
                 </div>
             </>
         );
-      
+
     };
 
 }
@@ -1876,4 +1882,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {setGameMode, setWaitForAction})(GameHandle);
+export default connect(mapStateToProps, { setGameMode, setWaitForAction })(GameHandle);
