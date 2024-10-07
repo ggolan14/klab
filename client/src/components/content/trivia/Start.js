@@ -8,6 +8,7 @@ import TriviaIntroduction from './TriviaIntroduction';
 import FoodPreference from './FoodPreference';
 import ResourceAllocation from '../mind_game/ResourceAllocation';
 import { formatPrice } from '../../utils/StringUtils';
+import MathQuestion from './MathQuestion'; // The math question component
 const ThisExperiment = 'Trivia';
 
 
@@ -86,9 +87,20 @@ class Start extends Component {
       hideTriviaCompleted: false,
       showWelcomeToFoodPreference: false,
       userAnswers: {},
+      mathAnsweredCorrectly: false,
+      showError: false,
 
     };
   }
+
+    // Method to handle the result from the MathQuestion component
+    handleMathQuestionAnswer = (isCorrect) => {
+      if (isCorrect) {
+        this.setState({ mathAnsweredCorrectly: true, showError: false });
+      } else {
+        this.setState({ showError: true });
+      }
+    };
 
   componentDidMount(){
     NewLogs({
@@ -333,7 +345,7 @@ This function is invoked when user confirmed (click yes or no).
   render() {
     const { currentQuestionIndex, showConfirmation, correctAnswer, hideTriviaCompleted, showWelcomeToFoodPreference,
       showQuestion, yesClickCount, noClickCount, practiceMode, gameCondition,
-      hideMessages, practiceIsOver } = this.state;
+      hideMessages, practiceIsOver,mathAnsweredCorrectly, showError} = this.state;
     let questions = trivia_questions;
     const question = questions[currentQuestionIndex];
     const { answers } = question;
@@ -420,12 +432,28 @@ This function is invoked when user confirmed (click yes or no).
         </div>
       )
     }
+    if (!mathAnsweredCorrectly) {
+      return (
+        <div className="trivia-container">
+          <MathQuestion onAnswer={this.handleMathQuestionAnswer} />
 
+          {/* Display error message if user answers incorrectly */}
+          
+        </div>
+      );
+    }
     return (
       <div className="trivia-container">
         {foodPreferenceComponent}
+        {/* Show error message if math question is answered incorrectly */}
+      
 
-        {!hideMessages ? (
+        {/* Show TriviaIntroduction or DebuggerModalView based on math question result */}
+        {mathAnsweredCorrectly && !hideMessages ? (
+
+
+
+        
           <TriviaIntroduction signOfReward={SignOfReward} gameCondition={GameCondition} onHideMessages={this.handleHideMessages} messageIndex={currentQuestionIndex} />
         ) : (
           <div style={{ Width:800, position: 'absolute', top: 200, left: 400 }}>
