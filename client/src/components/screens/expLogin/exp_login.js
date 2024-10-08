@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './exp_login.css';
 import { GetExperimentLabel } from "../../../data/experiments";
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import {isSuperAdminUser} from "../../../utils/app_utils";
 
 class ExpLogin extends React.Component {
 
@@ -73,7 +74,7 @@ class ExpLogin extends React.Component {
             }
             else {
 
-                if (this.state.hCaptchaVerified || this.state.isAdmin) {
+                if (this.state.hCaptchaVerified || isSuperAdminUser()) {
                     // Proceed with login
                     this.callback('ExpLogin', {
                         UserId: this.state.user_id,
@@ -153,7 +154,7 @@ class ExpLogin extends React.Component {
         return (
             <>
                 {/* CAPTCHA Verification Block */}
-                {!this.state.hCaptchaVerified && !this.state.isAdmin  && (
+                {!this.state.hCaptchaVerified && !isSuperAdminUser()  && (
                     <div className={'exp-login-panel ' + (this.state.errors_inputs ? '' : '')}>
                         
                         <HCaptcha
@@ -170,7 +171,7 @@ class ExpLogin extends React.Component {
                 )}
     
                 {/* Render form content only after CAPTCHA is verified */}
-                {(this.state.hCaptchaVerified || this.state.isAdmin) && (
+                {(this.state.hCaptchaVerified || isSuperAdminUser()) && (
                     <>
                         {this.state.errors_inputs && (
                             <div className="exp-login-errors-p">
