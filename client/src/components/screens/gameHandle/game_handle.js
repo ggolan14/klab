@@ -410,7 +410,6 @@ const insertLineCustomTable = (table, line, type) => {
 };
 
 const insertPayment = (payment) => {
-    console.log("---> @@@ in insertPayment")
     DB_RECORDS.Payment = {
         ...constantLineValues('PAYMENT'),
         ...payment
@@ -514,7 +513,6 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
 };
 
 const getSummary = ({ exp, summary_args }) => {
-    console.log("---> @@@ in getSummary")
     const game_list = {
         RepeatedChoice: {
             label: 'Repeated Choice',
@@ -828,7 +826,6 @@ function checkExperimentPath(exp) {
 }
 
 const Summary = ({ exp, finishCallback, summary_args }) => {
-    console.log("---> @@@ in Summary finishCallback="+finishCallback)
     const language = summary_lang(summary_args);
     let buttonText = "Get completion code";
     let showCompletionCode = false; // if the experiment is Trivia or Mind game , show completion code , otherwise show button
@@ -1501,8 +1498,6 @@ class GameHandle extends React.Component {
 
     // ng = 'NewGame
     callbackFunction(option, params) {
-        console.log("---> @@@ in callbackFunction option="+option+"  params="+params)
-
         if (option === 'ConsentForm') {
             let sc = this.state;
             if (params === 'user_not_consent') {
