@@ -410,6 +410,7 @@ const insertLineCustomTable = (table, line, type) => {
 };
 
 const insertPayment = (payment) => {
+    console.log("---> @@@ in insertPayment")
     DB_RECORDS.Payment = {
         ...constantLineValues('PAYMENT'),
         ...payment
@@ -513,7 +514,7 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
 };
 
 const getSummary = ({ exp, summary_args }) => {
-    console.log("---> in game_handle.js getSummary ");
+    console.log("---> @@@ in getSummary")
     const game_list = {
         RepeatedChoice: {
             label: 'Repeated Choice',
@@ -827,7 +828,7 @@ function checkExperimentPath(exp) {
 }
 
 const Summary = ({ exp, finishCallback, summary_args }) => {
-    // console.log("--->in summarry")
+    console.log("---> @@@ in Summary finishCallback="+finishCallback)
     const language = summary_lang(summary_args);
     let buttonText = "Get completion code";
     let showCompletionCode = false; // if the experiment is Trivia or Mind game , show completion code , otherwise show button
@@ -895,9 +896,18 @@ const Summary = ({ exp, finishCallback, summary_args }) => {
                 </div>
                 {
                     showCompletionCode ? (
+                        <>
                         <label className='exp-summary-h3'>
                             {"Your code is: BokNq7emXT0f"}
                         </label>
+                        <button
+                            disabled={disableBtn}
+                            onClick={disableBtn ? undefined : () => finishCallback()}
+                        >
+                            Finish Game
+                        </button>
+                        </>
+                        
                     ) : (
                         <button
                             disabled={disableBtn}
@@ -1491,6 +1501,8 @@ class GameHandle extends React.Component {
 
     // ng = 'NewGame
     callbackFunction(option, params) {
+        console.log("---> @@@ in callbackFunction option="+option+"  params="+params)
+
         if (option === 'ConsentForm') {
             let sc = this.state;
             if (params === 'user_not_consent') {
