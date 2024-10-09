@@ -891,21 +891,29 @@ const Summary = ({ exp, finishCallback, summary_args }) => {
                         onChange={e => insertTextInput('UserFinalComments', e.target.value)}
                     />
                 </div>
-                {showCompletionCode ? (
-                    <>
+                {
+                    showCompletionCode ? (
+                        <>
                         <label className='exp-summary-h3'>
                             {"Your code is: BokNq7emXT0f"}
                         </label>
-                        {finishCallback()} {/* Invoke finishCallback when showCompletionCode is true */}
-                    </>
-                ) : (
-                    <button
-                        disabled={disableBtn}
-                        onClick={disableBtn ? undefined : () => finishCallback()}
-                    >
-                        {buttonText}
-                    </button>
-                )}
+                        <button
+                            disabled={disableBtn}
+                            onClick={disableBtn ? undefined : () => finishCallback()}
+                        >
+                            Finish Game
+                        </button>
+                        </>
+                        
+                    ) : (
+                        <button
+                            disabled={disableBtn}
+                            onClick={disableBtn ? undefined : () => finishCallback()}
+                        >
+                            {buttonText}
+                        </button>
+                    )
+                }
             </div>
         </div>
     )
