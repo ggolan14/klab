@@ -221,7 +221,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                     <p style={{ color: 'lightgray' }}>You recently found out that you had one package revoked.  You recently found out that you had one package revoked. You wonder how the manager reached the decision to revoke your package</p>
                     <br></br>
                     <br></br>
-                    <p style={{ color: 'black' }}>{keyValueData["4_1"]} (scale: 1- not likely at all… 7 – very likely)</p>
+                    <p style={{ color: 'black' }}>{keyValueData["4_1"]}</p>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
                     <span style={{ marginRight: '12px' }}>Not at all</span>
                     <input
@@ -267,7 +267,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                     </p>
 					<br></br>
                     <br></br>
-					<p style={{ color: 'black' }}>{keyValueData["4_2"]} (scale: 1- not likely at  all… 7 – very likely)
+					<p style={{ color: 'black' }}>{keyValueData["4_2"]} 
                     </p>
                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>
                     <span style={{ marginRight: '12px' }}>Not at all</span>
@@ -401,7 +401,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                         }}
                     >
                         {Array.from({ length: 10 }, (_, i) => (
-                            <span key={i} style={{fontSize: '11px', color:'green',textAlign: 'center', }}> {i + 1}</span>
+                            <span key={i} style={{fontSize: '18px', color:'green',textAlign: 'center', }}> {i + 1}</span>
                         ))}
                     </div>
                     <p style={{ display: 'flex', alignItems: 'left', justifyContent: 'left' }}>

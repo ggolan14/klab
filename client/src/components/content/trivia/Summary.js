@@ -21,7 +21,7 @@ const Summary = ({ SummaryArgs }) => {
     <label>
       Thank you for your participation.
       Your bonus is {formatPrice(SummaryArgs.reward_sum, SummaryArgs.sign_of_reward)}, and will be added to your participation payment.<br />
-      Your completion code is provided below.
+      To receive your payment, please copy the completion code below and click on the <b>Finish Game</b> button.<br/>It is essential to click <b>Finish Game</b> for your data to be recorded!
     </label>
   );
 };
