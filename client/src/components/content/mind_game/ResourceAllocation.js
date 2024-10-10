@@ -358,7 +358,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
                 <div>
                     <p>You are almost done!
                         <br></br>
-                        We have 4 last questions regarding your self-assessment and food preferences.
+                        We have 5 last questions regarding your self-assessment and food preferences.
                         Please answer the questions according to your true assessment and actual preferences.
                     </p>
 
