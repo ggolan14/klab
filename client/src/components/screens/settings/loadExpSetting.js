@@ -11,6 +11,7 @@ import RepeatedChoice from '../../content/repeated_choice/Settings';
 import QueenGarden from '../../content/queen_garden/Settings';
 import QueenGarden2 from '../../content/queen_garden_2/Settings';
 import QueenGarden3 from '../../content/queen_garden_3/Settings';
+import PreferancePerformance from '../../content/preferance_performance/Settings';
 import SP from '../../content/sp/Settings';
 import Trivia from '../../content/trivia/Settings';
 import MindGame from '../../content/mind_game/Settings';
@@ -36,6 +37,7 @@ const EXPERIMENTS_LIST = {
     QueenGarden,
     QueenGarden2,
     QueenGarden3,
+	PreferancePerformance,
     SP,
     TryOrGiveUp,
     Trivia,

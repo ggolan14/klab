@@ -48,6 +48,9 @@ import QueenGarden2Summary from "../../content/queen_garden_2/Summary";
 import QueenGarden3Start from "../../content/queen_garden_3/Start";
 import QueenGarden3Summary from "../../content/queen_garden_3/Summary";
 
+import PreferancePerformanceStart from "../../content/preferance_performance/Start";
+import PreferancePerformanceSummary from "../../content/preferance_performance/Summary";
+
 import MetaSamplingStart from "../../content/meta_sampling/Start";
 import MetaSamplingSummary from '../../content/meta_sampling/Summary';
 import SPStart from "../../content/sp/Start";
@@ -499,6 +502,7 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
         QueenGarden: <QueenGardenStart {...game_props} />,
         QueenGarden2: <QueenGarden2Start {...game_props} />,
         QueenGarden3: <QueenGarden3Start {...game_props} />,
+		PreferancePerformance: <PreferancePerformanceStart {...game_props} />,
         SP: <SPStart {...game_props} />,
         DFE: <DFEStart />,
         PL_PATTERN: <PLPatternStart />,
@@ -551,6 +555,17 @@ const getSummary = ({ exp, summary_args }) => {
             label: 'Queen Garden',
             element: () => (
                 <QueenGarden3Summary
+                    summary_args={summary_args}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    GameBonus={DB_RECORDS.Payment.bonus_payment}
+                />
+            )
+        },
+		PreferancePerformance: {
+            label: 'Queen Garden',
+            element: () => (
+                <PreferancePerformanceSummary
                     summary_args={summary_args}
                     ShowUpFee={DB_RECORDS.Payment.show_up_fee}
                     SignOfReward={DB_RECORDS.Payment.sign_of_reward}
