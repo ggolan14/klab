@@ -865,7 +865,7 @@ const Summary = ({ exp, finishCallback, summary_args }) => {
     const currentPath = window.location.pathname;
     if (currentPath.includes('QueenGarden')) {
         buttonText = "Move to exit survey"
-    } else if (currentPath.includes('Trivia') || currentPath.includes('MindGame')) {
+    } else if (currentPath.includes('Trivia') || currentPath.includes('MindGame') || currentPath.includes('Mixed')) {
         showCompletionCode = true;
     }
 
