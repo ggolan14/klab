@@ -1,4 +1,12 @@
 export const AllExperiments ={
+    PreferancePerformance: {
+        main_pathname: '/PreferancePerformance/main',
+        settings_pathname: '/PreferancePerformance/settings',
+        start_pathname: '/PreferancePerformance/start',
+        reports_pathname: '/PreferancePerformance/reports',
+        consent_pathname: '/PreferancePerformance/consent',
+        exp_messages_pathname: '/PreferancePerformance/exp_messages',
+    },
     Trivia: {
         main_pathname: '/Trivia/main',
         settings_pathname: '/Trivia/settings',

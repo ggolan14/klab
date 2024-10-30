@@ -154,3 +154,31 @@
         font-size: 50px;
       }
   }
+  .bullet-text-green::before {
+    content: "■"; /* Unicode for a square bullet */
+    color: green; /* Set the color to green */
+    margin-right: 8px; /* Adjust space as needed */
+    display: inline-block;
+}
+.bullet-text-blue::before {
+    content: "■"; /* Unicode for a square bullet */
+    color:blue; /* Set the color to green */
+    margin-right: 8px; /* Adjust space as needed */
+    display: inline-block;
+}
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button.green {
+    background-color: green;
+    color: white;
+  }
+  
+  button.blue {
+    background-color: blue;
+    color: white;
+  }
