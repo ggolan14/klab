@@ -198,7 +198,7 @@ class ExpLogin extends React.Component {
                                                     <label>
                                                         {this.exp === 'RepeatedChoice'
                                                             ? 'Participant ID'
-                                                            : (this.exp === 'Trivia' || this.exp === 'MindGame')
+                                                            : (this.exp === 'Trivia' || this.exp === 'MindGame' || this.exp === 'MixedGame')
                                                             ? 'Worker ID'
                                                             : 'User ID'}
                                                         :
