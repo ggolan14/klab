@@ -10,6 +10,7 @@ const new_game_props = {
     // r_v: 1, // Reward Value
     // m_t_c: 1, // Mileage/Travel/Toll Cost:
     p0: 0.05,  // first Probability
+    
     a: 0.2, // Adaptability
     // pe: 1, // Penalty
     // e_c: 1, // Equipment Cost
@@ -22,90 +23,60 @@ const GameElement = ({gameSelect, game_props, editGame}) => {
     const practice_game = gameSelect === 'practice_game';
     let g_settings = [];
     if (!practice_game)
-        g_settings.push(
-          {
-              type: 'Select',
-              label: 'Active:',
-              show: true,
-              options: [
-                  {label: 'Yes', value: 'Yes'},
-                  {label: 'No', value: 'No'},
-              ],
-              value: game_props.active,
-              callback: value => editGame(gameSelect, 'active', value)
-          },
-        );
+
 
     g_settings = [
       ...g_settings,
+      
+     
+      
+        ////////
         {
             type: 'Input',
-            label: 'Trials:',
+            label: 'Type 1 blocks num:', // Mileage/Travel
             show: true,
             class_name: '',
-            value: game_props.t,
-            input_type: 'number',
-            step: 1,
-            min: 1,
-            label_after: '',
-            pattern: '',
-            callback: value => editGame(gameSelect, 't', value)
-        },
-        {
-            type: 'Input',
-            label: 'Reward value:',
-            show: true,
-            class_name: '',
-            value: game_props.r_v,
+            value: game_props.type_1_blocks_num,
             input_type: 'number',
             label_after: '',
             pattern: '',
-            callback: value => editGame(gameSelect, 'r_v', value)
+            callback: value => editGame(gameSelect, 'type_1_blocks_num', value)
         },
         {
             type: 'Input',
-            label: 'Toll cost:', // Mileage/Travel
+            label: 'Type 1 trials num:', // Mileage/Travel
             show: true,
             class_name: '',
-            value: game_props.t_c,
+            value: game_props.type_1_trials_num,
             input_type: 'number',
             label_after: '',
             pattern: '',
-            callback: value => editGame(gameSelect, 't_c', value)
+            callback: value => editGame(gameSelect, 'type_1_trials_num', value)
         },
         {
             type: 'Input',
-            label: 'Clearing cost:', // Mileage/Travel
+            label: 'Type 2 blocks num:', // Mileage/Travel
             show: true,
             class_name: '',
-            value: game_props.c_c,
+            value: game_props.type_2_blocks_num,
             input_type: 'number',
             label_after: '',
             pattern: '',
-            callback: value => editGame(gameSelect, 'c_c', value)
+            callback: value => editGame(gameSelect, 'type_2_blocks_num', value)
         },
         {
             type: 'Input',
-            label: 'P0:',
+            label: 'Type 2 trials num:', // Mileage/Travel
             show: true,
             class_name: '',
-            value: game_props.p0,
+            value: game_props.type_2_trials_num,
             input_type: 'number',
             label_after: '',
             pattern: '',
-            callback: value => editGame(gameSelect, 'p0', value)
+            callback: value => editGame(gameSelect, 'type_2_trials_num', value)
         },
-        {
-            type: 'Input',
-            label: 'Adaptability:',
-            show: true,
-            class_name: '',
-            value: game_props.a,
-            input_type: 'number',
-            label_after: '',
-            pattern: '',
-            callback: value => editGame(gameSelect, 'a', value)
-        },
+        ////////////////////////////
+     
         // {
         //     type: 'Input',
         //     label: 'Penalty:',
@@ -153,14 +124,7 @@ const ListElement = ({game_index, game_active, gameSelect, setGameSelect, remove
             onClick={() => setGameSelect(game_index)}
           >{!is_practice_game?`Game ${game_index+1}`:'Practice Game'}</label>
 
-          {
-              !is_practice_game && (
-                <button
-                  className='btn-delete'
-                  onClick={() => removeGame(game_index)}
-                >Delete</button>
-              )
-          }
+          
       </div>
     )
 }
@@ -220,11 +184,7 @@ const GamesBank = ({changeSettings, game_bank, practice_game}) => {
       >
           <div className='qg_set-gb_head'>
               <label>Games Bank:</label>
-              <button
-                className='btn-add'
-                onClick={addNewGame}
-              >Add new game</button>
-          </div>
+            </div>
 
           <div
             className='qg_set-gb_body'
@@ -232,11 +192,7 @@ const GamesBank = ({changeSettings, game_bank, practice_game}) => {
               <div
                 className='qg_set-gb_list unselectable'
               >
-                  <ListElement
-                    game_index={'practice_game'}
-                    gameSelect={gameSelect}
-                    setGameSelect={setGameSelect}
-                  />
+                 
                   {
                       game_bank.map(
                         (game_, game_index) => (

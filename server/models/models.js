@@ -2495,42 +2495,69 @@ const defaultVersions = {
             cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
             
             pt_g: { // practice_game
-                t: 3, // Trials
+               // t: 3, // Trials
                 // r_v: 1, // Reward Value
                 // m_t_c: 1, // Mileage/Travel/Toll Cost:
-                p0: 0.05,  // first Probability
-                a: 0.2, // Adaptability
+              //  p0: 0.05,  // first Probability
+               // a: 0.2, // Adaptability
                 // pe: 1, // Penalty
                 // e_c: 1, // Equipment Cost
-                r_v: 1, // Reward Value
-                t_c: 1, // Toll Cost:
-                c_c: 1, // Toll Cost:
+               // r_v: 1, // Reward Value
+               // t_c: 1, // Toll Cost:
+               // c_c: 1, // Toll Cost:
+                
+				
             },
             
             g_b: [
                 {
                     active: 'Yes',
-                    t: 3, // Trials
+                    //t: 3, // Trials
                     // r_v: 1, // Reward Value
                     // m_t_c: 1, // Mileage/Travel/Toll Cost:
-                    p0: 0.05,  // first Probability
-                    a: 0.2, // Adaptability
-                    r_v: 1, // Reward Value
-                    t_c: 1, // Toll Cost:
-                    c_c: 1, // Toll Cost:
+                   // p0: 0.05,  // first Probability
+                   // a: 0.2, // Adaptability
+                   // r_v: 1, // Reward Value
+                   // t_c: 1, // Toll Cost:
+                   // c_c: 1, // Toll Cost:
+					type_1_blocks_num: 8,
+					type_1_trials_num: 20,
+					type_2_blocks_num: 8,
+					type_2_trials_num: 20,
                     // pe: 1, // Penalty
                     // e_c: 1, // Equipment Cost
                 },
                 {
-                    active: 'No',
-                    t: 3, // Trials
+                    active: 'Yes',
+                   // t: 3, // Trials
                     // r_v: 1, // Reward Value
                     // m_t_c: 1, // Mileage/Travel/Toll Cost:
-                    p0: 0.05,  // first Probability
-                    a: 0.2, // Adaptability
-                    r_v: 1, // Reward Value
-                    t_c: 1, // Toll Cost:
-                    c_c: 1, // Toll Cost:
+                   // p0: 0.05,  // first Probability
+                  //  a: 0.2, // Adaptability
+                  //  r_v: 1, // Reward Value
+                  //  t_c: 1, // Toll Cost:
+                  //  c_c: 1, // Toll Cost:
+					type_1_blocks_num: 8,
+					type_1_trials_num: 20,
+					type_2_blocks_num: 8,
+					type_2_trials_num: 20,
+                    // pe: 1, // Penalty
+                    // e_c: 1, // Equipment Cost
+                },
+                {
+                    active: 'Yes',
+                   // t: 3, // Trials
+                    // r_v: 1, // Reward Value
+                    // m_t_c: 1, // Mileage/Travel/Toll Cost:
+                   // p0: 0.05,  // first Probability
+                  //  a: 0.2, // Adaptability
+                  //  r_v: 1, // Reward Value
+                  //  t_c: 1, // Toll Cost:
+                  //  c_c: 1, // Toll Cost:
+					type_1_blocks_num: 8,
+					type_1_trials_num: 20,
+					type_2_blocks_num: 8,
+					type_2_trials_num: 20,
                     // pe: 1, // Penalty
                     // e_c: 1, // Equipment Cost
                 },
