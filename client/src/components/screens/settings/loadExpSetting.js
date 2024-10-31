@@ -6,6 +6,7 @@ import DFE from '../../content/dfe/Settings';
 import MetaSampling from '../../content/meta_sampling/Settings';
 import PL_PATTERN from '../../content/pl_pattern/Settings';
 import PointsGame from '../../content/points_game/Settings';
+import MegaDots from '../../content/mega_dots/Settings';
 import PointsGameSh from '../../content/points_game_sh/Settings';
 import RepeatedChoice from '../../content/repeated_choice/Settings';
 import QueenGarden from '../../content/queen_garden/Settings';
@@ -33,6 +34,7 @@ const EXPERIMENTS_LIST = {
     PL_PATTERN,
     PointsGame,
     PointsGameSh,
+    MegaDots,
     RepeatedChoice,
     QueenGarden,
     QueenGarden2,

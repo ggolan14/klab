@@ -55,6 +55,14 @@ export const AllExperiments ={
         consent_pathname: '/PointsGameSh/consent',
         exp_messages_pathname: '/PointsGameSh/exp_messages',
     },
+    MegaDots: {
+        main_pathname: '/MegaDots/main',
+        settings_pathname: '/MegaDots/settings',
+        start_pathname: '/MegaDots/start',
+        reports_pathname: '/MegaDots/reports',
+        consent_pathname: '/MegaDots/consent',
+        exp_messages_pathname: '/MegaDots/exp_messages',
+    },
     WordPuzzle: {
         main_pathname: '/WordPuzzle/main',
         settings_pathname: '/WordPuzzle/settings',

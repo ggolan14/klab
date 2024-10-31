@@ -19,6 +19,7 @@ const {AbstractAndDeclarationEffectUsersRecords, AbstractAndDeclarationEffectVer
 const {SignatureAsReminderUsersRecords, SignatureAsReminderVersions} = require('./all_models/SignatureAsReminder');
 const {PointsGameShVersions, PointsGameShUsersRecords} = require('./all_models/PointsGameSh');
 const {PointsGameVersions, PointsGameUsersRecords} = require('./all_models/PointsGame');
+const {MegaDotsVersions, MegaDotsUsersRecords} = require('./all_models/MegaDots');
 const {TryOrGiveUpVersions, TryOrGiveUpUsersRecords} = require('./all_models/TryOrGiveUp');
 const {TriviaVersions, TriviaUsersRecords} = require('./all_models/Trivia');
 const {MindGameVersions, MindGameUsersRecords} = require('./all_models/MindGame');
@@ -342,6 +343,77 @@ const defaultVersions = {
             // redirect_to: "",
             // action_timeout: 30,
             // warning_before_closing: 0,
+            redirect_to: "",
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'Yes'
+        },
+    },
+    MegaDots: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            force_full_screen: "true",
+            p_t: 100, // plus_time
+            d_t: 100, // dots_time
+            pa_t: 100, // pay_time
+            p_c: {
+                r: 255,
+                g: 0,
+                b: 0,
+                a: 1}, // points color
+            e_c: {
+                r: 255,
+                g: 50,
+                b: 50,
+                a: 1
+            }, // enforcement background
+            enb_c: {
+                r: 30,
+                g: 255,
+                b: 30,
+                a: 1
+            }, // enforcement no busted background
+            g_p: ['0'], // games_play
+            r_o: true,
+            practice: true,
+            r: [], // random_from
+            g_b: [
+                {
+                    g: {
+                        l: 'default_game', // game_name
+                        c: 'ne', // e -> enforce, ne => np no enforce
+                        e_p: 0, // enforce probability
+                        f: 10, // fine
+                    },
+                    pr: {
+                        p_s: 10, // profitable side
+                        nps: 0, // not profitable side
+                    }, // profitable
+                    t: {
+                        a_p: 1, // Amibgous profit side
+                        a_n_p: 1, // Amibgous not profit side
+                        c_p: 1, // Clear profit side
+                        c_n_p: 1, // Clear not profit side
+                    }, // trials
+                    d: {
+                        a_m: 1, // Amibgous more
+                        a_l: 1, // Amibgous less
+                        c_m: 1, // Clear more
+                        c_l: 1, // Clear less
+                    }, // dots
+                },
+            ],  // games_bank
+        },
+        payments: {
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            need_summary: true,
             redirect_to: "",
             action_time: 60,
             second_warning: 10,
@@ -2620,6 +2692,11 @@ const AllModels = {
         records: PointsGameShUsersRecords,
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },
+    MegaDots: {
+        versions: MegaDotsVersions,
+        records: MegaDotsUsersRecords,
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
     WordPuzzle: {
         versions: WordPuzzleVersions,
         records: WordPuzzleUsersRecords,
@@ -2656,11 +2733,6 @@ const AllModels = {
     QueenGarden3: {
         versions: QueenGarden3Versions,
         records: QueenGarden3UsersRecords,
-        tables: ['game', 'payment', 'summary', 'KeyTable'],
-    },
-    PreferancePerformance: {
-        versions: PreferancePerformanceVersions,
-        records: PreferancePerformanceUsersRecords,
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },
     SP: {

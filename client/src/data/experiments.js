@@ -22,7 +22,8 @@ const EXPERIMENTS_LABELS_NAMES = {
     SubjectiveStory: 'SignatureTimingEffect',
     CupsGame: 'CupsGame',
     NoCupsGame: 'NoCupsGame',
-    PreferancePerformance: 'PreferancePerformance'
+    PreferancePerformance: 'PreferancePerformance',
+    MegaDots: 'MegaDots'
     
 };
 
@@ -50,7 +51,8 @@ const EXPERIMENTS_NAMES_LABELS = {
     SignatureTimingEffect: 'SubjectiveStory',
     CupsGame: 'CupsGame',
     NoCupsGame: 'NoCupsGame',
-    PreferancePerformance: 'PreferancePerformance'
+    PreferancePerformance: 'PreferancePerformance',
+    MegaDots: 'MegaDots'
    
 };
 
