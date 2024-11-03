@@ -22,6 +22,9 @@ import MixedGameSummary from "../../content/mixed_game/Summary";
 import PointsGameStart from "../../content/points_game/Start";
 import PointsGameSummary from "../../content/points_game/Summary";
 
+import MegaDotsStart from "../../content/mega_dots/Start";
+import MegaDotsSummary from "../../content/mega_dots/Summary";
+
 import PointsGameShStart from "../../content/points_game_sh/Start";
 
 import WordPuzzleStart from "../../content/word_puzzle/Start";
@@ -420,6 +423,7 @@ const insertPayment = (payment) => {
 };
 
 const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr }) => {
+    console.log("===> getGame    exp="+exp);
     const additionalParams = {};
     const extended_name = "";
     const TRIVIA_ONE_SHOT = 0;
@@ -492,6 +496,7 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
         Trivia: <TriviaStart {...game_props} game_settings={setCondForComponent("Trivia", game_settings, additionalParams)} />,
         TryOrGiveUp: <TryOrGiveUpStart {...game_props} />,
         PointsGame: <PointsGameStart {...game_props} />,
+        MegaDots: <MegaDotsStart {...game_props} />,
         PointsGameSh: <PointsGameShStart />,
         WordPuzzle: <WordPuzzleStart {...game_props} />,
         AbstractAndDeclarationEffect: <AbstractAndDeclarationEffectStart {...game_props} />,
@@ -599,6 +604,15 @@ const getSummary = ({ exp, summary_args }) => {
             label: 'Points game',
             element: () => (
                 <PointsGameSummary
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                />
+            )
+        },
+        MegaDots: {
+            label: 'Mega Dots',
+            element: () => (
+                <MegaDotsSummary
                     SignOfReward={DB_RECORDS.Payment.sign_of_reward}
                     ShowUpFee={DB_RECORDS.Payment.show_up_fee}
                 />
@@ -738,7 +752,7 @@ const getSummary = ({ exp, summary_args }) => {
  */
 
 const HandleFullScreen = (props) => {
-    // console.log("---> in game_handle.js HandleFullScreen ");
+    console.log("---> 111 in game_handle.js HandleFullScreen ");
     const handle = useFullScreenHandle();
     useEffect(() => {
         if (props.action_time_alert)
@@ -1763,13 +1777,16 @@ class GameHandle extends React.Component {
                 );
             case 'Game':
                 OnBeforeUnload(true);
+                console.log("--->111   case = Game")
                 if (this.state.force_full_screen)
+                    console.log("--->111   case = Game  this.state.force_full_screen="+this.state.force_full_screen)
                     return (
-                        <HandleFullScreen
+                      <HandleFullScreen
                             action_time_alert={this.state.action_time_alert}
                         >
                             <ReturnToMainLink label={<span>&#9664;</span>} className='game-handle_back_to_main' state={this.state} exp={this.exp} />
                             {
+                                
                                 getGame({
                                     exp: this.exp,
                                     game_settings: this.state.game_settings,
@@ -1826,8 +1843,10 @@ class GameHandle extends React.Component {
     }
 
     render() {
-        if (!this.state || this.state.isLoading)
+        if (!this.state || this.state.isLoading){
+            console.log("-----> !this.state="+!this.state+"   this.state.isLoading");
             return <></>;
+        }
         if (this.state.redirect_to !== null && this.state.redirect_to) {
             OnBeforeUnload(false);
             return window.location = this.state.redirect_to;

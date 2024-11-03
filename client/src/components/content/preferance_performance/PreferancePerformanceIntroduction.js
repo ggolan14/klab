@@ -11,8 +11,9 @@ class PreferancePerformanceIntroduction extends Component {
 
     const part1 = (
       <span>
+        <br/>
         <h2><b>Game Instructions </b></h2>
-        <br/><u>The Goal</u>
+        <u>The Goal</u>
         <br/>
         Your golal is to accumulate as many points as possible.
         <br/>
@@ -38,7 +39,7 @@ class PreferancePerformanceIntroduction extends Component {
         <p class="bullet-text-blue">
           The blue button provides +5 points with a 10% chance, or 0 otherwise.
         </p>
-        <br/>
+        
         
 
       </span>
@@ -55,7 +56,7 @@ class PreferancePerformanceIntroduction extends Component {
         </span>
     ) ;
 
-    const message_3 = (
+    const part3 = (
       <span>
         <h2><b>Game Instructions Cont.</b></h2>
         <br/>
@@ -72,7 +73,7 @@ class PreferancePerformanceIntroduction extends Component {
     );
 
     this.state = {
-      messages: [part1, part2, message_3],
+      messages: [part1, part2, part3],
       currentIndex: 0 // Initial index to display the first message
     };
   }
@@ -89,6 +90,14 @@ class PreferancePerformanceIntroduction extends Component {
     }
   }
 
+  // Handle click on "Back" button
+  handleBack = () => {
+    const { currentIndex } = this.state;
+    if (currentIndex > 0) {
+      this.setState({ currentIndex: currentIndex - 1 });
+    }
+  }
+
   render() {
     const { messages, currentIndex } = this.state;
 
@@ -97,6 +106,11 @@ class PreferancePerformanceIntroduction extends Component {
         
         {/* Display the current message */}
         <p>{messages[currentIndex]}</p>
+        <div className="button-container">
+        {/* Show "Back" button if not the first message */}
+        {currentIndex > 0 && (
+          <button onClick={this.handleBack}>Back</button>
+        )}
         {/* Show "Next" button if not the last message */}
         {currentIndex < messages.length - 1 && (
           <button onClick={this.handleNext}>Next</button>
@@ -105,6 +119,7 @@ class PreferancePerformanceIntroduction extends Component {
         {currentIndex === messages.length - 1 && (
           <button onClick={this.props.onHideMessages}>Next</button>
         )}
+        </div>
       </div>
     );
   }

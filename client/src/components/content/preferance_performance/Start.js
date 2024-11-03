@@ -75,7 +75,9 @@ class Start extends Component {
 
     // Initialize component state
     this.state = {
-      currentRoundIndex: 0,
+      gameIndex: 0,
+      blockIndex: 0,
+      stepIndex: 0,
       showConfirmation: false,
       correctAnswer: null,
       showResult: false,
@@ -384,9 +386,10 @@ class Start extends Component {
       });
     }, 50);
   };
-
+  
   // Render method for displaying the UI
   render() {
+    console.log("--------> in render")
     const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToNextTask,
       showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
       hideMessages, practiceIsOver, showButton, diceOutcome, diceClass, diceTransform, newRound, mathAnsweredCorrectly, showError } = this.state;

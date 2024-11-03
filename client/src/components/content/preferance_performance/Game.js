@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { config } from './config/config';
+import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 
-const Trial = ({ type, onComplete }) => {
+const Trial = ({ type, onComplete , block , trial}) => {
+  console.log("-----> type="+type+"    block="+block+"   trial="+trial)
   const [greenResult, setGreenResult] = useState(null);
   const [blueResult, setBlueResult] = useState(null);
-
   const handleGreenButtonClick = () => {
     const value = Math.random() < 0.5 ? 0 : 3;
     setGreenResult(value);
@@ -16,7 +17,16 @@ const Trial = ({ type, onComplete }) => {
   };
 
   return (
-    <div>
+            
+
+    <div className="button-container">
+      <DebuggerModalView>
+              <p>Game number: {type}</p>
+              <p>Block: {block}</p>
+              <p>Game number: {trial}</p>
+              
+      </DebuggerModalView>  
+
       <h3>{type}</h3>
       <button
         onClick={handleGreenButtonClick}
@@ -41,9 +51,9 @@ const Trial = ({ type, onComplete }) => {
   );
 };
 
-const Block = ({ type, numberOfTrials, onComplete }) => {
-  const [currentTrial, setCurrentTrial] = useState(0);
-
+const Block = ({ type, numberOfTrials, onComplete,block,currentTrial2 }) => {
+  const [currentTrial, setCurrentTrial] = useState(currentTrial2);
+  //const [myBlock,setMyPlock] = useState(block);
   const handleTrialComplete = () => {
     if (currentTrial < numberOfTrials - 1) {
       setCurrentTrial(currentTrial + 1);
@@ -55,7 +65,7 @@ const Block = ({ type, numberOfTrials, onComplete }) => {
   return (
     <div>
       
-      <Trial type={`${type} Trial ${currentTrial + 1}`} onComplete={handleTrialComplete} />
+      <Trial type={`${type} Trial ${currentTrial + 1}` }  onComplete={handleTrialComplete} block={block} trial={currentTrial}/>
     </div>
   );
 };
@@ -65,6 +75,8 @@ const Game = () => {
   const [currentShortBlock, setCurrentShortBlock] = useState(0);
   const [currentLongBlock, setCurrentLongBlock] = useState(0);
   const [isPlayingShortBlock, setIsPlayingShortBlock] = useState(true);
+  const [currentStep, setCurrentStep] = useState(null); // Global state
+ 
   //const [isPlayingShortBlock, setIsPlayingShortBlock] = useState(() => Math.random() >= 0.5);
 
   const handleBlockComplete = () => {
@@ -86,7 +98,9 @@ const Game = () => {
   };
 
   return (
+
     <div>
+      
       <h1>Preferance Performance</h1>
       <br/>
       <br/>
@@ -95,6 +109,9 @@ const Game = () => {
           type={`ShortBlock ${currentShortBlock + 1}`}
           numberOfTrials={Y_1}
           onComplete={handleBlockComplete}
+          currentShortBlock = {currentShortBlock}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
         />
       ) : (
         currentLongBlock < X_2 && (
@@ -102,6 +119,9 @@ const Game = () => {
             type={`LongBlock ${currentLongBlock + 1}`}
             numberOfTrials={Y_2}
             onComplete={handleBlockComplete}
+            currentLongtBlock = {currentLongBlock}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
           />
         )
       )}
