@@ -420,7 +420,7 @@ class Start extends Component {
           <div className="practice-is-over">
             <h3>You completed the "mind-game”</h3>
             <p>
-              You will now receive a food preference survey. <br></br>
+              You will now fill out food preference survey. <br></br>
               Note that you cannot leave or stop responding until you have completed the entire study and <br></br>
               have received your completion code, or else you will not receive compensation.
             </p>
