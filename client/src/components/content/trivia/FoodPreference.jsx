@@ -76,7 +76,7 @@ class FoodPreference extends Component {
         const { currentStep, selectedOption, nonRobotAnswer } = this.state;
 
         return (
-            <div>
+            <div className="trivia-container">
                 {currentStep === 1 && (
                     <div>
                         <p>Which of the following options best describes your dietary preferences?</p>
@@ -99,7 +99,7 @@ class FoodPreference extends Component {
                             value={nonRobotAnswer}
                             onChange={this.handleTextChange}
                             style={{
-                                width: '50%',
+                                width: '100%',
                                 height: '100px',
                                 border: '2px solid lightgray',
                                 borderRadius: '4px',
