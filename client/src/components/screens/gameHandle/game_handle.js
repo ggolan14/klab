@@ -1779,7 +1779,7 @@ class GameHandle extends React.Component {
                 OnBeforeUnload(true);
                 console.log("--->111   case = Game")
                 if (this.state.force_full_screen)
-                    console.log("--->111   case = Game  this.state.force_full_screen="+this.state.force_full_screen)
+                  //  console.log("--->111   case = Game  this.state.force_full_screen="+this.state.force_full_screen)
                     return (
                       <HandleFullScreen
                             action_time_alert={this.state.action_time_alert}
