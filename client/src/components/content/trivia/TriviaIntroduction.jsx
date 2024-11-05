@@ -26,17 +26,17 @@ class TriviaIntroduction extends Component {
 
     const part2 = isRepeated ? (
       <span>
-      In this game, you will be presented with multiple-choice trivia questions, ranging in difficulty.
+      In this game, you will be presented with multiple-choice trivia questions.
       <br />
       Your task is to think of the correct answer to the question and keep it in your mind.
       <br />After the question is presented and you decide on your answer, the correct answer will be revealed, and you will be asked to report whether it matches the one you had in mind.
-      <br />Once you complete the study, the computer will randomly choose one round of the trivia game.
+      <br />Once you complete the study, the computer will randomly choose <b>one</b> round of the trivia game.
 	  <br /> If the correct answer <strong>is</strong> the one you had in mind, you will receive a <strong>{formatPrice(1, this.props.signOfReward)} bonus.</strong> 
       <br /> If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
     </span>
     ) : (
       <span>
-      In this game, you will be presented with multiple-choice trivia questions, ranging in difficulty.
+      In this game, you will be presented with multiple-choice trivia question.
       <br />
       Your task is to think of the correct answer to the question and keep it in your mind.
       <br />After the question is presented and you decide on your answer, the correct answer will be revealed, and you will be asked to report whether it matches the one you had in mind.
