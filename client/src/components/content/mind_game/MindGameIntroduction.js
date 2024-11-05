@@ -31,9 +31,9 @@ class MindGameIntroduction extends Component {
         In this game, you will be asked to think of a number between 1 and 6 and keep it in your mind. Then, you will roll a virtual die.
         You wil be asked to report if the number you rolled is the one you had in mind.
         <br></br>
-        Once you completed the study, the computer will rendomally choose one round of the mind game.
+        Once you completed the study, the computer will rendomly choose <b>one</b> round of the mind game.
         <br></br>
-        If in this selected round you reported that the number you rolled is the one that you hade in mind, you <b>will</b> receive a {formatPrice(1,this.props.signOfReward)} bonus.
+        If in this selected round you reported that the number you rolled <b>is</b> the one that you hade in mind, you <b>will</b> receive a {formatPrice(1,this.props.signOfReward)} bonus.
         <br></br>
         If in this selected round you reported that the number you rolled <b>is not</b> the one you had in mind, you <b>will not</b> receive a bonus.
         <br></br>
