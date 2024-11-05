@@ -5,8 +5,10 @@ let startTimer = 0;
 let endTimer = 0;
 let totalTimer = 0;
 let timeForStep = 0;
+let isTriviaExp; ;
 
-const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
+const ResourceAllocation = ({ insertLine, sendDataToDB,isTrivia }) => {
+    isTriviaExp=isTrivia;
     const [currentStep, setCurrentStep] = useState(1);
     const [coinLikelihood, setCoinLikelihood] = useState(null); // No default value
     const [managerLikelihood, setManagerLikelihood] = useState(null); // No default value
@@ -34,6 +36,70 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         12: 'What is your favorite breakfast food?',
       };
 
+      const step2Trivia="Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages."
+      const step1Text= isTrivia ? (
+        <span>
+        Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.
+        <br/>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.
+        <br />
+              
+      </span>
+      ) : (
+        <span>
+        Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.
+        <br/>The company has a total of three concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.
+
+        <br />
+       
+       
+      </span>
+      );
+
+
+      const step2Text= isTrivia ? (
+        <span>
+        Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.
+        <br/>
+        <br/>
+        <u>The manager considers the following options:</u>
+        <br/>1. Revoke a package from both Bill and you.
+        <br/>2. Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you
+        <br />
+        
+        
+      </span>
+      ) : (
+        <span>
+        Bill and you have each been given one concert package. The manager now needs to decide what to do with the third concert package. 
+        <br/>
+        <br/>
+        <u>The manager considers the following options:</u>
+        <br/> 1. Give the package to neither Bill nor you.
+        <br/>2. Flip a coin. If it lands on Heads, the manager would give the package to Bill; if it lands on Tails, the manager would give the package to you.
+
+        <br />
+       
+       
+      </span>
+      );
+
+      const step3Text= isTrivia ? (
+        <span>
+        You recently found out that you had one package revoked. 
+        <br/>You wonder how the manager reached the decision to revoke your package.
+
+        <br />
+        
+        
+      </span>
+      ) : (
+        <span>
+        You recently found out that you did not get the extra package. 
+        <br/>You wonder how the manager reached the decision not to give you the extra package.
+        <br />
+      </span>
+      );
+  
     useEffect(() => {
         // Set the start time when the step changes
         setStartTime(getTimeDate().now);
@@ -167,24 +233,17 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 1) {
             return (
                 <>
-                    <p>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
-                    <p>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
+                      {step1Text}
                 </>
             );
         }
 
         if (currentStep === 2) {
+            console.log(">>> exp name="+isTriviaExp)
             return (
                 <>
-                    <p style={{ color: 'lightgray' }}>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
-                    <p style={{ color: 'lightgray' }}>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
-
-                    <p>Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.</p>
-                    <p>The manager considers the following options:</p>
-                    <ol>
-                        <li>Revoke a package from both Bill and you.</li>
-                        <li>Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you.</li>
-                    </ol>
+                    <p style={{ color: 'lightgray' }}>{step1Text}</p>
+                    {step2Text}
                 </>
             );
         }
@@ -192,17 +251,9 @@ const ResourceAllocation = ({ insertLine, sendDataToDB }) => {
         if (currentStep === 3) {
             return (
                 <>
-                    <p style={{ color: 'lightgray' }}>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
-                    <p style={{ color: 'lightgray' }}>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
-                    <p style={{ color: 'lightgray' }}>Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.</p>
-                    <p style={{ color: 'lightgray' }}>The manager considers the following options:</p>
-                    <ol style={{ color: 'lightgray' }}>
-                        <li>Revoke a package from both Bill and you.</li>
-                        <li>Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you.</li>
-                    </ol>
-
-                    <p>You recently found out that you had one package revoked.</p>
-                    <p>You wonder how the manager reached the decision to revoke your package.</p>
+                    <p style={{ color: 'lightgray' }}>{step1Text}</p>
+                    <p style={{ color: 'lightgray' }}>{step2Text}</p>
+                    {step3Text}
                 </>
             );
         }
