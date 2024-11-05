@@ -399,7 +399,7 @@ This function is invoked when user confirmed (click yes or no).
       if(GameCondition == "Repeated"){
         return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
       }else if(GameCondition == "OneShot")
-      return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
+      return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} isTrivia={true} />
 
          
       
@@ -444,6 +444,7 @@ This function is invoked when user confirmed (click yes or no).
     }
     return (
       <div className="trivia-container">
+        
         {foodPreferenceComponent}
         {/* Show error message if math question is answered incorrectly */}
       
@@ -451,10 +452,7 @@ This function is invoked when user confirmed (click yes or no).
         {/* Show TriviaIntroduction or DebuggerModalView based on math question result */}
         {mathAnsweredCorrectly && !hideMessages ? (
 
-
-
-        
-          <TriviaIntroduction signOfReward={SignOfReward} gameCondition={GameCondition} onHideMessages={this.handleHideMessages} messageIndex={currentQuestionIndex} />
+         <TriviaIntroduction signOfReward={SignOfReward} gameCondition={GameCondition} onHideMessages={this.handleHideMessages} messageIndex={currentQuestionIndex} />
         ) : (
           <div style={{ Width:800, position: 'absolute', top: 200, left: 400 }}>
             <DebuggerModalView>

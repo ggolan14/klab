@@ -468,7 +468,7 @@ class Start extends Component {
       if (GameCondition == "Repeated") {
         return <FoodPreference GameCondition={GameCondition} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />
       } else if (GameCondition == "OneShot") {
-        return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} />;
+        return <ResourceAllocation GameCondition={GameCondition} insertLine={this.insertGameLine} sendDataToDB={this.sendDataToDB} isTrivia={false} />;
       }
     }
 
