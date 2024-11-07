@@ -15,7 +15,7 @@ class TriviaIntroduction extends Component {
         <h2>Welcome to the study, let's start.</h2>
         <br />
         This study includes two parts.
-        <br />In the first part, you will play the trivia-game and can win a bonus {isRepeated ? "based on your performance." : "depending on your performance."}
+        <br />In the first part, you will play the trivia-game and can win a bonus {isRepeated ? "depending on your performance." : "depending on your performance."}
         <br />In the second part, {isRepeated ? "you will fill out a food preference survey and there will be no bonus." : "you will be asked to answer several questions about your self-assessment and preferences and there will be no bonus."}
         <br /><br />
         Note that you should not leave or stop responding until you have completed the entire study and have received your completion code.
@@ -31,17 +31,17 @@ class TriviaIntroduction extends Component {
       Your task is to think of the correct answer to the question and keep it in your mind.
       <br />After the question is presented and you decide on your answer, the correct answer will be revealed, and you will be asked to report whether it matches the one you had in mind.
       <br />Once you complete the study, the computer will randomly choose <b>one</b> round of the trivia game.
-	  <br /> If the correct answer <strong>is</strong> the one you had in mind, you will receive a <strong>{formatPrice(1, this.props.signOfReward)} bonus.</strong> 
-      <br /> If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
+	    <br />If in this selected round the correct answer <strong>is</strong> the one you had in mind, you will receive a <strong>{formatPrice(1, this.props.signOfReward)} bonus.</strong> 
+      <br />If in this selected round the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
     </span>
     ) : (
       <span>
-      In this game, you will be presented with multiple-choice trivia question.
+      In this game, you will be presented with a multiple-choice trivia question.
       <br />
       Your task is to think of the correct answer to the question and keep it in your mind.
       <br />After the question is presented and you decide on your answer, the correct answer will be revealed, and you will be asked to report whether it matches the one you had in mind.
-      <br /> If the correct answer <strong>is</strong> the one you had in mind, you will receive a <strong>{formatPrice(1, this.props.signOfReward)} bonus.</strong> 
-      <br /> If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
+      <br />If the correct answer <strong>is</strong> the one you had in mind, you will receive a <strong>{formatPrice(1, this.props.signOfReward)} bonus.</strong> 
+      <br />If the correct answer <strong>is not</strong> the one you had in mind, you <strong>will not receive</strong> a bonus.
     </span>
     );
 

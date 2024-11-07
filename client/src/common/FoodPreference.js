@@ -88,7 +88,7 @@ class FoodPreference extends Component {
                             <label><input type="radio" name="diet" value="5" checked={selectedOption === '5'} /> Vegan (do not eat meat, seafood, or any animal product)</label><br />
                             <label><input type="radio" name="diet" value="6" checked={selectedOption === '6'} /> Mostly vegan (do not eat meat or seafood, but occasionally eat eggs or milk)</label>
                         </div>
-                        <button onClick={this.handleNext}>Next</button>
+                        <button disabled={!selectedOption} onClick={this.handleNext}>Next</button>
                     </div>
                 )}
 
@@ -108,7 +108,7 @@ class FoodPreference extends Component {
                             placeholder="Enter your answer here"
                         />
                         <br /><br />
-                        <button onClick={this.handleSubmit}>Submit</button>
+                        <button disabled={!nonRobotAnswer} onClick={this.handleSubmit}>Submit</button>
                     </div>
                 )}
             </div>

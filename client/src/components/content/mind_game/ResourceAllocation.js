@@ -217,7 +217,7 @@ const ResourceAllocation = ({ insertLine, sendDataToDB,isTrivia }) => {
             return userSelection7 == null;
         }
         if (currentStep === 12) {
-            return nonRobotAnswer == null;
+            return !nonRobotAnswer;
         }
         // Steps 6, 9, 10,11 and 12 require a radio button to be selected
         if ([6, 9, 10, 11].includes(currentStep)) {  // if no answer was selected , disable next button
@@ -261,15 +261,11 @@ const ResourceAllocation = ({ insertLine, sendDataToDB,isTrivia }) => {
         if (currentStep === 4) {
             return (
                 <>
-                    <p style={{ color: 'lightgray' }}>Imagine that you and another employee named Bill are working at a large company. Bill and you both do the same job and make the same salary each year. This year, Bill and you received the same evaluations, which were the highest in the company. The company has decided to reward Bill and you for your exceptionally good work.</p>
-                    <p style={{ color: 'lightgray' }}>The company has a total of four concert packages to give Bill and you, each worth $500. These packages include seats, VIP passes, and free food. The packages are valid for the next few weeks, so if no one gets them, they will be wasted.</p>
-                    <p style={{ color: 'lightgray' }}>Bill and you have each been given two concert packages. However, the company then learned that it must tighten its budget and must revoke at least one package. The manager now needs to decide how to revoke the packages.</p>
+                    <p style={{ color: 'lightgray' }}>{step1Text}</p>
+                    <p style={{ color: 'lightgray' }}>{step2Text}</p>
+                    <p style={{ color: 'lightgray' }}>{step3Text}</p>
                     <p style={{ color: 'lightgray' }}>The manager considers the following options:</p>
-                    <ol style={{ color: 'lightgray' }}>
-                        <li>Revoke a package from both Bill and you.</li>
-                        <li>Flip a coin. If it lands on Heads, the manager would revoke a package from Bill; if it lands on Tails, the manager would revoke a package from you.</li>
-                    </ol>
-                    <p style={{ color: 'lightgray' }}>You recently found out that you had one package revoked.  You recently found out that you had one package revoked. You wonder how the manager reached the decision to revoke your package</p>
+                   
                     <br></br>
                     <br></br>
                     <p style={{ color: 'black' }}>{keyValueData["4_1"]}</p>
