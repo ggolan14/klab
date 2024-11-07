@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {DivContainer} from "../../screens/settings/elements_builder";
 import {convertPointsRatio} from "../../screens/settings/settings";
-import './ctStyles.css';
 
 const new_game_props = {
     active: 'Yes',
