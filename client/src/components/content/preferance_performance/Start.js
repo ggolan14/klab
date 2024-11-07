@@ -5,12 +5,9 @@ import { getTimeDate } from "../../../utils/app_utils";
 import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import PreferancePerformanceIntroduction from './PreferancePerformanceIntroduction';
-import FoodPreference from '../trivia/FoodPreference';
 import { formatPrice } from '../../utils/StringUtils';
 import GameRound from '../mind_game/GameRound';
 import Game from './Game';
-import ResourceAllocation from '../mind_game/ResourceAllocation';
-import MathQuestion from '../trivia/MathQuestion'; // The math question component
 
 
 // Constants for experiment and static styles

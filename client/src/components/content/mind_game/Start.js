@@ -4,11 +4,11 @@ import { getTimeDate } from "../../../utils/app_utils";
 import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import MindGameIntroduction from './MindGameIntroduction';
-import FoodPreference from './FoodPreference';
+import FoodPreference from '../../../common/FoodPreference';
 import { formatPrice } from '../../utils/StringUtils';
 import GameRound from './GameRound';
 import ResourceAllocation from './ResourceAllocation';
-import MathQuestion from '../trivia/MathQuestion'; // The math question component
+import MathQuestion from '../../../common/MathQuestion';
 
 
 // Constants for experiment and static styles

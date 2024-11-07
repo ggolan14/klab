@@ -5,10 +5,10 @@ import { getTimeDate } from "../../../utils/app_utils";
 import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import TriviaIntroduction from './TriviaIntroduction';
-import FoodPreference from './FoodPreference';
+import FoodPreference from '../../../common/FoodPreference';
 import ResourceAllocation from '../mind_game/ResourceAllocation';
 import { formatPrice } from '../../utils/StringUtils';
-import MathQuestion from './MathQuestion'; // The math question component
+import MathQuestion from '../../../common/MathQuestion';
 const ThisExperiment = 'Trivia';
 
 
