@@ -8,6 +8,7 @@ import PreferancePerformanceIntroduction from './PreferancePerformanceIntroducti
 import { formatPrice } from '../../utils/StringUtils';
 import GameRound from '../mind_game/GameRound';
 import Game from './Game';
+import { GlobalStateProvider } from './GlobalStateContext';
 
 
 // Constants for experiment and static styles
@@ -29,11 +30,15 @@ let SignOfReward = '$';
 let isStatic = true;
 let transform;
 let extended_name;
+let selectedGame;
+let selectedGameIndex;
 const yesButtonInRight = Math.random() < 0.5; // Randomize button position
 
 class Start extends Component {
   constructor(props) {
     super(props);
+
+
 
     // Initialize total bonus array
     this.TotalBonus = [];
@@ -44,9 +49,15 @@ class Start extends Component {
 
     // Set payment and game settings from props
     this.PaymentsSettings = props.game_settings.payments;
-    NUM_OF_REPEATED_REAL_ROUNDS = 40;
+   
     SignOfReward = props.game_settings.payments.sign_of_reward;
-    this.extended_name = props.game_settings.game.extended_name; // for the case that this game was invoked from mixed game , 
+   
+    selectedGameIndex =  Math.floor(Math.random() * 3);
+    this.selectedGame = props.game_settings.game.g_b[selectedGameIndex]; // allocate user to a game
+    console.log("%%%%% selectedGame="+selectedGame +"  selectedGameIndex="+selectedGameIndex)
+   
+
+
 
     // Determine game condition based on provided configuration
     let cond = props.game_settings.game.cond;
@@ -63,15 +74,8 @@ class Start extends Component {
       GameCondition = RunCounter % 2 ? 'OneShot' : 'Repeated';
     }
 
-    // Calculate the last index of the game rounds
-    lastIndex = GameCondition == 'OneShot' ?
-      NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + 1 :
-      NUM_OF_PRACTICE_ROUNDS + NUM_OF_INTRODUCTION_STEPS + NUM_OF_REPEATED_REAL_ROUNDS;
-
-    console.log("------------------> Exp= " + ThisExperiment + "-" + GameCondition + "  lastIndex=" + lastIndex);
-
-    // Initialize component state
     this.state = {
+      hideMessages: false,
       gameIndex: 0,
       blockIndex: 0,
       stepIndex: 0,
@@ -84,7 +88,6 @@ class Start extends Component {
       practiceMode: true,
       isLast: false,
       gameCondition: GameCondition,
-      hideMessages: false,
       practiceIsOver: false,
       hideMindGameCompleted: false,
       showWelcomeToNextTask: false,
@@ -99,6 +102,8 @@ class Start extends Component {
       mathAnsweredCorrectly: false,
       showError: false,
     };
+    
+    
   }
 
   // Logs game start and initializes state when component mounts
@@ -138,108 +143,39 @@ class Start extends Component {
 
   // Hides mind game completion message
   handelHideMindGameCompleted = () => {
-    this.setState({ hideMindGameCompleted: true, showWelcomeToNextTask: true });
+   
   }
 
   // Hides welcome message for the next task
   handelHideWelcomeToNextTask = () => {
-    this.setState({ showWelcomeToNextTask: false });
+    
   }
 
   // Hides practice over message
   handleHidePracticeIsOver = () => {
-    this.setState({ practiceIsOver: true });
+   
   }
 
   // Handles advancing to the next round
   handleNext = () => {
-    this.setState(prevState => ({
-      currentRoundIndex: Math.min(prevState.currentRoundIndex + 1, lastIndex),
-      showDice: false,
-      showConfirmation: true,
-      newRound: true,
-    }));
+   
   };
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
-      if (isCorrect) {
-        this.setState({ mathAnsweredCorrectly: true, showError: false });
-      } else {
-        this.setState({ showError: true });
-      }
+    //  if (isCorrect) {
+    //    this.setState({ mathAnsweredCorrectly: true, showError: false });
+   //   } else {
+    //    this.setState({ showError: true });
+     // }
     };
   // Handles the user's confirmation of the dice outcome
   handleConfirmation = (confirmed) => {
-    const { currentRoundIndex } = this.state;
-    isStatic = true; // Reset static state for the dice
-    endTimer = getTimeDate().now;
-    totalTimer = endTimer - startTimer;
-    console.log("===> in handleConfirmation totalTimer=" + totalTimer);
 
-    // Check if this is the last round
-    if (currentRoundIndex + 1 === lastIndex) {
-      this.setState({
-        isLast: true,
-        showConfirmation: false,
-        showDice: false,
-        showButton: true,
-      });
-    }
-
-    // Update the state and database based on confirmation
-    if (confirmed) {
-      this.setState(prevState => ({
-        yesClickCount: prevState.yesClickCount + 1,
-        showResult: false,
-        newRound: true,
-        showButton: true,
-        showDice: false,
-        showConfirmation: false,
-      }), () => {
-        // Prepare data for database insertion
-        const db_row = {
-          RoundIndex: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? 0 : currentRoundIndex - NUM_OF_PRACTICE_ROUNDS,
-          RoundType: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
-          Answer: 1,
-          TotalYesAnswers: this.state.yesClickCount,
-          TotalNoAnswers: this.state.noClickCount,
-          GameCondition: GameCondition,
-          IsThisTheNumberConfirmationTime: totalTimer,
-          Game: !this.extended_name ? "MindGame" : this.extended_name,
-        };
-        this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');
-        this.insertGameLine(db_row);
-        this.sendDataToDB(false);
-      });
-    } else {
-      this.setState(prevState => ({
-        noClickCount: prevState.noClickCount + 1,
-        showResult: false,
-        newRound: true,
-        showButton: true,
-        showDice: false,
-        showConfirmation: false,
-      }), () => {
-        const db_row = {
-          RoundIndex: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? 0 : currentRoundIndex - NUM_OF_PRACTICE_ROUNDS,
-          RoundType: currentRoundIndex <= NUM_OF_PRACTICE_ROUNDS ? "Practice" : "Mind",
-          Answer: 0,
-          TotalYesAnswers: this.state.yesClickCount,
-          TotalNoAnswers: this.state.noClickCount,
-          GameCondition: GameCondition,
-          IsThisTheNumberConfirmationTime: totalTimer,
-          Game: !this.extended_name ? "MindGame" : this.extended_name,
-        };
-        this.addRecord(currentRoundIndex, confirmed ? 'Yes' : 'No');
-        this.insertGameLine(db_row);
-        this.sendDataToDB(false);
-      });
-    }
   }
 
   // Inserts a game line into the database
   insertGameLine = (db_row) => {
-    this.props.insertGameLine(db_row);
+  //  this.props.insertGameLine(db_row);
   }
 
   // Placeholder method for forwarding actions (not currently used)
@@ -386,50 +322,27 @@ class Start extends Component {
   
   // Render method for displaying the UI
   render() {
-    console.log("--------> in render")
-    const { currentRoundIndex, showConfirmation, correctAnswer, hideMindGameCompleted, showWelcomeToNextTask,
-      showDice, yesClickCount, noClickCount, practiceMode, gameCondition,
-      hideMessages, practiceIsOver, showButton, diceOutcome, diceClass, diceTransform, newRound, mathAnsweredCorrectly, showError } = this.state;
-
-    // Check if the introduction messages should be hidden 
-
-    if (!hideMessages) {
-      return (
-        <PreferancePerformanceIntroduction gameCondition={GameCondition} signOfReward={SignOfReward} onHideMessages={this.handleHideMessages} messageIndex={currentRoundIndex} props />
-      );
-    }
-
-    // Declare a variable to hold the JSX for FoodPreference
-    let foodPreferenceComponent = null;
-
-    // Conditions for showing the last screen of OneShot or Repeated game modes
-    const oneShotLast = GameCondition == "OneShot" && !showConfirmation && currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + 1;
-    const repeatedLast = GameCondition == "Repeated" && !showConfirmation && (currentRoundIndex == NUM_OF_PRACTICE_ROUNDS + NUM_OF_REPEATED_REAL_ROUNDS);
-
-    // Check if the mind game is completed, show a next task (food or resource allocation)
-
-
-    // Display message when practice is over in OneShot mode
-
-
-    // Display message when practice is over in Repeated mode
-
-
-    // If the dice has not been rolled, display the prompt to roll the dice
-
-
-    // If a new round starts, display the dice component
-
-
-    // Default return when no other conditions are met
+    const { hideMessages} = this.state;
+    console.log("==========> this.selected game="+this.selectedGame)
     return (
       <div className="container">
-        {foodPreferenceComponent}
+      
         {!hideMessages ? (
-          <PreferancePerformanceIntroduction gameCondition={GameCondition} onHideMessages={this.handleHideMessages} gameCondition={this.GameCondition} />
+          <PreferancePerformanceIntroduction 
+          gameCondition={GameCondition} 
+          onHideMessages={this.handleHideMessages} 
+          selectedGame={this.selectedGame} 
+          insertLine={this.insertGameLine} 
+          sendDataToDB={this.sendDataToDB}/>
         ) : (
           <div>
-           <Game></Game>
+            <GlobalStateProvider>
+            <Game 
+            selectedGame={this.selectedGame} 
+            selectedGameIndex={selectedGameIndex}
+            insertLine={this.insertGameLine} 
+            sendDataToDB={this.sendDataToDB}/>
+            </GlobalStateProvider>
 
           </div>
         )}
