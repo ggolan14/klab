@@ -5,7 +5,7 @@ import { formatPrice } from '../../utils/StringUtils';
 class PreferancePerformanceIntroduction extends Component {
   constructor(props) {
     super(props);
-    console.log("===== this.props.signOfReward=" + this.props.signOfReward);
+    //console.log("===== this.props.signOfReward=" + this.props.signOfReward);
     let game = this.props.selectedGame;
     this.insertLine = this.props.insertLine;
 
@@ -85,13 +85,14 @@ class PreferancePerformanceIntroduction extends Component {
 
   handleSubmitChoice = () => {
     if (this.state.selectedButtonChoice) {
-      console.log('User selected:', this.state.selectedButtonChoice);
+      //console.log('User selected:', this.state.selectedButtonChoice);
       const db_row = {
        
         Question: "Introduction - Select single button",
         Answer: this.state.selectedButtonChoice
         
     };
+    
     this.insertLine(db_row);
       this.props.onHideMessages();
     } else {
@@ -101,8 +102,6 @@ class PreferancePerformanceIntroduction extends Component {
 
   render() {
     const { messages, currentIndex, selectedButtonChoice } = this.state;
-    console.log("===> currentIndex="+currentIndex)
-
     // Define part4 here within render to access state properly
     const part4 = (
       <div>
@@ -152,7 +151,7 @@ class PreferancePerformanceIntroduction extends Component {
         <div className="button-container">
           {/* Show "Back" button if not the first message */}
           {currentIndex <3  && (
-            <button onClick={this.handleBack}>Back2</button>
+            <button onClick={this.handleBack}>Back</button>
           )}
           {/* Show "Next" button if not the last message */}
           {currentIndex < allMessages.length - 1 && (

@@ -2337,6 +2337,11 @@ const defaultVersions = {
             tutorial_r_t: 1,
             g_o: 'r', // games order r-random n_r no random (Ascending)
             cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
+            display_time:1,
+            type_1_score:3,
+            type_1_probability:75,
+            type_2_score:5,
+            type_2_probability:10,
             pt_g: { // practice_game
                 t: 3, // Trials
                 // r_v: 1, // Reward Value
@@ -2413,6 +2418,11 @@ const defaultVersions = {
             tutorial_r_t: 1,
             g_o: 'r', // games order r-random n_r no random (Ascending)
             cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
+            display_time:1,
+            type_1_score:3,
+            type_1_probability:75,
+            type_2_score:5,
+            type_2_probability:10,
             pt_g: { // practice_game
                 t: 3, // Trials
                 // r_v: 1, // Reward Value
@@ -2489,6 +2499,11 @@ const defaultVersions = {
             tutorial_r_t: 1,
             g_o: 'r', // games order r-random n_r no random (Ascending)
             cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
+            display_time:1,
+            type_1_score:3,
+            type_1_probability:75,
+            type_2_score:5,
+            type_2_probability:10,
             pt_g: { // practice_game
                 t: 3, // Trials
                 // r_v: 1, // Reward Value
@@ -2565,7 +2580,11 @@ const defaultVersions = {
             tutorial_r_t: 1,
             g_o: 'r', // games order r-random n_r no random (Ascending)
             cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
-            
+            display_time:1,
+            type_1_score:3,
+            type_1_probability:75,
+            type_2_score:5,
+            type_2_probability:10,
             pt_g: { // practice_game
                // t: 3, // Trials
                 // r_v: 1, // Reward Value

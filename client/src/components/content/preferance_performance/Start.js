@@ -54,6 +54,7 @@ class Start extends Component {
    
     selectedGameIndex =  Math.floor(Math.random() * 3);
     this.selectedGame = props.game_settings.game.g_b[selectedGameIndex]; // allocate user to a game
+    this.displayTime = props.game_settings.game.display_time;
     console.log("%%%%% selectedGame="+selectedGame +"  selectedGameIndex="+selectedGameIndex)
    
 
@@ -174,8 +175,9 @@ class Start extends Component {
   }
 
   // Inserts a game line into the database
-  insertGameLine = (db_row) => {
-  //  this.props.insertGameLine(db_row);
+  insertGameLineToDB = (db_row) => {
+    console.log("$$$$$$$$$")
+     this.props.insertGameLine(db_row);
   }
 
   // Placeholder method for forwarding actions (not currently used)
@@ -202,12 +204,12 @@ class Start extends Component {
         },
       });
 
-      if (send) {
+      if (true) {
         var result = this.addGameBonus();
-        var total_bonus = result.selectedRoundPoints;
-        var randomSelectedRound = result.randomSelectedRound;
+        var total_bonus = "55";
+        var randomSelectedRound = "99";
         console.log("---> in sendDataToDB total_bonus=" + total_bonus + "   randomSelectedRound=" + randomSelectedRound);
-
+        
         this.PaymentsSettings.total_bonus = total_bonus;
         this.PaymentsSettings.randomSelectedRound = randomSelectedRound;
 
@@ -320,10 +322,16 @@ class Start extends Component {
     }, 50);
   };
   
+  newProps = {
+    ...this.props,         // Spread the existing props
+    insertGameLineToDB: this.insertGameLineToDB,           // Add myFunc
+    sendDataToDB: this.sendDataToDB,          // Add myFunc2
+   
+  };
+
   // Render method for displaying the UI
   render() {
     const { hideMessages} = this.state;
-    console.log("==========> this.selected game="+this.selectedGame)
     return (
       <div className="container">
       
@@ -332,16 +340,16 @@ class Start extends Component {
           gameCondition={GameCondition} 
           onHideMessages={this.handleHideMessages} 
           selectedGame={this.selectedGame} 
-          insertLine={this.insertGameLine} 
+          insertLine={this.insertGameLineToDB} 
           sendDataToDB={this.sendDataToDB}/>
         ) : (
           <div>
             <GlobalStateProvider>
             <Game 
+            isGreenFirst={Math.random() < 0.5}
             selectedGame={this.selectedGame} 
             selectedGameIndex={selectedGameIndex}
-            insertLine={this.insertGameLine} 
-            sendDataToDB={this.sendDataToDB}/>
+            props={this.newProps}/>
             </GlobalStateProvider>
 
           </div>
