@@ -3,8 +3,7 @@ import Block from './Block';
 
 // Game component manages the sequence of blocks and tracks game progress
 const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps }) => { 
-  console.log("------------------->  Game isGreenFirst=" + isGreenFirst);
-
+  
   const [gameConfig, setGameConfig] = useState({
     Type_1_blocks_num: 0,
     Type_1_trials_num: 0,
@@ -17,6 +16,7 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
   const [type2BlockIndex, setType2BlockIndex] = useState(0);
   const [showBlock, setShowBlock] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // Track if game has started
+  const [totalScoreInGame,setTotalScoreInGame] = useState(0);
 
   // useEffect to initialize game configuration based on selectedGame
   useEffect(() => {
@@ -38,8 +38,9 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
     }
   }, [selectedGame]);
 
-  const handleBlockComplete = () => {
+  const handleBlockComplete = (totalScoreInBlock) => {
     setShowBlock(false);
+    setTotalScoreInGame(totalScoreInGame + totalScoreInBlock);
 
     if (currentBlockType === 'Type_1') {
       if (type2BlockIndex < gameConfig.Type_2_blocks_num) {
@@ -52,7 +53,7 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
       }
       setType2BlockIndex(type2BlockIndex + 1);
     }
-
+    
     setTimeout(() => setShowBlock(true), 500);
   };
 
@@ -77,6 +78,7 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
             isGreenFirst={isGreenFirst}
             blockIndex={currentBlockType === 'Type_1' ? type1BlockIndex + 1 : type2BlockIndex + 1}
             gameConfig={gameConfig}
+            totalScoreInGame = {totalScoreInGame}
             onComplete={handleBlockComplete}
             selectedGameIndex={selectedGameIndex}
             props={extraProps}

@@ -11,6 +11,7 @@ import Game from './Game';
 import { GlobalStateProvider } from './GlobalStateContext';
 
 
+
 // Constants for experiment and static styles
 const ThisExperiment = 'PreferancePerformance';
 const STATIC_TRANSFORM = "rotateX(45deg) rotateY(-45deg)";
@@ -20,9 +21,6 @@ let UserId = 'empty';
 let RunningName = '-';
 let GameCondition = null;
 let NUM_OF_REPEATED_REAL_ROUNDS = 0;
-let NUM_OF_PRACTICE_ROUNDS = 3;
-let NUM_OF_INTRODUCTION_STEPS = 3;
-let lastIndex;
 let startTimer = 0;
 let endTimer = 0;
 let totalTimer = 0;
@@ -38,7 +36,8 @@ class Start extends Component {
   constructor(props) {
     super(props);
 
-
+    
+    
 
     // Initialize total bonus array
     this.TotalBonus = [];
@@ -52,7 +51,8 @@ class Start extends Component {
    
     SignOfReward = props.game_settings.payments.sign_of_reward;
    
-    selectedGameIndex =  Math.floor(Math.random() * 3);
+    //selectedGameIndex =  Math.floor(Math.random() * 3);
+    selectedGameIndex = RunCounter % 3;
     this.selectedGame = props.game_settings.game.g_b[selectedGameIndex]; // allocate user to a game
     this.displayTime = props.game_settings.game.display_time;
     console.log("%%%%% selectedGame="+selectedGame +"  selectedGameIndex="+selectedGameIndex)
@@ -176,8 +176,7 @@ class Start extends Component {
 
   // Inserts a game line into the database
   insertGameLineToDB = (db_row) => {
-    console.log("$$$$$$$$$")
-     this.props.insertGameLine(db_row);
+    this.props.insertGameLine(db_row);
   }
 
   // Placeholder method for forwarding actions (not currently used)

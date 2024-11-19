@@ -10,7 +10,7 @@ class PreferancePerformanceIntroduction extends Component {
     this.insertLine = this.props.insertLine;
 
     const part1 = (
-      <span>
+      <span style={{ lineHeight: '1.4' }}>
         <br/>
         <h2><b>Game Instructions </b></h2>
         <u>The Goal</u>
@@ -25,12 +25,13 @@ class PreferancePerformanceIntroduction extends Component {
         <br/>
         Each button provides different points:
         <br/>
-        <p className="bullet-text-green">
-          The green button provides +3 points with a 75% chance, or 0 otherwise.
-        </p>
-        <p className="bullet-text-blue">
-          The blue button provides +5 points with a 10% chance, or 0 otherwise.
-        </p>
+        <p className="bullet-text-green" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
+  The green button provides +3 points with a 75% chance, or 0 otherwise.
+</p>
+<p className="bullet-text-blue" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
+  The blue button provides +5 points with a 10% chance, or 0 otherwise.
+</p>
+        <br/>
       </span>
     );
 
@@ -42,7 +43,9 @@ class PreferancePerformanceIntroduction extends Component {
         ***** PICTURE HERE ***
         <br/>
         Example: the green button is chosen for 4 steps in a row. Once it provides +3 points (in step 2), it continues to provide +3 points in all the following steps.
+        <br/>
       </span>
+      
     );
 
     const part3 = (
@@ -104,14 +107,15 @@ class PreferancePerformanceIntroduction extends Component {
     const { messages, currentIndex, selectedButtonChoice } = this.state;
     // Define part4 here within render to access state properly
     const part4 = (
-      <div>
+      <div style={{ lineHeight: '1.8' }}>
         <h2>Before the game begins, you have the option to select a single button for the entire game:</h2>
-        <label style={{ display: 'block', textAlign: 'left' }}>
+        <label style={{ display: 'block', textAlign: 'left'}}>
           <input
             type="radio"
             value="green"
             checked={selectedButtonChoice === 'green'}
             onChange={this.handleRadioChange}
+            style={{ marginRight: '8px' }} // Add space here
           />
           Choose the green button
         </label>
@@ -121,6 +125,7 @@ class PreferancePerformanceIntroduction extends Component {
             value="blue"
             checked={selectedButtonChoice === 'blue'}
             onChange={this.handleRadioChange}
+            style={{ marginRight: '8px' }} // Add space here
           />
           Choose the blue button
         </label>
@@ -130,6 +135,7 @@ class PreferancePerformanceIntroduction extends Component {
             value="both"
             checked={selectedButtonChoice === 'both'}
             onChange={this.handleRadioChange}
+            style={{ marginRight: '8px' }} // Add space here
           />
           Choose to keep both
         </label>
