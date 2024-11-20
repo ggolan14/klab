@@ -82,7 +82,7 @@ const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConf
   };
 
   return (
-    <div style={{ fontSize: '36px' }}>
+    <div style={{ fontSize: '36px', textAlign: "center"}}>
       {/* Debugger view to show selected game and trial info */}
       <DebuggerModalView>
         <p>Selected game: {selectedGameIndex}</p>
@@ -93,9 +93,9 @@ const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConf
   
       {/* Display current trial information */}
       <h1>
-        Trial {trialIndex} out of {totalTrialsInBlock}
+       <b>Step {trialIndex} out of {totalTrialsInBlock}</b>
       </h1>
-      Points scored in this block: {totalScoreInBlock}
+      Points scored in this block: <b>{totalScoreInBlock}</b>
       <br />
   
       {/* Render buttons based on the order specified by isGreenFirst */}

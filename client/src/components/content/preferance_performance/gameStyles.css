@@ -37,3 +37,22 @@
   background-color: rgb(0, 217, 255) !important;
   color: black !important; /* Force text color to black when active */
 }
+
+.shared-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.shared-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.center-text {
+  text-align: center;
+  display: block;
+}

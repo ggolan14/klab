@@ -65,6 +65,7 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
   useEffect(() => {
     if (gameStarted && allBlocksCompleted) {
       console.log("=====> All blocks completed! Invoking sendDataToDB.");
+      extraProps.setTotalPointsInGame(totalScoreInGame)
       extraProps.sendDataToDB(true);
     }
   }, [allBlocksCompleted, gameStarted, extraProps]);

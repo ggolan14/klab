@@ -30,6 +30,7 @@ let transform;
 let extended_name;
 let selectedGame;
 let selectedGameIndex;
+let totalPointsInGame=0;
 const yesButtonInRight = Math.random() < 0.5; // Randomize button position
 
 class Start extends Component {
@@ -55,7 +56,13 @@ class Start extends Component {
     selectedGameIndex = RunCounter % 3;
     this.selectedGame = props.game_settings.game.g_b[selectedGameIndex]; // allocate user to a game
     this.displayTime = props.game_settings.game.display_time;
-    console.log("%%%%% selectedGame="+selectedGame +"  selectedGameIndex="+selectedGameIndex)
+    this.selectedGame.type_1_score = props.game_settings.game.type_1_score;
+    this.selectedGame.type_2_score = props.game_settings.game.type_2_score;
+    this.selectedGame.type_1_probability = props.game_settings.game.type_1_probability;
+    this.selectedGame.type_2_probability = props.game_settings.game.type_2_probability;
+
+    console.log("Selected Game:", JSON.stringify(this.selectedGame));
+    
    
 
 
@@ -161,6 +168,10 @@ class Start extends Component {
   handleNext = () => {
    
   };
+
+  setTotalPointsInGame = (totalPoints) => {
+   totalPointsInGame=totalPointsInGame+totalPoints;
+  }
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
     //  if (isCorrect) {
@@ -187,7 +198,9 @@ class Start extends Component {
     const current_time = getTimeDate();
     var reward_sum = 0;
     var temp_sign_of_reward = this.PaymentsSettings.sign_of_reward;
-    let debug_args = { reward_sum, temp_sign_of_reward };
+    let debug_args = {
+      reward_sum,
+    }
 
     this.props.sendGameDataToDB().then(() => {
       NewLogs({
@@ -204,8 +217,7 @@ class Start extends Component {
       });
 
       if (true) {
-        var result = this.addGameBonus();
-        var total_bonus = "55";
+        var total_bonus = totalPointsInGame;
         var randomSelectedRound = "99";
         console.log("---> in sendDataToDB total_bonus=" + total_bonus + "   randomSelectedRound=" + randomSelectedRound);
         
@@ -224,7 +236,6 @@ class Start extends Component {
         });
 
         debug_args.reward_sum = total_bonus;
-        debug_args.sign_of_reward = temp_sign_of_reward;
         this.props.callbackFunction('FinishGame', { need_summary: true, args: debug_args });
       }
     });
@@ -325,6 +336,7 @@ class Start extends Component {
     ...this.props,         // Spread the existing props
     insertGameLineToDB: this.insertGameLineToDB,           // Add myFunc
     sendDataToDB: this.sendDataToDB,          // Add myFunc2
+    setTotalPointsInGame: this.setTotalPointsInGame
    
   };
 
@@ -338,13 +350,15 @@ class Start extends Component {
           <PreferancePerformanceIntroduction 
           gameCondition={GameCondition} 
           onHideMessages={this.handleHideMessages} 
-          selectedGame={this.selectedGame} 
+          selectedGame={this.selectedGame}
+          gameSettings={this.gameSettings}
           insertLine={this.insertGameLineToDB} 
           sendDataToDB={this.sendDataToDB}/>
         ) : (
           <div>
             <GlobalStateProvider>
             <Game 
+            setTotalPointsInGame={this.setTotalPointsInGame}
             isGreenFirst={Math.random() < 0.5}
             selectedGame={this.selectedGame} 
             selectedGameIndex={selectedGameIndex}
