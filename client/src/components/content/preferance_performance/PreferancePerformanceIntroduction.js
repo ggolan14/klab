@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './gameStyles.css';
 import { formatPrice } from '../../utils/StringUtils';
+import ImgIntro1 from './images/introduction1.png';
+import ImgIntro2 from './images/introduction2.png';
 
 class PreferancePerformanceIntroduction extends Component {
   constructor(props) {
@@ -12,40 +14,57 @@ class PreferancePerformanceIntroduction extends Component {
     this.insertLine = this.props.insertLine;
 
     const part1 = (
-      <span style={{ lineHeight: '1.4' }}>
-        <br />
-        <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
-        <u>The Goal</u>
-        <br />
-        Your goal is to accumulate as many points as possible.
-        <br />
-        At the end of the game, each point will be worth 1 cent.
-        <br />
-        You gain points by clicking the green and blue buttons.
-        <br />
-        <br /><u>Gaining Points</u>
-        <br />
-        Each button provides different points:
-        <br />
-        <p className="bullet-text-green" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
-          The green button provides +{game.type_1_score} points with a {game.type_1_probability}%  chance, or 0 otherwise.
-        </p>
-        <p className="bullet-text-blue" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
-          The blue button provides +{game.type_2_score} points with a {game.type_2_probability}% chance, or 0 otherwise.
-        </p>
-        <br />
-      </span>
+      <div width="500px" style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
+        <div style={{ flex: 1, lineHeight: '1.4' }}>
+          <br />
+          <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
+          <u>The Goal</u>
+          <br />
+          Your goal is to accumulate as many points as possible.
+          <br />
+          At the end of the game, each point will be worth 1 cent.
+          <br />
+          You gain points by clicking the green and blue buttons.
+          <br />
+          <br /><u>Gaining Points</u>
+          <br />
+          Each button provides different points:
+          <br />
+          <p className="bullet-text-green" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
+            The green button provides +{game.type_1_score} points with a {game.type_1_probability}% chance, or 0 otherwise.
+          </p>
+          <p className="bullet-text-blue" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
+            The blue button provides +{game.type_2_score} points with a {game.type_2_probability}% chance, or 0 otherwise.
+          </p>
+          <br />
+        </div>
+        <div style={{ flex: '0 0 auto', textAlign: 'center' }}>
+          <img
+            src={ImgIntro1}
+            alt="Game Introduction"
+            style={{ maxWidth: '400px', maxHeight: '300px', borderRadius: '8px' }}
+          />
+        </div>
+      </div>
     );
+
 
     const part2 = (
       <span>
         <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
         <br />Once you receive the <b>positive</b> payoff from a button, <b>this button</b> will continue to provide the same payoff for all remaining steps in that round.
         <br />
-        ***** PICTURE HERE ***
-        <br />
-        Example: the green button is chosen for 4 steps in a row. Once it provides +{game.type_1_score} points (in step 2), it continues to provide +{game.type_1_score} points in all the following steps.
-        <br />
+        <div>
+          <img
+            src={ImgIntro2}
+            alt="Game Introduction"
+            style={{ width: '800px', maxHeight: '500px', borderRadius: '8px' }}
+          />
+          <br />
+          Example: the green button is chosen for 4 steps in a row. Once it provides +{game.type_1_score} points (in step 2), it continues to provide +{game.type_1_score} points in all the following steps.
+          <br />
+        </div>
+
       </span>
 
     );
