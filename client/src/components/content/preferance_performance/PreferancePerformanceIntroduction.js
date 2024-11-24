@@ -90,7 +90,7 @@ class PreferancePerformanceIntroduction extends Component {
       <span>
         <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
         <br />
-        In the game, you will experience {game.type_1_blocks_num + game.type_2_blocks_num} rounds in a random order: {game.type_1_blocks_num} rounds of <b>{game.type_1_trials_num}</b> steps & {game.type_2_blocks_num} rounds of <b>{game.type_2_trials_num} steps.</b>
+        In the game, you will experience {game.type_1_blocks_num + game.type_2_blocks_num} rounds in a random order: {game.type_1_blocks_num} rounds of <b>{game.type_1_trials_num}</b> steps & {game.type_2_blocks_num} rounds of <b>{game.type_2_trials_num}</b> steps.
         <br />
         Before each round starts, you'll be told how many steps it has.
         <br />
