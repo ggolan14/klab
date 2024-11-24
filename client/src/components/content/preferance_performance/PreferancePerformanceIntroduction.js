@@ -38,11 +38,13 @@ class PreferancePerformanceIntroduction extends Component {
           </p>
           <br />
         </div>
-        <div style={{ flex: '0 0 auto', textAlign: 'center' }}>
+        <div style={{ flex: '0 0 auto', textAlign: 'center' , paddingTop: '70px'}}>
+          <label>Example: a step in the game</label>
+          <br/>
           <img
             src={ImgIntro1}
             alt="Game Introduction"
-            style={{ maxWidth: '400px', maxHeight: '300px', borderRadius: '8px' }}
+            style={{ width: '300px', height: '200px', borderRadius: '8px' , paddingTop: '10px'}}
           />
         </div>
       </div>
