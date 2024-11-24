@@ -13,6 +13,7 @@ class PreferancePerformanceIntroduction extends Component {
     //let gameSettings=this.props.
     this.insertLine = this.props.insertLine;
 
+
     const part1 = (
       <div width="500px" style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
         <div style={{ flex: 1, lineHeight: '1.4' }}>
@@ -30,26 +31,40 @@ class PreferancePerformanceIntroduction extends Component {
           <br />
           Each button provides different points:
           <br />
-          <p className="bullet-text-green" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
+          <p style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4', display: 'flex', alignItems: 'center' }}>
+            <span style={{
+              display: 'inline-block',
+              width: '10px',
+              height: '10px',
+              backgroundColor: 'greenyellow',
+              marginRight: '8px'
+            }}></span>
             The green button provides +{game.type_1_score} points with a {game.type_1_probability}% chance, or 0 otherwise.
           </p>
-          <p className="bullet-text-blue" style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4' }}>
+          <p style={{ margin: '0', marginBottom: '4px', lineHeight: '1.4', display: 'flex', alignItems: 'center' }}>
+            <span style={{
+              display: 'inline-block',
+              width: '10px',
+              height: '10px',
+              backgroundColor: 'rgb(0, 217, 255)',
+              marginRight: '8px'
+            }}></span>
             The blue button provides +{game.type_2_score} points with a {game.type_2_probability}% chance, or 0 otherwise.
           </p>
           <br />
         </div>
-        <div style={{ flex: '0 0 auto', textAlign: 'center' , paddingTop: '70px'}}>
+        <div style={{ flex: '0 0 auto', textAlign: 'center', paddingTop: '70px' }}>
           <label>Example: a step in the game</label>
-          <br/>
+          <br />
           <img
             src={ImgIntro1}
             alt="Game Introduction"
-            style={{ width: '300px', height: '200px', borderRadius: '8px' , paddingTop: '10px'}}
-          />
+            style={{ width: '300px', height: '200px', borderRadius: '8px', paddingTop: '10px' }}
+          /> 
         </div>
       </div>
     );
-
+    
 
     const part2 = (
       <span>
