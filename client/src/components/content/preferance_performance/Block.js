@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Trial from './Trial';
 import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
+import { getTotalScore, setTotalScore } from './GlobalState';
 
 // Block component manages a sequence of trials and calculates the total score for a block
-const Block = ({ isGreenFirst, type, blockIndex, gameConfig, totalScoreInGame, onComplete, selectedGameIndex, props }) => {
+const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selectedGameIndex, props }) => {
   // Determine the number of trials based on block type
   let totalTrialsInBlock = type === 'Type_1' ? gameConfig.Type_1_trials_num : gameConfig.Type_2_trials_num;
   let totalBlocksInGame = gameConfig.Type_1_blocks_num + gameConfig.Type_2_blocks_num
@@ -20,8 +21,6 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, totalScoreInGame, o
   // State to display the block completion message
   const [showBlockCompletionMessage, setShowBlockCompletionMessage] = useState(false);
 
-  const [tempTotalScoreInGame, setTempTotalScoreInGame] = useState(totalScoreInGame);
-
   // Starts the block by showing the first trial
   const handleStart = () => {
     setShowTrial(true); // Show the first trial when Start is clicked
@@ -31,19 +30,13 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, totalScoreInGame, o
   const handleContinue = () => {
     setShowTrial(true); // Show the first trial when Start is clicked
     setShowBlockCompletionMessage(false); // Hide the block completion message
-    onComplete(totalScoreInGame);
+    onComplete(totalScoreInBlock);
   };
 
   // Handles the completion of each trial, updating the score and managing the trial sequence
   const handleTrialComplete = (score, totalTime, color) => {
-    console.log("---> in handleTrialComplete()  score in trial " + currentTrialIndex + " is " + score + " time=" + totalTime);
-
-    // Add the score from the completed trial to the total block score
-    setTotalScoreInBlock(totalScoreInBlock + score);
-    let tmp = tempTotalScoreInGame + score;
-    setTempTotalScoreInGame(tempTotalScoreInGame + score)
-    props.setTotalPointsInGame(tmp)
-
+    const newBlockVal=totalScoreInBlock + score;
+    setTotalScoreInBlock(newBlockVal);
     // Check if there are more trials left in the block
     if (currentTrialIndex < totalTrialsInBlock - 1) {
       // Move to the next trial in the block
@@ -53,10 +46,6 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, totalScoreInGame, o
       setShowTrial(false); // Hide trials
       setCurrentTrialIndex(0); // Reset trial index for the next block
       setShowBlockCompletionMessage(true); // Show block completion message
-      //setTimeout(() => {
-      //  setShowBlockCompletionMessage(false); // Hide completion message after some time
-      //  onComplete(); // Notify the parent component that the block is complete
-      //}, 3000); // Display the completion message for 3 seconds
     }
 
     const db_row = {
@@ -71,8 +60,6 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, totalScoreInGame, o
     props.insertGameLineToDB(db_row);
   };
 
-  console.log("------>  totalTrialsInBlock=" + totalTrialsInBlock + "   currentTrialIndex=" + currentTrialIndex);
-
   return (
 
     <div style={{ textAlign: "center" }}>
@@ -84,7 +71,7 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, totalScoreInGame, o
           <br />
           In this round you scored {totalScoreInBlock} points
           <br />
-          Your curent game score is {tempTotalScoreInGame} points
+          Your curent game score is {getTotalScore()} points
           <br />
           <br />
           <b>Please continue to the next round when you are ready</b>

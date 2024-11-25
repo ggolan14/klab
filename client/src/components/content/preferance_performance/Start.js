@@ -9,6 +9,7 @@ import { formatPrice } from '../../utils/StringUtils';
 import GameRound from '../mind_game/GameRound';
 import Game from './Game';
 import { GlobalStateProvider } from './GlobalStateContext';
+import { getTotalScore, setTotalScore } from './GlobalState';
 
 
 
@@ -30,7 +31,6 @@ let transform;
 let extended_name;
 let selectedGame;
 let selectedGameIndex;
-let totalPointsInGame=0;
 const yesButtonInRight = Math.random() < 0.5; // Randomize button position
 
 class Start extends Component {
@@ -168,10 +168,13 @@ class Start extends Component {
   handleNext = () => {
    
   };
-
+/*
   setTotalPointsInGame = (totalPoints) => {
-   totalPointsInGame=totalPointsInGame+totalPoints;
+  console.log("---> BEFORE in setTotalPointsInGame() last block points totalPoints=" + totalPoints+"  current total point game="+totalPointsInGame2);
+  totalPointsInGame2=totalPointsInGame2+totalPoints;
+  console.log("---> AFTER new totalPointsInGame=" +totalPointsInGame2); 
   }
+  */
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
     //  if (isCorrect) {
@@ -217,9 +220,9 @@ class Start extends Component {
       });
 
       if (true) {
-        var total_bonus = totalPointsInGame;
+        var total_bonus = getTotalScore();
         var randomSelectedRound = "99";
-        console.log("---> in sendDataToDB total_bonus=" + total_bonus + "   randomSelectedRound=" + randomSelectedRound);
+        console.log("---> in sendDataToDB total_bonus=" + total_bonus);
         
         this.PaymentsSettings.total_bonus = total_bonus;
         this.PaymentsSettings.randomSelectedRound = randomSelectedRound;
@@ -247,7 +250,6 @@ class Start extends Component {
     var exchange_ratio = this.PaymentsSettings.exchange_ratio;
     total_bonus = total_bonus / exchange_ratio;
     total_bonus = (Math.round(total_bonus * 100) / 100).toFixed(2);
-    console.log("---> in calculateBonus()  total_bonus=" + total_bonus + "  exchange_ratio=" + exchange_ratio);
     return total_bonus;
   }
 
@@ -255,16 +257,16 @@ class Start extends Component {
   addGameBonus = (game_data) => {
     const { userAnswers } = this.state;
     const keys = Object.keys(userAnswers);
-    keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${userAnswers[key]}`); });
+  
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
-    console.log("--->  in addGameBonus()   randomIndex=" + randomIndex);
+   
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = userAnswers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
     const TotalBonus = [];
     TotalBonus.push(selectedRoundPoints);
-    console.log("---> in addGameBonus() selectedRoundPoints=" + selectedRoundPoints + "   randomSelectedRound=" + randomSelectedRound);
+   
 
     return {
       selectedRoundPoints: selectedRoundPoints,
@@ -287,7 +289,7 @@ class Start extends Component {
 
   // Rolls the dice and updates the UI
   rollDice = (random) => {
-    console.log("===> in roll dice random=" + random);
+    
     startTimer = getTimeDate().now;
 
     setTimeout(() => {
@@ -336,8 +338,6 @@ class Start extends Component {
     ...this.props,         // Spread the existing props
     insertGameLineToDB: this.insertGameLineToDB,           // Add myFunc
     sendDataToDB: this.sendDataToDB,          // Add myFunc2
-    setTotalPointsInGame: this.setTotalPointsInGame
-   
   };
 
   // Render method for displaying the UI
@@ -358,7 +358,6 @@ class Start extends Component {
           <div>
             <GlobalStateProvider>
             <Game 
-            setTotalPointsInGame={this.setTotalPointsInGame}
             isGreenFirst={Math.random() < 0.5}
             selectedGame={this.selectedGame} 
             selectedGameIndex={selectedGameIndex}

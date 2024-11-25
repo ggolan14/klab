@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
 import { getTimeDate } from "../../../utils/app_utils";
+import { getTotalScore, setTotalScore } from './GlobalState';
 
 // Trial component represents a single trial with green and blue button options
-const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConfig, totalTrialsInBlock, totalScoreInBlock, selectedGameIndex, props }) => {
-  
-  
+const Trial = ({ type, isGreenFirst, blockIndex, trialIndex, onComplete, gameConfig, totalTrialsInBlock, totalScoreInBlock, selectedGameIndex, props }) => {
+
+
   let startTimer = 0;
   let endTimer = 0;
-  
-  
+
+
   // State variables to store the result for each button click
   const [greenResult, setGreenResult] = useState(null);
   const [blueResult, setBlueResult] = useState(null);
@@ -30,14 +31,14 @@ const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConf
         gameGonfig
       });
     }
-    
+
     // Handle spacebar press to complete the trial
     const handleKeyPress = (event) => {
       if (event.code === 'Space') {
         onComplete(greenResult || blueResult); // Pass result on spacebar press if any result exists
       }
     };
-    
+
     // Add event listener for spacebar press
     window.addEventListener('keydown', handleKeyPress);
 
@@ -52,15 +53,16 @@ const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConf
     let prob = props.game_settings.game.type_1_probability;
     let score = props.game_settings.game.type_1_score;
     let totalTimer = getTimeDate().now - startTimer;
-    console.log("++++++++++ totalTimer="+totalTimer + "  startTimer="+startTimer)
-    
+
     // Calculate result based on probability and score settings
     const result = Math.random() < (prob / 100) ? score : 0;
     setGreenResult(result); // Set the result for green button
+    setTotalScore(getTotalScore() + result)
+    console.log("---> in handleGreenButtonClick() New total score " + getTotalScore())
 
     // Wait for displayTime seconds before calling onComplete
     setTimeout(() => {
-       onComplete(result,totalTimer,"Green"); // Pass green result to onComplete after timeout
+      onComplete(result, totalTimer, "Green"); // Pass green result to onComplete after timeout
     }, displayTime * 1000);
   };
 
@@ -69,20 +71,20 @@ const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConf
     let prob = props.game_settings.game.type_2_probability;
     let score = props.game_settings.game.type_2_score;
     let totalTimer = getTimeDate().now - startTimer;
-    console.log("++++++++++ totalTimer="+totalTimer + "  startTimer="+startTimer)
-
     // Calculate result based on probability and score settings
     const result = Math.random() < (prob / 100) ? score : 0;
     setBlueResult(result); // Set the result for blue button
+    setTotalScore(getTotalScore() + result)
+    console.log("---> in handleBlueButtonClick() New total score " + getTotalScore())
 
     // Wait for displayTime seconds before calling onComplete
     setTimeout(() => {
-      onComplete(result,totalTimer,"Blue"); // Pass blue result to onComplete after timeout
+      onComplete(result, totalTimer, "Blue"); // Pass blue result to onComplete after timeout
     }, displayTime * 1000);
   };
 
   return (
-    <div style={{ fontSize: '36px', textAlign: "center"}}>
+    <div style={{ fontSize: '36px', textAlign: "center" }}>
       {/* Debugger view to show selected game and trial info */}
       <DebuggerModalView>
         <p>Selected game: {selectedGameIndex}</p>
@@ -90,14 +92,14 @@ const Trial = ({ type,isGreenFirst, blockIndex, trialIndex, onComplete, gameConf
         <p>Round#: {blockIndex}</p>
         <p>Step#: {trialIndex}</p>
       </DebuggerModalView>
-  
+
       {/* Display current trial information */}
       <h1>
-       <b>Step {trialIndex} out of {totalTrialsInBlock}</b>
+        <b>Step {trialIndex} out of {totalTrialsInBlock}</b>
       </h1>
       Points scored in this round: {totalScoreInBlock}
       <br />
-  
+
       {/* Render buttons based on the order specified by isGreenFirst */}
       {isGreenFirst ? (
         <>
