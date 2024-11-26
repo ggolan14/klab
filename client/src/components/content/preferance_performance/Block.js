@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Trial from './Trial';
 import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
-import { getTotalScore, setTotalScore } from './GlobalState';
+import { getTotalScore, setTotalScore, getGreenScore, setGreenScore, getBlueScore, setBlueScore } from './GlobalState';
 
 // Block component manages a sequence of trials and calculates the total score for a block
 const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selectedGameIndex, props }) => {
@@ -23,6 +23,8 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selecte
 
   // Starts the block by showing the first trial
   const handleStart = () => {
+    setGreenScore(0);
+    setBlueScore(0);
     setShowTrial(true); // Show the first trial when Start is clicked
     setShowBlockCompletionMessage(false); // Hide the block completion message
   };
