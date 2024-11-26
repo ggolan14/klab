@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
 import { getTimeDate } from "../../../utils/app_utils";
-import { getTotalScore, setTotalScore } from './GlobalState';
+import { getTotalScore, setTotalScore, getGreenScore,setGreenScore,getBlueScore, setBlueScore} from './GlobalState';
 
 // Trial component represents a single trial with green and blue button options
 const Trial = ({ type, isGreenFirst, blockIndex, trialIndex, onComplete, gameConfig, totalTrialsInBlock, totalScoreInBlock, selectedGameIndex, props }) => {
@@ -50,36 +50,50 @@ const Trial = ({ type, isGreenFirst, blockIndex, trialIndex, onComplete, gameCon
 
   // Handle click event for the green button
   const handleGreenButtonClick = () => {
-    let prob = props.game_settings.game.type_1_probability;
-    let score = props.game_settings.game.type_1_score;
-    let totalTimer = getTimeDate().now - startTimer;
 
+    let totalTimer = getTimeDate().now - startTimer;
+    let greenScore=getGreenScore();
+
+    if(greenScore==0){
+      let prob = props.game_settings.game.type_1_probability;
+      let score = props.game_settings.game.type_1_score;
+      greenScore = Math.random() < (prob / 100) ? score : 0;
+      setGreenScore(greenScore);
+    }
+    
     // Calculate result based on probability and score settings
-    const result = Math.random() < (prob / 100) ? score : 0;
-    setGreenResult(result); // Set the result for green button
-    setTotalScore(getTotalScore() + result)
-    console.log("---> in handleGreenButtonClick() New total score " + getTotalScore())
+    
+    setGreenResult(greenScore); // Set the result for green button
+    setTotalScore(getTotalScore() + greenScore)
+    console.log("---> in handleGreenButtonClick() New total score " + getTotalScore()+" greenScore="+greenScore)
 
     // Wait for displayTime seconds before calling onComplete
     setTimeout(() => {
-      onComplete(result, totalTimer, "Green"); // Pass green result to onComplete after timeout
+      onComplete(greenScore, totalTimer, "Green"); // Pass green result to onComplete after timeout
     }, displayTime * 1000);
   };
 
   // Handle click event for the blue button
   const handleBlueButtonClick = () => {
-    let prob = props.game_settings.game.type_2_probability;
-    let score = props.game_settings.game.type_2_score;
     let totalTimer = getTimeDate().now - startTimer;
+    let blueScore=getBlueScore();
+
+    if(blueScore==0){
+      let prob = props.game_settings.game.type_2_probability;
+      let score = props.game_settings.game.type_2_score;
+      blueScore = Math.random() < (prob / 100) ? score : 0;
+      setBlueScore(blueScore);
+    }
+    
     // Calculate result based on probability and score settings
-    const result = Math.random() < (prob / 100) ? score : 0;
-    setBlueResult(result); // Set the result for blue button
-    setTotalScore(getTotalScore() + result)
-    console.log("---> in handleBlueButtonClick() New total score " + getTotalScore())
+    
+    setBlueResult(blueScore); // Set the result for green button
+    setTotalScore(getTotalScore() + blueScore)
+    console.log("---> in handleBlueButtonClick() New total score " + getTotalScore()+" blueScore="+blueScore)
 
     // Wait for displayTime seconds before calling onComplete
     setTimeout(() => {
-      onComplete(result, totalTimer, "Blue"); // Pass blue result to onComplete after timeout
+      onComplete(blueScore, totalTimer, "Blue"); // Pass green result to onComplete after timeout
     }, displayTime * 1000);
   };
 
