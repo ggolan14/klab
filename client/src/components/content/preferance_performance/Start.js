@@ -9,6 +9,8 @@ import { formatPrice } from '../../utils/StringUtils';
 import GameRound from '../mind_game/GameRound';
 import Game from './Game';
 import { GlobalStateProvider } from './GlobalStateContext';
+import { getTotalScore, setTotalScore } from './GlobalState';
+
 
 
 // Constants for experiment and static styles
@@ -20,9 +22,6 @@ let UserId = 'empty';
 let RunningName = '-';
 let GameCondition = null;
 let NUM_OF_REPEATED_REAL_ROUNDS = 0;
-let NUM_OF_PRACTICE_ROUNDS = 3;
-let NUM_OF_INTRODUCTION_STEPS = 3;
-let lastIndex;
 let startTimer = 0;
 let endTimer = 0;
 let totalTimer = 0;
@@ -38,7 +37,8 @@ class Start extends Component {
   constructor(props) {
     super(props);
 
-
+    
+    
 
     // Initialize total bonus array
     this.TotalBonus = [];
@@ -52,10 +52,17 @@ class Start extends Component {
    
     SignOfReward = props.game_settings.payments.sign_of_reward;
    
-    selectedGameIndex =  Math.floor(Math.random() * 3);
+    //selectedGameIndex =  Math.floor(Math.random() * 3);
+    selectedGameIndex = RunCounter % 3;
     this.selectedGame = props.game_settings.game.g_b[selectedGameIndex]; // allocate user to a game
     this.displayTime = props.game_settings.game.display_time;
-    console.log("%%%%% selectedGame="+selectedGame +"  selectedGameIndex="+selectedGameIndex)
+    this.selectedGame.type_1_score = props.game_settings.game.type_1_score;
+    this.selectedGame.type_2_score = props.game_settings.game.type_2_score;
+    this.selectedGame.type_1_probability = props.game_settings.game.type_1_probability;
+    this.selectedGame.type_2_probability = props.game_settings.game.type_2_probability;
+
+    console.log("Selected Game:", JSON.stringify(this.selectedGame));
+    
    
 
 
@@ -161,6 +168,13 @@ class Start extends Component {
   handleNext = () => {
    
   };
+/*
+  setTotalPointsInGame = (totalPoints) => {
+  console.log("---> BEFORE in setTotalPointsInGame() last block points totalPoints=" + totalPoints+"  current total point game="+totalPointsInGame2);
+  totalPointsInGame2=totalPointsInGame2+totalPoints;
+  console.log("---> AFTER new totalPointsInGame=" +totalPointsInGame2); 
+  }
+  */
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
     //  if (isCorrect) {
@@ -176,8 +190,7 @@ class Start extends Component {
 
   // Inserts a game line into the database
   insertGameLineToDB = (db_row) => {
-    console.log("$$$$$$$$$")
-     this.props.insertGameLine(db_row);
+    this.props.insertGameLine(db_row);
   }
 
   // Placeholder method for forwarding actions (not currently used)
@@ -188,7 +201,9 @@ class Start extends Component {
     const current_time = getTimeDate();
     var reward_sum = 0;
     var temp_sign_of_reward = this.PaymentsSettings.sign_of_reward;
-    let debug_args = { reward_sum, temp_sign_of_reward };
+    let debug_args = {
+      reward_sum,
+    }
 
     this.props.sendGameDataToDB().then(() => {
       NewLogs({
@@ -205,10 +220,9 @@ class Start extends Component {
       });
 
       if (true) {
-        var result = this.addGameBonus();
-        var total_bonus = "55";
+        var total_bonus = getTotalScore();
         var randomSelectedRound = "99";
-        console.log("---> in sendDataToDB total_bonus=" + total_bonus + "   randomSelectedRound=" + randomSelectedRound);
+        console.log("---> in sendDataToDB total_bonus=" + total_bonus);
         
         this.PaymentsSettings.total_bonus = total_bonus;
         this.PaymentsSettings.randomSelectedRound = randomSelectedRound;
@@ -225,7 +239,6 @@ class Start extends Component {
         });
 
         debug_args.reward_sum = total_bonus;
-        debug_args.sign_of_reward = temp_sign_of_reward;
         this.props.callbackFunction('FinishGame', { need_summary: true, args: debug_args });
       }
     });
@@ -237,7 +250,6 @@ class Start extends Component {
     var exchange_ratio = this.PaymentsSettings.exchange_ratio;
     total_bonus = total_bonus / exchange_ratio;
     total_bonus = (Math.round(total_bonus * 100) / 100).toFixed(2);
-    console.log("---> in calculateBonus()  total_bonus=" + total_bonus + "  exchange_ratio=" + exchange_ratio);
     return total_bonus;
   }
 
@@ -245,16 +257,16 @@ class Start extends Component {
   addGameBonus = (game_data) => {
     const { userAnswers } = this.state;
     const keys = Object.keys(userAnswers);
-    keys.forEach(key => { console.log(`keys Key: ${key}, Value: ${userAnswers[key]}`); });
+  
 
     const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
-    console.log("--->  in addGameBonus()   randomIndex=" + randomIndex);
+   
     const randomSelectedRound = keys[randomIndex - 1];
     const randomSelectedRoundValue = userAnswers[randomSelectedRound];
     const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
     const TotalBonus = [];
     TotalBonus.push(selectedRoundPoints);
-    console.log("---> in addGameBonus() selectedRoundPoints=" + selectedRoundPoints + "   randomSelectedRound=" + randomSelectedRound);
+   
 
     return {
       selectedRoundPoints: selectedRoundPoints,
@@ -277,7 +289,7 @@ class Start extends Component {
 
   // Rolls the dice and updates the UI
   rollDice = (random) => {
-    console.log("===> in roll dice random=" + random);
+    
     startTimer = getTimeDate().now;
 
     setTimeout(() => {
@@ -326,7 +338,6 @@ class Start extends Component {
     ...this.props,         // Spread the existing props
     insertGameLineToDB: this.insertGameLineToDB,           // Add myFunc
     sendDataToDB: this.sendDataToDB,          // Add myFunc2
-   
   };
 
   // Render method for displaying the UI
@@ -339,7 +350,8 @@ class Start extends Component {
           <PreferancePerformanceIntroduction 
           gameCondition={GameCondition} 
           onHideMessages={this.handleHideMessages} 
-          selectedGame={this.selectedGame} 
+          selectedGame={this.selectedGame}
+          gameSettings={this.gameSettings}
           insertLine={this.insertGameLineToDB} 
           sendDataToDB={this.sendDataToDB}/>
         ) : (

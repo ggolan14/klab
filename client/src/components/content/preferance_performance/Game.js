@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Block from './Block';
+import { getTotalScore, setTotalScore } from './GlobalState';
 
 // Game component manages the sequence of blocks and tracks game progress
-const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps }) => { 
-  console.log("------------------->  Game isGreenFirst=" + isGreenFirst);
+const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps }) => {
 
   const [gameConfig, setGameConfig] = useState({
     Type_1_blocks_num: 0,
@@ -17,6 +17,7 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
   const [type2BlockIndex, setType2BlockIndex] = useState(0);
   const [showBlock, setShowBlock] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // Track if game has started
+
 
   // useEffect to initialize game configuration based on selectedGame
   useEffect(() => {
@@ -38,9 +39,8 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
     }
   }, [selectedGame]);
 
-  const handleBlockComplete = () => {
+  const handleBlockComplete = (totalScoreInBlock) => {
     setShowBlock(false);
-
     if (currentBlockType === 'Type_1') {
       if (type2BlockIndex < gameConfig.Type_2_blocks_num) {
         setCurrentBlockType('Type_2');
@@ -60,14 +60,12 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
     type1BlockIndex === gameConfig.Type_1_blocks_num &&
     type2BlockIndex === gameConfig.Type_2_blocks_num;
 
-  // useEffect to call sendDataToDB only when all blocks are completed and gameStarted is true
+
   useEffect(() => {
     if (gameStarted && allBlocksCompleted) {
-      console.log("=====> All blocks completed! Invoking sendDataToDB.");
       extraProps.sendDataToDB(true);
     }
   }, [allBlocksCompleted, gameStarted, extraProps]);
-
   return (
     <div>
       {!allBlocksCompleted ? (

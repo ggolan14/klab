@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Trial from './Trial';
+import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
+import { getTotalScore, setTotalScore, getGreenScore, setGreenScore, getBlueScore, setBlueScore } from './GlobalState';
 
 // Block component manages a sequence of trials and calculates the total score for a block
 const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selectedGameIndex, props }) => {
-
-  console.log("------------------->  Block isGreenFirst="+isGreenFirst)
-  
   // Determine the number of trials based on block type
   let totalTrialsInBlock = type === 'Type_1' ? gameConfig.Type_1_trials_num : gameConfig.Type_2_trials_num;
+  let totalBlocksInGame = gameConfig.Type_1_blocks_num + gameConfig.Type_2_blocks_num
 
   // State to track the current trial index within the block
   const [currentTrialIndex, setCurrentTrialIndex] = useState(0);
@@ -18,17 +18,27 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selecte
   // State to keep track of the total score accumulated in this block
   const [totalScoreInBlock, setTotalScoreInBlock] = useState(0);
 
+  // State to display the block completion message
+  const [showBlockCompletionMessage, setShowBlockCompletionMessage] = useState(false);
+
   // Starts the block by showing the first trial
   const handleStart = () => {
+    setGreenScore(0);
+    setBlueScore(0);
     setShowTrial(true); // Show the first trial when Start is clicked
+    setShowBlockCompletionMessage(false); // Hide the block completion message
+  };
+
+  const handleContinue = () => {
+    setShowTrial(true); // Show the first trial when Start is clicked
+    setShowBlockCompletionMessage(false); // Hide the block completion message
+    onComplete(totalScoreInBlock);
   };
 
   // Handles the completion of each trial, updating the score and managing the trial sequence
-  const handleTrialComplete = (score) => {
-    console.log("---> in handleTrialComplete()  score in trial " + currentTrialIndex + " is " + score);
-    // Add the score from the completed trial to the total block score
-    setTotalScoreInBlock(totalScoreInBlock + score);
-
+  const handleTrialComplete = (score, totalTime, color) => {
+    const newBlockVal=totalScoreInBlock + score;
+    setTotalScoreInBlock(newBlockVal);
     // Check if there are more trials left in the block
     if (currentTrialIndex < totalTrialsInBlock - 1) {
       // Move to the next trial in the block
@@ -37,35 +47,60 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selecte
       // All trials in the block are complete
       setShowTrial(false); // Hide trials
       setCurrentTrialIndex(0); // Reset trial index for the next block
-      onComplete(); // Notify the parent component that the block is complete
+      setShowBlockCompletionMessage(true); // Show block completion message
     }
 
     const db_row = {
-       
-      TrailIndex: currentTrialIndex,
+      BlockType: type,
+      BlockIndex: blockIndex,
+      TrailIndex: currentTrialIndex + 1,
       Score: score,
-      
-  };
-  
-  props.insertGameLineToDB(db_row);
+      TotalTime: totalTime,
+      Color: color,
+    };
 
+    props.insertGameLineToDB(db_row);
   };
 
   return (
-    <div>
-      {/* Display the block introduction and start button when no trial is shown */}
-      {!showTrial && (
+
+    <div style={{ textAlign: "center" }}>
+      {/* Display the block completion message */}
+      {showBlockCompletionMessage && (
         <>
-          <h1>The next block consists of {totalTrialsInBlock} steps</h1>
+          <b>You have completed round {blockIndex} out of {totalBlocksInGame}</b>
+          <br />
+          <br />
+          In this round you scored {totalScoreInBlock} points
+          <br />
+          Your curent game score is {getTotalScore()} points
+          <br />
+          <br />
+          <b>Please continue to the next round when you are ready</b>
+          <br />
+          <br />
+
+          <div className="button-container">
+            <button onClick={handleContinue}>Continue</button>
+          </div>
+        </>
+      )}
+
+      {/* Display the block introduction and start button when no trial is shown */}
+      {!showTrial && !showBlockCompletionMessage && (
+        <div style={{ textAlign: "center", lineHeight: '2.6' }}>
+
           <p>
-            Both the green and blue buttons are available for you
+            <b>The next round consists of {totalTrialsInBlock} steps</b>
+            <br />
+            Both the green and the blue buttons are available to you
             <br />
             Please start when you are ready
           </p>
           <div className="button-container">
             <button onClick={handleStart}>Start</button>
           </div>
-        </>
+        </div>
       )}
 
       {/* Display the Trial component when a trial is active */}
