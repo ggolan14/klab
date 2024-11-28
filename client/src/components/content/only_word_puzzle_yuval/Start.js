@@ -1117,7 +1117,7 @@ class Demo extends React.Component{
         this.isAdminUser = props.isAdminUser;
         this.FinishTask = props.FinishTask;
 
-        this.word_list = ['garden', 'porch', 'home'];///
+        this.word_list = ['garden', 'porch', 'home'];
 
         this.puzzle = {
             Demo: {
