@@ -74,6 +74,7 @@ const Game = ({ isGreenFirst, selectedGame, selectedGameIndex, props: extraProps
             type={currentBlockType}
             isGreenFirst={isGreenFirst}
             blockIndex={currentBlockType === 'Type_1' ? type1BlockIndex + 1 : type2BlockIndex + 1}
+            totalNumOfCompletedBlocks = {type1BlockIndex + type2BlockIndex}
             gameConfig={gameConfig}
             onComplete={handleBlockComplete}
             selectedGameIndex={selectedGameIndex}

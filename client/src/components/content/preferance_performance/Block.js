@@ -4,7 +4,7 @@ import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
 import { getTotalScore, setTotalScore, getGreenScore, setGreenScore, getBlueScore, setBlueScore } from './GlobalState';
 
 // Block component manages a sequence of trials and calculates the total score for a block
-const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selectedGameIndex, props }) => {
+const Block = ({ isGreenFirst, type, blockIndex,totalNumOfCompletedBlocks, gameConfig, onComplete, selectedGameIndex, props }) => {
   // Determine the number of trials based on block type
   let totalTrialsInBlock = type === 'Type_1' ? gameConfig.Type_1_trials_num : gameConfig.Type_2_trials_num;
   let totalBlocksInGame = gameConfig.Type_1_blocks_num + gameConfig.Type_2_blocks_num
@@ -52,7 +52,8 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selecte
 
     const db_row = {
       BlockType: type,
-      BlockIndex: blockIndex,
+      RoundIndex: blockIndex,
+      TotalCompletedRounds:  totalNumOfCompletedBlocks,
       TrailIndex: currentTrialIndex + 1,
       Score: score,
       TotalTime: totalTime,
@@ -68,7 +69,7 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selecte
       {/* Display the block completion message */}
       {showBlockCompletionMessage && (
         <>
-          <b>You have completed round {blockIndex} out of {totalBlocksInGame}</b>
+          <b>You have completed round {totalNumOfCompletedBlocks+1} out of {totalBlocksInGame}</b>
           <br />
           <br />
           In this round you scored {totalScoreInBlock} points
@@ -110,6 +111,7 @@ const Block = ({ isGreenFirst, type, blockIndex, gameConfig, onComplete, selecte
           type={type} // Pass the block type to the trial
           isGreenFirst={isGreenFirst} // Control button order in trial
           blockIndex={blockIndex} // Pass the block index
+          totalNumOfCompletedBlocks={totalNumOfCompletedBlocks} //Total
           trialIndex={currentTrialIndex + 1} // Display a 1-based index for users
           onComplete={handleTrialComplete} // Function to call when a trial is complete
           gameConfig={gameConfig} // Pass game configuration settings
