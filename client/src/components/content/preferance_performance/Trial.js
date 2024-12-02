@@ -56,9 +56,13 @@ const Trial = ({ type, isGreenFirst, blockIndex, totalNumOfCompletedBlocks, tria
       setBlueResult(resultScore);
     }
 
-    setTotalScore(getTotalScore() + resultScore);
+    let curentTotal=getTotalScore();
+    let newTotal=curentTotal + resultScore
+    //console.log("---> BEFORE setTotal curentTotal="+curentTotal+"  score="+resultScore+"  newTotal="+newTotal)
+    setTotalScore(newTotal);
+    //console.log("---> AFTER setTotal total="+getTotalScore())
 
-    console.log(`---> in handle${color}ButtonClick() New total score ${getTotalScore()} ${color}Score=${resultScore}`);
+    //console.log(`---> in handle${color}ButtonClick() New total score ${getTotalScore()} ${color} Score=${resultScore}`);
 
     setTimeout(() => {
       onComplete(resultScore, totalTimer, color);

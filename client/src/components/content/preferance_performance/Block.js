@@ -49,9 +49,10 @@ const Block = ({ isGreenFirst, type, blockIndex,totalNumOfCompletedBlocks, gameC
       setCurrentTrialIndex(0); // Reset trial index for the next block
       setShowBlockCompletionMessage(true); // Show block completion message
     }
-
     const db_row = {
+      GameType: "Game"+(selectedGameIndex+1),
       BlockType: type,
+      BlockTrials: totalTrialsInBlock,
       RoundIndex: blockIndex,
       TotalCompletedRounds:  totalNumOfCompletedBlocks,
       TrailIndex: currentTrialIndex + 1,
