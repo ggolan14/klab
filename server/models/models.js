@@ -70,9 +70,9 @@ const isSuperAdminUser = async req => {
 const getModelPack = model => {
 
     try {
-        console.log("=======> model="+model);
-        let ggg=AllModels[model];
-        console.log("=======> ggg="+ggg);
+       // console.log("=======> model="+model);
+      //  let ggg=AllModels[model];
+      //  console.log("=======> ggg="+ggg);
         return AllModels[model];
     } catch (e) {
         return null;
