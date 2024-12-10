@@ -5,7 +5,7 @@ let startTimer = 0;
 let endTimer = 0;
 let totalTimer = 0;
 let timeForStep = 0;
-let isTriviaExp; ;
+let isTriviaExp; ; //test
 
 const ResourceAllocation = ({ insertLine, sendDataToDB,isTrivia }) => {
     isTriviaExp=isTrivia;
