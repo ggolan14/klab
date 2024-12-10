@@ -10,7 +10,7 @@ const MathQuestion = ({ onAnswer }) => {
   };
 
   const handleSubmit = () => {
-    if (selectedOption !== null) {
+    if (selectedOption !== null) { // dummy comment
       const isCorrect = selectedOption === correctAnswer;
       onAnswer(isCorrect);
       
