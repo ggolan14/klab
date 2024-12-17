@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Launch the server directly
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Server",
+            "program": "${workspaceFolder}/server/server.js",
+            "skipFiles": ["<node_internals>/**"],
+            "outFiles": ["${workspaceFolder}/server/**/*.js"]
+        },
+        {
+            // Attach to a running Nodemon process with --inspect
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Nodemon",
+            "port": 9229, // Default inspect port
+            "restart": true,
+            "skipFiles": ["<node_internals>/**"]
+        }
+    ]
+}
