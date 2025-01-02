@@ -1730,9 +1730,7 @@ class GameHandle extends React.Component {
     }
 
     game_stages() {
-        console.log("---> in game_stages() ")
         let stage = this.game_handle[this.state.game_index];
-        console.log("---> in game_stages() 111 stage=" + stage)
         let user;
         try {
             if (this.state.isAuthenticated)
@@ -1747,10 +1745,8 @@ class GameHandle extends React.Component {
                     age: '',
                     gender: '',
                 };
-            console.log("---> in game_stages() 222 user.id=" + user.id)
-        }
+            }
         catch (e) {
-            console.log("---> in game_stages() 222 catch user.id=" + user.id)
             user = {
                 id: '',
                 age: '',
@@ -1844,7 +1840,6 @@ class GameHandle extends React.Component {
 
     render() {
         if (!this.state || this.state.isLoading){
-            console.log("-----> !this.state="+!this.state+"   this.state.isLoading");
             return <></>;
         }
         if (this.state.redirect_to !== null && this.state.redirect_to) {
