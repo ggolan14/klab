@@ -23,7 +23,8 @@ const EXPERIMENTS_LABELS_NAMES = {
     CupsGame: 'CupsGame',
     NoCupsGame: 'NoCupsGame',
     PreferancePerformance: 'PreferancePerformance',
-    MegaDots: 'MegaDots'
+    MegaDots: 'MegaDots',
+    DotsMindGame: 'DotsMindGame'
     
 };
 
@@ -52,7 +53,8 @@ const EXPERIMENTS_NAMES_LABELS = {
     CupsGame: 'CupsGame',
     NoCupsGame: 'NoCupsGame',
     PreferancePerformance: 'PreferancePerformance',
-    MegaDots: 'MegaDots'
+    MegaDots: 'MegaDots',
+    DotsMindGame: 'DotsMindGame'
    
 };
 

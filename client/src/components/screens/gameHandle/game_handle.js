@@ -25,6 +25,9 @@ import PointsGameSummary from "../../content/points_game/Summary";
 import MegaDotsStart from "../../content/mega_dots/Start";
 import MegaDotsSummary from "../../content/mega_dots/Summary";
 
+import DotsMindGameStart from "../../content/dots_mind_game/Start";
+import DotsMindGameSummary from "../../content/dots_mind_game/Summary";
+
 import PointsGameShStart from "../../content/points_game_sh/Start";
 
 import WordPuzzleStart from "../../content/word_puzzle/Start";
@@ -497,6 +500,7 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
         TryOrGiveUp: <TryOrGiveUpStart {...game_props} />,
         PointsGame: <PointsGameStart {...game_props} />,
         MegaDots: <MegaDotsStart {...game_props} />,
+        DotsMindGame: <DotsMindGameStart {...game_props} />,
         PointsGameSh: <PointsGameShStart />,
         WordPuzzle: <WordPuzzleStart {...game_props} />,
         AbstractAndDeclarationEffect: <AbstractAndDeclarationEffectStart {...game_props} />,
@@ -613,6 +617,15 @@ const getSummary = ({ exp, summary_args }) => {
             label: 'Mega Dots',
             element: () => (
                 <MegaDotsSummary
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                />
+            )
+        },
+        DotsMindGame: {
+            label: 'Dots Mind Game',
+            element: () => (
+                <DotsMindGameSummary
                     SignOfReward={DB_RECORDS.Payment.sign_of_reward}
                     ShowUpFee={DB_RECORDS.Payment.show_up_fee}
                 />
@@ -1378,6 +1391,7 @@ class GameHandle extends React.Component {
     }
 
     getEndCode() {
+        console.log("---------> 1111 redirect")
         this.props.setWaitForAction(true);
 
         getEndCode({
@@ -1403,8 +1417,10 @@ class GameHandle extends React.Component {
                         local_d: getTimeDate().date,
                     },
                 }).then((res) => { });
+                
                 if (redirect && !redirect.startsWith('http'))
                     redirect = 'https://' + redirect;
+                console.log("---------> 22222 redirect="+redirect)
                 this.setState({ redirect_to: redirect }, this.props.setWaitForAction(false));
             }
         )
@@ -1424,6 +1440,7 @@ class GameHandle extends React.Component {
         }
 
         this.setState(sc, () => {
+            console.log("=======> in setState() new_game="+new_game)
             this.props.setWaitForAction(false);
 
             if (new_game)
@@ -1662,7 +1679,7 @@ class GameHandle extends React.Component {
                             )
                         }
                         catch (e) {
-
+                            
                             this.setState({
                                 isLoading: false,
                                 running_error: true,
@@ -1839,13 +1856,17 @@ class GameHandle extends React.Component {
     }
 
     render() {
+        
         if (!this.state || this.state.isLoading){
             return <></>;
         }
+        console.log("------> 111 in render this.state.redirect_to="+this.state.redirect_to+"  this.state.redirect_to="+this.state.redirect_to)
         if (this.state.redirect_to !== null && this.state.redirect_to) {
+            console.log("------> 222 in render this.state.redirect_to="+this.state.redirect_to+"  this.state.redirect_to="+this.state.redirect_to)
             OnBeforeUnload(false);
             return window.location = this.state.redirect_to;
         }
+        console.log("------> 333 in render didn't get into redirect_to")
         if ((this.state.redirect_to !== null && !this.state.redirect_to) || this.state.play_error || this.state.user_rejected || (this.state.user_finish_game && this.state.active_settings.mode !== 'Real') || (this.state.user_finish_game && this.state.isAuthenticated)) {
             OnBeforeUnload(false);
             return <PlayError state={this.state} exp={this.exp} />;

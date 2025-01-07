@@ -213,6 +213,50 @@ const fixGameVersion = (exp, Version) => {
 
         return version;
     }
+    else if (exp === 'DotsMindGame'){
+        let version = {...Version};
+        try {
+            let game_play = version.game.g_p;
+            let final_game_play = [...game_play];
+            let games_bank = version.game.g_b;
+            let final_games_bank = [];
+
+            if (game_play.length === 0)  throw 'err';
+            let random_from = version.game.r;
+            for (let i=0; i<game_play.length; i++){
+                if (game_play[i] === 'null'){
+                    if (random_from.length === 0) throw 'err';
+                    let rnd_index = Math.floor(Math.random() * random_from.length);
+                    const rnd_game = random_from[rnd_index];
+                    final_game_play[i] = rnd_game;
+                }
+            }
+
+            const games_indexes = Array.from(new Set(final_game_play));
+            for (let i=0; i<games_indexes.length; i++){
+                final_games_bank.push({
+                    g_i: games_indexes[i],
+                    g_s: games_bank[games_indexes[i]]
+                })
+            }
+            if (!final_games_bank.length || !final_game_play.length)
+                throw 'err';
+
+            version.game.g_b = final_games_bank;
+            version.game.g_p = final_game_play;
+            delete version.game.r;
+            version.error = false;
+            // version.game.stories = version.game.stories[active_story];
+        }
+        catch (e) {
+            version.error = true;
+            // version.game.stories = null;
+        }
+        // if (!version.game.stories)
+        //     version.game.stories = null;
+
+        return version;
+    }
     else if (exp === 'QueenGarden'){
         let version = {...Version};
         try {
