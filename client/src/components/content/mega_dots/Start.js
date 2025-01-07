@@ -1123,7 +1123,7 @@ class GameMessages extends React.Component {
     }
 
     render() {
-
+        
         return (
             <div
                 className='pg-game-intro'
@@ -1135,16 +1135,7 @@ class GameMessages extends React.Component {
                 </div>
 
                 <div className="pg-gi-btn">
-                    <button
-                        className='pg-game-btn'
-                        style={{
-                            marginRight: 10,
-                            marginLeft:10,
-                        }}
-                        onClick={() => this.props.Forward('UserRequestToQuit')}
-                    >
-                        Quit
-                    </button>
+                    
 
                     {
                         this.state.page_index > 0 && (
