@@ -229,6 +229,8 @@ const getRedirectTo = asyncHandler(async (req, res) => {
         version = version['_doc'];
 
         if (version) {
+            version.general.redirect_to += "&userID="+user_id;
+            console.log("Final redirect link:" + version.general.redirect_to)
             res.json({rdc: version.general.redirect_to});
         } else {
             res.status(404);
