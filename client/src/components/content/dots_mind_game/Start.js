@@ -6,9 +6,10 @@ import WaitForAction2 from "../../screens/waitForAction/wait_for_action2";
 import './gameStyles.css';
 import './messages.css';
 
-import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
+import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import MathQuestion from '../../../common/MathQuestion';
 import { CURRENT_URL } from "../../../utils/current_url";
+import FoodPreference from './FoodPreference';
 
 const ThisExperiment = 'DotsMindGame';
 let UserId = null;
@@ -18,8 +19,10 @@ let PaymentsSettings = null;
 let GameSet = {};
 let NumberOfRoundsTotal = 0;
 let GamesErrors = [], GamesPayoff = [];
+let GameCondition = null;
 
 let GAME_ORDER = [];
+let isPractice = true;
 
 const CM_TO_PX = 37.7952755906;
 // trial is profit side -> more profit side  || Not profit side -> more not profit side
@@ -192,7 +195,6 @@ class DrawPoints extends React.Component {
     }
 
     render() {
-        console.log("---> 111 render")
         return (
             <svg
                 className='pg-points-canvas center-screen'
@@ -231,6 +233,7 @@ class DrawPoints extends React.Component {
 }
 
 const PointsPage = ({ Forward, dots }) => {
+    console.log("---> PointsPage()")
     const callback = () => {
         setTimeout(() => {
             Forward();
@@ -312,8 +315,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
     // }
 
     const step1_msg = btn_side => (<>
-        More to the<br />
-        {btn_side}<br />
+        The {btn_side} section<br />
         ({getPointLabel(containerProps.buttons[btn_side], true)})
     </>);
 
@@ -336,12 +338,28 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                 backgroundColor: containerProps.backgroundColor
             }}
         >
+            {/* Existing header */}
             <label
                 className='pg_bp-inspection'
                 style={{ visibility: containerProps.head_show ? 'visible' : 'hidden' }}
             >
                 {containerProps.head_label}
             </label>
+
+            {/* Conditional rendering for practice round message */}
+
+
+            {/* Main question label */}
+            {isPractice && (
+                <div style={{ textAlign: "center", fontSize: "36px", color: "red", fontWeight: "bold", marginBottom: "10px" }}>
+                    <label>This is practice round</label>
+                </div>
+            )}
+            <div style={{ textAlign: "center", fontSize: "36px" }}>
+                <label>Which section contained more red dots?</label>
+            </div>
+
+            {/* Buttons */}
             <div>
                 {
                     ['left', 'right'].map(
@@ -361,25 +379,25 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                 }
             </div>
 
+            {/* Space bar instruction */}
             <label
                 className='pg_bp-space_bar'
                 style={{ visibility: showSpaceBarLbl ? 'visible' : 'hidden' }}
             >
                 {showSpaceBarLbl ? 'To continue press on space-bar' : '------'}
             </label>
-
         </div>
-    )
+    );
+
 };
 
 const FinishGamePage = ({ Forward }) => {
 
     return (
-        <div className='pg_fbp center-screen msg_container'>
-            <label>
-                Game finish
-            </label>
-
+        <div className='pg-game-intro'>
+            <b>You completed the dots game</b><br />
+            You will now be asked to complete a food preference survey.
+            You cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
             <button onClick={Forward}>Next</button>
         </div>
     )
@@ -406,6 +424,8 @@ class Game extends React.Component {
         this.sendPartToDb = this.sendPartToDb.bind(this);
         this.getCurrentDots = this.getCurrentDots.bind(this);
         this.onClickBtn = this.onClickBtn.bind(this);
+        this.insertGameLine = this.insertGameLine.bind(this)
+        this.sendGameDataToDB = this.sendGameDataToDB.bind(this)
 
         this.game_order = 0;
         this.game_data = [];
@@ -415,6 +435,15 @@ class Game extends React.Component {
         this.current_game_trials = null;
 
         this.resetGameData();
+    }
+    insertGameLine = (db_row) => {
+        console.log("---> setting insertGameLine to:" + this.props.insertGameLine)
+        this.props.insertGameLine(db_row);
+    }
+
+    sendGameDataToDB = (db_row) => {
+        console.log("---> setting sendGameDataToDB to:" + this.props.sendGameDataToDB)
+        this.props.sendGameDataToDB(db_row);
     }
 
     resetGameData() {
@@ -645,24 +674,26 @@ class Game extends React.Component {
         else
             return { is_busted, inspection, buttons };
     }
-
     render() {
-        console.log("---> 222 render")
         if (this.state.isLoading) return <WaitForAction2 />;
 
         const { step } = this.state;
+        console.log("---> step=" + step);
 
         return (
             <>
+                {/* Display "This is practice round" message only if in practice mode */}
+                {this.GamePart === 'Practice' && (
+                    <div style={{ color: 'red', fontWeight: 'bold', textAlign: 'center', marginBottom: '10px' }}>
+                        This is practice round
+                    </div>
+                )}
+
                 {step === 0 && (
-                    <PlusPage
-                        Forward={this.nextStep} />
+                    <PlusPage Forward={this.nextStep} />
                 )}
                 {step === 1 && (
-                    <PointsPage
-                        Forward={this.nextStep}
-                        dots={this.getCurrentDots()}
-                    />
+                    <PointsPage Forward={this.nextStep} dots={this.getCurrentDots()} />
                 )}
                 {step === 2 && (
                     <ButtonPage
@@ -673,21 +704,25 @@ class Game extends React.Component {
                     />
                 )}
                 {step === 3 && (
-                    <FinishGamePage
+                    <FoodPreference
+                        GameCondition={GameCondition}
+                        insertGameLine={this.insertGameLine}
+                        sendGameDataToDB={this.sendGameDataToDB}
                         Forward={this.nextStep}
                     />
                 )}
+                {step === 4 && (
+                    <FinishGamePage Forward={this.nextStep} />
+                )}
 
-                {
-                    this.state.debugger_props && (
-                        <DebuggerItem
-                            debugger_props={this.state.debugger_props}
-                        />
-                    )
-                }
+                {this.state.debugger_props && (
+                    <DebuggerItem debugger_props={this.state.debugger_props} />
+                )}
             </>
         );
     }
+
+
 }
 
 const convertRgb = rgb_obj => {
@@ -699,9 +734,23 @@ class Start extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
+        let RunCounter = KeyTableID();
         console.log()
         ResetAll();
-
+        let cond = props.game_settings.game.cond;
+        if (cond === 'o') {
+            GameCondition = 'OneShot';
+        } else if (cond === 'r') {
+            GameCondition = 'Repeated';
+        } else if (cond === 'rand') {
+            // Randomly decide between OneShot and Repeated
+            let rnd = Math.floor(Math.random() * 2);
+            GameCondition = rnd ? 'OneShot' : 'Repeated';
+        } else if (cond === 'u_d') {
+            // Use uniform distribution for deciding condition
+            GameCondition = RunCounter % 2 ? 'OneShot' : 'Repeated';
+        }
+        console.log("---> GameCondition=" + GameCondition)
         UserId = props.user_id;
         RunningName = props.running_name;
         DebugMode = props.dmr;
@@ -734,6 +783,7 @@ class Start extends React.Component {
             error: game_error,
             mathAnsweredCorrectly: false,
             showError: false,
+
         };
 
         this.game_template = null;
@@ -754,14 +804,15 @@ class Start extends React.Component {
             console.log("====> initGameOrder game=" + game)
             GAME_ORDER.push(game);
             const { a_p, a_n_p, c_p, c_n_p } = game.g_s.t;
-            const total_t = a_p + a_n_p + c_p + c_n_p;
+            //  const total_t = a_p + a_n_p + c_p + c_n_p;
+            const total_t = 5;
             NumberOfRoundsTotal += total_t;
         }
         while (GameSet.games_play.length);
 
         if (GameSet.practice) {
             const first_game = JSON.parse(JSON.stringify(GAME_ORDER[0]));
-
+            const practice_clear_profit = 1, practice_clear_not_profit = 2;
             let practice_game_set = {
                 g_i: '-1',
                 g_s: {
@@ -773,7 +824,7 @@ class Start extends React.Component {
                         f: first_game.g_s.g.f
                     },
                     pr: first_game.g_s.pr,
-                    t: { a_p: 0, a_n_p: 0, c_p: 1, c_n_p: 2 }
+                    t: { a_p: 0, a_n_p: 0, c_p: practice_clear_profit, c_n_p: practice_clear_not_profit }
                 }
             };
 
@@ -820,7 +871,7 @@ class Start extends React.Component {
                 insertTextInput: this.props.insertTextInput,
             }
         });
-
+        console.log("---> Pushing PracticeGame page=START")
         if (GameSet.practice) {
             game_template.push({
                 Component: PracticeGame,
@@ -828,15 +879,21 @@ class Start extends React.Component {
                     page: 'START',
                 }
             });
+            console.log("---> Pushing Game pPart=Practice")
             game_template.push({
                 Component: Game,
                 Props: {
-                    // sendGameDataToDB: this.props.sendGameDataToDB,
-                    // insertGameArray: this.props.insertGameArray,
-                    Part: 'Practice'
+                    sendGameDataToDB: this.props.sendGameDataToDB,
+                    insertGameArray: this.props.insertGameArray,
+                    Part: 'Practice',
+                    insertGameLine: this.props.insertGameLine,
+                    sendDataToDB: this.props.sendGameDataToDB
                 }
 
             });
+
+            console.log("---> Pushing PracticeGame page=END")
+
             game_template.push({
                 Component: PracticeGame,
                 Props: {
@@ -851,6 +908,8 @@ class Start extends React.Component {
             Props: {
                 sendGameDataToDB: this.props.sendGameDataToDB,
                 insertGameArray: this.props.insertGameArray,
+                insertGameLine: this.props.insertGameLine,
+                sendDataToDB: this.props.sendGameDataToDB,
                 Part: 'Real'
             }
 
@@ -863,6 +922,10 @@ class Start extends React.Component {
             isLoading: false,
         })
     }
+    insertGameLine = (db_row) => {
+        this.props.insertGameLine(db_row);
+    }
+
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
         console.log("-----> in handleMathQuestionAnswer()")
@@ -971,12 +1034,19 @@ Start.propTypes = {
 export default Start;
 
 const PracticeGame = ({ page, Forward }) => {
-
+   isPractice = page === 'START' ? true : false
     return (
         <div
             className='pg_-gw center-screen msg_container'
         >
-            <label>{page === 'START' ? 'Practice game' : 'End practice'}</label>
+            <label
+                dangerouslySetInnerHTML={{
+                    __html: page === 'START'
+                        ? 'Start practice'
+                        : `Practice is over.<br/>You will now play ${GameCondition === "OneShot" ? "one round" : "40 rounds"
+                        } of the dots game for real bonus.<br/><u>Remember: Your bonus depends on the points you earn in this round.</u>`
+                }}
+            ></label>
             <button onClick={Forward} className=''>Next</button>
         </div>
     )
@@ -993,11 +1063,12 @@ class GameMessages extends React.Component {
         this.Page4 = this.Page4.bind(this);
         this.Page5 = this.Page5.bind(this);
         this.Page6 = this.Page6.bind(this);
+        this.Page7 = this.Page7.bind(this);
         this.buttonCallback = this.buttonCallback.bind(this);
 
         this.fine = false;
 
-        this.pages = [this.Page0, this.Page1, this.Page2, this.Page3, this.Page4, this.Page5, this.Page6];
+        this.pages = [this.Page0, this.Page1, this.Page2, this.Page3, this.Page4, this.Page5, this.Page6, this.Page7];
 
         this.state = {
             page_index: 0,
@@ -1015,16 +1086,16 @@ class GameMessages extends React.Component {
                 In the first part, you will play the dots game and can win a bonus based<br />
                 on your performance. In the second part, you will fill out a food preference survey with no bonus.
                 <br /><br />
-                Note that you should not leave or stop responding until you have completed the entire study.
+                Note that you should not leave or stop responding until you have completed the entire study and have received your completion code. If you leave or stop responding before completing the two parts, you will not receive compensation.
+
+
             </div>
         );
     };
 
     Page1 = () => {
         return (
-            <div
-                className='pg-gw-page2'
-            >
+            <div>
                 <div
                     className='pg-gw-p2-r1'
                 >
@@ -1116,30 +1187,56 @@ class GameMessages extends React.Component {
     };
 
     Page2 = () => {
-        let points1_msg = '', points2_msg = '';
+        let points1_msg = '# points', points2_msg = '# points';
+        console.log("-------> GameCondition=" + GameCondition);
+
+        // Define the instructional text based on GameCondition
+        let instructionText = GameCondition === "OneShot" ?
+            `            Many people find it easier to identify when the ${GameSet.profit_side} section of the rectangle contains more dots. 
+            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points1_msg}, 
+            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points2_msg}.
+            
+            These rewards are independent of whether your answer is correct or not. Your task is to be 
+            as accurate as possible while also trying to earn points.
+            The points you earn will be converted into a bonus payment at the end of the experiment, 
+            with a conversion rate of 10 points = 1 £.
+            To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the 
+            comment box below. If you type anything else, we will know that you did not fully read the instructions.
+            
+            In addition to your potential bonus, you will receive 1 £ for participating in this study.`
+            : `            Many people find it easier to identify when the ${GameSet.profit_side} section of the rectangle contains more dots. 
+            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points1_msg}, 
+            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points2_msg}.
+            
+            These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points.
+            At the end of the study, the computer will randomly select one round of the dots game.
+            The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 £.
+            To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, 
+            we will know that you did not fully read the instructions.
+            
+            In addition to your potential bonus, you will receive 1 £ for participating in this study.`;
+
+        // console.log("-------> instructionText="+instructionText);
 
         return (
             <div>
                 <span><h1>Earning points</h1></span>
-                Many people find it easier to identify when the {GameSet.profit_side} section of the rectangle contains more dots. Therefore, selecting "There are more dots on the {GameSet.profit_side} section of the rectangle" will earn you {points1_msg}, whereas choosing "There are more dots on the {GameSet.not_profit_side} section of the rectangle" will earn you {points2_msg}.
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
-                In addition to your potential bonus, you will receive 1 £ for participating in this study.
-                <br />
-                <br />
+                <p>{instructionText}</p>
                 <u>Comments:</u><br />
                 <textarea
                     onChange={e => this.props.insertTextInput('TextInput', e.target.value)}
                     style={{
-                        border: '1px solid lightgray',  // Light gray thin border
-                        padding: '8px',  // Add padding for better appearance
-                        width: '50%',   // Optional: make it full width
-                        fontSize: '16px', // Optional: improve readability
-                        borderRadius: '4px' // Optional: Slightly rounded corners for a soft look
+                        border: '1px solid lightgray',
+                        padding: '8px',
+                        width: '50%',
+                        fontSize: '16px',
+                        borderRadius: '4px'
                     }}
                 />
             </div>
         );
     };
+
 
     Page3 = () => {
         return (
@@ -1153,15 +1250,30 @@ class GameMessages extends React.Component {
     Page4 = () => {
         return (
             <div>
-                <h2>The month after February is March.</h2>
-                
+                <h2>To ensure you understood the instructions, please answer the following questions:</h2>
+                <br />
+                <br />
+                <h2><b>Your task is to tell us which section you think includes more dots.</b></h2>
+                <br />
+
                 {/* True and False buttons */}
                 <div>
-                    <button onClick={() => this.handleAnswer(true)} style={{ marginRight: '10px' }}>True</button>
-                    <button onClick={() => this.handleAnswer(false)}>False</button>
+                    <button
+                        onClick={() => this.handleAnswer(true, "Correct! your task is to estimate which section includes more dots.")}
+                        className="true-false-button"
+                    >
+                        True
+                    </button>
+                    <button
+                        onClick={() => this.handleAnswer(false, "Wrong! Your task is to estimate which section includes more dots.")}
+                        className="true-false-button"
+                    >
+                        False
+                    </button>
                 </div>
 
                 {/* Feedback message */}
+                <br />
                 <p>{this.state.feedbackMessage}</p>
 
                 {/* Conditional rendering of Next button */}
@@ -1177,15 +1289,27 @@ class GameMessages extends React.Component {
     Page5 = () => {
         return (
             <div>
-                <h2>In winter it is cold while in summer it is hot.</h2>
-                
+                <h2><b>Incorrect answers in the dots game can lead to rejection of your submission.</b></h2>
+                <br />
+
                 {/* True and False buttons */}
                 <div>
-                    <button onClick={() => this.handleAnswer(true)} style={{ marginRight: '10px' }}>True</button>
-                    <button onClick={() => this.handleAnswer(false)}>False</button>
+                    <button
+                        onClick={() => this.handleAnswer(true, "Wrong! Your submission will be rejected only if you do not complete the study. Incorrect answers in the dots game do not affect the status of your submission and will not lead to rejection.")}
+                        className="true-false-button"
+                    >
+                        True
+                    </button>
+                    <button
+                        onClick={() => this.handleAnswer(false, "Correct! Your submission will be rejected only if you do not complete the study. Incorrect answers in the dots game do not affect the status of your submission and will not lead to rejection.")}
+                        className="true-false-button"
+                    >
+                        False
+                    </button>
                 </div>
 
                 {/* Feedback message */}
+                <br />
                 <p>{this.state.feedbackMessage}</p>
 
                 {/* Conditional rendering of Next button */}
@@ -1197,18 +1321,33 @@ class GameMessages extends React.Component {
             </div>
         );
     };
+
     Page6 = () => {
+        let page6Message = GameCondition == "OneShot" ? "If you earn 10 points in the game, you will receive a 1£ bonus." : "If the computer randomly selects a round where you earned 10 points, you will receive a 1£ bonus.";
+
         return (
             <div>
-                <h2>7 is bigger than 9.</h2>
-                
+                <h2><b>{page6Message}</b></h2>
+                <br />
+
                 {/* True and False buttons */}
                 <div>
-                    <button onClick={() => this.handleAnswer(false)} style={{ marginRight: '10px' }}>True</button>
-                    <button onClick={() => this.handleAnswer(true)}>False</button>
+                    <button
+                        onClick={() => this.handleAnswer(true, "Correct! The conversion rate is 10 points=1£, so if you earn 10 points, you will receive a 1£ bonus.")}
+                        className="true-false-button"
+                    >
+                        True
+                    </button>
+                    <button
+                        onClick={() => this.handleAnswer(false, "Wrong! Recall that the conversion rate is 10 points=1£. Thus if you earn 10 points, you will receive a 1£ bonus.")}
+                        className="true-false-button"
+                    >
+                        False
+                    </button>
                 </div>
 
                 {/* Feedback message */}
+                <br />
                 <p>{this.state.feedbackMessage}</p>
 
                 {/* Conditional rendering of Next button */}
@@ -1220,12 +1359,20 @@ class GameMessages extends React.Component {
             </div>
         );
     };
+    Page7 = () => {
+        return (
+            <div>
+                Let’s try it out!<br />
+                You will now go through 9 practice rounds of the dots game.The goal of the practice rounds is to help you understand the game.You will not earn any bonus in these rounds, and your answers will not be recorded.You will be notified when the practice is over and the real game begins.
+            </div>
+        );
+    };
 
-    handleAnswer = (isCorrect) => {
+    handleAnswer = (isCorrect, feedback) => {
         if (isCorrect) {
-            this.setState({ feedbackMessage: "You are right", showNext: true });
+            this.setState({ feedbackMessage: feedback, showNext: true });
         } else {
-            this.setState({ feedbackMessage: "You are wrong", showNext: false });
+            this.setState({ feedbackMessage: feedback, showNext: true });
         }
     };
 
@@ -1245,7 +1392,7 @@ class GameMessages extends React.Component {
     }
 
     render() {
-        console.log("---> this.state.page_index="+this.state.page_index+"  this.pages.length="+this.pages.length)
+        console.log("---> this.state.page_index=" + this.state.page_index + "  this.pages.length=" + this.pages.length)
         return (
             <div className='pg-game-intro'>
                 <div className="pg-gi-message-box">
@@ -1254,7 +1401,7 @@ class GameMessages extends React.Component {
 
                 {/* Navigation buttons */}
                 <div className="pg-gi-btn">
-                    {(this.state.page_index > 1 && this.state.page_index<4) && (
+                    {(this.state.page_index > 1 && this.state.page_index < 4) && (
                         <button
                             className='pg-game-btn'
                             style={{ marginRight: 10, marginLeft: 10 }}
@@ -1263,14 +1410,14 @@ class GameMessages extends React.Component {
                             Go Back
                         </button>
                     )}
-                    
+
                     {/* Hide Next button in Page4 until correct answer is clicked */}
-                    {this.state.page_index !== 4 &&  this.state.page_index !== 5 &&  this.state.page_index !== 6 && (
+                    {this.state.page_index !== 4 && this.state.page_index !== 5 && this.state.page_index !== 6 && (
                         <button
                             className='pg-game-btn'
                             onClick={() => this.buttonCallback('NEXT')}
                         >
-                            {this.state.page_index === this.pages.length - 1 ? 'Start Game' : 'NEXT2'}
+                            {this.state.page_index === this.pages.length ? 'Start Game' : 'NEXT'}
                         </button>
                     )}
                 </div>
