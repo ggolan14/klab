@@ -423,6 +423,7 @@ const defaultVersions = {
         last_modified: '-',
         date_modified: '-',
         game: {
+            cond: 'o',
             force_full_screen: "true",
             p_t: 100, // plus_time
             d_t: 100, // dots_time

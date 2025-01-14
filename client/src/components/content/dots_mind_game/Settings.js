@@ -5,6 +5,8 @@ import {convertPointsRatio} from "../../screens/settings/settings";
 import './pogStyles.css';
 import ColorPicker from "../../layout/colorPicker/color_picker";
 
+let GameCondition = null;
+
 const Colors = ({settings, changeSettings, label, attr}) => {
     return (
         <div className='t-o-g-u_set_m-s_kv'>
@@ -1179,6 +1181,36 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
     ];
 
     const game_elements = [
+        {
+            type: 'Select',
+            label: 'Condition:',
+            show: true,
+            options: [
+                {
+                    value: 'o',
+                    label: 'One Shot'
+                },
+                {
+                    value: 'r',
+                    label: 'Repeated'
+                },
+                {
+                    value: 'u_d',
+                    label: 'Uniform distribution'
+                },
+                {
+                    value: 'rand',
+                    label: 'Random'
+                },
+            ],
+            value: game_settings.game.cond,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'cond',
+                value,
+            })
+        },
         {
             type: 'Select',
             label: 'Force full screen:',
