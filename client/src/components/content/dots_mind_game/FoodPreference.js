@@ -1,115 +1,138 @@
 import React, { Component } from 'react';
-
-const DIETARY_PREFRENCES_QUESTION = "Which of the following options best describes your dietary preferences?";
-const NON_ROBOT_QUESTIO = "What is your favorite breakfast food?";
+import foodQuestions from './food_questions.json';
 
 class FoodPreference extends Component {
     constructor(props) {
         super(props);
-        console.log("----> in FoodPreference constructor")
         this.state = {
-            currentStep: 1,
-            selectedOption: '',
-            nonRobotAnswer: ''
+            currentQuestionIndex: 0,
+            answers: Array(foodQuestions.length + 1).fill(null), // Extra slot for open question
+            showWelcomePage: true,
+            showOpenQuestion: false,
+            openAnswer: ""
         };
     }
-    handleNext = () => {
-        this.setState({ currentStep: 2 });
+
+    startSurvey = () => {
+        this.setState({ showWelcomePage: false });
     };
-    handleSubmit = () => {
-        const { selectedOption, nonRobotAnswer } = this.state;
-        
-        if (!selectedOption || !nonRobotAnswer) return; // Ensure values exist
-    
-        const db_row1 = {
-            QuestionIndex: 13,
-            QuestionType: "FoodPreference",
-            Question:DIETARY_PREFRENCES_QUESTION,
-            Answer: selectedOption,
-            GameCondition: "Repeated"
-        };
-    
-        const db_row2 = {
-            QuestionIndex: 14,
-            QuestionType: "FoodPreference",
-            Question:NON_ROBOT_QUESTIO,
-            Answer: nonRobotAnswer,
-            GameCondition: "Repeated"
-        };
-    
-        this.props.insertGameLine(db_row1);
-        this.props.insertGameLine(db_row2);
-    
-        // Ensure sendGameDataToDB is executed, then move forward
-        if (typeof this.props.sendGameDataToDB === "function") {
-            const result = this.props.sendGameDataToDB(true);
-            
-            if (result && typeof result.then === "function") {
-                // If sendGameDataToDB returns a promise, wait for it to complete
-                result.then(() => {
-                    this.props.Forward(); // Move to next step (step 4)
-                }).catch((error) => {
-                    console.error("Error sending game data to DB:", error);
-                    this.props.Forward(); // Proceed even if there was an error
-                });
-            } else {
-                // If sendGameDataToDB is not a promise, call Forward immediately
-                this.props.Forward();
-            }
-        } else {
-            console.warn("sendGameDataToDB is not a function");
-            this.props.Forward();
+
+    insertLine = () => {
+        const { currentQuestionIndex, answers } = this.state;
+        if (currentQuestionIndex >= answers.length || answers[currentQuestionIndex] === null) {
+            return;
         }
-    };
-    
 
-    handleOptionChange = (e) => {
-        this.setState({ selectedOption: e.target.value });
+        const currentQuestion = foodQuestions[currentQuestionIndex];
+        const answer = currentQuestionIndex < foodQuestions.length ? answers[currentQuestionIndex] + 1 : answers[currentQuestionIndex];
+
+        console.log(`---> answer=${answer}`);
+
+        const db_row = {
+            QuestionIndex: currentQuestionIndex,
+            QuestionType: currentQuestionIndex < foodQuestions.length ? "FoodPreference" : "OpenEnded",
+            Answer: answer,
+            TotalYesAnswers: "N/A",
+            TotalNoAnswers: "N/A",
+            GameCondition: this.props.GameCondition,
+            HaveAnAnswerTime: "N/A",
+            ConfirmationTime: "N/A",
+        };
+
+        this.props.insertGameLine(db_row);
+        console.log(`Saving to database: Question - ${currentQuestionIndex < foodQuestions.length ? currentQuestion.question : "Open Question"}, Answer - ${answer}`);
     };
 
-    handleTextChange = (e) => {
-        this.setState({ nonRobotAnswer: e.target.value });
+    handleNextQuestion = () => {
+        this.insertLine();
+
+        this.setState((prevState) => {
+            if (this.props.GameCondition === "Repeated" || prevState.currentQuestionIndex === foodQuestions.length - 1) {
+                return { showOpenQuestion: true, currentQuestionIndex: foodQuestions.length };
+            }
+            return { currentQuestionIndex: prevState.currentQuestionIndex + 1 };
+        });
+    };
+
+    handleOpenAnswerChange = (event) => {
+        this.setState({ openAnswer: event.target.value });
+    };
+
+    handleSubmitOpenQuestion = () => {
+        const { openAnswer, answers } = this.state;
+        const updatedAnswers = [...answers];
+        updatedAnswers[foodQuestions.length] = openAnswer; // Save open answer
+
+        this.setState({ answers: updatedAnswers }, () => {
+            console.log(`Open question answer: ${this.state.openAnswer}`);
+            this.insertLine(); // Save open question to DB
+            this.props.sendGameDataToDB(true);
+            this.props.Forward();
+        });
+    };
+
+    handleAnswerSelection = (questionIndex, index) => {
+        const newAnswers = [...this.state.answers];
+        newAnswers[questionIndex] = index;
+        this.setState({ answers: newAnswers });
     };
 
     render() {
-        const { currentStep, selectedOption, nonRobotAnswer } = this.state;
+        if (this.state.showWelcomePage) {
+            return (
+                <div className="trivia-container">
+                    <h2>Welcome to the food preference survey</h2>
+                    <p>In this survey, you will be asked {this.props.GameCondition == "Repeated" ? 2 : 41} questions about your food preferences.<br />
+                        Please answer the {this.props.GameCondition == "Repeated" ? 2 : 41} questions according to your actual preferences.
+                    </p>
+                    <button onClick={this.startSurvey}>Next</button>
+                </div>
+            );
+        }
+
+        if (this.state.showOpenQuestion) {
+            return (
+                <div className="trivia-container">
+                    <h3>Please provide additional comments about your food preferences:</h3>
+                    <textarea
+                        style={{ border: '1px solid #ccc' }}
+                        value={this.state.openAnswer}
+                        onChange={this.handleOpenAnswerChange}
+                        rows="4"
+                        cols="50"
+                    />
+                    <button onClick={this.handleSubmitOpenQuestion} disabled={!this.state.openAnswer.trim()}>Submit</button>
+                </div>
+            );
+        }
+
+        const { currentQuestionIndex } = this.state;
+        const currentQuestion = foodQuestions[currentQuestionIndex];
+        const isNextDisabled = this.state.answers[currentQuestionIndex] === null;
 
         return (
             <div className="trivia-container">
-                {currentStep === 1 && (
-                    <div>
-                        <p>Which of the following options best describes your dietary preferences?</p>
-                        <div onChange={this.handleOptionChange}>
-                            <label><input type="radio" name="diet" value="1" checked={selectedOption === '1'} /> Omnivorous (can eat everything)</label><br />
-                            <label><input type="radio" name="diet" value="2" checked={selectedOption === '2'} /> Vegetarian (do not eat meat or seafood)</label><br />
-                            <label><input type="radio" name="diet" value="3" checked={selectedOption === '3'} /> Pescatarian (eat seafood but not meat)</label><br />
-                            <label><input type="radio" name="diet" value="4" checked={selectedOption === '4'} /> Flexitarian (mostly vegetarian but occasionally eat meat or seafood)</label><br />
-                            <label><input type="radio" name="diet" value="5" checked={selectedOption === '5'} /> Vegan (do not eat meat, seafood, or any animal product)</label><br />
-                            <label><input type="radio" name="diet" value="6" checked={selectedOption === '6'} /> Mostly vegan (do not eat meat or seafood, but occasionally eat eggs or milk)</label>
-                        </div>
-                        <button disabled={!selectedOption} onClick={this.handleNext}>Next</button>
-                    </div>
-                )}
-
-                {currentStep === 2 && (
-                    <div>
-                        <p>What is your favorite breakfast food?</p>
-                        <textarea
-                            value={nonRobotAnswer}
-                            onChange={this.handleTextChange}
-                            style={{
-                                width: '100%',
-                                height: '100px',
-                                border: '2px solid lightgray',
-                                borderRadius: '4px',
-                                padding: '10px',
-                            }}
-                            placeholder="Enter your answer here"
-                        />
-                        <br /><br />
-                        <button disabled={!nonRobotAnswer} onClick={this.handleSubmit}>Submit</button>
-                    </div>
-                )}
+                <h3>{currentQuestion.question}</h3>
+                <ul>
+                    {currentQuestion.choices.map((choice, index) => (
+                        <li key={index}>
+                            <label style={{ display: 'flex', alignItems: 'center' }}>
+                                <input
+                                    type="radio"
+                                    name={`choice_${currentQuestionIndex}`}
+                                    value={index}
+                                    checked={this.state.answers[currentQuestionIndex] === index}
+                                    onChange={() => this.handleAnswerSelection(currentQuestionIndex, index)}
+                                    style={{ marginRight: '10px' }}
+                                />
+                                {choice}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+                <button onClick={this.handleNextQuestion} disabled={isNextDisabled}>
+                    {currentQuestionIndex === foodQuestions.length - 1 ? 'Next' : 'Next'}
+                </button>
             </div>
         );
     }

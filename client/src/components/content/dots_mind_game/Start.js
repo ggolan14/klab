@@ -27,6 +27,20 @@ let isPractice = true;
 const CM_TO_PX = 37.7952755906;
 // trial is profit side -> more profit side  || Not profit side -> more not profit side
 
+const completedDotsMindGame = (
+    <span>
+        <b>You completed the dots game</b>
+        <br></br>
+        You will now be asked to complete a food preference survey.
+        <br></br>
+        You cannot leave or stop responding until you have completed the entire study and have received your completion code,
+        <br></br>
+        or else you will not receive compensation.
+
+        <br />
+    </span>
+);
+
 const ResetAll = () => {
     UserId = 'empty';
     RunningName = '-';
@@ -464,9 +478,16 @@ class Game extends React.Component {
         const game_set = game.g_s;
         const general_set = game_set.g;
         const profitable_set = game_set.pr;
-        const trials_set = game_set.t;
+        const one_shot_set = {a_p:1 , a_n_p:1 , c_p:1 , c_n_p:1}
+        const practice_set = {a_p:1 , a_n_p:1 , c_p:1 , c_n_p:1}
+        let trials_set = null;
+        if(this.GamePart=="Real"){
+            trials_set= (GameCondition=="OneShot") ? one_shot_set : game_set.t;
+        }else{
+            trials_set= practice_set;
+        }
+        console.log("==========>  trials_set = ",trials_set)
         const dots_set = game_set.d;
-
         this.current_game = {
             game_index: +game.g_i + 1,
             label: general_set.l,
@@ -561,7 +582,7 @@ class Game extends React.Component {
 
     nextStep() {
         let sc = this.state;
-        if (sc.step === 3) {
+        if (sc.step === 4) {
             if (!GameSet.games_play.length) {
                 return this.props.Forward();
             }
@@ -682,6 +703,7 @@ class Game extends React.Component {
 
         return (
             <>
+
                 {/* Display "This is practice round" message only if in practice mode */}
                 {this.GamePart === 'Practice' && (
                     <div style={{ color: 'red', fontWeight: 'bold', textAlign: 'center', marginBottom: '10px' }}>
@@ -704,6 +726,19 @@ class Game extends React.Component {
                     />
                 )}
                 {step === 3 && (
+                    <div className="pg-game-intro">
+
+                        {/* Display the current message */}
+                        <p className="survey-text">
+                            {completedDotsMindGame}
+                        </p>
+                        {/* Show "Next" button if not the last message */}
+                        <button className='ame-btnpg-g' onClick={this.nextStep}>Next</button>
+                        
+
+                    </div>
+                )}
+                {step === 4 && (
                     <FoodPreference
                         GameCondition={GameCondition}
                         insertGameLine={this.insertGameLine}
@@ -711,7 +746,7 @@ class Game extends React.Component {
                         Forward={this.nextStep}
                     />
                 )}
-                {step === 4 && (
+                {step === 5 && (
                     <FinishGamePage Forward={this.nextStep} />
                 )}
 
@@ -1274,7 +1309,14 @@ class GameMessages extends React.Component {
 
                 {/* Feedback message */}
                 <br />
-                <p>{this.state.feedbackMessage}</p>
+                <p
+                    style={{
+                        color: this.state.feedbackMessage.startsWith("Wrong") ? "red" :
+                            this.state.feedbackMessage.startsWith("Correct") ? "green" : "black"
+                    }}
+                >
+                    {this.state.feedbackMessage}
+                </p>
 
                 {/* Conditional rendering of Next button */}
                 {this.state.showNext && (
@@ -1310,7 +1352,14 @@ class GameMessages extends React.Component {
 
                 {/* Feedback message */}
                 <br />
-                <p>{this.state.feedbackMessage}</p>
+                <p
+                    style={{
+                        color: this.state.feedbackMessage.startsWith("Wrong") ? "red" :
+                            this.state.feedbackMessage.startsWith("Correct") ? "green" : "black"
+                    }}
+                >
+                    {this.state.feedbackMessage}
+                </p>
 
                 {/* Conditional rendering of Next button */}
                 {this.state.showNext && (
@@ -1348,7 +1397,14 @@ class GameMessages extends React.Component {
 
                 {/* Feedback message */}
                 <br />
-                <p>{this.state.feedbackMessage}</p>
+                <p
+                    style={{
+                        color: this.state.feedbackMessage.startsWith("Wrong") ? "red" :
+                            this.state.feedbackMessage.startsWith("Correct") ? "green" : "black"
+                    }}
+                >
+                    {this.state.feedbackMessage}
+                </p>
 
                 {/* Conditional rendering of Next button */}
                 {this.state.showNext && (
@@ -1392,8 +1448,11 @@ class GameMessages extends React.Component {
     }
 
     render() {
+
         console.log("---> this.state.page_index=" + this.state.page_index + "  this.pages.length=" + this.pages.length)
+        
         return (
+            
             <div className='pg-game-intro'>
                 <div className="pg-gi-message-box">
                     {this.pages[this.state.page_index]()}
