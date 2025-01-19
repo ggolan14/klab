@@ -465,13 +465,6 @@ class Game extends React.Component {
         this.game_data = [];
         this.game_errors = 0;
         this.game_payoff = 0;
-        // let next_game_index = 0;
-        // if (GameSet.random_games_order)
-        //     next_game_index = Math.floor(Math.random() * GameSet.games_play.length);
-        //
-        // const current_game_index = GameSet.games_play[next_game_index];
-        // GameSet.games_play = GameSet.games_play.filter((a, i) => i !== next_game_index);
-        // const game = GameSet.games_bank.find(g => g.g_i === current_game_index);
 
         const game = JSON.parse(JSON.stringify(GAME_ORDER[0]));
         GAME_ORDER.shift();
