@@ -705,11 +705,6 @@ class Game extends React.Component {
             <>
 
                 {/* Display "This is practice round" message only if in practice mode */}
-                {this.GamePart === 'Practice' && (
-                    <div style={{ color: 'red', fontWeight: 'bold', textAlign: 'center', marginBottom: '10px' }}>
-                        This is practice round
-                    </div>
-                )}
 
                 {step === 0 && (
                     <PlusPage Forward={this.nextStep} />
