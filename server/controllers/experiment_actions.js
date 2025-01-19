@@ -228,18 +228,18 @@ const getRedirectTo = asyncHandler(async (req, res) => {
 
         version = version['_doc'];
 
-        if (version) {
+		if (version) {
 			let updatedUrl;
-			if(version.general.redirect_to.includes("XXXXXX")){
+			if(version.general.redirect_to.includes("xxxxxx")){
 				
-				updatedUrl = version.general.redirect_to.replace("XXXXXX", user_id);
-				console.log("xxxxxx was replaced . final url"+updatedUrl +"  user_id="+user_id) 
+				updatedUrl = version.general.redirect_to.replace("xxxxxx", user_id);
+				console.log("xxxxxx was replaced . final url="+updatedUrl +"  user_id="+user_id) 
 			}else{
 				updatedUrl = version.general.redirect_to;
 				console.log("there is no xxxxxxx in the link. . final url"+updatedUrl +"  user_id="+user_id) 
 			}
 		    res.json({rdc: updatedUrl});            
-        } else {
+        }else {
             res.status(404);
             return res.json({error: 'Not found'});
         }
