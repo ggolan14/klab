@@ -1860,13 +1860,10 @@ class GameHandle extends React.Component {
         if (!this.state || this.state.isLoading){
             return <></>;
         }
-        console.log("------> 111 in render this.state.redirect_to="+this.state.redirect_to+"  this.state.redirect_to="+this.state.redirect_to)
         if (this.state.redirect_to !== null && this.state.redirect_to) {
-            console.log("------> 222 in render this.state.redirect_to="+this.state.redirect_to+"  this.state.redirect_to="+this.state.redirect_to)
             OnBeforeUnload(false);
             return window.location = this.state.redirect_to;
         }
-        console.log("------> 333 in render didn't get into redirect_to")
         if ((this.state.redirect_to !== null && !this.state.redirect_to) || this.state.play_error || this.state.user_rejected || (this.state.user_finish_game && this.state.active_settings.mode !== 'Real') || (this.state.user_finish_game && this.state.isAuthenticated)) {
             OnBeforeUnload(false);
             return <PlayError state={this.state} exp={this.exp} />;
