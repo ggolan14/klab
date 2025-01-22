@@ -1210,14 +1210,14 @@ class GameMessages extends React.Component {
     };
 
     Page2 = () => {
-        let points1_msg = '# points', points2_msg = '# points';
+        let points_msg = '10 points';
         console.log("-------> GameCondition=" + GameCondition);
 
         // Define the instructional text based on GameCondition
         let instructionText = GameCondition === "OneShot" ?
             `            Many people find it easier to identify when the ${GameSet.profit_side} section of the rectangle contains more dots. 
-            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points1_msg}, 
-            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points2_msg}.
+            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points_msg}, 
+            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points_msg}.
             
             These rewards are independent of whether your answer is correct or not. Your task is to be 
             as accurate as possible while also trying to earn points.
@@ -1228,8 +1228,8 @@ class GameMessages extends React.Component {
             
             In addition to your potential bonus, you will receive 1 £ for participating in this study.`
             : `            Many people find it easier to identify when the ${GameSet.profit_side} section of the rectangle contains more dots. 
-            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points1_msg}, 
-            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points2_msg}.
+            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points_msg}, 
+            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points_msg}.
             
             These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points.
             At the end of the study, the computer will randomly select one round of the dots game.
