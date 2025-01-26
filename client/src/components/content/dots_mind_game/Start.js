@@ -189,6 +189,9 @@ class DrawPoints extends React.Component {
     }
 
     componentDidMount() {
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 100);
         let all_points = [];
 
         for (let i = 0; i < Number(this.props.points_right); i++) {
