@@ -471,15 +471,15 @@ class Game extends React.Component {
         const game_set = game.g_s;
         const general_set = game_set.g;
         const profitable_set = game_set.pr;
-        const one_shot_set = {a_p:1 , a_n_p:1 , c_p:1 , c_n_p:1}
-        const practice_set = {a_p:1 , a_n_p:1 , c_p:1 , c_n_p:1}
+        const one_shot_set = { a_p: 1, a_n_p: 1, c_p: 1, c_n_p: 1 }
+        const practice_set = { a_p: 1, a_n_p: 1, c_p: 1, c_n_p: 1 }
         let trials_set = null;
-        if(this.GamePart=="Real"){
-            trials_set= (GameCondition=="OneShot") ? one_shot_set : game_set.t;
-        }else{
-            trials_set= practice_set;
+        if (this.GamePart == "Real") {
+            trials_set = (GameCondition == "OneShot") ? one_shot_set : game_set.t;
+        } else {
+            trials_set = practice_set;
         }
-        console.log("==========>  trials_set = ",trials_set)
+        console.log("==========>  trials_set = ", trials_set)
         const dots_set = game_set.d;
         this.current_game = {
             game_index: +game.g_i + 1,
@@ -722,7 +722,7 @@ class Game extends React.Component {
                         </p>
                         {/* Show "Next" button if not the last message */}
                         <button className='ame-btnpg-g' onClick={this.nextStep}>Next</button>
-                        
+
 
                     </div>
                 )}
@@ -1057,7 +1057,7 @@ Start.propTypes = {
 export default Start;
 
 const PracticeGame = ({ page, Forward }) => {
-   isPractice = page === 'START' ? true : false
+    isPractice = page === 'START' ? true : false
     return (
         <div
             className='pg_-gw center-screen msg_container'
@@ -1212,39 +1212,41 @@ class GameMessages extends React.Component {
     Page2 = () => {
         let points_msg = '10 points';
         console.log("-------> GameCondition=" + GameCondition);
-
+        const isRepeated = GameCondition == "Repeated";
+        
         // Define the instructional text based on GameCondition
-        let instructionText = GameCondition === "OneShot" ?
-            `            Many people find it easier to identify when the ${GameSet.profit_side} section of the rectangle contains more dots. 
-            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points_msg}, 
-            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points_msg}.
-            
-            These rewards are independent of whether your answer is correct or not. Your task is to be 
-            as accurate as possible while also trying to earn points.
-            The points you earn will be converted into a bonus payment at the end of the experiment, 
-            with a conversion rate of 10 points = 1 £.
-            To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the 
-            comment box below. If you type anything else, we will know that you did not fully read the instructions.
-            
-            In addition to your potential bonus, you will receive 1 £ for participating in this study.`
-            : `            Many people find it easier to identify when the ${GameSet.profit_side} section of the rectangle contains more dots. 
-            Therefore, selecting "There are more dots on the right section of the rectangle" will earn you ${points_msg}, 
-            whereas choosing "There are more dots on the left section of the rectangle" will earn you ${points_msg}.
-            
-            These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points.
-            At the end of the study, the computer will randomly select one round of the dots game.
-            The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 £.
-            To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, 
-            we will know that you did not fully read the instructions.
-            
-            In addition to your potential bonus, you will receive 1 £ for participating in this study.`;
+        let instructionText = isRepeated ? (
+            <span>
+                Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
+                <br></br>
+                <br></br>
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                <br></br>
+                <br></br>
+                In addition to your potential bonus, you will receive 1 £ for participating in this study.
+
+            </span>
+        ) : (
+            <span>
+                Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
+                <br></br>
+                <br></br>
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                <br></br>
+                <br></br>
+                In addition to your potential bonus, you will receive 1 £ for participating in this study.
+
+                <br></br>
+                <br></br>
+            </span>
+        );
 
         // console.log("-------> instructionText="+instructionText);
 
         return (
             <div>
                 <span><h1>Earning points</h1></span>
-                <p>{instructionText}</p>
+                <span>{instructionText}</span>
                 <u>Comments:</u><br />
                 <textarea
                     onChange={e => this.props.insertTextInput('TextInput', e.target.value)}
@@ -1438,9 +1440,9 @@ class GameMessages extends React.Component {
     render() {
 
         console.log("---> this.state.page_index=" + this.state.page_index + "  this.pages.length=" + this.pages.length)
-        
+
         return (
-            
+
             <div className='pg-game-intro'>
                 <div className="pg-gi-message-box">
                     {this.pages[this.state.page_index]()}
