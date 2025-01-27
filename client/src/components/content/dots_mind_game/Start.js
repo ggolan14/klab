@@ -1070,7 +1070,8 @@ const PracticeGame = ({ page, Forward }) => {
                     __html: page === 'START'
                         ? 'Start practice'
                         : `Practice is over.<br/>You will now play ${GameCondition === "OneShot" ? "one round" : "40 rounds"
-                        } of the dots game for real bonus.<br/><u>Remember: Your bonus depends on the points you earn in this round.</u>`
+                        } of the dots game for real bonus.<br/><u>Remember: ${GameCondition === "OneShot" ? "Your bonus depends on the points you earn in this round." : "Your bonus will depend on the points you earn in one round, which will be randomly selected by the computer."
+                        }</u>`
                 }}
             ></label>
             <button onClick={Forward} className=''>Next</button>
@@ -1223,10 +1224,13 @@ class GameMessages extends React.Component {
                 Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you {points_msg}, whereas choosing "There are more dots on the left section of the rectangle" will earn you {points_msg}.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of {points_msg} = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of {points_msg} = 1£. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
-                In addition to your potential bonus, you will receive 1 £ for participating in this study.
+                In addition to your potential bonus, you will receive 1£ for participating in this study.
+                <br></br>
+                <br></br>
+                
 
             </span>
         ) : (
@@ -1234,13 +1238,14 @@ class GameMessages extends React.Component {
                 Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1£. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
-                In addition to your potential bonus, you will receive 1 £ for participating in this study.
-
+                In addition to your potential bonus, you will receive 1£ for participating in this study.
                 <br></br>
                 <br></br>
+                
+                
             </span>
         );
 
