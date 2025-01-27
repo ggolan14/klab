@@ -103,7 +103,7 @@ class FoodPreference extends Component {
         if (this.state.showOpenQuestion) {
             return (
                 <div className="trivia-container">
-                    <h3>Please provide additional comments about your food preferences:</h3>
+                    <h3>What is your favorite breakfast food?</h3>
                     <textarea
                         style={{ border: '1px solid #ccc' }}
                         value={this.state.openAnswer}
