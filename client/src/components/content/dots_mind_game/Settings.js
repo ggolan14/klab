@@ -42,6 +42,8 @@ const new_game = (count) => ({
         a_n_p: 1, // Amibgous not profit side
         c_p: 1, // Clear profit side
         c_n_p: 1, // Clear not profit side
+        p_p:1, // practice profit
+        p_n_p:1, // practice not profit
     }, // trials
     d: {
         a_p: 1, // Amibgous profit side
@@ -551,22 +553,54 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
                 update_attr('t', value, 'c_n_p')
             }
         },
-    ];
-
-    const dots_elements_amibgous = [
         {
             type: 'Input',
-            label: 'More:',
+            label: 'Practice profit:',
             show: true,
             class_name: '',
-            value: game.d.a_m,
+            value: game.t.p_p,
             input_type: 'number',
             min: 1,
             step: 1,
             label_after: '',
             pattern: '',
             callback: value => {
-                update_attr('d', value, 'a_m')
+                update_attr('t', value, 'p_p')
+            }
+        },
+        {
+            type: 'Input',
+            label: 'Practice not profit:',
+            show: true,
+            class_name: '',
+            value: game.t.p_n_p,
+            input_type: 'number',
+            min: 1,
+            step: 1,
+            label_after: '',
+            pattern: '',
+            callback: value => {
+                update_attr('t', value, 'p_n_p')
+            }
+        },
+        
+
+    ];
+
+    const dots_elements_practice = [
+        {
+            type: 'Input',
+            label: 'More:',
+            show: true,
+            class_name: '',
+            value: game.d.p_m,
+            input_type: 'number',
+            min: 1,
+            step: 1,
+            label_after: '',
+            pattern: '',
+            callback: value => {
+                update_attr('d', value, 'p_m')
             }
         },
         {
@@ -574,14 +608,14 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
             label: 'Less:',
             show: true,
             class_name: '',
-            value: game.d.a_l,
+            value: game.d.p_l,
             input_type: 'number',
             min: 1,
             step: 1,
             label_after: '',
             pattern: '',
             callback: value => {
-                update_attr('d', value, 'a_l')
+                update_attr('d', value, 'p_l')
             }
         },
     ];
@@ -695,13 +729,13 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
                                     className='pg_settings-game_bank-h admin-settings-section-col'
                                     elements={[{
                                         type: 'Label',
-                                        label: 'Amibgous:',
+                                        label: 'Practice:',
                                         show: true
                                     }]}
                                 />
                                 <DivContainer
                                     className='admin-settings-section-raw admin-settings-section-b'
-                                    elements={dots_elements_amibgous}
+                                    elements={dots_elements_practice}
                                 />
                             </DivContainer>
 

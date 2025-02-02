@@ -20,6 +20,7 @@ let GameSet = {};
 let NumberOfRoundsTotal = 0;
 let GamesErrors = [], GamesPayoff = [];
 let GameCondition = null;
+let randNum = -1;
 
 let GAME_ORDER = [];
 let isPractice = true;
@@ -189,9 +190,6 @@ class DrawPoints extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(() => {
-            window.dispatchEvent(new Event('resize'));
-        }, 100);
         let all_points = [];
 
         for (let i = 0; i < Number(this.props.points_right); i++) {
@@ -250,7 +248,7 @@ class DrawPoints extends React.Component {
 }
 
 const PointsPage = ({ Forward, dots }) => {
-    console.log("---> PointsPage()")
+   // console.log("---> PointsPage()")
     const callback = () => {
         setTimeout(() => {
             Forward();
@@ -454,14 +452,22 @@ class Game extends React.Component {
         this.resetGameData();
     }
     insertGameLine = (db_row) => {
-        console.log("---> setting insertGameLine to:" + this.props.insertGameLine)
+        //console.log("---> setting insertGameLine to:" + this.props.insertGameLine)
         this.props.insertGameLine(db_row);
     }
 
     sendGameDataToDB = (db_row) => {
-        console.log("---> setting sendGameDataToDB to:" + this.props.sendGameDataToDB)
+       // console.log("---> setting sendGameDataToDB to:" + this.props.sendGameDataToDB)
         this.props.sendGameDataToDB(db_row);
     }
+ 
+
+     calculateProbability = (game_set) => {
+        const total = game_set.t.c_p + game_set.t.c_n_p;
+        let prob=game_set.t.c_p / total;
+        console.log("---> prob= "+prob)
+        return prob; // Probability of selecting clear_profit
+      };
 
     resetGameData() {
         this.game_order++;
@@ -474,8 +480,13 @@ class Game extends React.Component {
         const game_set = game.g_s;
         const general_set = game_set.g;
         const profitable_set = game_set.pr;
-        const one_shot_set = { a_p: 1, a_n_p: 1, c_p: 1, c_n_p: 1 }
-        const practice_set = { a_p: 1, a_n_p: 1, c_p: 1, c_n_p: 1 }
+        //const oneShotRand = random.choices([game_set.t.c_p, game_set.t.c_n_p], weights=[game_set.t.c_p, game_set.t.c_n_p])[0]
+        randNum = Math.random();
+        const clear_profit= randNum < this.calculateProbability(game_set) ? true : false;
+        console.log("------> randNum="+randNum+"  clear_profit="+clear_profit +"  GameCondition="+GameCondition)
+        const one_shot_set =  clear_profit ? { a_p: 0, a_n_p: 0, c_p: 1, c_n_p: 0 }:  { a_p: 0, a_n_p: 0, c_p: 0, c_n_p: 1 }
+       // console.log("------> one_shot_set=",one_shot_set)
+        const practice_set = { a_p: 0, a_n_p: 0, c_p: game_set.t.p_p, c_n_p: game_set.t.p_n_p }
         let trials_set = null;
         if (this.GamePart == "Real") {
             trials_set = (GameCondition == "OneShot") ? one_shot_set : game_set.t;
@@ -522,6 +533,7 @@ class Game extends React.Component {
 
     getCurrentDots() {
         const current_game_type = this.current_game_trials[this.state.trial];
+        //console.log("--->  current_game_type="+current_game_type)
 
         let sides = { left: null, right: null };
 
@@ -529,10 +541,12 @@ class Game extends React.Component {
         if (current_game_type.includes('amibgous')) {
             more_dots = this.current_game.dots_amibgous_more;
             less_dots = this.current_game.dots_amibgous_less;
+           // console.log("---> AMBIGUS  more_dots="+more_dots+"  less_dots="+less_dots)
         }
         else {
             more_dots = this.current_game.dots_clear_more;
             less_dots = this.current_game.dots_clear_less;
+           // console.log("---> CLEAR  more_dots="+more_dots+"  less_dots="+less_dots)
         }
 
         if (current_game_type.includes('not_profit_side')) {
@@ -543,6 +557,7 @@ class Game extends React.Component {
             sides[GameSet.profit_side] = more_dots;
             sides[GameSet.not_profit_side] = less_dots;
         }
+        console.log("----> sides=",sides)
         return sides;
     }
 
@@ -613,6 +628,7 @@ class Game extends React.Component {
         let not_choose_side = choose_side === 'left' ? 'right' : 'left';
 
         const points = this.getCurrentDots();
+       // console.log("++++++++ points = ",points)
         let correct_answer = points.left > points.right ? 'left' : 'right';
         let is_correct_answer = correct_answer === choose_side;
 
@@ -672,9 +688,11 @@ class Game extends React.Component {
             not_profit_side: this.current_game.not_profit_side,
             points_right: points.right,
             points_left: points.left,
-            choice_time
+            randNum,
+            GameCondition,
+            choice_time,
         };
-
+        console.log("*********** trial_data = ",trial_data)
         this.game_data.push(trial_data);
 
         if (DebugMode) {
@@ -695,7 +713,8 @@ class Game extends React.Component {
         if (this.state.isLoading) return <WaitForAction2 />;
 
         const { step } = this.state;
-        console.log("---> step=" + step);
+       // console.log("---> step=" + step);
+       // console.log("-------> this.getCurrentDots() =" , this.getCurrentDots())
 
         return (
             <>
@@ -818,16 +837,16 @@ class Start extends React.Component {
 
     initGameOrder() {
         do {
-            console.log("====> initGameOrder")
+           // console.log("====> initGameOrder")
             let next_game_index = 0;
-            console.log("====> initGameOrder  GameSet.random_games_order=" + GameSet.random_games_order)
+           // console.log("====> initGameOrder  GameSet.random_games_order=" + GameSet.random_games_order)
             if (GameSet.random_games_order)
                 next_game_index = Math.floor(Math.random() * GameSet.games_play.length);
             const current_game_index = GameSet.games_play[next_game_index];
-            console.log("====> initGameOrder current_game_index=" + current_game_index)
+           // console.log("====> initGameOrder current_game_index=" + current_game_index)
             GameSet.games_play = GameSet.games_play.filter((a, i) => i !== next_game_index);
             const game = GameSet.games_bank.find(g => g.g_i === current_game_index);
-            console.log("====> initGameOrder game=" + game)
+           // console.log("====> initGameOrder game=" + game)
             GAME_ORDER.push(game);
             const { a_p, a_n_p, c_p, c_n_p } = game.g_s.t;
             //  const total_t = a_p + a_n_p + c_p + c_n_p;
@@ -850,7 +869,7 @@ class Start extends React.Component {
                         f: first_game.g_s.g.f
                     },
                     pr: first_game.g_s.pr,
-                    t: { a_p: 0, a_n_p: 0, c_p: practice_clear_profit, c_n_p: practice_clear_not_profit }
+                    t: { a_p: 0, a_n_p: 0, c_p: practice_clear_profit, c_n_p: practice_clear_not_profit ,p_p:first_game.g_s.t.p_p, p_n_p: first_game.g_s.t.p_n_p}
                 }
             };
 
@@ -897,7 +916,7 @@ class Start extends React.Component {
                 insertTextInput: this.props.insertTextInput,
             }
         });
-        console.log("---> Pushing PracticeGame page=START")
+       // console.log("---> Pushing PracticeGame page=START")
         if (GameSet.practice) {
             game_template.push({
                 Component: PracticeGame,
@@ -905,7 +924,7 @@ class Start extends React.Component {
                     page: 'START',
                 }
             });
-            console.log("---> Pushing Game pPart=Practice")
+        //    console.log("---> Pushing Game pPart=Practice")
             game_template.push({
                 Component: Game,
                 Props: {
@@ -918,7 +937,7 @@ class Start extends React.Component {
 
             });
 
-            console.log("---> Pushing PracticeGame page=END")
+          //  console.log("---> Pushing PracticeGame page=END")
 
             game_template.push({
                 Component: PracticeGame,
@@ -954,7 +973,7 @@ class Start extends React.Component {
 
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
-        console.log("-----> in handleMathQuestionAnswer()")
+      //  console.log("-----> in handleMathQuestionAnswer()")
         if (isCorrect) {
             this.setState({ mathAnsweredCorrectly: true, showError: false });
         } else {
@@ -1017,7 +1036,7 @@ class Start extends React.Component {
     }
 
     render() {
-        console.log("---> 333 render")
+      //  console.log("---> 333 render")
         if (!this.state || this.state.isLoading)
             return <WaitForAction2 />;
 
@@ -1070,8 +1089,7 @@ const PracticeGame = ({ page, Forward }) => {
                     __html: page === 'START'
                         ? 'Start practice'
                         : `Practice is over.<br/>You will now play ${GameCondition === "OneShot" ? "one round" : "40 rounds"
-                        } of the dots game for real bonus.<br/><u>Remember: ${GameCondition === "OneShot" ? "Your bonus depends on the points you earn in this round." : "Your bonus will depend on the points you earn in one round, which will be randomly selected by the computer."
-                        }</u>`
+                        } of the dots game for real bonus.<br/><u>Remember: Your bonus depends on the points you earn in this round.</u>`
                 }}
             ></label>
             <button onClick={Forward} className=''>Next</button>
@@ -1215,22 +1233,19 @@ class GameMessages extends React.Component {
 
     Page2 = () => {
         let points_msg = '10 points';
-        console.log("-------> GameCondition=" + GameCondition);
+      //  console.log("-------> GameCondition=" + GameCondition);
         const isRepeated = GameCondition == "Repeated";
         
         // Define the instructional text based on GameCondition
         let instructionText = isRepeated ? (
             <span>
-                Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you {points_msg}, whereas choosing "There are more dots on the left section of the rectangle" will earn you {points_msg}.
+                Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of {points_msg} = 1£. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
-                In addition to your potential bonus, you will receive 1£ for participating in this study.
-                <br></br>
-                <br></br>
-                
+                In addition to your potential bonus, you will receive 1 £ for participating in this study.
 
             </span>
         ) : (
@@ -1238,14 +1253,13 @@ class GameMessages extends React.Component {
                 Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1£. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
-                In addition to your potential bonus, you will receive 1£ for participating in this study.
+                In addition to your potential bonus, you will receive 1 £ for participating in this study.
+
                 <br></br>
                 <br></br>
-                
-                
             </span>
         );
 
@@ -1447,7 +1461,7 @@ class GameMessages extends React.Component {
 
     render() {
 
-        console.log("---> this.state.page_index=" + this.state.page_index + "  this.pages.length=" + this.pages.length)
+      //  console.log("---> this.state.page_index=" + this.state.page_index + "  this.pages.length=" + this.pages.length)
 
         return (
 
