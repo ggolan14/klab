@@ -21,6 +21,7 @@ let NumberOfRoundsTotal = 0;
 let GamesErrors = [], GamesPayoff = [];
 let GameCondition = null;
 let randNum = -1;
+let all_game_data = [];
 
 let GAME_ORDER = [];
 let isPractice = true;
@@ -443,7 +444,7 @@ class Game extends React.Component {
         this.sendGameDataToDB = this.sendGameDataToDB.bind(this)
 
         this.game_order = 0;
-        this.game_data = [];
+      //  this.game_data = [];
         this.game_errors = 0;
         this.game_payoff = 0;
         this.current_game = null;
@@ -511,6 +512,8 @@ class Game extends React.Component {
             dots_amibgous_less: dots_set.a_l,
             dots_clear_more: dots_set.c_m,
             dots_clear_less: dots_set.c_l,
+            dots_practice_more: dots_set.p_m,
+            dots_practice_less: dots_set.p_l
         };
 
         let games = [
@@ -518,6 +521,8 @@ class Game extends React.Component {
             ...((new Array(trials_set.a_n_p)).fill('amibgous_not_profit_side')),
             ...((new Array(trials_set.c_p)).fill('clear_profit_side')),
             ...((new Array(trials_set.c_n_p)).fill('clear_not_profit_side')),
+          //  ...((new Array(trials_set.p_p)).fill('practice_profit_side')),
+          //  ...((new Array(trials_set.p_n_p)).fill('practice_not_profit_side')),
         ];
 
         this.current_game_trials = [];
@@ -538,16 +543,22 @@ class Game extends React.Component {
         let sides = { left: null, right: null };
 
         let more_dots, less_dots;
-        if (current_game_type.includes('amibgous')) {
-            more_dots = this.current_game.dots_amibgous_more;
-            less_dots = this.current_game.dots_amibgous_less;
-           // console.log("---> AMBIGUS  more_dots="+more_dots+"  less_dots="+less_dots)
+        if(this.GamePart == "Practice"){
+            more_dots = this.current_game.dots_practice_more;
+            less_dots = this.current_game.dots_practice_less;
+        }else{
+            if (current_game_type.includes('amibgous')) {
+                more_dots = this.current_game.dots_amibgous_more;
+                less_dots = this.current_game.dots_amibgous_less;
+               // console.log("---> AMBIGUS  more_dots="+more_dots+"  less_dots="+less_dots)
+            }
+            else {
+                more_dots = this.current_game.dots_clear_more;
+                less_dots = this.current_game.dots_clear_less;
+               // console.log("---> CLEAR  more_dots="+more_dots+"  less_dots="+less_dots)
+            }
         }
-        else {
-            more_dots = this.current_game.dots_clear_more;
-            less_dots = this.current_game.dots_clear_less;
-           // console.log("---> CLEAR  more_dots="+more_dots+"  less_dots="+less_dots)
-        }
+
 
         if (current_game_type.includes('not_profit_side')) {
             sides[GameSet.profit_side] = less_dots;
@@ -564,7 +575,8 @@ class Game extends React.Component {
     sendPartToDb() {
         let sc = this.state;
         sc.isLoading = true;
-        this.props.insertGameArray([...this.game_data]);
+        this.props.insertGameArray([...all_game_data]);
+        console.log("====>  all_game_data = ",all_game_data)
         this.setState(sc, () => {
             this.props.sendGameDataToDB().then(
                 () => {
@@ -606,6 +618,7 @@ class Game extends React.Component {
             if (sc.step === 2) {
                 if (sc.trial === (this.current_game_trials.length - 1)) {
                     if (this.GamePart === 'Practice') {
+                       this.props.insertGameArray([...this.game_data]);;
                         return this.props.Forward();
                     }
                     GamesErrors.push(this.game_errors);
@@ -688,12 +701,13 @@ class Game extends React.Component {
             not_profit_side: this.current_game.not_profit_side,
             points_right: points.right,
             points_left: points.left,
-            randNum,
+            randNum: GameCondition == "Repeated" ? "N/A" : randNum,
             GameCondition,
             choice_time,
         };
         console.log("*********** trial_data = ",trial_data)
         this.game_data.push(trial_data);
+        all_game_data.push(trial_data);
 
         if (DebugMode) {
             let sc = this.state;
@@ -849,8 +863,8 @@ class Start extends React.Component {
            // console.log("====> initGameOrder game=" + game)
             GAME_ORDER.push(game);
             const { a_p, a_n_p, c_p, c_n_p } = game.g_s.t;
-            //  const total_t = a_p + a_n_p + c_p + c_n_p;
-            const total_t = 5;
+            const total_t = a_p + a_n_p + c_p + c_n_p;
+            
             NumberOfRoundsTotal += total_t;
         }
         while (GameSet.games_play.length);

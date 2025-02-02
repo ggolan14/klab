@@ -27,13 +27,14 @@ class FoodPreference extends Component {
 
         const currentQuestion = foodQuestions[currentQuestionIndex];
         const answer = currentQuestionIndex < foodQuestions.length ? answers[currentQuestionIndex] + 1 : answers[currentQuestionIndex];
-
-        console.log(`---> answer=${answer}`);
+        const question = currentQuestionIndex < foodQuestions.length ? currentQuestion.question : "What type of fried food do you prefer?";
+        //console.log(`---> answer=${answer}`);
 
         // Constructs the database entry
         const db_row = {
             QuestionIndex: currentQuestionIndex,
             QuestionType: currentQuestionIndex < foodQuestions.length ? "FoodPreference" : "OpenEnded",
+            Question: question,
             Answer: answer,
             TotalYesAnswers: "N/A",
             TotalNoAnswers: "N/A",
@@ -123,8 +124,8 @@ class FoodPreference extends Component {
 
         return (
             <div className="trivia-container">
-                <h3>{currentQuestion.question}</h3>
-                <ul>
+                <h3 style={{ marginTop: '100px', alignItems: 'center' }}>{currentQuestion.question}</h3>
+                <ul style={{ marginTop: '10px', alignItems: 'center' }}>
                     {currentQuestion.choices.map((choice, index) => (
                         <li key={index}>
                             <label style={{ display: 'flex', alignItems: 'center' }}>
@@ -141,8 +142,8 @@ class FoodPreference extends Component {
                         </li>
                     ))}
                 </ul>
-                <button onClick={this.handleNextQuestion} disabled={isNextDisabled}>
-                    {currentQuestionIndex === foodQuestions.length - 1 ? 'Next' : 'Next'}
+                <button onClick={this.handleNextQuestion} disabled={isNextDisabled} style={{ marginTop: '10px', alignItems: 'center' }}>
+                    Next
                 </button>
             </div>
         );
