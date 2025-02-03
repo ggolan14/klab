@@ -56,3 +56,13 @@
   text-align: center;
   display: block;
 }
+
+.correct-message {
+  color: green;
+ 
+}
+
+.wrong-message {
+  color: red;
+  
+}
