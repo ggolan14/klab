@@ -51,6 +51,7 @@ const Block = ({ isGreenFirst, type, blockIndex,totalNumOfCompletedBlocks, gameC
     }
     const db_row = {
       GameType: "Game"+(selectedGameIndex+1),
+      GreenSide: isGreenFirst ? "Left" : "Right",
       BlockType: type,
       BlockTrials: totalTrialsInBlock,
       RoundIndex: blockIndex,

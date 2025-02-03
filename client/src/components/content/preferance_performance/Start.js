@@ -5,6 +5,7 @@ import { getTimeDate } from "../../../utils/app_utils";
 import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import PreferancePerformanceIntroduction from './PreferancePerformanceIntroduction';
+import Quize from './Quize';
 import { formatPrice } from '../../utils/StringUtils';
 import GameRound from '../mind_game/GameRound';
 import Game from './Game';
@@ -84,6 +85,7 @@ class Start extends Component {
 
     this.state = {
       hideMessages: false,
+      showQuiz: true, // Initialize quiz to show first
       gameIndex: 0,
       blockIndex: 0,
       stepIndex: 0,
@@ -342,33 +344,38 @@ class Start extends Component {
 
   // Render method for displaying the UI
   render() {
-    const { hideMessages} = this.state;
+    const { hideMessages, showQuiz } = this.state;
+    
     return (
       <div className="container">
-      
         {!hideMessages ? (
           <PreferancePerformanceIntroduction 
-          gameCondition={GameCondition} 
-          onHideMessages={this.handleHideMessages} 
-          selectedGame={this.selectedGame}
-          gameSettings={this.gameSettings}
-          insertLine={this.insertGameLineToDB} 
-          sendDataToDB={this.sendDataToDB}/>
+            gameCondition={GameCondition} 
+            onHideMessages={this.handleHideMessages} 
+            selectedGame={this.selectedGame}
+            gameSettings={this.gameSettings}
+            insertLine={this.insertGameLineToDB} 
+            sendDataToDB={this.sendDataToDB}
+          />
+        ) : showQuiz ? (
+          <Quize 
+            insertLine={this.insertGameLineToDB} 
+            onComplete={() => this.setState({ showQuiz: false })} 
+          />
         ) : (
-          <div>
-            <GlobalStateProvider>
+          <GlobalStateProvider>
             <Game 
-            isGreenFirst={Math.random() < 0.5}
-            selectedGame={this.selectedGame} 
-            selectedGameIndex={selectedGameIndex}
-            props={this.newProps}/>
-            </GlobalStateProvider>
-
-          </div>
+              isGreenFirst={Math.random() < 0.5}
+              selectedGame={this.selectedGame} 
+              selectedGameIndex={selectedGameIndex}
+              props={this.newProps}
+            />
+          </GlobalStateProvider>
         )}
       </div>
     );
   }
-}
+  }
+
 
 export default Start;

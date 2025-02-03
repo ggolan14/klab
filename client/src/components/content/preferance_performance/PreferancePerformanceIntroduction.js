@@ -7,12 +7,10 @@ import ImgIntro2 from './images/introduction2.png';
 class PreferancePerformanceIntroduction extends Component {
   constructor(props) {
     super(props);
-    //console.log("===== this.props.signOfReward=" + this.props.signOfReward);
-    let game = this.props.selectedGame;
-    //let gameSettings= this.props.gameSettings.game;
-    //let gameSettings=this.props.
+
     this.insertLine = this.props.insertLine;
 
+    let game = this.props.selectedGame;
 
     const part1 = (
       <div width="500px" style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
@@ -64,7 +62,6 @@ class PreferancePerformanceIntroduction extends Component {
         </div>
       </div>
     );
-    
 
     const part2 = (
       <span>
@@ -88,50 +85,74 @@ class PreferancePerformanceIntroduction extends Component {
 
     const part3 = (
       <span>
-        <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
+        <h2 style={{ textAlign: "center" }}><b>Game Rounds</b></h2>
         <br />
-        In the game, you will experience {game.type_1_blocks_num + game.type_2_blocks_num} rounds in a random order: {game.type_1_blocks_num} rounds of <b>{game.type_1_trials_num}</b> steps & {game.type_2_blocks_num} rounds of <b>{game.type_2_trials_num}</b> steps.
+        The game has 40 rounds, divided half by half into rounds of:
         <br />
-        Before each round starts, you'll be told how many steps it has.
+        • <b>5 steps</b> (button choices)
         <br />
+        • <b>15 steps</b>
+        <br /><br />
+        Before each round starts, you’ll see how many steps it has.
+        <br /><br />
+        <b>Your bonus depends on matching the button to the round length:</b>
         <br />
-        Statistically, the blue button's expected value (average gain) is higher in rounds of 19 steps or more,
+        • Green is better in short rounds, of 18 steps or fewer, <br />
+          because it provides consistent rewards.
         <br />
-        and the green button's expected value is higher in rounds of 18 steps or less.
+        • Blue is better in long rounds, of 19 steps or more, <br />
+          where there are more chances for its rare big reward to occur.
       </span>
     );
+
+    // Define radio options and shuffle them **only once**
+    const radioOptions = [
+      {
+        value: "green",
+        label: `Choose to use only the green button (${this.props.selectedGame.type_1_probability}% chance to gain +${this.props.selectedGame.type_1_score} points, or 0 otherwise)`,
+      },
+      {
+        value: "blue",
+        label: `Choose to use only the blue button (${this.props.selectedGame.type_2_probability}% chance to gain +${this.props.selectedGame.type_2_score} points, or 0 otherwise)`,
+      },
+      {
+        value: "both",
+        label: "Choose to keep both the green and the blue buttons optional throughout the game",
+      }
+    ];
+
+    // Shuffle the radio options ONCE and store them in state
+    const shuffledOptions = [...radioOptions].sort(() => Math.random() - 0.5);
 
     this.state = {
       messages: [part1, part2, part3],
       currentIndex: 0,
-      selectedButtonChoice: '', // New state for radio button selection
+      selectedButtonChoice: '', // Stores selected radio button value
+      shuffledOptions, // Stores the shuffled radio buttons
     };
   }
 
   handleNext = () => {
     const { currentIndex } = this.state;
     this.setState({ currentIndex: currentIndex + 1 });
-  }
+  };
 
   handleBack = () => {
     const { currentIndex } = this.state;
     if (currentIndex > 0) {
       this.setState({ currentIndex: currentIndex - 1 });
     }
-  }
+  };
 
   handleRadioChange = (event) => {
     this.setState({ selectedButtonChoice: event.target.value });
-  }
+  };
 
   handleSubmitChoice = () => {
     if (this.state.selectedButtonChoice) {
-      //console.log('User selected:', this.state.selectedButtonChoice);
       const db_row = {
-
         Question: "Introduction - Select single button",
         Answer: this.state.selectedButtonChoice
-
       };
 
       this.insertLine(db_row);
@@ -139,47 +160,29 @@ class PreferancePerformanceIntroduction extends Component {
     } else {
       alert("Please select a button option before proceeding.");
     }
-  }
+  };
 
   render() {
-    const { messages, currentIndex, selectedButtonChoice } = this.state;
-    // Define part4 here within render to access state properly
+    const { messages, currentIndex, selectedButtonChoice, shuffledOptions } = this.state;
+
     const part4 = (
       <div style={{ lineHeight: '2.6' }}>
         <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
         <br />
         Before the game begins, you have the option to select a single button for the entire game:
         <br />
-        <label style={{ display: 'block', textAlign: 'left' }}>
-          <input
-            type="radio"
-            value="green"
-            checked={selectedButtonChoice === 'green'}
-            onChange={this.handleRadioChange}
-            style={{ marginRight: '8px' }} // Add space here
-          />
-          Choose to use only the green button ({this.props.selectedGame.type_1_probability}% chance to gain +{this.props.selectedGame.type_1_score} points, or 0 otherwise)
-        </label>
-        <label style={{ display: 'block', textAlign: 'left' }}>
-          <input
-            type="radio"
-            value="blue"
-            checked={selectedButtonChoice === 'blue'}
-            onChange={this.handleRadioChange}
-            style={{ marginRight: '8px' }} // Add space here
-          />
-          Choose to use only the blue button ({this.props.selectedGame.type_2_probability}% chance to gain +{this.props.selectedGame.type_2_score} points, or 0 otherwise)
-        </label>
-        <label style={{ display: 'block', textAlign: 'left' }}>
-          <input
-            type="radio"
-            value="both"
-            checked={selectedButtonChoice === 'both'}
-            onChange={this.handleRadioChange}
-            style={{ marginRight: '8px' }} // Add space here
-          />
-          Choose to keep both both the green and the blue buttons optional throughout the game
-        </label>
+        {shuffledOptions.map(option => (
+          <label key={option.value} style={{ display: 'block', textAlign: 'left' }}>
+            <input
+              type="radio"
+              value={option.value}
+              checked={selectedButtonChoice === option.value}
+              onChange={this.handleRadioChange}
+              style={{ marginRight: '8px' }}
+            />
+            {option.label}
+          </label>
+        ))}
         <div className="button-container" style={{ lineHeight: '1.6' }}>
           <button className="shared-button" onClick={this.handleBack}>Back</button>
           <button
@@ -198,23 +201,18 @@ class PreferancePerformanceIntroduction extends Component {
       </div>
     );
 
-    // Add part4 to the end of the messages array in render
     const allMessages = [...messages, part4];
-    console.log("-----> currentIndex=" + currentIndex)
+
     return (
       <div className="trivia-container">
-        {/* Display the current message */}
         <div>{allMessages[currentIndex]}</div>
         <div className="button-container">
-          {/* Show "Back" button if not the first message */}
-          <div className="button-container">
-            {currentIndex > 0 && currentIndex < 3 && (
-              <button className="shared-button" onClick={this.handleBack}>Back</button>
-            )}
-            {currentIndex < allMessages.length - 1 && (
-              <button className="shared-button" onClick={this.handleNext}>Next</button>
-            )}
-          </div>
+          {currentIndex > 0 && currentIndex < 3 && (
+            <button className="shared-button" onClick={this.handleBack}>Back</button>
+          )}
+          {currentIndex < allMessages.length - 1 && (
+            <button className="shared-button" onClick={this.handleNext}>Next</button>
+          )}
         </div>
       </div>
     );
