@@ -59,10 +59,53 @@
 
 .correct-message {
   color: green;
- 
+  width: 100%; /* Full width for better alignment */
+  display: flex;
 }
 
 .wrong-message {
   color: red;
+  width: 100%; /* Full width for better alignment */
+  display: flex;
   
+}
+
+.quize-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  margin-bottom: 1000px;
+}
+
+.question-container {
+  text-align: left; /* Align question text to the left */
+  width: 100%; /* Full width for better alignment */
+  max-width: 900px; /* Optional: Limit width for readability */
+  margin-bottom: 10px; /* Space below the question */
+  margin-left: 50px;
+}
+
+.options-container {
+  text-align: left; /* Align options to the left */
+  width: 100%; /* Full width for better alignment */
+  max-width: 500px; /* Optional: Limit width for readability */
+  margin-left: 50px;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adds space between the radio button and text */
+  margin-bottom: 5px; /* Space between options */
+  margin-left: 5px;
+}
+
+.option-label input {
+  margin-right: 5px; /* Adds space between radio button and answer text */
+}
+.question-container h3 {
+  white-space: nowrap;
 }

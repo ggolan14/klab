@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {DivContainer} from "../../screens/settings/elements_builder";
 import {convertPointsRatio} from "../../screens/settings/settings";
-import './ctStyles.css';
 
 const new_game_props = {
     active: 'Yes',
@@ -10,6 +9,7 @@ const new_game_props = {
     // r_v: 1, // Reward Value
     // m_t_c: 1, // Mileage/Travel/Toll Cost:
     p0: 0.05,  // first Probability
+    
     a: 0.2, // Adaptability
     // pe: 1, // Penalty
     // e_c: 1, // Equipment Cost
@@ -20,99 +20,85 @@ const new_game_props = {
 
 const GameElement = ({gameSelect, game_props, editGame}) => {
     const practice_game = gameSelect === 'practice_game';
-    console.log("--->  gameSelect = "+gameSelect+"  practice_game="+practice_game)
     let g_settings = [];
     if (!practice_game)
-        g_settings.push(
-          {
-              type: 'Select',
-              label: 'Active:',
-              show: true,
-              options: [
-                  {label: 'Yes', value: 'Yes'},
-                  {label: 'No', value: 'No'},
-              ],
-              value: game_props.active,
-              callback: value => editGame(gameSelect, 'active', value)
-          },
-        );
 
 
-        g_settings = [
-            ...g_settings,
-            
-           
-            
-              ////////
-              {
-                  type: 'Input',
-                  label: 'Type 1 blocks num:', // Mileage/Travel
-                  show: true,
-                  class_name: '',
-                  value: game_props.type_1_blocks_num,
-                  input_type: 'number',
-                  label_after: '',
-                  pattern: '',
-                  callback: value => editGame(gameSelect, 'type_1_blocks_num', value)
-              },
-              {
-                  type: 'Input',
-                  label: 'Type 1 trials num:', // Mileage/Travel
-                  show: true,
-                  class_name: '',
-                  value: game_props.type_1_trials_num,
-                  input_type: 'number',
-                  label_after: '',
-                  pattern: '',
-                  callback: value => editGame(gameSelect, 'type_1_trials_num', value)
-              },
-              {
-                  type: 'Input',
-                  label: 'Type 2 blocks num:', // Mileage/Travel
-                  show: true,
-                  class_name: '',
-                  value: game_props.type_2_blocks_num,
-                  input_type: 'number',
-                  label_after: '',
-                  pattern: '',
-                  callback: value => editGame(gameSelect, 'type_2_blocks_num', value)
-              },
-              {
-                  type: 'Input',
-                  label: 'Type 2 trials num:', // Mileage/Travel
-                  show: true,
-                  class_name: '',
-                  value: game_props.type_2_trials_num,
-                  input_type: 'number',
-                  label_after: '',
-                  pattern: '',
-                  callback: value => editGame(gameSelect, 'type_2_trials_num', value)
-              },
-              ////////////////////////////
-           
-              // {
-              //     type: 'Input',
-              //     label: 'Penalty:',
-              //     show: true,
-              //     class_name: '',
-              //     value: game_props.pe,
-              //     input_type: 'number',
-              //     label_after: '',
-              //     pattern: '',
-              //     callback: value => editGame(gameSelect, 'pe', value)
-              // },
-              // {
-              //     type: 'Input',
-              //     label: 'Equipment cost:',
-              //     show: true,
-              //     class_name: '',
-              //     value: game_props.e_c,
-              //     input_type: 'number',
-              //     label_after: '',
-              //     pattern: '',
-              //     callback: value => editGame(gameSelect, 'e_c', value)
-              // },
-          ];
+    g_settings = [
+      ...g_settings,
+      
+     
+      
+        ////////
+        {
+            type: 'Input',
+            label: 'Type 1 blocks num:', // Mileage/Travel
+            show: true,
+            class_name: '',
+            value: game_props.type_1_blocks_num,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
+            callback: value => editGame(gameSelect, 'type_1_blocks_num', value)
+        },
+        {
+            type: 'Input',
+            label: 'Type 1 trials num:', // Mileage/Travel
+            show: true,
+            class_name: '',
+            value: game_props.type_1_trials_num,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
+            callback: value => editGame(gameSelect, 'type_1_trials_num', value)
+        },
+        {
+            type: 'Input',
+            label: 'Type 2 blocks num:', // Mileage/Travel
+            show: true,
+            class_name: '',
+            value: game_props.type_2_blocks_num,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
+            callback: value => editGame(gameSelect, 'type_2_blocks_num', value)
+        },
+        {
+            type: 'Input',
+            label: 'Type 2 trials num:', // Mileage/Travel
+            show: true,
+            class_name: '',
+            value: game_props.type_2_trials_num,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
+            callback: value => editGame(gameSelect, 'type_2_trials_num', value)
+        },
+        ////////////////////////////
+     
+        // {
+        //     type: 'Input',
+        //     label: 'Penalty:',
+        //     show: true,
+        //     class_name: '',
+        //     value: game_props.pe,
+        //     input_type: 'number',
+        //     label_after: '',
+        //     pattern: '',
+        //     callback: value => editGame(gameSelect, 'pe', value)
+        // },
+        // {
+        //     type: 'Input',
+        //     label: 'Equipment cost:',
+        //     show: true,
+        //     class_name: '',
+        //     value: game_props.e_c,
+        //     input_type: 'number',
+        //     label_after: '',
+        //     pattern: '',
+        //     callback: value => editGame(gameSelect, 'e_c', value)
+        // },
+    ];
 
     return (
       <div
@@ -137,21 +123,14 @@ const ListElement = ({game_index, game_active, gameSelect, setGameSelect, remove
             onClick={() => setGameSelect(game_index)}
           >{!is_practice_game?`Game ${game_index+1}`:'Practice Game'}</label>
 
-          {
-              !is_practice_game && (
-                <button
-                  className='btn-delete'
-                  onClick={() => removeGame(game_index)}
-                >Delete</button>
-              )
-          }
+          
       </div>
     )
 }
 
 const GamesBank = ({changeSettings, game_bank, practice_game}) => {
     const [gameSelect, setGameSelect] = useState(null);
-    
+
     const addNewGame = () => {
         const gb = JSON.parse(JSON.stringify(game_bank));
         gb.push(JSON.parse(JSON.stringify(new_game_props)));
@@ -204,11 +183,7 @@ const GamesBank = ({changeSettings, game_bank, practice_game}) => {
       >
           <div className='qg_set-gb_head'>
               <label>Games Bank:</label>
-              <button
-                className='btn-add'
-                onClick={addNewGame}
-              >Add new game</button>
-          </div>
+            </div>
 
           <div
             className='qg_set-gb_body'
@@ -216,11 +191,7 @@ const GamesBank = ({changeSettings, game_bank, practice_game}) => {
               <div
                 className='qg_set-gb_list unselectable'
               >
-                  <ListElement
-                    game_index={'practice_game'}
-                    gameSelect={gameSelect}
-                    setGameSelect={setGameSelect}
-                  />
+                 
                   {
                       game_bank.map(
                         (game_, game_index) => (
@@ -252,9 +223,6 @@ const GamesBank = ({changeSettings, game_bank, practice_game}) => {
 const Settings = (props) => {
 
     let {game_settings, changeSettings, LAST_SETTING_NAME, versions_list} = props;
-    console.log("-----> practice game="+JSON.stringify(game_settings.game.pt_g))
-    console.log("-----> game_bank="+JSON.stringify(game_settings.game.g_b))
-
     const general = [
         {
             type: 'Input',
@@ -348,81 +316,84 @@ const Settings = (props) => {
                 value,
             })
         },
+               
         {
-            type: 'Select',
-            label: 'Condition:',
+            type: 'Input',
+            label: 'Display time (sec):', // Mileage/Travel
             show: true,
-            options: [
-                {
-                    value: 'R',
-                    label: 'Risk'
-                },
-                {
-                    value: 'D',
-                    label: 'Dishonest'
-                },
-                {
-                    value: 'Ra',
-                    label: 'Random'
-                },
-                {
-                    value: 'U',
-                    label: 'Uniform distribution'
-                },
-            ],
-            value: game_settings.game.cond,
+            class_name: '',
+            value: game_settings.game.display_time,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
             callback: value => changeSettings({
                 settings_of: 'game_settings',
                 key: 'game',
-                key2: 'cond',
+                key2: 'display_time',
                 value,
             })
         },
         {
-            type: 'Select',
-            label: 'Tutorial:',
+            type: 'Input',
+            label: 'Type 1 score:', // Mileage/Travel
             show: true,
-            options: [
-                {label: 'Yes', value: 'Yes'},
-                {label: 'No', value: 'No'},
-            ],
-            value: game_settings.game.w_t,
+            class_name: '',
+            value: game_settings.game.type_1_score,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
             callback: value => changeSettings({
                 settings_of: 'game_settings',
                 key: 'game',
-                key2: 'w_t',
+                key2: 'type_1_score',
                 value,
             })
         },
         {
-            type: 'Select',
-            label: 'Practice:',
+            type: 'Input',
+            label: 'Type 1 probability (%) :', // Mileage/Travel
             show: true,
-            options: [
-                {label: 'Yes', value: 'Yes'},
-                {label: 'No', value: 'No'},
-            ],
-            value: game_settings.game.w_p,
+            class_name: '',
+            value: game_settings.game.type_1_probability,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
             callback: value => changeSettings({
                 settings_of: 'game_settings',
                 key: 'game',
-                key2: 'w_p',
+                key2: 'type_1_probability',
                 value,
             })
         },
         {
-            type: 'Select',
-            label: 'Games order:',
+            type: 'Input',
+            label: 'Type 2 score:', // Mileage/Travel
             show: true,
-            options: [
-                {label: 'Random', value: 'r'},
-                {label: 'Ascending', value: 'n_r'},
-            ],
-            value: game_settings.game.g_o,
+            class_name: '',
+            value: game_settings.game.type_2_score,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
             callback: value => changeSettings({
                 settings_of: 'game_settings',
                 key: 'game',
-                key2: 'g_o',
+                key2: 'type_2_score',
+                value,
+            })
+        },
+        {
+            type: 'Input',
+            label: 'Type 2 probability (%) :', // Mileage/Travel
+            show: true,
+            class_name: '',
+            value: game_settings.game.type_2_probability,
+            input_type: 'number',
+            label_after: '',
+            pattern: '',
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'type_2_probability',
                 value,
             })
         },
@@ -443,118 +414,7 @@ const Settings = (props) => {
         //         value,
         //     })
         // },
-        {
-            type: 'Input',
-            label: 'Crown highway:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.ch_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'ch_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Kingdom Left:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.c_l_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'c_l_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Kingdom Right:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.c_r_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'c_r_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Queen signpost:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.qg_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'qg_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Road #1:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.r1_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'r1_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Road #2:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.r2_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'r2_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Road #3:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.r3_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'r3_txt',
-                value,
-            })
-        },
-        {
-            type: 'Input',
-            label: 'Road #4:',
-            show: true,
-            class_name: 'admin-settings-input-big ',
-            value: game_settings.game.r4_txt,
-            input_type: 'text',
-            callback: value => changeSettings({
-                settings_of: 'game_settings',
-                key: 'game',
-                key2: 'r4_txt',
-                value,
-            })
-        },
+        
         // {
         //     type: 'Select',
         //     label: 'Tutorial (Forest Path) road index:',
