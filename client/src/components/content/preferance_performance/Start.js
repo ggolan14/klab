@@ -6,6 +6,7 @@ import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 import PreferancePerformanceIntroduction from './PreferancePerformanceIntroduction';
 import Quize from './Quize';
+import Part4Selection from './Part4Selection'; // New Component for Part4
 import { formatPrice } from '../../utils/StringUtils';
 import GameRound from '../mind_game/GameRound';
 import Game from './Game';
@@ -32,54 +33,31 @@ let transform;
 let extended_name;
 let selectedGame;
 let selectedGameIndex;
-const yesButtonInRight = Math.random() < 0.5; // Randomize button position
+const yesButtonInRight = Math.random() < 0.5;
 
 class Start extends Component {
   constructor(props) {
     super(props);
 
-    
-    
-
-    // Initialize total bonus array
-    this.TotalBonus = [];
     let RunCounter = KeyTableID();
-
-    // Bind methods
-    this.Forward = this.Forward.bind(this);
-
-    // Set payment and game settings from props
     this.PaymentsSettings = props.game_settings.payments;
-   
-    SignOfReward = props.game_settings.payments.sign_of_reward;
-   
-    //selectedGameIndex =  Math.floor(Math.random() * 3);
     selectedGameIndex = RunCounter % 3;
-    this.selectedGame = props.game_settings.game.g_b[selectedGameIndex]; // allocate user to a game
+    this.selectedGame = props.game_settings.game.g_b[selectedGameIndex];
     this.displayTime = props.game_settings.game.display_time;
     this.selectedGame.type_1_score = props.game_settings.game.type_1_score;
     this.selectedGame.type_2_score = props.game_settings.game.type_2_score;
     this.selectedGame.type_1_probability = props.game_settings.game.type_1_probability;
     this.selectedGame.type_2_probability = props.game_settings.game.type_2_probability;
 
-    console.log("Selected Game:", JSON.stringify(this.selectedGame));
-    
-   
-
-
-
-    // Determine game condition based on provided configuration
+    // Determine game condition
     let cond = props.game_settings.game.cond;
     if (cond === 'o') {
       GameCondition = 'OneShot';
     } else if (cond === 'r') {
       GameCondition = 'Repeated';
     } else if (cond === 'rand') {
-      // Randomly decide between OneShot and Repeated
-      let rnd = Math.floor(Math.random() * 2);
-      GameCondition = rnd ? 'OneShot' : 'Repeated';
+      GameCondition = Math.random() < 0.5 ? 'OneShot' : 'Repeated';
     } else if (cond === 'u_d') {
-      // Use uniform distribution for deciding condition
       GameCondition = RunCounter % 2 ? 'OneShot' : 'Repeated';
     }
 
@@ -112,11 +90,8 @@ class Start extends Component {
       mathAnsweredCorrectly: false,
       showError: false,
     };
-    
-    
   }
 
-  // Logs game start and initializes state when component mounts
   componentDidMount() {
     NewLogs({
       user_id: this.UserId,
@@ -134,8 +109,6 @@ class Start extends Component {
       this.setState({ isLoading: false });
     });
   }
-
-  // Adds a record for the current round index and user answer
   addRecord = (roundIndex, value) => {
     const { userAnswers } = this.state;
     this.setState(prevState => ({
@@ -145,59 +118,32 @@ class Start extends Component {
       }
     }));
   };
-
-  // Hides introduction messages
+  // Hide introduction and move to quiz
   handleHideMessages = () => {
     this.setState({ hideMessages: true });
-  }
-
-  // Hides mind game completion message
-  handelHideMindGameCompleted = () => {
-   
-  }
-
-  // Hides welcome message for the next task
-  handelHideWelcomeToNextTask = () => {
-    
-  }
-
-  // Hides practice over message
-  handleHidePracticeIsOver = () => {
-   
-  }
-
-  // Handles advancing to the next round
-  handleNext = () => {
-   
   };
-/*
-  setTotalPointsInGame = (totalPoints) => {
-  console.log("---> BEFORE in setTotalPointsInGame() last block points totalPoints=" + totalPoints+"  current total point game="+totalPointsInGame2);
-  totalPointsInGame2=totalPointsInGame2+totalPoints;
-  console.log("---> AFTER new totalPointsInGame=" +totalPointsInGame2); 
-  }
-  */
-    // Method to handle the result from the MathQuestion component
-    handleMathQuestionAnswer = (isCorrect) => {
-    //  if (isCorrect) {
-    //    this.setState({ mathAnsweredCorrectly: true, showError: false });
-   //   } else {
-    //    this.setState({ showError: true });
-     // }
-    };
-  // Handles the user's confirmation of the dice outcome
-  handleConfirmation = (confirmed) => {
 
-  }
+  // Hide quiz and move to Part4 selection
+  handleQuizComplete = () => {
+    this.setState({ showQuiz: false, showPart4: true });
+  };
 
-  // Inserts a game line into the database
-  insertGameLineToDB = (db_row) => {
-    this.props.insertGameLine(db_row);
-  }
+  // Hide Part4 selection and start game
+  handlePart4Complete = () => {
+    this.setState({ showPart4: false });
+  };
 
+    // Inserts a game line into the database
+    insertGameLineToDB = (db_row) => {
+      console.log("---> insert game line to db ",db_row)
+      console.log("---> insert game line to db "+db_row.Color)
+
+      this.props.insertGameLine(db_row);
+    }
+
+    
   // Placeholder method for forwarding actions (not currently used)
   Forward(finish_game, game_data) { }
-
   // Sends game data to the database and logs game completion
   sendDataToDB = (send) => {
     const current_time = getTimeDate();
@@ -245,124 +191,68 @@ class Start extends Component {
       }
     });
   }
-
-  // Calculates the total bonus based on user performance
-  calculateBonus() {
+   // Calculates the total bonus based on user performance
+   calculateBonus() {
     var total_bonus = this.TotalBonus.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     var exchange_ratio = this.PaymentsSettings.exchange_ratio;
     total_bonus = total_bonus / exchange_ratio;
     total_bonus = (Math.round(total_bonus * 100) / 100).toFixed(2);
     return total_bonus;
   }
-
-  // Adds a bonus for a randomly selected round
-  addGameBonus = (game_data) => {
-    const { userAnswers } = this.state;
-    const keys = Object.keys(userAnswers);
+    // Adds a bonus for a randomly selected round
+    addGameBonus = (game_data) => {
+      const { userAnswers } = this.state;
+      const keys = Object.keys(userAnswers);
+    
   
-
-    const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
-   
-    const randomSelectedRound = keys[randomIndex - 1];
-    const randomSelectedRoundValue = userAnswers[randomSelectedRound];
-    const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
-    const TotalBonus = [];
-    TotalBonus.push(selectedRoundPoints);
-   
-
-    return {
-      selectedRoundPoints: selectedRoundPoints,
-      randomSelectedRound: randomSelectedRound
+      const randomIndex = GameCondition === "OneShot" ? 4 : Math.floor(Math.random() * (NUM_OF_REPEATED_REAL_ROUNDS + 1)) + 4;
+     
+      const randomSelectedRound = keys[randomIndex - 1];
+      const randomSelectedRoundValue = userAnswers[randomSelectedRound];
+      const selectedRoundPoints = randomSelectedRoundValue === 'Yes' ? 1 : 0;
+      const TotalBonus = [];
+      TotalBonus.push(selectedRoundPoints);
+     
+  
+      return {
+        selectedRoundPoints: selectedRoundPoints,
+        randomSelectedRound: randomSelectedRound
+      };
     };
-  };
 
-  // Generates a random dice value between 1 and 6
-  getRandomDiceValue = () => {
-    let tmpRand = Math.floor(Math.random() * 6) + 1;
-    return tmpRand;
-  };
-
-  // Randomizes dice and sets state for dice roll
-  randomDice = () => {
-    isStatic = false;
-    this.random = isStatic ? -1 : this.getRandomDiceValue();
-    this.rollDice(this.random);
-  };
-
-  // Rolls the dice and updates the UI
-  rollDice = (random) => {
-    
-    startTimer = getTimeDate().now;
-
-    setTimeout(() => {
-      // Rotate the dice based on the random value
-      switch (random) {
-        case -1:
-          transform = 'rotateX(0deg) rotateY(-45deg)';
-          break;
-        case 1:
-          transform = 'rotateX(0deg) rotateY(0deg)';
-          break;
-        case 6:
-          transform = 'rotateX(180deg) rotateY(0deg)';
-          break;
-        case 2:
-          transform = 'rotateX(-90deg) rotateY(0deg)';
-          break;
-        case 5:
-          transform = 'rotateX(90deg) rotateY(0deg)';
-          break;
-        case 3:
-          transform = 'rotateX(0deg) rotateY(90deg)';
-          break;
-        case 4:
-          transform = 'rotateX(0deg) rotateY(-90deg)';
-          break;
-        case 7:
-          transform = 'rotateX(0deg) rotateY(-45deg)';
-          break;
-        default:
-          break;
-      }
-
-      // Update state after dice roll
-      this.setState({
-        diceTransform: transform,
-        diceClass: '',
-        showButton: false,
-        diceOutcome: random,
-        showConfirmation: true,
-      });
-    }, 50);
-  };
-  
-  newProps = {
-    ...this.props,         // Spread the existing props
-    insertGameLineToDB: this.insertGameLineToDB,           // Add myFunc
-    sendDataToDB: this.sendDataToDB,          // Add myFunc2
-  };
-
-  // Render method for displaying the UI
+    newProps = {
+      ...this.props,         // Spread the existing props
+      insertGameLineToDB: this.insertGameLineToDB,           // Add myFunc
+      sendDataToDB: this.sendDataToDB,          // Add myFunc2
+    };
   render() {
-    const { hideMessages, showQuiz } = this.state;
-    
+    const { hideMessages, showQuiz, showPart4 } = this.state;
+   console.log("===> this.newProps=",this.newProps)
     return (
       <div className="container">
+        {/* Step 1: Show Introduction */}
         {!hideMessages ? (
           <PreferancePerformanceIntroduction 
             gameCondition={GameCondition} 
             onHideMessages={this.handleHideMessages} 
             selectedGame={this.selectedGame}
-            gameSettings={this.gameSettings}
-            insertLine={this.insertGameLineToDB} 
-            sendDataToDB={this.sendDataToDB}
           />
-        ) : showQuiz ? (
+        ) : /* Step 2: Show Quiz */
+        showQuiz ? (
           <Quize 
-            insertLine={this.insertGameLineToDB} 
-            onComplete={() => this.setState({ showQuiz: false })} 
+            insertLine={this.props.insertGameLine} 
+            onComplete={this.handleQuizComplete} 
+            selectedGame={this.selectedGame}
           />
-        ) : (
+        ) : /* Step 3: Show Part4 Selection */
+        showPart4 ? (
+          <Part4Selection 
+            selectedGame={this.selectedGame} 
+            insertLine={this.props.insertGameLine} 
+            onComplete={this.handlePart4Complete} 
+          />
+        ) : /* Step 4: Start the Game */
+        (
           <GlobalStateProvider>
             <Game 
               isGreenFirst={Math.random() < 0.5}
