@@ -75,14 +75,14 @@ class PreferancePerformanceIntroduction extends Component {
 
     const part3 = (
       <span>
-        <h2 style={{ textAlign: "center" }}><b>Game Rounds</b></h2>
+        <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
         <div style={{ lineHeight: "1.8" }}> {/* Adjust line height as needed */}
           <br />
-          The game has 40 rounds, divided half by half into rounds of:
+          The game has {game.type_1_blocks_num + game.type_1_blocks_num} rounds, divided half by half into rounds of:
           <br />
-          • <b>5 steps</b> (button choices)
+          • <b>{game.type_2_trials_num} steps</b> (button choices)
           <br />
-          • <b>15 steps</b>
+          • <b>{game.type_1_trials_num} steps</b>
           <br />
           Before each round starts, you’ll see how many steps it has.
           <br /><br />
