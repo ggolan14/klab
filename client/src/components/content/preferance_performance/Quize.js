@@ -16,7 +16,7 @@ const questions = [
   {
     text: "Which button is better on average in short rounds (18 trials or less)?",
     correctFeedback: "Correct!",
-    wrongFeedback: "Incorrect. The green button is better in short rounds, of 18 steps or fewer,because it provides consistent rewards.",
+    wrongFeedback: "Incorrect. The green button is better in short rounds, of 18 steps or fewer, because it provides consistent rewards.",
     options: [
       " Both green and blue",
       " Green (75% chance to get +3)",
@@ -73,82 +73,63 @@ const Quize = ({ insertLine, onComplete,selectedGame }) => {
   };
 
   return (
-    <div 
-      className="quize-container"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        width: "80vw",
-        textAlign: "center",
-        
-       
-      }}
-    >
-        
-      <span><h1><b>Quiz</b></h1></span>
-      <span><h2><b>Question {currentQuestion + 1}/{questions.length}</b></h2></span>
-      <br></br>
-      <div className="question-container" style={{ width: "100%", textAlign: "center", whiteSpace: "nowrap" , marginRight:"500px" }}>
-        <span>
-  <h3 style={{ display: "inline-block", whiteSpace: "nowrap" , textAlign:"center"}}>
-    <b>
-      {questions[currentQuestion].text.split(" ").map((word, index) =>
-        (word === "long" || word === "short" || word === "cannot" )? <u key={index}> {word} </u> : ` ${word} `
-        
-      )}
-    </b>
-  </h3>
-  </span>
-  
+  <div className="quiz-container">
+   
+
+   <div style={{ alignItems: 'center', marginLeft:'400px'}}>
+<h1 className="center-text"><b>Quiz</b></h1>
+<h2 className="center-text"><b>Question {currentQuestion + 1}/{questions.length}</b></h2>
 </div>
-  
-<form className="options-container">
-  {questions[currentQuestion].options.map((option, index) => (
-    <div key={index}>
-      <label className="option-label">
-        <input
-          type="radio"
-          name="quiz-option"
-          value={index}
-          checked={selectedAnswer === index}
-          onChange={() => handleAnswerSelect(index)}
-        />
-        {option}
-      </label>
+    <div className="question-container">
+      <h3>
+        <br></br>
+        <b>
+          {questions[currentQuestion].text.split(" ").map((word, index) =>
+            ["long", "short", "cannot"].includes(word) ? (
+              <u key={index}>{word} </u>
+            ) : (
+              `${word} `
+            )
+          )}
+        </b>
+      </h3>
     </div>
-  ))}
-</form>
-
-<div>
-  <span
-    className={isCorrect ? "correct-message" : "wrong-message"}
-    style={{
-      textAlign: "center",
-      marginLeft: "50px",
-      visibility: isCorrect !== null ? "visible" : "hidden",
-      display: "inline-block",
-      minHeight: "20px", // Adjust this value based on your design requirements
-    }}
-  >
-    {isCorrect
-      ? questions[currentQuestion].correctFeedback
-      : questions[currentQuestion].wrongFeedback}
-  </span>
-</div>
-
-      <br></br>
-      <br></br>
-      <div className="button-container">
-      <button button className="shared-button"onClick={handleNext} disabled={isCorrect === null}>
+    <form className="options-container">
+      {questions[currentQuestion].options.map((option, index) => (
+        <label key={index} className="option-label">
+          <input
+            type="radio"
+            name="quiz-option"
+            value={index}
+            checked={selectedAnswer === index}
+            onChange={() => handleAnswerSelect(index)}
+          />
+          {option}
+        </label>
+      ))}
+    </form>
+    <div>
+      <span
+        className={isCorrect ? "correct-message" : "wrong-message"}
+        style={{ visibility: isCorrect !== null ? "visible" : "hidden" }}
+      >
+        {isCorrect
+          ? questions[currentQuestion].correctFeedback
+          : questions[currentQuestion].wrongFeedback}
+      </span>
+    </div>
+    <div className="button-container">
+      <button
+        className="shared-button"
+        onClick={handleNext}
+        disabled={isCorrect === null}
+      >
         Submit
       </button>
-      </div>
-      <br/>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Quize;

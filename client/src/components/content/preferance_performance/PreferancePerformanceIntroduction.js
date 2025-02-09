@@ -76,22 +76,25 @@ class PreferancePerformanceIntroduction extends Component {
     const part3 = (
       <span>
         <h2 style={{ textAlign: "center" }}><b>Game Rounds</b></h2>
-        <br />
-        The game has 40 rounds, divided half by half into rounds of:
-        <br />
-        • <b>5 steps</b> (button choices)
-        <br />
-        • <b>15 steps</b>
-        <br /><br />
-        Before each round starts, you’ll see how many steps it has.
-        <br /><br />
-        <b>Your bonus depends on matching the button to the round length:</b>
-        <br />
-        • Green is better in short rounds, of 18 steps or fewer, because it provides consistent rewards.
-        <br />
-        • Blue is better in long rounds, of 19 steps or more,where there are more chances for its rare big reward to occur.
+        <div style={{ lineHeight: "1.8" }}> {/* Adjust line height as needed */}
+          <br />
+          The game has 40 rounds, divided half by half into rounds of:
+          <br />
+          • <b>5 steps</b> (button choices)
+          <br />
+          • <b>15 steps</b>
+          <br />
+          Before each round starts, you’ll see how many steps it has.
+          <br /><br />
+          <b>Your bonus depends on matching the button to the round length:</b>
+          <br />
+          • Green is better in short rounds, of 18 steps or fewer, because it provides consistent rewards.
+          <br />
+          • Blue is better in long rounds, of 19 steps or more, where there are more chances for its rare big reward to occur.
+        </div>
       </span>
     );
+    
 
     this.state = {
       messages: [part1, part2, part3],

@@ -58,7 +58,7 @@ class Part4Selection extends Component {
   render() {
     return (
       <div style={{ lineHeight: '2.6' }}>
-        <h2 style={{ textAlign: "center" }}><b>Game Instructions</b></h2>
+        <h2 style={{ textAlign: "center" }}><b>Pre-Commitment</b></h2>
         <p>Before the game begins, you have the option to select a single button for the entire game:</p>
         {this.state.shuffledOptions.map(option => (
           <label key={option.value} style={{ display: 'block', textAlign: 'left' }}>
@@ -77,7 +77,11 @@ class Part4Selection extends Component {
             Submit my choice
           </button>
         </div>
+        <div style={{ textAlign: "center" }}>
+          Good luck and enjoy the game!
+        </div>
       </div>
+      
     );
   }
 }
