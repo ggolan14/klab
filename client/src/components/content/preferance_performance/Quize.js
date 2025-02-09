@@ -47,7 +47,7 @@ const questions = [
       " You click the blue button and receive 0",
       " You click the blue button and receive +5"
     ],
-    correctIndex: 0
+    correctIndex: 2
   }
 ];
 
@@ -108,7 +108,7 @@ const Quize = ({ insertLine, onComplete,selectedGame }) => {
         </label>
       ))}
     </form>
-    <div>
+    <div style={{ minHeight: "100px" }}>
       <span
         className={isCorrect ? "correct-message" : "wrong-message"}
         style={{ visibility: isCorrect !== null ? "visible" : "hidden" }}
