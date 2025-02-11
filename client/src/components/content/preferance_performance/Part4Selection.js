@@ -6,15 +6,15 @@ class Part4Selection extends Component {
     const shuffledOptions = this.shuffleArray([
       {
         value: "green",
-        label: `Use only the green button (${this.props.selectedGame.type_1_probability}% chance to gain +${this.props.selectedGame.type_1_score} points, or 0 otherwise)`,
+        label: `Choose to use only the green button (${this.props.selectedGame.type_1_probability}% chance to gain +${this.props.selectedGame.type_1_score} points, or 0 otherwise)`,
       },
       {
         value: "blue",
-        label: `Use only the blue button (${this.props.selectedGame.type_2_probability}% chance to gain +${this.props.selectedGame.type_2_score} points, or 0 otherwise)`,
+        label: `Choose to use only the blue button (${this.props.selectedGame.type_2_probability}% chance to gain +${this.props.selectedGame.type_2_score} points, or 0 otherwise)`,
       },
       {
         value: "both",
-        label: "Keep both buttons optional throughout the game",
+        label: "Choose to keep both the green and the blue buttons optional throughout the game",
       }
     ]);
 
