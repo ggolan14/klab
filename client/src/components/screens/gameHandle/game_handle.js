@@ -626,8 +626,10 @@ const getSummary = ({ exp, summary_args }) => {
             label: 'Dots Mind Game',
             element: () => (
                 <DotsMindGameSummary
-                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    summary_args={summary_args}
                     ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    GameBonus={DB_RECORDS.Payment.bonus_payment}
                 />
             )
         },

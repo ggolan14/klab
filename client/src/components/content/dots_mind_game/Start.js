@@ -10,6 +10,7 @@ import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_han
 import MathQuestion from '../../../common/MathQuestion';
 import { CURRENT_URL } from "../../../utils/current_url";
 import FoodPreference from './FoodPreference';
+import { formatPrice } from '../../utils/StringUtils';
 
 const ThisExperiment = 'DotsMindGame';
 let UserId = null;
@@ -25,20 +26,25 @@ let all_game_data = [];
 
 let GAME_ORDER = [];
 let isPractice = true;
+let totalBonus = [];
+
 
 const CM_TO_PX = 37.7952755906;
 // trial is profit side -> more profit side  || Not profit side -> more not profit side
 
 const completedDotsMindGame = (
-    <span>
-        <b>You completed the dots game</b>
-        <br></br>
-        You will now be asked to complete a food preference survey.
-        <br></br>
-        You cannot leave or stop responding until you have completed the entire study and have received your completion code,
-        <br></br>
-        or else you will not receive compensation.
-
+    <span style={{
+        fontSize: "36px",
+        padding: "20px",
+        display: "block",
+        width: "80%", // Adjust width if needed
+        margin: "20px auto", // Centers the span
+        marginTop:"300px",
+        textAlign: "left" // Centers the text
+    }}>
+        <label style={{textAlign:'center' , marginLeft:600}}><b>You completed the dots game</b></label>
+        <br />
+        You will now be asked to complete a food preference survey. You cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
         <br />
     </span>
 );
@@ -249,7 +255,6 @@ class DrawPoints extends React.Component {
 }
 
 const PointsPage = ({ Forward, dots }) => {
-   // console.log("---> PointsPage()")
     const callback = () => {
         setTimeout(() => {
             Forward();
@@ -325,11 +330,6 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
         }, GameSet.pay_time);
     }
 
-    // const buttons = {
-    //     [GameSet.profit_side]: profit_side,
-    //     [GameSet.not_profit_side]: not_profit_side,
-    // }
-
     const step1_msg = btn_side => (<>
         The {btn_side} section<br />
         ({getPointLabel(containerProps.buttons[btn_side], true)})
@@ -362,10 +362,8 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                 {containerProps.head_label}
             </label>
 
-            {/* Conditional rendering for practice round message */}
-
-
             {/* Main question label */}
+
             {isPractice && (
                 <div style={{ textAlign: "center", fontSize: "36px", color: "red", fontWeight: "bold", marginBottom: "10px" }}>
                     <label>This is practice round</label>
@@ -375,7 +373,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                 <label>Which section contained more red dots?</label>
             </div>
 
-            {/* Buttons */}
+
             <div>
                 {
                     ['left', 'right'].map(
@@ -444,7 +442,6 @@ class Game extends React.Component {
         this.sendGameDataToDB = this.sendGameDataToDB.bind(this)
 
         this.game_order = 0;
-      //  this.game_data = [];
         this.game_errors = 0;
         this.game_payoff = 0;
         this.current_game = null;
@@ -453,22 +450,20 @@ class Game extends React.Component {
         this.resetGameData();
     }
     insertGameLine = (db_row) => {
-        //console.log("---> setting insertGameLine to:" + this.props.insertGameLine)
         this.props.insertGameLine(db_row);
     }
 
     sendGameDataToDB = (db_row) => {
-       // console.log("---> setting sendGameDataToDB to:" + this.props.sendGameDataToDB)
         this.props.sendGameDataToDB(db_row);
     }
- 
 
-     calculateProbability = (game_set) => {
+
+    calculateProbability = (game_set) => {
         const total = game_set.t.c_p + game_set.t.c_n_p;
-        let prob=game_set.t.c_p / total;
-        console.log("---> prob= "+prob)
+        let prob = game_set.t.c_p / total;
+        console.log("---> prob= " + prob)
         return prob; // Probability of selecting clear_profit
-      };
+    };
 
     resetGameData() {
         this.game_order++;
@@ -481,12 +476,10 @@ class Game extends React.Component {
         const game_set = game.g_s;
         const general_set = game_set.g;
         const profitable_set = game_set.pr;
-        //const oneShotRand = random.choices([game_set.t.c_p, game_set.t.c_n_p], weights=[game_set.t.c_p, game_set.t.c_n_p])[0]
         randNum = Math.random();
-        const clear_profit= randNum < this.calculateProbability(game_set) ? true : false;
-        console.log("------> randNum="+randNum+"  clear_profit="+clear_profit +"  GameCondition="+GameCondition)
-        const one_shot_set =  clear_profit ? { a_p: 0, a_n_p: 0, c_p: 1, c_n_p: 0 }:  { a_p: 0, a_n_p: 0, c_p: 0, c_n_p: 1 }
-       // console.log("------> one_shot_set=",one_shot_set)
+        const clear_profit = randNum < this.calculateProbability(game_set) ? true : false;
+        console.log("------> randNum=" + randNum + "  clear_profit=" + clear_profit + "  GameCondition=" + GameCondition)
+        const one_shot_set = clear_profit ? { a_p: 0, a_n_p: 0, c_p: 1, c_n_p: 0 } : { a_p: 0, a_n_p: 0, c_p: 0, c_n_p: 1 }
         const practice_set = { a_p: 0, a_n_p: 0, c_p: game_set.t.p_p, c_n_p: game_set.t.p_n_p }
         let trials_set = null;
         if (this.GamePart == "Real") {
@@ -521,8 +514,6 @@ class Game extends React.Component {
             ...((new Array(trials_set.a_n_p)).fill('amibgous_not_profit_side')),
             ...((new Array(trials_set.c_p)).fill('clear_profit_side')),
             ...((new Array(trials_set.c_n_p)).fill('clear_not_profit_side')),
-          //  ...((new Array(trials_set.p_p)).fill('practice_profit_side')),
-          //  ...((new Array(trials_set.p_n_p)).fill('practice_not_profit_side')),
         ];
 
         this.current_game_trials = [];
@@ -538,24 +529,20 @@ class Game extends React.Component {
 
     getCurrentDots() {
         const current_game_type = this.current_game_trials[this.state.trial];
-        //console.log("--->  current_game_type="+current_game_type)
-
         let sides = { left: null, right: null };
 
         let more_dots, less_dots;
-        if(this.GamePart == "Practice"){
+        if (this.GamePart == "Practice") {
             more_dots = this.current_game.dots_practice_more;
             less_dots = this.current_game.dots_practice_less;
-        }else{
+        } else {
             if (current_game_type.includes('amibgous')) {
                 more_dots = this.current_game.dots_amibgous_more;
                 less_dots = this.current_game.dots_amibgous_less;
-               // console.log("---> AMBIGUS  more_dots="+more_dots+"  less_dots="+less_dots)
             }
             else {
                 more_dots = this.current_game.dots_clear_more;
                 less_dots = this.current_game.dots_clear_less;
-               // console.log("---> CLEAR  more_dots="+more_dots+"  less_dots="+less_dots)
             }
         }
 
@@ -568,7 +555,7 @@ class Game extends React.Component {
             sides[GameSet.profit_side] = more_dots;
             sides[GameSet.not_profit_side] = less_dots;
         }
-        console.log("----> sides=",sides)
+        console.log("----> sides=", sides)
         return sides;
     }
 
@@ -576,7 +563,7 @@ class Game extends React.Component {
         let sc = this.state;
         sc.isLoading = true;
         this.props.insertGameArray([...all_game_data]);
-        console.log("====>  all_game_data = ",all_game_data)
+        console.log("====>  all_game_data = ", all_game_data)
         this.setState(sc, () => {
             this.props.sendGameDataToDB().then(
                 () => {
@@ -618,7 +605,7 @@ class Game extends React.Component {
             if (sc.step === 2) {
                 if (sc.trial === (this.current_game_trials.length - 1)) {
                     if (this.GamePart === 'Practice') {
-                       this.props.insertGameArray([...this.game_data]);;
+                        this.props.insertGameArray([...this.game_data]);;
                         return this.props.Forward();
                     }
                     GamesErrors.push(this.game_errors);
@@ -641,9 +628,11 @@ class Game extends React.Component {
         let not_choose_side = choose_side === 'left' ? 'right' : 'left';
 
         const points = this.getCurrentDots();
-       // console.log("++++++++ points = ",points)
+        // console.log("++++++++ points = ",points)
         let correct_answer = points.left > points.right ? 'left' : 'right';
         let is_correct_answer = correct_answer === choose_side;
+        if (this.GamePart === "Real")
+            totalBonus.push(is_correct_answer ? 10 : 0);
 
         if (!is_correct_answer)
             this.game_errors++;
@@ -705,7 +694,7 @@ class Game extends React.Component {
             GameCondition,
             choice_time,
         };
-        console.log("*********** trial_data = ",trial_data)
+        console.log("*********** trial_data = ", trial_data)
         this.game_data.push(trial_data);
         all_game_data.push(trial_data);
 
@@ -727,13 +716,8 @@ class Game extends React.Component {
         if (this.state.isLoading) return <WaitForAction2 />;
 
         const { step } = this.state;
-       // console.log("---> step=" + step);
-       // console.log("-------> this.getCurrentDots() =" , this.getCurrentDots())
-
         return (
             <>
-
-                {/* Display "This is practice round" message only if in practice mode */}
 
                 {step === 0 && (
                     <PlusPage Forward={this.nextStep} />
@@ -750,17 +734,14 @@ class Game extends React.Component {
                     />
                 )}
                 {step === 3 && (
-                    <div className="pg-game-intro">
-
-                        {/* Display the current message */}
-                        <p className="survey-text">
-                            {completedDotsMindGame}
-                        </p>
-                        {/* Show "Next" button if not the last message */}
-                        <button className='ame-btnpg-g' onClick={this.nextStep}>Next</button>
-
-
-                    </div>
+                    (
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                           <p style={{ marginBottom: "20px" }}>
+                              {completedDotsMindGame}
+                           </p>
+                           <button className='pg-game-btn' onClick={this.nextStep}>Next</button>
+                        </div>
+                    )
                 )}
                 {step === 4 && (
                     <FoodPreference
@@ -816,7 +797,6 @@ class Start extends React.Component {
 
         PaymentsSettings = props.game_settings.payments;
 
-        // let RunCounter = KeyTableID();
         const game_error = props.game_settings.error;
         GameSet.plus_time = Number(props.game_settings.game.p_t);
         GameSet.dots_time = Number(props.game_settings.game.d_t);
@@ -851,20 +831,15 @@ class Start extends React.Component {
 
     initGameOrder() {
         do {
-           // console.log("====> initGameOrder")
             let next_game_index = 0;
-           // console.log("====> initGameOrder  GameSet.random_games_order=" + GameSet.random_games_order)
             if (GameSet.random_games_order)
                 next_game_index = Math.floor(Math.random() * GameSet.games_play.length);
             const current_game_index = GameSet.games_play[next_game_index];
-           // console.log("====> initGameOrder current_game_index=" + current_game_index)
             GameSet.games_play = GameSet.games_play.filter((a, i) => i !== next_game_index);
             const game = GameSet.games_bank.find(g => g.g_i === current_game_index);
-           // console.log("====> initGameOrder game=" + game)
             GAME_ORDER.push(game);
             const { a_p, a_n_p, c_p, c_n_p } = game.g_s.t;
             const total_t = a_p + a_n_p + c_p + c_n_p;
-            
             NumberOfRoundsTotal += total_t;
         }
         while (GameSet.games_play.length);
@@ -883,7 +858,7 @@ class Start extends React.Component {
                         f: first_game.g_s.g.f
                     },
                     pr: first_game.g_s.pr,
-                    t: { a_p: 0, a_n_p: 0, c_p: practice_clear_profit, c_n_p: practice_clear_not_profit ,p_p:first_game.g_s.t.p_p, p_n_p: first_game.g_s.t.p_n_p}
+                    t: { a_p: 0, a_n_p: 0, c_p: practice_clear_profit, c_n_p: practice_clear_not_profit, p_p: first_game.g_s.t.p_p, p_n_p: first_game.g_s.t.p_n_p }
                 }
             };
 
@@ -930,7 +905,6 @@ class Start extends React.Component {
                 insertTextInput: this.props.insertTextInput,
             }
         });
-       // console.log("---> Pushing PracticeGame page=START")
         if (GameSet.practice) {
             game_template.push({
                 Component: PracticeGame,
@@ -938,7 +912,7 @@ class Start extends React.Component {
                     page: 'START',
                 }
             });
-        //    console.log("---> Pushing Game pPart=Practice")
+
             game_template.push({
                 Component: Game,
                 Props: {
@@ -950,8 +924,6 @@ class Start extends React.Component {
                 }
 
             });
-
-          //  console.log("---> Pushing PracticeGame page=END")
 
             game_template.push({
                 Component: PracticeGame,
@@ -987,7 +959,6 @@ class Start extends React.Component {
 
     // Method to handle the result from the MathQuestion component
     handleMathQuestionAnswer = (isCorrect) => {
-      //  console.log("-----> in handleMathQuestionAnswer()")
         if (isCorrect) {
             this.setState({ mathAnsweredCorrectly: true, showError: false });
         } else {
@@ -995,52 +966,48 @@ class Start extends React.Component {
         }
     };
     Forward(option) {
+
         if (option === 'UserRequestToQuit') {
             return this.props.callbackFunction('UserRequestToQuit');
         }
-
+        this.PaymentsSettings = PaymentsSettings;
         let sc = this.state;
+        const current_time = getTimeDate();
+        var reward_sum = 0;
+        let debug_args = {
+            reward_sum,
+        }
+
         if (sc.tasks_index === (this.game_template.length - 1)) {
-            this.props.SetLimitedTime(false);
 
-            let game_points = 0;
-            let total_pay = PaymentsSettings.show_up_fee;
 
-            const current_time = getTimeDate();
-            NewLogs({
-                user_id: UserId,
-                exp: ThisExperiment,
-                running_name: RunningName,
-                action: 'G.E',
-                type: 'LogGameType',
-                more_params: {
-                    game_points,
-                    total_payment: total_pay,
-                    local_t: current_time.time,
-                    local_d: current_time.date,
-                },
-            }).then((res) => { });
+            var result = this.addGameBonus();
+            console.log("---> result= ", result)
+            var total_bonus = result.randomSelectedRoundValue / this.PaymentsSettings.exchange_ratio;
+            totalBonus = formatPrice(total_bonus, this.PaymentsSettings.sign_of_reward)
+            var randomSelectedRound = result.randomSelectedRound;
+            console.log("---> in sendDataToDB total_bonus=" + total_bonus);
 
-            this.props.insertTextInput('GamesErrors', GamesErrors.join('|'));
-            this.props.insertTextInput('TotalErrors', GamesErrors.reduce((total, num) => total + num, 0));
-            this.props.insertTextInput('GamesPayoff', GamesPayoff.join('|'));
-            this.props.insertTextInput('TotalPayoff', GamesPayoff.reduce((total, num) => total + num, 0));
+            this.PaymentsSettings.total_bonus = total_bonus;
+            this.PaymentsSettings.randomSelectedRound = randomSelectedRound;
 
-            this.props.insertMoreRecords('version_settings', GameSet)
+
             this.props.insertPayment({
-                game_points,
-                sign_of_reward: PaymentsSettings.sign_of_reward,
-                show_up_fee: PaymentsSettings.show_up_fee,
-                exchange_ratio: PaymentsSettings.exchange_ratio,
-                bonus_endowment: PaymentsSettings.bonus_endowment,
-                total_payment: total_pay,
+                exchange_ratio: this.PaymentsSettings.exchange_ratio,
+                bonus_endowment: this.PaymentsSettings.bonus_endowment,
+                show_up_fee: this.PaymentsSettings.show_up_fee,
+                sign_of_reward: this.PaymentsSettings.sign_of_reward,
+                random_round_Index: this.PaymentsSettings.randomSelectedRound,
+                bonus_payment: this.PaymentsSettings.total_bonus,
                 Time: current_time.time,
                 Date: current_time.date
             });
 
-            sc.isLoading = true;
+            debug_args.reward_sum = total_bonus;
+
+
             this.setState(sc, () => {
-                this.props.callbackFunction('FinishGame', { need_summary: option !== 'NewGame', new_game: option === 'NewGame', args: { game_points } });
+                this.props.callbackFunction('FinishGame', { need_summary: option !== 'NewGame', new_game: option === 'NewGame', args: debug_args });
             });
         }
         else {
@@ -1048,9 +1015,18 @@ class Start extends React.Component {
         }
         this.setState(sc);
     }
+    addGameBonus = () => {
+        const randomIndex = GameCondition === "OneShot" ? 0 : Math.floor(Math.random() * totalBonus.length);
+        const randomSelectedRoundValue = totalBonus[randomIndex]
+        const TotalBonus = [];
+        TotalBonus.push(randomSelectedRoundValue);
+        return {
+            randomSelectedRoundValue: randomSelectedRoundValue,
+            randomSelectedRound: randomIndex
+        };
+    };
 
     render() {
-      //  console.log("---> 333 render")
         if (!this.state || this.state.isLoading)
             return <WaitForAction2 />;
 
@@ -1094,6 +1070,7 @@ export default Start;
 
 const PracticeGame = ({ page, Forward }) => {
     isPractice = page === 'START' ? true : false
+    let num_of_real_rounds = GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p;
     return (
         <div
             className='pg_-gw center-screen msg_container'
@@ -1102,8 +1079,11 @@ const PracticeGame = ({ page, Forward }) => {
                 dangerouslySetInnerHTML={{
                     __html: page === 'START'
                         ? 'Start practice'
-                        : `Practice is over.<br/>You will now play ${GameCondition === "OneShot" ? "one round" : "40 rounds"
-                        } of the dots game for real bonus.<br/><u>Remember: Your bonus depends on the points you earn in this round.</u>`
+                        : `Practice is over.<br/>
+               You will now play ${GameCondition === "OneShot" ? "one round" : `${num_of_real_rounds} rounds`} 
+               of the dots game for real bonus.<br/>
+               <u>Remember: ${GameCondition === "OneShot" ? "Your bonus depends on the points you earn in this round" : "Your bonus will depend on the points you earn in one round, which will be randomly selected by the computer"}. 
+               </u>`
                 }}
             ></label>
             <button onClick={Forward} className=''>Next</button>
@@ -1131,9 +1111,9 @@ class GameMessages extends React.Component {
 
         this.state = {
             page_index: 0,
-            showNext: false,  // Controls visibility of Next button in Page4
+            showNext: false,
             showBack: false,
-            feedbackMessage: "", // Stores feedback message for Page4
+            feedbackMessage: "",
         };
     }
 
@@ -1246,44 +1226,45 @@ class GameMessages extends React.Component {
     };
 
     Page2 = () => {
-        let points_msg = '10 points';
-      //  console.log("-------> GameCondition=" + GameCondition);
+        let profit_side_score = GAME_ORDER[0].g_s.pr.p_s;
+        let none_profit_side_score = GAME_ORDER[0].g_s.pr.nps;
         const isRepeated = GameCondition == "Repeated";
-        
+
         // Define the instructional text based on GameCondition
         let instructionText = isRepeated ? (
             <span>
-                Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
+                Many people find it easier to identify when the {GameSet.profit_side} section of the rectangle contains more dots. Therefore, selecting "There are more dots on the {GameSet.profit_side} section of the rectangle" will earn you {profit_side_score} points, whereas choosing "There are more dots on the {GameSet.not_profit_side} section of the rectangle" will earn you {none_profit_side_score} points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
-                In addition to your potential bonus, you will receive 1 £ for participating in this study.
+                In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
 
             </span>
         ) : (
             <span>
-                Many people find it easier to identify when the right section of the rectangle contains more dots. Therefore, selecting "There are more dots on the right section of the rectangle" will earn you 10 points, whereas choosing "There are more dots on the left section of the rectangle" will earn you 10 points.
+                Many people find it easier to identify when the {GameSet.profit_side} section of the rectangle contains more dots. Therefore, selecting "There are more dots on the {GameSet.profit_side} section of the rectangle" will earn you {profit_side_score} points, whereas choosing "There are more dots on the {GameSet.not_profit_side} section of the rectangle" will earn you {none_profit_side_score} points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 £. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
-                In addition to your potential bonus, you will receive 1 £ for participating in this study.
+                In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
 
                 <br></br>
                 <br></br>
             </span>
         );
 
-        // console.log("-------> instructionText="+instructionText);
-
         return (
             <div>
                 <span><h1>Earning points</h1></span>
                 <span>{instructionText}</span>
+                <br></br>
+                <br></br>
                 <u>Comments:</u><br />
+                <br></br>
                 <textarea
                     onChange={e => this.props.insertTextInput('TextInput', e.target.value)}
                     style={{
@@ -1442,10 +1423,11 @@ class GameMessages extends React.Component {
         );
     };
     Page7 = () => {
+        let num_of_practice_rounds = GAME_ORDER[0].g_s.t.p_p + GAME_ORDER[0].g_s.t.p_n_p;
         return (
             <div>
                 Let’s try it out!<br />
-                You will now go through 9 practice rounds of the dots game.The goal of the practice rounds is to help you understand the game.You will not earn any bonus in these rounds, and your answers will not be recorded.You will be notified when the practice is over and the real game begins.
+                You will now go through {num_of_practice_rounds} practice rounds of the dots game.The goal of the practice rounds is to help you understand the game.You will not earn any bonus in these rounds, and your answers will not be recorded.You will be notified when the practice is over and the real game begins.
             </div>
         );
     };
@@ -1474,11 +1456,7 @@ class GameMessages extends React.Component {
     }
 
     render() {
-
-      //  console.log("---> this.state.page_index=" + this.state.page_index + "  this.pages.length=" + this.pages.length)
-
         return (
-
             <div className='pg-game-intro'>
                 <div className="pg-gi-message-box">
                     {this.pages[this.state.page_index]()}
@@ -1496,7 +1474,7 @@ class GameMessages extends React.Component {
                         </button>
                     )}
 
-                    {/* Hide Next button in Page4 until correct answer is clicked */}
+                    
                     {this.state.page_index !== 4 && this.state.page_index !== 5 && this.state.page_index !== 6 && (
                         <button
                             className='pg-game-btn'
@@ -1512,22 +1490,3 @@ class GameMessages extends React.Component {
 }
 
 
-/*
-           Props:
-           SetLimitedTime,
-           dmr,
-           running_name: DB_RECORDS.KeyTable.RunningName,
-           getTable,
-           insertGameLine,
-           sendGameDataToDB,
-           insertTextInput,
-           insertTaskGameLine,
-           insertPayment,
-           insertLineCustomTable,
-           setWaitForAction: setWaitForAction,
-           game_settings,
-           more,
-           isa,
-           user_id: DB_RECORDS.UserDetails.UserId,
-           callbackFunction
-        */

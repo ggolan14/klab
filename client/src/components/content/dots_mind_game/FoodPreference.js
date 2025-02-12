@@ -90,12 +90,22 @@ class FoodPreference extends Component {
         // Show welcome page initially
         if (this.state.showWelcomePage) {
             return (
-                <div className="trivia-container">
-                    <h2>Welcome to the food preference survey</h2>
-                    <p>In this survey, you will be asked {this.props.GameCondition === "Repeated" ? 2 : 41} questions about your food preferences.<br />
+                <div style={{
+                    fontSize: "32px",
+                    padding: "20px",
+                    display: "block",
+                    width: "80%", // Adjust width if needed
+                    margin: "20px auto", // Centers the span
+                    marginTop:"300px",
+                    marginLeft:"600px",
+                    textAlign: "left", // Centers the text
+                    alignItems: "center"
+                }}>
+                    <h2><b>Welcome to the food preference survey</b></h2>
+                    <p style={{marginBottom:"100px" , }}>In this survey, you will be asked {this.props.GameCondition === "Repeated" ? 2 : 41} questions about your food preferences.<br />
                         Please answer the {this.props.GameCondition === "Repeated" ? 2 : 41} questions according to your actual preferences.
                     </p>
-                    <button onClick={this.startSurvey}>Next</button>
+                    <button className='pg-game-btn' onClick={this.startSurvey} style={{marginLeft:'300px' ,width:'150px',fontSize: "24px",}}>Next</button>
                 </div>
             );
         }
@@ -103,7 +113,7 @@ class FoodPreference extends Component {
         // Show open-ended question when survey is complete
         if (this.state.showOpenQuestion) {
             return (
-                <div className="trivia-container">
+                <div className="trivia-container" style={{marginTop:'200px'}}>
                     <h3>What is your favorite breakfast food?</h3>
                     <textarea
                         style={{ border: '1px solid #ccc' }}
@@ -112,7 +122,7 @@ class FoodPreference extends Component {
                         rows="4"
                         cols="50"
                     />
-                    <button onClick={this.handleSubmitOpenQuestion} disabled={!this.state.openAnswer.trim()}>Submit</button>
+                    <button className='pg-game-btn' onClick={this.handleSubmitOpenQuestion} disabled={!this.state.openAnswer.trim()} style={{marginLeft:'800px' , marginTop:'50px',width:'150px',fontSize: "24px",}}>Submit</button>
                 </div>
             );
         }
@@ -142,7 +152,7 @@ class FoodPreference extends Component {
                         </li>
                     ))}
                 </ul>
-                <button onClick={this.handleNextQuestion} disabled={isNextDisabled} style={{ marginTop: '10px', alignItems: 'center' }}>
+                <button className='pg-game-btn' onClick={this.handleNextQuestion} disabled={isNextDisabled} style={{marginLeft:'800px' , marginTop:'50px',width:'150px',fontSize: "24px",}}>
                     Next
                 </button>
             </div>
