@@ -42,7 +42,7 @@ const completedDotsMindGame = (
         marginTop:"300px",
         textAlign: "left" // Centers the text
     }}>
-        <label style={{textAlign:'center' , marginLeft:600}}><b>You completed the dots game</b></label>
+        <label style={{textAlign:'center' , marginLeft:400}}><b>You completed the dots game</b></label>
         <br />
         You will now be asked to complete a food preference survey. You cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
         <br />

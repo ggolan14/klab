@@ -97,7 +97,7 @@ class FoodPreference extends Component {
                     width: "80%", // Adjust width if needed
                     margin: "20px auto", // Centers the span
                     marginTop:"300px",
-                    marginLeft:"600px",
+                    marginLeft:"330px",
                     textAlign: "left", // Centers the text
                     alignItems: "center"
                 }}>
