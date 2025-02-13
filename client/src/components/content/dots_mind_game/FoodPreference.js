@@ -122,7 +122,7 @@ class FoodPreference extends Component {
                         rows="4"
                         cols="50"
                     />
-                    <button className='pg-game-btn' onClick={this.handleSubmitOpenQuestion} disabled={!this.state.openAnswer.trim()} style={{marginLeft:'800px' , marginTop:'50px',width:'150px',fontSize: "24px",}}>Submit</button>
+                    <button className='pg-game-btn' onClick={this.handleSubmitOpenQuestion} disabled={!this.state.openAnswer.trim()} style={{marginLeft:'700px' , marginTop:'50px',width:'150px',fontSize: "24px",}}>Submit</button>
                 </div>
             );
         }
@@ -152,7 +152,7 @@ class FoodPreference extends Component {
                         </li>
                     ))}
                 </ul>
-                <button className='pg-game-btn' onClick={this.handleNextQuestion} disabled={isNextDisabled} style={{marginLeft:'800px' , marginTop:'50px',width:'150px',fontSize: "24px",}}>
+                <button className='pg-game-btn' onClick={this.handleNextQuestion} disabled={isNextDisabled} style={{marginLeft:'700px' , marginTop:'50px',width:'150px',fontSize: "24px",}}>
                     Next
                 </button>
             </div>
