@@ -625,15 +625,27 @@ class Game extends React.Component {
     }
 
     onClickBtn(choose_side, choice_time) {
+        
         let not_choose_side = choose_side === 'left' ? 'right' : 'left';
 
         const points = this.getCurrentDots();
         // console.log("++++++++ points = ",points)
         let correct_answer = points.left > points.right ? 'left' : 'right';
         let is_correct_answer = correct_answer === choose_side;
-        if (this.GamePart === "Real")
-            totalBonus.push(is_correct_answer ? 10 : 0);
-
+        
+       
+       
+        if (this.GamePart === "Real"){
+            console.log("---->   choose_side = "+choose_side+"  GameSet.profit_side = "+GameSet.profit_side)
+            /* 
+            If the choosen side matches the profit side,
+             add 10 to the total bonus for this trial ==> this trail is candidate for the bonus; otherwise, 
+             add 0 
+             */
+            choose_side == GameSet.profit_side ? totalBonus.push(10) : totalBonus.push(0)
+            console.log("----> totalBonus = ",totalBonus)
+           
+        }
         if (!is_correct_answer)
             this.game_errors++;
 
