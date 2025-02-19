@@ -283,6 +283,7 @@ let begin_time;
 const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
     const [selectedSide, setSelectedSide] = useState(null);
     const [showSpaceBarLbl, setShowSpaceBarLbl] = useState(false);
+    
     const [containerProps, setContainerProps] = useState({
         head_label: '-----',
         head_show: false,
@@ -366,7 +367,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
 
             {isPractice && (
                 <div style={{ textAlign: "center", fontSize: "36px", color: "red", fontWeight: "bold", marginBottom: "10px" }}>
-                    <label>This is practice round</label>
+                    <label>This is a practice round</label>
                 </div>
             )}
             <div style={{ textAlign: "center", fontSize: "36px" }}>
@@ -396,9 +397,9 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
             {/* Space bar instruction */}
             <label
                 className='pg_bp-space_bar'
-                style={{ visibility: showSpaceBarLbl ? 'visible' : 'hidden' }}
+                style={{ animation: 'none', visibility: 'visible' }}
             >
-                {showSpaceBarLbl ? 'To continue press on space-bar' : '------'}
+                {showSpaceBarLbl ? 'To continue press the space bar' : '------'}
             </label>
         </div>
     );
