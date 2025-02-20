@@ -39,10 +39,10 @@ const completedDotsMindGame = (
         display: "block",
         width: "80%", // Adjust width if needed
         margin: "20px auto", // Centers the span
-        marginTop:"300px",
+        marginTop: "300px",
         textAlign: "left" // Centers the text
     }}>
-        <label style={{textAlign:'center' , marginLeft:400}}><b>You completed the dots game</b></label>
+        <label style={{ textAlign: 'center', marginLeft: 400 }}><b>You completed the dots game</b></label>
         <br />
         You will now be asked to complete a food preference survey. You cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
         <br />
@@ -283,7 +283,7 @@ let begin_time;
 const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
     const [selectedSide, setSelectedSide] = useState(null);
     const [showSpaceBarLbl, setShowSpaceBarLbl] = useState(false);
-    
+
     const [containerProps, setContainerProps] = useState({
         head_label: '-----',
         head_show: false,
@@ -626,26 +626,26 @@ class Game extends React.Component {
     }
 
     onClickBtn(choose_side, choice_time) {
-        
+
         let not_choose_side = choose_side === 'left' ? 'right' : 'left';
 
         const points = this.getCurrentDots();
         // console.log("++++++++ points = ",points)
         let correct_answer = points.left > points.right ? 'left' : 'right';
         let is_correct_answer = correct_answer === choose_side;
-        
-       
-       
-        if (this.GamePart === "Real"){
-            console.log("---->   choose_side = "+choose_side+"  GameSet.profit_side = "+GameSet.profit_side)
+
+
+
+        if (this.GamePart === "Real") {
+            console.log("---->   choose_side = " + choose_side + "  GameSet.profit_side = " + GameSet.profit_side)
             /* 
             If the choosen side matches the profit side,
              add 10 to the total bonus for this trial ==> this trail is candidate for the bonus; otherwise, 
              add 0 
              */
             choose_side == GameSet.profit_side ? totalBonus.push(10) : totalBonus.push(0)
-            console.log("----> totalBonus = ",totalBonus)
-           
+            console.log("----> totalBonus = ", totalBonus)
+
         }
         if (!is_correct_answer)
             this.game_errors++;
@@ -749,10 +749,10 @@ class Game extends React.Component {
                 {step === 3 && (
                     (
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                           <p style={{ marginBottom: "20px" }}>
-                              {completedDotsMindGame}
-                           </p>
-                           <button className='pg-game-btn' onClick={this.nextStep}>Next</button>
+                            <p style={{ marginBottom: "20px" }}>
+                                {completedDotsMindGame}
+                            </p>
+                            <button className='pg-game-btn' onClick={this.nextStep}>Next</button>
                         </div>
                     )
                 )}
@@ -912,13 +912,16 @@ class Start extends React.Component {
 
         let game_template = [];
 
+        // Add initial game messages
         game_template.push({
             Component: GameMessages,
             Props: {
                 insertTextInput: this.props.insertTextInput,
             }
         });
+
         if (GameSet.practice) {
+            // Start Practice Game
             game_template.push({
                 Component: PracticeGame,
                 Props: {
@@ -926,6 +929,7 @@ class Start extends React.Component {
                 }
             });
 
+            // Add Practice Game session
             game_template.push({
                 Component: Game,
                 Props: {
@@ -935,19 +939,37 @@ class Start extends React.Component {
                     insertGameLine: this.props.insertGameLine,
                     sendDataToDB: this.props.sendGameDataToDB
                 }
-
             });
 
+            // End Practice Game
             game_template.push({
                 Component: PracticeGame,
                 Props: {
                     page: 'END',
                 }
             });
+
+            // Add the question component (decision point)
+            game_template.push({
+                Component: UserQuestion,
+                Props: {
+                    onAnswerCorrect: () => this.proceedToRealGame(),
+                    onAnswerIncorrect: () => this.returnToPracticeEnd(),
+                }
+            });
         }
 
+        this.game_template = game_template;
 
-        game_template.push({
+        this.setState({
+            tasks_index: 0,
+            isLoading: false,
+        });
+    }
+
+    // Function to proceed to the real game if the answer is correct
+    proceedToRealGame() {
+        this.game_template.push({
             Component: Game,
             Props: {
                 sendGameDataToDB: this.props.sendGameDataToDB,
@@ -956,16 +978,20 @@ class Start extends React.Component {
                 sendDataToDB: this.props.sendGameDataToDB,
                 Part: 'Real'
             }
-
         });
 
-        this.game_template = game_template;
-
         this.setState({
-            tasks_index: 0,
-            isLoading: false,
-        })
+            tasks_index: this.state.tasks_index + 1, // Move to next step
+        });
     }
+
+    // Function to go back to practice end screen if answer is incorrect
+    returnToPracticeEnd() {
+        this.setState({
+            tasks_index: this.state.tasks_index - 1, // Go back to the last PracticeGame
+        });
+    }
+
     insertGameLine = (db_row) => {
         this.props.insertGameLine(db_row);
     }
@@ -1080,6 +1106,99 @@ Start.propTypes = {
 };
 
 export default Start;
+
+
+
+const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
+    const [answer, setAnswer] = useState("");
+    const [message, setMessage] = useState("");
+
+    // Handle Back button click immediately
+    const handleBack = () => {
+        setMessage("Incorrect! Please read the instructions in the previous screen");
+        onAnswerIncorrect();
+    };
+
+    // Handle Next button click immediately
+    const handleNext = () => {
+        setMessage("Correct! You will now play one round of the dots game.");
+        onAnswerCorrect();
+    };
+
+    // Handle text input change with number validation
+    const handleInputChange = (e) => {
+        const value = e.target.value.trim();
+        setAnswer(value);
+
+        // Check if the input is a valid number
+        if (value === "" || !/^\d+$/.test(value)) {
+            setMessage("Type in numbers only");
+            return;
+        }
+        if (GameCondition == "Repeated") {
+            // Check if the answer is correct or not
+            if (value === "40") {
+                setMessage("Correct! You will now play 40 rounds of the dots game.\nIf you earn 10 points in the selected round you will receive a bonus");
+            } else {
+                setMessage("Incorrect! Please read the instructions in the previous screen");
+            }
+        }
+        else {
+            if (value === "1") {
+                setMessage("Correct! You will now play one round \n of the dots game.\nIf you earn 10 points in this round you will receive a bonus");
+            } else {
+                setMessage("Incorrect! Please read the instructions in the previous screen");
+            }
+        }
+
+    };
+
+    return (
+        <div className='pg_-gw center-screen msg_container'>
+            <p>How many rounds are you going to play now, for real money?</p>
+
+            <input
+                type="text"
+                value={answer}
+                onChange={handleInputChange}
+                placeholder="Enter a number"
+            />
+
+            <div>
+                <button
+                    onClick={handleBack}
+                    disabled={GameCondition=="Repeated" ? (answer == "40") : (answer == "1")}
+                    style={{ marginRight: '10px' }}
+                >
+                    Back
+                </button>
+
+                <button
+                    onClick={handleNext}
+                    disabled={GameCondition=="Repeated" ? (answer !== "40") : (answer !== "1")}
+                >
+                    Next
+                </button>
+            </div>
+
+            {message && (
+                <p>
+                    {message.split('\n').map((line, index) => (
+                        <span key={index}>
+                            {line}
+                            <br />
+                        </span>
+                    ))}
+                </p>
+            )}
+        </div>
+    );
+};
+
+
+
+
+
 
 const PracticeGame = ({ page, Forward }) => {
     isPractice = page === 'START' ? true : false
@@ -1487,7 +1606,7 @@ class GameMessages extends React.Component {
                         </button>
                     )}
 
-                    
+
                     {this.state.page_index !== 4 && this.state.page_index !== 5 && this.state.page_index !== 6 && (
                         <button
                             className='pg-game-btn'
