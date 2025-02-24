@@ -397,9 +397,12 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
             {/* Space bar instruction */}
             <label
                 className='pg_bp-space_bar'
-                style={{ animation: 'none', visibility: 'visible' }}
+                style={{
+                    animation: 'none',
+                    visibility: showSpaceBarLbl ? 'visible' : 'hidden'
+                }}
             >
-                {showSpaceBarLbl ? 'To continue press the space bar' : '------'}
+                To continue press the space bar
             </label>
         </div>
     );
@@ -1167,7 +1170,7 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
             <div>
                 <button
                     onClick={handleBack}
-                    disabled={GameCondition=="Repeated" ? (answer == "40") : (answer == "1")}
+                    disabled={GameCondition == "Repeated" ? (answer == "40") : (answer == "1")}
                     style={{ marginRight: '10px' }}
                 >
                     Back
@@ -1175,7 +1178,7 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
 
                 <button
                     onClick={handleNext}
-                    disabled={GameCondition=="Repeated" ? (answer !== "40") : (answer !== "1")}
+                    disabled={GameCondition == "Repeated" ? (answer !== "40") : (answer !== "1")}
                 >
                     Next
                 </button>
@@ -1212,7 +1215,7 @@ const PracticeGame = ({ page, Forward }) => {
                     __html: page === 'START'
                         ? 'Start practice'
                         : `Practice is over.<br/>
-               You will now play ${GameCondition === "OneShot" ? "one round" : `${num_of_real_rounds} rounds`} 
+               You will now play ${GameCondition === "OneShot" ? "<b>one round</b>" : `<b>40 rounds</b>`} 
                of the dots game for real bonus.<br/>
                <u>Remember: ${GameCondition === "OneShot" ? "Your bonus depends on the points you earn in this round" : "Your bonus will depend on the points you earn in one round, which will be randomly selected by the computer"}. 
                </u>`
@@ -1250,16 +1253,18 @@ class GameMessages extends React.Component {
     }
 
     Page0 = () => {
+        const isRepeated = GameCondition === "Repeated";
+        let oneShotNumOfRounds = "one round";
+        let repeatedNumOfRounds = "40 rounds";
+
         return (
             <div>
                 <b>Welcome to the study!</b><br />
                 The study includes two independent parts.<br /><br />
-                In the first part, you will play the dots game and can win a bonus based<br />
-                on your performance. In the second part, you will fill out a food preference survey with no bonus.
+                In the first part, you will practice and then play {isRepeated ? repeatedNumOfRounds : oneShotNumOfRounds} of the dots game and can win a bonus <br />
+                based on your performance. In the second part, you will fill out a food preference survey with no bonus.
                 <br /><br />
                 Note that you should not leave or stop responding until you have completed the entire study and have received your completion code. If you leave or stop responding before completing the two parts, you will not receive compensation.
-
-
             </div>
         );
     };
