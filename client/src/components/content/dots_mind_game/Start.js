@@ -1140,15 +1140,15 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
         }
         if (GameCondition == "Repeated") {
             // Check if the answer is correct or not
-            if (value === "40") {
-                setMessage("Correct! You will now play 40 rounds of the dots game.\nIf you earn 10 points in the selected round you will receive a bonus");
+            if (value === "42") {
+                setMessage("Correct! You will now play 42 rounds of the dots game.\nOne randomly selected round will determine your bonus.");
             } else {
                 setMessage("Incorrect! Please read the instructions in the previous screen");
             }
         }
         else {
             if (value === "1") {
-                setMessage("Correct! You will now play one round \n of the dots game.\nIf you earn 10 points in this round you will receive a bonus");
+                setMessage("Correct! You will now play one round of the dots game.\nThis round will determine your bonus");
             } else {
                 setMessage("Incorrect! Please read the instructions in the previous screen");
             }
@@ -1215,7 +1215,7 @@ const PracticeGame = ({ page, Forward }) => {
                     __html: page === 'START'
                         ? 'Start practice'
                         : `Practice is over.<br/>
-               You will now play ${GameCondition === "OneShot" ? "<b>one round</b>" : `<b>40 rounds</b>`} 
+               You will now play ${GameCondition === "OneShot" ? "<b>one round</b>" : `<b>42 rounds</b>`} 
                of the dots game for real bonus.<br/>
                <u>Remember: ${GameCondition === "OneShot" ? "Your bonus depends on the points you earn in this round" : "Your bonus will depend on the points you earn in one round, which will be randomly selected by the computer"}. 
                </u>`
@@ -1255,7 +1255,7 @@ class GameMessages extends React.Component {
     Page0 = () => {
         const isRepeated = GameCondition === "Repeated";
         let oneShotNumOfRounds = "one round";
-        let repeatedNumOfRounds = "40 rounds";
+        let repeatedNumOfRounds = "42 rounds";
 
         return (
             <div>
