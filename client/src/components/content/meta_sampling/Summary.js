@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const span_style = {
     marginLeft: '0.3rem',

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import api from "../utils/api";
 import api_download from "../utils/api_download";
-import {CURRENT_URL} from "../utils/current_url";
 import api_upload from "../utils/api_upload";
 const config = {
     headers: {

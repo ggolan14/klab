@@ -5,8 +5,6 @@ import {convertPointsRatio} from "../../screens/settings/settings";
 import './pogStyles.css';
 import ColorPicker from "../../layout/colorPicker/color_picker";
 
-let GameCondition = null;
-
 const Colors = ({settings, changeSettings, label, attr}) => {
     return (
         <div className='t-o-g-u_set_m-s_kv'>

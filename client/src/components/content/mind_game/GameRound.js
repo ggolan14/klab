@@ -5,7 +5,6 @@ const GameRound = ({ onShowConfirmation }) => {
   console.log("===> component loaded");
   const [diceClass, setDiceClass] = useState('');
   const [diceTransform, setDiceTransform] = useState('');
-  const [random, setRandom] = useState(1);
   const [renderKey, setRenderKey] = useState(0); // State to trigger re-rendering
   const [showButton, setShowButton] = useState(true);
   const [doneText, setDoneText] = useState(''); // New state to control "Done" text

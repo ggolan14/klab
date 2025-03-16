@@ -41,7 +41,6 @@ class FoodPreference extends Component {
   
 
 
-      const currentQuestion2 = "What is your favorite breakfast food?";
       const answer2 = nonRobotAnswer; // Adjust for 0-based index
       if (typeof answer === 'undefined' || answer === null) return;
   
