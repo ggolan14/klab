@@ -1178,7 +1178,7 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
 
                 <button
                     onClick={handleNext}
-                    disabled={GameCondition == "Repeated" ? (answer !== "40") : (answer !== "1")}
+                    disabled={GameCondition == "Repeated" ? (answer !== "42") : (answer !== "1")}
                 >
                     Next
                 </button>
