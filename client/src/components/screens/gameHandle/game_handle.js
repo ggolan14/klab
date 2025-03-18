@@ -12,6 +12,12 @@ import TryOrGiveUpSummary from "../../content/try_or_give_up/Summary";
 import TriviaStart from "../../content/trivia/Start";
 import TriviaSummary from "../../content/trivia/Summary";
 
+import PrmStart from "../../content/prm/Start";
+import PrmSummary from "../../content/prm/Summary";
+
+import SpatialSearchStart from "../../content/spatial_search/Start";
+import SpatialSearchSummary from "../../content/spatial_search/Summary";
+
 import MindGameStart from "../../content/mind_game/Start";
 import MindGameSummary from "../../content/mind_game/Summary";
 
@@ -497,6 +503,8 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
         MixedGame: <MixedGameStart {...game_props} extended_name={extended_name} />,
         MindGame: <MindGameStart {...game_props} game_settings={setCondForComponent("MindGame", game_settings, additionalParams)} />,
         Trivia: <TriviaStart {...game_props} game_settings={setCondForComponent("Trivia", game_settings, additionalParams)} />,
+        Prm: <PrmStart {...game_props} />,
+        SpatialSearch: <SpatialSearchStart {...game_props} />,
         TryOrGiveUp: <TryOrGiveUpStart {...game_props} />,
         PointsGame: <PointsGameStart {...game_props} />,
         MegaDots: <MegaDotsStart {...game_props} />,
@@ -718,6 +726,22 @@ const getSummary = ({ exp, summary_args }) => {
             label: 'Trivia',
             element: () => (
                 <TriviaSummary
+                    SummaryArgs={summary_args}
+                />
+            )
+        },
+        Prm: {
+            label: 'Prm',
+            element: () => (
+                <PrmSummary
+                    SummaryArgs={summary_args}
+                />
+            )
+        },
+        SpatialSearch: {
+            label: 'SpatialSearch',
+            element: () => (
+                <SpatialSearchSummary
                     SummaryArgs={summary_args}
                 />
             )

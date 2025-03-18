@@ -23,6 +23,8 @@ const {MegaDotsVersions, MegaDotsUsersRecords} = require('./all_models/MegaDots'
 const {DotsMindGameVersions, DotsMindGameUsersRecords} = require('./all_models/DotsMindGame');
 const {TryOrGiveUpVersions, TryOrGiveUpUsersRecords} = require('./all_models/TryOrGiveUp');
 const {TriviaVersions, TriviaUsersRecords} = require('./all_models/Trivia');
+const {PrmVersions, PrmUsersRecords} = require('./all_models/Prm');
+const {SpatialSearchVersions, SpatialSearchUsersRecords} = require('./all_models/SpatialSearch');
 const {MindGameVersions, MindGameUsersRecords} = require('./all_models/MindGame');
 const {MixedGameVersions, MixedGameUsersRecords} = require('./all_models/MixedGame');
 const User = require('./all_models/User');
@@ -145,6 +147,70 @@ const defaultVersions = {
     },
     
     Trivia: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            force_full_screen: "false",
+            cond: 'o',
+            s_c: false,
+            trials: 40,
+            reward: 100,
+            no_ask: 'None'  // ['None', 'Random', 1-10]
+        },
+        payments: {
+            // COINSIGN: "pound",
+            // SHOWUP: 2,
+            // EXCHANGERATIO: 100,
+            // INITIALBONUS: 0.4,
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            // TIMEOUT: "00:00",
+            // EXPNAME: "",
+            redirect_to: "",
+            need_summary: true,
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'Yes'
+        },
+    },
+    Prm: {
+        version: 'test',
+        last_modified: '-',
+        date_modified: '-',
+        game: {
+            force_full_screen: "false",
+            cond: 'o',
+            s_c: false,
+            trials: 40,
+            reward: 100,
+            no_ask: 'None'  // ['None', 'Random', 1-10]
+        },
+        payments: {
+            // COINSIGN: "pound",
+            // SHOWUP: 2,
+            // EXCHANGERATIO: 100,
+            // INITIALBONUS: 0.4,
+            sign_of_reward: "£",
+            show_up_fee: 1,
+            exchange_ratio: 100,
+            bonus_endowment: 0.4
+        },
+        general: {
+            // TIMEOUT: "00:00",
+            // EXPNAME: "",
+            redirect_to: "",
+            need_summary: true,
+            action_time: 60,
+            second_warning: 10,
+            consent_form: 'Yes'
+        },
+    },
+    SpatialSearch: {
         version: 'test',
         last_modified: '-',
         date_modified: '-',
@@ -2722,6 +2788,18 @@ const AllModels = {
     Trivia: {
         versions: TriviaVersions,
         records: TriviaUsersRecords,
+        extra: {},
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
+    Prm: {
+        versions: PrmVersions,
+        records: PrmUsersRecords,
+        extra: {},
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
+    SpatialSearch: {
+        versions: SpatialSearchVersions,
+        records: SpatialSearchUsersRecords,
         extra: {},
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },

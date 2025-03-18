@@ -1,6 +1,8 @@
 const EXPERIMENTS_LABELS_NAMES = {
     TwoMatricesExperiment: 'TryOrGiveUp',
     Trivia: 'Trivia',
+    Prm: 'Prm',
+    SpatialSearch: 'SpatialSearch',
     MindGame:'MindGame',
     MixedGame:'MixedGame',
     PointsGame: 'PointsGame',
@@ -30,6 +32,8 @@ const EXPERIMENTS_LABELS_NAMES = {
 
 const EXPERIMENTS_NAMES_LABELS = {
     Trivia: 'Trivia',
+    Prm: 'Prm',
+    SpatialSearch: 'SpatialSearch',
     MindGame:'MindGame',
     MixedGame:'MixedGame',
     TryOrGiveUp: 'TwoMatricesExperiment',

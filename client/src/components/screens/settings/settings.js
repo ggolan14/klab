@@ -571,7 +571,7 @@ const SettingsBody = ({_this, changeSettings}) => {
         )
     }
     catch (e) {
-        return <label>Some error happened</label>
+        return <label>Some error happened3</label>
     }
 };
 

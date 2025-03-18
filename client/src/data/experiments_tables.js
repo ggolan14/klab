@@ -15,6 +15,22 @@ export const AllExperiments ={
         consent_pathname: '/Trivia/consent',
         exp_messages_pathname: '/Trivia/exp_messages',
     },
+    Prm: {
+        main_pathname: '/Prm/main',
+        settings_pathname: '/Prm/settings',
+        start_pathname: '/Prm/start',
+        reports_pathname: '/Prm/reports',
+        consent_pathname: '/Prm/consent',
+        exp_messages_pathname: '/Prm/exp_messages',
+    },
+    SpatialSearch: {
+        main_pathname: '/SpatialSearch/main',
+        settings_pathname: '/SpatialSearch/settings',
+        start_pathname: '/SpatialSearch/start',
+        reports_pathname: '/SpatialSearch/reports',
+        consent_pathname: '/SpatialSearch/consent',
+        exp_messages_pathname: '/SpatialSearch/exp_messages',
+    },
     MindGame: {
         main_pathname: '/MindGame/main',
         settings_pathname: '/MindGame/settings',
@@ -219,6 +235,9 @@ const ExperimentsTablesCols = {
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },
     Trivia: {
+        tables: ['game', 'payment', 'summary', 'KeyTable'],
+    },
+    SpatialSearch: {
         tables: ['game', 'payment', 'summary', 'KeyTable'],
     },
     TryOrGiveUp: {
