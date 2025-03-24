@@ -1,7 +1,7 @@
 export const generalSettings = (game_settings, LAST_SETTING_NAME, versions_list, changeSettings) => ([
     {
         type: 'Input',
-        label: 'Version2:',
+        label: 'Version:',
         show: true,
         class_name: 'admin-settings-input-big ' + 
             (game_settings.version === 'test' ? ' disabledElem ' : '') +
