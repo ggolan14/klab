@@ -1,0 +1,23 @@
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(200, 5px);
+    grid-template-rows: repeat(200, 5px);
+    gap: 1px;
+    background-color: black;
+    padding: 5px;
+  }
+  
+  .row {
+    display: contents;
+  }
+  
+  .cell {
+    width: 5px;
+    height: 5px;
+    background-color: white;
+  }
+  
+  .player {
+    background-color: blue;
+  }
+  

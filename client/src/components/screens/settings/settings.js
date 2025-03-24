@@ -527,6 +527,7 @@ const SettingButtons = ({_this,}) => {
 };
 
 const SettingsBody = ({_this, changeSettings}) => {
+    console.log("--->  in SettingsBody=",changeSettings)
     try {
         return (
             <>
@@ -571,7 +572,8 @@ const SettingsBody = ({_this, changeSettings}) => {
         )
     }
     catch (e) {
-        return <label>Some error happened3</label>
+        console.log(e)
+        return <label>Some error happened</label>
     }
 };
 

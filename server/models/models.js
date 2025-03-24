@@ -220,7 +220,9 @@ const defaultVersions = {
             s_c: false,
             trials: 40,
             reward: 100,
-            no_ask: 'None'  // ['None', 'Random', 1-10]
+            no_ask: 'None',  // ['None', 'Random', 1-10]
+            trial_duration:120000,
+            num_of_resources: 10,
         },
         payments: {
             // COINSIGN: "pound",
