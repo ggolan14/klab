@@ -65,6 +65,19 @@ const Settings = ({ game_settings, changeSettings, LAST_SETTING_NAME, versions_l
                 value,
             })
         },
+        {
+            type: 'Select',
+            label: 'Show resources:',
+            show: true,
+            options: ['true', 'false'],
+            value: game_settings.game.show_resources,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'show_resources',
+                value,
+            })
+        },
         /*
         {
             type: 'Input',

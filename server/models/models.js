@@ -216,6 +216,7 @@ const defaultVersions = {
         date_modified: '-',
         game: {
             show_path:"true",
+            show_resources:"true",
             force_full_screen: "false",
             cond: 'o',
             s_c: false,

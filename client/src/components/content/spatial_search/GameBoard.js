@@ -9,8 +9,9 @@ const SPEED = 1;
 const TRIAL_DURATION = 120000; // 2 minutes
 const TOTAL_TRIALS = 5;
 let showPath;
+let showResources;
 
-const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame,gameSettings }) => {
+const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gameSettings }) => {
   const [coins, setCoins] = useState([]);
   const canvasRef = useRef(null);
   const [playerPosition, setPlayerPosition] = useState(INITIAL_POSITION);
@@ -20,11 +21,13 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame,game
   const [currentTrial, setCurrentTrial] = useState(1);
   const [timeLeft, setTimeLeft] = useState(TRIAL_DURATION / 1000);
   const [trialStarted, setTrialStarted] = useState(false);
-  showPath = gameSettings.game.show_path=="true" ? true : false
-  
+  showPath = gameSettings.game.show_path == "true" ? true : false;
+  showResources = gameSettings.game.show_resources == "true" ? true : false;
+
   useEffect(() => {
     const loadCoinsFromCSV = async () => {
-      const fileName = GameCondition === 'clustered' ? 'clustered_resources.csv' : 'diffuse_resources.csv';
+      const fileName = GameCondition === 'Clustered' ? 'clustered_resources.csv' : 'diffuse_resources.csv';
+      console.log("---> GameCondition="+GameCondition+"  fileName="+fileName)
       try {
         const response = await fetch(`/${fileName}`);
         const text = await response.text();
@@ -64,35 +67,49 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame,game
     };
 
     const drawVisitedCells = () => {
-      
       ctx.fillStyle = "blue";
       visitedCells.forEach((cell) => {
         const [x, y] = cell.split(",").map(Number);
-        if(showPath)
+        if (showPath){
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        }
+        ctx.fillStyle = "darkblue";
+  ctx.fillRect(
+    playerPosition.x * CELL_SIZE,
+    playerPosition.y * CELL_SIZE,
+    CELL_SIZE,
+    CELL_SIZE
+  );
       });
-      
     };
 
     const drawCoins = () => {
       coins.forEach(({ x, y, found }) => {
-        
-        if(found){
-          console.log("===> coin that was found x="+x+"  y="+y+" found="+found)
+        if (found) {
           ctx.fillStyle = 'red';
+          ctx.beginPath();
+          ctx.arc(
+            x * CELL_SIZE + CELL_SIZE / 2,
+            y * CELL_SIZE + CELL_SIZE / 2,
+            CELL_SIZE / 2,
+            0,
+            2 * Math.PI
+          );
+          ctx.fill();
         }
+        //else if(showResources){
         else{
-        ctx.fillStyle = 'grey';
-      }
-        ctx.beginPath();
-        ctx.arc(
-          x * CELL_SIZE + CELL_SIZE / 2,
-          y * CELL_SIZE + CELL_SIZE / 2,
-          CELL_SIZE / 2,
-          0,
-          2 * Math.PI
-        );
-        ctx.fill();
+          ctx.fillStyle = 'grey';
+        }
+          ctx.beginPath();
+          ctx.arc(
+            x * CELL_SIZE + CELL_SIZE / 2,
+            y * CELL_SIZE + CELL_SIZE / 2,
+            CELL_SIZE / 2,
+            0,
+            2 * Math.PI
+          );
+          ctx.fill();
       });
     };
 
@@ -100,7 +117,6 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame,game
       drawGrid();
       drawVisitedCells();
       drawCoins();
-      
     };
 
     updateCanvas();
@@ -167,7 +183,7 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame,game
 
     ctx.beginPath();
     ctx.arc(0, 0, radius - 2, 0, 2 * Math.PI);
-    ctx.fillStyle = "lightgray";
+    ctx.fillStyle = "lightgreen";
     ctx.fill();
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
@@ -243,8 +259,8 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame,game
           height="60"
           style={{
             position: "absolute",
-            top: 10,
-            right: 10,
+            top: 50,
+            right: 100,
             borderRadius: "50%",
             backgroundColor: "white",
             border: "2px solid black",
