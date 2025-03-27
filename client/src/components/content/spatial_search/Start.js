@@ -1,40 +1,26 @@
 import React, { Component } from 'react';
-//import './gameStyles.css';
-//import trivia_questions from './trivia_questions.json';
+import './gameStyles.css';
 import { getTimeDate } from "../../../utils/app_utils";
 import { NewLogs } from "../../../actions/logger";
 import { DebuggerModalView, KeyTableID } from "../../screens/gameHandle/game_handle";
 //import TriviaIntroduction from './TriviaIntroduction';
-import FoodPreference from '../../../common/FoodPreference';
-import ResourceAllocation from '../mind_game/ResourceAllocation';
-import { formatPrice } from '../../utils/StringUtils';
-import MathQuestion from '../../../common/MathQuestion';
+//import { formatPrice } from '../../utils/StringUtils';
+//import MathQuestion from '../../../common/MathQuestion';
 import GameStage from './GameStage';
 const ThisExperiment = 'SpatialSearch';
 
 
-let trivia_questions=[]
 let UserId = 'empty';
 let RunningName = '-';
 let SignOfReward = "$";
 let GameCondition = null;
-let NUM_OF_PRACTICE_QUESTIONS = 4;
 let lastIndex;
-let startShowQuestionTimer = 0;
-let endShowQuestionTimer = 0;
-let startShowConfirmationTimer = 0;
-let endShowConfirmationTimer = 0;
-let totalShowQuestionTime = 0;
-let totalShowConfirmationTime = 0;
 let trialDuration = 120000;
-//let extended_name;
-const yesButtonInRight = Math.random() < 0.5;
-
 
 class Start extends Component {
   constructor(props) {
     super(props);
-    this.props=props;
+    this.props = props;
 
     this.TotalBonus = [];
     let RunCounter = KeyTableID();
@@ -68,94 +54,41 @@ class Start extends Component {
     }
 
     //set lastIndex according to GameCondition . 
-    
-    console.log("------------------> Exp= "+ThisExperiment+"-"+GameCondition+"  lastIndex="+lastIndex)
+
+    console.log("------------------> Exp= " + ThisExperiment + "-" + GameCondition + "  lastIndex=" + lastIndex)
 
     this.state = {
-      //currentQuestionIndex: 0,
-      //showConfirmation: false,
-      //correctAnswer: null,
-      //showResult: false,
-      /*
-      showQuestion: true,
-      yesClickCount: 0,
-      noClickCount: 0,
-      practiceMode: true,
-      isLast: false,
-      gameCondition: GameCondition,
-      hideMessages: false,
-      practiceIsOver: false,
-      hideTriviaCompleted: false,
-      showWelcomeToFoodPreference: false,
-      userAnswers: {},
-      mathAnsweredCorrectly: false,
-      showError: false,
-      */
 
     };
   }
 
-    // Method to handle the result from the MathQuestion component
-    handleMathQuestionAnswer = (isCorrect) => {
-      if (isCorrect) {
-        this.setState({ mathAnsweredCorrectly: true, showError: false });
-      } else {
-        this.setState({ showError: true });
-      }
-    };
-
-  componentDidMount(){
-    NewLogs({
-        user_id: this.UserId,
-        exp: ThisExperiment,
-        running_name: this.RunningName,
-        action: 'G.L',
-        type: 'LogGameType',
-        more_params: {
-            local_t: getTimeDate().time,
-            local_d: getTimeDate().date,
-        },
-    }).then((res) => {
-        this.START_APP_MIL = Date.now();
-        this.props.SetLimitedTime(true);
-        this.setState({isLoading: false});
-    });
-}
-
-  addRecord = (questionIndex, value) => {
-    const { userAnswers } = this.state;
-    this.setState(prevState => ({
-      userAnswers: {
-        ...prevState.userAnswers,
-        [questionIndex]: value
-      }
-    }));
+  // Method to handle the result from the MathQuestion component
+  handleMathQuestionAnswer = (isCorrect) => {
+    if (isCorrect) {
+      this.setState({ mathAnsweredCorrectly: true, showError: false });
+    } else {
+      this.setState({ showError: true });
+    }
   };
 
-  handleHideMessages = () => {
-    startShowQuestionTimer = getTimeDate().now;
-    this.setState({ hideMessages: true });
+  componentDidMount() {
+    NewLogs({
+      user_id: this.UserId,
+      exp: ThisExperiment,
+      running_name: this.RunningName,
+      action: 'G.L',
+      type: 'LogGameType',
+      more_params: {
+        local_t: getTimeDate().time,
+        local_d: getTimeDate().date,
+      },
+    }).then((res) => {
+      this.START_APP_MIL = Date.now();
+      this.props.SetLimitedTime(true);
+      this.setState({ isLoading: false });
+    });
   }
 
-  handelHideTriviaCompleted = () => {
-    this.setState({ hideTriviaCompleted: true, showWelcomeToFoodPreference: true });
-  }
-
-  handelHideWelcomeToFoodPreference = () => {
-    this.setState({ showWelcomeToFoodPreference: false });
-  }
-
-  handleHidePracticeIsOver = () => {
-    this.setState({ practiceIsOver: true });
-  }
-/*
-This function is invoked when user answerd question and would like to move to the next question.
-*/
- 
-
-/*
-This function is invoked when user confirmed (click yes or no).
-*/
 
 
   insertGameLine = (db_row) => {
@@ -221,24 +154,25 @@ This function is invoked when user confirmed (click yes or no).
   }
 
   calculateBonus() {
-   let total_bonus = 5555
+    let total_bonus = 5555
     return total_bonus;
   }
 
   addGameBonus(game_data) {
-   
+
     return {
-     // selectedQuestionPoints: selectedQuestionPoints,
-     // randomSelectedQuestion: randomSelectedQuestion
+      // selectedQuestionPoints: selectedQuestionPoints,
+      // randomSelectedQuestion: randomSelectedQuestion
     };
   }
-  
+
   render() {
     return (
+
       <div>
-          <GameStage GameCondition trialDuration/>
+        <GameStage GameCondition={GameCondition} trialDuration={trialDuration} gameSettings={this.props.game_settings}/>
       </div>
-  );
+    );
   }
 
 

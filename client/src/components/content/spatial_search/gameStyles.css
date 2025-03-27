@@ -1,0 +1,114 @@
+.button {
+  margin: 30px;
+  padding: 30px;
+  width: 300px;
+  height: 100px;
+  border: none;
+  border-radius: 20px;
+  font-size: 36px;
+  background-color: inherit; /* Maintain the background color */
+  color: black !important; /* Force text color to black */
+}
+
+.green-button {
+  background-color: greenyellow;
+}
+
+.green-button:hover {
+  background-color: greenyellow !important;
+  color: black !important; /* Force text color to black on hover */
+}
+
+.green-button:active {
+  background-color: greenyellow !important;
+  color: black !important; /* Force text color to black when active */
+}
+
+.blue-button {
+  background-color: rgb(0, 217, 255);
+}
+
+.blue-button:hover {
+  background-color: rgb(0, 217, 255) !important;
+  color: black !important; /* Force text color to black on hover */
+}
+
+.blue-button:active {
+  background-color: rgb(0, 217, 255) !important;
+  color: black !important; /* Force text color to black when active */
+}
+
+.shared-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.shared-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.center-text {
+  text-align: center;
+  display: block;
+}
+
+.correct-message {
+  color: green;
+  width: 100%; /* Full width for better alignment */
+  display: flex;
+}
+
+.wrong-message {
+  color: red;
+  width: 100%; /* Full width for better alignment */
+  display: flex;
+  
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns all child elements to the left */
+  padding: 20px; /* Adds padding around the container */
+  width: 80vw;
+  margin: 0 auto; /* Centers the container horizontally */
+}
+
+.question-container {
+  margin-bottom: 20px; /* Adds space between the question and options */
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns options to the left */
+  margin-bottom: 20px; /* Adds space between options and feedback */
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Space between each option */
+}
+
+.option-label input[type="radio"] {
+  margin-right: 10px; /* Space between radio button and option text */
+}
+
+.correct-message,
+.wrong-message {
+  min-height: 20px; /* Ensures space is reserved for feedback */
+  margin-bottom: 20px; /* Space between feedback and the submit button */
+}
+
+.button-container {
+  align-self: center; /* Centers the button horizontally */
+}
+.center-text {
+  text-align: center;
+}

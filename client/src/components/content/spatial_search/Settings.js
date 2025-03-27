@@ -40,8 +40,35 @@ const Settings = ({ game_settings, changeSettings, LAST_SETTING_NAME, versions_l
             })
         },
         {
+            type: 'Select',
+            label: 'Force full screen:',
+            show: true,
+            options: ['true', 'false'],
+            value: game_settings.game.force_full_screen,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'force_full_screen',
+                value,
+            })
+        },
+        {
+            type: 'Select',
+            label: 'Show path:',
+            show: true,
+            options: ['true', 'false'],
+            value: game_settings.game.show_path,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'show_path',
+                value,
+            })
+        },
+        /*
+        {
             type: 'Input',
-            label: 'Trial duratioin:',
+            label: 'Trial duratioin (milisec):',
             show: true,
             class_name: '',
             value: game_settings.game.trial_duration,
@@ -71,6 +98,7 @@ const Settings = ({ game_settings, changeSettings, LAST_SETTING_NAME, versions_l
                 value,
             })
         },
+        */
     ]
 
     return (
