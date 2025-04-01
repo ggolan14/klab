@@ -58,10 +58,14 @@ class Start extends Component {
     console.log("------------------> Exp= " + ThisExperiment + "-" + GameCondition + "  lastIndex=" + lastIndex)
 
     this.state = {
-
+     // foundResources :0
     };
   }
-
+  /*
+  setNumOfFoundResources = (num_of_found_resources) => {
+    this.setState({ foundResources: num_of_found_resources });
+  };
+  */
   // Method to handle the result from the MathQuestion component
   handleMathQuestionAnswer = (isCorrect) => {
     if (isCorrect) {
@@ -96,10 +100,12 @@ class Start extends Component {
   }
 
   Forward(finish_game, game_data) {
-    console.log("---> In Forward")
+  
+    
   }
 
-  sendDataToDB = (send) => {
+  sendDataToDB = (withSummary,totalFoundCoins) => {
+    console.log("---> in Start  sendDataToDB withSummary="+withSummary+"  totalFoundCoins="+totalFoundCoins)
     const current_time = getTimeDate();
     var reward_sum = 0;
     var temp_sign_of_reward = this.PaymentsSettings.sign_of_reward
@@ -121,13 +127,13 @@ class Start extends Component {
             local_d: current_time.date,
           },
         }).then((res) => { });
-        if (send) {
+        if (withSummary) {
           var result = this.addGameBonus();
-          var total_bonus = result.selectedQuestionPoints;
-          var randomSelectedQuestion = result.randomSelectedQuestion;
+          var total_bonus = totalFoundCoins//result.selectedQuestionPoints;
+          
 
           this.PaymentsSettings.total_bonus = total_bonus;
-          this.PaymentsSettings.randomSelectedQuestion = randomSelectedQuestion;
+          //this.PaymentsSettings.randomSelectedQuestion = randomSelectedQuestion;
 
           this.props.insertPayment({
             exchange_ratio: this.PaymentsSettings.exchange_ratio,
@@ -161,16 +167,17 @@ class Start extends Component {
   addGameBonus(game_data) {
 
     return {
-      // selectedQuestionPoints: selectedQuestionPoints,
-      // randomSelectedQuestion: randomSelectedQuestion
+     //  selectedQuestionPoints: 123,
+     //  randomSelectedQuestion: randomSelectedQuestion
     };
   }
+
 
   render() {
     return (
 
       <div>
-        <GameStage GameCondition={GameCondition} trialDuration={trialDuration} gameSettings={this.props.game_settings}/>
+        <GameStage GameCondition={GameCondition} trialDuration={trialDuration}  gameSettings={this.props.game_settings} insertGameLine={this.insertGameLine} sendDataToDB={this.sendDataToDB}  />
       </div>
     );
   }

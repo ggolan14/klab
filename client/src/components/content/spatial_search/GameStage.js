@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './gameStyles.css';
 import GameBoard from './GameBoard.js';
+import { RiFontColor } from 'react-icons/ri';
 
-const GameStage = ({ GameCondition, trialDuration ,gameSettings}) => {
+const GameStage = ({ GameCondition, trialDuration ,gameSettings, insertGameLine, sendDataToDB }) => {
 
     const [stage, setStage] = useState('instructions'); // 'instructions' -> 'training' -> 'mainTask'
     //const [taskCompleted, setTaskCompleted] = useState(false);
-
+    
     const handleNextStage = () => {
         console.log("---> handleNextStage")
         if (stage === 'instructions') setStage('trainingInstruction');
@@ -15,14 +16,26 @@ const GameStage = ({ GameCondition, trialDuration ,gameSettings}) => {
         else if (stage === 'mainTaskInstruction') setStage('mainTask');
     };
 
-    const finishGame = () => {
-        console.log("---> finishGame")
+    const finishGame = (totalFoundCoins) => {
+        console.log("---> finishGame totalFoundCoins="+totalFoundCoins)
+        sendDataToDB(true,totalFoundCoins);
         setStage('finish');
+
     };
     console.log("----> before return stage=" + stage)
     return (
 
-        <div>
+        <div style={{
+            width: "800px",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "0 auto",
+            textAlign: "left",
+            fontSize: "30px",
+          }}>
             {stage === 'instructions' && (
                 <div>
                     <h2>Welcome!</h2>
@@ -36,7 +49,9 @@ const GameStage = ({ GameCondition, trialDuration ,gameSettings}) => {
                         Good luck and enjoy the task!
 
                     </p>
+                    <div className="button-container">
                     <button onClick={handleNextStage}>Next</button>
+                    </div>
                 </div>
             )}
             {stage === 'trainingInstruction' && (
@@ -46,7 +61,9 @@ const GameStage = ({ GameCondition, trialDuration ,gameSettings}) => {
                         You can hold down the keys for smooth and continuous movement.
                         To complete the training, successfully navigate your icon to the maze exit.
                     </p>
+                    <div className="button-container">
                     <button onClick={handleNextStage}>Next</button>
+                    </div>
                 </div>
             )}
             {stage === 'training' && (
@@ -60,6 +77,9 @@ const GameStage = ({ GameCondition, trialDuration ,gameSettings}) => {
                         trialDuration={trialDuration}
                         onTrainingComplete={() => setStage('mainTask')}
                         gameSettings={gameSettings}
+                        insertGameLine = {insertGameLine}
+                        sendDataToDB = {sendDataToDB}
+                        
                     />
 
                 </div>
@@ -82,13 +102,16 @@ const GameStage = ({ GameCondition, trialDuration ,gameSettings}) => {
                         trialDuration={trialDuration}
                         onFinishGame={finishGame}
                         gameSettings={gameSettings}
+                        insertGameLine = {insertGameLine}
+                        sendDataToDB = {sendDataToDB}
+                      
                     />
                 </div>
             )}
 
             {stage === 'finish' && (
-                <div>
-                    <h2>Game Over!</h2>
+                <div style={{ color: 'green' }}>
+                    <h2><b>Game Over!</b></h2>
                     <p>Thank you</p>
                     {/*<Element />*/}
                     {/* <SpatialSearch stage="mainTask" /> */}

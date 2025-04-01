@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./GameBoard.css";
+import { getTimeDate } from "../../../utils/app_utils";
 
 const GRID_SIZE = 200;
 const CELL_SIZE = 4;
 const INITIAL_POSITION = { x: Math.floor(GRID_SIZE / 2), y: Math.floor(GRID_SIZE / 2) };
 const INITIAL_DIRECTION = -90;
 const SPEED = 1;
-const TRIAL_DURATION = 120000; // 2 minutes
-const TOTAL_TRIALS = 5;
+const TRIAL_DURATION = 8000;
+const TOTAL_TRIALS = 3;
 let showPath;
 let showResources;
 
-const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gameSettings }) => {
+const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gameSettings, insertGameLine, sendDataToDB }) => {
   const [coins, setCoins] = useState([]);
   const canvasRef = useRef(null);
   const [playerPosition, setPlayerPosition] = useState(INITIAL_POSITION);
@@ -21,13 +22,15 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
   const [currentTrial, setCurrentTrial] = useState(1);
   const [timeLeft, setTimeLeft] = useState(TRIAL_DURATION / 1000);
   const [trialStarted, setTrialStarted] = useState(false);
+  const [totalFoundCoins, setTotalFoundCoins] = useState(0);
+  const totalFoundCoinsRef = useRef(0);
+  const isOutsideGrid = useRef(false);
   showPath = gameSettings.game.show_path == "true" ? true : false;
   showResources = gameSettings.game.show_resources == "true" ? true : false;
 
   useEffect(() => {
     const loadCoinsFromCSV = async () => {
       const fileName = GameCondition === 'Clustered' ? 'clustered_resources.csv' : 'diffuse_resources.csv';
-      console.log("---> GameCondition="+GameCondition+"  fileName="+fileName)
       try {
         const response = await fetch(`/${fileName}`);
         const text = await response.text();
@@ -52,7 +55,7 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
     const drawGrid = () => {
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = "grey";
       ctx.lineWidth = 0.5;
       for (let i = 0; i <= GRID_SIZE; i++) {
         ctx.beginPath();
@@ -70,17 +73,18 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
       ctx.fillStyle = "blue";
       visitedCells.forEach((cell) => {
         const [x, y] = cell.split(",").map(Number);
-        if (showPath){
+        if (showPath) {
           ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
-        ctx.fillStyle = "darkblue";
-  ctx.fillRect(
-    playerPosition.x * CELL_SIZE,
-    playerPosition.y * CELL_SIZE,
-    CELL_SIZE,
-    CELL_SIZE
-  );
       });
+
+      ctx.fillStyle = "darkblue";
+      ctx.fillRect(
+        playerPosition.x * CELL_SIZE,
+        playerPosition.y * CELL_SIZE,
+        CELL_SIZE,
+        CELL_SIZE
+      );
     };
 
     const drawCoins = () => {
@@ -97,10 +101,8 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
           );
           ctx.fill();
         }
-        //else if(showResources){
-        else{
+        else if (showResources) {
           ctx.fillStyle = 'grey';
-        }
           ctx.beginPath();
           ctx.arc(
             x * CELL_SIZE + CELL_SIZE / 2,
@@ -110,6 +112,7 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
             2 * Math.PI
           );
           ctx.fill();
+        }
       });
     };
 
@@ -128,24 +131,56 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
       moveInterval = setInterval(() => {
         setPlayerPosition((prevPos) => {
           const radians = (direction * Math.PI) / 180;
-          let newX = (Math.round(prevPos.x + Math.cos(radians) * SPEED) + GRID_SIZE) % GRID_SIZE;
-          let newY = (Math.round(prevPos.y + Math.sin(radians) * SPEED) + GRID_SIZE) % GRID_SIZE;
+          const deltaX = Math.round(Math.cos(radians) * SPEED);
+          const deltaY = Math.round(Math.sin(radians) * SPEED);
 
-          setVisitedCells((prev) => new Set(prev).add(`${newX},${newY}`));
-          setCoins(prev => {
+          const newX = prevPos.x + deltaX;
+          const newY = prevPos.y + deltaY;
+
+          let wrappedX = (newX + GRID_SIZE) % GRID_SIZE;
+          let wrappedY = (newY + GRID_SIZE) % GRID_SIZE;
+
+          const exitedX = newX !== wrappedX;
+          const exitedY = newY !== wrappedY;
+
+          if (exitedX || exitedY) {
+            const exitAction = `Exited grid at (${prevPos.x}, ${prevPos.y})`;
+            console.log("---> exitAction =", exitAction);
+            insertLine(exitAction);
+
+            const entryAction = `Re-entered grid at (${wrappedX}, ${wrappedY})`;
+            console.log("---> entryAction =", entryAction);
+            insertLine(entryAction);
+          }
+
+          setVisitedCells((prev) => new Set(prev).add(`${wrappedX},${wrappedY}`));
+
+          setCoins((prev) => {
             let updated = false;
-            const newCoins = prev.map(c => {
-              if (c.x === newX && c.y === newY && !c.found) {
-                console.log(`Coin found at (${newX}, ${newY})`);
+            let newlyFound = 0;
+            const newCoins = prev.map((c) => {
+              if (c.x === wrappedX && c.y === wrappedY && !c.found) {
+                const foundCoinAction = `Coin found at (${wrappedX}, ${wrappedY})`;
+                console.log(foundCoinAction);
+                insertLine(foundCoinAction);
                 updated = true;
+                newlyFound++;
                 return { ...c, found: true };
               }
               return c;
             });
+            if (newlyFound > 0) {
+              setTotalFoundCoins((prevTotal) => {
+                const updatedTotal = prevTotal + newlyFound;
+                totalFoundCoinsRef.current = updatedTotal;
+                console.log("[Updated totalFoundCoins]", updatedTotal);
+                return updatedTotal;
+              });
+            }
             return updated ? [...newCoins] : prev;
           });
 
-          return { x: newX, y: newY };
+          return { x: wrappedX, y: wrappedY };
         });
       }, 100);
     } else {
@@ -202,8 +237,11 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      let action = "Unknown"
       if (event.code === "KeyI") {
+        action = "Go"
         if (!trialStarted) {
+          setTimeLeft(TRIAL_DURATION / 1000);
           setTrialStarted(true);
           setIsMoving(true);
           setTimeout(() => {
@@ -213,13 +251,17 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
             } else if (stage === 'mainTask') {
               if (currentTrial < TOTAL_TRIALS) {
                 setCurrentTrial((prev) => prev + 1);
+                sendDataToDB(false);
                 setTimeLeft(TRIAL_DURATION / 1000);
                 setTrialStarted(false);
                 setPlayerPosition(INITIAL_POSITION);
                 setDirection(INITIAL_DIRECTION);
                 setVisitedCells(new Set([`${INITIAL_POSITION.x},${INITIAL_POSITION.y}`]));
               } else {
-                if (onFinishGame) onFinishGame();
+                if (onFinishGame) {
+                  console.log("[Final totalFoundCoins]", totalFoundCoinsRef.current);
+                  onFinishGame(totalFoundCoinsRef.current);
+                }
               }
             }
           }, TRIAL_DURATION);
@@ -227,22 +269,38 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
           setIsMoving(true);
         }
       } else if (event.code === "KeyK") {
+        action = "Stop"
         setIsMoving(false);
       } else if (event.code === "KeyJ") {
+        action = "Left"
         setDirection((prevDir) => prevDir - 35);
       } else if (event.code === "KeyL") {
+        action = "Right"
         setDirection((prevDir) => prevDir + 35);
       }
+
+      insertLine(action);
+
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMoving, currentTrial, stage, onTrainingComplete, coins, trialStarted]);
 
+  const insertLine = (action) => {
+    const db_row = {
+      GameCondition: GameCondition,
+      Trail : currentTrial,
+      Action : action,
+      Time: getTimeDate().time,
+    };
+    insertGameLine(db_row);
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
       {stage === 'mainTask' ? (
-        <h2 style={{ textAlign: "center" }}>Trial {currentTrial} out of {TOTAL_TRIALS}</h2>
+        <h2 style={{ textAlign: "center" }}>Trial {currentTrial} out of {TOTAL_TRIALS} | Found: {totalFoundCoins}</h2>
       ) : (
         <h2 style={{ textAlign: "center", color: "red" }}>Training round</h2>
       )}
@@ -252,15 +310,29 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
         height={GRID_SIZE * CELL_SIZE}
         className="game-canvas"
       />
-      {trialStarted && (
+      {stage === 'training' && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 4,
+            right: -150,
+            fontWeight: 'bold',
+            color: 'green',
+            backgroundColor: 'yellow',
+          }}
+        >
+          ==&gt; EXIT
+        </div>
+      )}
+      {(stage === 'mainTask' || stage === 'training') && trialStarted && (
         <canvas
           id="clock"
           width="60"
           height="60"
           style={{
             position: "absolute",
-            top: 50,
-            right: 100,
+            top: 100,
+            right: -200,
             borderRadius: "50%",
             backgroundColor: "white",
             border: "2px solid black",
