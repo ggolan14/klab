@@ -83,7 +83,7 @@ connectDB().then(
 
       }
       catch (e) {
-        console.log('connectDB error', e);
+        console.log('connectDB Error', e);
           process.exit(1);
       }
     }

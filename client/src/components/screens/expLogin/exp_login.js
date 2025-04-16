@@ -83,7 +83,7 @@ class ExpLogin extends React.Component {
                     });
                 } else {
                     this.setState({
-                        hCaptchaError: true, // Display error message
+                        hCaptchaError: true, // Display Error message
                     });
                 }
             }
@@ -163,7 +163,7 @@ class ExpLogin extends React.Component {
                             onExpire={this.onCaptchaExpire}
                         />
 
-                        {/* Show error message if CAPTCHA fails */}
+                        {/* Show Error message if CAPTCHA fails */}
                         {this.state.hCaptchaError && (
                             <p style={{ color: 'red' }}>CAPTCHA verification failed. Please try again.</p>
                         )}

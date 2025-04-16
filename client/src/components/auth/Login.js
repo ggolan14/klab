@@ -102,7 +102,7 @@ const Login = ({login}) => {
                     catch (e) {
                         dispatch({
                             type: 'ForgetMsg',
-                            payload: 'Some error was happened'
+                            payload: 'Some Error was happened'
                         });
                     }
                 });

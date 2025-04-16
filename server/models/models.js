@@ -3047,7 +3047,7 @@ const addNewExperiment = asyncHandler(async (req, res) => {
         return res.json({msg: 'Success', exps_list});
     }
     catch (e) {
-        console.log('error: ', e);
+        console.log('Error: ', e);
         return res.json({error: 'Error'});
     }
     /* ############### VERSIONS CHANGES ################## */

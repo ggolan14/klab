@@ -138,7 +138,7 @@ function saveNewActiveSettings(_this) {
                         isLoading: false,
                     }, () => {
                         _this.props.setWaitForAction(false);
-                        _this.props.setAlert('Some error happened, please try later', 'danger')
+                        _this.props.setAlert('Some Error happened, please try later', 'danger')
                     });
                 }
                 // Already exist
@@ -179,7 +179,7 @@ function addNewCounter(_this, new_counter) {
                         isLoading: false,
                     }, () => {
                         _this.props.setWaitForAction(false);
-                        _this.props.setAlert('Some error happened, please try later', 'danger')
+                        _this.props.setAlert('Some Error happened, please try later', 'danger')
                     });
                 }
                 // Already exist
@@ -224,7 +224,7 @@ function saveSettingsChanges(_this) {
                         isLoading: false,
                     }, () => {
                         _this.props.setWaitForAction(false);
-                        _this.props.setAlert('Some error happened, please try later', 'danger')
+                        _this.props.setAlert('Some Error happened, please try later', 'danger')
                     });
                 }
             }
@@ -267,7 +267,7 @@ function deleteSettingsAction(_this) {
                         isLoading: false,
                     }, () => {
                         _this.props.setWaitForAction(false);
-                        _this.props.setAlert('Some error happened, please try later', 'danger')
+                        _this.props.setAlert('Some Error happened, please try later', 'danger')
                     });
                 }
             }
@@ -304,7 +304,7 @@ function createNewSettings(_this, action) {
                         isLoading: false,
                     }, () => {
                         _this.props.setWaitForAction(false);
-                        _this.props.setAlert('Some error happened, please try later', 'danger')
+                        _this.props.setAlert('Some Error happened, please try later', 'danger')
                     });
                 }
 
@@ -350,7 +350,7 @@ function modifyRunningCounterAction(_this, running_name, action){
                         isLoading: false,
                     }, () => {
                         _this.props.setWaitForAction(false);
-                        _this.props.setAlert('Some error happened, please try later', 'danger')
+                        _this.props.setAlert('Some Error happened, please try later', 'danger')
                     });
                 }
                 // Already exist

@@ -256,7 +256,7 @@ class Dashboard extends React.Component {
             );
         }
         catch (e) {
-            //// Create error log from hear
+            //// Create Error log from hear
             // NewLog({error_name: e.name, message: e.message})
             return <></>;
         }

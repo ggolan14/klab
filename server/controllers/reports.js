@@ -232,7 +232,7 @@ const getFilters = asyncHandler(async (req, res) => {
         let model_pack = getModelPack(exp);
 
         if (!model_pack){
-            console.log("---> getFilters 333 error")
+            console.log("---> getFilters 333 Error")
             return res.status(400).json({error: 'Error'});
         }
         console.log("---> getFilters 100")
@@ -539,7 +539,7 @@ const downloadData = asyncHandler(async (req, res) => {
     console.log('---> downloadData()    Runnings:', filters.runnings, 'Versions:', filters.versions, 'Users:', filters.users, 'Permissions:', filters.permissions);
 
     try {
-        //     return res.status(400).json({error: 'No tables'});
+        //     return res.status(400).json({Error: 'No tables'});
         // const IP = req.headers['x-real-ip'] || '0.0.0.0';
         //
         // filters = JSON.parse(filters);
@@ -779,7 +779,7 @@ const wpImages = asyncHandler(async (req, res) => {
     //         fs.mkdirSync(exp_path);
     //     }
     //     catch (e) {
-    //         return res.json({ error: "Download files failed, "});
+    //         return res.json({ Error: "Download files failed, "});
     //     }
     // }
     //
@@ -812,9 +812,9 @@ const wpImages = asyncHandler(async (req, res) => {
     // }
     //
     // let results = model_pack.records.find(match_filters, async function(err, docs) {
-    //     if (err) return res.json({ error: "Download files failed, "});
+    //     if (err) return res.json({ Error: "Download files failed, "});
     //
-    //     if (docs.length === 0) return res.json({ error: "Download files failed, "});
+    //     if (docs.length === 0) return res.json({ Error: "Download files failed, "});
     //
     //     let data = {};
     //

@@ -52,7 +52,7 @@ const addTodoList = asyncHandler(async (req, res) => {
         return res.json({msg: 'Todo add success', todo_item});
     }
     catch (e) {
-        return res.json({error: 'Some error happened'})
+        return res.json({error: 'Some Error happened'})
     }
 });
 
@@ -74,7 +74,7 @@ const updateTodoQueue = asyncHandler(async (req, res) => {
         return res.json({msg: 'Todo update success'})
     }
     catch (e) {
-        return res.json({error: 'Some error happened'})
+        return res.json({error: 'Some Error happened'})
     }
 });
 
@@ -239,7 +239,7 @@ const updateTodoList = asyncHandler(async (req, res) => {
         return res.json({msg: 'Todo update success'});
     }
     catch (e) {
-        return res.json({error: 'Some error happened'})
+        return res.json({error: 'Some Error happened'})
     }
 });
 
@@ -300,7 +300,7 @@ const deleteTodoList = asyncHandler(async (req, res) => {
         }
     }
     catch (e) {
-        return res.json({error: 'Some error happened'})
+        return res.json({error: 'Some Error happened'})
     }
 });
 

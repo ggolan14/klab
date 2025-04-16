@@ -366,7 +366,7 @@ class Chat extends React.Component {
                     this.props.setWaitForAction(false);
                     if (!res.data.success){
 
-                        this.props.setAlert('Some error happened, please try later', 'danger');
+                        this.props.setAlert('Some Error happened, please try later', 'danger');
                     }
                     else {
 
@@ -374,7 +374,7 @@ class Chat extends React.Component {
                 }
                 catch (e) {
                     this.props.setWaitForAction(false);
-                    this.props.setAlert('Some error happened, please try later', 'danger');
+                    this.props.setAlert('Some Error happened, please try later', 'danger');
                 }
             }
         )
@@ -413,7 +413,7 @@ class Chat extends React.Component {
                     }
                     catch (e) {
                         this.props.setWaitForAction(false);
-                        this.props.setAlert('Some error happened, please try later', 'danger');
+                        this.props.setAlert('Some Error happened, please try later', 'danger');
                     }
                 }
             );

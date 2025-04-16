@@ -127,9 +127,9 @@ class Todo extends React.Component {
         // }).then(
         //     res => {
         //         try {
-        //             if (res.data.error ){
+        //             if (res.data.Error ){
         //                 this.props.setWaitForAction(false);
-        //                 this.props.setAlert(res.data.error, 'danger');
+        //                 this.props.setAlert(res.data.Error, 'danger');
         //             }
         //             else {
         //                 let sc = this.state;
@@ -142,7 +142,7 @@ class Todo extends React.Component {
         //         }
         //         catch (e) {
         //             this.props.setWaitForAction(false);
-        //             this.props.setAlert('Some error happened, please try later', 'danger');
+        //             this.props.setAlert('Some Error happened, please try later', 'danger');
         //         }
         //     }
         // );
@@ -209,7 +209,7 @@ class Todo extends React.Component {
 
                                 }
                                 catch (e) {
-                                    this.props.setAlert('Upload error', 'danger');
+                                    this.props.setAlert('Upload Error', 'danger');
                                     this.props.setWaitForAction(false);
                                     this.setState(sc);
                                 }

@@ -437,7 +437,7 @@ This function is invoked when user confirmed (click yes or no).
         <div className="trivia-container">
           <MathQuestion onAnswer={this.handleMathQuestionAnswer} />
 
-          {/* Display error message if user answers incorrectly */}
+          {/* Display Error message if user answers incorrectly */}
           
         </div>
       );
@@ -446,7 +446,7 @@ This function is invoked when user confirmed (click yes or no).
       <div className="trivia-container">
         
         {foodPreferenceComponent}
-        {/* Show error message if math question is answered incorrectly */}
+        {/* Show Error message if math question is answered incorrectly */}
       
 
         {/* Show TriviaIntroduction or DebuggerModalView based on math question result */}

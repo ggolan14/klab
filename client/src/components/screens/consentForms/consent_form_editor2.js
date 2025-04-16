@@ -175,7 +175,7 @@ class ConsentFormEditor extends React.Component {
                 }
                 catch (e) {
                     _this.props.setWaitForAction(false);
-                    _this.props.setAlert('Some error happened, please try later', 'danger');
+                    _this.props.setAlert('Some Error happened, please try later', 'danger');
                 }
             }
         );

@@ -455,15 +455,15 @@ const checkPuzzleSettings = ({game_settings, puzzles_models_mem, setCheckMessage
         msg = [
             {
                 label: `Possible puzzles of Scattered=${number_of_puzzle_final.Scattered}`,
-                className: (number_of_puzzle_final.Scattered > 0 && number_of_puzzle_final.Scattered >= number_of_puzzles) ? 'puzzle-check-msg' : 'puzzle-check-msg-error',
+                className: (number_of_puzzle_final.Scattered > 0 && number_of_puzzle_final.Scattered >= number_of_puzzles) ? 'puzzle-check-msg' : 'puzzle-check-msg-Error',
             },
             {
                 label: `Possible puzzles of Grouped=${number_of_puzzle_final.Grouped}`,
-                className: (number_of_puzzle_final.Grouped > 0 && number_of_puzzle_final.Grouped >= number_of_puzzles) ? 'puzzle-check-msg' : 'puzzle-check-msg-error',
+                className: (number_of_puzzle_final.Grouped > 0 && number_of_puzzle_final.Grouped >= number_of_puzzles) ? 'puzzle-check-msg' : 'puzzle-check-msg-Error',
             },
             {
                 label: check_res ? 'Settings is OK!' : 'Error check settings',
-                className: check_res ? 'puzzle-check-msg-settings-ok' : 'puzzle-check-msg-settings-error',
+                className: check_res ? 'puzzle-check-msg-settings-ok' : 'puzzle-check-msg-settings-Error',
             }
         ]
     }
@@ -476,7 +476,7 @@ const checkPuzzleSettings = ({game_settings, puzzles_models_mem, setCheckMessage
             },
             {
                 label: (num >= number_of_puzzles && num > 0) ? 'Settings is OK!' : 'Error check settings',
-                className: (num >= number_of_puzzles && num > 0) ? 'puzzle-check-msg-settings-ok' : 'puzzle-check-msg-settings-error',
+                className: (num >= number_of_puzzles && num > 0) ? 'puzzle-check-msg-settings-ok' : 'puzzle-check-msg-settings-Error',
             }
         ]
     }
