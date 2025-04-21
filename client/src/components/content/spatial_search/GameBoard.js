@@ -3,11 +3,11 @@ import "./GameBoard.css";
 import { getTimeDate } from "../../../utils/app_utils";
 
 const GRID_SIZE = 200;
-const CELL_SIZE = 4;
+const CELL_SIZE = 3;
 const INITIAL_POSITION = { x: Math.floor(GRID_SIZE / 2), y: Math.floor(GRID_SIZE / 2) };
 const INITIAL_DIRECTION = -90;
 const SPEED = 1;
-const TRIAL_DURATION = 8000;
+const TRIAL_DURATION = 120000;
 const TOTAL_TRIALS = 3;
 let showPath;
 let showResources;
@@ -15,7 +15,14 @@ let showResources;
 const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gameSettings, insertGameLine, sendDataToDB }) => {
   const [coins, setCoins] = useState([]);
   const canvasRef = useRef(null);
-  const [playerPosition, setPlayerPosition] = useState(INITIAL_POSITION);
+  //const [playerPosition, setPlayerPosition] = useState(INITIAL_POSITION);
+  const [playerPosition, setPlayerPosition] = useState({
+    x: INITIAL_POSITION.x,
+    y: INITIAL_POSITION.y,
+    realX: INITIAL_POSITION.x,
+    realY: INITIAL_POSITION.y
+  });
+  const playerPositionRef = useRef(playerPosition);
   const [direction, setDirection] = useState(INITIAL_DIRECTION);
   const [isMoving, setIsMoving] = useState(false);
   const [visitedCells, setVisitedCells] = useState(new Set([`${INITIAL_POSITION.x},${INITIAL_POSITION.y}`]));
@@ -27,6 +34,10 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
   const isOutsideGrid = useRef(false);
   showPath = gameSettings.game.show_path == "true" ? true : false;
   showResources = gameSettings.game.show_resources == "true" ? true : false;
+
+  useEffect(() => {
+    playerPositionRef.current = playerPosition;
+  }, [playerPosition]);
 
   useEffect(() => {
     const loadCoinsFromCSV = async () => {
@@ -79,12 +90,12 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
       });
 
       ctx.fillStyle = "darkblue";
-      ctx.fillRect(
-        playerPosition.x * CELL_SIZE,
-        playerPosition.y * CELL_SIZE,
-        CELL_SIZE,
-        CELL_SIZE
-      );
+      const px = (playerPosition.realX ?? playerPosition.x) * CELL_SIZE;
+      const py = (playerPosition.realY ?? playerPosition.y) * CELL_SIZE;
+      
+      ctx.beginPath();
+      ctx.arc(px + CELL_SIZE / 2, py + CELL_SIZE / 2, CELL_SIZE / 2, 0, 2 * Math.PI);
+      ctx.fill();
     };
 
     const drawCoins = () => {
@@ -125,42 +136,72 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
     updateCanvas();
   }, [visitedCells, coins]);
 
+
   useEffect(() => {
     let moveInterval;
     if (isMoving) {
       moveInterval = setInterval(() => {
         setPlayerPosition((prevPos) => {
           const radians = (direction * Math.PI) / 180;
-          const deltaX = Math.round(Math.cos(radians) * SPEED);
-          const deltaY = Math.round(Math.sin(radians) * SPEED);
-
-          const newX = prevPos.x + deltaX;
-          const newY = prevPos.y + deltaY;
-
-          let wrappedX = (newX + GRID_SIZE) % GRID_SIZE;
-          let wrappedY = (newY + GRID_SIZE) % GRID_SIZE;
-
-          const exitedX = newX !== wrappedX;
-          const exitedY = newY !== wrappedY;
-
-          if (exitedX || exitedY) {
-            const exitAction = `Exited grid at (${prevPos.x}, ${prevPos.y})`;
+          const deltaX = Math.cos(radians) * SPEED;
+          const deltaY = Math.sin(radians) * SPEED;
+        
+          const prevRealX = prevPos.realX ?? prevPos.x;
+          const prevRealY = prevPos.realY ?? prevPos.y;
+        
+          let realX = prevRealX + deltaX;
+          let realY = prevRealY + deltaY;
+        
+          const center = GRID_SIZE / 2;
+          let didExit = false;
+        
+          // Vertical wrapping (top <-> bottom)
+          if (realY < 0) {
+            didExit = true;
+            realX = 2 * center - realX;
+            realY = GRID_SIZE - 1;
+          } else if (realY >= GRID_SIZE) {
+            didExit = true;
+            realX = 2 * center - realX;
+            realY = 0;
+          }
+        
+          // Horizontal wrapping (left <-> right)
+          if (realX < 0) {
+            didExit = true;
+            realY = 2 * center - realY;
+            realX = GRID_SIZE - 1;
+          } else if (realX >= GRID_SIZE) {
+            didExit = true;
+            realY = 2 * center - realY;
+            realX = 0;
+          }
+        
+          // Convert to integer cell positions
+          const newX = Math.floor(realX);
+          const newY = Math.floor(realY);
+        
+          // Exit and entry logging
+          if (didExit) {
+            const exitAction = `Exited grid at (${prevPos.x}, ${prevPos.y}) Direction (${direction})`;
             console.log("---> exitAction =", exitAction);
             insertLine(exitAction);
-
-            const entryAction = `Re-entered grid at (${wrappedX}, ${wrappedY})`;
+        
+            const entryAction = `Re-entered grid at (${newX}, ${newY}) Direction (${direction})`;
             console.log("---> entryAction =", entryAction);
             insertLine(entryAction);
           }
-
-          setVisitedCells((prev) => new Set(prev).add(`${wrappedX},${wrappedY}`));
-
+        
+          // Track visited cells
+          setVisitedCells((prev) => new Set(prev).add(`${newX},${newY}`));
+        
+          // Check for coin collection
           setCoins((prev) => {
             let updated = false;
             let newlyFound = 0;
             const newCoins = prev.map((c) => {
-              if (c.x === wrappedX && c.y === wrappedY && !c.found) {
-                const foundCoinAction = `Coin found at (${wrappedX}, ${wrappedY})`;
+              if (c.x === newX && c.y === newY && !c.found) {
+                const foundCoinAction = `Coin found at (${newX}, ${newY})`;
                 console.log(foundCoinAction);
                 insertLine(foundCoinAction);
                 updated = true;
@@ -169,6 +210,7 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
               }
               return c;
             });
+        
             if (newlyFound > 0) {
               setTotalFoundCoins((prevTotal) => {
                 const updatedTotal = prevTotal + newlyFound;
@@ -177,11 +219,21 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
                 return updatedTotal;
               });
             }
+        
             return updated ? [...newCoins] : prev;
           });
-
-          return { x: wrappedX, y: wrappedY };
+        
+          return {
+            x: newX,
+            y: newY,
+            realX,
+            realY,
+          };
         });
+        
+        
+        
+        
       }, 100);
     } else {
       clearInterval(moveInterval);
@@ -272,26 +324,52 @@ const GameBoard = ({ stage, GameCondition, onTrainingComplete, onFinishGame, gam
         action = "Stop"
         setIsMoving(false);
       } else if (event.code === "KeyJ") {
-        action = "Left"
-        setDirection((prevDir) => prevDir - 35);
+        action = "Left";
+        setDirection((prevDir) => {
+          console.log("---->  playerPositionRef.current.y="+playerPositionRef.current.y+"   playerPosition.y="+playerPosition.y)
+          const rotationStep = -35;
+          const rawNewDir = prevDir + rotationStep;
+          const newDir = normalize(rawNewDir);
+      
+          console.log(
+            `Turning Left: Direction before = ${prevDir}, raw after = ${rawNewDir}, normalized after = ${newDir}, change = +${rotationStep}, position = (${playerPositionRef.current.x}, ${playerPositionRef.current.y})`
+          );
+      
+          return newDir;
+        });
       } else if (event.code === "KeyL") {
-        action = "Right"
-        setDirection((prevDir) => prevDir + 35);
+        action = "Right";
+        console.log("--------> playerPosition.x= "+playerPosition.x+"   playerPosition.y= "+playerPosition.y+"  ")
+        setDirection((prevDir) => {
+          const rotationStep = 35;
+          const rawNewDir = prevDir + rotationStep;
+          const newDir = normalize(rawNewDir);
+      
+          console.log(
+            `Turning Right: Direction before = ${prevDir}, raw after = ${rawNewDir}, normalized after = ${newDir}, change = ${rotationStep}, position = (${playerPositionRef.current.x}, ${playerPositionRef.current.y})`
+          );
+      
+          return newDir;
+        });
       }
 
       insertLine(action);
 
     };
 
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMoving, currentTrial, stage, onTrainingComplete, coins, trialStarted]);
 
+  const normalize = (angle) => ((angle % 360) + 360) % 360;
+
+
   const insertLine = (action) => {
     const db_row = {
       GameCondition: GameCondition,
-      Trail : currentTrial,
-      Action : action,
+      Trail: currentTrial,
+      Action: action,
       Time: getTimeDate().time,
     };
     insertGameLine(db_row);
