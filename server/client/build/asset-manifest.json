@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dc0d0232.css",
+    "main.js": "/static/js/main.a87e4d69.js",
+    "static/media/spinner.gif": "/static/media/spinner.d97b17720365b6a9b159.gif",
+    "static/media/cups_game.png": "/static/media/cups_game.52bed6e15661bd34c59c.png",
+    "static/media/gain.png": "/static/media/gain.1d94ae2d9548e768bc4f.png",
+    "static/media/bear.png": "/static/media/bear.9551943dbb2bc08a7593.png",
+    "static/media/knight.png": "/static/media/knight.b80506b524da37449a9f.png",
+    "static/media/single_coffee_cup.png": "/static/media/single_coffee_cup.7cfda6f6773fe4558bd3.png",
+    "static/media/introduction2.png": "/static/media/introduction2.f2aee2cf60b23de29063.png",
+    "static/media/real.png": "/static/media/real.451ba47e76eae2d6eb55.png",
+    "static/media/caravan.png": "/static/media/caravan.2bf31f73d7db2e93c4b0.png",
+    "static/media/wheel.png": "/static/media/wheel.c8be3a2ef5c1e17edcb9.png",
+    "static/media/knight2.png": "/static/media/knight2.2b69a835d8154ce76ae4.png",
+    "static/media/introduction1.png": "/static/media/introduction1.aabb7b96e86759a49f2e.png",
+    "static/media/practice.png": "/static/media/practice.f052eb93b7d97ae1154d.png",
+    "static/media/magnifying2.png": "/static/media/magnifying2.96eeed1e47a6dcd1e420.png",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.dc0d0232.css",
+    "static/js/main.a87e4d69.js"
+  ]
+}

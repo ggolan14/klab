@@ -96,9 +96,9 @@ const getExpDev = asyncHandler(async (req, res) => {
 
     try {
         const {exp} = req.params;
-
+        console.log("📡 Trying to get from DB");
         let expDevDetails = await expDevDetailsModel.findOne({exp});
-
+        console.log("✅ Get from DB succeeded");
         let all_files = [];
         const new_path = ExpDevFilesPath + exp + '/';
 
