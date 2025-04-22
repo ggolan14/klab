@@ -20,6 +20,7 @@ client/build
 node_modules/*.*
 server/node_modules
 server/logs/
+server/client/build
 
 # misc
 .DS_Store
