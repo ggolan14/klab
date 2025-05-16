@@ -13,7 +13,7 @@ class Start extends Component {
     }
 
     render() {
-        return <Experiment />;
+        return <Experiment insertToDbArray={this.props.insertGameLine} sendToDB={this.props.sendGameDataToDB}/>;
     }
 
 

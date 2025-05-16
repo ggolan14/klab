@@ -4,7 +4,8 @@ import ItemRenderer from "./ItemRender/ItemRenderer";
 import "./Styling/usefulClasses.css"
 import Error from "./Ui/Error/Error";
 
-function Experiment() {
+
+function Experiment({insertToDbArray , sendToDB}) {
     const items = getItemsInOrder(experimentData);
     const [currentItemIndex, setCurrentItemIndex] = useState(0);
 
@@ -23,7 +24,7 @@ function Experiment() {
                         return <Error error={ {errorMessage:"Error No UiData in json" , isError: true}} key={`item-index-${index}`}/>
                     }
                     return <ItemRenderer item={item} uiData={item.uiData} key={`item-index-${index}`}
-                                         startTime={Date.now()} setCurrentItemIndex={setCurrentItemIndex}/>;
+                                         startTime={Date.now()} setCurrentItemIndex={setCurrentItemIndex} sendToDB={sendToDB} insertToDbArray={insertToDbArray}/>;
                 }
             })}
         </div>

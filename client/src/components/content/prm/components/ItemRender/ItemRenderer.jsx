@@ -24,13 +24,18 @@ import UnderstandingInstruction from "../Ui/UnderstandingInstruction/Understandi
  * Features to add to page:
  * Expected Props including types: TrialTypeProps = {
  *     startTime: number,
- *     Item, ItemType
+ *     Item: ItemType
+ *     uiData: uiObject
+ *     setCurrentItemIndex: setter react method
  * }
  * @param startTime the time the that the trial type started at.
  * @param item the current item
  * @param uiData {uiObject[]} the uiData of each item
+ * @param setCurrentItemIndex {Dispatch<SetStateAction<number>>}
+ * @param insertToDbArray {(object)=>void}
+ * @param sendToDB {()=>Promise}
  */
-function ItemRenderer({startTime, item, uiData, setCurrentItemIndex}) {
+function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbArray , sendToDB}) {
     // // Page Flow (Output for each Ui element):
     const [pageFlow, setPageFlow] = useState(getPageFlowOutput(uiData));
     // For Focus
@@ -63,13 +68,17 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex}) {
             // newOutput = updateImages(newOutput, item.children);
             //Setting the output to fit each ui element criteria
             newOutput = updateOutputFromPageFlow(newOutput, pageFlow);
-            newOutput = {...newOutput,responseTimeLast: responseTimeLast};
-            setCurrentItemIndex(prevIndex => prevIndex + 1);
-            console.log(newOutput);
+            if (item.addToOutput) {
+                newOutput = {...newOutput, addToOutput: item.addToOutput}
+            }
+            newOutput = {...newOutput, responseTimeFirst: responseTimeFirst};
+            newOutput = {...newOutput, responseTimeLast: responseTimeLast};
+            newOutput = {...newOutput, condition: item.condition};
+            newOutput = {...newOutput, itemID: item.id, trialType: item.trialType};
         }
-
-
-        //TODO CHOOSE HOW TO USE THE OUTPUT AND MOVE TO NEXT ITEM
+        setCurrentItemIndex(prevIndex => prevIndex + 1);
+        insertToDbArray(newOutput);
+        await sendToDB();
     }
 
 
