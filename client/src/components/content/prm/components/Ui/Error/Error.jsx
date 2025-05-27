@@ -12,7 +12,7 @@
 function Error({error}) {
     const css = "text-clamping-mid rounded-xl p-5 bg-red-50 border border-white text-center";
     return (
-        <h1 className={css}>{error.errorMessage}</h1>
+        <h1 className={css} style={{color:"white"}}>{error.errorMessage}</h1>
     );
 }
 

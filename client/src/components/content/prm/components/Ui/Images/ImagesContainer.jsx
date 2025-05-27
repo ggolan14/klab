@@ -1,3 +1,6 @@
+import {handleImageContainerError} from "./errors";
+import Error from "../Error/Error";
+
 /**
  * type ImagesContainerProps = {
  *     className?: string;
@@ -5,13 +8,17 @@
  *     images: UiObjects;
  * }
  * @param className
- * @param images
+ * @param images{UiElement}
  * @param setCurrentImageZoom
  * @returns {JSX.Element}
  * @constructor
  */
 function ImagesContainer({className, images, setCurrentImageZoom}) {
     const Style = images.style ? images.style : {};
+    const error = handleImageContainerError(images);
+    if (error.isError) {
+        return <Error error={error}/>;
+    }
     return (
         <div
             className={`flex justify-center w-full ${className} gap-3 flex-row items-center flex-wrap`}>

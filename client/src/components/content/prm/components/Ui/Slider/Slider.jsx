@@ -8,6 +8,7 @@ import Error from "../Error/Error.jsx";
 
 
 /**
+ * The slider function is a React component to show slider using the item renderer
  * type SliderProps = {
  *     uiObject: UiObjects,
  *     setPageFlow: Dispatch<SetStateAction<PageFlowOutput[]>>,

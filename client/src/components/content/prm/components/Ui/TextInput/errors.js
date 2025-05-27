@@ -1,4 +1,6 @@
 /**
+ *
+ * Error testing for text input
  * Param={UiObject element}
  * @param id
  * @param hint

@@ -76,6 +76,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
             newOutput = {...newOutput, condition: item.condition};
             newOutput = {...newOutput, itemID: item.id, trialType: item.trialType};
         }
+        console.log(newOutput)
         setCurrentItemIndex(prevIndex => prevIndex + 1);
         insertToDbArray(newOutput);
         await sendToDB();

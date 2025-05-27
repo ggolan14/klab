@@ -1,15 +1,11 @@
 import {useEffect} from "react";
 
-
-/**
- expected type props: type hookProps = {
- pageFlow: PageFlowOutput[],
- setPageFlow: Dispatch<SetStateAction<PageFlowOutput[]>>,
- }
- **/
-
 /**
  * The hook is to prevent when one element output is set to false while the page flow already moved forward more than one element
+ * expected type props: type hookProps = {
+ *  pageFlow: PageFlowOutput[],
+ *  setPageFlow: Dispatch<SetStateAction<PageFlowOutput[]>>,
+ *  }
  * @param pageFlow the page flow array
  * @param setPageFlow the setter method from React.
  */

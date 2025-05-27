@@ -1,0 +1,49 @@
+{
+  "name": "Name of the experiment",
+  "randomize": {
+  },
+  "items": [
+    {
+      "type": "item",
+      "id": "Q1",
+      "trialType": "trial-PRM",
+      "features": {},
+      "uiData": [
+        {
+          "id": 1,
+          "type": "images",
+          "urls": [
+            "https://mikel-hagever.s3.eu-north-1.amazonaws.com/D10.JPG",
+            "https://mikel-hagever.s3.eu-north-1.amazonaws.com/D1.JPG"
+          ]
+        },
+        {
+          "type": "headline",
+          "text": "Which perimeter is longer?\n\n",
+          "id": 2
+        },
+        {
+          "type": "text",
+          "text": "Which perimeter is longer?\n\n",
+          "id": 123
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            "LEFT",
+            "EQUAL",
+            "RIGHT"
+          ],
+          "correct": "RIGHT",
+          "id": 3
+        },
+        {
+          "type": "submit",
+          "text": "Next",
+          "id": 6
+        }
+      ]
+    }
+  ]
+}
+

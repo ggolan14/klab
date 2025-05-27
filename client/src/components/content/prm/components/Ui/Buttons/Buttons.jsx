@@ -2,11 +2,15 @@ import {useEffect, useState} from "react";
 import {getCurrentIndex} from "../../../utils/helperMethods.js";
 import {getIsButtonDisabled} from "./helperMethods.js";
 import "../../Styling/usefulClasses.css"
+import Error from "../Error/Error";
+
+import {handleButtonsError} from "./errors";
 function Buttons({uiObject, setPageFlow, pageFlow, startTime}) {
     const [isDisabled, setIsDisabled] = useState(false);
     const [elementOutput, setElementOutput] = useState(null);
     const currentIndex = getCurrentIndex(pageFlow, uiObject);
     const [isContainerDisabled, setIsContainerDisabled] = useState(getIsButtonDisabled(pageFlow, currentIndex));
+    const error = handleButtonsError(uiObject, currentIndex);
 
     // Updating the Disable state if the value of the other confidence in the page changed.
     useEffect(() => {
@@ -22,7 +26,9 @@ function Buttons({uiObject, setPageFlow, pageFlow, startTime}) {
         setIsDisabled(false);
     }, [uiObject]);
     //Showing Error if needed
-
+    if (error.isError){
+        return <Error error={error}/>;
+    }
     function handleClick(index, value) {
         setElementOutput({index, value});
         setIsDisabled(true);
