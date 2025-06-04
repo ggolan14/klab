@@ -395,7 +395,7 @@ class Start extends Component {
         <div className="trivia-container">
           <MathQuestion onAnswer={this.handleMathQuestionAnswer} />
 
-          {/* Display error message if user answers incorrectly */}
+          {/* Display Error message if user answers incorrectly */}
           
         </div>
       );

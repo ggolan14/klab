@@ -41,7 +41,7 @@ const Actions = {
         'N.R.N.S': 'New user saved failed',
         'T.O': 'Try to go out',
         'R.D': 'Get redirect code',
-        'R.N.S': 'Finish records error',
+        'R.N.S': 'Finish records Error',
         'U.R': 'User rejected',
         'U.L': 'User login',
         'V.C.H': 'Visibility HIDDEN',

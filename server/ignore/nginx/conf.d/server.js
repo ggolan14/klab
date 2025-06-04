@@ -89,11 +89,11 @@ app.use('/api/logger', require('./routes/api/logger'));
 //        // callback(null, JSON.parse(buffer));
 //
 //         var file = fs.createWriteStream('array.txt');
-//         file.on('error', function(err) { /* error handling */ });
+//         file.on('Error', function(err) { /* Error handling */ });
 //         buffer.forEach(function(v) { file.write(v); });
 //         file.end();
 //
-//     }).on('error', function (e) {
+//     }).on('Error', function (e) {
 //     });
 //     res.send('working...');
 // });

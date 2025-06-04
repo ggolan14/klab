@@ -65,7 +65,7 @@ router.post('/', async (req, res) => {
         if (logs.permission !== undefined) permission = logs.permission;
 
         await NewLog({logs: {action: 'LoggerError', user_id, exp, running_name, permission}, LogErrorType: 'LogErrorType'})
-        res.status(500).send('Server error p/settings');
+        res.status(500).send('Server Error p/settings');
     }
 });
 

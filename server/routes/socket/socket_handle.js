@@ -15,7 +15,7 @@ const {getConnectionsHandle} = require('../../Struct/users_list')
 //         case 'register':
 //             return await userRegister(data);
 //         default:
-//             return {res: {error: 'Error'}};
+//             return {res: {Error: 'Error'}};
 //     }
 // }
 const socketHandle = async (socket, query) => {

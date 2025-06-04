@@ -65,7 +65,7 @@ const userAuthenticate = asyncHandler(async (req, res) => {
         );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).send('Server Error');
     }
 })
 
@@ -105,7 +105,7 @@ const userAuthentication = asyncHandler(async (req, res) => {
     catch (e) {
         return res
             .status(400)
-            .json({errors: [{msg: 'Server error'}]});
+            .json({errors: [{msg: 'Server Error'}]});
     }
 });
 
@@ -178,7 +178,7 @@ const ModifyUser = asyncHandler(async (req, res) => {
         res.json({msg: 'Success', exps_list, users_list})
     }
     catch (e) {
-        return res.json({error: 'Server error'});
+        return res.json({error: 'Server Error'});
     }
 });
 
@@ -211,7 +211,7 @@ const ChangeUserDet = asyncHandler(async (req, res) => {
             }})
     }
     catch (e) {
-        return res.json({error: 'Server error'});
+        return res.json({error: 'Server Error'});
     }
 });
 
@@ -238,7 +238,7 @@ const ChangeUserPassword = asyncHandler(async (req, res) => {
         res.json({msg: 'Success'})
     }
     catch (e) {
-        return res.json({error: 'Server error'});
+        return res.json({error: 'Server Error'});
     }
 });
 
@@ -265,7 +265,7 @@ const ResetPassword = asyncHandler(async (req, res) => {
         res.json({msg: 'Success'});
     }
     catch (e){
-        return res.json({error: 'Server error'});
+        return res.json({error: 'Server Error'});
     }
 })
 
@@ -297,7 +297,7 @@ const RemoveUser = asyncHandler(async (req, res) => {
         res.json({msg: 'Success', exps_list, users_list});
     }
     catch (e){
-        return res.json({error: 'Server error'});
+        return res.json({error: 'Server Error'});
     }
 });
 
@@ -318,7 +318,7 @@ const GetUserInfo = asyncHandler(async (req, res) => {
         res.json({user_info: user});
     }
     catch (e){
-        return res.json({error: 'Server error'});
+        return res.json({error: 'Server Error'});
     }
 })
 

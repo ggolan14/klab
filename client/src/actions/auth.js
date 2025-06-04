@@ -236,7 +236,7 @@ export const register = ({ name, email, password, gender, age, date, permission,
 //         const errors = err.response.data.errors;
 //
 //         if (errors) {
-//             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+//             errors.forEach(Error => dispatch(setAlert(Error.msg, 'danger')));
 //         }
 //
 //         dispatch({

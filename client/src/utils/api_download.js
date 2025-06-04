@@ -13,7 +13,7 @@ const api_download = axios.create({
 
 
 /**
- intercept any error responses from the api
+ intercept any Error responses from the api
  and check if the token is no longer valid.
  ie. Token has expired or user is no longer
  authenticated.

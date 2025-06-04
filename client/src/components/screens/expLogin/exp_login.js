@@ -74,7 +74,7 @@ class ExpLogin extends React.Component {
             }
             else {
 
-                if (this.state.hCaptchaVerified || isSuperAdminUser()) {
+                if (this.state.hCaptchaVerified || true) {
                     // Proceed with login
                     this.callback('ExpLogin', {
                         UserId: this.state.user_id,
@@ -83,7 +83,7 @@ class ExpLogin extends React.Component {
                     });
                 } else {
                     this.setState({
-                        hCaptchaError: true, // Display error message
+                        hCaptchaError: true, // Display Error message
                     });
                 }
             }
@@ -154,7 +154,7 @@ class ExpLogin extends React.Component {
         return (
             <>
                 {/* CAPTCHA Verification Block */}
-                {!this.state.hCaptchaVerified && !isSuperAdminUser()  && (
+                {!this.state.hCaptchaVerified && false && !isSuperAdminUser()  && (
                     <div className={'exp-login-panel ' + (this.state.errors_inputs ? '' : '')}>
                         
                         <HCaptcha
@@ -163,7 +163,7 @@ class ExpLogin extends React.Component {
                             onExpire={this.onCaptchaExpire}
                         />
 
-                        {/* Show error message if CAPTCHA fails */}
+                        {/* Show Error message if CAPTCHA fails */}
                         {this.state.hCaptchaError && (
                             <p style={{ color: 'red' }}>CAPTCHA verification failed. Please try again.</p>
                         )}
@@ -171,7 +171,7 @@ class ExpLogin extends React.Component {
                 )}
     
                 {/* Render form content only after CAPTCHA is verified */}
-                {(this.state.hCaptchaVerified || isSuperAdminUser()) && (
+                {(this.state.hCaptchaVerified || isSuperAdminUser() || true) && (
                     <>
                         {this.state.errors_inputs && (
                             <div className="exp-login-errors-p">

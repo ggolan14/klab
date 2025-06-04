@@ -84,7 +84,7 @@ class Todo extends React.Component {
                     }
                 }
                 catch (e) {
-                    msg = 'Some error was happened try later';
+                    msg = 'Some Error was happened try later';
                 }
                 _this.setState(sc, () => {
                     _this.props.setWaitForAction(false);
