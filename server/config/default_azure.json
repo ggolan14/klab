@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://klab:LJLCXF%254klab@cluster0.0aictzo.mongodb.net/",
+  "mongoURI": "mongodb+srv://klab:LJLCXF%254klab@cluster0.0aictzo.mongodb.net/klabDB?retryWrites=true&w=majority&appName=Cluster0",
   "jwtSecret": "salvadorgct",
   "githubClientId": "a07777dff9f7f77358a3",
   "githubSecret": "8bee12a0e98362e19c77c2f0b24463545be200dc"
