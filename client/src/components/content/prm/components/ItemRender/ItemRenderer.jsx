@@ -126,7 +126,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
 
     if (!item) {
         return <div className={trialTypeCss}>
-            <h1>ERROR!!!!!!!</h1>
+            <h1>ERROR! NO ITEM RECEIVED AS PROP</h1>
         </div>
     }
     const Style = item.style ? item.style : {};
