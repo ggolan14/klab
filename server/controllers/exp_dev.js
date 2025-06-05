@@ -115,7 +115,7 @@ const getExpDev = asyncHandler(async (req, res) => {
         }
     }
     catch (e) {
-        res.json({error: 'Some Error happened4'});
+        res.json({error: 'Some Error happened'});
     }
 })
 
