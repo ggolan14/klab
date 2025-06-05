@@ -24,17 +24,30 @@ export const RiskInstructions1 = () => {
 }
 
 export const DishonestInstructions1 = () => {
-  const {game_settings} = useContext(QueenGardenContext);
-
-  return (
-    <p>
+  const { game_settings } = useContext(QueenGardenContext);
+  console.log("----->   game_settings.game.game_type="+game_settings.GameType)
+  if (game_settings.GameType === "sick_child") {
+    return (
+       <p>
+        You have been tasked with delivering plants for the Queen of the Realm to use to heal sick children.  The plants are grown in a greenhouse on the outskirts of the forest.  Your job is to pick up the plants from the greenhouse and deliver them to her castle. These plants are used by the Queen’s healers to craft medicine to heal grainlung, a severe cough in children.
+        <br /><br />
+        She emphasizes the importance of sunlight for the health of the plants and their ability to heal the children, <b>as prolonged periods of shade eliminate their medicinal properties, rendering the medicine ineffective</b>. As a result, all deliveries through the Shadewood forest are banned and guards are patrolling the forest to enforce the delivery ban.  Instead, you are required to travel the Crown Road.  You will be paid {game_settings.GamesBank[0].RewardValue} coin{Number(game_settings.GamesBank[0].RewardValue) !== 1 ? 's' : ''} upon successful delivery.
+        <br /><br />
+        As an experienced merchant you know that the cost of travel along {game_settings.Labels.CrownHighway} is {game_settings.GamesBank[0].TollCost} coin{Number(game_settings.GamesBank[0].TollCost) !== 1 ? 's' : ''}.
+      </p>
+    )
+  }
+  else {
+    return (
+      <p>
       You have been tasked with delivering plants for the Queen of the realm. The plants are grown in a greenhouse on the outskirts of the forest. Your job is to pick up the plants from the greenhouse, and deliver them to her castle.
       <br/><br/>
       She emphasizes the importance of sunlight for the health of the plants, and so as part of the contract tells you that all deliveries through the Shadewood forest are banned, and guards are patrolling the forest to enforce the delivery ban. Instead, you are required to travel the {game_settings.Labels.CrownHighway}. You will be paid {game_settings.GamesBank[0].RewardValue} coin{Number(game_settings.GamesBank[0].RewardValue) !== 1? 's' : ''} upon successful delivery.
       <br/><br/>
       As an experienced merchant, you know that the cost of travel along the {game_settings.Labels.CrownHighway} is {game_settings.GamesBank[0].TollCost} coin{Number(game_settings.GamesBank[0].TollCost) !== 1? 's' : ''}.
     </p>
-  )
+    )
+  }
 }
 
 const InstructionsScreen1 = () => {
@@ -412,10 +425,11 @@ export const GainMessage = ({message_more_info}) => {
     >
       <p>
         You have successfully delivered the plants to the Queen’s castle.<br/>
-        You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1?'s':''} upon successful delivery.
+		If they stayed healthy and did not travel through the forest, her healers will use it to treat the sick children.<br/>
+        You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1?'s':''} upon successful delivery. 
         <br/><br/>
         {from_queen_road && (
-          `Your total cost was ${TollCost} `+coinsStrToll
+          `your cost was ${TollCost} `+coinsStrToll
         )}
         
 
