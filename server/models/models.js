@@ -2476,6 +2476,7 @@ const defaultVersions = {
             tutorial_f_p: 1,
             tutorial_r_t: 1,
             g_o: 'r', // games order r-random n_r no random (Ascending)
+            game_type: 'orig', // game type
             cond: 'U', // R-Risk D-Dishonest Ra-Random U-Uniform distribution
             display_time:1,
             type_1_score:3,

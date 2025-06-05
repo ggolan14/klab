@@ -439,6 +439,22 @@ const Settings = (props) => {
                 value,
             })
         },
+        {
+            type: 'Select',
+            label: 'Game Type:',
+            show: true,
+            options: [
+                {label: 'Original', value: 'orig'},
+                {label: 'Sick Child', value: 'sick_child'},
+            ],
+            value: game_settings.game.game_type,
+            callback: value => changeSettings({
+                settings_of: 'game_settings',
+                key: 'game',
+                key2: 'game_type',
+                value,
+            })
+        },
         // {
         //     type: 'Select',
         //     label: 'Road on hover',
