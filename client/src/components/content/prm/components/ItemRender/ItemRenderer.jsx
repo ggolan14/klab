@@ -17,6 +17,7 @@ import Likert from "../Ui/Likert/Likert";
 import TextInput from "../Ui/TextInput/TextInput";
 import ImagesContainer from "../Ui/Images/ImagesContainer";
 import UnderstandingInstruction from "../Ui/UnderstandingInstruction/UnderstandingInstruction";
+import {useFocus} from "../Focus/useFocus";
 
 
 /**
@@ -39,7 +40,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
     // // Page Flow (Output for each Ui element):
     const [pageFlow, setPageFlow] = useState(getPageFlowOutput(uiData));
     // For Focus
-    // TODO SEE HOW TO IMPLEMENT OF FOCUS IN THE CURRENT MODULE
+    const { focusProp } = useFocus();
     // For Zoom
     const [currentImageZoom, setCurrentImageZoom] = useState(getInitialZoom(startTime));
     // For Mouse Tracking feature
@@ -71,6 +72,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
             if (item.addToOutput) {
                 newOutput = {...newOutput, addToOutput: item.addToOutput}
             }
+            newOutput = {...newOutput, focus: focusProp};
             newOutput = {...newOutput, responseTimeFirst: responseTimeFirst};
             newOutput = {...newOutput, responseTimeLast: responseTimeLast};
             newOutput = {...newOutput, condition: item.condition};
