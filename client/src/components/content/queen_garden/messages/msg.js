@@ -405,46 +405,55 @@ export const DeliveryToll = () => {
   )
 };
 
-export const GainMessage = ({message_more_info}) => {
-  const {game_settings, current_game_index,finalReward, needToPayClearing} = useContext(QueenGardenContext);
-  console.log("---> in Gain message Reward = "+finalReward+"   needToPayClearing="+needToPayClearing)
+export const GainMessage = ({ message_more_info }) => {
+  const { game_settings, current_game_index, finalReward, needToPayClearing } = useContext(QueenGardenContext);
+  console.log("---> in Gain message Reward = " + finalReward + "   needToPayClearing=" + needToPayClearing);
 
-  const {TollCost, RewardValue,ClearingCost} = game_settings.GamesBank[current_game_index];
+  const { TollCost, RewardValue, ClearingCost } = game_settings.GamesBank[current_game_index];
+  const { from_queen_road } = message_more_info;
 
-  const {from_queen_road} = message_more_info;
+  const net_gain = from_queen_road ? (RewardValue - TollCost) : finalReward;
+  let coinsStrToll = TollCost !== 1 ? 'coins. ' : 'coin. ';
+  let coinsStrCleaning = ClearingCost !== 1 ? 'coins. ' : 'coin. ';
 
-  const net_gain = from_queen_road? (RewardValue-TollCost) : finalReward;
-  let coinsStrToll= TollCost !== 1 ? 'coins. ' : 'coin. ';
-  let coinsStrCleaning= ClearingCost !== 1 ? 'coins. ' : 'coin. ';
-  
-    
-  
+  const isSickChild = game_settings.GameType === "sick_child";
+
   return (
-    <div
-      className='qg_delivery_gain'
-    >
-      <p>
-        You have successfully delivered the plants to the Queen’s castle.<br/>
-		If they stayed healthy and did not travel through the forest, her healers will use it to treat the sick children.<br/>
-        You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1?'s':''} upon successful delivery. 
-        <br/><br/>
-        {from_queen_road && (
-          `your cost was ${TollCost} `+coinsStrToll
-        )}
-        
-
-        {needToPayClearing && (
-         `Your total cost to clear the path was ${ClearingCost} `+coinsStrCleaning 
-
-        )}
-      <br></br>
-      <br></br>
-        Your net gain is {net_gain} coins
-      </p>
-      {/*<img src={ImgGain}/>*/}
+    <div className='qg_delivery_gain'>
+      {isSickChild ? (
+        <p>
+          You have successfully delivered the plants to the Queen’s castle.<br />
+          If they stayed healthy and did not travel through the forest, her healers will use it to treat the sick children.<br />
+          You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1 ? 's' : ''} upon successful delivery.
+          <br /><br />
+          {from_queen_road && (
+            `your cost was ${TollCost} ` + coinsStrToll
+          )}
+          {needToPayClearing && (
+            `Your total cost to clear the path was ${ClearingCost} ` + coinsStrCleaning
+          )}
+          <br /><br />
+          Your net gain is {net_gain} coins
+        </p>
+      ) : (
+        <p>
+          You have successfully delivered the plants to the Queen’s castle.<br />
+          You are paid {RewardValue.toString()} coin{Number(RewardValue) !== 1 ? 's' : ''} upon successful delivery.
+          <br /><br />
+          {from_queen_road && (
+            `Your total cost was ${TollCost} ` + coinsStrToll
+          )}
+          {needToPayClearing && (
+            `Your total cost to clear the path was ${ClearingCost} ` + coinsStrCleaning
+          )}
+          <br /><br />
+          Your net gain is {net_gain} coins
+        </p>
+      )}
     </div>
-  )
+  );
 };
+
 
 const MESSAGES = {
   InstructionsScreen1, InstructionsScreen2,
