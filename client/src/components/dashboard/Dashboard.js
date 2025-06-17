@@ -210,7 +210,7 @@ class Dashboard extends React.Component {
     header() {
         return (
             <label>
-                TestHello {
+                Hello {
                 !this.props.auth.user.name || this.props.auth.user.name === '' || this.props.auth.user.name === '-' ? (
                     <span className='klab-dashboard-panel-misname'>name is missing</span>
                 ) : (
