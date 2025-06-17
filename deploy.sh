@@ -25,6 +25,7 @@ fi
 docker tag ${IMAGE_NAME}:${TAG} ${IMAGE_NAME}:latest
 docker push ${IMAGE_NAME}:latest
 
+#restart App-Service klab-app with the relevant resource group
 echo "Restarting Azure App Service..."
 az webapp restart --name klab-app --resource-group facu-apps-rg
 
