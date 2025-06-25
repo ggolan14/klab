@@ -757,7 +757,7 @@ class Start extends React.Component {
         }
         while (GameSet.games_play.length);
         
-        if (GameSet.practice == true){
+        if (GameSet.practice == "true"){
             const first_game = JSON.parse(JSON.stringify(GAME_ORDER[0]));
 
             let practice_game_set = {
@@ -819,7 +819,7 @@ class Start extends React.Component {
             }
         });
 
-        if (GameSet.practice == true){
+        if (GameSet.practice == "true"){
             game_template.push({
                 Component: PracticeGame,
                 Props: {
