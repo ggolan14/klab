@@ -74,7 +74,7 @@ class ExpLogin extends React.Component {
             }
             else {
 
-                if (this.state.hCaptchaVerified || true) {
+                if (this.state.hCaptchaVerified || isSuperAdminUser()) {
                     // Proceed with login
                     this.callback('ExpLogin', {
                         UserId: this.state.user_id,
@@ -154,7 +154,7 @@ class ExpLogin extends React.Component {
         return (
             <>
                 {/* CAPTCHA Verification Block */}
-                {!this.state.hCaptchaVerified && false && !isSuperAdminUser()  && (
+                {!this.state.hCaptchaVerified && !isSuperAdminUser()  && (
                     <div className={'exp-login-panel ' + (this.state.errors_inputs ? '' : '')}>
                         
                         <HCaptcha
@@ -171,7 +171,7 @@ class ExpLogin extends React.Component {
                 )}
     
                 {/* Render form content only after CAPTCHA is verified */}
-                {(this.state.hCaptchaVerified || isSuperAdminUser() || true) && (
+                {(this.state.hCaptchaVerified || isSuperAdminUser()) && (
                     <>
                         {this.state.errors_inputs && (
                             <div className="exp-login-errors-p">
