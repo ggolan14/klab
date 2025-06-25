@@ -1,0 +1,178 @@
+.pg-sp-btn-con-msg {
+    position: fixed;
+    left: 50%;
+    bottom: 10%;
+    font-size: xx-large;
+    margin: auto;
+    animation: blinker 3s infinite;
+    background-color: #1B8BFF;
+    width: max-content;
+    height: max-content;
+    border: 1px solid #005cbf;
+    border-radius: 11px;
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+@keyframes blinker {
+    20%{opacity: 1;}
+    50%{opacity: 0;}
+    80%{opacity: 1;}
+}
+
+
+.pg-game-intro {
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    white-space: pre-wrap;
+    font-size: 1rem;
+    padding: 1.5rem;
+    width: 90%;
+    display: grid;
+    grid-template-areas:
+            'messageBox'
+            'consentBtn';
+    grid-template-rows: auto max-content;
+    /*grid-template-rows: 85% 15%;*/
+    overflow: visible;
+    height: max-content;
+    min-height: 90%;
+}
+
+.pg-gi-message-box {
+    grid-area: messageBox;
+    height: 100%;
+    overflow-y: visible;
+    font-size: 24px;
+}
+
+.pg-gi-btn {
+    grid-area: consentBtn;
+    width: max-content;
+    height: max-content;
+    margin-right: 0;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.pg-game-btn {
+    -moz-box-shadow: 0px 10px 14px -7px #276873;
+    -webkit-box-shadow: 0px 10px 14px -7px #276873;
+    box-shadow: 0px 10px 14px -7px #276873;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
+    background:-moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:-webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:-o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:-ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+    background-color:#599bb3;
+    -moz-border-radius:13px;
+    -webkit-border-radius:13px;
+    border-radius:13px;
+    border:2px solid #29668f;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:1.2rem;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #3d768a;
+    text-align: center;
+    width: 15rem;
+    height: 3rem;
+}
+.pg-game-btn:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
+    background:-moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:-webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:-o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:-ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+    background-color:#408c99;
+}
+
+.pg-gw-page3,
+.pg-gw-page2 {
+    display: grid;
+    width: 100%;
+    height: 80%;
+}
+
+.pg-gw-page2>div {
+    margin-bottom: 5rem;
+    /*grid-template-rows: repeat(6, 20%);*/
+}
+
+.pg-gw-p2-r1,
+.pg-gw-p2-r2,
+.pg-gw-p2-r3 {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    /*grid-template-columns: 40% 60%;*/
+    /*grid-template-columns: repeat(2, max-content);*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+}
+
+.pg-finish-block-d .pg-gw-p2-r1 {
+    height: max-content;
+    margin-bottom: 0 !important;
+}
+
+.pg-gw-p2-img {
+
+    width: 12.8rem;
+    max-width: 12.8rem;
+    min-width: 12.8rem;
+
+    height: 8rem;
+    max-height: 8rem;
+    min-height: 8rem;
+
+    border: 1px black solid;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.pg-gw-p2-txt {
+    margin-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.pg-page3 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.pg-page3 label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: x-large;
+}
+
+.true-false-button {
+    font-size: 20px;
+    padding: 15px 30px;
+    background-color: yellow;
+    font-weight: bold;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.true-false-button:first-child {
+    margin-right: 20px;  /* Adds spacing to the right of the first button */
+}

@@ -26,7 +26,8 @@ const EXPERIMENTS_LABELS_NAMES = {
     NoCupsGame: 'NoCupsGame',
     PreferancePerformance: 'PreferancePerformance',
     MegaDots: 'MegaDots',
-    DotsMindGame: 'DotsMindGame'
+    DotsMindGame: 'DotsMindGame',
+    DotsMindGameBenchmark: 'DotsMindGameBenchmark'
     
 };
 
@@ -58,7 +59,8 @@ const EXPERIMENTS_NAMES_LABELS = {
     NoCupsGame: 'NoCupsGame',
     PreferancePerformance: 'PreferancePerformance',
     MegaDots: 'MegaDots',
-    DotsMindGame: 'DotsMindGame'
+    DotsMindGame: 'DotsMindGame',
+    DotsMindGameBenchmark: 'DotsMindGameBenchmark'
    
 };
 

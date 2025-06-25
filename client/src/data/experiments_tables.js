@@ -87,6 +87,14 @@ export const AllExperiments ={
         consent_pathname: '/DotsMindGame/consent',
         exp_messages_pathname: '/DotsMindGame/exp_messages',
     },
+    DotsMindGameBenchmark: {
+        main_pathname: '/DotsMindGameBenchmark/main',
+        settings_pathname: '/DotsMindGameBenchmark/settings',
+        start_pathname: '/DotsMindGameBenchmark/start',
+        reports_pathname: '/DotsMindGameBenchmark/reports',
+        consent_pathname: '/DotsMindGameBenchmark/consent',
+        exp_messages_pathname: '/DotsMindGameBenchmark/exp_messages',
+    },
     WordPuzzle: {
         main_pathname: '/WordPuzzle/main',
         settings_pathname: '/WordPuzzle/settings',

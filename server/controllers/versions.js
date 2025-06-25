@@ -213,7 +213,7 @@ const fixGameVersion = (exp, Version) => {
 
         return version;
     }
-    else if (exp === 'DotsMindGame'){
+    else if (exp === 'DotsMindGame' || exp === 'DotsMindGameBenchmark'){
         let version = {...Version};
         try {
             let game_play = version.game.g_p;

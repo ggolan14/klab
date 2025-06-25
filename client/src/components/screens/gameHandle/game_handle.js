@@ -34,6 +34,9 @@ import MegaDotsSummary from "../../content/mega_dots/Summary";
 import DotsMindGameStart from "../../content/dots_mind_game/Start";
 import DotsMindGameSummary from "../../content/dots_mind_game/Summary";
 
+import DotsMindGameBenchmarkStart from "../../content/dots_mind_game_benchmark/Start";
+import DotsMindGameBenchmarkSummary from "../../content/dots_mind_game_benchmark/Summary";
+
 import PointsGameShStart from "../../content/points_game_sh/Start";
 
 import WordPuzzleStart from "../../content/word_puzzle/Start";
@@ -509,6 +512,7 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
         PointsGame: <PointsGameStart {...game_props} />,
         MegaDots: <MegaDotsStart {...game_props} />,
         DotsMindGame: <DotsMindGameStart {...game_props} />,
+        DotsMindGameBenchmark: <DotsMindGameBenchmarkStart {...game_props} />,
         PointsGameSh: <PointsGameShStart />,
         WordPuzzle: <WordPuzzleStart {...game_props} />,
         AbstractAndDeclarationEffect: <AbstractAndDeclarationEffectStart {...game_props} />,
@@ -634,6 +638,17 @@ const getSummary = ({ exp, summary_args }) => {
             label: 'Dots Mind Game',
             element: () => (
                 <DotsMindGameSummary
+                    summary_args={summary_args}
+                    ShowUpFee={DB_RECORDS.Payment.show_up_fee}
+                    SignOfReward={DB_RECORDS.Payment.sign_of_reward}
+                    GameBonus={DB_RECORDS.Payment.bonus_payment}
+                />
+            )
+        },
+        DotsMindGameBenchmark: {
+            label: 'Dots Mind Game Benchmark',
+            element: () => (
+                <DotsMindGameBenchmarkSummary
                     summary_args={summary_args}
                     ShowUpFee={DB_RECORDS.Payment.show_up_fee}
                     SignOfReward={DB_RECORDS.Payment.sign_of_reward}
