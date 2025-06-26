@@ -28,6 +28,11 @@ let all_game_data = [];
 let GAME_ORDER = [];
 let isPractice = true;
 let totalBonus = [];
+let POINTS_PAGE = 1
+let BUTTONS_PAGE = 2
+let QUESTION_PAGE = 3
+let DOTS_GAME_COMPLETED = 4
+let STEP_BEFORE_SURVEY = 5
 
 
 const CM_TO_PX = 37.7952755906;
@@ -49,6 +54,67 @@ const completedDotsMindGame = (
         <br />
     </span>
 );
+
+const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
+    return (
+        <div style={{ fontSize: "24px", width: "80%", margin: "40px auto", textAlign: "left" }}>
+            <label style={{ display: "block", fontSize: "32px", textAlign: 'center', marginBottom: '20px' }}>
+                <b>Please answer the following question</b>
+            </label>
+            Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?
+            <br /><br />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ marginRight: '12px' }}>Not at all</span>
+                <input
+                    type="range"
+                    min="1"
+                    max="7"
+                    step="1"
+                    value={sliderValue || ''}
+                    onChange={(e) => setSliderValue(e.target.value)}
+                    style={{
+                        width: '355px',
+                        margin: '0 5px',
+                        appearance: 'none',
+                        background: '#ddd',
+                    }}
+                />
+                <span style={{ marginLeft: '10px' }}>Very likely</span>
+            </div>
+            <div
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(7, 1fr)`,
+                    width: '390px',
+                    marginTop: '5px',
+                    marginLeft: '97px',
+                }}
+            >
+                {Array.from({ length: 7 }, (_, i) => (
+                    <span key={i} style={{ fontSize: '18px', textAlign: 'center' }}>{i + 1}</span>
+                ))}
+            </div>
+            <p>
+                <b style={{ color: 'black' }}>Your selection:&nbsp;</b>
+                {sliderValue !== null && sliderValue !== '' ? (
+                    sliderValue
+                ) : (
+                    <span style={{ color: 'red' }}>None (please select a value)</span>
+                )}
+            </p>
+            <div style={{ marginTop: "30px", textAlign: "center" }}>
+                <button
+                    className='pg-game-btn'
+                    onClick={onNext}
+                    disabled={sliderValue === null || sliderValue === ''}
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    );
+};
+
 
 const ResetAll = () => {
     UserId = 'empty';
@@ -435,7 +501,8 @@ class Game extends React.Component {
             trial: 0,
             step: 0,
             isLoading: false,
-            debugger_props: null
+            debugger_props: null,
+            sliderValue: null
         }
 
         this.GamePart = this.props.Part;
@@ -600,7 +667,8 @@ class Game extends React.Component {
 
     nextStep() {
         let sc = this.state;
-        if (sc.step === 4) {
+        console.log("---> sc.step="+sc.step)
+        if (sc.step === 5) {
             if (!GameSet.games_play.length) {
                 return this.props.Forward();
             }
@@ -625,8 +693,26 @@ class Game extends React.Component {
                     sc.step = 0;
                 }
             }
-            else
+            else{
+                if(sc.step == 3){
+                 const db_row = {
+            QuestionIndex: "lastQuestion",
+            QuestionType: "LAST_QUESTION",
+            Question:"Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?",
+            Answer: sc.sliderValue,
+            TotalYesAnswers: "N/A",
+            TotalNoAnswers: "N/A",
+            GameCondition: this.props.GameCondition,
+            HaveAnAnswerTime: "N/A",
+            ConfirmationTime: "N/A",
+        };
+
+        // Calls parent function to save the response in the database
+        this.props.insertGameLine(db_row);
+                }
                 sc.step++;
+            }
+                
         }
         this.setState(sc);
 
@@ -640,7 +726,7 @@ class Game extends React.Component {
         // console.log("++++++++ points = ",points)
         let correct_answer = points.left > points.right ? 'left' : 'right';
         let is_correct_answer = correct_answer === choose_side;
-
+        console.log("---> STEP = "+this.state.step);
 
 
         if (this.GamePart === "Real") {
@@ -732,9 +818,11 @@ class Game extends React.Component {
         else
             return { is_busted, inspection, buttons };
     }
+    
     render() {
+        //console.log("---> STEP="+step)
         if (this.state.isLoading) return <WaitForAction2 />;
-
+        
         const { step } = this.state;
         return (
             <>
@@ -742,10 +830,10 @@ class Game extends React.Component {
                 {step === 0 && (
                     <PlusPage Forward={this.nextStep} />
                 )}
-                {step === 1 && (
+                {step === POINTS_PAGE && (
                     <PointsPage Forward={this.nextStep} dots={this.getCurrentDots()} />
                 )}
-                {step === 2 && (
+                {step === BUTTONS_PAGE && (
                     <ButtonPage
                         profit_side={this.current_game.profit_side}
                         not_profit_side={this.current_game.not_profit_side}
@@ -753,7 +841,14 @@ class Game extends React.Component {
                         onClickBtn={this.onClickBtn}
                     />
                 )}
-                {step === 3 && (
+                {step === QUESTION_PAGE && (
+  <LastQuestionWithSlider
+    sliderValue={this.state.sliderValue}
+    setSliderValue={(value) => this.setState({ sliderValue: value })}
+    onNext={this.nextStep}
+  />
+)}
+                {step === DOTS_GAME_COMPLETED && (
                     (
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <p style={{ marginBottom: "20px" }}>
@@ -763,7 +858,7 @@ class Game extends React.Component {
                         </div>
                     )
                 )}
-                {step === 4 && (
+                {step === STEP_BEFORE_SURVEY && (
                     <FoodPreference
                         GameCondition={GameCondition}
                         insertGameLine={this.insertGameLine}
@@ -771,7 +866,7 @@ class Game extends React.Component {
                         Forward={this.nextStep}
                     />
                 )}
-                {step === 5 && (
+                {step === 6 && (
                     <FinishGamePage Forward={this.nextStep} />
                 )}
 
