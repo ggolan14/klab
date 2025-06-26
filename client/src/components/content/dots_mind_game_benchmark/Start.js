@@ -87,7 +87,7 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
                     gridTemplateColumns: `repeat(7, 1fr)`,
                     width: '390px',
                     marginTop: '5px',
-                    marginLeft: '97px',
+                    marginLeft: '412px',
                 }}
             >
                 {Array.from({ length: 7 }, (_, i) => (
@@ -420,8 +420,8 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
 
     return (
         <div
-            className='pg_bp center-screen' 
-            
+            className='pg_bp center-screen'
+
         >
             {/* Existing header */}
 
@@ -456,9 +456,9 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                     )
                 }
             </div>
-             <div style={{ textAlign: "center", fontSize: "24px"}}>
+            <div style={{ textAlign: "center", fontSize: "24px" }}>
                 <label>
-                    Remember: this game was programmed such that there is a 33% chance 
+                    Remember: this game was programmed such that there is a 33% chance
                     <br></br>that a rectangle will have more dots in the {GameSet.profit_side} section.
 
                 </label>
@@ -469,7 +469,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                 style={{
                     animation: 'none',
                     visibility: showSpaceBarLbl ? 'visible' : 'hidden',
-                    fontSize:"24px"
+                    fontSize: "24px"
                 }}
             >
                 To continue press the space bar
@@ -667,7 +667,7 @@ class Game extends React.Component {
 
     nextStep() {
         let sc = this.state;
-        console.log("---> sc.step="+sc.step)
+        console.log("---> sc.step=" + sc.step)
         if (sc.step === 5) {
             if (!GameSet.games_play.length) {
                 return this.props.Forward();
@@ -693,26 +693,26 @@ class Game extends React.Component {
                     sc.step = 0;
                 }
             }
-            else{
-                if(sc.step == 3){
-                 const db_row = {
-            QuestionIndex: "lastQuestion",
-            QuestionType: "LAST_QUESTION",
-            Question:"Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?",
-            Answer: sc.sliderValue,
-            TotalYesAnswers: "N/A",
-            TotalNoAnswers: "N/A",
-            GameCondition: this.props.GameCondition,
-            HaveAnAnswerTime: "N/A",
-            ConfirmationTime: "N/A",
-        };
+            else {
+                if (sc.step == 3) {
+                    const db_row = {
+                        QuestionIndex: "lastQuestion",
+                        QuestionType: "LAST_QUESTION",
+                        Question: "Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?",
+                        Answer: sc.sliderValue,
+                        TotalYesAnswers: "N/A",
+                        TotalNoAnswers: "N/A",
+                        GameCondition: this.props.GameCondition,
+                        HaveAnAnswerTime: "N/A",
+                        ConfirmationTime: "N/A",
+                    };
 
-        // Calls parent function to save the response in the database
-        this.props.insertGameLine(db_row);
+                    // Calls parent function to save the response in the database
+                    this.props.insertGameLine(db_row);
                 }
                 sc.step++;
             }
-                
+
         }
         this.setState(sc);
 
@@ -726,7 +726,7 @@ class Game extends React.Component {
         // console.log("++++++++ points = ",points)
         let correct_answer = points.left > points.right ? 'left' : 'right';
         let is_correct_answer = correct_answer === choose_side;
-        console.log("---> STEP = "+this.state.step);
+        console.log("---> STEP = " + this.state.step);
 
 
         if (this.GamePart === "Real") {
@@ -818,11 +818,11 @@ class Game extends React.Component {
         else
             return { is_busted, inspection, buttons };
     }
-    
+
     render() {
         //console.log("---> STEP="+step)
         if (this.state.isLoading) return <WaitForAction2 />;
-        
+
         const { step } = this.state;
         return (
             <>
@@ -842,12 +842,12 @@ class Game extends React.Component {
                     />
                 )}
                 {step === QUESTION_PAGE && (
-  <LastQuestionWithSlider
-    sliderValue={this.state.sliderValue}
-    setSliderValue={(value) => this.setState({ sliderValue: value })}
-    onNext={this.nextStep}
-  />
-)}
+                    <LastQuestionWithSlider
+                        sliderValue={this.state.sliderValue}
+                        setSliderValue={(value) => this.setState({ sliderValue: value })}
+                        onNext={this.nextStep}
+                    />
+                )}
                 {step === DOTS_GAME_COMPLETED && (
                     (
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -989,7 +989,7 @@ class Start extends React.Component {
     }
 
     componentDidMount() {
-                setTimeout(() => {
+        setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
         }, 100);
         NewLogs({
@@ -1348,7 +1348,7 @@ class GameMessages extends React.Component {
 
         this.fine = false;
 
-        this.pages = [this.Page0, this.Page1, this.Page2, this.Page3, this.Page4, this.Page5, this.Page6, this.Page7,this.Page8];
+        this.pages = [this.Page0, this.Page1, this.Page2, this.Page3, this.Page4, this.Page5, this.Page6, this.Page7, this.Page8];
 
         this.state = {
             page_index: 0,
@@ -1479,7 +1479,7 @@ class GameMessages extends React.Component {
                 Many people find it easier to identify when the {GameSet.profit_side} section of the rectangle contains more dots. Therefore, selecting "There are more dots on the {GameSet.profit_side} section of the rectangle" will earn you {profit_side_score} points, whereas choosing "There are more dots on the {GameSet.not_profit_side} section of the rectangle" will earn you {none_profit_side_score} points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. 
+                These rewards are independent of whether your answer is correct or not.
                 <br></br>
                 Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
                 <br></br>
@@ -1495,7 +1495,7 @@ class GameMessages extends React.Component {
                 <br></br>
                 <br></br>
                 These rewards are independent of whether your answer is correct or not.
-                <br></br> 
+                <br></br>
                 Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
                 <br></br>
                 Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
@@ -1512,7 +1512,7 @@ class GameMessages extends React.Component {
             <div>
                 <span><h1>Earning points</h1></span>
                 <span>{instructionText}</span>
-               
+
                 <u>Comments:</u><br />
                 <br></br>
                 <textarea
@@ -1540,7 +1540,7 @@ class GameMessages extends React.Component {
         );
     };
     Page4 = () => {
-            return (
+        return (
             <div>
                 <h2>To ensure you understood the instructions, please answer the following questions:</h2>
                 <br />
@@ -1586,7 +1586,7 @@ class GameMessages extends React.Component {
     };
 
     Page5 = () => {
-            return (
+        return (
             <div>
 
                 <h2><b>There is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section</b></h2>
