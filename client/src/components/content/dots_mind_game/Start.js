@@ -21,7 +21,6 @@ let GameSet = {};
 let NumberOfRoundsTotal = 0;
 let GamesErrors = [], GamesPayoff = [];
 let GameCondition = null;
-let GameType = null;
 let randNum = -1;
 let all_game_data = [];
 
@@ -394,13 +393,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                     )
                 }
             </div>
-             <div style={{ textAlign: "center", fontSize: "36px" }}>
-                <label>
-                    Remember: this game was programmed such that there is a 33% chance 
-                    <br></br>that a rectangle will have more dots in the {GameSet.profit_side} section.
 
-                </label>
-            </div>
             {/* Space bar instruction */}
             <label
                 className='pg_bp-space_bar'
@@ -814,9 +807,6 @@ class Start extends React.Component {
             GameCondition = RunCounter % 2 ? 'OneShot' : 'Repeated';
         }
         console.log("---> GameCondition=" + GameCondition)
-
-        GameType = props.game_settings.general.game_type;
-
         UserId = props.user_id;
         RunningName = props.running_name;
         DebugMode = props.dmr;
@@ -1095,7 +1085,7 @@ class Start extends React.Component {
                 <div className="trivia-container">
                     <MathQuestion onAnswer={this.handleMathQuestionAnswer} />
 
-                    {/* Display Error message if user answers incorrectly */}
+                    {/* Display error message if user answers incorrectly */}
 
                 </div>
             );
@@ -1383,11 +1373,7 @@ class GameMessages extends React.Component {
                 Many people find it easier to identify when the {GameSet.profit_side} section of the rectangle contains more dots. Therefore, selecting "There are more dots on the {GameSet.profit_side} section of the rectangle" will earn you {profit_side_score} points, whereas choosing "There are more dots on the {GameSet.not_profit_side} section of the rectangle" will earn you {none_profit_side_score} points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not. 
-                <br></br>
-                Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
-                <br></br>
-                Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
                 In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
@@ -1398,11 +1384,7 @@ class GameMessages extends React.Component {
                 Many people find it easier to identify when the {GameSet.profit_side} section of the rectangle contains more dots. Therefore, selecting "There are more dots on the {GameSet.profit_side} section of the rectangle" will earn you {profit_side_score} points, whereas choosing "There are more dots on the {GameSet.not_profit_side} section of the rectangle" will earn you {none_profit_side_score} points.
                 <br></br>
                 <br></br>
-                These rewards are independent of whether your answer is correct or not.
-                <br></br> 
-                Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
-                <br></br>
-                Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                These rewards are independent of whether your answer is correct or not. Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
                 In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
@@ -1450,20 +1432,19 @@ class GameMessages extends React.Component {
                 <h2>To ensure you understood the instructions, please answer the following questions:</h2>
                 <br />
                 <br />
-                <h2><b>There is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section
-                </b></h2>
+                <h2><b>Your task is to tell us which section you think includes more dots.</b></h2>
                 <br />
 
                 {/* True and False buttons */}
                 <div>
                     <button
-                        onClick={() => this.handleAnswer(true, "Correct!")}
+                        onClick={() => this.handleAnswer(true, "Correct! your task is to estimate which section includes more dots.")}
                         className="true-false-button"
                     >
                         True
                     </button>
                     <button
-                        onClick={() => this.handleAnswer(false, "Wrong! There is a 33% chance that a rectangle will have more dots in the " + GameSet.profit_side + " section")}
+                        onClick={() => this.handleAnswer(false, "Wrong! Your task is to estimate which section includes more dots.")}
                         className="true-false-button"
                     >
                         False
