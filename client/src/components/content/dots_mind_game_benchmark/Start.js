@@ -696,8 +696,8 @@ class Game extends React.Component {
             else {
                 if (sc.step == 3) {
                     const db_row = {
-                        QuestionIndex: "lastQuestion",
-                        QuestionType: "LAST_QUESTION",
+                        QuestionIndex: "N/A",
+                        QuestionType: "PerceivedObs",
                         Question: "Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?",
                         Answer: sc.sliderValue,
                         TotalYesAnswers: "N/A",
@@ -1483,7 +1483,7 @@ class GameMessages extends React.Component {
                 <br></br>
                 Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
                 <br></br>
-                Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
                 In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
@@ -1498,7 +1498,7 @@ class GameMessages extends React.Component {
                 <br></br>
                 Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
                 <br></br>
-                Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in all capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
+                Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
                 In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
@@ -1512,7 +1512,7 @@ class GameMessages extends React.Component {
             <div>
                 <span><h1>Earning points</h1></span>
                 <span>{instructionText}</span>
-
+                <br></br>
                 <u>Comments:</u><br />
                 <br></br>
                 <textarea
