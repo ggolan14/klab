@@ -144,7 +144,7 @@ const OpenQuestion = ({ onNext, textAnswer , setTextAnswer }) => {
                         width: '50%',
                         fontSize: '16px',
                         borderRadius: '4px'}}
-                placeholder="Type your answer here..."
+                        placeholder="Type your answer here..."
             />
             <div style={{ marginTop: "30px", textAlign: "center" }}>
                 <button
@@ -520,18 +520,6 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
         </div>
     );
 
-};
-
-const FinishGamePage = ({ Forward }) => {
-
-    return (
-        <div className='pg-game-intro'>
-            <b>222You completed the dots game</b><br />
-            You will now be asked to complete a food preference survey.
-            You cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
-            <button onClick={Forward}>Next</button>
-        </div>
-    )
 };
 
 class Game extends React.Component {
