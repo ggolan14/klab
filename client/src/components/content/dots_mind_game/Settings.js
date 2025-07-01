@@ -1234,6 +1234,10 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                     value: 'rand',
                     label: 'Random'
                 },
+                {
+                    value: 'mixed',
+                    label: 'Mixed'
+                },
             ],
             value: game_settings.game.cond,
             callback: value => changeSettings({
