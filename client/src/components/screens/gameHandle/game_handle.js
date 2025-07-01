@@ -437,11 +437,21 @@ const insertPayment = (payment) => {
 const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAction, dmr }) => {
     console.log("===> getGame    exp="+exp);
     const additionalParams = {};
-    const extended_name = "";
+    const extended_name = "";  // extended name of the experiment(for mixed excutions)
+
+    //MixedGame experiment excutions types
     const TRIVIA_ONE_SHOT = 0;
     const MIND_GAME_REPEATED = 1;
     const TRIVIA_REPEATED = 2;
     const MIND_GAME_ONE_SHOT = 3;
+
+    //DotsMindGame mixed excutions types
+    const DOTS_MIND_GAME_ONE_SHOT = 0;
+    const DOTS_MIND_GAME_BENCHMARK_REPEATED = 1;
+    const DOTS_MIND_GAME_REPEATED = 2;
+    const DOTS_MIND_GAME_BENCHMARK_ONESHOT = 3;
+
+
 
     additionalParams.num_of_real_rounds = game_settings.game.num_of_real_rounds;
     if (exp === "MixedGame") {
@@ -463,6 +473,26 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
             exp = "MindGame";
             additionalParams.cond = "o";
             additionalParams.extended_name = "MIXED_MIND_GAME_ONE_SHOT";
+        }
+    } else if(exp === "DotsMindGame" && game_settings.game.cond == "mixed"){
+        let RunCounter = KeyTableID();
+        let type = RunCounter % 4
+        if (type == DOTS_MIND_GAME_ONE_SHOT) {
+            exp = "DotsMindGame";
+            additionalParams.cond = "o";
+            additionalParams.extended_name = "DOTS_MIND_GAME_ONE_SHOT";
+        } else if (type == DOTS_MIND_GAME_BENCHMARK_REPEATED) {
+            exp = "DotsMindGameBenchmark";
+            additionalParams.cond = "r";
+            additionalParams.extended_name = "DOTS_MIND_GAME_BENCHMARK_REPEATED";
+        } else if (type == DOTS_MIND_GAME_REPEATED) {
+            exp = "DotsMindGame";
+            additionalParams.cond = "r";
+            additionalParams.extended_name = "DOTS_MIND_GAME_REPEATED";
+        } else if (type == DOTS_MIND_GAME_BENCHMARK_ONESHOT) {
+            exp = "DotsMindGameBenchmark";
+            additionalParams.cond = "o";
+            additionalParams.extended_name = "DOTS_MIND_GAME_BENCHMARK_ONESHOT";
         }
     } else {
         additionalParams.cond = game_settings.game.cond;
@@ -499,9 +529,11 @@ const getGame = ({ exp, game_settings, more, isa, callbackFunction, setWaitForAc
         more,
         isa,
         user_id: DB_RECORDS.UserDetails.UserId,
-        callbackFunction
-    };
+        callbackFunction,
+        extended_name: additionalParams.extended_name ?? "N/A"
 
+    };
+    console.log("---> exp= "+exp+"   game_props.extended_name = "+game_props.extended_name)
     const game_list = {
         MixedGame: <MixedGameStart {...game_props} extended_name={extended_name} />,
         MindGame: <MindGameStart {...game_props} game_settings={setCondForComponent("MindGame", game_settings, additionalParams)} />,
