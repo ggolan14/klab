@@ -31,8 +31,9 @@ let totalBonus = [];
 let POINTS_PAGE = 1
 let BUTTONS_PAGE = 2
 let QUESTION_PAGE = 3
-let DOTS_GAME_COMPLETED = 4
-let STEP_BEFORE_SURVEY = 5
+let OPEN_QUESTION_PAGE = 4
+let DOTS_GAME_COMPLETED = 5
+let STEP_BEFORE_SURVEY = 6
 
 
 const CM_TO_PX = 37.7952755906;
@@ -62,9 +63,9 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
             <label style={{ display: "block", fontSize: "32px", textAlign: 'center', marginBottom: '20px' }}>
                 <b>Please answer the following question</b>
             </label>
-            Consider a participant who cheated on the dots game. <br></br>
+            Consider a participant who cheated on the dots game.  <br></br>
             This participant selected the {GameSet.profit_side} side to earn more money, even when they thought more dots appeared on the {GameSet.not_profit_side}. <br></br>
-            In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task
+            In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task?
 
             <br /><br />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -120,6 +121,43 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
     );
 };
 
+const OpenQuestion = ({ onNext, textAnswer , setTextAnswer }) => {
+    //const [textAnswer, setTextAnswer] = useState("");
+
+    const handleSubmit = () => {
+        // Optional: insertGameLine call can be done here or in nextStep
+        onNext(textAnswer);
+    };
+
+    return (
+        <div style={{ fontSize: "24px", width: "80%", margin: "40px auto", textAlign: "left" }}>
+            <label style={{ display: "block", fontSize: "32px", textAlign: 'center', marginBottom: '20px' }}>
+                <b>Please explain your answer to the previous question:</b>
+            </label>
+            <textarea
+                
+                value={textAnswer}
+                onChange={(e) => setTextAnswer(e.target.value)}
+                rows={20}
+                style={{ border: '1px solid lightgray',
+                        padding: '8px',
+                        width: '50%',
+                        fontSize: '16px',
+                        borderRadius: '4px'}}
+                placeholder="Type your answer here..."
+            />
+            <div style={{ marginTop: "30px", textAlign: "center" }}>
+                <button
+                    className='pg-game-btn'
+                    onClick={handleSubmit}
+                    disabled={textAnswer.trim() === ""}
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    );
+};
 
 const ResetAll = () => {
     UserId = 'empty';
@@ -488,7 +526,7 @@ const FinishGamePage = ({ Forward }) => {
 
     return (
         <div className='pg-game-intro'>
-            <b>You completed the dots game</b><br />
+            <b>222You completed the dots game</b><br />
             You will now be asked to complete a food preference survey.
             You cannot leave or stop responding until you have completed the entire study and have received your completion code, or else you will not receive compensation.
             <button onClick={Forward}>Next</button>
@@ -507,7 +545,9 @@ class Game extends React.Component {
             step: 0,
             isLoading: false,
             debugger_props: null,
-            sliderValue: null
+            sliderValue: null,
+            textAnswer: '',
+
         }
 
         this.GamePart = this.props.Part;
@@ -673,7 +713,7 @@ class Game extends React.Component {
     nextStep() {
         let sc = this.state;
         console.log("---> sc.step=" + sc.step)
-        if (sc.step === 5) {
+        if (sc.step === STEP_BEFORE_SURVEY) {
             if (!GameSet.games_play.length) {
                 return this.props.Forward();
             }
@@ -683,7 +723,7 @@ class Game extends React.Component {
 
         }
         else {
-            if (sc.step === 2) {
+            if (sc.step === BUTTONS_PAGE) {
                 if (sc.trial === (this.current_game_trials.length - 1)) {
                     if (this.GamePart === 'Practice') {
                         this.props.insertGameArray([...this.game_data]);;
@@ -699,13 +739,32 @@ class Game extends React.Component {
                 }
             }
             else {
-                if (sc.step == 3) {
+                if (sc.step == QUESTION_PAGE) {
                     const db_row = {
                         GameType: this.props.gameExtendedName,
                         QuestionIndex: "N/A",
                         QuestionType: "PerceivedObs",
-                        Question: "Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?",
+                        Question: "Consider a participant who cheated on the dots game. This participant selected the right/left side to earn more money, even when they thought more dots appeared on the left/ right. In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task?",
                         Answer: sc.sliderValue,
+                        TotalYesAnswers: "N/A",
+                        TotalNoAnswers: "N/A",
+                        GameCondition: this.props.GameCondition,
+                        HaveAnAnswerTime: "N/A",
+                        ConfirmationTime: "N/A"
+
+                    };
+                    console.log(":----->  db_row=", db_row)
+
+                    // Calls parent function to save the response in the database
+                    this.props.insertGameLine(db_row);
+                }
+                if (sc.step == OPEN_QUESTION_PAGE) {
+                    const db_row = {
+                        GameType: this.props.gameExtendedName,
+                        QuestionIndex: "N/A",
+                        QuestionType: "PerceivedObsExplanation",
+                        Question: "Please explain your answer to the previous question:",
+                        Answer: sc.textAnswer,
                         TotalYesAnswers: "N/A",
                         TotalNoAnswers: "N/A",
                         GameCondition: this.props.GameCondition,
@@ -829,10 +888,10 @@ class Game extends React.Component {
     }
 
     render() {
-        //console.log("---> STEP="+step)
         if (this.state.isLoading) return <WaitForAction2 />;
 
         const { step } = this.state;
+        console.log("======> STEP = "+step)
         return (
             <>
 
@@ -857,6 +916,13 @@ class Game extends React.Component {
                         onNext={this.nextStep}
                     />
                 )}
+                {step === OPEN_QUESTION_PAGE && (
+                    <OpenQuestion
+                       textAnswer={this.state.textAnswer}
+                       setTextAnswer={(value) => this.setState({ textAnswer: value })}
+                        onNext={this.nextStep}
+                    />
+                )}
                 {step === DOTS_GAME_COMPLETED && (
                     (
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -875,9 +941,7 @@ class Game extends React.Component {
                         Forward={this.nextStep}
                     />
                 )}
-                {step === 6 && (
-                    <FinishGamePage Forward={this.nextStep} />
-                )}
+              
 
                 {this.state.debugger_props && (
                     <DebuggerItem debugger_props={this.state.debugger_props} />
@@ -1247,7 +1311,7 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
 
     // Handle text input change with number validation
     const handleInputChange = (e) => {
-        const value = e.target.value.trim();
+        const value = e.target.value;
         setAnswer(value);
 
         // Check if the input is a valid number
@@ -1514,9 +1578,7 @@ class GameMessages extends React.Component {
                 <br></br>
                 <br></br>
                 In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
-
-                <br></br>
-                <br></br>
+               
             </span>
         );
 
