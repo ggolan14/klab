@@ -56,12 +56,16 @@ const completedDotsMindGame = (
 );
 
 const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
+    let RunCounter = KeyTableID();
     return (
-        <div style={{ fontSize: "24px", width: "80%", margin: "40px auto", textAlign: "left" }}>
+        <div style={{ fontSize: "24px", width: "85%", margin: "40px auto", textAlign: "left" }}>
             <label style={{ display: "block", fontSize: "32px", textAlign: 'center', marginBottom: '20px' }}>
                 <b>Please answer the following question</b>
             </label>
-            Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?
+            Consider a participant who cheated on the dots game. <br></br>
+            This participant selected the {GameSet.profit_side} side to earn more money, even when they thought more dots appeared on the {GameSet.not_profit_side}. <br></br>
+            In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task
+
             <br /><br />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ marginRight: '12px' }}>Not at all</span>
@@ -85,9 +89,10 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
                 style={{
                     display: 'grid',
                     gridTemplateColumns: `repeat(7, 1fr)`,
-                    width: '390px',
+                    width: '390px', // Same as the slider
                     marginTop: '5px',
-                    marginLeft: '412px',
+                    marginLeft: '453px',
+                    marginRight: 'auto',
                 }}
             >
                 {Array.from({ length: 7 }, (_, i) => (
@@ -696,6 +701,7 @@ class Game extends React.Component {
             else {
                 if (sc.step == 3) {
                     const db_row = {
+                        GameType: this.props.gameExtendedName,
                         QuestionIndex: "N/A",
                         QuestionType: "PerceivedObs",
                         Question: "Imagine that a participant cheated in this dots game. In your opinion, how likely is it that the researchers conducting this study would suspect that the participant cheated?",
@@ -704,8 +710,10 @@ class Game extends React.Component {
                         TotalNoAnswers: "N/A",
                         GameCondition: this.props.GameCondition,
                         HaveAnAnswerTime: "N/A",
-                        ConfirmationTime: "N/A",
+                        ConfirmationTime: "N/A"
+
                     };
+                    console.log(":----->  db_row=", db_row)
 
                     // Calls parent function to save the response in the database
                     this.props.insertGameLine(db_row);
@@ -799,6 +807,7 @@ class Game extends React.Component {
             randNum: GameCondition == "Repeated" ? "N/A" : randNum,
             GameCondition,
             choice_time,
+            GameType: this.props.gameExtendedName
         };
         console.log("*********** trial_data = ", trial_data)
         this.game_data.push(trial_data);
@@ -890,7 +899,8 @@ class Start extends React.Component {
         super(props);
         this.props = props;
         let RunCounter = KeyTableID();
-        console.log()
+        this.extended_name = props.extended_name;
+        console.log("-------------> this.extended_name=" + this.extended_name)
         ResetAll();
         let cond = props.game_settings.game.cond;
         if (cond === 'o') {
@@ -1045,7 +1055,8 @@ class Start extends React.Component {
                     insertGameArray: this.props.insertGameArray,
                     Part: 'Practice',
                     insertGameLine: this.props.insertGameLine,
-                    sendDataToDB: this.props.sendGameDataToDB
+                    sendDataToDB: this.props.sendGameDataToDB,
+                    gameExtendedName: this.extended_name
                 }
             });
 
@@ -1084,6 +1095,7 @@ class Start extends React.Component {
                 insertGameArray: this.props.insertGameArray,
                 insertGameLine: this.props.insertGameLine,
                 sendDataToDB: this.props.sendGameDataToDB,
+                gameExtendedName: this.extended_name,
                 Part: 'Real'
             }
         });
