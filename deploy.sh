@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # משתנים
-IMAGE_NAME="ggolan14/klab-app"
+IMAGE_NAME="ddsapps2/klab-app"
 
 # מייצר tag לפי הפורמט שביקשת: ddMMyyyy-HH_MM_SS
 TAG=$(date +"%d%m%Y-%H_%M_%S")
