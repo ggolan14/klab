@@ -1012,7 +1012,7 @@ class GameMessages extends React.Component {
                     <div
                         className='pg-gw-p2-txt'
                     >
-                        Immediately afterwards, a rectangle, divided to two equally sized parts, will be presented for {GameSet.plus_time/1000} second{GameSet.plus_time/1000 !== 1? 's' : ''} only. Each part will consist of a certain number of red dots.
+                        Immediately afterwards, a rectangle, divided to two equally sized parts, will be presented for {GameSet.dots_time/1000} second{GameSet.dots_time/1000 !== 1? 's' : ''} only. Each part will consist of a certain number of red dots.
                     </div>
                 </div>
 
