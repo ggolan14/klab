@@ -573,7 +573,7 @@ const SettingsBody = ({_this, changeSettings}) => {
     }
     catch (e) {
         console.log(e)
-        return <label>Some error happened</label>
+        return <label>Failed to load settings</label>
     }
 };
 
