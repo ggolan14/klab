@@ -68,38 +68,36 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
             In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task?
 
             <br /><br />
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ marginRight: '12px' }}>Not at all</span>
-                <input
-                    type="range"
-                    min="1"
-                    max="7"
-                    step="1"
-                    value={sliderValue || ''}
-                    onChange={(e) => setSliderValue(e.target.value)}
-                    style={{
-                        width: '355px',
-                        margin: '0 5px',
-                        appearance: 'none',
-                        background: '#ddd',
-                    }}
-                />
-                <span style={{ marginLeft: '10px' }}>Very likely</span>
+           <div style={{ width: "100%", display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                <div style={{ display: "flex", flexDirection: "column", width: "500px", position: "relative" }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span style={{ marginRight: '12px', position: "absolute", top: "0px", left: "-100px" }}>Not at all</span>
+                        <input
+                            type="range"
+                            min="1"
+                            max="7"
+                            step="1"
+                            value={sliderValue || ''}
+                            onChange={(e) => setSliderValue(e.target.value)}
+                            style={{
+                                width: "100%",
+                                margin: '0 5px',
+                                appearance: 'none',
+                                background: '#ddd',
+                            }}
+                        />
+                        <span style={{ marginLeft: '10px', position: "absolute", top: "0px", right: "-120px" }}>Very likely</span>
+                    </div>
+                    <div
+                        style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between" }}
+                    >
+                        {Array.from({ length: 7 }, (_, i) => (
+                            <span key={i} style={{ fontSize: '18px', textAlign: 'center' }}>{i + 1}</span>
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(7, 1fr)`,
-                    width: '390px', // Same as the slider
-                    marginTop: '5px',
-                    marginLeft: '453px',
-                    marginRight: 'auto',
-                }}
-            >
-                {Array.from({ length: 7 }, (_, i) => (
-                    <span key={i} style={{ fontSize: '18px', textAlign: 'center' }}>{i + 1}</span>
-                ))}
-            </div>
+          
             <p>
                 <b style={{ color: 'black' }}>Your selection:&nbsp;</b>
                 {sliderValue !== null && sliderValue !== '' ? (
