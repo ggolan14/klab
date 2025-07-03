@@ -54,6 +54,7 @@ export type UiObjects = {
     nextIfWrong?: string,
     style?: CSSProperties,
     shuffle?: string,
+    logic?: string,
     styleContainer?: CSSProperties,
 }
 

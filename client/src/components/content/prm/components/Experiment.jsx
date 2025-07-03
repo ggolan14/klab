@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
-// import experimentData from "../experiment.json"
-import experimentData from "../uiTesting/experiment.json"
+import experimentData from "../experiment.json"
+// import experimentData from "../uiTesting/experiment.json"
 import ItemRenderer from "./ItemRender/ItemRenderer";
 import "./Styling/usefulClasses.css"
 import Error from "./Ui/Error/Error";

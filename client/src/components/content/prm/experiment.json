@@ -1,7 +1,6 @@
 {
   "name": "PRM4",
-  "randomize": {
-  },
+  "randomize":[],
   "items": [
     {
       "id": "GetReady",

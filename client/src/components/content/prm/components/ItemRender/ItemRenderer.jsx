@@ -18,6 +18,7 @@ import TextInput from "../Ui/TextInput/TextInput";
 import ImagesContainer from "../Ui/Images/ImagesContainer";
 import UnderstandingInstruction from "../Ui/UnderstandingInstruction/UnderstandingInstruction";
 import {useFocus} from "../Focus/useFocus";
+import CustomWidget from "../Ui/CustomUi/CustomWidget";
 
 
 /**
@@ -115,10 +116,11 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
             case ElementsKeys.TEXT_INPUT:
                 return <TextInput key={key} startTime={startTime} pageFlow={pageFlow} setPageFlow={setPageFlow}
                                   uiObject={currentObj}/>
+            case ElementsKeys.CUSTOM:
+                return <CustomWidget uiObject={currentObj}/>
             case ElementsKeys.SUBMIT:
                 return <SubmitButton key={key} currentObj={currentObj} pageFlow={pageFlow}
                                      onClickMethod={UpdateOutputAncContinueToNextTrialType}/>
-
         }
 
         return undefined;
