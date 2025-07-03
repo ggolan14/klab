@@ -7,6 +7,7 @@ export const ElementsKeys = {
     LIKERT: "likert",
     UNDERSTANDING_INSTRUCTION: "understandingInstruction",
     SLIDER: "slider",
-    TEXT_INPUT: "textInput"
+    TEXT_INPUT: "textInput",
+    CUSTOM: "customWidget",
 }
 
