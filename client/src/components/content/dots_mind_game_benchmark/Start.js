@@ -56,52 +56,52 @@ const completedDotsMindGame = (
     </span>
 );
 
-const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
+const LastQuestionWithRadio = ({ onNext, radioValue, setRadioValue }) => {
     let RunCounter = KeyTableID();
+
+    const labelsMap = {
+        1: "Not at all",
+        7: "Very likely"
+    };
+
     return (
-        <div style={{ fontSize: "24px", width: "85%", margin: "40px auto", textAlign: "left" }}>
+        <div style={{ fontSize: "24px", width: "100%", margin: "40px", textAlign: "left" }}>
             <label style={{ display: "block", fontSize: "32px", textAlign: 'center', marginBottom: '20px' }}>
                 <b>Please answer the following question</b>
             </label>
-            Consider a participant who cheated on the dots game.  <br></br>
-            This participant selected the {GameSet.profit_side} side to earn more money, even when they thought more dots appeared on the {GameSet.not_profit_side}. <br></br>
+            Consider a participant who cheated on the dots game. <br />
+            This participant selected the {GameSet.profit_side} side to earn more money, even when they thought more dots appeared on the {GameSet.not_profit_side}. <br />
             In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task?
 
             <br /><br />
-           <div style={{ width: "100%", display: 'flex', justifyContent: "center", alignItems: "center" }}>
-                <div style={{ display: "flex", flexDirection: "column", width: "500px", position: "relative" }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ marginRight: '12px', position: "absolute", top: "0px", left: "-100px" }}>Not at all</span>
-                        <input
-                            type="range"
-                            min="1"
-                            max="7"
-                            step="1"
-                            value={sliderValue || ''}
-                            onChange={(e) => setSliderValue(e.target.value)}
-                            style={{
-                                width: "100%",
-                                margin: '0 5px',
-                                appearance: 'none',
-                                background: '#ddd',
-                            }}
-                        />
-                        <span style={{ marginLeft: '10px', position: "absolute", top: "0px", right: "-120px" }}>Very likely</span>
-                    </div>
-                    <div
-                        style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between" }}
-                    >
-                        {Array.from({ length: 7 }, (_, i) => (
-                            <span key={i} style={{ fontSize: '18px', textAlign: 'center' }}>{i + 1}</span>
-                        ))}
-                    </div>
-                </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px', gap: '40px' }}>
+                {Array.from({ length: 7 }, (_, i) => {
+                    const value = i + 1;
+                    return (
+                        <label key={value} style={{ textAlign: 'center' }}>
+                            <input
+                                type="radio"
+                                name="likelihood"
+                                value={value}
+                                checked={String(radioValue) === String(value)}
+                                onChange={(e) => setRadioValue(e.target.value)}
+                                style={{ marginBottom: '5px' , marginRight:'30px'}}
+                            />
+                            <div>{value}</div>
+                            {labelsMap[value] && (
+                                <div style={{ fontSize: '14px', color: '#555' }}>{labelsMap[value]}</div>
+                            )}
+                        </label>
+                    );
+                })}
             </div>
-          
+
             <p>
                 <b style={{ color: 'black' }}>Your selection:&nbsp;</b>
-                {sliderValue !== null && sliderValue !== '' ? (
-                    sliderValue
+                {radioValue !== null && radioValue !== '' ? (
+                    <>
+                        {radioValue} {labelsMap[radioValue] || ''}
+                    </>
                 ) : (
                     <span style={{ color: 'red' }}>None (please select a value)</span>
                 )}
@@ -110,7 +110,7 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
                 <button
                     className='pg-game-btn'
                     onClick={onNext}
-                    disabled={sliderValue === null || sliderValue === ''}
+                    disabled={radioValue === null || radioValue === ''}
                 >
                     Next
                 </button>
@@ -118,6 +118,8 @@ const LastQuestionWithSlider = ({ onNext, sliderValue, setSliderValue }) => {
         </div>
     );
 };
+
+
 
 const OpenQuestion = ({ onNext, textAnswer , setTextAnswer }) => {
     //const [textAnswer, setTextAnswer] = useState("");
@@ -531,7 +533,7 @@ class Game extends React.Component {
             step: 0,
             isLoading: false,
             debugger_props: null,
-            sliderValue: null,
+            radioValue: null,
             textAnswer: '',
 
         }
@@ -731,7 +733,7 @@ class Game extends React.Component {
                         QuestionIndex: "N/A",
                         QuestionType: "PerceivedObs",
                         Question: "Consider a participant who cheated on the dots game. This participant selected the right/left side to earn more money, even when they thought more dots appeared on the left/ right. In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task?",
-                        Answer: sc.sliderValue,
+                        Answer: sc.radioValue,
                         TotalYesAnswers: "N/A",
                         TotalNoAnswers: "N/A",
                         GameCondition: this.props.GameCondition,
@@ -896,9 +898,9 @@ class Game extends React.Component {
                     />
                 )}
                 {step === QUESTION_PAGE && (
-                    <LastQuestionWithSlider
-                        sliderValue={this.state.sliderValue}
-                        setSliderValue={(value) => this.setState({ sliderValue: value })}
+                    <LastQuestionWithRadio
+                        radioValue={this.state.radioValue}
+                        setRadioValue={(value) => this.setState({ radioValue: value })}
                         onNext={this.nextStep}
                     />
                 )}
@@ -1119,6 +1121,8 @@ class Start extends React.Component {
             });
 
             // Add the question component (decision point)
+            
+        }
             game_template.push({
                 Component: UserQuestion,
                 Props: {
@@ -1126,8 +1130,6 @@ class Start extends React.Component {
                     onAnswerIncorrect: () => this.returnToPracticeEnd(),
                 }
             });
-        }
-
         this.game_template = game_template;
 
         this.setState({
