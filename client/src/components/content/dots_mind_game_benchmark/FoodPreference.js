@@ -27,7 +27,7 @@ class FoodPreference extends Component {
 
         const currentQuestion = foodQuestions[currentQuestionIndex];
         const answer = currentQuestionIndex < foodQuestions.length ? answers[currentQuestionIndex] + 1 : answers[currentQuestionIndex];
-        const question = currentQuestionIndex < foodQuestions.length ? currentQuestion.question : "What type of fried food do you prefer?";
+        const question = currentQuestionIndex < foodQuestions.length ? currentQuestion.question : "What is your favorite breakfast food?";
         //console.log(`---> answer=${answer}`);
 
         // Constructs the database entry
