@@ -270,7 +270,7 @@ class ExpLogin extends React.Component {
                                     </table>
                                 </div>
     
-                                <div className="exp-login-panel-btn">
+                                <div className="exp-login-panel-btn drop-shadow-lg">
                                     <button onClick={() => this.goNext('LogInToGame')}>Continue</button>
     
                                     {this.have_consent && (

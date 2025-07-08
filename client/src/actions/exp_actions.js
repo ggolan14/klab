@@ -367,9 +367,8 @@ export const getFilters = async (exp, filters) => {
     }
 };
 
-export const downloadUserData = async (exp, filters) => {
-    const body = {exp, filters};
-
+export const downloadUserData = async (exp, filters , deepFold=false , EXCEL=false) => {
+    const body = {exp, filters ,deepFold , EXCEL};
     try {
         // const res = await api.post('/exps_actions/download_data', Object.assign({}, download_config, {
         //     params: {
