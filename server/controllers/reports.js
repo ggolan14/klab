@@ -1,12 +1,14 @@
 const asyncHandler = require('express-async-handler');
 const {getModelPack} = require('../models/models');
 const {getTimeDate} = require('../utils');
-const { stringify } = require('zipson');
+const {stringify} = require('zipson');
 const fs = require("fs");
 // const ObjectsToCsv = require('objects-to-csv');
 const ObjectsToCsv = require('../utils/objects_to_csv');
 const JSZip = require("jszip");
 const Logger = require("../logger");
+const ExcelJS = require('exceljs');
+
 // var svg = require('svg-builder');
 // const { createCanvas, loadImage } = require('canvas')
 
@@ -23,11 +25,11 @@ const addLineToGame = (records, isArray, game_table) => {
     };
 
     if (isArray)
-        for (let j=0; j<records.Records.Game.length; j++){
+        for (let j = 0; j < records.Records.Game.length; j++) {
             game.push(Object.assign({}, add_to_game_line, records.Records.Game[j]));
         }
     else {
-        for (let j=0; j<records.Records.Game[game_table].length; j++){
+        for (let j = 0; j < records.Records.Game[game_table].length; j++) {
             game.push(Object.assign({}, add_to_game_line, records.Records.Game[game_table][j]));
         }
     }
@@ -36,16 +38,16 @@ const addLineToGame = (records, isArray, game_table) => {
 
 const filtersCreate = (filters) => {
     console.log("---> filtersCreate")
-    let new_filters= {};
+    let new_filters = {};
     new_filters['$and'] = [];
-    for (let i=0; i<filters.length; i++){
+    for (let i = 0; i < filters.length; i++) {
         if (filters[i].value !== null && filters[i].value !== 'All' && filters[i].value !== '')
             new_filters['$and'].push({
                 [filters[i].filter]: filters[i].value
             });
     }
 
-    return new_filters['$and'].length > 0 ?new_filters : {};
+    return new_filters['$and'].length > 0 ? new_filters : {};
 };
 
 const ExpsTables = ['Game', 'UserDetails', 'KeyTable', 'Summary', 'Payment'];
@@ -67,7 +69,7 @@ const ExpGameDataSize = exp => {
 
 const ExpGameGroup = exp => {
     console.log("---> ExpGameGroup")
-    switch (exp){
+    switch (exp) {
         case 'RepeatedChoice':
             return {
                 PL: {$push: '$Records.Game.PL'},
@@ -83,9 +85,9 @@ const ExpGameGroup = exp => {
     }
 };
 
-const ExpGameProject= exp => {
+const ExpGameProject = exp => {
     console.log("---> ExpGameProject")
-    switch (exp){
+    switch (exp) {
         case 'RepeatedChoice':
             return {
                 PL: '$Records.Game.PL',
@@ -103,42 +105,42 @@ const ExpGameProject= exp => {
 
 const ExpGameAddFields = exp => {
     console.log("---> ExpGameAddFields")
-    switch (exp){
+    switch (exp) {
         case 'RepeatedChoice':
             return {
                 PL: {
                     "$reduce": {
                         "input": "$PL",
                         "initialValue": [],
-                        "in": { "$concatArrays": [ "$$value", "$$this" ] }
+                        "in": {"$concatArrays": ["$$value", "$$this"]}
                     }
                 },
                 RT: {
                     "$reduce": {
                         "input": "$RT",
                         "initialValue": [],
-                        "in": { "$concatArrays": [ "$$value", "$$this" ] }
+                        "in": {"$concatArrays": ["$$value", "$$this"]}
                     }
                 },
                 RD: {
                     "$reduce": {
                         "input": "$RD",
                         "initialValue": [],
-                        "in": { "$concatArrays": [ "$$value", "$$this" ] }
+                        "in": {"$concatArrays": ["$$value", "$$this"]}
                     }
                 },
                 DFE_Pattern: {
                     "$reduce": {
                         "input": "$DFE_Pattern",
                         "initialValue": [],
-                        "in": { "$concatArrays": [ "$$value", "$$this" ] }
+                        "in": {"$concatArrays": ["$$value", "$$this"]}
                     }
                 },
                 PL_Pattern: {
                     "$reduce": {
                         "input": "$PL_Pattern",
                         "initialValue": [],
-                        "in": { "$concatArrays": [ "$$value", "$$this" ] }
+                        "in": {"$concatArrays": ["$$value", "$$this"]}
                     }
                 },
             };
@@ -148,7 +150,7 @@ const ExpGameAddFields = exp => {
                     "$reduce": {
                         "input": "$Game",
                         "initialValue": [],
-                        "in": { "$concatArrays": [ "$$value", "$$this" ] }
+                        "in": {"$concatArrays": ["$$value", "$$this"]}
                     }
                 },
             }
@@ -178,33 +180,32 @@ const getFilters2 = asyncHandler(async (req, res) => {
     let permissions, running_names, users, tables, modes, versions;
 
     let filters_create = [];
-    for (let f in filters){
-        if (filters[f] !== null && filters[f] !== '' && filters[f] !== 'All' )
+    for (let f in filters) {
+        if (filters[f] !== null && filters[f] !== '' && filters[f] !== 'All')
             filters_create.push({
                 filter: f,
                 value: filters[f],
             })
     }
 
-    modes = await model_pack.records.distinct( "Mode" );
+    modes = await model_pack.records.distinct("Mode");
 
     const filters_ordered = filtersCreate(filters_create);
 
 
-    versions = await model_pack.records.find(filters_ordered).distinct( "Version" );
-    permissions = await model_pack.records.find(filters_ordered).distinct( "Permission" );
+    versions = await model_pack.records.find(filters_ordered).distinct("Version");
+    permissions = await model_pack.records.find(filters_ordered).distinct("Permission");
     running_names = await model_pack.records.find(filters_ordered).distinct("RunningName");
     users = await model_pack.records.find(filters_ordered).distinct("UserId");
     let records = await model_pack.records.find(filters_ordered);
     let records_keys = [];
-    for (let i=0; i<records.length; i++){
+    for (let i = 0; i < records.length; i++) {
         for (let key in records[i]['_doc'].Records) {
             if (key === 'Game' && !Array.isArray(records[i]['_doc'].Records[key])) {
                 for (let game_key in records[i]['_doc'].Records[key]) {
                     records_keys.push(game_key);
                 }
-            }
-            else
+            } else
                 records_keys.push(key);
 
         }
@@ -231,26 +232,26 @@ const getFilters = asyncHandler(async (req, res) => {
         console.log("---> getFilters 222")
         let model_pack = getModelPack(exp);
 
-        if (!model_pack){
+        if (!model_pack) {
             console.log("---> getFilters 333 Error")
             return res.status(400).json({error: 'Error'});
         }
         console.log("---> getFilters 100")
         let filters_create = [];
 
-        if (filters.runnings && filters.runnings.length > 0){
+        if (filters.runnings && filters.runnings.length > 0) {
             console.log("---> getFilters 101")
             filters_create.push({
                 RunningName: {$in: filters.runnings}
             });
         }
-        if (filters.versions && filters.versions.length > 0){
+        if (filters.versions && filters.versions.length > 0) {
             console.log("---> getFilters 102")
             filters_create.push({
                 Version: {$in: filters.versions}
             });
         }
-        if (filters.permissions && filters.permissions.length > 0){
+        if (filters.permissions && filters.permissions.length > 0) {
             console.log("---> getFilters 103")
             filters_create.push({
                 Permission: {$in: filters.permissions}
@@ -265,7 +266,7 @@ const getFilters = asyncHandler(async (req, res) => {
         let match_filters = {
             $and: [
                 {
-                    "Records.Game":{"$exists":true}
+                    "Records.Game": {"$exists": true}
                 },
                 {
                     $expr: {
@@ -292,30 +293,31 @@ const getFilters = asyncHandler(async (req, res) => {
                 // {'Records.Game': { $size: {$gt: 0} }}
             ]
         };
-        if (filters_create.length > 0){
+        if (filters_create.length > 0) {
             console.log("---> getFilters 105")
-            for (let i=0; i<filters_create.length; i++){
+            for (let i = 0; i < filters_create.length; i++) {
                 match_filters.$and.push(filters_create[i]);
             }
         }
 
         let results = await model_pack.records.aggregate([
-            {"$match" : match_filters},
-            {$group: {
+            {"$match": match_filters},
+            {
+                $group: {
                     _id: null,
                     runnings: {$addToSet: '$RunningName'},
                     users: {$addToSet: '$UserId'},
                     versions: {$addToSet: '$Version'},
                     permissions: {$addToSet: '$Permission'},
-                }}
+                }
+            }
         ]);
-        console.log("---> getFilters 106 results.size="+results.size)
+        console.log("---> getFilters 106 results.size=" + results.size)
         if (results && results[0])
-         delete results[0]._id;
+            delete results[0]._id;
 
-        res.json({filters: (results && results[0])? results[0] : null});
-    }
-    catch (e) {
+        res.json({filters: (results && results[0]) ? results[0] : null});
+    } catch (e) {
         console.log('e', e)
         Logger({
             logs_target: exp,
@@ -337,13 +339,12 @@ const getExpRuns = asyncHandler(async (req, res) => {
 
     try {
         let model_pack = getModelPack(exp);
-        const runs = await model_pack.records.distinct( "RunningName" );
+        const runs = await model_pack.records.distinct("RunningName");
 
         res.json({
             runs
         });
-    }
-    catch (e) {
+    } catch (e) {
 
         Logger({
             logs_target: exp,
@@ -364,10 +365,10 @@ const getRunVers = asyncHandler(async (req, res) => {
     let {exp, run} = req.body;
 
     try {
-        let new_filters= {};
-        if (run.length > 0){
+        let new_filters = {};
+        if (run.length > 0) {
             new_filters['$or'] = [];
-            for (let i=0; i<run.length; i++){
+            for (let i = 0; i < run.length; i++) {
                 new_filters['$or'].push({
                     RunningName: run[i]
                 });
@@ -375,13 +376,12 @@ const getRunVers = asyncHandler(async (req, res) => {
         }
 
         let model_pack = getModelPack(exp);
-        const vers = await model_pack.records.find(new_filters).distinct( "Version" );
+        const vers = await model_pack.records.find(new_filters).distinct("Version");
 
         res.json({
             vers
         });
-    }
-    catch (e) {
+    } catch (e) {
 
         Logger({
             logs_target: exp,
@@ -402,13 +402,12 @@ const getRunVerUsers = asyncHandler(async (req, res) => {
 
     try {
         let model_pack = getModelPack(exp);
-        const users = await model_pack.records.find({RunningName: run, Version: ver}).distinct( "UserId" );
+        const users = await model_pack.records.find({RunningName: run, Version: ver}).distinct("UserId");
 
         res.json({
             users
         });
-    }
-    catch (e) {
+    } catch (e) {
 
         Logger({
             logs_target: exp,
@@ -427,12 +426,13 @@ const getRunVerUsers = asyncHandler(async (req, res) => {
 const getData = asyncHandler(async (req, res) => {
     console.log("---> getData")
     try {
-        let {exp, filters, tables} = req.body;
+        let {exp, filters, tables, EXCEL, deepFold} = req.body;
+        console.log(req.body)
         let model_pack = getModelPack(exp);
 
         let filters_create = [];
-        for (let f in filters){
-            if (filters[f] !== null && filters[f] !== '' && filters[f] !== 'All' )
+        for (let f in filters) {
+            if (filters[f] !== null && filters[f] !== '' && filters[f] !== 'All')
                 filters_create.push({
                     filter: f,
                     value: filters[f],
@@ -449,7 +449,8 @@ const getData = asyncHandler(async (req, res) => {
             return res.json({
                 records_ordered
             });
-        for (let i=0; i<records_data.length; i++){
+        for (let i = 0; i < records_data.length; i++) {
+
             let records = records_data[i]['_doc'];
             let temp_records = {};
             if (tables.includes('Payment')) {
@@ -498,11 +499,11 @@ const getData = asyncHandler(async (req, res) => {
                 )
             );
 
-            if (tables_of_record.includes('Game')){
+            if (tables_of_record.includes('Game')) {
                 if (tables.includes('Game'))
                     temp_records['Game'] = addLineToGame(records, true);
                 else {
-                    if (!Array.isArray(records.Records.Game)){
+                    if (!Array.isArray(records.Records.Game)) {
                         for (let game_table in records.Records.Game)
                             if (tables.includes(game_table))
                                 temp_records[game_table] = addLineToGame(records, false, game_table);
@@ -519,8 +520,7 @@ const getData = asyncHandler(async (req, res) => {
         res.json({
             records_ordered: stringify(records_ordered)
         });
-    }
-    catch (e) {
+    } catch (e) {
 
         Logger({
             logs_target: exp,
@@ -532,12 +532,56 @@ const getData = asyncHandler(async (req, res) => {
     }
 });
 
+
+function isObject(value) {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+
+function flattenObject(obj, prefix = '') {
+    const result = {};
+    for (const key in obj) {
+        const value = obj[key];
+        const fullKey = prefix ? `${prefix}-${key}` : key;
+
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+            Object.assign(result, flattenObject(value, fullKey));
+        } else {
+            result[fullKey] = value;
+        }
+    }
+    return result;
+}
+
+/**
+ *
+ * @param result{object[]}
+ * @return {null|object }
+ */
+const getGameDeepFolded = (result) => {
+    const experiment = []
+
+    result.forEach((obj) => {
+        if (!"Game" in obj) {
+            return null
+        }
+        const currentGame = obj["Game"];
+        Object.values(currentGame).forEach((userOutput) => {
+            if (!userOutput || !isObject(userOutput)) {
+                return;
+            }
+            experiment.push(flattenObject(userOutput));
+        })
+
+    })
+
+    return experiment;
+}
+
 const downloadData = asyncHandler(async (req, res) => {
-    
-    let {exp, filters} = req.query;
 
+    let {exp, filters, deepFold, EXCEL} = req.query;
     console.log('---> downloadData()    Runnings:', filters.runnings, 'Versions:', filters.versions, 'Users:', filters.users, 'Permissions:', filters.permissions);
-
     try {
         //     return res.status(400).json({Error: 'No tables'});
         // const IP = req.headers['x-real-ip'] || '0.0.0.0';
@@ -549,33 +593,32 @@ const downloadData = asyncHandler(async (req, res) => {
         let model_pack = getModelPack(exp);
         //
         const exp_path = 'TempReports/';
-        if (!fs.existsSync(exp_path)){
+        if (!fs.existsSync(exp_path)) {
             try {
                 fs.mkdirSync(exp_path);
-            }
-            catch (e) {
-                return res.json({ error: "Download files failed, "});
+            } catch (e) {
+                return res.json({error: "Download files failed, "});
             }
         }
         //
         let filters_create = [];
 
-        if (filters.runnings && filters.runnings.length > 0){
+        if (filters.runnings && filters.runnings.length > 0) {
             filters_create.push({
                 RunningName: {$in: filters.runnings}
             });
         }
-        if (filters.versions && filters.versions.length > 0){
+        if (filters.versions && filters.versions.length > 0) {
             filters_create.push({
                 Version: {$in: filters.versions}
             });
         }
-        if (filters.permissions && filters.permissions.length > 0){
+        if (filters.permissions && filters.permissions.length > 0) {
             filters_create.push({
                 Permission: {$in: filters.permissions}
             });
         }
-        if (filters.users && filters.users.length > 0){
+        if (filters.users && filters.users.length > 0) {
             filters_create.push({
                 UserId: {$in: filters.users}
             });
@@ -591,18 +634,18 @@ const downloadData = asyncHandler(async (req, res) => {
         let match_filters = {
             $and: [
                 {
-                    "Records.Game":{"$exists":true}
+                    "Records.Game": {"$exists": true}
                 },
                 {
                     $expr: {
-                        $gt: [{ $size: ExpGameDataSize(exp) }, 0]
+                        $gt: [{$size: ExpGameDataSize(exp)}, 0]
                     }
                 }
                 // {'Records.Game': { $size: {$gt: 0} }}
             ]
         };
-        if (filters_create.length > 0){
-            for (let i=0; i<filters_create.length; i++){
+        if (filters_create.length > 0) {
+            for (let i = 0; i < filters_create.length; i++) {
                 match_filters.$and.push(filters_create[i]);
             }
         }
@@ -652,16 +695,15 @@ const downloadData = asyncHandler(async (req, res) => {
         };
         const expMoreRec = ExpMoreRec(exp);
 
-        if (expMoreRec){
-            if (Array.isArray(expMoreRec)){
-               for (let i=0; i<expMoreRec.length; i++) {
-                   $group[expMoreRec[i]] = {$push: '$Records.MoreRec.' + expMoreRec[i]};
-                   $project[expMoreRec[i]] = '$Records.MoreRec.'+expMoreRec[i];
-               }
-            }
-            else {
+        if (expMoreRec) {
+            if (Array.isArray(expMoreRec)) {
+                for (let i = 0; i < expMoreRec.length; i++) {
+                    $group[expMoreRec[i]] = {$push: '$Records.MoreRec.' + expMoreRec[i]};
+                    $project[expMoreRec[i]] = '$Records.MoreRec.' + expMoreRec[i];
+                }
+            } else {
                 $group[expMoreRec] = {$push: '$Records.MoreRec.' + expMoreRec};
-                $project[expMoreRec] = '$Records.MoreRec.'+expMoreRec;
+                $project[expMoreRec] = '$Records.MoreRec.' + expMoreRec;
             }
         }
 
@@ -669,8 +711,8 @@ const downloadData = asyncHandler(async (req, res) => {
         // let results3 = await model_pack.records.find(match_filters).select('-_id Records');
 
         let results3 = await model_pack.records.aggregate([
-            { "$match" : match_filters},
-            { $project },
+            {"$match": match_filters},
+            {$project},
             // { "$group": $group3},
             // { $project: { Records: 1 } },
             // { "$addFields":
@@ -697,27 +739,43 @@ const downloadData = asyncHandler(async (req, res) => {
         ]).allowDiskUse(true);
 
         if (!results3 || (results3.length === 0))
-            return res.status(500).json({ error: "Download files failed, ", results3});
-
+            return res.status(500).json({error: "Download files failed, ", results3});
         let zip = new JSZip();
 
-        for (let key in $project){
-            const key_res = results3.reduce((a,b) => {
-            if (!b[key]) return a;
-            // console.log('key', key, '  b[key]', typeof b[key], b[key]);
+        for (let key in $project) {
+
+            let key_res = results3.reduce((a, b) => {
+                if (!b[key]) return a;
+                // console.log('key', key, '  b[key]', typeof b[key], b[key]);
                 try {
                     return [...a, ...b[key]];
-                }
-                catch (e) {
+                } catch (e) {
                     return [...a, {...b[key]}];
                 }
             }, []);
 
-            if (key_res.length){
-                const csv = new ObjectsToCsv(key_res);
-                const csv_str = await csv.toString(true, true);
+            if (deepFold === true ||deepFold === "true"  && key === "Game") {
+                key_res = getGameDeepFolded(results3);
+            }
+            if (key_res.length) {
+                if (EXCEL === 'true') {
+                    const workbook = new ExcelJS.Workbook();
+                    const worksheet = workbook.addWorksheet(key);
+                    const allKeys = Array.from(new Set(key_res.flatMap(obj => Object.keys(obj))));
 
-                zip.file(key + '.csv', csv_str);
+                    worksheet.columns = allKeys.map(col => ({
+                        header: col,
+                        key: col
+                    }));
+
+                    worksheet.addRows(key_res);
+                    const buffer = await workbook.xlsx.writeBuffer();
+                    zip.file(`${key}.xlsx`, buffer);
+                } else {
+                    const csv = new ObjectsToCsv(key_res);
+                    const csv_str = await csv.toString(true, true);
+                    zip.file(`${key}.csv`, csv_str);
+                }
             }
         }
 
@@ -739,17 +797,16 @@ const downloadData = asyncHandler(async (req, res) => {
         let file_name = exp_path + req.user.id + '_' + exp + '.zip';
 
         zip
-            .generateNodeStream({type:'nodebuffer',streamFiles:true})
+            .generateNodeStream({type: 'nodebuffer', streamFiles: true})
             .pipe(fs.createWriteStream(file_name))
             .on('finish', function () {
                 // JSZip generates a readable stream with a "end" event,
                 // but is piped here in a writable stream which emits a "finish" event.
-                return res.download( file_name, (err)=>{
+                return res.download(file_name, (err) => {
                     fs.unlinkSync(file_name);
                 })
             });
-    }
-    catch (e) {
+    } catch (e) {
         console.log('e', e);
         Logger({
             logs_target: exp,
@@ -871,8 +928,7 @@ const deleteData = asyncHandler(async (req, res) => {
         });
 
         res.json({msg: 'Record deleted', status: "OK"});
-    }
-    catch (e) {
+    } catch (e) {
 
         Logger({
             logs_target: exp,

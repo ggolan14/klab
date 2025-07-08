@@ -6,10 +6,13 @@ import {getFilters, downloadUserData, downloadWpImages} from "../../../actions/e
 import './reports.css';
 import {toggleOpen} from "../dropdown/dropdown";
 import PromptMessage from "../promptMessage/PromptMessage";
+import "../../content/prm/components/Styling/usefulClasses.css"
+
 // import { parse } from 'zipson';
 import {Header} from "../../layout/header/header";
 import {getCurrentExp, preventPageGoBack, setCurrentExp} from "../../../utils/helpers";
 import {setAlert} from "../../../actions/alert";
+
 const FileDownload = require('js-file-download');
 
 let RedirectBack;
@@ -38,7 +41,7 @@ let RedirectBack;
 //     </select>
 // );
 
-function promptMessages(children_type, action_on){
+function promptMessages(children_type, action_on) {
     if (children_type === 'ERROR')
         return (
             <label
@@ -52,7 +55,36 @@ function promptMessages(children_type, action_on){
         )
 };
 
-const FilterItem = ({label, filter_item, selected_list, list, addFilter, removeFilter, filter_of, selected_list_length}) => {
+const ToggleSwitch = ({isOn = false, onToggle, label , labelRight}) => {
+    const [checked, setChecked] = useState(isOn);
+
+    const handleToggle = () => {
+        const newState = !checked;
+        setChecked(newState);
+        onToggle?.(newState);
+    };
+
+    return (
+        <label className="toggle-switch font-exo">
+            {label && <span className="toggle-label font-exo">{label}</span>}
+            <input type="checkbox" checked={checked} onChange={handleToggle}/>
+            <span className="slider font-exo"/>
+            {labelRight && <span className="toggle-label font-exo ">{labelRight}</span>}
+        </label>
+    );
+};
+
+
+const FilterItem = ({
+                        label,
+                        filter_item,
+                        selected_list,
+                        list,
+                        addFilter,
+                        removeFilter,
+                        filter_of,
+                        selected_list_length
+                    }) => {
     const [filtersSearch, setFiltersSearch] = useState('');
 
     let list_filtered;
@@ -77,12 +109,13 @@ const FilterItem = ({label, filter_item, selected_list, list, addFilter, removeF
                                 <li
                                     key={list_item}
                                     className={exist ? 'list_item_y' : 'list_item_n'}
-                                    onClick={() => exist? removeFilter(filter_of, list_item) : addFilter(filter_of, list_item)}
+                                    onClick={() => exist ? removeFilter(filter_of, list_item) : addFilter(filter_of, list_item)}
                                 >
                                     {exist && '✓ '}
                                     {list_item}
                                 </li>
-                            )}
+                            )
+                        }
                     )
                 }
             </ol>
@@ -109,9 +142,10 @@ const FilterPanel = ({label, list, selected_list, filter_of, addFilter, removeFi
                 {
                     selected_list.map(
                         list_select => (
-                            <label key={list_select+'l'} className='selected_item'>
-                                <span key={list_select+'s1'} onClick={() => removeFilter(filter_of, list_select)}>X</span>
-                                <span key={list_select+'s2'}>{list_select}</span>
+                            <label key={list_select + 'l'} className='selected_item'>
+                                <span key={list_select + 's1'}
+                                      onClick={() => removeFilter(filter_of, list_select)}>X</span>
+                                <span key={list_select + 's2'}>{list_select}</span>
                             </label>
                         )
                     )
@@ -131,7 +165,8 @@ const FiltersBox = ({Filters, addFilter, removeFilter}) => {
                     filter_item => {
                         // const {label, list, selected_list, filter_of} = filter_item;
                         return (
-                            <FilterPanel key={filter_item.label} {...filter_item} addFilter={addFilter} removeFilter={removeFilter} filter_item={filter_item}/>
+                            <FilterPanel key={filter_item.label} {...filter_item} addFilter={addFilter}
+                                         removeFilter={removeFilter} filter_item={filter_item}/>
                         );
                     }
                 )
@@ -152,8 +187,7 @@ class Reports extends React.Component {
 
         try {
             exp = this.props.location.state.exp;
-        }
-        catch (e){
+        } catch (e) {
             exp = undefined;
         }
         if (!exp) {
@@ -172,7 +206,8 @@ class Reports extends React.Component {
             isLoading: true,
             exp_selected: exp,
             experiment_list_dropdown: false,
-
+            deepFold:false ,
+            EXCEL:false,
             prompt_message: {
                 show: false,
                 messageType: null,
@@ -208,7 +243,7 @@ class Reports extends React.Component {
     }
 
     select_drop_item(item, tag) {
-        if (tag === 'EXP'){
+        if (tag === 'EXP') {
             let sc = this.state;
             sc.exp_selected = item;
             sc.filters_selected = {
@@ -224,11 +259,11 @@ class Reports extends React.Component {
                 permissions: getPermissions(),
             };
             setCurrentExp(item);
-            this.setState(sc, this.getAllFilters );
+            this.setState(sc, this.getAllFilters);
         }
     }
 
-    getAllFilters(){
+    getAllFilters() {
         this.props.setWaitForAction(true);
         getFilters(this.state.exp_selected, this.state.filters_selected).then(
             res => {
@@ -251,8 +286,7 @@ class Reports extends React.Component {
                     //     permissions: sc.filters_selected.permissions,
                     // }
 
-                }
-                catch (e){
+                } catch (e) {
                     sc.filters_values = {
                         runnings: [],
                         versions: [],
@@ -283,7 +317,7 @@ class Reports extends React.Component {
 
     }
 
-    filtersOptions(){
+    filtersOptions() {
         const addFilter = (filter_of, filter) => {
             let sc = this.state;
             sc.filters_selected[filter_of] = Array.from(new Set([...sc.filters_selected[filter_of], filter]));
@@ -344,8 +378,7 @@ class Reports extends React.Component {
             let tag = e.target.attributes.group.value;
             if (tag !== 'DROPDOWN_TAG')
                 toggleOpen.bind(this)('ALL');
-        }
-        catch (e) {
+        } catch (e) {
             toggleOpen.bind(this)('ALL');
         }
     }
@@ -356,26 +389,27 @@ class Reports extends React.Component {
         downloadUserData(
             this.state.exp_selected,
             this.state.filters_selected,
+            this.state.deepFold,
+            this.state.EXCEL
         ).then(
             res => {
                 this.props.setWaitForAction(false);
                 try {
-                    if (res.data.error){
+                    if (res.data.error) {
                         this.props.setAlert('Error', 'danger');
-                    }
-                    else{
+                    } else {
                         let file_name = 'reports.zip';
                         FileDownload(res.data, file_name);
                     }
+                } catch (e) {
+                    this.props.setAlert('Error', 'danger');
                 }
-                catch (e) {
-                    this.props.setAlert('Error', 'danger');                }
             }
         ).catch(
-          err => {
-              this.props.setWaitForAction(false);
-              this.props.setAlert('Error', 'danger');
-          }
+            err => {
+                this.props.setWaitForAction(false);
+                this.props.setAlert('Error', 'danger');
+            }
         )
     }
 
@@ -416,7 +450,7 @@ class Reports extends React.Component {
         )
     }
 
-    DownloadData(){
+    DownloadData() {
         const need_image = false;
         // const need_image = this.state.exp_selected === 'WordPuzzle';
 
@@ -439,10 +473,9 @@ class Reports extends React.Component {
             let f_num = Object.keys(filters_selected).reduce((accumulator, currentValue) => accumulator + filters_selected[currentValue].length, 0);
             disableDownloadButton = f_num === 0;
             // console.log('f_num', f_num );
+        } catch (e) {
         }
-        catch (e) {}
         // console.log('disableDownloadButton', disableDownloadButton );
-
         return (
             <>
                 <PromptMessage
@@ -452,7 +485,6 @@ class Reports extends React.Component {
                         this.state.prompt_message.children_type && promptMessages(this.state.prompt_message.children_type, this.state.prompt_message.action_on)
                     }
                 </PromptMessage>
-
 
                 <div
                     className={'admin-reports-page ' + (this.state.prompt_message.show ? 'dimming-page' : '')}
@@ -477,10 +509,21 @@ class Reports extends React.Component {
                                 <div className='c_box'>
 
                                     {this.filtersOptions()}
+                                    <div
+                                        className="flex flex-col gap-3 border border-gray-300 p-2"
+                                    >
+                                        <label className={"font-exo"}>Filter item</label>
+                                        <ToggleSwitch label={"CSV"} labelRight={"EXCEL"} onToggle={(e) => {
+                                            this.state.EXCEL = e;
+                                        }} isOn={false}/>
+                                        <ToggleSwitch label={"Regular"} labelRight={"Deep Fold"} onToggle={(e) => {
+                                            this.state.deepFold = e;
+                                        }} isOn={false}/>
+                                    </div>
                                 </div>
                                 <div className='b_box'>
                                     <button
-                                        className={disableDownloadButton? 'disabledElem' : ''}
+                                        className={disableDownloadButton ? 'disabledElem' : ''}
                                         onClick={() => this.downloadZip()}
                                     >
                                         Download Data
