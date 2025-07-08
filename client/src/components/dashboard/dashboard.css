@@ -76,3 +76,25 @@
   width: max-content;
   height: max-content;
 }
+:root{
+  --card-width: 150px;
+}
+
+.dashboard-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  justify-items: center;
+}
+
+.dashboard-option:hover {
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.dashboard-option  {
+  opacity: 0.5;
+}

@@ -149,6 +149,11 @@ Position Related
     border-width: 1px !important;
 }
 
+.border-3 {
+    border-width: 3px !important;
+    border: solid
+}
+
 .border-red {
     border-color: rgb(156, 8, 8) !important;
 }
@@ -285,6 +290,7 @@ Position Related
 .h-\[95\%\] {
     height: 95%;
 }
+
 .h-\[5\%\] {
     height: 5%;
 }
@@ -327,6 +333,7 @@ Position Related
     background-color: rgb(55, 107, 145) !important; /* #c0dffd */;
 }
 
+
 .opacity-50 {
     opacity: 0.5;
 }
@@ -341,6 +348,10 @@ Position Related
 
 .hover\:opacity-100:hover {
     opacity: 1;
+}
+
+.font-bold{
+    font-weight: 600;
 }
 
 .active\:scale-110:active {
