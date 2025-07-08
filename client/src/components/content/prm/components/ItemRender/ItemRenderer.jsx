@@ -41,7 +41,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
     // // Page Flow (Output for each Ui element):
     const [pageFlow, setPageFlow] = useState(getPageFlowOutput(uiData));
     // For Focus
-    const { focusProp } = useFocus();
+    const { current: focusStats } = useFocus();
     // For Zoom
     const [currentImageZoom, setCurrentImageZoom] = useState(getInitialZoom(startTime));
     // For Mouse Tracking feature
@@ -73,7 +73,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
             if (item.addToOutput) {
                 newOutput = {...newOutput, addToOutput: item.addToOutput}
             }
-            newOutput = {...newOutput, focus: focusProp};
+            newOutput = {...newOutput, focus: focusStats};
             newOutput = {...newOutput, responseTimeFirst: responseTimeFirst};
             newOutput = {...newOutput, responseTimeLast: responseTimeLast};
             newOutput = {...newOutput, condition: item.condition};

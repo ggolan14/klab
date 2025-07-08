@@ -33,7 +33,7 @@ function Experiment({insertToDbArray, sendToDB}) {
 
     return (
         <div className={"flex justify-center item-center border flex-col"} style={{width: "100dvw", height: "100dvh"}}>
-            <h1 className={"text-clamping-mid text-center m-1"}>{experimentData.name}</h1>
+            {/*<h1 className={"text-clamping-mid text-center m-1"}>{experimentData.name}</h1>*/}
             {items.map((item, index) => {
                 if (index === currentItemIndex) {
                     if (!item.uiData) {

@@ -3,7 +3,7 @@
   "randomize":[],
   "items": [
     {
-      "id": "GetReady",
+      "id": "Q0",
       "features": {},
       "style": {
         "gap": "1.5rem"
@@ -108,6 +108,15 @@
           ],
           "correct": "RIGHT",
           "id": 3
+        },
+        {
+          "type": "slider",
+          "textCenter": "How confident are you?",
+          "textLeft": "A wild guess",
+          "textRight": "Definitely correct",
+          "id": "abc12213",
+          "max": 100,
+          "min": 1
         },
         {
           "type": "submit",
