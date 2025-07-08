@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
-import {NewLogs} from "../../../actions/logger";
-import {getTimeDate} from "../../../utils/app_utils";
+import { NewLogs } from "../../../actions/logger";
+import { getTimeDate } from "../../../utils/app_utils";
 import WaitForAction2 from "../../screens/waitForAction/wait_for_action2";
 import './gameStyles.css';
 import './messages.css';
 
-import {DebuggerModalView} from "../../screens/gameHandle/game_handle";
-import {CURRENT_URL} from "../../../utils/current_url";
+import { DebuggerModalView } from "../../screens/gameHandle/game_handle";
+import { CURRENT_URL } from "../../../utils/current_url";
 
 const ThisExperiment = 'MegaDots';
 let UserId = null;
@@ -35,7 +35,7 @@ const ResetAll = () => {
     NumberOfRoundsTotal = 0;
 };
 
-const DItem = ({item_label, item_data}) => {
+const DItem = ({ item_label, item_data }) => {
     return (
         <label>
             {item_label}:
@@ -44,7 +44,7 @@ const DItem = ({item_label, item_data}) => {
     )
 };
 
-const DItems = ({items}) => {
+const DItems = ({ items }) => {
     return (
         Object.keys(items).map(
             (item, item_i) => (
@@ -58,8 +58,8 @@ const DItems = ({items}) => {
     )
 }
 
-const DebuggerItem = ({debugger_props}) => {
-    const {current_game, trial_data, game_errors, game_payoff} = debugger_props;
+const DebuggerItem = ({ debugger_props }) => {
+    const { current_game, trial_data, game_errors, game_payoff } = debugger_props;
 
     return (
         <DebuggerModalView>
@@ -85,7 +85,7 @@ const DebuggerItem = ({debugger_props}) => {
     )
 }
 
-const PlusPage = ({Forward}) => {
+const PlusPage = ({ Forward }) => {
 
     useEffect(() => {
         setTimeout(() => {
@@ -104,7 +104,7 @@ const PlusPage = ({Forward}) => {
 
 class DrawPoints extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.props = props;
 
@@ -119,20 +119,20 @@ class DrawPoints extends React.Component {
 
     getRandomInt(max_x, max_y) {
         // -20, +10, For padding in top\down\right\left
-        let x = Math.floor(Math.random() * (max_x-20)) + 10;
-        let y = Math.floor(Math.random() * (max_y-20)) + 10;
-        return [x,y];
+        let x = Math.floor(Math.random() * (max_x - 20)) + 10;
+        let y = Math.floor(Math.random() * (max_y - 20)) + 10;
+        return [x, y];
     }
 
-    pointInPartOf(x, y){
-        const d = (y-x)/Math.sqrt(2);
+    pointInPartOf(x, y) {
+        const d = (y - x) / Math.sqrt(2);
         const d_abs = Math.abs(d);
 
-        if(x===y || d_abs < 9)
+        if (x === y || d_abs < 9)
             return 'Line';
-        else if(x > y)
+        else if (x > y)
             return 'Up';
-        else if(x < y)
+        else if (x < y)
             return 'Down';
     }
 
@@ -143,13 +143,13 @@ class DrawPoints extends React.Component {
         let break_ = false;
 
         do {
-            let points = this.getRandomInt((this.canvas_width*CM_TO_PX), (this.canvas_height*CM_TO_PX));
-            let in_ = this.pointInPartOf(points[0],points[1]);
+            let points = this.getRandomInt((this.canvas_width * CM_TO_PX), (this.canvas_height * CM_TO_PX));
+            let in_ = this.pointInPartOf(points[0], points[1]);
             let found = false;
 
             let do_time = Date.now();
-            if (do_time - start_right_time < 5000){
-                for (let t=0; t<all_points.length; t++){
+            if (do_time - start_right_time < 5000) {
+                for (let t = 0; t < all_points.length; t++) {
                     const [x, y] = all_points[t].points;
                     const [new_x, new_y] = points;
                     const d_x = Math.abs(x - new_x);
@@ -162,31 +162,31 @@ class DrawPoints extends React.Component {
                 }
             }
 
-            if(in_ === IN && !found){
+            if (in_ === IN && !found) {
                 break_ = true;
-                all_points.push({points, color});
+                all_points.push({ points, color });
             }
         }
         while (break_ === false);
     }
 
-    componentDidMount(){
-         setTimeout(() => {
+    componentDidMount() {
+        setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
         }, 100);
         let all_points = [];
 
-        for (let i=0; i<Number(this.props.points_right); i++) {
+        for (let i = 0; i < Number(this.props.points_right); i++) {
             this.getPoints(all_points, 'Up')
         }
 
-        for (let i=0; i<Number(this.props.points_left); i++) {
+        for (let i = 0; i < Number(this.props.points_left); i++) {
             this.getPoints(all_points, 'Down')
         }
 
         this.setState({
-                allPointsCoor: all_points
-            }
+            allPointsCoor: all_points
+        }
             , () => this.props.callback()
         );
 
@@ -231,7 +231,7 @@ class DrawPoints extends React.Component {
     }
 }
 
-const PointsPage = ({Forward, dots}) => {
+const PointsPage = ({ Forward, dots }) => {
     const callback = () => {
         setTimeout(() => {
             Forward();
@@ -253,11 +253,11 @@ const getPointLabel = (points, points_word) => {
     let sign = '';
     if (points > 0) sign = '+';
     if (!points_word) return `${sign}${points}`;
-    return `${sign}${points} point${points !== 1?'s':''}`;
+    return `${sign}${points} point${points !== 1 ? 's' : ''}`;
 };
 
 let begin_time;
-const ButtonPage = ({Forward, onClickBtn, profit_side, not_profit_side}) => {
+const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
     const [selectedSide, setSelectedSide] = useState(null);
     const [showSpaceBarLbl, setShowSpaceBarLbl] = useState(false);
     const [containerProps, setContainerProps] = useState({
@@ -291,13 +291,13 @@ const ButtonPage = ({Forward, onClickBtn, profit_side, not_profit_side}) => {
 
     const onClickItem = click_side => {
         if (selectedSide !== null) return;
-        let {is_busted, inspection, buttons} = onClickBtn(click_side, Date.now() - begin_time);
-        if (inspection){
+        let { is_busted, inspection, buttons } = onClickBtn(click_side, Date.now() - begin_time);
+        if (inspection) {
             setContainerProps({
-                head_label: is_busted? 'Inspection: wrong answer, you were fined': 'Inspection: right answer, you were not fined',
+                head_label: is_busted ? 'Inspection: wrong answer, you were fined' : 'Inspection: right answer, you were not fined',
                 head_show: true,
                 buttons,
-                backgroundColor: is_busted? GameSet.enforcement_background : GameSet.enforcement_no_busted_background
+                backgroundColor: is_busted ? GameSet.enforcement_background : GameSet.enforcement_no_busted_background
             })
         }
         setSelectedSide(click_side);
@@ -313,18 +313,18 @@ const ButtonPage = ({Forward, onClickBtn, profit_side, not_profit_side}) => {
     // }
 
     const step1_msg = btn_side => (<>
-            More to the<br/>
-            {btn_side}<br/>
-            ({getPointLabel(containerProps.buttons[btn_side], true)})
-        </>);
+        More to the<br />
+        {btn_side}<br />
+        ({getPointLabel(containerProps.buttons[btn_side], true)})
+    </>);
 
     const step2_msg = btn_side => (<>
-            {getPointLabel(containerProps.buttons[btn_side], false)}
-        </>);
+        {getPointLabel(containerProps.buttons[btn_side], false)}
+    </>);
 
-    const classes = {left: '', right: ''};
+    const classes = { left: '', right: '' };
 
-    if (selectedSide !== null){
+    if (selectedSide !== null) {
         classes.left = 'side_not_selected';
         classes.right = 'side_not_selected';
         classes[selectedSide] = 'side_selected';
@@ -339,7 +339,7 @@ const ButtonPage = ({Forward, onClickBtn, profit_side, not_profit_side}) => {
         >
             <label
                 className='pg_bp-inspection'
-                style={{visibility: containerProps.head_show? 'visible' : 'hidden'}}
+                style={{ visibility: containerProps.head_show ? 'visible' : 'hidden' }}
             >
                 {containerProps.head_label}
             </label>
@@ -364,16 +364,16 @@ const ButtonPage = ({Forward, onClickBtn, profit_side, not_profit_side}) => {
 
             <label
                 className='pg_bp-space_bar'
-                style={{visibility: showSpaceBarLbl? 'visible' : 'hidden'}}
+                style={{ visibility: showSpaceBarLbl ? 'visible' : 'hidden' }}
             >
-                {showSpaceBarLbl?'To continue press on space-bar':'------'}
+                {showSpaceBarLbl ? 'To continue press on space-bar' : '------'}
             </label>
 
         </div>
     )
 };
 
-const FinishGamePage = ({Forward}) => {
+const FinishGamePage = ({ Forward }) => {
 
     return (
         <div className='pg_fbp center-screen msg_container'>
@@ -442,7 +442,7 @@ class Game extends React.Component {
         this.current_game = {
             game_index: +game.g_i + 1,
             label: general_set.l,
-            condition: general_set.c === 'e'? 'enforce' : 'no_enforce',
+            condition: general_set.c === 'e' ? 'enforce' : 'no_enforce',
             enforce_prob: general_set.e_p,
             fine: general_set.f,
             profit_side: profitable_set.p_s,
@@ -475,13 +475,13 @@ class Game extends React.Component {
 
     }
 
-    getCurrentDots(){
+    getCurrentDots() {
         const current_game_type = this.current_game_trials[this.state.trial];
 
-        let sides = {left: null, right: null};
+        let sides = { left: null, right: null };
 
         let more_dots, less_dots;
-        if (current_game_type.includes('amibgous')){
+        if (current_game_type.includes('amibgous')) {
             more_dots = this.current_game.dots_amibgous_more;
             less_dots = this.current_game.dots_amibgous_less;
         }
@@ -490,7 +490,7 @@ class Game extends React.Component {
             less_dots = this.current_game.dots_clear_less;
         }
 
-        if (current_game_type.includes('not_profit_side')){
+        if (current_game_type.includes('not_profit_side')) {
             sides[GameSet.profit_side] = less_dots;
             sides[GameSet.not_profit_side] = more_dots;
         }
@@ -501,14 +501,14 @@ class Game extends React.Component {
         return sides;
     }
 
-    sendPartToDb(){
+    sendPartToDb() {
         let sc = this.state;
         sc.isLoading = true;
         this.props.insertGameArray([...this.game_data]);
         this.setState(sc, () => {
-            this.props.sendGameDataToDB().then(
+        this.props.sendGameDataToDB().then(
                 () => {
-                    const {time, date} = getTimeDate();
+                    const { time, date } = getTimeDate();
 
                     NewLogs({
                         user_id: UserId,
@@ -521,7 +521,7 @@ class Game extends React.Component {
                             local_t: time,
                             local_d: date,
                         },
-                    }).then((res) => {});
+                    }).then((res) => { });
                     sc = this.state;
                     sc.isLoading = false;
                     sc.step = 3;
@@ -531,20 +531,21 @@ class Game extends React.Component {
         });
     }
 
-    nextStep(){
+    nextStep() {
         let sc = this.state;
-        if (sc.step === 3){
+        if (sc.step === 3) {
             if (!GameSet.games_play.length) {
                 return this.props.Forward();
             }
             sc.step = 0;
             sc.trial = 0;
             this.resetGameData();
+            
 
         }
         else {
-            if(sc.step === 2){
-                if (sc.trial === (this.current_game_trials.length-1)){
+            if (sc.step === 2) {
+                if (sc.trial === (this.current_game_trials.length - 1)) {
                     if (this.GamePart === 'Practice') {
                         return this.props.Forward();
                     }
@@ -564,7 +565,7 @@ class Game extends React.Component {
 
     }
 
-    onClickBtn(choose_side, choice_time){
+    onClickBtn(choose_side, choice_time) {
         let not_choose_side = choose_side === 'left' ? 'right' : 'left';
 
         const points = this.getCurrentDots();
@@ -581,11 +582,11 @@ class Game extends React.Component {
             is_busted = false,
             final_fine = 0;
 
-        if (this.current_game.condition === 'enforce'){
-            random_enforce = Math.floor(Math.random()*1000)/1000;
-            inspection = enforce_prob > random_enforce ;
+        if (this.current_game.condition === 'enforce') {
+            random_enforce = Math.floor(Math.random() * 1000) / 1000;
+            inspection = enforce_prob > random_enforce;
             is_busted = inspection && !is_correct_answer;
-            final_fine = is_busted? this.current_game.fine : 0;
+            final_fine = is_busted ? this.current_game.fine : 0;
         }
 
         const buttons = {
@@ -593,8 +594,8 @@ class Game extends React.Component {
             [GameSet.not_profit_side]: this.current_game.not_profit_side,
         }
 
-        if (inspection){
-            if (is_busted){
+        if (inspection) {
+            if (is_busted) {
                 buttons[choose_side] -= final_fine;
             }
             else {
@@ -608,7 +609,7 @@ class Game extends React.Component {
         const trial_data = {
             game_order: this.game_order,
             game_label: this.current_game.label,
-            trial: this.state.trial+1,
+            trial: this.state.trial + 1,
             type: this.current_game_trials[this.state.trial],
             profitable_side: GameSet.profit_side,
             choice: choose_side,
@@ -632,7 +633,7 @@ class Game extends React.Component {
 
         this.game_data.push(trial_data);
 
-        if (DebugMode){
+        if (DebugMode) {
             let sc = this.state;
             sc.debugger_props = {
                 current_game: this.current_game,
@@ -641,22 +642,22 @@ class Game extends React.Component {
                 game_payoff: this.game_payoff,
             }
             this.setState(sc);
-            return {is_busted, inspection, buttons};
+            return { is_busted, inspection, buttons };
         }
         else
-            return {is_busted, inspection, buttons};
+            return { is_busted, inspection, buttons };
     }
-
+    
     render() {
-        if (this.state.isLoading) return <WaitForAction2/>;
+        
+        if (this.state.isLoading) return <WaitForAction2 />;
 
-        const {step} = this.state;
-
+        const { step , trial} = this.state;
         return (
             <>
                 {step === 0 && (
                     <PlusPage
-                        Forward={this.nextStep}/>
+                        Forward={this.nextStep} />
                 )}
                 {step === 1 && (
                     <PointsPage
@@ -742,22 +743,22 @@ class Start extends React.Component {
         do {
             console.log("====> initGameOrder")
             let next_game_index = 0;
-            console.log("====> initGameOrder  GameSet.random_games_order="+GameSet.random_games_order)
+            console.log("====> initGameOrder  GameSet.random_games_order=" + GameSet.random_games_order)
             if (GameSet.random_games_order)
                 next_game_index = Math.floor(Math.random() * GameSet.games_play.length);
             const current_game_index = GameSet.games_play[next_game_index];
-            console.log("====> initGameOrder current_game_index="+current_game_index)
+            console.log("====> initGameOrder current_game_index=" + current_game_index)
             GameSet.games_play = GameSet.games_play.filter((a, i) => i !== next_game_index);
             const game = GameSet.games_bank.find(g => g.g_i === current_game_index);
-            console.log("====> initGameOrder game="+game)
+            console.log("====> initGameOrder game=" + game)
             GAME_ORDER.push(game);
-            const {a_p, a_n_p, c_p, c_n_p} = game.g_s.t;
+            const { a_p, a_n_p, c_p, c_n_p } = game.g_s.t;
             const total_t = a_p + a_n_p + c_p + c_n_p;
             NumberOfRoundsTotal += total_t;
         }
         while (GameSet.games_play.length);
-        
-        if (GameSet.practice == "true"){
+
+        if (GameSet.practice == "true") {
             const first_game = JSON.parse(JSON.stringify(GAME_ORDER[0]));
 
             let practice_game_set = {
@@ -771,7 +772,7 @@ class Start extends React.Component {
                         f: first_game.g_s.g.f
                     },
                     pr: first_game.g_s.pr,
-                    t: {a_p: 0, a_n_p: 0, c_p: 1, c_n_p: 2}
+                    t: { a_p: 0, a_n_p: 0, c_p: 1, c_n_p: 2 }
                 }
             };
 
@@ -783,7 +784,10 @@ class Start extends React.Component {
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 100);
         NewLogs({
             user_id: UserId,
             exp: ThisExperiment,
@@ -800,7 +804,7 @@ class Start extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.isa !== this.props.isa){
+        if (prevProps.isa !== this.props.isa) {
             let sc = this.state;
             sc.isa = this.props.isa;
             this.setState(sc);
@@ -819,7 +823,9 @@ class Start extends React.Component {
             }
         });
 
-        if (GameSet.practice == "true"){
+
+
+        if (GameSet.practice == "true") {
             game_template.push({
                 Component: PracticeGame,
                 Props: {
@@ -839,6 +845,14 @@ class Start extends React.Component {
                 Component: PracticeGame,
                 Props: {
                     page: 'END',
+                }
+            });
+
+            game_template.push({
+                Component: UserQuestion,
+                Props: {
+                    onAnswerCorrect: () => this.proceedToRealGame(),
+                    onAnswerIncorrect: () => this.returnToPracticeEnd(),
                 }
             });
         }
@@ -862,13 +876,37 @@ class Start extends React.Component {
         })
     }
 
-    Forward(option){
-        if (option === 'UserRequestToQuit'){
+    returnToPracticeEnd() {
+        this.setState({
+            tasks_index: this.state.tasks_index - 1, // Go back to the last PracticeGame
+        });
+    }
+
+    proceedToRealGame() {
+        this.game_template.push({
+            Component: Game,
+            Props: {
+                sendGameDataToDB: this.props.sendGameDataToDB,
+                insertGameArray: this.props.insertGameArray,
+                insertGameLine: this.props.insertGameLine,
+                sendDataToDB: this.props.sendGameDataToDB,
+                gameExtendedName: this.extended_name,
+                Part: 'Real'
+            }
+        });
+
+        this.setState({
+            tasks_index: this.state.tasks_index + 1, // Move to next step
+        });
+    }
+
+    Forward(option) {
+        if (option === 'UserRequestToQuit') {
             return this.props.callbackFunction('UserRequestToQuit');
         }
 
         let sc = this.state;
-        if (sc.tasks_index === (this.game_template.length-1)){
+        if (sc.tasks_index === (this.game_template.length - 2)) {
             this.props.SetLimitedTime(false);
 
             let game_points = 0;
@@ -887,7 +925,7 @@ class Start extends React.Component {
                     local_t: current_time.time,
                     local_d: current_time.date,
                 },
-            }).then((res) => {});
+            }).then((res) => { });
 
             this.props.insertTextInput('GamesErrors', GamesErrors.join('|'));
             this.props.insertTextInput('TotalErrors', GamesErrors.reduce((total, num) => total + num, 0));
@@ -908,7 +946,7 @@ class Start extends React.Component {
 
             sc.isLoading = true;
             this.setState(sc, () => {
-                this.props.callbackFunction('FinishGame', {need_summary: option !== 'NewGame', new_game: option === 'NewGame', args: {game_points}});
+                this.props.callbackFunction('FinishGame', { need_summary: option !== 'NewGame', new_game: option === 'NewGame', args: { game_points } });
             });
         }
         else {
@@ -919,9 +957,9 @@ class Start extends React.Component {
 
     render() {
         if (!this.state || this.state.isLoading)
-            return <WaitForAction2/>;
+            return <WaitForAction2 />;
 
-        if(this.state.error)
+        if (this.state.error)
             return (
                 <div className='game_error'>Game Error</div>
             )
@@ -948,13 +986,104 @@ Start.propTypes = {
 
 export default Start;
 
-const PracticeGame = ({page, Forward}) => {
+const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
+    const [answer, setAnswer] = useState("");
+    const [message, setMessage] = useState("");
 
+    // Handle Back button click immediately
+    const handleBack = () => {
+        setMessage("Incorrect! Please read the instructions in the previous screen");
+        onAnswerIncorrect();
+    };
+
+    // Handle Next button click immediately
+    const handleNext = () => {
+        setMessage("Correct! You will now play one round of the dots game.");
+        onAnswerCorrect();
+    };
+
+    // Handle text input change with number validation
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setAnswer(value);
+
+        // Check if the input is a valid number
+        if (value === "" || !/^\d+$/.test(value)) {
+            setMessage("Type in numbers only");
+            return;
+        }
+
+        // Check if the answer is correct or not
+        if (value === "42") {
+            setMessage("Correct! You will now play 42 rounds of the dots game.\nOne randomly selected round will determine your bonus.");
+        } else {
+            setMessage("Incorrect! Please read the instructions in the previous screen");
+
+        }
+
+
+    };
+
+    return (
+        <div className='pg_-gw center-screen msg_container'>
+            <p>How many rounds are you going to play now, for real money?</p>
+
+            <input
+                type="text"
+                value={answer}
+                onChange={handleInputChange}
+                placeholder="Enter a number"
+            />
+
+            <div>
+                <button
+                    onClick={handleBack}
+                    disabled={answer == "42"}
+                    style={{ marginRight: '10px' }}
+                >
+                    Back
+                </button>
+
+                <button
+                    onClick={handleNext}
+                    disabled={answer != "42"}
+                >
+                    Next
+                </button>
+            </div>
+
+            {message && (
+                <p>
+                    {message.split('\n').map((line, index) => (
+                        <span key={index}>
+                            {line}
+                            <br />
+                        </span>
+                    ))}
+                </p>
+            )}
+        </div>
+    );
+};
+
+const PracticeGame = ({ page, Forward }) => {
+    let isPractice =  false;
+    let num_of_real_rounds = GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p;
     return (
         <div
             className='pg_-gw center-screen msg_container'
         >
-            <label>{page === 'START' ? 'Practice game' : 'End practice'}</label>
+            <label
+                dangerouslySetInnerHTML={{
+                    __html: page === 'START'
+                        ? 'Start practice'
+                        : `Practice is over.<br/>
+               You will now play 42 rounds
+               of the dots game for real bonus.<br/>
+               
+               </u>`
+                }}
+            ></label>
             <button onClick={Forward} className=''>Next</button>
         </div>
     )
@@ -969,96 +1098,78 @@ class GameMessages extends React.Component {
         this.Page1 = this.Page1.bind(this);
         this.Page2 = this.Page2.bind(this);
         this.Page3 = this.Page3.bind(this);
+        this.Page4 = this.Page4.bind(this);
         this.buttonCallback = this.buttonCallback.bind(this);
 
         this.fine = false;
 
-        this.pages = [this.Page1, this.Page2, this.Page3];
+        this.pages = [this.Page1, this.Page2, this.Page3, this.Page4];
 
         this.state = {
             page_index: 0,
         };
     }
 
-    Page1 = () => {
+Page1 = () => {
         return (
-            <div
-                className='pg-gw-page2'
-            >
-                <div
-                    className='pg-gw-p2-r1'
-                >
+            <div>
+                <div className='pg-gw-p2-r1'>
                     <img
                         className='pg-gw-p2-img'
                         src={`${CURRENT_URL()}/images/pg/plus.png`}
                         alt='plus'
                     />
-                    <div
-                        className='pg-gw-p2-txt'
-                    >
-                        This experiment includes {NumberOfRoundsTotal} rounds in each of which you will earn points. Each round begins with a cross in the center of the screen. Your gaze should be focused on this cross.
+                    <div className='pg-gw-p2-txt'>
+                       This experiment includes {NumberOfRoundsTotal} rounds in each of which you will earn points. Each round begins with a cross in the center of the screen. Your gaze should be focused on this cross.
                     </div>
                 </div>
 
-                <div
-                    className='pg-gw-p2-r2'
-                >
+                <div className='pg-gw-p2-r2'>
                     <img
-                        style={{border: 'none'}}
+                        style={{ border: 'none' }}
                         alt='dots'
                         className='pg-gw-p2-img'
                         src={`${CURRENT_URL()}/images/pg/dots.png`}
                     />
-                    <div
-                        className='pg-gw-p2-txt'
-                    >
-                        Immediately afterwards, a rectangle, divided to two equally sized parts, will be presented for {GameSet.dots_time/1000} second{GameSet.dots_time/1000 !== 1? 's' : ''} only. Each part will consist of a certain number of red dots.
+                    <div className='pg-gw-p2-txt'>
+                       Immediately afterwards, a rectangle, divided to two equally sized parts, will be presented for {GameSet.dots_time / 1000} second{GameSet.dots_time / 1000 !== 1 ? 's' : ''} only. Each part will consist of a certain number of red dots.
+
                     </div>
                 </div>
 
-                <div
-                    className='pg-gw-p2-r3'
-                >
+                <div className='pg-gw-p2-r3'>
                     <img
                         alt='buttons'
                         className='pg-gw-p2-img'
                         src={`${CURRENT_URL()}/images/pg/b1.png`}
                     />
-                    <div
-                        className='pg-gw-p2-txt'
-                    >
+                    <div className='pg-gw-p2-txt'>
                         After the rectangle will disappear, you will be asked to indicate which of the two parts, the left one or the right one, included more red dots (by clicking on the left or right button presented on the screen).
+
                     </div>
                 </div>
 
-                <div
-                    className='pg-gw-p2-r1'
-                >
+                <div className='pg-gw-p2-r1'>
                     <img
                         alt='image1'
                         className='pg-gw-p2-img'
                         src={`${CURRENT_URL()}/images/pg/b2.png`}
                     />
-                    <div
-                        className='pg-gw-p2-txt'
-                    >
-                        After you make your choice, the number of points you got from making that choice will appear on the button you selected. On the other button, you will see how many points you would have gotten had you selected it. After this feedback disappears, you will be moved to the next round.
+                    <div className='pg-gw-p2-txt'>
+                         After you make your choice, the number of points you got from making that choice will appear on the button you selected. On the other button, you will see how many points you would have gotten had you selected it. After this feedback disappears, you will be moved to the next round.
+
                     </div>
                 </div>
 
                 {
                     this.fine && (
-                        <div
-                            className='pg-gw-p2-r2'
-                        >
+                        <div className='pg-gw-p2-r2'>
                             <img
                                 alt='image1'
                                 className='pg-gw-p2-img'
                                 src={undefined}
                             />
-                            <div
-                                className='pg-gw-p2-txt'
-                            >
+                            <div className='pg-gw-p2-txt'>
                                 In addition, in some of the rounds, the computer may randomly decide to check whether your answer was correct or not. When this happens, a red screen means that your answer was wrong and you will be fined, while a green screen means your answer was correct and you will not be fined (If the screen does not change color then your answer was not checked, and no fine will be given even if you made a mistake).
                             </div>
                         </div>
@@ -1075,35 +1186,41 @@ class GameMessages extends React.Component {
         return (
             <div>
                 <span><h1>Earning points</h1></span>
-                Because most people find it easier to identify when the {GameSet.not_profit_side} part of the rectangle includes more dots, the answer “there are more dots on the {GameSet.not_profit_side} part of the rectangle” will earn you {points1_msg}, whereas the answer “there are more dots on the {GameSet.profit_side} part of the rectangle” will earn you {points2_msg}.<br/>
+                Because most people find it easier to identify when the {GameSet.not_profit_side} part of the rectangle includes more dots, the answer “there are more dots on the {GameSet.not_profit_side} part of the rectangle” will earn you {points1_msg}, whereas the answer “there are more dots on the {GameSet.profit_side} part of the rectangle” will earn you {points2_msg}.<br />
                 These rewards are independent of whether you were correct or not. Your task is to be as accurate as
                 you can but also to earn as many points as possible (which will be translated to your bonus
                 payment).
                 {
                     !this.fine ? '' : (
                         <span>
-                                In addition, in some of the rounds, the computer may randomly decide to check whether your answer was correct or not. When this happens, the screen will turn red and if your answer is wrong you will be fined.
-                            </span>
+                            In addition, in some of the rounds, the computer may randomly decide to check whether your answer was correct or not. When this happens, the screen will turn red and if your answer is wrong you will be fined.
+                        </span>
 
                     )
                 }
-                In the space for comments bellow, please type in the word NEXT (in all capital letters). Note that if you type anything else, we will know you're not reading these instructions.<br/>
-                <br/>
-                At the end of the experiment, the total accumulated points you earn will be converted into your bonus payment for your performance, at the conversion rate of {PaymentsSettings.exchange_ratio} point{PaymentsSettings.exchange_ratio !== 1 ? 's' : ''} to {PaymentsSettings.sign_of_reward}1. The more points you earn, the higher will be your bonus payment.<br/>
-                <br/>
+                In the space for comments bellow, please type in the word NEXT (in all capital letters). Note that if you type anything else, we will know you're not reading these instructions.<br />
+                <br />
+                At the end of the experiment, the total accumulated points you earn will be converted into your bonus payment for your performance, at the conversion rate of {PaymentsSettings.exchange_ratio} point{PaymentsSettings.exchange_ratio !== 1 ? 's' : ''} to {PaymentsSettings.sign_of_reward}1. The more points you earn, the higher will be your bonus payment.<br />
+                <br />
                 In addition, to the potential bonus you could earn, you will receive {PaymentsSettings.sign_of_reward}{PaymentsSettings.show_up_fee} for participation in the study.
-                <br/>
-                <u>Comments:</u><br/>
-                <textarea onChange={e => this.props.insertTextInput('TextInput', e.target.value)}/>
+                <br />
+                <u>Comments:</u><br />
+                <textarea onChange={e => this.props.insertTextInput('TextInput', e.target.value)}
+                    style={{
+                        border: '1px solid lightgray',
+                        padding: '8px',
+                        width: '50%',
+                        fontSize: '16px',
+                        borderRadius: '4px'
+                    }}
+                />
             </div>
         );
     };
 
     Page3 = () => {
         return (
-            <div
-                className='pg-page3'
-            >
+            <div>
                 <label>We ask your answers will be as accurate as possible, <b>but because this task is not easy, your task will not be rejected even if you make many mistakes</b>. Remember that your bonus payment depends
                     on the points you get in each trial, so try to be accurate and earn as many points as possible.
                 </label>
@@ -1111,22 +1228,32 @@ class GameMessages extends React.Component {
         );
     };
 
+    Page4 = () => {
+        let num_of_practice_rounds = 6; // GAME_ORDER[0].g_s.t.p_p + GAME_ORDER[0].g_s.t.p_n_p;
+        return (
+            <div>
+                Let’s try it out!<br />
+                You will now go through {num_of_practice_rounds} practice rounds of the dots game.The goal of the practice rounds is to help you understand the game.You will not earn any bonus in these rounds, and your answers will not be recorded.You will be notified when the practice is over and the real game begins.
+            </div>
+        );
+    };
+
     buttonCallback(option) {
-        let sc = {...this.state};
-        if (option === 'NEXT'){
+        let sc = { ...this.state };
+        if (option === 'NEXT') {
             sc.page_index++;
-            if(sc.page_index === this.pages.length)
+            if (sc.page_index === this.pages.length)
                 return this.props.Forward();
         }
         else {
-            if (sc.page_index>0)
+            if (sc.page_index > 0)
                 sc.page_index--;
         }
         this.setState(sc);
     }
 
     render() {
-        
+
         return (
             <div
                 className='pg-game-intro'
@@ -1138,7 +1265,7 @@ class GameMessages extends React.Component {
                 </div>
 
                 <div className="pg-gi-btn">
-                    
+
 
                     {
                         this.state.page_index > 0 && (
@@ -1146,11 +1273,11 @@ class GameMessages extends React.Component {
                                 className='pg-game-btn'
                                 style={{
                                     marginRight: 10,
-                                    marginLeft:10,
+                                    marginLeft: 10,
                                 }}
                                 onClick={() => this.buttonCallback('BACK')}
                             >
-                                Backs
+                                Back
                             </button>
                         )
                     }
@@ -1159,7 +1286,7 @@ class GameMessages extends React.Component {
                         onClick={e => this.buttonCallback('NEXT')}
                     >
                         {
-                            this.state.page_index === (this.pages.length-1)? 'Start Game' : 'NEXT'
+                            this.state.page_index === (this.pages.length - 1) ? 'Start Game' : 'NEXT'
                         }
                     </button>
                 </div>
