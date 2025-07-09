@@ -77,15 +77,15 @@
   height: max-content;
 }
 :root{
-  --card-width: 150px;
+  --card-width: 170px;
 }
 
 .dashboard-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
-  gap: 16px;
+  gap: 10px;
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   box-sizing: border-box;
   justify-items: center;
 }

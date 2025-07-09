@@ -127,3 +127,61 @@
     font-size: large;
     color: #bd2e00;
 }
+:root{
+    --button-width:250px ;
+}
+.button-width{
+    width: 100%;
+}
+.buttons-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--button-width), 1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    justify-items: center;
+}
+
+
+/*Button effect*/
+.button-option{
+    width: 100%;
+    border-radius: 0.75rem /* 12px */;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border:1px solid lightgray;
+    margin: 0;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.button-option:hover{
+    opacity: 1;
+    background: rgb(201, 231, 255);
+}
+.button-option:active{
+    scale: 1.05;
+}
+.button-option-disabled{
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.gradient-text:hover {
+    background: linear-gradient(270deg, rgba(102, 45, 140, 0.75), #ee0979, #00c3ff, rgba(2, 35, 96, 0.4));
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animatedGradient 3s linear infinite;
+}
+
+@keyframes animatedGradient {
+    0% { background-position: 0 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+

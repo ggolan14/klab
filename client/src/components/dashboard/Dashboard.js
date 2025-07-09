@@ -91,9 +91,9 @@ class Dashboard extends React.Component {
             {path: '/reports', text: 'Reports'},
         ];
         return (
-            <ul className='flex-col w-full flex justify-between h-full items-center m-0 p-3 overflow-y-scroll '>
+            <ul className='flex-col w-full flex justify-start gap-4 h-full items-center m-0 p-3 overflow-y-scroll '>
                 {navLinks.map(({path, text}) => (
-                    <li key={path} className={"w-full flex justify-start items-center"} style={{minHeight: "50px"}}>
+                    <li key={path} className={"w-full flex justify-start items-center"} >
                         <Link to={{pathname: path}}
                               className={"text-clamping-sm font-exo text-black dashboard-option"}>
                             {text}
@@ -111,12 +111,10 @@ class Dashboard extends React.Component {
                 <div className='dashboard-card-grid w-full'>
                     {this.state.Experiments.sort().map(
                         (exp, index) => (
-                            <>
-                                <Link key={'li-' + exp + '-' + index} state={{exp}}
-                                      to={getExperimentPaths(exp).main_pathname}>
-                                    <Card name={exp} image={iconHeader}/>
-                                </Link>
-                            </>
+                            <Link key={'li-' + exp + '-' + index} state={{exp}}
+                                  to={getExperimentPaths(exp).main_pathname}>
+                                <Card name={exp} image={iconHeader}/>
+                            </Link>
                         )
                     )
                     }

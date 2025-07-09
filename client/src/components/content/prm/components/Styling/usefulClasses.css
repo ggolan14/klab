@@ -148,7 +148,18 @@ Position Related
 .border {
     border-width: 1px !important;
 }
-
+.border-b{
+    border-bottom: 1px solid;
+}
+.border-r{
+    border-right: 1px solid;
+}
+.border-black{
+    border-color:black ;
+}
+.border-light-gray{
+    border-color:lightgrey;
+}
 .border-3 {
     border-width: 3px !important;
     border: solid

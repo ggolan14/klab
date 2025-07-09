@@ -22,11 +22,15 @@ const LinkItem = ({exp, item}) => {
 
     return (
         <Link
-            className={'button-item ' + (disable_link ? 'disabledElem' : '')}
+            className={` button-option  ${(disable_link ? ' button-option-disabled' : 'drop-shadow-lg')}`}
+            style={{height: '90px'}}
             to={disable_link ? '' : getPathLocation(exp, item)}
             state={{exp}}
         >
-            {getPathLabel(item)}
+            <h2 style={{fontSize:"15px"}}
+                className={"font-exo text-black text-uppercase text-truncate"}>
+                {getPathLabel(item)}
+            </h2>
         </Link>
     )
 }
@@ -41,8 +45,7 @@ class Main extends React.Component {
 
         try {
             this.exp = this.props.location.state.exp;
-        }
-        catch (e){
+        } catch (e) {
             this.exp = undefined;
         }
 
@@ -71,7 +74,7 @@ class Main extends React.Component {
         sc.exp_paths = getExperimentPaths(exp);
         sc.experiment_selected = exp;
         sc.debuggerMode = localStorage.getItem(exp + '_debugger_mode') === 'true';
-        this.setState(sc , () => this.getExpActiveSettings());
+        this.setState(sc, () => this.getExpActiveSettings());
         // return this.props.history.push(redirect);
     }
 
@@ -80,7 +83,7 @@ class Main extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.location.pathname !== this.props.location.pathname){
+        if (prevProps.location.pathname !== this.props.location.pathname) {
             let sc = this.state;
             this.exp = this.props.match.params.exp
             sc.experiment_selected = this.props.match.params.exp;
@@ -89,8 +92,7 @@ class Main extends React.Component {
                 this.getExpActiveSettings();
                 window.history.pushState(null, null, document.URL);
                 window.defaultPrevented = false;
-                window.onpopstate = function(e)
-                {
+                window.onpopstate = function (e) {
                     e.preventDefault();
                     window.history.go(1);
                 }
@@ -114,8 +116,7 @@ class Main extends React.Component {
                 try {
                     sc.active_settings = res.data;
                     sc.exp_paths = getExperimentPaths(this.exp);
-                }
-                catch (e) {
+                } catch (e) {
                     sc.active_settings = null;
                 }
                 this.setState(sc, () => this.props.setWaitForAction(false));
@@ -151,7 +152,7 @@ class Main extends React.Component {
                         className='debugger-chk'
                         checked={this.state.debuggerMode}
                     />
-                    <span>Debugger mode</span>
+                    <span className={"font-exo"}>Debugger mode</span>
                 </label>
 
                 <div
@@ -179,7 +180,7 @@ class Main extends React.Component {
     btnOptions() {
         return (
             <div
-                className='admin-main-panel-b-o'
+                className='buttons-grid'
             >
                 {
                     this.state.exp_paths && Object.keys(this.state.exp_paths).map(
@@ -199,56 +200,66 @@ class Main extends React.Component {
     }
 
     render() {
-        if (this.state.AllExperiments.indexOf(this.exp) < 0){
-            return <Navigate to='/not_found' />;
+        if (this.state.AllExperiments.indexOf(this.exp) < 0) {
+            return <Navigate to='/not_found'/>;
         }
 
         const exp_label = CURRENT_URL() + '/' + GetExperimentLabel(this.exp);
 
         return (
+
             <div
-                className='admin-main-panel'
-                onClick={(e) => {
-                    try {
-                        let tag = e.target.attributes.group.value;
-                        if (tag !== 'DROPDOWN_TAG')
-                            toggleOpen.bind(this)('ALL');
-                    }
-                    catch (e) {
-                        toggleOpen.bind(this)('ALL');
-                    }
-                }}
+                style={{backgroundColor: "#CEDFF6"}}
+                className='w-full h-full flex justify-center items-center'
             >
-                <DropDown
-                    label='Experiment'
-                    tag='EXP'
-                    dropdown_item='experiment_list'
-                    item_selected={this.state.experiment_selected}
-                    list_open={this.state.experiment_list_dropdown}
-                    optionsList={this.state.AllExperiments}
-                    select_item={this.select_experiment}
-                    reference={this}
-                />
-
-                <div className='admin-main-panel-t-l'>{this.exp} Task</div>
-
-                {this.expDetails()}
-
                 <div
-                    className='admin-main-url'
+                    className={"w-[80%] rounded-3xl overflow-hidden bg-white drop-shadow-xl flex flex-col"}
+                    style={{height: "80dvh"}}
+                    onClick={(e) => {
+                        try {
+                            let tag = e.target.attributes.group.value;
+                            if (tag !== 'DROPDOWN_TAG')
+                                toggleOpen.bind(this)('ALL');
+                        } catch (e) {
+                            toggleOpen.bind(this)('ALL');
+                        }
+                    }}
                 >
-                    <label className='admin-main-url-a'>Experiment url:</label>
-                    <label className='admin-main-url-b'>{exp_label}</label>
-                    <button
-                        onClick={() => copyToClipboard(exp_label)}
-                    >Copy</button>
-                </div>
+                    <div className={"w-full border-light-gray border-b flex justify-between items-center"}
+                         style={{height: "15%", padding: "0px 30px"}}>
+                        <h1 className={"font-exo text-clamping-lg m-0"}>{this.exp} Task</h1>
+                        <div className={"flex flex-col h-full items-start justify-center gap-3"}>
+                            <div className={"flex flex-row gap-4"}>
+                                <h2 className={"font-exo text-uppercase text-clamping-sm"}>
+                                    <span
+                                        className={"font-exo text-uppercase text-clamping-sm opacity-50"}>version:</span> {(this.state.active_settings) ? this.state.active_settings.version : '-'}
+                                </h2>
+                                <h2 className={"font-exo text-uppercase text-clamping-sm"}>
+                                    <span
+                                        className={"font-exo text-uppercase text-clamping-sm opacity-50"}>Running:</span> {(this.state.active_settings) ? this.state.active_settings.running_name : '-'}
+                                </h2>
+                            </div>
+                            <h2 className={"font-exo gradient-text cursor-pointer text-uppercase text-clamping-sm text-black-50"}
+                                onClick={() => copyToClipboard(exp_label)}>
+                                <span
+                                    className={"font-exo text-uppercase text-clamping-sm opacity-50"}>Experiment url:</span> {exp_label}
+                            </h2>
+                        </div>
+                    </div>
 
-                <div
-                    className='admin-main-panel-g1'
-                >
-                    {this.btnOptions()}
-                    {this.debuggerItem()}
+                    <div className={"w-full flex flex-row "} style={{height: "85%"}}>
+                        <div className={"border-r p-4 border-light-gray h-full overflow-y-scroll"} style={{width: "80%"}}>
+                            {this.btnOptions()}
+
+                        </div>
+                        <div
+                            className={"p-3"}
+                            style={{width: "20%"}}
+                        >
+                            {this.debuggerItem()}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         );
