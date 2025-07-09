@@ -906,7 +906,8 @@ class Start extends React.Component {
         }
 
         let sc = this.state;
-        if (sc.tasks_index === (this.game_template.length - 2)) {
+        let numToDecrease = GameSet.practice == "true" ? 2 : 1;
+        if (sc.tasks_index === (this.game_template.length - numToDecrease)) {
             this.props.SetLimitedTime(false);
 
             let game_points = 0;
