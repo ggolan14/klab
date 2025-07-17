@@ -343,6 +343,13 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
             >
                 {containerProps.head_label}
             </label>
+
+            {GameSet.practice == "true" && (
+                <div style={{ textAlign: "center", fontSize: "36px", color: "red", fontWeight: "bold", marginBottom: "10px" }}>
+                    <label>This is a practice round</label>
+                </div>
+            )}
+
             <div>
                 {
                     ['left', 'right'].map(
@@ -1107,7 +1114,11 @@ class GameMessages extends React.Component {
 
         this.fine = false;
 
-        this.pages = [this.Page1, this.Page2, this.Page3, this.Page4];
+        this.pages = [this.Page1, this.Page2, this.Page3];
+
+    if (GameSet.practice === "true") {
+        this.pages.push(this.Page4);
+    }
 
         this.state = {
             page_index: 0,
@@ -1233,7 +1244,7 @@ Page1 = () => {
     };
 
     Page4 = () => {
-        let num_of_practice_rounds = 6; // GAME_ORDER[0].g_s.t.p_p + GAME_ORDER[0].g_s.t.p_n_p;
+        let num_of_practice_rounds = 3; // GAME_ORDER[0].g_s.t.p_p + GAME_ORDER[0].g_s.t.p_n_p;
         return (
             <div>
                 Let’s try it out!<br />
