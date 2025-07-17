@@ -378,13 +378,9 @@ class Start extends React.Component {
                     <h1>Welcome to the Queen’s Garden Study</h1>
                     <h2>
                         <p>
-
-                            <label>Thank you for taking part in this experiment. Today you will be playing the Queen’s Garden Game. You will begin by first completing the games tutorial.</label><br></br>
-                            <label>Following the tutorial, you will  have a couple practice trials of the game before you start playing for real. Once the game begins you will play two separate instances of the game, each game includes many trials.</label><br></br>
-                            <label>At the end of each game, a random trial will be selected, and the payoffs earned from these selected trials will be used to determine your bonus payment. That means, in order to maximize your bonus payment, you should try to earn as many points as possible in every trial, in both games.</label><br></br>
-                            <label>Once you have completed the games you will be redirected to take a brief exit survey.</label><br></br>
-                            <label>In order to receive the payment for participation, you are asked to complete the games and the exit survey, after which you will receive the completion code. </label><br></br>
-
+                            <label></label>Thank you for taking part in this  study which includes two separate parts. In the first part you will be playing the Queen’s Garden Game. You will begin by first completing the games tutorial.<br></br>
+                            <label>Following the tutorial, you will have a couple practice trials of the game before you start playing for real. Once the game begins, you will play two separate instances of the game, each game includes many trials. At the end of each game, a random trial will be selected, and the payoffs earned from these selected trials will be used to determine your bonus payment. That means, in order to maximize your bonus payment, you should try to earn as many points as possible in every trial, in both games.</label><br></br>
+                            <label>Once you have completed the games you will be redirected to the second part of the study in which you will complete two questionnaires. In order to receive the payment for participation, you are asked to complete both parts of the study, the games and the questionnaires, after which you will receive the completion code. </label><br></br>
                         </p>
                     </h2>
                     <button style={{ fontSize: '40px', marginTop: '10px' }} onClick={this.handleOkButtonClick}>Move to the Queen's Garden Game</button>
