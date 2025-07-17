@@ -990,39 +990,37 @@ export default Start;
 const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
     const [answer, setAnswer] = useState("");
     const [message, setMessage] = useState("");
+/*
+    const getNumOfRealRounds = () => {
+        return GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p;
+    };
+*/
+    const expectedAnswer = String(getNumOfRealRounds());
 
-    // Handle Back button click immediately
     const handleBack = () => {
         setMessage("Incorrect! Please read the instructions in the previous screen");
         onAnswerIncorrect();
     };
 
-    // Handle Next button click immediately
     const handleNext = () => {
-        setMessage("Correct! You will now play one round of the dots game.");
+        setMessage(`Correct! You will now play ${expectedAnswer} rounds of the dots game.`);
         onAnswerCorrect();
     };
 
-    // Handle text input change with number validation
     const handleInputChange = (e) => {
         const value = e.target.value;
         setAnswer(value);
 
-        // Check if the input is a valid number
         if (value === "" || !/^\d+$/.test(value)) {
             setMessage("Type in numbers only");
             return;
         }
 
-        // Check if the answer is correct or not
-        if (value === "42") {
-            setMessage("Correct! You will now play 42 rounds of the dots game.\nOne randomly selected round will determine your bonus.");
+        if (value === expectedAnswer) {
+            setMessage(`Correct! You will now play ${expectedAnswer} rounds of the dots game.\nOne randomly selected round will determine your bonus.`);
         } else {
             setMessage("Incorrect! Please read the instructions in the previous screen");
-
         }
-
-
     };
 
     return (
@@ -1039,7 +1037,7 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
             <div>
                 <button
                     onClick={handleBack}
-                    disabled={answer == "42"}
+                    disabled={answer === expectedAnswer}
                     style={{ marginRight: '10px' }}
                 >
                     Back
@@ -1047,7 +1045,7 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
 
                 <button
                     onClick={handleNext}
-                    disabled={answer != "42"}
+                    disabled={answer !== expectedAnswer}
                 >
                     Next
                 </button>
@@ -1067,28 +1065,33 @@ const UserQuestion = ({ onAnswerCorrect, onAnswerIncorrect }) => {
     );
 };
 
+
+const getNumOfRealRounds = () => {
+    let num_of_real_rounds = GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p + GAME_ORDER[0].g_s.t.a_n_p + GAME_ORDER[0].g_s.t.a_p;
+    return num_of_real_rounds;
+};
+
+
 const PracticeGame = ({ page, Forward }) => {
-    let isPractice =  false;
-    let num_of_real_rounds = GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p;
+    let isPractice = false;
+    //let num_of_real_rounds = GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p;
+
     return (
-        <div
-            className='pg_-gw center-screen msg_container'
-        >
+        <div className='pg_-gw center-screen msg_container'>
             <label
                 dangerouslySetInnerHTML={{
                     __html: page === 'START'
                         ? 'Start practice'
                         : `Practice is over.<br/>
-               You will now play 42 rounds
-               of the dots game for real bonus.<br/>
-               
-               </u>`
+                           You will now play <b>${getNumOfRealRounds()}</b> rounds
+                           of the dots game for real bonus.<br/><br/>`
                 }}
             ></label>
             <button onClick={Forward} className=''>Next</button>
         </div>
-    )
+    );
 };
+
 
 class GameMessages extends React.Component {
 
