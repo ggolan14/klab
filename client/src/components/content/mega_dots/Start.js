@@ -19,6 +19,7 @@ let NumberOfRoundsTotal = 0;
 let GamesErrors = [], GamesPayoff = [];
 
 let GAME_ORDER = [];
+let isPractice = true;
 
 const CM_TO_PX = 37.7952755906;
 // trial is profit side -> more profit side  || Not profit side -> more not profit side
@@ -344,7 +345,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
                 {containerProps.head_label}
             </label>
 
-            {GameSet.practice == "true" && (
+            {isPractice && (
                 <div style={{ textAlign: "center", fontSize: "36px", color: "red", fontWeight: "bold", marginBottom: "10px" }}>
                     <label>This is a practice round</label>
                 </div>
@@ -1080,7 +1081,7 @@ const getNumOfRealRounds = () => {
 
 
 const PracticeGame = ({ page, Forward }) => {
-    let isPractice = false;
+    isPractice = page === 'START' ? true : false
     //let num_of_real_rounds = GAME_ORDER[0].g_s.t.c_p + GAME_ORDER[0].g_s.t.c_n_p;
 
     return (
