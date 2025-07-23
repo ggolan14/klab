@@ -516,7 +516,7 @@ class Reports extends React.Component {
                                         <ToggleSwitch label={"CSV"} labelRight={"EXCEL"} onToggle={(e) => {
                                             this.state.EXCEL = e;
                                         }} isOn={false}/>
-                                        <ToggleSwitch label={"Regular"} labelRight={"Deep Fold"} onToggle={(e) => {
+                                        <ToggleSwitch label={"Regular"} labelRight={"Flatten"} onToggle={(e) => {
                                             this.state.deepFold = e;
                                         }} isOn={false}/>
                                     </div>

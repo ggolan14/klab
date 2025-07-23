@@ -1603,6 +1603,20 @@ class GameHandle extends React.Component {
                 const bbb = date.toString().match(/([A-Z]+[-][0-9]+)/);
                 DB_RECORDS.UserDetails.EDT = (aaa && Array.isArray(aaa)) ? aaa[1] : '';
                 DB_RECORDS.UserDetails.GMT = (bbb && Array.isArray(bbb)) ? bbb[1] : '';
+
+                // DeviceType detection
+                const ua = navigator.userAgent;
+                const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+                DB_RECORDS.UserDetails.DeviceType = isMobile ? 'Mobile Phone' : 'Desktop';
+
+                // OS detection (basic)
+                if (/Windows NT/.test(ua)) DB_RECORDS.UserDetails.OS = 'Windows';
+                else if (/Mac OS X/.test(ua)) DB_RECORDS.UserDetails.OS = 'Mac OS';
+                else if (/Linux/.test(ua)) DB_RECORDS.UserDetails.OS = 'Linux';
+                else if (/Android/.test(ua)) DB_RECORDS.UserDetails.OS = 'Android';
+                else if (/iPhone|iPad|iPod/.test(ua)) DB_RECORDS.UserDetails.OS = 'iOS';
+                else DB_RECORDS.UserDetails.OS = 'Unknown';
+
             }
             catch (e) {
             }
