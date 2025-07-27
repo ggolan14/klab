@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link, Navigate} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './dashboard.css';
-import {setGameMode} from "../../actions/app_actions";
-import {getExperimentPaths} from "../../data/experiments";
-import {isSuperAdminUser} from "../../utils/app_utils";
+import { setGameMode } from "../../actions/app_actions";
+import { getExperimentPaths } from "../../data/experiments";
+import { isSuperAdminUser } from "../../utils/app_utils";
 
 class Dashboard extends React.Component {
 
@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
         };
     }
 
-    updateUser(){
+    updateUser() {
         try {
             let Experiments = this.props.auth.user.Experiments;
             if (Experiments) {
@@ -40,15 +40,15 @@ class Dashboard extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.setGameMode(false);
-        if (this.props.auth && this.props.auth.user){
+        if (this.props.auth && this.props.auth.user) {
             this.updateUser();
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.isAuthenticated && (prevProps.auth !== this.props.auth)){
+        if (this.props.isAuthenticated && (prevProps.auth !== this.props.auth)) {
             this.updateUser();
         }
     }
@@ -170,7 +170,7 @@ class Dashboard extends React.Component {
         )
     }
 
-    expList(){
+    expList() {
 
         return (
             <div
@@ -190,7 +190,7 @@ class Dashboard extends React.Component {
                                         >
                                             <Link
                                                 to={getExperimentPaths(exp).main_pathname}
-                                                state={{exp}}
+                                                state={{ exp }}
                                                 key={'link-' + exp + '-' + index}
                                             >
                                                 {exp}
@@ -211,12 +211,12 @@ class Dashboard extends React.Component {
         return (
             <label>
                 Hello {
-                !this.props.auth.user.name || this.props.auth.user.name === '' || this.props.auth.user.name === '-' ? (
-                    <span className='klab-dashboard-panel-misname'>name is missing</span>
-                ) : (
-                    <span className='klab-dashboard-panel-name'>{this.props.auth.user.name}</span>
-                )
-            },
+                    !this.props.auth.user.name || this.props.auth.user.name === '' || this.props.auth.user.name === '-' ? (
+                        <span className='klab-dashboard-panel-misname'>name is missing</span>
+                    ) : (
+                        <span className='klab-dashboard-panel-name'>{this.props.auth.user.name}</span>
+                    )
+                },
             </label>
         )
     }
@@ -231,12 +231,12 @@ class Dashboard extends React.Component {
         )
     }
 
-    render () {
+    render() {
         if (!this.state || this.state.isLoading)
             return <></>;
         if (this.state.navigate_to_exp)
-            return <Navigate state={{exp: this.state.navigate_to_exp}} to={`${this.state.navigate_to_exp}/main`} />;
-            // return <Navigate to={`/${this.state.navigate_to_exp}/main`} />;
+            return <Navigate state={{ exp: this.state.navigate_to_exp }} to={`${this.state.navigate_to_exp}/main`} />;
+        // return <Navigate to={`/${this.state.navigate_to_exp}/main`} />;
 
         /// need to add isValidExperiments for each index in this.props.auth.user_permissions.experiments
         try {
@@ -275,4 +275,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps, {setGameMode})(Dashboard);
+export default connect(mapStateToProps, { setGameMode })(Dashboard);
