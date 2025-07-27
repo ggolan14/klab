@@ -21,7 +21,7 @@ let GameSet = {};
 let NumberOfRoundsTotal = 0;
 let GamesErrors = [], GamesPayoff = [];
 let GameCondition = null;
-let GameType = null;
+let benchMark = null;
 let randNum = -1;
 let all_game_data = [];
 
@@ -85,7 +85,7 @@ const LastQuestionWithRadio = ({ onNext, radioValue, setRadioValue }) => {
                                 value={value}
                                 checked={String(radioValue) === String(value)}
                                 onChange={(e) => setRadioValue(e.target.value)}
-                                style={{ marginBottom: '5px' , marginRight:'30px'}}
+                                style={{ marginBottom: '5px', marginRight: '30px' }}
                             />
                             <div>{value}</div>
                             {labelsMap[value] && (
@@ -121,7 +121,7 @@ const LastQuestionWithRadio = ({ onNext, radioValue, setRadioValue }) => {
 
 
 
-const OpenQuestion = ({ onNext, textAnswer , setTextAnswer }) => {
+const OpenQuestion = ({ onNext, textAnswer, setTextAnswer }) => {
     //const [textAnswer, setTextAnswer] = useState("");
 
     const handleSubmit = () => {
@@ -135,16 +135,18 @@ const OpenQuestion = ({ onNext, textAnswer , setTextAnswer }) => {
                 <b>Please explain your answer to the previous question:</b>
             </label>
             <textarea
-                
+
                 value={textAnswer}
                 onChange={(e) => setTextAnswer(e.target.value)}
                 rows={20}
-                style={{ border: '1px solid lightgray',
-                        padding: '8px',
-                        width: '50%',
-                        fontSize: '16px',
-                        borderRadius: '4px'}}
-                        placeholder="Type your answer here..."
+                style={{
+                    border: '1px solid lightgray',
+                    padding: '8px',
+                    width: '50%',
+                    fontSize: '16px',
+                    borderRadius: '4px'
+                }}
+                placeholder="Type your answer here..."
             />
             <div style={{ marginTop: "30px", textAlign: "center" }}>
                 <button
@@ -501,7 +503,7 @@ const ButtonPage = ({ Forward, onClickBtn, profit_side, not_profit_side }) => {
             </div>
             <div style={{ textAlign: "center", fontSize: "24px" }}>
                 <label>
-                    Remember: this game was programmed such that there is a 33% chance
+                    Remember: this game was programmed such that there is a {benchMark}% chance
                     <br></br>that a rectangle will have more dots in the {GameSet.profit_side} section.
 
                 </label>
@@ -730,6 +732,7 @@ class Game extends React.Component {
                 if (sc.step == QUESTION_PAGE) {
                     const db_row = {
                         GameType: this.props.gameExtendedName,
+                        "Benchmark (%)": benchMark,
                         QuestionIndex: "N/A",
                         QuestionType: "PerceivedObs",
                         Question: "Consider a participant who cheated on the dots game. This participant selected the right/left side to earn more money, even when they thought more dots appeared on the left/ right. In your opinion, how likely are the researchers who conducted this experiment to suspect that the participant cheated on the dots task?",
@@ -749,6 +752,7 @@ class Game extends React.Component {
                 if (sc.step == OPEN_QUESTION_PAGE) {
                     const db_row = {
                         GameType: this.props.gameExtendedName,
+                        "Benchmark (%)": benchMark,
                         QuestionIndex: "N/A",
                         QuestionType: "PerceivedObsExplanation",
                         Question: "Please explain your answer to the previous question:",
@@ -879,7 +883,7 @@ class Game extends React.Component {
         if (this.state.isLoading) return <WaitForAction2 />;
 
         const { step } = this.state;
-        console.log("======> STEP = "+step)
+        console.log("======> STEP = " + step)
         return (
             <>
 
@@ -906,8 +910,8 @@ class Game extends React.Component {
                 )}
                 {step === OPEN_QUESTION_PAGE && (
                     <OpenQuestion
-                       textAnswer={this.state.textAnswer}
-                       setTextAnswer={(value) => this.setState({ textAnswer: value })}
+                        textAnswer={this.state.textAnswer}
+                        setTextAnswer={(value) => this.setState({ textAnswer: value })}
                         onNext={this.nextStep}
                     />
                 )}
@@ -929,7 +933,7 @@ class Game extends React.Component {
                         Forward={this.nextStep}
                     />
                 )}
-              
+
 
                 {this.state.debugger_props && (
                     <DebuggerItem debugger_props={this.state.debugger_props} />
@@ -952,7 +956,9 @@ class Start extends React.Component {
         this.props = props;
         let RunCounter = KeyTableID();
         this.extended_name = props.extended_name;
-        console.log("-------------> this.extended_name=" + this.extended_name)
+        //console.log("-------------> this.extended_name=" + this.extended_name)
+        benchMark = this.calculateBenchmark(props.game_settings);
+        console.log("-------------> benchMark=" + benchMark)
         ResetAll();
         let cond = props.game_settings.game.cond;
         if (cond === 'o') {
@@ -968,8 +974,6 @@ class Start extends React.Component {
             GameCondition = RunCounter % 2 ? 'OneShot' : 'Repeated';
         }
         console.log("---> GameCondition=" + GameCondition)
-
-        GameType = props.game_settings.general.game_type;
 
         UserId = props.user_id;
         RunningName = props.running_name;
@@ -1007,6 +1011,24 @@ class Start extends React.Component {
 
         this.game_template = null;
         this.props.SetLimitedTime(false);
+    }
+
+    calculateBenchmark(game_settings) {
+        let RunCounter = KeyTableID();
+        let benchmarkIndex;
+        let benchmarkRandom = game_settings.game.benchmarkRandom;
+        let benchmarks = game_settings.game.benchmarks;
+        let benchmarksLength = benchmarks.length;
+        //console.log("---> RunCounter="+RunCounter+" benchmarkRandom="+benchmarkRandom+"  benchmarksLength="+benchmarksLength)
+        if (benchmarkRandom == true) {
+            benchmarkIndex = Math.floor(Math.random() * benchmarksLength);
+            return benchmarks[benchmarkIndex]
+            //console.log("---> Random benchMark=" + benchMark)
+        } else {
+            benchmarkIndex = (RunCounter % benchmarksLength)
+            return benchmarks[benchmarkIndex]
+            //console.log("---> benchMark=" + benchMark)
+        }
     }
 
     initGameOrder() {
@@ -1121,15 +1143,15 @@ class Start extends React.Component {
             });
 
             // Add the question component (decision point)
-            
+
         }
-            game_template.push({
-                Component: UserQuestion,
-                Props: {
-                    onAnswerCorrect: () => this.proceedToRealGame(),
-                    onAnswerIncorrect: () => this.returnToPracticeEnd(),
-                }
-            });
+        game_template.push({
+            Component: UserQuestion,
+            Props: {
+                onAnswerCorrect: () => this.proceedToRealGame(),
+                onAnswerIncorrect: () => this.returnToPracticeEnd(),
+            }
+        });
         this.game_template = game_template;
 
         this.setState({
@@ -1545,7 +1567,7 @@ class GameMessages extends React.Component {
                 <br></br>
                 These rewards are independent of whether your answer is correct or not.
                 <br></br>
-                Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
+                Note that this game was programmed such that there is a {benchMark}% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
                 <br></br>
                 Your task is to be as accurate as possible while also trying to earn points. At the end of the study, the computer will randomly select one round of the dots game. The points you earn in that round will be converted into a bonus payment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
@@ -1560,13 +1582,13 @@ class GameMessages extends React.Component {
                 <br></br>
                 These rewards are independent of whether your answer is correct or not.
                 <br></br>
-                Note that this game was programmed such that there is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
+                Note that this game was programmed such that there is a {benchMark}% chance that a rectangle will have more dots in the {GameSet.profit_side} section.
                 <br></br>
                 Your task is to be as accurate as possible while also trying to earn points. The points you earn will be converted into a bonus payment at the end of the experiment, with a conversion rate of 10 points = 1 {PaymentsSettings.sign_of_reward}. To confirm that you’ve read these instructions, type the word NEXT (in capital letters) in the comment box below. If you type anything else, we will know that you did not fully read the instructions.
                 <br></br>
                 <br></br>
                 In addition to your potential bonus, you will receive 1 {PaymentsSettings.sign_of_reward} for participating in this study.
-               
+
             </span>
         );
 
@@ -1651,7 +1673,7 @@ class GameMessages extends React.Component {
         return (
             <div>
 
-                <h2><b>There is a 33% chance that a rectangle will have more dots in the {GameSet.profit_side} section</b></h2>
+                <h2><b>There is a {benchMark}% chance that a rectangle will have more dots in the {GameSet.profit_side} section</b></h2>
                 <br />
 
                 {/* True and False buttons */}
@@ -1663,7 +1685,7 @@ class GameMessages extends React.Component {
                         True
                     </button>
                     <button
-                        onClick={() => this.handleAnswer(false, "Wrong! There is a 33% chance that a rectangle will have more dots in the " + GameSet.profit_side + " section")}
+                        onClick={() => this.handleAnswer(false, "Wrong! There is a "+benchMark+"% chance that a rectangle will have more dots in the " + GameSet.profit_side + " section")}
                         className="true-false-button"
                     >
                         False

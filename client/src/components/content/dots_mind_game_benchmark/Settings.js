@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {DivContainer} from "../../screens/settings/elements_builder";
-import {convertPointsRatio} from "../../screens/settings/settings";
+import { DivContainer } from "../../screens/settings/elements_builder";
+import { convertPointsRatio } from "../../screens/settings/settings";
 import './pogStyles.css';
 import ColorPicker from "../../layout/colorPicker/color_picker";
 
-const Colors = ({settings, changeSettings, label, attr}) => {
+const Colors = ({ settings, changeSettings, label, attr }) => {
     return (
         <div className='t-o-g-u_set_m-s_kv'>
             <label>{label}</label>
             <ColorPicker
                 defaultValue={settings[attr]}
                 setSetting={value => {
-                    changeSettings( {
+                    changeSettings({
                         settings_of: 'game_settings',
                         key: 'game',
                         key2: attr,
@@ -24,9 +24,143 @@ const Colors = ({settings, changeSettings, label, attr}) => {
     )
 };
 
+const BenchmarkSettings = ({ benchmarks, benchmarkRandom, changeSettings }) => {
+    const [newBenchmark, setNewBenchmark] = useState('');
+
+    const addBenchmark = () => {
+        if (newBenchmark === '') return;
+        if (benchmarks.length >= 10) {
+            alert('You can add up to 10 benchmarks only.');
+            return;
+        }
+
+        const num = Number(newBenchmark);
+        if (isNaN(num)) {
+            alert('Benchmark must be a number.');
+            return;
+        }
+
+        changeSettings({
+            settings_of: 'game_settings',
+            key: 'game',
+            key2: 'benchmarks',
+            value: [...benchmarks, num],
+        });
+        setNewBenchmark('');
+    };
+
+    const removeBenchmark = (index) => {
+        const updated = benchmarks.filter((_, i) => i !== index);
+        changeSettings({
+            settings_of: 'game_settings',
+            key: 'game',
+            key2: 'benchmarks',
+            value: updated,
+        });
+    };
+
+    const toggleRandom = (value) => {
+        console.log("---> in toggleRandom value="+value)
+        changeSettings({
+            settings_of: 'game_settings',
+            key: 'game',
+            key2: 'benchmarkRandom',
+            value: value === 'true',
+        });
+    };
+
+    return (
+        <div
+            style={{ width: '90%', marginTop: 20 }}
+            className="t-o-g-u_set_m-s_kv unselectable"
+        >
+            <div
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'auto 1fr',
+                    gridColumnGap: '19px',
+                    alignItems: 'start', // ensures panel aligns with label
+                }}
+            >
+                {/* Title */}
+                <label style={{ marginTop: '5px' }}><b>Benchmarks:</b></label>
+
+                {/* Benchmarks Panel */}
+                <div
+                    className="t-o-g-u_set_items"
+                    style={{
+                        border: '1px solid #ccc',
+                        borderRadius: '6px',
+                        padding: '10px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                    }}
+                >
+                    {/* Input + Add Button in One Line */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                        <input
+                            type="number"
+                            value={newBenchmark}
+                            onChange={(e) => setNewBenchmark(e.target.value)}
+                            placeholder="New banchmark (%)"
+                            style={{ width: '120px', padding: '4px' }}
+                        />
+                        <button onClick={addBenchmark} disabled={benchmarks.length >= 10}>
+                            Add
+                        </button>
+                    </div>
+
+                    {/* Benchmarks List */}
+                    <div>
+                        {benchmarks.length === 0 && (
+                            <p style={{ color: '#777', margin: 0 }}>No benchmarks added yet.</p>
+                        )}
+                        {benchmarks.map((b, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    padding: '4px 0',
+                                    borderBottom: '1px solid #eee',
+                                }}
+                            >
+                                <span>{b}</span>
+                                <button style={{ marginLeft: '20px' }} onClick={() => removeBenchmark(index)}>
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Random Selection */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <label>Random selection:</label>
+                        <select
+                            value={benchmarkRandom ? 'true' : 'false'}
+                            onChange={(e) => toggleRandom(e.target.value)}
+                        >
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+
+
+
+
+
 const new_game = (count) => ({
     g: {
-        l: 'game'+count, // game_name
+        l: 'game' + count, // game_name
         c: 'ne', // e -> enforce, ne => np no enforce
         e_p: 0, // enforce probability
         f: 10, // fine
@@ -40,8 +174,8 @@ const new_game = (count) => ({
         a_n_p: 1, // Amibgous not profit side
         c_p: 1, // Clear profit side
         c_n_p: 1, // Clear not profit side
-        p_p:1, // practice profit
-        p_n_p:1, // practice not profit
+        p_p: 1, // practice profit
+        p_n_p: 1, // practice not profit
     }, // trials
     d: {
         a_p: 1, // Amibgous profit side
@@ -388,13 +522,13 @@ const new_game = (count) => ({
 //     )
 // }
 
-const Game = ({game, game_i, updateGame, removeGame}) => {
+const Game = ({ game, game_i, updateGame, removeGame }) => {
     const [loading, setLoading] = useState(false);
 
     const [open, setOpen] = useState(false);
 
     const update_attr = (attr, value, attr2) => {
-        let game_ = {...game};
+        let game_ = { ...game };
         if (attr2)
             game_[attr][attr2] = value;
         else
@@ -402,7 +536,7 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
 
         updateGame(game_, game_i);
 
-        if (attr2 === 'c'){
+        if (attr2 === 'c') {
             setLoading(true);
             setTimeout(() => {
                 setLoading(false);
@@ -423,7 +557,7 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
             class_name: 'pg_settings-game_label ' + (game_i === 0 ? ' disabledElem ' : ''),
             value: game.g.l,
             input_type: 'text',
-            callback: game_i === 0 ? () => {} : value => update_attr('g', value, 'l')
+            callback: game_i === 0 ? () => { } : value => update_attr('g', value, 'l')
         },
         {
             type: 'Select',
@@ -581,7 +715,7 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
                 update_attr('t', value, 'p_n_p')
             }
         },
-        
+
 
     ];
 
@@ -761,7 +895,7 @@ const Game = ({game, game_i, updateGame, removeGame}) => {
     )
 }
 
-const GamesBank = ({game_settings, changeSettings}) => {
+const GamesBank = ({ game_settings, changeSettings }) => {
 
     const addNewGame = () => {
 
@@ -787,11 +921,11 @@ const GamesBank = ({game_settings, changeSettings}) => {
         let keys = ['g_p', 'r'];
         game_index = game_index.toString();
 
-        for (let key in keys){
+        for (let key in keys) {
             const key_ = keys[key];
             let key_value = [...game_settings[key_]];
             key_value = key_value.filter((g) => g !== game_index)
-            for (let i=0; i<key_value.length; i++)
+            for (let i = 0; i < key_value.length; i++)
                 if (Number(key_value[i]) > Number(game_index))
                     key_value[i] = (Number(key_value[i]) - 1).toString();
 
@@ -845,22 +979,22 @@ const GamesBank = ({game_settings, changeSettings}) => {
     )
 }
 
-const GameElement = ({game, disabled, callback, game_index, options, part}) => {
+const GameElement = ({ game, disabled, callback, game_index, options, part }) => {
     let divStyle = {}, divClass = '';
     if (part.includes('RANDOM_FROM_BANK'))
-        divStyle = {pointerEvents: 'none'};
+        divStyle = { pointerEvents: 'none' };
     else if (part.includes('RANDOM_FROM_TOP'))
         divClass = ' pg_set-ge-rft ';
     return (
         <div
-            className={'t-o-g-u_game_btn ' + divClass + (disabled? 'disabledElem' : '')}
+            className={'t-o-g-u_game_btn ' + divClass + (disabled ? 'disabledElem' : '')}
             style={divStyle}
         >
             {
                 part !== 'RANDOM_FROM_TOP' && (
                     <label
                         className={'t-o-g-u_game_btn_options remove'}
-                        style={{pointerEvents: 'all'}}
+                        style={{ pointerEvents: 'all' }}
                         onClick={() => callback.removeGame(game_index)}
                     >
                         x
@@ -894,7 +1028,7 @@ const GameElement = ({game, disabled, callback, game_index, options, part}) => {
             {
                 part.includes('RANDOM_FROM_TOP') && (
                     <label
-                        onClick={disabled?undefined:() => callback.addGame(game_index)}
+                        onClick={disabled ? undefined : () => callback.addGame(game_index)}
                     >{game}</label>
                 )
             }
@@ -903,7 +1037,7 @@ const GameElement = ({game, disabled, callback, game_index, options, part}) => {
     )
 }
 
-const GamesPlay = ({changeSettings, settings}) => {
+const GamesPlay = ({ changeSettings, settings }) => {
 
     const addGame = () => {
         changeSettings({
@@ -934,17 +1068,17 @@ const GamesPlay = ({changeSettings, settings}) => {
         });
     };
 
-    let options = settings.g_b.map((g_, g_i) => ({label: g_.g.l, game_index: g_i}));
-    options = [{label: 'Random', game_index: 'null'}, ...options];
+    let options = settings.g_b.map((g_, g_i) => ({ label: g_.g.l, game_index: g_i }));
+    options = [{ label: 'Random', game_index: 'null' }, ...options];
 
 
     return (
-        <div style={{width: '90%'}} className='t-o-g-u_set_m-s_kv unselectable'>
-            <div style={{display:'grid'}}>
+        <div style={{ width: '90%' }} className='t-o-g-u_set_m-s_kv unselectable'>
+            <div style={{ display: 'grid' }}>
                 <label><b>Games play:</b></label>
                 <button
                     onClick={addGame}
-                    // className={}
+                // className={}
                 >Add game</button>
             </div>
             <div>
@@ -954,7 +1088,7 @@ const GamesPlay = ({changeSettings, settings}) => {
                             (game, game_i) => (
                                 <GameElement
                                     key={game_i}
-                                    callback={{removeGame, changeGame}}
+                                    callback={{ removeGame, changeGame }}
                                     game={game}
                                     game_index={game_i}
                                     options={options}
@@ -969,7 +1103,7 @@ const GamesPlay = ({changeSettings, settings}) => {
     )
 }
 
-const RandomFrom = ({changeSettings, settings}) => {
+const RandomFrom = ({ changeSettings, settings }) => {
 
     const addGame = game => {
         const rnd_set = new Set([...settings.r, game.toString()]);
@@ -993,7 +1127,7 @@ const RandomFrom = ({changeSettings, settings}) => {
 
     return (
         <div
-            style={{width: '90%', marginTop: 20, display: 'block'}}
+            style={{ width: '90%', marginTop: 20, display: 'block' }}
             className='t-o-g-u_set_m-s_kv unselectable'
         >
             <div>
@@ -1015,7 +1149,7 @@ const RandomFrom = ({changeSettings, settings}) => {
                                     <GameElement
                                         disabled={settings.r.indexOf(game_i.toString()) > -1}
                                         key={game_i}
-                                        callback={{addGame}}
+                                        callback={{ addGame }}
                                         game={game.g.l}
                                         game_index={game_i}
                                         part='RANDOM_FROM_TOP'
@@ -1032,7 +1166,7 @@ const RandomFrom = ({changeSettings, settings}) => {
                                 (game, game_i) => (
                                     <GameElement
                                         key={game_i}
-                                        callback={{removeGame}}
+                                        callback={{ removeGame }}
                                         game={settings.g_b[game].g.l}
                                         game_index={game_i}
                                         part='RANDOM_FROM_BANK'
@@ -1048,7 +1182,7 @@ const RandomFrom = ({changeSettings, settings}) => {
     )
 }
 
-const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_list}) => {
+const Settings = ({ game_settings, changeSettings, LAST_SETTING_NAME, versions_list }) => {
 
     const general = [
         {
@@ -1058,7 +1192,7 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
             class_name: 'admin-settings-input-big ' + (game_settings.version === 'test' ? ' disabledElem ' : '') + ((game_settings.version !== LAST_SETTING_NAME && versions_list.indexOf(game_settings.version) > -1) ? 'highlight_error_input' : ''),
             value: game_settings.version,
             input_type: 'text',
-            callback: game_settings.version === 'test' ? () => {} : value => changeSettings({
+            callback: game_settings.version === 'test' ? () => { } : value => changeSettings({
                 settings_of: 'game_settings',
                 key: 'version',
                 key2: null,
@@ -1449,6 +1583,13 @@ const Settings = ({game_settings, changeSettings, LAST_SETTING_NAME, versions_li
                     changeSettings={changeSettings}
                     settings={game_settings.game}
                 />
+                <BenchmarkSettings
+                    benchmarks={game_settings.game.benchmarks || []}
+                    benchmarkRandom={game_settings.game.benchmarkRandom || false}
+                    changeSettings={changeSettings}
+                />
+
+
             </DivContainer>
 
             <DivContainer
