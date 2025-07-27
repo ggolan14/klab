@@ -944,7 +944,7 @@ const Summary = ({ exp, finishCallback, summary_args }) => {
     const language = summary_lang(summary_args);
     let buttonText = "Get completion code";
     let showCompletionCode = false; // if the experiment is Trivia or Mind game , show completion code , otherwise show button
-    let finishScreenTitle = "You finished the study!"
+    let finishScreenTitle = "You have completed the study."
     const [expSummary, setExpSummary] = useState(null);
     const [disableBtn, setDisableBtn] = useState(true);
 
