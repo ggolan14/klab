@@ -103,8 +103,8 @@ const BenchmarkSettings = ({ benchmarks, benchmarkRandom, changeSettings }) => {
                             type="number"
                             value={newBenchmark}
                             onChange={(e) => setNewBenchmark(e.target.value)}
-                            placeholder="New banchmark (%)"
-                            style={{ width: '120px', padding: '4px' }}
+                            placeholder="New benchmark (%)"
+                            style={{ width: '180px', padding: '4px' }}
                         />
                         <button onClick={addBenchmark} disabled={benchmarks.length >= 10}>
                             Add
