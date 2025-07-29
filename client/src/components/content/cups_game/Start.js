@@ -93,7 +93,7 @@ const GameWelcome = ({Forward}) => {
 			<div className='cg_welcome_container'>
                 <div className='cg_welcome_int'>
                     <label>Please read carefully the following instructions:</label>
-                    <label>The cups game consists of 100 trials. In each trial a ball will fall randomly in one of 10 locations.</label>
+                    <label>The cups game consists of {GameSet.trials} trials. In each trial a ball will fall randomly in one of 10 locations.</label>
                     <label>The fall, and your decisions, will determine if you earn or lose points:</label>
                     <label className='indent_label'>
                                If the ball falls into a cup, you will be rewarded with 100 points.<br></br>
