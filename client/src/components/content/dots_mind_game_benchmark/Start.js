@@ -30,10 +30,10 @@ let isPractice = true;
 let totalBonus = [];
 let POINTS_PAGE = 1
 let BUTTONS_PAGE = 2
-let QUESTION_PAGE = 3
-let OPEN_QUESTION_PAGE = 4
-let DOTS_GAME_COMPLETED = 5
-let STEP_BEFORE_SURVEY = 6
+//let QUESTION_PAGE = 3
+//let OPEN_QUESTION_PAGE = 4
+let DOTS_GAME_COMPLETED = 3
+let STEP_BEFORE_SURVEY = 4
 
 
 const CM_TO_PX = 37.7952755906;
@@ -560,6 +560,7 @@ class Game extends React.Component {
         this.resetGameData();
     }
     insertGameLine = (db_row) => {
+        db_row.Benchmark = benchMark;
         this.props.insertGameLine(db_row);
     }
 
@@ -728,7 +729,7 @@ class Game extends React.Component {
                     sc.step = 0;
                 }
             }
-            else {
+        /*  else {
                 if (sc.step == QUESTION_PAGE) {
                     const db_row = {
                         GameType: this.props.gameExtendedName,
@@ -771,7 +772,8 @@ class Game extends React.Component {
                 }
                 sc.step++;
             }
-
+        */
+        sc.step++;
         }
         this.setState(sc);
 
@@ -858,7 +860,8 @@ class Game extends React.Component {
             randNum: GameCondition == "Repeated" ? "N/A" : randNum,
             GameCondition,
             choice_time,
-            GameType: this.props.gameExtendedName
+            GameType: this.props.gameExtendedName,
+            Benchmark: benchMark,
         };
         console.log("*********** trial_data = ", trial_data)
         this.game_data.push(trial_data);
@@ -901,6 +904,7 @@ class Game extends React.Component {
                         onClickBtn={this.onClickBtn}
                     />
                 )}
+                {/*
                 {step === QUESTION_PAGE && (
                     <LastQuestionWithRadio
                         radioValue={this.state.radioValue}
@@ -908,6 +912,7 @@ class Game extends React.Component {
                         onNext={this.nextStep}
                     />
                 )}
+                
                 {step === OPEN_QUESTION_PAGE && (
                     <OpenQuestion
                         textAnswer={this.state.textAnswer}
@@ -915,6 +920,7 @@ class Game extends React.Component {
                         onNext={this.nextStep}
                     />
                 )}
+                */}
                 {step === DOTS_GAME_COMPLETED && (
                     (
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
