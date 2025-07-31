@@ -1235,7 +1235,7 @@ const GameWelcome = (insertTextInput) => {
             })}
             <br/>
             <label>
-                Each round starts with a sampling stage in which you can check the values produced by each of the buttons. After pressing a button, one value will be sampled randomly and presented on that button. You can sample the values on each button again and again, for as long as you wish. When you have made up your mind and do not wish to sample anymore, click "ready for final decision".
+                Each round starts with a sampling stage in which you can check the values produced by each of the buttons. To make a valid and meaningful decision, you must sample from <b>both buttons</b>. Decisions based only on one option go against the task’s purpose and may result in disqualification from payment.
             </label>
             <label>
                 Notice: There is always one button that has higher value on average than the other. Your task is to find which button it is!
@@ -1375,7 +1375,7 @@ const PracticeEnd = () => {
             <label>Great! The instructions and practice are now over. On the next screen you will start the real challenge, with the option to earn a bonus based on your choice. The challenge includes {GameSettings.real_trials} rounds.</label>
             <br/>
             <label>
-                There is no time limit on making your choices. You can continue sampling as long as you wish! However, there is a time limit for being idle so you must continue sampling without being idle for more than {ActionTime} second{ActionTime !== 1 ? 's' : ''}. Therefore, once you start the challenge, please complete all the rounds without breaks. Note that if you will be idle for {ActionTime} second{ActionTime !== 1 ? 's' : ''}, the experimental screen will close and you will not be compensated.
+                There is no time limit on making your choices. You can continue sampling as long as you wish! However, there is a time limit for being idle so you must continue sampling without being idle for more than {ActionTime} second{ActionTime !== 1 ? 's' : ''}. Therefore, once you start the challenge, please complete all the rounds without breaks. Note that if you will be idle for {ActionTime} second{ActionTime !== 1 ? 's' : ''}, the experimental screen will close and you will not be compensated. Also, you must sample from <b>both buttons</b> on every round. Otherwise, your decision will not be valid and you will not be compensated.
             </label>
             <br/>
             <label>Good luck!</label>
