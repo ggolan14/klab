@@ -10,7 +10,7 @@ const MathQuestion = ({ onAnswer }) => {
   };
 
   const handleSubmit = () => {
-    if (selectedOption !== null) { // dummy comment
+    if (selectedOption !== null) {
       const isCorrect = selectedOption === correctAnswer;
       onAnswer(isCorrect);
       
@@ -40,9 +40,10 @@ const MathQuestion = ({ onAnswer }) => {
                 </label>
               </div>
             ))}
-            <button type="button" onClick={handleSubmit}>
+            <button className='pg-game-btn' type="button" onClick={handleSubmit}>
               Next
             </button>
+            
           </form>
         </>
       ) : (
