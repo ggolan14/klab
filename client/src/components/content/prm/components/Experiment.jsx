@@ -1,5 +1,6 @@
 import React, {useMemo, useState} from 'react';
-import experimentData from "../experiment.json"
+// import experimentData from "../experiment.json"
+import experimentData from "../uiTesting/experiment_xray_ai.json"
 // import experimentData from "../uiTesting/experiment.json"
 import ItemRenderer from "./ItemRender/ItemRenderer";
 import "./Styling/usefulClasses.css"

@@ -1,0 +1,264 @@
+{
+  "name": "Xray Ai 4",
+  "features": {},
+  "conditions": {
+    "isAi": "boolean"
+  },
+  "randomize": [
+    {
+      "start": 1,
+      "end": 3
+    }
+  ],
+  "items": [
+    {
+      "id": "Q1",
+      "features": {},
+      "trialType": "XrayConf",
+      "uiData": [
+        {
+          "id": "Rendered",
+          "type": "customWidget",
+          "logic": "TrailTypeXrayAi",
+          "data": {
+            "imageBefore":"Images/Instruction3.JPG",
+            "imageAi":"Images/Instruction3_r.jpg",
+            "imageDoctor":"Images/Instruction3_a.jpg"
+          }
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            "Yes",
+            "No"
+          ],
+          "correct": "No",
+          "id": "button-before"
+        },
+        {
+          "type": "slider",
+          "textCenter": "How confident are you?",
+          "textLeft": "A wild guess",
+          "textRight": "Definitely correct",
+          "id": "slider-before",
+          "max": 100,
+          "min": 50
+        },
+        {
+          "id": "Icon-button",
+          "type": "customWidget",
+          "logic": "AiOrDoctorIcon",
+          "data": {
+            "iconAi":"Images/ai.png",
+            "iconDoctor":"Images/doctor.png"
+          }
+        },
+        {
+          "id": "button-after",
+          "type": "buttons",
+          "buttons": [
+            "Yes",
+            "No"
+          ],
+          "correct": "No"
+        },
+        {
+          "type": "slider",
+          "textCenter": "How confident are you?",
+          "textLeft": "A wild guess",
+          "textRight": "Definitely correct",
+          "id": "slider-after",
+          "max": 100,
+          "min": 50
+        },
+        {
+          "id": "Text",
+          "type": "text",
+          "text": "What should be the next step with this patient?"
+        },
+        {
+          "type": "submit",
+          "text": "next",
+          "id": 4
+        }
+      ]
+    },
+    {
+      "id": "Text-input-test",
+      "features": {},
+      "trialType": "text-input",
+      "uiData": [
+        {
+          "type": "textInput",
+          "hint": "First Name",
+          "min": 3,
+          "id": 5
+        },
+        {
+          "type": "textInput",
+          "hint": "Prolific Id minimum 8 chars",
+          "min": 10,
+          "id": 9
+        },
+        {
+          "type": "textInput",
+          "hint": "Last Name",
+          "min": 3,
+          "id": 7
+        },
+        {
+          "type": "submit",
+          "text": "next",
+          "id": 4
+        }
+      ]
+    },
+    {
+      "id": "Likert-test",
+      "trialType": "likert-input",
+      "features": {},
+      "uiData": [
+        {
+          "type": "likert",
+          "id": "312312",
+          "headline": "Lorem",
+          "semiHeadlines": [
+            "text3",
+            "text2",
+            "text1"
+          ],
+          "scalePoints": 6
+        },
+        {
+          "type": "likert",
+          "id": "23424234",
+          "headline": "Lorem",
+          "semiHeadlines": [
+            "text3",
+            "text2",
+            "text1"
+          ],
+          "scalePoints": 4
+        },
+        {
+          "type": "submit",
+          "text": "next",
+          "id": 4
+        }
+      ]
+    },
+    {
+      "id": "Button-test",
+      "trialType": "button-input",
+      "features": {},
+      "uiData": [
+        {
+          "type": "buttons",
+          "buttons": [
+            "LEFT",
+            "EQUAL",
+            "RIGHT"
+          ],
+          "style": {
+            "background": "rgb(200,50,50)"
+          },
+          "correct": "RIGHT",
+          "shuffle": "y",
+          "id": "button-1"
+        },
+        {
+          "type": "text",
+          "text": "Shuffled item above",
+          "id": "headline-id"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            "LEFT",
+            "EQUAL",
+            "RIGHT",
+            "CENTER",
+            "SDFKLKSDFJ",
+            "FDLKSD",
+            "lORE,"
+          ],
+          "correct": "RIGHT",
+          "id": "button-2"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            "LEFT",
+            "EQUAL"
+          ],
+          "correct": "RIGHT",
+          "id": "button-3"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            "LEFT",
+            "EQUAL",
+            "Need some placeholder text in your code? Type lorem and press ⇥ (macOS) / Tab (Windows/Linux). If needed, you can add the text together with a tag: just add a tag name and > before lorem. If you want to generate a specific number of words, add a number after lorem, e.g. lorem5, then press ⇥ (macOS) / Tab (Windows/Linux)."
+          ],
+          "correct": "RIGHT",
+          "id": "button-4"
+        },
+        {
+          "type": "submit",
+          "text": "Next",
+          "id": 5
+        }
+      ]
+    },
+    {
+      "id": "Sliders-test",
+      "trialType": "sliders-input",
+      "features": {},
+      "uiData": [
+        {
+          "type": "slider",
+          "textCenter": "How confident are you?",
+          "textLeft": "Left Text",
+          "textRight": "Right Text",
+          "id": "abc123",
+          "max": 10,
+          "min": 1
+        },
+        {
+          "type": "slider",
+          "textCenter": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod justo arcu, et pulvinar orci porttitor eu. Praesent elit lorem, viverra sed neque ut, ultricies congue metus. Praesent imperdiet elit a sem gravida, vitae venenatis sem fermentum. Fusce accumsan arcu ut tristique dictum. Quisque sed ex nibh. Vivamus laoreet mauris id tincidunt finibus. Fusce dapibus, neque at condimentum mollis, arcu justo accumsan magna, faucibus bibendum metus lacus sed leo. Vestibulum id ligula vel erat pretium malesuada.",
+          "textLeft": "Left Text",
+          "textRight": "Right Text",
+          "id": "abc12213",
+          "max": 120,
+          "min": 30
+        },
+        {
+          "type": "slider",
+          "textCenter": "How confident are you?",
+          "textLeft": "Left Text",
+          "textRight": "Right Text",
+          "id": "ab234c123",
+          "max": 5000,
+          "min": 1000
+        },
+        {
+          "type": "slider",
+          "textCenter": "How confident are you?",
+          "textLeft": "Left Text",
+          "textRight": "Right Text",
+          "id": "ab234242c123",
+          "max": 1001,
+          "min": 100
+        },
+        {
+          "type": "submit",
+          "text": "next",
+          "id": 4
+        }
+      ]
+    }
+  ]
+}
+

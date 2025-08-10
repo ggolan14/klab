@@ -30,7 +30,6 @@ function ImagesContainer({className, images, setCurrentImageZoom}) {
 
             {!allLoaded && (<div className="absolute-center flex items-center justify-center bg-white z-10"
                                  style={{border: "none"}}>
-                    <LoadingSpinner size={48}/>
                 </div>
             )}
 
@@ -47,7 +46,10 @@ function ImagesContainer({className, images, setCurrentImageZoom}) {
                         style={Style}
                         className="min-w-[175px] max-w-[40%] shadow-none drop-shadow-none"
                         onLoad={handleImageLoad}
-                        onClick={() =>
+                        onClick={() => {
+                            if (!setCurrentImageZoom){
+                                return;
+                            }
                             setCurrentImageZoom(prevState => {
                                 const array = [...prevState.zoomOutput];
                                 array.push({
@@ -60,8 +62,8 @@ function ImagesContainer({className, images, setCurrentImageZoom}) {
                                     isOpen: !prevState.isOpen,
                                     zoomOutput: array,
                                 };
-                            })
-                        }
+                            });
+                        }}
                     />
                 ))}
             </div>

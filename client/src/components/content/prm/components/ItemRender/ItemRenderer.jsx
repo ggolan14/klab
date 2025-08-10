@@ -117,7 +117,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
                 return <TextInput key={key} startTime={startTime} pageFlow={pageFlow} setPageFlow={setPageFlow}
                                   uiObject={currentObj}/>
             case ElementsKeys.CUSTOM:
-                return <CustomWidget uiObject={currentObj}/>
+                return <CustomWidget uiObject={currentObj} pageFlow={pageFlow} setPageFlow={setPageFlow}/>
             case ElementsKeys.SUBMIT:
                 return <SubmitButton key={key} currentObj={currentObj} pageFlow={pageFlow}
                                      onClickMethod={UpdateOutputAncContinueToNextTrialType}/>
