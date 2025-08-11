@@ -6,6 +6,7 @@ import ItemRenderer from "./ItemRender/ItemRenderer";
 import "./Styling/usefulClasses.css"
 import Error from "./Ui/Error/Error";
 import {ExperimentType, ItemType, ErrorType} from "./Ui/types/typsT.ts";
+import {ConditionsProvider} from "./Condition/ConditionsContext";
 
 
 /**
@@ -19,10 +20,11 @@ function Experiment({insertToDbArray, sendToDB}) {
     const error = useMemo(() => validateExperiment(experimentData), []);
     const items = useMemo(() => getItemsInOrder(experimentData), []);
     const [currentItemIndex, setCurrentItemIndex] = useState(0);
+    const conditions = experimentData.conditions ?? {};
 
     if (error.isError) {
         return <div className={"w-full h-full flex justify-center items-center"}>
-            <Error error={error} />;
+            <Error error={error}/>;
         </div>
     }
 
@@ -31,22 +33,24 @@ function Experiment({insertToDbArray, sendToDB}) {
             <h1 className={"text-clamping-lg text-center m-1"}>Thank you for participating</h1>
         </div>
     }
-
     return (
-        <div className={"flex justify-center item-center border flex-col"} style={{width: "100dvw", height: "100dvh"}}>
-            {/*<h1 className={"text-clamping-mid text-center m-1"}>{experimentData.name}</h1>*/}
-            {items.map((item, index) => {
-                if (index === currentItemIndex) {
-                    if (!item.uiData) {
-                        return <Error error={{errorMessage: "Error No UiData in json", isError: true}}
-                                      key={`item-index-${index}`}/>
+        <ConditionsProvider conditions={conditions}>
+            <div className={"flex justify-center item-center border flex-col"}
+                 style={{width: "100dvw", height: "100dvh"}}>
+                {/*<h1 className={"text-clamping-mid text-center m-1"}>{experimentData.name}</h1>*/}
+                {items.map((item, index) => {
+                    if (index === currentItemIndex) {
+                        if (!item.uiData) {
+                            return <Error error={{errorMessage: "Error No UiData in json", isError: true}}
+                                          key={`item-index-${index}`}/>
+                        }
+                        return <ItemRenderer item={item} uiData={item.uiData} key={`item-index-${index}`}
+                                             startTime={Date.now()} setCurrentItemIndex={setCurrentItemIndex}
+                                             sendToDB={sendToDB} insertToDbArray={insertToDbArray}/>;
                     }
-                    return <ItemRenderer item={item} uiData={item.uiData} key={`item-index-${index}`}
-                                         startTime={Date.now()} setCurrentItemIndex={setCurrentItemIndex}
-                                         sendToDB={sendToDB} insertToDbArray={insertToDbArray}/>;
-                }
-            })}
-        </div>
+                })}
+            </div>
+        </ConditionsProvider>
     );
 }
 
@@ -81,8 +85,8 @@ function getItemsInOrder(experimentData) {
  * @param experimentData{ExperimentType}
  * @return {ErrorType}
  */
-function validateExperiment(experimentData){
-    const error= { errorMessage: "", isError: false };
+function validateExperiment(experimentData) {
+    const error = {errorMessage: "", isError: false};
 
     // Validate experiment name
     if (typeof experimentData.name !== "string" || experimentData.name.trim() === "") {
@@ -104,7 +108,7 @@ function validateExperiment(experimentData){
     }
 
     // Validate randomize ranges
-    experimentData.randomize.forEach(({ start, end }, index) => {
+    experimentData.randomize.forEach(({start, end}, index) => {
         if (
             typeof start !== "number" || typeof end !== "number" ||
             start < 0 || end >= experimentData.items.length || start > end

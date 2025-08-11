@@ -19,6 +19,7 @@ import ImagesContainer from "../Ui/Images/ImagesContainer";
 import UnderstandingInstruction from "../Ui/UnderstandingInstruction/UnderstandingInstruction";
 import {useFocus} from "../Focus/useFocus";
 import CustomWidget from "../Ui/CustomUi/CustomWidget";
+import {useConditions} from "../Condition/ConditionsContext";
 
 
 /**
@@ -46,7 +47,7 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
     const [currentImageZoom, setCurrentImageZoom] = useState(getInitialZoom(startTime));
     // For Mouse Tracking feature
     // TODO SHOULD ADD THIS LINE IF WANT MOUSE TRACKING ALSO HERE const {mouseTracking} = useMouseTracking(startTime, 350);
-
+    const { chosenValues, error } = useConditions();
     useEffect(() => {
         if (!item) {
             return;
@@ -79,7 +80,6 @@ function ItemRenderer({startTime, item, uiData, setCurrentItemIndex, insertToDbA
             newOutput = {...newOutput, condition: item.condition};
             newOutput = {...newOutput, itemID: item.id, trialType: item.trialType};
         }
-        console.log(newOutput)
         setCurrentItemIndex(prevIndex => prevIndex + 1);
         insertToDbArray(newOutput);
         await sendToDB();

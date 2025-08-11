@@ -2,7 +2,10 @@
   "name": "Xray Ai 4",
   "features": {},
   "conditions": {
-    "isAi": "boolean"
+    "isAi": {
+      "options": [true , false],
+      "percentage": [30,70]
+    }
   },
   "randomize": [
     {
